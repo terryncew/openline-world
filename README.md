@@ -27,6 +27,30 @@ For a phone on the same Wi-Fi: `./launch-preview.sh --https` (self-signed
 cert, dev only — your phone will warn). WebCrypto signing needs a secure
 context, so plain HTTP over LAN will not complete the join ceremony.
 
+## Send your first agent
+
+Two ways in, and they are not the same thing:
+
+**1. The scripted custody test** — `clients/demo_custody.py --server
+http://127.0.0.1:8471` (backend running first). Two scripted participants
+join with their own keys, walk an agreement, settle, revoke, and try to act
+after revocation. 19 checks, all automated. This is the custody boundary
+demonstrated end to end: the server holds only its receiver key, each client
+holds its own keys in an isolated key dir, revocation is measured
+(~0.010s, stated as not-instant). No cost, no accounts, nothing leaves your
+machine.
+
+**2. The real external-agent path** — `clients/participant.py`. One
+`ParticipantClient` = one participant: it generates its own owner-root and
+worker Ed25519 keys into a local key dir (0o600), grants a bounded mandate
+in its own wallet, joins with `openline-join-profile/v1`, and signs every
+gated act itself. See `docs/joining.md` for the full contract. Access
+requirements: this repo, Python 3.10+, the backend running on your machine.
+Possible costs: none — no paid services, no model calls, no network beyond
+your loopback. Keys and bearer tokens never leave the client process and are
+never written to logs; receipts are yours to keep private by default — share
+only what you choose, and never share private keys or tokens.
+
 ## What is demonstrated
 
 - **Owner delegates, worker acts, receiver decides.** An owner joins, grants a
@@ -139,6 +163,9 @@ Documented in full at `docs/joining.md` and `docs/custody-browser-integration.md
 
 ## Known limitations
 
+- Supported adapter only: the local dev transport is the one demonstrated
+  adapter. The nearby/offline adapter is specified in `docs/transports.md`
+  but untested — treat it as a design note, not evidence.
 - Transport is local dev transport only; nearby/Bluetooth untested.
 - Identity is self-asserted (`openline-join-profile/v1`) plus proof-of-control.
 - Revocation timing measured ~0.014–0.026s on loopback; no cross-network
