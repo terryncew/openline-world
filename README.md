@@ -133,7 +133,7 @@ Documented in full at `docs/joining.md` and `docs/custody-browser-integration.md
   not peer review, not scientific truth, and not a verdict on the claim's
   real-world correctness.
 
-## Test results (at the exported commit)
+## Test results (v0.1.0 release commit)
 
 - Backend: **203/203 green** (`test_commission_chapter.py` 21, commons
   chapter 32, browser custody 12, custody headless 19, remainder from earlier
@@ -141,7 +141,8 @@ Documented in full at `docs/joining.md` and `docs/custody-browser-integration.md
 - Browser QA: custody negative battery 12/12, research-commons flow 27/27,
   avatar-migration live check PASS (five locations, fresh join, OWNER badges).
 - Full per-lane counts and the reconciliation of the test suite's evolution
-  are in `docs/test-count-reconciliation.md` and the Bureau report.
+  are in `docs/test-count-reconciliation.md`. The bounded consequence-history
+  artifacts are under `research/bureau/`.
 
 ## Claim ceiling — read this before quoting anything
 
@@ -193,21 +194,12 @@ components keep their own licenses — see `NOTICE`, including the vendored
 Wallet (Apache-2.0) and Claim Graph (MIT). The code license does not grant
 trademark rights and does not imply endorsement by OpenLine.
 
-## Provenance
+## Release provenance
 
-- Source: `openline-workshop`, branch `robot-avatar-migration`, exported
-  history-free at commit `b8f49b6` ("Avatar-migration QA: live-browser
-  verification, all five locations pass").
-- Lineage: `d92a139` (Bureau consequence-history report, frozen and
-  byte-identical) → `b371acb` (robot avatar migration) → `fbc8c13`
-  (Bureau reporting corrections) → `b8f49b6` (avatar-migration QA notes).
-- The private development history is not included and stays private. The
-  commits above are recorded as provenance, not reproduced here.
-- Consolidated review archive of the Bureau corrections:
-  `bureau-corrections-fbc8c13.zip`, sha256
-  `b81dc552fe9f3aec45b1853b0b6b49a9fc0a4b517b9cf757c37254ee7851a603`
-  (9.5MB, history-free, secret-scan clean). Prior lane archives are listed
-  in that archive's README; they are not duplicated here.
-- This distribution's own digest is in `SOURCE-MANIFEST.md`.
+- **Public prerelease:** `openline-world-v0.1.0`
+- **Release commit:** `671598c`
+- **Release archive SHA-256:** `c50945f1b0832c3035845e06561f9544582d289b6d27089b14b3fa0108726521`
+- v0.1.0 was exported history-free from the reviewed internal artifact. The private development history is intentionally not included in this public repository.
+- Detailed source lineage, internal provenance references, and this distribution's source digest are recorded in `SOURCE-MANIFEST.md`. Those records document where the release came from; they are not a claim of independent review.
 
-Status: prepared for review. Not published.
+**Status:** published as a public prerelease / local developer preview. It is not a hosted service.
