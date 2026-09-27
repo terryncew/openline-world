@@ -1,0 +1,56 @@
+{
+  "demo": "receiver-owned acceptance of the actual research report",
+  "no_model_calls": true,
+  "no_retrievals": true,
+  "no_paid_contact": true,
+  "steps": [
+    {
+      "step": "join",
+      "participant_id": "research-desk-correction",
+      "agent_id": "atlas-1",
+      "receipt_id": null
+    },
+    {
+      "step": "submit actual report",
+      "decision": "ALLOWED",
+      "receipt_id": "2005490384ddcd89",
+      "reason_codes": [],
+      "binding": {
+        "declared_sha256": "d80eed02cabf6e331e96258e8bb61d75d1dc1499447de99112ba2cb123b1f558",
+        "pinned_sha256": "d80eed02cabf6e331e96258e8bb61d75d1dc1499447de99112ba2cb123b1f558",
+        "match": true
+      },
+      "acceptance_verdict": "ACCEPTED",
+      "dispatch_id": "research-report:d80eed02cabf6e33"
+    },
+    {
+      "step": "verify displayed artifact",
+      "displayed_sha256": "d80eed02cabf6e331e96258e8bb61d75d1dc1499447de99112ba2cb123b1f558",
+      "all_identical": true
+    },
+    {
+      "step": "submit altered bytes",
+      "decision": "STOPPED",
+      "receipt_id": "8ce05c2a232fecaa",
+      "reason_codes": [
+        "REPORT_HASH_MISMATCH"
+      ],
+      "binding_match": false,
+      "dispatches_after": 1
+    },
+    {
+      "step": "submit after revocation",
+      "decision": "STOPPED",
+      "receipt_id": "d1802b0c9bca8562",
+      "reason_codes": [
+        "MANDATE_REVOKED"
+      ],
+      "dispatches_after": 1
+    },
+    {
+      "step": "cross-check backend vs research/evaluate.py",
+      "agree": true
+    }
+  ],
+  "participant_token": "REDACTED \u2014 bearer removed from the distributable copy; original preserved privately (see research/EVIDENCE-REDACTION.md)"
+}

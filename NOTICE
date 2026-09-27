@@ -1,0 +1,39 @@
+OpenLine World — copyright and attribution
+
+OpenLine World's original project code is Copyright 2026 Terrynce White and is
+licensed under the Apache License, Version 2.0 (see LICENSE). The license
+does not grant trademark rights and does not imply endorsement by OpenLine.
+
+Third-party components (retained with their own licenses and notices):
+
+1. OpenLine Wallet (github.com/terryncew/openline-wallet)
+   The backend imports the openline_wallet Python package from the vendored
+   snapshot in backend/vendor/ (Apache-2.0, see
+   backend/vendor/openline-wallet-LICENSE.txt and backend/vendor/VENDOR.md
+   for the source commit). All mandate grants, revocations, bundle admissions,
+   challenge issuance, exact-action evaluations, and signed gate receipts are
+   produced by that package's ReferenceGate/EffectGate and Wallet classes.
+   The workshop adds no authorization logic of its own.
+
+2. OpenLine Claim Graph (vendored in backend/vendor/openline_claim_graph/)
+   MIT license, Copyright (c) 2026 Terrynce White (see
+   backend/vendor/openline-claim-graph-LICENSE.txt).
+
+3. diorama-builder (github.com/hitesh153/diorama-builder, MIT, Hitesh Goyal)
+   Inspected as a rendering reference on 2026-09-25. Not vendored; no code,
+   branding, or assets used.
+
+4. claude-office (github.com/paulrobello/claude-office, MIT, Paul Robello)
+   Inspected as an event/hook reference on 2026-09-25. Its documented
+   hook-to-event mapping approach informed the CONNECTED adapter design.
+   Not vendored; no code, branding, or assets used.
+
+5. Claude Code hooks reference (code.claude.com/docs/en/hooks)
+   Public documentation used to define the CONNECTED adapter's accepted
+   event names and redaction policy.
+
+Assets: all 3D geometry is procedural code in frontend/src/world/scene/.
+No bundled fonts (system font stacks only), no image/texture assets beyond
+favicon.svg and icons.svg, no third-party models. An unreferenced image
+asset (frontend/src/assets/hero.png, origin unknown) was removed from the
+distribution rather than shipped under an uncertain license.

@@ -1,0 +1,100 @@
+{
+  "accounting": {
+    "buyer_balance_cents": 17850,
+    "buyer_net_cents": -515,
+    "cost_events": [
+      {
+        "at": "2026-09-27T05:52:04.194150+00:00",
+        "claimed_cents": 10000,
+        "cost_cents": 15,
+        "event_id": "ce-ac1ba38b481f3a57",
+        "op": "readings.scan",
+        "rate_cents": 5,
+        "receipt_id": null,
+        "units": 3
+      }
+    ],
+    "recorded_cost_cents": 15,
+    "released_to_buyer_cents": 985,
+    "seller_balance_cents": 2150,
+    "seller_compensation_cents": 515,
+    "seller_net_cents": 515,
+    "simulated": true,
+    "success_fee_cents": 500
+  },
+  "commission_id": "com-712b51c855e844b4",
+  "contract": {
+    "acceptance": {
+      "forbidden_substrings": [],
+      "max_bytes": 4096,
+      "required_substrings": [
+        "2.43 m",
+        "harbor"
+      ]
+    },
+    "buyer_id": "alice",
+    "deadline_ts": 1790491924.1850493,
+    "job": {
+      "deliverable": "A text tide report naming the mean tide height.",
+      "task": "Summarize the harbor log into a tide report."
+    },
+    "max_cost_cents": 1000,
+    "permitted_operations": [
+      {
+        "op": "readings.scan",
+        "rate_cents": 5
+      },
+      {
+        "op": "summary.write",
+        "rate_cents": 20
+      }
+    ],
+    "rules": {
+      "on_reject": "pay recorded authorized costs only; no success fee",
+      "on_revoke": "stop new gated work; account already-incurred authorized costs",
+      "on_unknown_outcome": "unresolved until reconciled; never repeat an effect or charge"
+    },
+    "schema": "openline.commission.contract.v1",
+    "seller_id": "bob",
+    "success_fee_cents": 500,
+    "version": 1
+  },
+  "contract_id": "ctr-6cb12bdbd4e3a21c",
+  "contract_sha256": "6cb12bdbd4e3a21cd439b9bbefd19eccf536108f850ab190fa1047903a206fb6",
+  "cost_events": [
+    {
+      "at": "2026-09-27T05:52:04.194150+00:00",
+      "claimed_cents": 10000,
+      "cost_cents": 15,
+      "event_id": "ce-ac1ba38b481f3a57",
+      "op": "readings.scan",
+      "rate_cents": 5,
+      "receipt_id": null,
+      "units": 3
+    }
+  ],
+  "deadline_passed": false,
+  "deliverable": {
+    "accepted": true,
+    "at": "2026-09-27T05:52:04.197887+00:00",
+    "reasons": [],
+    "text": "Harbor tide report: mean tide height 2.43 m at the harbor in Q3 2026, computed from the harbor log."
+  },
+  "recorded_cost_cents": 15,
+  "reserved_cents": 1500,
+  "settlement": {
+    "at": "2026-09-27T05:52:04.197894+00:00",
+    "buyer_release_cents": 985,
+    "commission_id": "com-712b51c855e844b4",
+    "contract_id": "ctr-6cb12bdbd4e3a21c",
+    "contract_sha256": "6cb12bdbd4e3a21cd439b9bbefd19eccf536108f850ab190fa1047903a206fb6",
+    "outcome": "accepted",
+    "payee": "bob",
+    "recorded_cost_cents": 15,
+    "seller_payout_cents": 515,
+    "settlement_id": "stl-fad24cdc0c10aa62",
+    "simulated": true,
+    "success_fee_cents": 500
+  },
+  "status": "accepted"
+}

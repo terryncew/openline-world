@@ -1,0 +1,95 @@
+{
+  "accounting": {
+    "buyer_balance_cents": 18915,
+    "buyer_net_cents": -15,
+    "cost_events": [
+      {
+        "at": "2026-09-27T05:52:04.154114+00:00",
+        "claimed_cents": 15,
+        "cost_cents": 15,
+        "event_id": "ce-5d06f153d1269ce0",
+        "op": "readings.scan",
+        "rate_cents": 5,
+        "receipt_id": null,
+        "units": 3
+      }
+    ],
+    "recorded_cost_cents": 15,
+    "released_to_buyer_cents": 1485,
+    "seller_balance_cents": 1085,
+    "seller_compensation_cents": 15,
+    "seller_net_cents": 15,
+    "simulated": true,
+    "success_fee_cents": 0
+  },
+  "commission_id": "com-de0e5dba536d8514",
+  "contract": {
+    "acceptance": {
+      "forbidden_substrings": [],
+      "max_bytes": 4096,
+      "required_substrings": [
+        "2.43 m",
+        "harbor"
+      ]
+    },
+    "buyer_id": "alice",
+    "deadline_ts": 1790491924.1467144,
+    "job": {
+      "deliverable": "A text tide report naming the mean tide height.",
+      "task": "Summarize the harbor log into a tide report."
+    },
+    "max_cost_cents": 1000,
+    "permitted_operations": [
+      {
+        "op": "readings.scan",
+        "rate_cents": 5
+      },
+      {
+        "op": "summary.write",
+        "rate_cents": 20
+      }
+    ],
+    "rules": {
+      "on_reject": "pay recorded authorized costs only; no success fee",
+      "on_revoke": "stop new gated work; account already-incurred authorized costs",
+      "on_unknown_outcome": "unresolved until reconciled; never repeat an effect or charge"
+    },
+    "schema": "openline.commission.contract.v1",
+    "seller_id": "bob",
+    "success_fee_cents": 500,
+    "version": 1
+  },
+  "contract_id": "ctr-383f59b3a4b38382",
+  "contract_sha256": "383f59b3a4b3838294b0d071033827392b82c868784dce5f6f368d103643a49b",
+  "cost_events": [
+    {
+      "at": "2026-09-27T05:52:04.154114+00:00",
+      "claimed_cents": 15,
+      "cost_cents": 15,
+      "event_id": "ce-5d06f153d1269ce0",
+      "op": "readings.scan",
+      "rate_cents": 5,
+      "receipt_id": null,
+      "units": 3
+    }
+  ],
+  "deadline_passed": false,
+  "deliverable": null,
+  "recorded_cost_cents": 15,
+  "reserved_cents": 1500,
+  "settlement": {
+    "at": "2026-09-27T05:52:04.155502+00:00",
+    "buyer_release_cents": 1485,
+    "commission_id": "com-de0e5dba536d8514",
+    "contract_id": "ctr-383f59b3a4b38382",
+    "contract_sha256": "383f59b3a4b3838294b0d071033827392b82c868784dce5f6f368d103643a49b",
+    "outcome": "revoked",
+    "payee": "bob",
+    "recorded_cost_cents": 15,
+    "seller_payout_cents": 15,
+    "settlement_id": "stl-3ada73286b9e21ac",
+    "simulated": true,
+    "success_fee_cents": 0
+  },
+  "status": "revoked"
+}

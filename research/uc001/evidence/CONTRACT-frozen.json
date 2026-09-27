@@ -1,0 +1,36 @@
+{
+  "acceptance": {
+    "forbidden_substrings": [],
+    "max_bytes": 4096,
+    "required_substrings": [
+      "2.43 m",
+      "harbor"
+    ]
+  },
+  "buyer_id": "alice",
+  "deadline_ts": 1790491924.1108274,
+  "job": {
+    "deliverable": "A text tide report naming the mean tide height.",
+    "task": "Summarize the harbor log into a tide report."
+  },
+  "max_cost_cents": 1000,
+  "permitted_operations": [
+    {
+      "op": "readings.scan",
+      "rate_cents": 5
+    },
+    {
+      "op": "summary.write",
+      "rate_cents": 20
+    }
+  ],
+  "rules": {
+    "on_reject": "pay recorded authorized costs only; no success fee",
+    "on_revoke": "stop new gated work; account already-incurred authorized costs",
+    "on_unknown_outcome": "unresolved until reconciled; never repeat an effect or charge"
+  },
+  "schema": "openline.commission.contract.v1",
+  "seller_id": "bob",
+  "success_fee_cents": 500,
+  "version": 1
+}

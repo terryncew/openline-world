@@ -1,0 +1,132 @@
+{
+  "ledger": [
+    {
+      "amount_cents": 20000,
+      "at": "2026-09-27T05:52:04.110514+00:00",
+      "balance_cents": 20000,
+      "kind": "fund",
+      "participant_id": "alice",
+      "simulated": true
+    },
+    {
+      "amount_cents": 1500,
+      "at": "2026-09-27T05:52:04.112581+00:00",
+      "balance_cents": 18500,
+      "commission_id": "com-c3e96a791994c810",
+      "kind": "reserve",
+      "participant_id": "alice",
+      "simulated": true
+    },
+    {
+      "at": "2026-09-27T05:52:04.120455+00:00",
+      "buyer_release_cents": 965,
+      "commission_id": "com-c3e96a791994c810",
+      "kind": "settle",
+      "outcome": "accepted",
+      "payee": "bob",
+      "seller_payout_cents": 535,
+      "simulated": true
+    },
+    {
+      "amount_cents": 1500,
+      "at": "2026-09-27T05:52:04.124210+00:00",
+      "balance_cents": 17965,
+      "commission_id": "com-71b4163c828b2fe3",
+      "kind": "reserve",
+      "participant_id": "alice",
+      "simulated": true
+    },
+    {
+      "at": "2026-09-27T05:52:04.132606+00:00",
+      "buyer_release_cents": 1465,
+      "commission_id": "com-71b4163c828b2fe3",
+      "kind": "settle",
+      "outcome": "rejected",
+      "payee": "bob",
+      "seller_payout_cents": 35,
+      "simulated": true
+    },
+    {
+      "amount_cents": 1500,
+      "at": "2026-09-27T05:52:04.137391+00:00",
+      "balance_cents": 17930,
+      "commission_id": "com-b5da2142996a7f87",
+      "kind": "reserve",
+      "participant_id": "alice",
+      "simulated": true
+    },
+    {
+      "at": "2026-09-27T05:52:04.143801+00:00",
+      "buyer_release_cents": 1000,
+      "commission_id": "com-b5da2142996a7f87",
+      "kind": "settle",
+      "outcome": "stopped_cap",
+      "payee": "bob",
+      "seller_payout_cents": 500,
+      "simulated": true
+    },
+    {
+      "amount_cents": 1500,
+      "at": "2026-09-27T05:52:04.150712+00:00",
+      "balance_cents": 17430,
+      "commission_id": "com-de0e5dba536d8514",
+      "kind": "reserve",
+      "participant_id": "alice",
+      "simulated": true
+    },
+    {
+      "at": "2026-09-27T05:52:04.155502+00:00",
+      "buyer_release_cents": 1485,
+      "commission_id": "com-de0e5dba536d8514",
+      "kind": "settle",
+      "outcome": "revoked",
+      "payee": "bob",
+      "seller_payout_cents": 15,
+      "simulated": true
+    },
+    {
+      "amount_cents": 1500,
+      "at": "2026-09-27T05:52:04.164373+00:00",
+      "balance_cents": 17415,
+      "commission_id": "com-360bafceec335896",
+      "kind": "reserve",
+      "participant_id": "alice",
+      "simulated": true
+    },
+    {
+      "at": "2026-09-27T05:52:04.179976+00:00",
+      "buyer_release_cents": 950,
+      "commission_id": "com-360bafceec335896",
+      "kind": "settle",
+      "outcome": "accepted",
+      "payee": "bob",
+      "seller_payout_cents": 550,
+      "simulated": true
+    },
+    {
+      "amount_cents": 1500,
+      "at": "2026-09-27T05:52:04.190395+00:00",
+      "balance_cents": 16865,
+      "commission_id": "com-712b51c855e844b4",
+      "kind": "reserve",
+      "participant_id": "alice",
+      "simulated": true
+    },
+    {
+      "at": "2026-09-27T05:52:04.197894+00:00",
+      "buyer_release_cents": 985,
+      "commission_id": "com-712b51c855e844b4",
+      "kind": "settle",
+      "outcome": "accepted",
+      "payee": "bob",
+      "seller_payout_cents": 515,
+      "simulated": true
+    }
+  ],
+  "note": "Simulated funds only. Cost events are not provider invoices.",
+  "simulated": true,
+  "simulated_balances_cents": {
+    "alice": 17850,
+    "bob": 2150
+  }
+}

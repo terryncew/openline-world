@@ -1,0 +1,28 @@
+{
+  "citations": [
+    {
+      "locator": "fixture://harbor-log.txt",
+      "note": "Harbor log fixture (morning watch): the readings CSV is transcribed from this source."
+    },
+    {
+      "locator": "producer://external-producer-demo/transcription-note",
+      "note": "Producer-supplied transcription note: how the CSV rows were copied from the log. Producer-supplied; grants no acceptance authority."
+    }
+  ],
+  "claim": "The mean tide height at the harbor in Q3 2026, computed from the harbor-log readings CSV, is 2.43 m.",
+  "expected_result": "{\"mean_tide_height_m\": 2.43, \"n\": 8, \"period\": \"2026-Q3\", \"source\": \"harbor-log readings CSV (fixture transcription)\"}\n",
+  "files": {
+    "input.csv": {
+      "sha256": "ee92a9edda133c32c71d9792b489e6636fabdee16cb3dfbfc721c6bebbb9679e"
+    },
+    "study.py": {
+      "sha256": "16c0c7ced3bcd09c0ba397e238e1f105a103058d10f127b4c6189182e86c75d6"
+    }
+  },
+  "limitations": "Demonstration fixture, not a scientific finding. The input is a short hand transcription (n=8) of a fictional harbor log, not calibrated gauge data. The mean is arithmetic only; no uncertainty, tide model, or datum correction is applied. Passing the receiver's checks admits the package for display; it does not establish that the claim is true.",
+  "producer_id": "external-producer-demo",
+  "producer_review": "PRODUCER-SUPPLIED REVIEW \u2014 grants no acceptance authority\nThe producer re-ran study.py on the pinned input.csv and observed the expected output. This self-review is the producer's own check: it grants no acceptance authority. Only the receiver's evaluation under its frozen criteria can admit the package.",
+  "reproduce": "python3 study.py",
+  "schema": "openline.research.package.v1",
+  "title": "Mean tide height at the harbor, Q3 2026"
+}

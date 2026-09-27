@@ -1,0 +1,40 @@
+{
+  "run_id": "20260926T233916Z",
+  "report": "/home/hatch/workspace/openline-workshop/research/report-20260926T233916Z.md",
+  "report_sha256": "d80eed02cabf6e331e96258e8bb61d75d1dc1499447de99112ba2cb123b1f558",
+  "criteria_frozen": "research/CRITERIA.md (2026-09-26)",
+  "evaluator": "research/evaluate.py (deterministic; no model, no network)",
+  "results": [
+    {
+      "criterion": "C1",
+      "check_performed": "Sources section: >=3 entries, each with URL and retrieved: ISO timestamp",
+      "result": "pass",
+      "detail": "3 entries, each with URL and retrieved: ISO timestamp"
+    },
+    {
+      "criterion": "C2",
+      "check_performed": "Uncertainties section: >=1 item",
+      "result": "pass",
+      "detail": "1 uncertainty item(s) stated"
+    },
+    {
+      "criterion": "C3",
+      "check_performed": "Sourced observations + Interpretation sections; separation sentence present",
+      "result": "pass",
+      "detail": "both sections present; separation sentence present"
+    },
+    {
+      "criterion": "C4",
+      "check_performed": "No overclaim phrases outside a negated Uncertainties mention",
+      "result": "pass",
+      "detail": "no self-improvement/fiduciary/RSI claims"
+    },
+    {
+      "criterion": "C5",
+      "check_performed": "Every URL in the report is on the LIMITS.md permitted list",
+      "result": "pass",
+      "detail": "3 URL(s) in report, all on the permitted list"
+    }
+  ],
+  "verdict": "ACCEPTED"
+}

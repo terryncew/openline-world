@@ -1,0 +1,186 @@
+# OpenLine World
+
+A local developer preview of a shared world where AI agents act only through
+receiver-owned authorization. The owner sets the goal, limits, and review
+conditions. The worker proposes and works. A receiver — not the worker —
+decides whether each consequential action is allowed. Every decision is a
+signed receipt.
+
+This is a **local developer preview**. It runs on your machine, on your
+network, with simulated funds. Nothing here is a hosted service, an audit
+verdict, or proof that any real system is safe.
+
+## Run it in five minutes
+
+Prerequisites: Python 3.10+, Node 18+, npm. Nothing is billed. No model calls.
+
+```bash
+./launch-preview.sh
+```
+
+The launcher starts the backend (127.0.0.1:8471, loopback only) and the
+frontend dev server (5173), waits until both answer, and prints the URL.
+Ctrl-C stops both. Your browser talks only to the frontend; `/api/*` is
+proxied server-side. The backend port is never exposed to the LAN.
+
+For a phone on the same Wi-Fi: `./launch-preview.sh --https` (self-signed
+cert, dev only — your phone will warn). WebCrypto signing needs a secure
+context, so plain HTTP over LAN will not complete the join ceremony.
+
+## What is demonstrated
+
+- **Owner delegates, worker acts, receiver decides.** An owner joins, grants a
+  bounded mandate (scopes: `notes.read`, `notes.write`, `draft.write`), and
+  the worker's every gated act goes through the receiver's exact-action
+  evaluation. Out-of-mandate acts are refused loudly, never silently.
+- **Browser-profile custody.** Each participant's owner and worker keys are
+  generated and held in their own browser profile (IndexedDB, non-extractable
+  in-memory signing). The server holds only its receiver key. Joining proves
+  key control via a signed challenge; joining grants no action permission.
+- **Explicit revocation.** The owner signs a revocation in the local wallet and
+  pushes it. Revocation is permanent within the session and does not undo
+  completed settlements. Stale standing (older than 300s) holds actions until
+  refreshed.
+- **Research Commons (admission + correction).** A receiver-controlled intake
+  for small computational studies: manifest, files, evaluation, decision, and
+  the displayed package are hash-bound. The receiver can accept, refuse, or
+  quarantine; corrections propagate through the claim graph without erasing
+  history. See `research/COMMONS-BRIEF.md`.
+- **Unattended commission (simulated funds only).** A deterministic
+  receiver-side accounting ledger for capped cost-plus work: the buyer reserves
+  max cost + success fee, the fee pays only on acceptance, unused reservations
+  release. All amounts are receiver arithmetic over frozen contract rates.
+  See `research/uc001/`.
+
+## Architecture and custody map
+
+```
+browser profile A (owner+worker keys, IndexedDB) ──┐
+browser profile B (owner+worker keys, IndexedDB) ──┤─► frontend (5173)
+                                                    │
+backend (127.0.0.1:8471, stdlib HTTP, no framework) │
+  ├─ world.py        — participants, standing, sessions
+  ├─ workshop_gate.py— admission checks before the real gate
+  ├─ commission.py   — simulated-funds accounting (receiver arithmetic)
+  ├─ package_sandbox.py — Research Commons evaluation
+  └─ vendor/
+       ├─ openline_wallet/      — the real authorization gate
+       │    (ReferenceGate/EffectGate, Wallet, signed receipts)
+       └─ openline_claim_graph/ — correction propagation
+server holds ONLY its receiver Ed25519 key.
+```
+
+No authorization logic is reimplemented in the workshop: mandate grants,
+revocations, bundle admissions, challenge issuance, exact-action evaluations,
+and signed receipts all come from the vendored `openline_wallet` package.
+
+## Join / authorize / revoke (browser flow)
+
+Documented in full at `docs/joining.md` and `docs/custody-browser-integration.md`.
+
+1. **Join:** the owner taps "Enter the square" — keygen in the profile, mandate
+   grant, owner-signed bundle, worker-signed proof-of-control over a
+   server-issued nonce (`openline-join-profile/v1`). The server verifies the
+   bundle against the pinned owner root. Joining creates the participant's own
+   gate session: own wallet, own keys, own receipt log.
+2. **Authorize:** every gated act (offer, propose, accept, agree, submit,
+   correct, newsroom import/review) fetches a receiver challenge and is sent
+   as a worker-signed presentation. No presentation-less path exists.
+3. **Revoke:** explicit owner gesture — the owner signs the revocation locally
+   and pushes the new bundle. The next gated act after revocation is refused.
+   Completed settlements stand.
+
+## Research Commons behavior and limits
+
+- Five control classes were demonstrated: pass accepted, genuine failure
+  refused, altered artifact refused (declared hash ≠ evaluated hash),
+  producer self-approval stripped (it cannot rescue a failed package), and
+  unauthorized publication refused (only the accepted dispatch is displayed).
+- **Arbitrary submitted research-code execution is disabled.** An isolation
+  probe (2026-09-26) ran a canary through the genuine intake path and found
+  all five tested escape routes open: the canary ran as uid 0, read outside
+  its inputs, wrote to /tmp, listed the receiver's data dir, and reached a
+  loopback listener. In response, `run_study` now executes only byte-pinned
+  receiver-trusted fixtures (`TRUSTED_FIXTURE_PINS`); every other byte is
+  refused with `STUDY_EXECUTION_DISABLED` before it runs. The product admits
+  research packages under defined checks; it has **not** demonstrated safe
+  execution of arbitrary research code.
+- Acceptance of a package is a receiver decision under stated criteria. It is
+  not peer review, not scientific truth, and not a verdict on the claim's
+  real-world correctness.
+
+## Test results (at the exported commit)
+
+- Backend: **203/203 green** (`test_commission_chapter.py` 21, commons
+  chapter 32, browser custody 12, custody headless 19, remainder from earlier
+  lanes). TypeScript compiles clean. Vite build green.
+- Browser QA: custody negative battery 12/12, research-commons flow 27/27,
+  avatar-migration live check PASS (five locations, fresh join, OWNER badges).
+- Full per-lane counts and the reconciliation of the test suite's evolution
+  are in `docs/test-count-reconciliation.md` and the Bureau report.
+
+## Claim ceiling — read this before quoting anything
+
+- Browser-profile custody and explicit owner authorization are demonstrated.
+  **Two profiles on one machine do not establish independent adoption or
+  hardened process/device isolation.**
+- The consequence-history report (`research/bureau/`) is a bounded evidence
+  record from internally operated demonstrations. Bureau and World share an
+  operator. **It is not an independent assessment and must not be read as one.**
+- **Simulated funds are not real settlement.** Reservation of simulated cents
+  is not proof of capped real billing; cost events are never provider invoices.
+- **Acceptance does not mean truth.** A receiver's ACCEPTED verdict means the
+  package met the stated criteria; it says nothing about the claim's
+  real-world correctness.
+- Refusals alone do not establish safety. Signatures do not establish
+  completeness, factual truth, or damages. Missing loss data means
+  "not measured," never "zero losses."
+- Physical-phone testing is reported separately and has not been done.
+
+## Known limitations
+
+- Transport is local dev transport only; nearby/Bluetooth untested.
+- Identity is self-asserted (`openline-join-profile/v1`) plus proof-of-control.
+- Revocation timing measured ~0.014–0.026s on loopback; no cross-network
+  revocation claim is made (standing freshness is 300s with explicit HOLD).
+- No network namespace isolation available on the reference machine; the
+  study sandbox's recorded limits bound cost, not access (hence execution
+  was disabled rather than "hardened").
+- Moderation is rate caps only.
+
+## Reporting failures
+
+Open an issue against the repository with: the exact steps, the expected
+receiver decision, the actual receiver decision (or error), the receipt or
+refusal code, and the export digest from `SOURCE-MANIFEST.md`. Do not
+include private keys, bearer tokens, or credentials — receipts are safe to
+share, secrets are not. Reports about the documented limitations above
+(e.g. "two profiles are one machine") are already known and need no new
+issue; reports of a concrete defect in the mechanism are welcome.
+
+## License and scope
+
+OpenLine World's original project code is Copyright 2026 Terrynce White,
+licensed under the Apache License, Version 2.0 (see `LICENSE`). Third-party
+components keep their own licenses — see `NOTICE`, including the vendored
+Wallet (Apache-2.0) and Claim Graph (MIT). The code license does not grant
+trademark rights and does not imply endorsement by OpenLine.
+
+## Provenance
+
+- Source: `openline-workshop`, branch `robot-avatar-migration`, exported
+  history-free at commit `b8f49b6` ("Avatar-migration QA: live-browser
+  verification, all five locations pass").
+- Lineage: `d92a139` (Bureau consequence-history report, frozen and
+  byte-identical) → `b371acb` (robot avatar migration) → `fbc8c13`
+  (Bureau reporting corrections) → `b8f49b6` (avatar-migration QA notes).
+- The private development history is not included and stays private. The
+  commits above are recorded as provenance, not reproduced here.
+- Consolidated review archive of the Bureau corrections:
+  `bureau-corrections-fbc8c13.zip`, sha256
+  `b81dc552fe9f3aec45b1853b0b6b49a9fc0a4b517b9cf757c37254ee7851a603`
+  (9.5MB, history-free, secret-scan clean). Prior lane archives are listed
+  in that archive's README; they are not duplicated here.
+- This distribution's own digest is in `SOURCE-MANIFEST.md`.
+
+Status: prepared for review. Not published.

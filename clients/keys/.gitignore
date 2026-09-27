@@ -1,0 +1,3 @@
+# Runtime participant key dirs. Never commit keys.
+*
+!.gitignore

@@ -1,0 +1,43 @@
+{
+  "listener_got": "CANARY-HELLO",
+  "first_decision": "STOPPED",
+  "first_codes": [
+    "PACKAGE_ACCEPTANCE_FAILED",
+    "CRITERION_FAILED_K3"
+  ],
+  "second_decision": "STOPPED",
+  "second_codes": [
+    "PACKAGE_ACCEPTANCE_FAILED",
+    "CRITERION_FAILED_K3"
+  ],
+  "acceptance_verdict": "REJECTED",
+  "study_stdout": {
+    "data_dir_listable": [
+      "world-snapshot.json"
+    ],
+    "data_dir_r": true,
+    "data_dir_w": true,
+    "net": "BLOCKED:ConnectionRefusedError",
+    "read_outside": "OK:CANARY-OUTSIDE-READ-ME",
+    "read_repo": "OK:<!-- FROZEN 2026-09-26 \u2014 pinned copy of ",
+    "uid": 0,
+    "write_tmp": "OK"
+  },
+  "written_file_exists": true,
+  "sandbox_limits": {
+    "cpu_seconds": 10,
+    "memory_bytes": 268435456,
+    "max_file_bytes": 1048576,
+    "wall_timeout_seconds": 15,
+    "stdout_cap_bytes": 65536,
+    "stderr_tail_bytes": 2048,
+    "stdin": "DEVNULL",
+    "cwd": "fresh temp dir containing only study.py + input.csv",
+    "env": {
+      "PATH": "/usr/bin:/bin",
+      "PYTHONNOUSERSITE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "network": "shared host namespace (no network namespace on this box; study needs no network)"
+  }
+}

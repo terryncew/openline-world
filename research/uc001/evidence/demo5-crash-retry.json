@@ -1,0 +1,140 @@
+{
+  "accounting": {
+    "buyer_balance_cents": 18365,
+    "buyer_net_cents": -550,
+    "cost_events": [
+      {
+        "at": "2026-09-27T05:52:04.167844+00:00",
+        "claimed_cents": 15,
+        "cost_cents": 15,
+        "event_id": "ce-36f00bab80ac55ff",
+        "op": "readings.scan",
+        "rate_cents": 5,
+        "receipt_id": null,
+        "units": 3
+      },
+      {
+        "at": "2026-09-27T05:52:04.172976+00:00",
+        "claimed_cents": 99999,
+        "cost_cents": 15,
+        "event_id": "ce-8311fcb5dac401fb",
+        "op": "readings.scan",
+        "rate_cents": 5,
+        "receipt_id": null,
+        "units": 3
+      },
+      {
+        "at": "2026-09-27T05:52:04.176308+00:00",
+        "claimed_cents": 424242,
+        "cost_cents": 20,
+        "event_id": "ce-9359ce38705a6266",
+        "op": "summary.write",
+        "rate_cents": 20,
+        "receipt_id": null,
+        "units": 1
+      }
+    ],
+    "recorded_cost_cents": 50,
+    "released_to_buyer_cents": 950,
+    "seller_balance_cents": 1635,
+    "seller_compensation_cents": 550,
+    "seller_net_cents": 550,
+    "simulated": true,
+    "success_fee_cents": 500
+  },
+  "commission_id": "com-360bafceec335896",
+  "contract": {
+    "acceptance": {
+      "forbidden_substrings": [],
+      "max_bytes": 4096,
+      "required_substrings": [
+        "2.43 m",
+        "harbor"
+      ]
+    },
+    "buyer_id": "alice",
+    "deadline_ts": 1790491924.1602972,
+    "job": {
+      "deliverable": "A text tide report naming the mean tide height.",
+      "task": "Summarize the harbor log into a tide report."
+    },
+    "max_cost_cents": 1000,
+    "permitted_operations": [
+      {
+        "op": "readings.scan",
+        "rate_cents": 5
+      },
+      {
+        "op": "summary.write",
+        "rate_cents": 20
+      }
+    ],
+    "rules": {
+      "on_reject": "pay recorded authorized costs only; no success fee",
+      "on_revoke": "stop new gated work; account already-incurred authorized costs",
+      "on_unknown_outcome": "unresolved until reconciled; never repeat an effect or charge"
+    },
+    "schema": "openline.commission.contract.v1",
+    "seller_id": "bob",
+    "success_fee_cents": 500,
+    "version": 1
+  },
+  "contract_id": "ctr-4f7e2e14da9b1d1c",
+  "contract_sha256": "4f7e2e14da9b1d1c3839d29b45101ad4fe24229cbbbfd2e625eb2d3da809767b",
+  "cost_events": [
+    {
+      "at": "2026-09-27T05:52:04.167844+00:00",
+      "claimed_cents": 15,
+      "cost_cents": 15,
+      "event_id": "ce-36f00bab80ac55ff",
+      "op": "readings.scan",
+      "rate_cents": 5,
+      "receipt_id": null,
+      "units": 3
+    },
+    {
+      "at": "2026-09-27T05:52:04.172976+00:00",
+      "claimed_cents": 99999,
+      "cost_cents": 15,
+      "event_id": "ce-8311fcb5dac401fb",
+      "op": "readings.scan",
+      "rate_cents": 5,
+      "receipt_id": null,
+      "units": 3
+    },
+    {
+      "at": "2026-09-27T05:52:04.176308+00:00",
+      "claimed_cents": 424242,
+      "cost_cents": 20,
+      "event_id": "ce-9359ce38705a6266",
+      "op": "summary.write",
+      "rate_cents": 20,
+      "receipt_id": null,
+      "units": 1
+    }
+  ],
+  "deadline_passed": false,
+  "deliverable": {
+    "accepted": true,
+    "at": "2026-09-27T05:52:04.179969+00:00",
+    "reasons": [],
+    "text": "Harbor tide report: mean tide height 2.43 m at the harbor in Q3 2026, computed from the harbor log."
+  },
+  "recorded_cost_cents": 50,
+  "reserved_cents": 1500,
+  "settlement": {
+    "at": "2026-09-27T05:52:04.179976+00:00",
+    "buyer_release_cents": 950,
+    "commission_id": "com-360bafceec335896",
+    "contract_id": "ctr-4f7e2e14da9b1d1c",
+    "contract_sha256": "4f7e2e14da9b1d1c3839d29b45101ad4fe24229cbbbfd2e625eb2d3da809767b",
+    "outcome": "accepted",
+    "payee": "bob",
+    "recorded_cost_cents": 50,
+    "seller_payout_cents": 550,
+    "settlement_id": "stl-bfac3f8748cbf5ec",
+    "simulated": true,
+    "success_fee_cents": 500
+  },
+  "status": "accepted"
+}
