@@ -6,7 +6,8 @@ Source commit: openline-workshop @ b8f49b6 (branch robot-avatar-migration).
 Export modifications from the commit tree: removed captures/ (37MB dev QA captures),
 removed frontend/src/assets/hero.png (unreferenced, unknown origin), added LICENSE,
 rewrote NOTICE (copyright + third-party licenses), replaced README.md with the
-distribution README (dev README preserved at docs/dev-readme.md).
+distribution README (dev README preserved at docs/dev-readme.md), added
+qa-notes/distribution-launch.md (clean-extraction launch record).
 
 ## sha256 of every file
 
@@ -15,6 +16,7 @@ distribution README (dev README preserved at docs/dev-readme.md).
   35473c26d2d455d37d0dc5ba824ec815378d44c77dd90c6397b3257980496341  LICENSE
   89699d52f0f8e0de76db6d251ab5436d7792833d2a4e735c9c5ae55168d48d5e  NOTICE
   246a59315afb0bf97aa985cbb91dcd1ded0f241bfd4a0fcc6e283bfd611b9926  README.md
+  d1941d9b3e9e56592001faf963d4529c848e57490518c896f4aa8c2cdbee42d5  SOURCE-MANIFEST.md
   c07e63defb4f04b718662006e60af14b9fa966f00b7604b0c0bca269f907b45e  backend/adapter_claude_hooks.py
   2877153df6c13269f15fea4f22c968de707bf92aaf9236fbb5d010da04e55de7  backend/agent_worker.py
   4fccf9b489ebb2315d411a3d19538544d6f35fe09f7d89bf519cddf8489a2c61  backend/claim_graph_chapter.py
@@ -163,6 +165,7 @@ distribution README (dev README preserved at docs/dev-readme.md).
   6677f2807d26799c8d32ec3c0dc387543df6428204973005ca03720e6af9f66b  frontend/vite.config.ts
   c8c34a75162e075e300d18c9ce8474800992d283fbc131ef2ecb279d03408ea5  launch-preview.sh
   52ffdf3eb8cb13b41ef8b990d8e21b30192809686b01207aaa7e68d2b57786ab  qa-notes/art-pass-close.md
+  b46c9fb126b9a66195a948be7ec8d4862462acd5429d8bf9883dce748445fd03  qa-notes/distribution-launch.md
   128a960b8e6b3537a65ab44c93e623a9fbd28b4eb54baf396261812b06df6a16  research/ACCEPTANCE-CLARIFICATION.md
   7d0bdf1b6b89e14c7173d1f2a506cd42271872f987e5aa90b14be20116980195  research/ADAPTER.md
   ed22a3375792f93729b94525a80c15800d453d4e5b9160af953110f91f92af0d  research/COMMONS-BRIEF.md
