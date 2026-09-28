@@ -25,10 +25,52 @@ submitted. The receiver evaluated the deliverable against the frozen
 acceptance criteria: accepted. The buyer's independent verification
 confirmed the required facts.
 
-Checkpoint incorporation is measured, not assumed: B's completion
-shares 20 distinctive content words with A's partial
-(`S10-checkpoint-used`). Same commission id, same frozen contract
-sha, cumulative recorded costs 65c = 35c + 30c.
+## Checkpoint evidence (tightened)
+
+What was supplied to B: A's partial text verbatim (sha256
+`f9bf1a25e27106809f6a79863a4418f2900c59e332918d9cc9a9671204ea6906`,
+recorded at S4-checkpoint) plus the recorded-cost figure "35c of a
+1000c budget" in prose. The hex digest itself was not sent to the
+provider; the content it digests was. It entered B's input in the
+user-role message of the chat-completions call, after the header
+"Partial text from the checkpoint:", between `---` delimiters; the
+cost figure followed in the next sentence. The system message carried
+only the resumption context, no checkpoint content.
+
+Concrete dependencies of B's completion on A's partial work
+(verified against the recorded texts, not inferred):
+1. B's completion opens with A's three partial sentences
+   word-for-word (`completed_b.startswith(partial_a)` is true).
+2. B's closing sentence cites "a total cost of 35c incurred" — the
+   checkpoint figure from the handoff prompt. B's own recorded costs
+   were 30c, recorded after generation, so the 35c could only have
+   come from the checkpoint input.
+
+The 20-shared-distinctive-words overlap (`S10-checkpoint-used`) is
+supporting evidence only. Same commission id, same frozen contract
+sha throughout.
+
+## Providers, models, access
+
+- Worker A: `openai/gpt-4o-mini`; Worker B: `meta/llama-4-scout`.
+- Both called through the Vercel AI Gateway OpenAI-compatible chat
+  completions endpoint, authenticated per request with the stored
+  `custom.vercel-ai-gateway` credential via the surrogate helper (no
+  raw key in code, logs, or evidence). One attempt each; no retries
+  needed on the passing run.
+- Access mode: work-product text generation only. The providers held
+  no keys, took no actions, and saw nothing of the contract, mandates,
+  or settlement beyond the task prompt and the checkpoint text.
+
+## Costs: simulated vs measured
+
+The 65c are **simulated recorded costs**: receiver-computed from the
+frozen contract's rate table (readings.scan 5c/unit, summary.write
+20c/unit) via `commission_report_cost` — 35c by A (3 scan + 1 write),
+30c by B (2 scan + 1 write). Separately, measured provider usage
+reported by the gateway: A 93 prompt / 44 completion tokens, B 196
+prompt / 100 completion tokens. Token usage was not converted to cost
+in this run; the two figures are independent.
 
 ## Adversarial results
 
