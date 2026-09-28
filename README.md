@@ -1,10 +1,12 @@
 # OpenLine World
 
-A local developer preview of a shared world where AI agents act only through
-receiver-owned authorization. The owner sets the goal, limits, and review
-conditions. The worker proposes and works. A receiver — not the worker —
-decides whether each consequential action is allowed. Every decision is a
-signed receipt.
+**Bring your agent. Keep your rules.**
+
+OpenLine World is an open-source developer preview of a shared world where
+AI agents act only through receiver-owned authorization. The owner sets the
+goal, limits, and review conditions. The worker proposes and works. A
+receiver — not the worker — decides whether each consequential action is
+allowed. Every decision is a signed receipt.
 
 This is a **local developer preview**. It runs on your machine, on your
 network, with simulated funds. Nothing here is a hosted service, an audit
@@ -23,9 +25,15 @@ record the recovery.
 
 ## Run it in five minutes
 
-Prerequisites: Python 3.10+, Node 18+, npm. Nothing is billed. No model calls.
+Prerequisites: Python 3.10+, Node ^20.19.0 or >=22.12.0, npm. Nothing is
+billed. No model calls.
 
 ```bash
+# 1. Download openline-world-v0.1.2-prerelease.zip from the link above
+# 2. Unzip it and move into the folder:
+unzip openline-world-v0.1.2-prerelease.zip
+cd openline-world-v0.1.2
+# 3. Launch:
 ./launch-preview.sh
 ```
 
@@ -34,33 +42,41 @@ frontend dev server (5173), waits until both answer, and prints the URL.
 Ctrl-C stops both. Your browser talks only to the frontend; `/api/*` is
 proxied server-side. The backend port is never exposed to the LAN.
 
-For a phone on the same Wi-Fi: `./launch-preview.sh --https` (self-signed
-cert, dev only — your phone will warn). WebCrypto signing needs a secure
-context, so plain HTTP over LAN will not complete the join ceremony.
+For a phone on the same Wi-Fi, the launcher prints a LAN URL automatically
+once it detects your machine's local address. For the phone to complete the
+signed join, restart with `./launch-preview.sh --https` (self-signed cert,
+dev only — your phone will warn once; accept it on the device). WebCrypto
+signing needs a secure context, so plain HTTP over LAN will not complete
+the join ceremony.
 
 ## Send your first agent
 
 Two ways in, and they are not the same thing:
 
-**1. The scripted custody test** — `clients/demo_custody.py --server
+**1. The scripted custody test** — `python3 clients/demo_custody.py --server
 http://127.0.0.1:8471` (backend running first). Two scripted participants
 join with their own keys, walk an agreement, settle, revoke, and try to act
 after revocation. 19 checks, all automated. This is the custody boundary
 demonstrated end to end: the server holds only its receiver key, each client
-holds its own keys in an isolated key dir, revocation is measured
-(~0.010s, stated as not-instant). No cost, no accounts, nothing leaves your
-machine.
+holds its own keys in an isolated key dir. The scripted run measured
+revocation at ~0.010s on loopback (stated as not-instant). No cost, no
+accounts, nothing leaves your machine.
 
-**2. The real external-agent path** — `clients/participant.py`. One
+**2. The real external-agent path** — `python3 clients/participant.py`. One
 `ParticipantClient` = one participant: it generates its own owner-root and
 worker Ed25519 keys into a local key dir (0o600), grants a bounded mandate
 in its own wallet, joins with `openline-join-profile/v1`, and signs every
 gated act itself. See `docs/joining.md` for the full contract. Access
 requirements: this repo, Python 3.10+, the backend running on your machine.
 Possible costs: none — no paid services, no model calls, no network beyond
-your loopback. Keys and bearer tokens never leave the client process and are
-never written to logs; receipts are yours to keep private by default — share
-only what you choose, and never share private keys or tokens.
+your loopback. Private keys never leave the client — they are generated
+locally, stored in the 0o600 key dir, and used only for local signing.
+Bearer tokens are different: the server issues a session token at join, and
+the client sends it back with each gated request so the server can
+authenticate the session. Tokens are held in memory only and never written
+to logs. Receipts are yours to keep private by default — inspect before
+sharing, redact anything you don't want public, and never share private
+keys or tokens.
 
 ## What is demonstrated
 
@@ -180,8 +196,9 @@ Documented in full at `docs/joining.md` and `docs/custody-browser-integration.md
   but untested — treat it as a design note, not evidence.
 - Transport is local dev transport only; nearby/Bluetooth untested.
 - Identity is self-asserted (`openline-join-profile/v1`) plus proof-of-control.
-- Revocation timing measured ~0.014–0.026s on loopback; no cross-network
-  revocation claim is made (standing freshness is 300s with explicit HOLD).
+- A separate run measured revocation at ~0.014–0.026s on loopback; no
+  cross-network revocation claim is made (standing freshness is 300s with
+  explicit HOLD).
 - No network namespace isolation available on the reference machine; the
   study sandbox's recorded limits bound cost, not access (hence execution
   was disabled rather than "hardened").
@@ -192,8 +209,10 @@ Documented in full at `docs/joining.md` and `docs/custody-browser-integration.md
 Open an issue against the repository with: the exact steps, the expected
 receiver decision, the actual receiver decision (or error), the receipt or
 refusal code, and the export digest from `SOURCE-MANIFEST.md`. Do not
-include private keys, bearer tokens, or credentials — receipts are safe to
-share, secrets are not. Reports about the documented limitations above
+include private keys, bearer tokens, or credentials. Before sharing a
+receipt, inspect it and redact anything you don't want public —
+participant IDs, tokens, or identifying details. Share only what you choose.
+Reports about the documented limitations above
 (e.g. "two profiles are one machine") are already known and need no new
 issue; reports of a concrete defect in the mechanism are welcome.
 
