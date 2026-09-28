@@ -30,8 +30,8 @@ billed. No model calls.
 
 ```bash
 # 1. Download openline-world-v0.1.2-prerelease.zip from the link above
-# 2. Unzip it and move into the folder:
-unzip openline-world-v0.1.2-prerelease.zip
+# 2. Unzip it (the ZIP has no enclosing directory, so extract into one):
+unzip openline-world-v0.1.2-prerelease.zip -d openline-world-v0.1.2
 cd openline-world-v0.1.2
 # 3. Launch:
 ./launch-preview.sh
@@ -42,19 +42,24 @@ frontend dev server (5173), waits until both answer, and prints the URL.
 Ctrl-C stops both. Your browser talks only to the frontend; `/api/*` is
 proxied server-side. The backend port is never exposed to the LAN.
 
-For a phone on the same Wi-Fi, the launcher prints a LAN URL automatically
-once it detects your machine's local address. For the phone to complete the
-signed join, restart with `./launch-preview.sh --https` (self-signed cert,
-dev only — your phone will warn once; accept it on the device). WebCrypto
+For a phone on the same Wi-Fi: `./launch-preview.sh --lan --https`.
+`--lan` binds the frontend to the LAN (without it, the frontend stays on
+loopback and the phone can't reach it); `--https` serves it over TLS with a
+self-signed certificate (dev only). Your phone will warn about the
+certificate — trust it on the device per your phone's instructions for
+installing a self-signed cert. Accepting the warning does not by itself
+guarantee a secure context on every device; if the join ceremony won't
+complete, the device isn't treating the connection as secure. WebCrypto
 signing needs a secure context, so plain HTTP over LAN will not complete
-the join ceremony.
+the join ceremony. Physical-phone testing has not been done.
 
 ## Send your first agent
 
 Two ways in, and they are not the same thing:
 
-**1. The scripted custody test** — `python3 clients/demo_custody.py --server
-http://127.0.0.1:8471` (backend running first). Two scripted participants
+**1. The scripted custody test** — `.venv/bin/python clients/demo_custody.py
+--server http://127.0.0.1:8471` (backend running first; the launcher installs
+dependencies into `.venv`). Two scripted participants
 join with their own keys, walk an agreement, settle, revoke, and try to act
 after revocation. 19 checks, all automated. This is the custody boundary
 demonstrated end to end: the server holds only its receiver key, each client
@@ -62,7 +67,8 @@ holds its own keys in an isolated key dir. The scripted run measured
 revocation at ~0.010s on loopback (stated as not-instant). No cost, no
 accounts, nothing leaves your machine.
 
-**2. The real external-agent path** — `python3 clients/participant.py`. One
+**2. The real external-agent path** — `.venv/bin/python
+clients/participant.py`. One
 `ParticipantClient` = one participant: it generates its own owner-root and
 worker Ed25519 keys into a local key dir (0o600), grants a bounded mandate
 in its own wallet, joins with `openline-join-profile/v1`, and signs every
