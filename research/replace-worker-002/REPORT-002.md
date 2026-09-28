@@ -96,7 +96,7 @@ owner signature prefix, head sequence 3), and the settlement
 
 ## Commit
 
-TBD — mechanism (`backend/world.py`, `backend/server.py`) plus
+`548a7fb` on branch `work/replace-worker-002` — mechanism
+(`backend/world.py`, `backend/server.py`) plus
 `research/replace-worker-002/` (protocol, report, demo, both evidence
-runs, S11 diagnosis) on branch `work/replace-worker-002`.
-Release and commercial assets untouched.
+runs, S11 diagnosis). Release and commercial assets untouched.
