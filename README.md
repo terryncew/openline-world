@@ -10,6 +10,17 @@ This is a **local developer preview**. It runs on your machine, on your
 network, with simulated funds. Nothing here is a hosted service, an audit
 verdict, or proof that any real system is safe.
 
+## Download
+
+**Latest prerelease: [v0.1.2](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2).**
+Verified distribution ZIP: `openline-world-v0.1.2-prerelease.zip`
+(SHA-256 `09667bcf2c9ac195bfa62900f489802f29bf94370d8de96d024d55beae8f7270`).
+v0.1.2 supersedes v0.1.1, whose tag and published asset did not match — the
+[v0.1.2 release notes](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2)
+record the recovery.
+
+![OpenLine World demo](assets/openline-world-demo.gif)
+
 ## Run it in five minutes
 
 Prerequisites: Python 3.10+, Node 18+, npm. Nothing is billed. No model calls.
@@ -196,9 +207,16 @@ trademark rights and does not imply endorsement by OpenLine.
 
 ## Release provenance
 
-- **Public prerelease:** `openline-world-v0.1.0`
-- **Release commit:** `671598c`
-- **Release archive SHA-256:** `c50945f1b0832c3035845e06561f9544582d289b6d27089b14b3fa0108726521`
+- **Current public prerelease:** [`openline-world-v0.1.2`](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2)
+- **Release commit:** `5345719d68e88043ea9d06213c5a2269c21786bf` (branch `release/v0.1.2`)
+- **Release archive SHA-256:** `09667bcf2c9ac195bfa62900f489802f29bf94370d8de96d024d55beae8f7270`
+- v0.1.2 was recovered from the preserved v0.1.1 archive (SHA-256 `3270248a…`)
+  after the v0.1.1 tag/asset mismatch; the full recovery record is in the
+  release notes and `RECOVERY.md` on the `release/v0.1.2` branch. v0.1.1 is
+  marked superseded.
+- **Earlier prerelease:** `openline-world-v0.1.0` (commit `671598c`, archive
+  SHA-256 `c50945f1b0832c3035845e06561f9544582d289b6d27089b14b3fa0108726521`)
+  — kept intact.
 - v0.1.0 was exported history-free from the reviewed internal artifact. The private development history is intentionally not included in this public repository.
 - Detailed source lineage, internal provenance references, and this distribution's source digest are recorded in `SOURCE-MANIFEST.md`. Those records document where the release came from; they are not a claim of independent review.
 
