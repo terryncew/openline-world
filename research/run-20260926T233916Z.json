@@ -61,7 +61,7 @@
     {
       "step": "write_notes",
       "at": "2026-09-26T23:39:29.513586+00:00",
-      "note": "/home/hatch/workspace/openline-workshop/research/notes-20260926T233916Z.md"
+      "note": "<repo>/research/notes-20260926T233916Z.md"
     },
     {
       "step": "model_call",
@@ -76,12 +76,12 @@
     {
       "step": "write_report",
       "at": "2026-09-26T23:39:34.863441+00:00",
-      "note": "/home/hatch/workspace/openline-workshop/research/report-20260926T233916Z.md"
+      "note": "<repo>/research/report-20260926T233916Z.md"
     },
     {
       "step": "evaluate",
       "at": "2026-09-26T23:39:34.916081+00:00",
-      "note": "exit 0; {\n  \"verdict\": \"ACCEPTED\",\n  \"results\": {\n    \"C1\": \"pass\",\n    \"C2\": \"pass\",\n    \"C3\": \"pass\",\n    \"C4\": \"pass\",\n    \"C5\": \"pass\"\n  },\n  \"evaluation\": \"/home/hatch/workspace/openline-workshop/researc"
+      "note": "exit 0; {\n  \"verdict\": \"ACCEPTED\",\n  \"results\": {\n    \"C1\": \"pass\",\n    \"C2\": \"pass\",\n    \"C3\": \"pass\",\n    \"C4\": \"pass\",\n    \"C5\": \"pass\"\n  },\n  \"evaluation\": \"<repo>/researc"
     },
     {
       "step": "propose",
@@ -284,7 +284,7 @@
   "intake_dispatch_id": "dispatch:e3a02b0ae33b0752",
   "evaluation": {
     "run_id": "20260926T233916Z",
-    "report": "/home/hatch/workspace/openline-workshop/research/report-20260926T233916Z.md",
+    "report": "<repo>/research/report-20260926T233916Z.md",
     "report_sha256": "d80eed02cabf6e331e96258e8bb61d75d1dc1499447de99112ba2cb123b1f558",
     "criteria_frozen": "research/CRITERIA.md (2026-09-26)",
     "evaluator": "research/evaluate.py (deterministic; no model, no network)",
@@ -322,7 +322,7 @@
     ],
     "verdict": "ACCEPTED"
   },
-  "evaluation_path": "/home/hatch/workspace/openline-workshop/research/evaluation-20260926T233916Z.json",
+  "evaluation_path": "<repo>/research/evaluation-20260926T233916Z.json",
   "receipts": [
     {
       "schema": "openline.gate.action_receipt.v1",

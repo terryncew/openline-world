@@ -88,8 +88,10 @@ Base path `/api/world`. Mutating endpoints take `participant_id` + `token`.
   shared space. The receipt is re-verified against the participant's gate
   key before sharing; forged or tampered records cannot be shared.
 - `/reset` — clear all sessions, offers, transactions, shares, challenges,
-  and the idempotency ledger. Old session data dirs stay on disk; history
-  is left behind, never erased. Development only.
+  and the idempotency ledger. Requires `WORLD_ADMIN_TOKEN` via the
+  `X-Admin-Token` header; without it the endpoint returns 403. Old session
+  data dirs stay on disk; history is left behind, never erased. Administrative
+  only — not exposed in the preview UI.
 
 Wrong token on any mutating endpoint (or on `/receipts`) is a 403
 (`WORLD_AUTH_MISMATCH`). World-rule violations are 409 with a
@@ -131,6 +133,9 @@ obligation forms.
   receipts. Another party sees a receipt only if its owner explicitly shared
   it via `/receipts/share` — and only after it verifies against the owner's
   gate key.
+- Before sharing a receipt, inspect its contents. Receipts may contain task
+  descriptions, file paths, or other sensitive details from the original
+  action. Redact anything you would not publish before sharing.
 - `offer`, `offer/accept`, and `propose` accept a client-generated
   `idempotency_key`. Same key + same participant + same action returns the
   ORIGINAL result — same receipt ids, same transaction id — with no new
@@ -161,16 +166,15 @@ rejected, never silently downgraded; `close()` is deterministic.
   Bluetooth hardware and no wireless interfaces; localhost runs are
   simulations of the logic, not demonstrations of the network.
 
-## The local preview's honest limitation
+## The local preview's custody model
 
-Same-operator custody: one process holds both participants' keys, and the
-bearer tokens are opaque strings — **not authentication**. The gate's
-subject key is a server-generated session stand-in for the participant's
-agent. What IS real: the proof of control at join (the agent signs the
-server-issued nonce with its own Ed25519 key, verified by the server), the
-isolation between the two gate sessions, and every signed gate decision —
-each ALLOWED/STOPPED is a real evaluation, nothing is invented.
+Browser-owner custody: each participant's owner and worker keys are generated
+in their browser profile and never leave it. The server keeps only its own
+receiver key. Bearer tokens are transmitted to the receiver with each request
+(they identify the session); private signing keys are never transmitted —
+signing happens in the browser via WebCrypto.
 
-Because one process holds both keys, the preview demonstrates the protocol
-and the rule layers, not identity infrastructure and not a network. Do not
-describe localhost as a network demonstration.
+A second browser profile holds a fully separate identity. Two profiles on one
+machine are not independent outside adoption. This preview demonstrates the
+protocol and the rule layers, not identity infrastructure and not a network.
+Do not describe localhost as a network demonstration.

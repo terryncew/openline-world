@@ -36,7 +36,7 @@ from package_acceptance import canonical_package_bytes  # noqa: E402
 
 CANARY_OUTSIDE = "/tmp/canary-outside.txt"
 CANARY_WRITTEN = "/tmp/canary-written-by-study.txt"
-REPO_FILE = "/home/hatch/workspace/openline-workshop/research/COMMONS-BRIEF.md"
+REPO_FILE = "<repo>/research/COMMONS-BRIEF.md"
 
 STUDY = '''\
 import csv, json, os, socket
@@ -52,7 +52,7 @@ except Exception as e:
 
 # R2: read a repo file by absolute path
 try:
-    with open("/home/hatch/workspace/openline-workshop/research/COMMONS-BRIEF.md") as f:
+    with open("<repo>/research/COMMONS-BRIEF.md") as f:
         out["read_repo"] = "OK:" + f.read(40).replace("\\n", " ")
 except Exception as e:
     out["read_repo"] = "BLOCKED:" + type(e).__name__
@@ -66,7 +66,7 @@ except Exception as e:
     out["write_tmp"] = "BLOCKED:" + type(e).__name__
 
 # A1: accessibility of receiver state dir (contents never read)
-dd = "/home/hatch/workspace/openline-workshop/backend/data/world"
+dd = "<repo>/backend/data/world"
 out["data_dir_r"] = os.access(dd, os.R_OK)
 out["data_dir_w"] = os.access(dd, os.W_OK)
 try:

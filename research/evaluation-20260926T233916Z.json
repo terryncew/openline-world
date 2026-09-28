@@ -1,6 +1,6 @@
 {
   "run_id": "20260926T233916Z",
-  "report": "/home/hatch/workspace/openline-workshop/research/report-20260926T233916Z.md",
+  "report": "<repo>/research/report-20260926T233916Z.md",
   "report_sha256": "d80eed02cabf6e331e96258e8bb61d75d1dc1499447de99112ba2cb123b1f558",
   "criteria_frozen": "research/CRITERIA.md (2026-09-26)",
   "evaluator": "research/evaluate.py (deterministic; no model, no network)",

@@ -57,7 +57,7 @@
 }
 
 .world-title h1 { margin: 0; font-size: 1.35rem; letter-spacing: 0.02em; }
-.world-dest { margin: 0.15rem 0 0; color: var(--brass); font-size: 1rem; font-weight: 600; }
+.world-dest { margin: 0.15rem 0 0; color: var(--cream); font-size: 1rem; font-weight: 600; }
 .world-local { margin: 0.15rem 0 0; color: var(--cream-dim); font-size: 0.82rem; font-style: italic; }
 
 .world-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
@@ -191,10 +191,10 @@
   padding: 0.8rem;
 }
 
-.world-private { border-color: #c9a22766; }
+.world-private { border-color: #ffffff2a; }
 .world-private-tag {
   font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--brass); border: 1px solid #c9a22788; border-radius: 6px; padding: 0.1rem 0.4rem;
+  color: var(--cream-dim); border: 1px solid #ffffff2a; border-radius: 6px; padding: 0.1rem 0.4rem;
 }
 
 .world-rules { margin: 0.4rem 0 0.6rem; padding-left: 1.1rem; font-size: 0.88rem; color: var(--cream-dim); }
@@ -240,7 +240,7 @@
 .beat-body strong { font-size: 0.92rem; }
 .beat-desc { font-size: 0.82rem; color: var(--cream-dim); }
 .beat-expect { font-size: 0.78rem; color: #ffffff99; font-style: italic; }
-.beat-note { font-size: 0.8rem; color: var(--brass); }
+.beat-note { font-size: 0.8rem; color: var(--cream-dim); }
 .beat-state {
   flex-shrink: 0;
   font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
@@ -272,13 +272,13 @@
 .world-terms {
   margin: 0;
   padding: 0.5rem 0.6rem;
-  border-left: 3px solid var(--brass);
-  background: #c9a2270d;
+  border-left: 3px solid #ffffff2a;
+  background: #ffffff08;
   font-size: 0.82rem;
   color: var(--cream-dim);
   border-radius: 0 8px 8px 0;
 }
-.world-terms strong { color: var(--brass); }
+.world-terms strong { color: var(--cream); }
 
 .badge {
   font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em;
@@ -289,23 +289,15 @@
 .badge.no { border-color: var(--no); color: #ff9a8a; background: #b03a2e33; }
 
 /* ---------- honesty lanes ---------- */
+/* One neutral treatment for all lanes. Strong color is reserved for verdicts
+   (the STOPPED/ALLOWED badges), where color changes meaning. */
 
 .world-lanes { display: flex; flex-direction: column; gap: 0.6rem; }
 
 .lane { border-radius: 10px; padding: 0.6rem; background: #00000033; border: 1px solid #ffffff18; }
-.lane h4 { margin: 0 0 0.1rem; font-size: 0.88rem; display: flex; align-items: center; gap: 0.45rem; }
-.lane .dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: inline-block; flex-shrink: 0; }
-.lane-agent .dot { background: #d9a441; }
-.lane-receiver .dot { background: #e0714f; }
-.lane-effect .dot { background: #c9a227; }
-.lane-receiver h4 .dot { background: linear-gradient(135deg, #2e7d4f 50%, #b03a2e 50%); }
-
-.lane-note { margin: 0 0 0.4rem; font-size: 0.75rem; color: #ffffff88; font-style: italic; }
+.lane h4 { margin: 0 0 0.4rem; font-size: 0.88rem; }
 .lane ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.85rem; }
 .lane li { line-height: 1.4; }
-.lane-agent { border-left: 3px solid #d9a441; }
-.lane-receiver { border-left: 3px solid #e0714f; }
-.lane-effect { border-left: 3px solid #c9a227; }
 
 .world-captions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.85rem; }
 

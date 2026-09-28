@@ -38,7 +38,7 @@ function focusFor(step: number, fallback: Focus): Focus {
 
 export default function App() {
   const w = useWorkshop();
-  const [view, setView] = useState<"watch" | "explore" | "changed" | "world">("watch");
+  const [view, setView] = useState<"watch" | "explore" | "changed" | "world">("world");
   const [walk, setWalk] = useState(false);
   const [listView, setListView] = useState(false);
   const [showRecords, setShowRecords] = useState(false);

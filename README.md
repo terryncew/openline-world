@@ -12,7 +12,7 @@ verdict, or proof that any real system is safe.
 
 ## Run it in five minutes
 
-Prerequisites: Python 3.10+, Node 18+, npm. Nothing is billed. No model calls.
+Prerequisites: Python 3.10+, Node ^20.19.0 or >=22.12.0, npm. Nothing is billed. No model calls.
 
 ```bash
 ./launch-preview.sh
@@ -133,11 +133,12 @@ Documented in full at `docs/joining.md` and `docs/custody-browser-integration.md
   not peer review, not scientific truth, and not a verdict on the claim's
   real-world correctness.
 
-## Test results (v0.1.0 release commit)
+## Test results (v0.1.2 release commit)
 
-- Backend: **203/203 green** (`test_commission_chapter.py` 21, commons
-  chapter 32, browser custody 12, custody headless 19, remainder from earlier
-  lanes). TypeScript compiles clean. Vite build green.
+- Backend: **207/207 green** — the v0.1.0 suite's 203 plus 4 new admin-reset
+  authorization tests (`TestAdminReset`: no token rejected, wrong token
+  rejected, correct token succeeds, reset disabled when no token configured).
+  TypeScript compiles clean. Vite build green.
 - Browser QA: custody negative battery 12/12, research-commons flow 27/27,
   avatar-migration live check PASS (five locations, fresh join, OWNER badges).
 - Full per-lane counts and the reconciliation of the test suite's evolution
@@ -196,10 +197,20 @@ trademark rights and does not imply endorsement by OpenLine.
 
 ## Release provenance
 
-- **Public prerelease:** `openline-world-v0.1.0`
-- **Release commit:** `671598c`
-- **Release archive SHA-256:** `c50945f1b0832c3035845e06561f9544582d289b6d27089b14b3fa0108726521`
-- v0.1.0 was exported history-free from the reviewed internal artifact. The private development history is intentionally not included in this public repository.
-- Detailed source lineage, internal provenance references, and this distribution's source digest are recorded in `SOURCE-MANIFEST.md`. Those records document where the release came from; they are not a claim of independent review.
+- **Public prerelease:** `openline-world-v0.1.2` (supersedes `openline-world-v0.1.1`,
+  which was published with a tag/asset mismatch — see `RECOVERY.md`)
+- **Release tag:** `openline-world-v0.1.2` on branch `release/v0.1.2`
+- v0.1.2 was recovered from the preserved archive
+  `openline-world-v0.1.1-prerelease.zip`
+  (SHA-256 `3270248ad2b17868af76b10061673f68bd926526a8740a553fcdf9953e30c945`).
+  That archive was historically reported as an export of internal commit
+  `e7b879b`, an ancestry that can no longer be independently verified — the
+  commit is absent from every reachable repository. The missing commit is not
+  claimed recovered.
+- Detailed source lineage and this distribution's source digest are recorded
+  in `SOURCE-MANIFEST.md`. The full recovery record — what was verified, what
+  was excluded, what was sanitized — is in `RECOVERY.md`. Those records
+  document where the release came from; they are not a claim of independent
+  review.
 
 **Status:** published as a public prerelease / local developer preview. It is not a hosted service.

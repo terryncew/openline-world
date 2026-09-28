@@ -6,7 +6,8 @@
  *   POST /api/world/presence             -> presence opt-in/out
  *   GET  /api/world/receipts             -> {receipts}
  *   POST /api/world/receipts/share       -> share a receipt into the shared space
- *   POST /api/world/reset                -> {reset}
+ *   (POST /api/world/reset is administrative-only: requires WORLD_ADMIN_TOKEN
+ *    via X-Admin-Token header; not exposed in the preview UI.)
  *
  * Custody note: every gated act (join, propose, offer, accept, agreement
  * steps, revocation, claim-graph and newsroom actions) now requires
@@ -572,10 +573,6 @@ export const worldApi = {
 
   shareReceipt(participant_id: string, token: string, receipt_id: string): Promise<unknown> {
     return req("/receipts/share", "POST", { participant_id, token, receipt_id });
-  },
-
-  reset(): Promise<{ reset: unknown }> {
-    return req<{ reset: unknown }>("/reset", "POST");
   },
 
   /** Inspectable claim-graph chapter state, from recorded data only. */

@@ -144,3 +144,13 @@ Arithmetic: 170 + 11 + 1 = **182**.
   frozen contract rates; worker-reported totals are audit data only.
 
 Arithmetic: 182 + 21 = **203**.
+
+## v0.1.2 delta (2026-09-27)
+
+- `backend/tests/test_world.py`: 72 → 76. The 4 new tests are `TestAdminReset`
+  (admin reset requires `X-Admin-Token` matching `WORLD_ADMIN_TOKEN`):
+  no token rejected (403), wrong token rejected (403), correct token succeeds
+  (200), reset disabled when no token is configured.
+- All other lanes unchanged.
+
+Arithmetic: 203 + 4 = **207**.

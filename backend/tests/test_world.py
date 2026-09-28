@@ -1402,5 +1402,82 @@ class TestWorldHTTP(unittest.TestCase):
             server.server_close()
 
 
+class TestAdminReset(unittest.TestCase):
+    """POST /api/world/reset requires explicit administrative authorization."""
+
+    def _serve(self):
+        import server as srv  # noqa: E402
+        from server import Handler  # noqa: E402
+        world = _fresh_world()
+        s = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        s.world = world  # type: ignore[attr-defined]
+        thread = threading.Thread(target=s.serve_forever, daemon=True)
+        thread.start()
+        return s, f"http://127.0.0.1:{s.server_address[1]}", srv
+
+    @staticmethod
+    def _post_reset(base, token=None):
+        headers = {"Content-Type": "application/json"}
+        if token is not None:
+            headers["X-Admin-Token"] = token
+        req = Request(base + "/api/world/reset", data=b"{}",
+                      headers=headers, method="POST")
+        try:
+            with urlopen(req, timeout=10) as resp:
+                return resp.status, json.loads(resp.read().decode("utf-8"))
+        except HTTPError as exc:
+            return exc.code, json.loads(exc.read().decode("utf-8"))
+
+    def test_reset_without_token_is_forbidden(self):
+        server, base, srv = self._serve()
+        old = srv.ADMIN_TOKEN
+        srv.ADMIN_TOKEN = "test-admin-token"
+        try:
+            status, body = self._post_reset(base)
+            self.assertEqual(status, 403)
+            self.assertEqual(body["error"], "ADMIN_TOKEN_REQUIRED")
+        finally:
+            srv.ADMIN_TOKEN = old
+            server.shutdown()
+            server.server_close()
+
+    def test_reset_with_wrong_token_is_forbidden(self):
+        server, base, srv = self._serve()
+        old = srv.ADMIN_TOKEN
+        srv.ADMIN_TOKEN = "test-admin-token"
+        try:
+            status, body = self._post_reset(base, token="wrong")
+            self.assertEqual(status, 403)
+        finally:
+            srv.ADMIN_TOKEN = old
+            server.shutdown()
+            server.server_close()
+
+    def test_reset_with_correct_token_succeeds(self):
+        server, base, srv = self._serve()
+        old = srv.ADMIN_TOKEN
+        srv.ADMIN_TOKEN = "test-admin-token"
+        try:
+            status, body = self._post_reset(base, token="test-admin-token")
+            self.assertEqual(status, 200)
+            self.assertEqual(body, {"reset": True})
+        finally:
+            srv.ADMIN_TOKEN = old
+            server.shutdown()
+            server.server_close()
+
+    def test_reset_disabled_when_token_unset(self):
+        server, base, srv = self._serve()
+        old = srv.ADMIN_TOKEN
+        srv.ADMIN_TOKEN = ""
+        try:
+            status, body = self._post_reset(base, token="anything")
+            self.assertEqual(status, 403)
+        finally:
+            srv.ADMIN_TOKEN = old
+            server.shutdown()
+            server.server_close()
+
+
 if __name__ == "__main__":
     unittest.main()

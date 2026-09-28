@@ -34,6 +34,10 @@ from openline_wallet.errors import WalletError
 
 HOST = os.environ.get("WORKSHOP_HOST", "127.0.0.1")
 PORT = int(os.environ.get("WORKSHOP_PORT", "8471"))
+# Administrative reset requires an explicit token. If unset, the reset
+# endpoint is disabled (403). This prevents unauthenticated LAN clients
+# from clearing active state via the frontend /api proxy.
+ADMIN_TOKEN = os.environ.get("WORLD_ADMIN_TOKEN", "")
 MAX_BODY = 256 * 1024
 STALE_AFTER_SECONDS = 15
 _ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/-]{0,63}$")
@@ -505,6 +509,13 @@ class Handler(BaseHTTPRequestHandler):
                     body.get("decision"), body.get("presentation"),
                     body.get("idempotency_key")))
             elif path == "/api/world/reset":
+                # Administrative only: requires WORLD_ADMIN_TOKEN. Without it,
+                # the endpoint is disabled to prevent unauthenticated resets
+                # via the frontend /api proxy.
+                provided = self.headers.get("X-Admin-Token", "")
+                if not ADMIN_TOKEN or provided != ADMIN_TOKEN:
+                    self._send(403, {"error": "ADMIN_TOKEN_REQUIRED"})
+                    return
                 # Fresh isolated sessions; the snapshot is removed.
                 self._send(200, self.world.reset())
             elif path == "/api/world/needs":

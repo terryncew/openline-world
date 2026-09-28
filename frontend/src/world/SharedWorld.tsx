@@ -669,21 +669,6 @@ token: j.token,
     await refresh();
   }, [getSession, cue, effectNote, refresh]);
 
-  const resetWorld = useCallback(async () => {
-    await worldApi.reset();
-    for (const client of custodyClientsRef.current.values()) client.forgetSession();
-    custodyClientsRef.current.clear();
-    squareClientRef.current = null;
-    setSessions({ amara: null, theo: null });
-    setDecisions([]);
-    setAgentNotes([]);
-    setEffects([]);
-    setOwnReceipts({ amara: [], theo: [] });
-    setBeatState({});
-    cue("stamp", "world reset — deep stamp");
-    await refresh();
-  }, [cue, refresh]);
-
   /* ---------- the square: join, board, agreements ---------- */
 
   const squareSessionRef = useRef<SquareSession | null>(null);
@@ -2160,7 +2145,6 @@ token: j.token,
                 {actingSession?.revoked ? `${actingDef.agent} revoked` : `Revoke ${actingDef.agent}`}
               </button>
               <button disabled={backendOk === false} onClick={() => refresh()}>Refresh</button>
-              <button disabled={backendOk === false} onClick={() => resetWorld().catch((e) => agentNote(`reset failed: ${String(e)}`))}>Reset world</button>
             </div>
             <div className="world-receipts">
               <div className="panel-title">Your receipts — private</div>
@@ -2248,16 +2232,14 @@ token: j.token,
 
           {/* honesty lanes */}
           <section className="world-panel" aria-label="What happened">
-            <div className="panel-title">What happened — three lanes</div>
+            <div className="panel-title">What happened</div>
             <div className="world-lanes">
-              <div className="lane lane-agent">
-                <h4><span className="dot" />Agent-reported</h4>
-                <p className="lane-note">what agents say — not yet decided</p>
+              <div className="lane">
+                <h4>Asked</h4>
                 <ul>{agentNotes.map((n, i) => <li key={i}><span className="ts">{n.ts}</span> {n.text}</li>)}</ul>
               </div>
-              <div className="lane lane-receiver">
-                <h4><span className="dot" />Receiver decided</h4>
-                <p className="lane-note">what the gate actually decided</p>
+              <div className="lane">
+                <h4>Decided</h4>
                 <ul>
                   {decisions.map((d, i) => (
                     <li key={i}>
@@ -2270,9 +2252,8 @@ token: j.token,
                   ))}
                 </ul>
               </div>
-              <div className="lane lane-effect">
-                <h4><span className="dot" />Confirmed effects</h4>
-                <p className="lane-note">receipts and mandate changes only</p>
+              <div className="lane">
+                <h4>Confirmed</h4>
                 <ul>{effects.map((n, i) => <li key={i}><span className="ts">{n.ts}</span> {n.text}</li>)}</ul>
               </div>
             </div>
@@ -3973,16 +3954,14 @@ function SquareMode(p: SquareModeProps) {
 
             {/* honesty lanes, compact */}
             <section className="world-panel" aria-label="What happened">
-              <div className="panel-title">What happened — three lanes</div>
+              <div className="panel-title">What happened</div>
               <div className="world-lanes">
-                <div className="lane lane-agent">
-                  <h4><span className="dot" />Agent-reported</h4>
-                  <p className="lane-note">what agents say — not yet decided</p>
+                <div className="lane">
+                  <h4>Asked</h4>
                   <ul>{p.agentNotes.map((n, i) => <li key={i}><span className="ts">{n.ts}</span> {n.text}</li>)}</ul>
                 </div>
-                <div className="lane lane-receiver">
-                  <h4><span className="dot" />Receiver decided</h4>
-                  <p className="lane-note">what the gate actually decided</p>
+                <div className="lane">
+                  <h4>Decided</h4>
                   <ul>
                     {p.decisions.map((d, i) => (
                       <li key={i}>
@@ -3995,9 +3974,8 @@ function SquareMode(p: SquareModeProps) {
                     ))}
                   </ul>
                 </div>
-                <div className="lane lane-effect">
-                  <h4><span className="dot" />Confirmed effects</h4>
-                  <p className="lane-note">receipts and mandate changes only</p>
+                <div className="lane">
+                  <h4>Confirmed</h4>
                   <ul>{p.effects.map((n, i) => <li key={i}><span className="ts">{n.ts}</span> {n.text}</li>)}</ul>
                 </div>
               </div>

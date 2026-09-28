@@ -2,13 +2,13 @@
 # launch-preview.sh — one launcher for the integrated-town preview.
 #
 # Starts the backend (127.0.0.1:8471, loopback only) and the frontend dev
-# server (0.0.0.0:5173), waits until both answer, then prints the exact URL
-# to open on a phone.
+# server (127.0.0.1:5173 loopback by default; --lan binds 0.0.0.0 for phone
+# access), waits until both answer, then prints the URL to open.
 #
 # PREREQUISITES (install once, on your own computer):
 #   - python3 (3.10+)          python3 -m venv .venv
 #                              .venv/bin/pip install -r backend/requirements.txt
-#   - node + npm               cd frontend && npm install
+#   - node ^20.19.0 or >=22.12.0 and npm          cd frontend && npm ci   (uses package-lock.json)
 #   - to run the backend tests: .venv/bin/pip install -r backend/requirements-test.txt
 # Nothing is downloaded beyond those installs. Nothing is billed. Nothing is
 # published or exposed to the internet.
@@ -39,13 +39,15 @@ BACKEND_PORT=8471
 FRONTEND_PORT=5173
 TIMEOUT_SECS=90
 USE_HTTPS=0
+USE_LAN=0
 
 for arg in "$@"; do
   case "$arg" in
     --https) USE_HTTPS=1 ;;
+    --lan) USE_LAN=1 ;;
     -h|--help)
       sed -n '2,32p' "$0"; exit 0 ;;
-    *) echo "Unknown option: $arg (try --https, --help)" >&2; exit 1 ;;
+    *) echo "Unknown option: $arg (try --https, --lan, --help)" >&2; exit 1 ;;
   esac
 done
 
@@ -61,9 +63,26 @@ if ! command -v python3 >/dev/null 2>&1; then
   echo "  python3 -m venv .venv && .venv/bin/pip install -r backend/requirements.txt" >&2
   exit 1
 fi
+if ! command -v node >/dev/null 2>&1; then
+  echo "ERROR: node not found. Install Node.js (^20.19.0 or >=22.12.0), then:" >&2
+  echo "  cd frontend && npm ci" >&2
+  exit 1
+fi
+# Check Node version against the locked Vite requirement: ^20.19.0 || >=22.12.0
+NODE_VER=$(node -p "process.versions.node")
+NODE_MAJOR=$(node -p "process.versions.node.split('.')[0]")
+NODE_MINOR=$(node -p "process.versions.node.split('.')[1]")
+NODE_OK=0
+if [ "$NODE_MAJOR" -eq 20 ] && [ "$NODE_MINOR" -ge 19 ]; then NODE_OK=1; fi
+if [ "$NODE_MAJOR" -ge 22 ] && { [ "$NODE_MAJOR" -gt 22 ] || [ "$NODE_MINOR" -ge 12 ]; }; then NODE_OK=1; fi
+if [ "$NODE_OK" -ne 1 ]; then
+  echo "ERROR: Node.js ^20.19.0 or >=22.12.0 required (found $NODE_VER)." >&2
+  echo "  Install a supported Node.js version, then: cd frontend && npm ci" >&2
+  exit 1
+fi
 if ! command -v npm >/dev/null 2>&1; then
   echo "ERROR: npm not found. Install Node.js (which includes npm), then:" >&2
-  echo "  cd frontend && npm install" >&2
+  echo "  cd frontend && npm ci" >&2
   exit 1
 fi
 
@@ -79,8 +98,8 @@ fi
 
 # --- frontend deps -------------------------------------------------------------
 if [ ! -d frontend/node_modules ]; then
-  echo "Installing frontend dependencies (one-time)..."
-  (cd frontend && npm install -q)
+  echo "Installing frontend dependencies from lockfile (one-time)..."
+  (cd frontend && npm ci -q)
 fi
 
 # --- LAN IP detection (macOS and Linux) ----------------------------------------
@@ -108,7 +127,14 @@ if [ "$USE_HTTPS" = 1 ]; then
 else
   echo "== starting frontend on :${FRONTEND_PORT} =="
 fi
-(cd frontend && npm run dev -- --host 0.0.0.0 --port "$FRONTEND_PORT" >/tmp/workshop-frontend.log 2>&1) &
+# Loopback by default. --lan binds 0.0.0.0 for phone access on the same Wi-Fi.
+if [ "$USE_LAN" = 1 ]; then
+  FRONTEND_HOST="0.0.0.0"
+  echo "== LAN access enabled: frontend on 0.0.0.0:${FRONTEND_PORT} =="
+else
+  FRONTEND_HOST="127.0.0.1"
+fi
+(cd frontend && npm run dev -- --host "$FRONTEND_HOST" --port "$FRONTEND_PORT" >/tmp/workshop-frontend.log 2>&1) &
 FRONTEND_PID=$!
 
 cleanup() {

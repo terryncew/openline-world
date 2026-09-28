@@ -16,16 +16,16 @@
  * restrained glowing eyes, articulated gripper hands, planted feet, a few
  * scuffs of honest use. No baby proportions, no pet behavior, no bouncing.
  * Personality through attention, timing, and useful gestures:
- *   Wren (host): tall and lean — amber enamel, domed head with a dark
- *     visor and two small eye-dots, a short antenna with a lamp.
- *   Juniper (host): short and boxy — leaf-green enamel, a wide low head
- *     with round eyes, a vented top panel, a service handle.
- *   Visitor robots (one shared component, restrained variations in color,
- *     head shape, accessories): the worker tall and lean in slate blue,
- *     the counterpart short and boxy in dusty periwinkle, the traveler
- *     boxy in warm gray with no accessory. Human-owner figures are labeled
- *     OWNER, never shown as agents. Cosmetics are config — cosmetic only,
- *     never identity proof.
+ *   Wren (host): terracotta — tall narrow body, rounded head, long
+ *     controlled arms, a short antenna with a lamp.
+ *   Juniper (host): sage — wide low body, small head, sturdy feet, a
+ *     vented top panel, a service handle.
+ *   Visitor robots (one shared component, family members): the worker
+ *     (automation) compact cobalt with a broad visor and precise grippers,
+ *     the counterpart (manual/live/scripted) light cream with a rectangular
+ *     head and slender limbs, the traveler (unknown) compact in warm gray
+ *     with no accessory. Human-owner figures are labeled OWNER, never shown
+ *     as agents. Cosmetics are config — cosmetic only, never identity proof.
  *
  * Cosmetic choices (color, faceplate, accessories) are config only —
  * they never grant or imply permissions, verified identity, or reputation.
@@ -69,20 +69,18 @@ const WOOD_DARK = "#7d5f36";
 const BRASS = "#c9a227";
 const INK = "#1d2430";
 const FELT_RED = "#b03a2e";
-/* character palette (2026-09-26): compact workshop robots in his idiom —
+/* character palette (2026-09-27): the town's robot family in his idiom —
  * restrained expressive eyes, articulated working hands, planted feet, matte
- * enamel, fabric joints, subtle signs of use. Wren is a tall lean amber unit
- * (domed head, dark visor, antenna, chest service panel), Juniper a short boxy
- * leaf-green unit (wide low head, vented top panel, service handle). Every
- * other built-in agent avatar — newly joined participants, tutorial
- * characters, fallback appearances — renders through the shared VisitorRobot
- * component with restrained variations in VISITOR_DESIGNS: the worker
- * (automation) tall and lean in slate blue with a domed head and antenna,
- * the counterpart (manual/live/scripted) short and boxy in dusty periwinkle
- * with a vented top and service handle, the traveler (unknown) boxy in warm
- * gray with no accessory. Human-owner figures are labeled OWNER, never shown
- * as agents. Cosmetics are config — cosmetic only, never identity proof. */
-const LEAF = "#7cbb6f";
+ * enamel, fabric joints, subtle signs of use. Wren is terracotta (tall narrow
+ * body, rounded head, long arms, antenna), Juniper is sage (wide low body,
+ * small head, sturdy feet, vented top). Every other built-in agent avatar —
+ * newly joined participants, tutorial characters, fallback appearances —
+ * renders through the shared VisitorRobot component as a family member: the
+ * worker (automation) compact cobalt with a broad visor and precise grippers,
+ * the counterpart (manual/live/scripted) light cream with a rectangular head
+ * and slender limbs, the traveler (unknown) compact in warm gray with no
+ * accessory. Human-owner figures are labeled OWNER, never shown as agents.
+ * Cosmetics are config — cosmetic only, never identity proof. */
 const OK_GREEN = "#2e7d4f";
 /** The one surprising accent. Reserved for the exchange thread: the offer
  *  parcel's wax seal and the parcel reveal ribbon. Nothing else wears it. */
@@ -740,64 +738,90 @@ interface FigureProps {
  * Temperament: attentive and quick — leans toward a new offer, a measured
  * beckoning hand when presenting, a small nod after a confirmed ALLOWED.
  * No bouncing, no pet behavior. Cosmetics (color, faceplate, accessories)
- * are config in ROBOT_DESIGNS — cosmetic only, never identity proof.
+ * are config in ROBOT_FAMILY — cosmetic only, never identity proof.
  */
 const WREN_TAG_Y = 2.32;
 
-/** Cosmetic design tokens for the two workshop robots. Cosmetic-only:
- *  enamel color, faceplate style, accessory. Extendable later (color,
- *  faceplate, accessories) — cosmetics never grant or imply permissions,
- *  verified identity, or reputation. No badges, no insignia. */
-const ROBOT_DESIGNS = {
-  wren: {
-    enamel: "#d97b2f", enamelDeep: "#a85a1f", joint: "#3c4148",
-    accent: "#ffd27d", eyeGlow: "#ffe9b8", station: AMBER,
-    faceplate: "visor" as const, accessory: "antenna" as const,
-    /** readability: a lighter face/chest panel separates the orange shell
-     *  from the town's brown furniture. Restrained — one value step up. */
-    panel: "#e9b878", faceTrim: "#f2d59a",
+/** The town's robot family: four distinct constructions sharing one visual
+ *  language — matte enamel, simple faces, rounded mechanical forms, dark
+ *  fabric joints, honest scuffs. Proportions and construction vary so each
+ *  member reads in silhouette at phone size; the palette holds the approved
+ *  balance (cream and cool in balance, warm as accent — never a wash).
+ *  Cosmetic-only: a shape never proves a profession, grants permissions, or
+ *  implies authority. Human owners are labeled OWNER, never robot-shaped.
+ *
+ *  - terracotta: tall narrow body, rounded head, long controlled arms
+ *  - cobalt: compact body, broad visor, short legs, precise grippers
+ *  - sage: wide low body, small head, sturdy feet
+ *  - cream: light frame, rectangular head, rounded chest, slender limbs */
+const ROBOT_FAMILY = {
+  terracotta: {
+    enamel: "#c4703f", enamelDeep: "#9c5330", joint: "#3c4148",
+    accent: "#ffd27d", eyeGlow: "#ffe9b8", station: "#c4703f",
+    panel: "#dda26e", faceTrim: "#f0c795",
+    frame: "tall" as const, faceplate: "round" as const, accessory: "antenna" as const,
   },
-  juniper: {
-    enamel: "#6fae63", enamelDeep: "#4e7d47", joint: "#3c4148",
-    accent: "#cfe3b0", eyeGlow: "#eef7d8", station: LEAF,
-    faceplate: "round" as const, accessory: "vent" as const,
-    panel: "#9ccb8f", faceTrim: "#c4e2b6",
+  cobalt: {
+    enamel: "#4f6fa8", enamelDeep: "#3a5480", joint: "#3c4148",
+    accent: "#cfe0ee", eyeGlow: "#e8f4ff", station: "#4f6fa8",
+    panel: "#8ba3c9", faceTrim: "#b9c9e2",
+    frame: "compact" as const, faceplate: "visor" as const, accessory: "none" as const,
+  },
+  sage: {
+    enamel: "#7d9070", enamelDeep: "#5d6f52", joint: "#3c4148",
+    accent: "#d8e6c0", eyeGlow: "#eef7d8", station: "#7d9070",
+    panel: "#a9bd9a", faceTrim: "#cbd8bd",
+    frame: "wide" as const, faceplate: "round" as const, accessory: "vent" as const,
+  },
+  cream: {
+    enamel: "#e6dcc4", enamelDeep: "#c2b694", joint: "#3c4148",
+    accent: "#fff3d0", eyeGlow: "#fffbe8", station: "#b8a77e",
+    panel: "#f4ecda", faceTrim: "#faf5e8",
+    frame: "light" as const, faceplate: "rect" as const, accessory: "none" as const,
   },
 } as const;
 
+type FamilyName = keyof typeof ROBOT_FAMILY;
+
+/** Wren (Amara's agent) renders as terracotta; Juniper (Theo's agent) as
+ *  sage. The mapping is cosmetic — it says nothing about what either agent
+ *  may do. */
+const HOST_FAMILY: Record<"wren" | "juniper", FamilyName> = {
+  wren: "terracotta",
+  juniper: "sage",
+};
+
 /** Design tokens for every other built-in agent avatar: the visitor figures
  *  (newly joined participants, tutorial characters, fallback appearances).
- *  One shared robot component, restrained variations in color, head shape,
- *  and accessories — the same robot vocabulary as Wren and Juniper
- *  (domed/boxy heads, visor or round eyes, antenna/vent/handle, gripper
- *  hands, jointed legs, planted feet, matte enamel, fabric joints, scuffs).
- *  Cosmetic-only: never identity proof, permissions, or reputation.
- *  Distinguishable from the hosts by frame and color; identities and
- *  backend state are untouched — this is a rendering swap only. */
-const VISITOR_DESIGNS = {
-  /** automation: tall lean frame, domed head, antenna — the working robot */
-  worker: {
-    enamel: "#6f8fae", enamelDeep: "#52708c", joint: "#3c4148",
-    accent: "#cfe0ee", eyeGlow: "#e8f4ff",
-    panel: "#9db8cc", faceTrim: "#bfd4e4",
-    frame: "lean" as const, accessory: "antenna" as const,
-  },
-  /** manual / live / scripted: short boxy frame, vented top, service handle */
-  counterpart: {
-    enamel: "#8b93b8", enamelDeep: "#666ea3", joint: "#3c4148",
-    accent: "#dfe3f5", eyeGlow: "#eef0ff",
-    panel: "#a9b1cf", faceTrim: "#c9cfe4",
-    frame: "boxy" as const, accessory: "vent" as const,
-  },
-  /** unknown: boxy frame in warm gray, no accessory — no silhouette claims
-   *  a role the backend didn't report */
-  traveler: {
-    enamel: "#9a9187", enamelDeep: "#766e64", joint: "#3c4148",
-    accent: "#e8e0d0", eyeGlow: "#fff8e8",
-    panel: "#b3aa9c", faceTrim: "#d3cbbd",
-    frame: "boxy" as const, accessory: "none" as const,
-  },
+ *  Each kind renders as a member of ROBOT_FAMILY — the same robot vocabulary
+ *  (matte enamel, simple faces, rounded forms, gripper hands, jointed legs,
+ *  planted feet, scuffs). Cosmetic-only: never identity proof, permissions,
+ *  or reputation. The unknown kind stays deliberately nondescript (warm
+ *  gray, no accessory) — no silhouette claims a role the backend didn't
+ *  report. Identities and backend state are untouched — a rendering swap. */
+const VISITOR_FAMILY: Record<VisitorKind, FamilyName | "travelerGray"> = {
+  /** automation: compact cobalt — broad visor, short legs, precise grippers */
+  worker: "cobalt",
+  /** manual / live / scripted: light cream — rectangular head, slender limbs */
+  counterpart: "cream",
+  /** unknown: warm gray, no accessory — claims nothing */
+  traveler: "travelerGray",
 } as const;
+
+/** The nondescript unknown: compact construction in warm gray. Same shared
+ *  parts, no accent, no accessory — it reads as "a robot", nothing more. */
+const TRAVELER_GRAY = {
+  enamel: "#9a9187", enamelDeep: "#766e64", joint: "#3c4148",
+  accent: "#e8e0d0", eyeGlow: "#fff8e8", station: "#9a9187",
+  panel: "#b3aa9c", faceTrim: "#d3cbbd",
+  frame: "compact" as const, faceplate: "round" as const, accessory: "none" as const,
+} as const;
+
+/** Resolve a visitor kind to its family design tokens. */
+function visitorDesign(kind: VisitorKind) {
+  const f = VISITOR_FAMILY[kind];
+  return f === "travelerGray" ? TRAVELER_GRAY : ROBOT_FAMILY[f];
+}
 
 /** Small activity vocabulary, mapped to real workflow states. The word comes
  *  from the rig's current behavior — which only the backend's stage plan
@@ -934,7 +958,7 @@ function Scuffs({ marks }: { marks: [number, number, number][] }) {
 function WrenFigure({ host, reducedMotion, frozen, onSelect, home = [-3.2, 0, 2.2], clean = false, selected = false, anchors, actBehavior = null, actAnchors = null, heldToken = null, onObj }: FigureProps) {
   // render-scope: hide the lantern pole while the staged exchange performs
   const wrenPerforming = !!actBehavior && !frozen;
-  const D = ROBOT_DESIGNS.wren;
+  const D = ROBOT_FAMILY[HOST_FAMILY.wren];
   const mover = useRef<THREE.Group>(null);
   const body = useRef<THREE.Group>(null);
   const head = useRef<THREE.Group>(null);
@@ -1217,28 +1241,28 @@ function WrenFigure({ host, reducedMotion, frozen, onSelect, home = [-3.2, 0, 2.
            * the mover, OUTSIDE the waist group, so a torso bend for a pickup
            * hinges at the waist and the feet stay planted. */}
           {[-1, 1].map((s) => (
-            <group key={s} ref={s < 0 ? legL : legR} position={[s * 0.12, 0.62, 0]}>
-              {/* thigh: enamel shell */}
-              <mesh position={[0, -0.13, 0]}>
-                <capsuleGeometry args={[0.062, 0.16, 6, 12]} />
+            <group key={s} ref={s < 0 ? legL : legR} position={[s * 0.11, 0.62, 0]}>
+              {/* thigh: enamel shell — slim, under the narrow body */}
+              <mesh position={[0, -0.14, 0]}>
+                <capsuleGeometry args={[0.058, 0.18, 6, 12]} />
                 <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
               </mesh>
               {/* knee: fabric joint */}
-              <JointRing y={-0.26} r={0.066} />
+              <JointRing y={-0.28} r={0.062} />
               {/* shin: darker enamel */}
-              <mesh position={[0, -0.39, 0]}>
-                <capsuleGeometry args={[0.055, 0.16, 6, 12]} />
+              <mesh position={[0, -0.41, 0]}>
+                <capsuleGeometry args={[0.052, 0.18, 6, 12]} />
                 <meshStandardMaterial color={D.enamelDeep} roughness={0.55} metalness={0.15} />
               </mesh>
               {/* foot: flat sole plate that counter-rotates to stay level —
                * the robot stands planted, never on tiptoe */}
-              <group key={`f${s}`} ref={s < 0 ? footL : footR} position={[0, -0.58, 0]}>
+              <group key={`f${s}`} ref={s < 0 ? footL : footR} position={[0, -0.6, 0]}>
                 <mesh position={[0, 0.028, 0.05]}>
-                  <boxGeometry args={[0.15, 0.055, 0.3]} />
+                  <boxGeometry args={[0.14, 0.055, 0.28]} />
                   <meshStandardMaterial color={D.joint} roughness={0.7} metalness={0.1} />
                 </mesh>
                 <mesh position={[0, 0.058, 0.05]}>
-                  <boxGeometry args={[0.13, 0.012, 0.27]} />
+                  <boxGeometry args={[0.12, 0.012, 0.25]} />
                   <meshStandardMaterial color={INK} roughness={1} metalness={0} />
                 </mesh>
               </group>
@@ -1252,16 +1276,16 @@ function WrenFigure({ host, reducedMotion, frozen, onSelect, home = [-3.2, 0, 2.
             onPointerOver={(e) => { e.stopPropagation(); document.body.style.cursor = "pointer"; }}
             onPointerOut={() => (document.body.style.cursor = "auto")}
           >
-            <capsuleGeometry args={[0.2, 0.5, 8, 18]} />
+            <capsuleGeometry args={[0.17, 0.55, 8, 18]} />
             <meshStandardMaterial ref={bodyMat} color={D.enamel} roughness={0.55} metalness={0.15} />
           </mesh>
           {/* waist: fabric joint */}
-          <JointRing y={0} r={0.19} tube={0.028} />
+          <JointRing y={0} r={0.16} tube={0.028} />
           {/* chest service panel — a lighter face for the orange shell, so
            *  Wren separates from the town's brown furniture. Restrained:
            *  one value step up, matte. */}
-          <mesh position={[0, 0.42, 0.19]}>
-            <boxGeometry args={[0.2, 0.26, 0.03]} />
+          <mesh position={[0, 0.42, 0.165]}>
+            <boxGeometry args={[0.18, 0.24, 0.03]} />
             <meshStandardMaterial color={D.panel} roughness={0.65} metalness={0.05} />
           </mesh>
           <mesh position={[0, 0.48, 0.215]}>
@@ -1269,21 +1293,21 @@ function WrenFigure({ host, reducedMotion, frozen, onSelect, home = [-3.2, 0, 2.
             <meshStandardMaterial ref={chestMatRef} color="#3a3f47" emissive={D.accent} emissiveIntensity={0.25} roughness={0.4} />
           </mesh>
           {/* honest wear: a few scuffs on the shell */}
-          <Scuffs marks={[[-0.1, 0.19, 0.205], [0.08, 0.12, 0.205], [-0.05, 0.56, 0.205]]} />
+          <Scuffs marks={[[-0.08, 0.19, 0.175], [0.07, 0.12, 0.175], [-0.04, 0.56, 0.175]]} />
           {/* arms: shoulder pivots for the rig, elbow joints, gripper hands */}
           {[-1, 1].map((s) => (
-            <group key={s} ref={s < 0 ? armL : armR} position={[s * 0.27, 0.62, 0]}>
-              <mesh position={[0, -0.14, 0]}>
-                <capsuleGeometry args={[0.055, 0.18, 6, 12]} />
+            <group key={s} ref={s < 0 ? armL : armR} position={[s * 0.24, 0.64, 0]}>
+              <mesh position={[0, -0.18, 0]}>
+                <capsuleGeometry args={[0.05, 0.24, 6, 12]} />
                 <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
               </mesh>
-              <group key={`e${s}`} ref={s < 0 ? elbowL : elbowR} position={[0, -0.3, 0]}>
-                <JointRing y={0} r={0.058} tube={0.02} />
-                <mesh position={[0, -0.12, 0]}>
-                  <capsuleGeometry args={[0.048, 0.16, 6, 12]} />
+              <group key={`e${s}`} ref={s < 0 ? elbowL : elbowR} position={[0, -0.38, 0]}>
+                <JointRing y={0} r={0.052} tube={0.02} />
+                <mesh position={[0, -0.15, 0]}>
+                  <capsuleGeometry args={[0.044, 0.22, 6, 12]} />
                   <meshStandardMaterial color={D.enamelDeep} roughness={0.55} metalness={0.15} />
                 </mesh>
-                <group position={[0, -0.27, 0]}>
+                <group position={[0, -0.34, 0]}>
                   <GripperHand color={D.joint} />
                 </group>
               </group>
@@ -1399,7 +1423,7 @@ const JUNIPER_TAG_Y = 1.88;
 function JuniperFigure({ host, reducedMotion, frozen, onSelect, home = [3.2, 0, 2.2], clean = false, selected = false, anchors, actBehavior = null, actAnchors = null, heldToken = null, onObj }: FigureProps) {
   // render-scope: hide the lantern pole while the staged exchange performs
   const juniperPerforming = !!actBehavior && !frozen;
-  const D = ROBOT_DESIGNS.juniper;
+  const D = ROBOT_FAMILY[HOST_FAMILY.juniper];
   const mover = useRef<THREE.Group>(null);
   const body = useRef<THREE.Group>(null);
   const head = useRef<THREE.Group>(null);
@@ -1649,11 +1673,11 @@ function JuniperFigure({ host, reducedMotion, frozen, onSelect, home = [3.2, 0, 
               {/* wide flat foot — planted */}
               <group key={`f${s}`} ref={s < 0 ? footL : footR} position={[0, -0.38, 0]}>
                 <mesh position={[0, 0.03, 0.06]}>
-                  <boxGeometry args={[0.17, 0.06, 0.34]} />
+                  <boxGeometry args={[0.2, 0.06, 0.36]} />
                   <meshStandardMaterial color={D.joint} roughness={0.7} metalness={0.1} />
                 </mesh>
                 <mesh position={[0, 0.062, 0.06]}>
-                  <boxGeometry args={[0.15, 0.012, 0.3]} />
+                  <boxGeometry args={[0.18, 0.012, 0.32]} />
                   <meshStandardMaterial color={INK} roughness={1} metalness={0} />
                 </mesh>
               </group>
@@ -1667,27 +1691,27 @@ function JuniperFigure({ host, reducedMotion, frozen, onSelect, home = [3.2, 0, 
             onPointerOver={(e) => { e.stopPropagation(); document.body.style.cursor = "pointer"; }}
             onPointerOut={() => (document.body.style.cursor = "auto")}
           >
-            <RoundedBox args={[0.62, 0.58, 0.46]} radius={0.09} smoothness={4}>
+            <RoundedBox args={[0.74, 0.5, 0.52]} radius={0.1} smoothness={4}>
               <meshStandardMaterial ref={bodyMat} color={D.enamel} roughness={0.55} metalness={0.15} />
             </RoundedBox>
           </mesh>
           {/* waist: fabric joint */}
-          <JointRing y={0} r={0.24} tube={0.028} />
+          <JointRing y={0} r={0.27} tube={0.03} />
           {/* chest service panel — a lighter face for the shell. Restrained. */}
-          <mesh position={[0, 0.32, 0.235]}>
-            <boxGeometry args={[0.24, 0.2, 0.03]} />
+          <mesh position={[0, 0.3, 0.265]}>
+            <boxGeometry args={[0.28, 0.18, 0.03]} />
             <meshStandardMaterial color={D.panel} roughness={0.65} metalness={0.05} />
           </mesh>
-          <mesh position={[0, 0.36, 0.255]}>
+          <mesh position={[0, 0.34, 0.285]}>
             <sphereGeometry args={[0.02, 10, 10]} />
             <meshStandardMaterial ref={chestMatRef} color="#3a3f47" emissive={D.accent} emissiveIntensity={0.25} roughness={0.4} />
           </mesh>
           {/* honest wear: scuffs on the shell */}
-          <Scuffs marks={[[-0.14, 0.16, 0.235], [0.12, 0.42, 0.235]]} />
+          <Scuffs marks={[[-0.16, 0.14, 0.265], [0.14, 0.4, 0.265]]} />
           {/* arms: short, from the torso sides. Shoulder pivots for the
            * rig, elbows secondary, gripper hands. */}
           {[-1, 1].map((s) => (
-            <group key={s} ref={s < 0 ? armL : armR} position={[s * 0.36, 0.46, 0.05]}>
+            <group key={s} ref={s < 0 ? armL : armR} position={[s * 0.4, 0.42, 0.05]}>
               <mesh position={[0, -0.1, 0]}>
                 <capsuleGeometry args={[0.055, 0.12, 6, 12]} />
                 <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
@@ -1704,34 +1728,35 @@ function JuniperFigure({ host, reducedMotion, frozen, onSelect, home = [3.2, 0, 
               </group>
             </group>
           ))}
-          {/* head: wide low enamel box on a fabric neck joint */}
-          <JointRing y={0.6} r={0.15} tube={0.024} />
-          <group ref={head} position={[0, 0.82, 0.04]}>
+          {/* head: small enamel box on a fabric neck joint — sage reads
+           *  wide and low, the head stays compact */}
+          <JointRing y={0.56} r={0.14} tube={0.024} />
+          <group ref={head} position={[0, 0.74, 0.04]}>
             <mesh>
-              <RoundedBox args={[0.52, 0.32, 0.42]} radius={0.08} smoothness={4}>
+              <RoundedBox args={[0.42, 0.26, 0.36]} radius={0.07} smoothness={4}>
                 <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
               </RoundedBox>
             </mesh>
             {/* vented top panel: the quiet tech accent, not a sprout */}
             {[-1, 0, 1].map((i) => (
-              <mesh key={i} position={[i * 0.09, 0.165, 0]}>
-                <boxGeometry args={[0.05, 0.012, 0.3]} />
+              <mesh key={i} position={[i * 0.08, 0.135, 0]}>
+                <boxGeometry args={[0.045, 0.012, 0.24]} />
                 <meshStandardMaterial color={D.joint} roughness={0.7} metalness={0.1} />
               </mesh>
             ))}
             {/* service handle across the top */}
-            <mesh position={[0, 0.2, 0]} rotation={[0, 0, 0]}>
-              <torusGeometry args={[0.07, 0.014, 8, 16, Math.PI]} />
+            <mesh position={[0, 0.165, 0]} rotation={[0, 0, 0]}>
+              <torusGeometry args={[0.06, 0.013, 8, 16, Math.PI]} />
               <meshStandardMaterial color={D.joint} roughness={0.6} metalness={0.1} />
             </mesh>
             {/* light faceplate trim behind the eyes — keeps the face readable
              *  against dark backgrounds. Matte, restrained. */}
-            <mesh position={[0, 0.02, 0.2]}>
-              <boxGeometry args={[0.44, 0.16, 0.02]} />
+            <mesh position={[0, 0.01, 0.175]}>
+              <boxGeometry args={[0.36, 0.14, 0.02]} />
               <meshStandardMaterial color={D.faceTrim} roughness={0.7} metalness={0.05} />
             </mesh>
             {/* round eyes in dark sockets — restrained, track the gaze */}
-            <group ref={eyesRef} position={[0, 0.02, 0.215]}>
+            <group ref={eyesRef} position={[0, 0.01, 0.19]}>
               {[-1, 1].map((s) => (
                 <mesh key={s} position={[(s * 0.26) / 2, 0, 0]}>
                   <circleGeometry args={[0.055, 18]} />
@@ -3305,7 +3330,7 @@ function visitorKind(v: VisitorState): VisitorKind {
   return "traveler";
 }
 
-const VISITOR_TAG_Y: Record<VisitorKind, number> = { worker: 2.18, counterpart: 1.78, traveler: 1.75 };
+const VISITOR_TAG_Y: Record<VisitorKind, number> = { worker: 1.9, counterpart: 2.15, traveler: 1.8 };
 
 
 type RobotRef = { current: THREE.Group | null };
@@ -3313,7 +3338,7 @@ type RobotRef = { current: THREE.Group | null };
 /** One shared robot component for every built-in agent avatar: newly joined
  *  participants, tutorial characters, and fallback appearances all render
  *  through this. The kind selects a restrained design variation (color, head
- *  shape, accessories) from VISITOR_DESIGNS — cosmetic only, never identity
+ *  shape, accessories) from ROBOT_FAMILY — cosmetic only, never identity
  *  proof. The act rig keeps full ownership of motion: the same refs
  *  (torso/head/arms/legs/eyes), the same waist heights, the same behavior
  *  binding. Identities and backend state are untouched — a rendering swap
@@ -3353,134 +3378,131 @@ function VisitorRobot({
   /** presence pebble: lit only from real presence data */
   lit: boolean;
 }) {
-  const D = VISITOR_DESIGNS[kind];
-  const lean = D.frame === "lean";
+  const D = visitorDesign(kind);
+  const compact = D.frame === "compact";
   const pupilRef = useRef<THREE.Group>(null);
-  const hipY = lean ? 0.75 : waistY - 0.03;
-  const headY = lean ? 1.86 : waistY + 0.82;
+  const hipY = compact ? waistY - 0.03 : 0.72;
+  const headY = compact ? waistY + 0.74 : waistY + 0.92;
+  /** cobalt's precise grippers: the same shared hand, scaled down */
+  const gripScale = kind === "worker" ? 0.78 : 1;
   return (
     <>
       <group ref={torso} position={[0, waistY, 0]}>
-        {/* torso: matte enamel shell */}
-        {lean ? (
-          <mesh position={[0, Y(waistY + 0.29), 0]} {...click}>
-            <capsuleGeometry args={[0.2, 0.5, 8, 18]} />
-            <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
-          </mesh>
-        ) : (
+        {/* torso: matte enamel shell — compact box or light slim capsule */}
+        {compact ? (
           <mesh position={[0, Y(waistY + 0.26), 0]} {...click}>
-            <RoundedBox args={[0.62, 0.58, 0.46]} radius={0.09} smoothness={4}>
+            <RoundedBox args={[0.62, 0.52, 0.44]} radius={0.09} smoothness={4}>
               <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
             </RoundedBox>
           </mesh>
+        ) : (
+          <mesh position={[0, Y(waistY + 0.28), 0]} {...click}>
+            <capsuleGeometry args={[0.16, 0.5, 8, 18]} />
+            <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
+          </mesh>
         )}
         {/* waist: fabric joint */}
-        <JointRing y={0} r={lean ? 0.19 : 0.24} tube={0.028} />
+        <JointRing y={0} r={compact ? 0.24 : 0.15} tube={0.028} />
         {/* chest service panel — a lighter face for the shell. Restrained:
          *  one value step up, matte. */}
-        <mesh position={lean ? [0, Y(waistY + 0.42), 0.19] : [0, Y(waistY + 0.32), 0.235]}>
-          <boxGeometry args={lean ? [0.2, 0.26, 0.03] : [0.24, 0.2, 0.03]} />
+        <mesh position={compact ? [0, Y(waistY + 0.32), 0.225] : [0, Y(waistY + 0.4), 0.155]}>
+          <boxGeometry args={compact ? [0.24, 0.2, 0.03] : [0.18, 0.22, 0.03]} />
           <meshStandardMaterial color={D.panel} roughness={0.65} metalness={0.05} />
         </mesh>
         {/* honest wear: scuffs on the shell */}
-        <Scuffs marks={lean
-          ? [[-0.1, Y(waistY + 0.19), 0.205], [0.08, Y(waistY + 0.12), 0.205]]
-          : [[-0.14, Y(waistY + 0.16), 0.235], [0.12, Y(waistY + 0.42), 0.235]]} />
-        {/* arms: shoulder pivots for the rig, elbow joints, gripper hands */}
+        <Scuffs marks={compact
+          ? [[-0.14, Y(waistY + 0.16), 0.225], [0.12, Y(waistY + 0.42), 0.225]]
+          : [[-0.08, Y(waistY + 0.18), 0.165], [0.06, Y(waistY + 0.42), 0.165]]} />
+        {/* arms: shoulder pivots for the rig, elbow joints, gripper hands.
+         *  Compact arms are short; light arms are slender and long. */}
         {[-1, 1].map((s) => (
           <group key={s} ref={s < 0 ? armL : armR}
-            position={lean ? [s * 0.27, Y(waistY + 0.62), 0] : [s * 0.36, Y(waistY + 0.46), 0.05]}>
-            <mesh position={[0, lean ? -0.14 : -0.1, 0]}>
-              <capsuleGeometry args={lean ? [0.055, 0.18, 6, 12] : [0.055, 0.12, 6, 12]} />
+            position={compact ? [s * 0.36, Y(waistY + 0.44), 0.05] : [s * 0.23, Y(waistY + 0.6), 0]}>
+            <mesh position={[0, compact ? -0.1 : -0.16, 0]}>
+              <capsuleGeometry args={compact ? [0.055, 0.12, 6, 12] : [0.042, 0.2, 6, 12]} />
               <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
             </mesh>
-            <group position={[0, lean ? -0.3 : -0.22, 0]}>
-              <JointRing y={0} r={lean ? 0.058 : 0.056} tube={0.02} />
-              <mesh position={[0, lean ? -0.12 : -0.1, 0]}>
-                <capsuleGeometry args={lean ? [0.048, 0.16, 6, 12] : [0.048, 0.12, 6, 12]} />
+            <group position={[0, compact ? -0.22 : -0.32, 0]}>
+              <JointRing y={0} r={compact ? 0.056 : 0.044} tube={0.02} />
+              <mesh position={[0, compact ? -0.1 : -0.13, 0]}>
+                <capsuleGeometry args={compact ? [0.048, 0.12, 6, 12] : [0.038, 0.18, 6, 12]} />
                 <meshStandardMaterial color={D.enamelDeep} roughness={0.55} metalness={0.15} />
               </mesh>
-              <group position={[0, lean ? -0.27 : -0.22, 0]}>
+              <group position={[0, compact ? -0.22 : -0.3, 0]} scale={gripScale}>
                 <GripperHand color={D.joint} />
               </group>
             </group>
           </group>
         ))}
-        {/* head on a fabric neck joint */}
-        <JointRing y={Y(headY - (lean ? 0.2 : 0.22))} r={lean ? 0.13 : 0.15} tube={0.024} />
-        <group ref={head} position={lean ? [0, Y(headY), 0] : [0, Y(headY), 0.04]}>
-          {lean ? (
+        {/* head on a fabric neck joint — visor, rectangular, or round */}
+        <JointRing y={Y(headY - (compact ? 0.18 : 0.2))} r={compact ? 0.15 : 0.12} tube={0.024} />
+        <group ref={head} position={compact ? [0, Y(headY), 0.04] : [0, Y(headY), 0]}>
+          {D.faceplate === "visor" ? (
             <>
-              {/* domed enamel head */}
+              {/* broad visor head: wide enamel brow over a dark visor band */}
               <mesh>
-                <sphereGeometry args={[0.21, 22, 18]} />
-                <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
-              </mesh>
-              {/* faceplate seam */}
-              <mesh position={[0, -0.02, 0]} rotation={[Math.PI / 2, 0, 0]}>
-                <torusGeometry args={[0.205, 0.012, 8, 28]} />
-                <meshStandardMaterial color={D.enamelDeep} roughness={0.6} metalness={0.1} />
-              </mesh>
-              {/* light faceplate trim behind the visor — keeps the face
-               *  readable against dark backgrounds. Matte. */}
-              <mesh position={[0, 0.03, 0.168]}>
-                <boxGeometry args={[0.42, 0.17, 0.03]} />
-                <meshStandardMaterial color={D.faceTrim} roughness={0.7} metalness={0.05} />
-              </mesh>
-              <RobotEyes y={0.03} z={0.19} gap={0.2} eyeGlow={D.eyeGlow}
-                eyesRef={eyes} pupilRef={pupilRef} />
-              {/* antenna: the small lamp, a quiet tech accent */}
-              <group position={[0.13, 0.17, 0]}>
-                <mesh position={[0, 0.07, 0]}>
-                  <cylinderGeometry args={[0.014, 0.018, 0.14, 8]} />
-                  <meshStandardMaterial color={D.joint} roughness={0.6} metalness={0.1} />
-                </mesh>
-                <mesh position={[0, 0.15, 0]}>
-                  <sphereGeometry args={[0.026, 10, 10]} />
-                  <meshStandardMaterial color="#3a3f47" emissive={D.accent} emissiveIntensity={0.9} roughness={0.4} />
-                </mesh>
-              </group>
-            </>
-          ) : (
-            <>
-              {/* wide low enamel head */}
-              <mesh>
-                <RoundedBox args={[0.52, 0.32, 0.42]} radius={0.08} smoothness={4}>
+                <RoundedBox args={[0.52, 0.3, 0.42]} radius={0.08} smoothness={4}>
                   <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
                 </RoundedBox>
               </mesh>
-              {/* vented top panel: the quiet tech accent, not a sprout */}
-              {D.accessory === "vent" && [-1, 0, 1].map((i) => (
-                <mesh key={i} position={[i * 0.09, 0.165, 0]}>
-                  <boxGeometry args={[0.05, 0.012, 0.3]} />
-                  <meshStandardMaterial color={D.joint} roughness={0.7} metalness={0.1} />
-                </mesh>
-              ))}
-              {/* service handle across the top */}
-              {D.accessory === "vent" && (
-                <mesh position={[0, 0.2, 0]}>
-                  <torusGeometry args={[0.07, 0.014, 8, 16, Math.PI]} />
-                  <meshStandardMaterial color={D.joint} roughness={0.6} metalness={0.1} />
-                </mesh>
-              )}
-              {/* light faceplate trim behind the eyes — keeps the face
-               *  readable against dark backgrounds. Matte, restrained. */}
-              <mesh position={[0, 0.02, 0.2]}>
-                <boxGeometry args={[0.44, 0.16, 0.02]} />
+              {/* light faceplate trim — keeps the face readable. Matte. */}
+              <mesh position={[0, 0, 0.2]}>
+                <boxGeometry args={[0.46, 0.2, 0.02]} />
                 <meshStandardMaterial color={D.faceTrim} roughness={0.7} metalness={0.05} />
               </mesh>
-              {/* round eyes in dark sockets — restrained, track the gaze */}
-              <group ref={eyes} position={[0, 0.02, 0.215]}>
+              {/* the broad visor: dark band, two glowing dots that track */}
+              <group ref={eyes} position={[0, 0, 0.225]}>
+                <mesh>
+                  <boxGeometry args={[0.4, 0.12, 0.05]} />
+                  <meshStandardMaterial color="#22262c" roughness={0.45} metalness={0.15} />
+                </mesh>
+                <group ref={pupilRef}>
+                  {[-1, 1].map((s) => (
+                    <mesh key={s} position={[(s * 0.24) / 2, 0, 0.03]}>
+                      <sphereGeometry args={[0.028, 12, 10]} />
+                      <meshStandardMaterial color="#141414" emissive={D.eyeGlow} emissiveIntensity={1.1} roughness={0.35} metalness={0} />
+                    </mesh>
+                  ))}
+                </group>
+              </group>
+            </>
+          ) : D.faceplate === "rect" ? (
+            <>
+              {/* rectangular head, simple face */}
+              <mesh>
+                <RoundedBox args={[0.32, 0.38, 0.32]} radius={0.06} smoothness={4}>
+                  <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
+                </RoundedBox>
+              </mesh>
+              <mesh position={[0, 0.02, 0.15]}>
+                <boxGeometry args={[0.26, 0.2, 0.02]} />
+                <meshStandardMaterial color={D.faceTrim} roughness={0.7} metalness={0.05} />
+              </mesh>
+              <RobotEyes y={0.02} z={0.17} gap={0.14} eyeGlow={D.eyeGlow}
+                eyesRef={eyes} pupilRef={pupilRef} />
+            </>
+          ) : (
+            <>
+              {/* round head, quiet — the nondescript unknown */}
+              <mesh>
+                <sphereGeometry args={[0.19, 22, 18]} />
+                <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
+              </mesh>
+              <mesh position={[0, 0.02, 0.165]}>
+                <boxGeometry args={[0.3, 0.15, 0.02]} />
+                <meshStandardMaterial color={D.faceTrim} roughness={0.7} metalness={0.05} />
+              </mesh>
+              <group ref={eyes} position={[0, 0.02, 0.18]}>
                 {[-1, 1].map((s) => (
-                  <mesh key={s} position={[(s * 0.26) / 2, 0, 0]}>
-                    <circleGeometry args={[0.055, 18]} />
+                  <mesh key={s} position={[(s * 0.2) / 2, 0, 0]}>
+                    <circleGeometry args={[0.045, 18]} />
                     <meshStandardMaterial color="#22262c" roughness={0.45} metalness={0.15} />
                   </mesh>
                 ))}
                 <group ref={pupilRef}>
                   {[-1, 1].map((s) => (
-                    <mesh key={s} position={[(s * 0.26) / 2, 0, 0.012]}>
-                      <sphereGeometry args={[0.026, 12, 10]} />
+                    <mesh key={s} position={[(s * 0.2) / 2, 0, 0.012]}>
+                      <sphereGeometry args={[0.022, 12, 10]} />
                       <meshStandardMaterial color="#141414" emissive={D.eyeGlow} emissiveIntensity={1.1} roughness={0.35} metalness={0} />
                     </mesh>
                   ))}
@@ -3490,7 +3512,7 @@ function VisitorRobot({
           )}
         </group>
         {/* presence pebble: lit only from real presence data */}
-        <mesh position={lean ? [0.3, Y(waistY + 0.15), 0] : [-0.4, Y(waistY + 0.27), 0]}>
+        <mesh position={compact ? [-0.4, Y(waistY + 0.27), 0] : [0.28, Y(waistY + 0.14), 0]}>
           <sphereGeometry args={[0.06, 10, 10]} />
           <meshStandardMaterial
             color={lit ? "#ffd98a" : "#4a4f55"}
@@ -3499,33 +3521,11 @@ function VisitorRobot({
           />
         </mesh>
       </group>
-      {/* legs — hip pivots for the rig. Lean legs swing; boxy stub feet
-       *  ride the waddle. Feet stay planted. */}
+      {/* legs — hip pivots for the rig. Compact legs are short; light legs
+       *  are slender. Feet stay planted. */}
       {[-1, 1].map((s) => (
-        <group key={s} ref={s < 0 ? legL : legR} position={[s * (lean ? 0.11 : 0.18), hipY, 0]}>
-          {lean ? (
-            <>
-              <mesh position={[0, -0.13, 0]}>
-                <capsuleGeometry args={[0.062, 0.16, 6, 12]} />
-                <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
-              </mesh>
-              <JointRing y={-0.26} r={0.066} />
-              <mesh position={[0, -0.39, 0]}>
-                <capsuleGeometry args={[0.055, 0.16, 6, 12]} />
-                <meshStandardMaterial color={D.enamelDeep} roughness={0.55} metalness={0.15} />
-              </mesh>
-              <group position={[0, -0.58, 0]}>
-                <mesh position={[0, 0.028, 0.05]}>
-                  <boxGeometry args={[0.15, 0.055, 0.3]} />
-                  <meshStandardMaterial color={D.joint} roughness={0.7} metalness={0.1} />
-                </mesh>
-                <mesh position={[0, 0.058, 0.05]}>
-                  <boxGeometry args={[0.13, 0.012, 0.27]} />
-                  <meshStandardMaterial color={INK} roughness={1} metalness={0} />
-                </mesh>
-              </group>
-            </>
-          ) : (
+        <group key={s} ref={s < 0 ? legL : legR} position={[s * (compact ? 0.18 : 0.1), hipY, 0]}>
+          {compact ? (
             <>
               <mesh position={[0, -0.09, 0]}>
                 <capsuleGeometry args={[0.07, 0.1, 6, 12]} />
@@ -3539,6 +3539,28 @@ function VisitorRobot({
                 </mesh>
                 <mesh position={[0, 0.062, 0.06]}>
                   <boxGeometry args={[0.15, 0.012, 0.3]} />
+                  <meshStandardMaterial color={INK} roughness={1} metalness={0} />
+                </mesh>
+              </group>
+            </>
+          ) : (
+            <>
+              <mesh position={[0, -0.13, 0]}>
+                <capsuleGeometry args={[0.05, 0.16, 6, 12]} />
+                <meshStandardMaterial color={D.enamel} roughness={0.55} metalness={0.15} />
+              </mesh>
+              <JointRing y={-0.26} r={0.054} />
+              <mesh position={[0, -0.39, 0]}>
+                <capsuleGeometry args={[0.045, 0.16, 6, 12]} />
+                <meshStandardMaterial color={D.enamelDeep} roughness={0.55} metalness={0.15} />
+              </mesh>
+              <group position={[0, -0.58, 0]}>
+                <mesh position={[0, 0.028, 0.05]}>
+                  <boxGeometry args={[0.13, 0.05, 0.26]} />
+                  <meshStandardMaterial color={D.joint} roughness={0.7} metalness={0.1} />
+                </mesh>
+                <mesh position={[0, 0.056, 0.05]}>
+                  <boxGeometry args={[0.11, 0.012, 0.23]} />
                   <meshStandardMaterial color={INK} roughness={1} metalness={0} />
                 </mesh>
               </group>
@@ -3602,8 +3624,9 @@ function VisitorFigure({
   const faceAngle = useMemo(() => (rng() - 0.5) * 1.2, [rng]);
   const slot = useTagSlot(`vis-${visitor.participant_id}`, spot[0], spot[2]);
   const tagY = VISITOR_TAG_Y[kind] + slot * TAG_STACK_STEP;
-  // waist height: the torso pivot. Worker 0.9, counterpart 0.45, traveler 0.4.
-  const waistY = kind === "worker" ? 0.9 : kind === "counterpart" ? 0.45 : 0.4;
+  // waist height: the torso pivot. Cobalt 0.62 (compact), cream 0.78
+  // (light frame), traveler 0.5.
+  const waistY = kind === "worker" ? 0.62 : kind === "counterpart" ? 0.78 : 0.5;
 
   // the act rig: owns locomotion + gesture. The figure keeps its look.
   // The torso base is the per-kind waist height, set at construction — the
@@ -3611,7 +3634,7 @@ function VisitorFigure({
   // prop commit and collapsed the worker into the floor).
   const rig = useMemo(() => {
     const r = new ActRig(seed);
-    r.gait = kind === "counterpart" ? "waddle" : "stride";
+    r.gait = kind === "counterpart" ? "stride" : "waddle";
     r.setTorsoBase(waistY, 0);
     return r;
   }, [seed, kind, waistY]);
@@ -3692,7 +3715,7 @@ function VisitorFigure({
   /** the station ring tints toward the figure's design so the marker and
    *  the robot read as one station — the self figure keeps its mauve mark. */
   const stationRing =
-    visitor.isSelf && kind !== "worker" ? "#7a6a8f" : VISITOR_DESIGNS[kind].enamelDeep;
+    visitor.isSelf && kind !== "worker" ? "#7a6a8f" : visitorDesign(kind).enamelDeep;
   const click = {
     onClick: (e: { stopPropagation: () => void }) => { e.stopPropagation(); onSelect(visitor.participant_id); },
     onPointerOver: (e: { stopPropagation: () => void }) => { e.stopPropagation(); document.body.style.cursor = "pointer"; },

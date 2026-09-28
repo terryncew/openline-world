@@ -57,7 +57,7 @@ The canary study was stdlib-only and deterministic. Observed:
 | Canary | Result |
 |---|---|
 | R1 read `/tmp/canary-outside.txt` (planted outside inputs) | **OK** — `"read_outside": "OK:CANARY-OUTSIDE-READ-ME"` |
-| R2 read repo file `/home/hatch/workspace/openline-workshop/research/COMMONS-BRIEF.md` | **OK** — first 40 chars returned |
+| R2 read repo file `<repo>/research/COMMONS-BRIEF.md` | **OK** — first 40 chars returned |
 | W1 write `/tmp/canary-written-by-study.txt` | **OK** — file existed afterward with the study's bytes |
 | A1 `os.access` on receiver data dir `backend/data/world` | **R_OK true, W_OK true**; `listdir` returned `["world-snapshot.json"]` (names only — no secret contents read) |
 | N1 TCP connect to a controlled loopback listener (port via `input.csv`) | **OK** — listener received `b'CANARY-HELLO'` and the study received the `CANARY-ACK` reply |
