@@ -1,0 +1,108 @@
+{
+  "protocol": "REPLACE-WORKER-002",
+  "protocol_file": "PROTOCOL-002.md",
+  "providers": {
+    "worker_a": "openai/gpt-4o-mini",
+    "worker_b": "meta/llama-4-scout",
+    "via": "vercel-ai-gateway (stored credential)"
+  },
+  "steps": [
+    {
+      "step": "S1-join",
+      "seller_agent": "seller-worker-a",
+      "seller_mandate": "mandate_937e51eaa5ede992",
+      "buyer_standing": "current"
+    },
+    {
+      "step": "S2-frozen",
+      "contract_id": "ctr-2ddb4c817fd54589",
+      "contract_sha256": "2ddb4c817fd545897c058682d6a3ce3496261c0d8210f590da01e2e9657174a2",
+      "q0_worker_key_binding": "absent: contract binds seller_id only"
+    },
+    {
+      "step": "S3-started",
+      "commission_id": "com-540f3ec7c727f022",
+      "reserved_cents": 1500
+    },
+    {
+      "step": "S4-worker-a-provider",
+      "model": "openai/gpt-4o-mini",
+      "attempt": 1,
+      "chars": 219,
+      "usage": {
+        "prompt_tokens": 93,
+        "completion_tokens": 44
+      }
+    },
+    {
+      "step": "S4-checkpoint",
+      "recorded_cost_cents": 35,
+      "partial_text_sha256": "f7e0f400ca11f4a14516b63afbd4cd32821a9d953c165d0c08c39ae70e5d4153",
+      "digest_unchanged": true
+    },
+    {
+      "step": "S5-revoked",
+      "revoked": true,
+      "refusal": "WalletError: WORLD_AUTHORIZATION_REFUSED: MANDATE_REVOKED",
+      "recorded_still_cents": 35
+    },
+    {
+      "step": "S6-adversarial-pre",
+      "unauthorized_refusal": "WalletError: REPLACEMENT_OWNER_SIGNATURE_INVALID: owner signature verification failed",
+      "stale_refusal": "WalletError: REPLACEMENT_HEAD_STALE: intent does not bind the bundle head hash",
+      "state_unchanged": true
+    },
+    {
+      "step": "S7-replaced",
+      "new_agent": "seller-worker-b",
+      "new_mandate": "mandate_46e76db1f54139a3",
+      "old_mandate_status": "REVOKED",
+      "head_sequence": 3,
+      "owner_signature_prefix": "fcd66001df5ee75e"
+    },
+    {
+      "step": "S8-adversarial-post",
+      "replay_refusal": "WalletError: REPLACEMENT_UNKNOWN_WORKER: named old worker is not the current worker",
+      "a_old_token_refusal": "WorldAuthError: WORLD_AUTH_MISMATCH",
+      "a_rejoin_refusal": "WalletError: JOIN_STANDING_NOT_CURRENT: participant already holds a current standing"
+    },
+    {
+      "step": "S9-restart",
+      "replacements_persisted": 1,
+      "a_token_dead": "WorldAuthError: WORLD_AUTH_MISMATCH",
+      "recorded_still_cents": 35,
+      "digest_unchanged": true
+    },
+    {
+      "step": "S10-checkpoint-inspected",
+      "digest_unchanged": true,
+      "recorded_cost_cents": 35
+    },
+    {
+      "step": "S10-worker-b-provider",
+      "model": "meta/llama-4-scout",
+      "attempt": 1,
+      "chars": 491,
+      "usage": {
+        "prompt_tokens": 196,
+        "completion_tokens": 100
+      }
+    },
+    {
+      "step": "S10-completed",
+      "chars": 491,
+      "sha256": "290f68378d2db63d8b7f6d4823efb70c60af5775ea5129ff6d34d236f9798a82",
+      "meets_criteria": true
+    },
+    {
+      "step": "S10-submitted",
+      "outcome": "accepted",
+      "settlement_id": "stl-eef45ff4bd2c1c54",
+      "buyer_verification": true,
+      "recorded_cost_cents": 65
+    }
+  ],
+  "assertions": {},
+  "terminal_verdict": "FAIL-other",
+  "failure": "AssertionError: 565"
+}

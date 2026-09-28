@@ -206,6 +206,7 @@ from newsroom_chapter import NewsroomChapter
 from package_acceptance import canonical_package_bytes, evaluate_package
 from report_acceptance import evaluate_report
 from openline_wallet.clock import parse_time, utc_now
+from openline_wallet.canonical import canonical_json
 from openline_wallet.crypto import (
     private_key_hex,
     sign_record,
@@ -220,6 +221,9 @@ from openline_wallet.wallet import verify_bundle
 # ---------------------------------------------------------------------------
 
 JOIN_PROFILE_VERSION = "openline-join-profile/v1"
+# Version string for an explicit owner-authorized worker replacement
+# request: the same participant standing continues under a new worker key.
+REPLACE_WORKER_VERSION = "openline-replace-worker/v1"
 
 # Allowlisted harmless task kinds -> the existing supported action the
 # ACCEPTOR's agent proposes through the ACCEPTOR's own gate. Offer detail is
@@ -432,6 +436,11 @@ class World:
         # them with the sessions they belonged to.
         self.delegations: dict[str, dict[str, Any]] = {}
         self.escalations: dict[str, dict[str, Any]] = {}
+        # Worker replacements: append-only record of explicit owner-authorized
+        # worker swaps (participant keeps its standing; the worker key
+        # changes). Survives restarts via the snapshot; the old worker's
+        # session is deleted, never resurrected.
+        self.worker_replacements: list[dict[str, Any]] = []
         # UNATTENDED COMMISSION -- simulated-funds ledger and commission
         # state (backend/commission.py). Simulated funds only; cost events
         # are never provider invoices.
@@ -634,6 +643,272 @@ class World:
         return {
             "participant_id": pid, "agent_id": aid, "token": token,
             "mandate_id": mandate_id, "standing": "current",
+            "world": {"location": "workshop", "version": 1},
+        }
+
+    # -- layer 1b: explicit owner-authorized worker replacement ------------------
+    def replace_worker(self, request: Any) -> dict[str, Any]:
+        """Replace the worker behind an existing participant's standing.
+
+        The participant keeps its standing -- same participant id, same
+        job, same frozen contract, same checkpoint, same budget -- under a
+        new worker key. The ordinary join() path is untouched:
+        JOIN_STANDING_NOT_CURRENT still refuses a plain rejoin while a
+        standing exists, and no rejoin recovers authority.
+
+        Requires, all verified before any state changes:
+          - the named old worker is this participant's current worker
+            (replay of a completed replacement finds no such worker);
+          - an owner-signed mandate bundle whose head is the authority
+            sequence the replacement binds to;
+          - the old worker's mandate NOT ACTIVE in that bundle (the old
+            worker stays revoked -- replacement never re-arms it);
+          - exactly one ACTIVE mandate for the new worker, its subject key
+            equal to the new worker's key, its scopes exactly the
+            explicitly delegated scopes (the new worker receives only what
+            the owner delegates, never the old worker's mandate);
+          - the owner's root-key signature over the replacement intent,
+            binding participant, old worker, old mandate, new worker key,
+            the bundle head (sequence + hash), and the delegated scopes;
+          - the new worker's proof of key control (server-issued
+            single-use nonce, as in join).
+
+        Effects: the old session is deleted (its bearer token dies with
+        it), a fresh session is created for the new worker, any delegation
+        for the participant is marked replaced, and the replacement is
+        recorded in worker_replacements, the event log, and the snapshot.
+        """
+        if not isinstance(request, dict):
+            raise WalletError("REPLACEMENT_REQUEST_INVALID", "request")
+        if request.get("version") != REPLACE_WORKER_VERSION:
+            raise WalletError("REPLACEMENT_VERSION_UNSUPPORTED", "version")
+        agent = request.get("agent") or {}
+        proof = request.get("proof") or {}
+        owner = request.get("owner") or {}
+        mandate = request.get("mandate") or {}
+        capabilities = request.get("capabilities")
+        repl = request.get("replacement")
+        if not isinstance(repl, dict):
+            raise WalletError("REPLACEMENT_REQUEST_INVALID", "replacement")
+
+        pid = self._id_field(request.get("participant_id"), "participant.id")
+        old_aid = self._id_field(repl.get("old_agent_id"), "replacement.old_agent_id")
+        new_aid = self._id_field(agent.get("id"), "agent.id")
+        if new_aid == old_aid:
+            raise WalletError("REPLACEMENT_SAME_WORKER",
+                              "new worker must differ from the old worker")
+        new_adisplay = WorldRules.moderate_text(
+            agent.get("display_name"), 40, "agent.display_name")
+        new_apub = self._agent_public_key(agent.get("public_key"))
+        if repl.get("new_agent_id") != new_aid:
+            raise WalletError("REPLACEMENT_INTENT_MISMATCH",
+                              "intent new_agent_id does not match the agent block")
+        if str(repl.get("new_agent_public_key") or "").lower() != new_apub:
+            raise WalletError("REPLACEMENT_INTENT_MISMATCH",
+                              "intent new_agent_public_key does not match")
+
+        session = self.sessions.get(pid)
+        if session is None:
+            raise WalletError("REPLACEMENT_UNKNOWN_PARTICIPANT",
+                              "no standing for this participant")
+        if session.agent_id != old_aid:
+            # Covers replay: after a completed replacement the old worker
+            # is no longer the current worker.
+            raise WalletError("REPLACEMENT_UNKNOWN_WORKER",
+                              "named old worker is not the current worker")
+        old_mid = self._id_field(repl.get("old_mandate_id"),
+                                 "replacement.old_mandate_id")
+        if old_mid != session.mandate_id:
+            raise WalletError("REPLACEMENT_INTENT_MISMATCH",
+                              "intent old_mandate_id does not match the session")
+
+        owner_principal = self._principal_id_field(owner.get("principal_id"))
+        owner_root = self._agent_public_key(owner.get("root_public_key"))
+        if (owner_principal != session.owner_principal_id
+                or owner_root != session.owner_root_public_key):
+            raise WalletError("REPLACEMENT_OWNER_MISMATCH",
+                              "owner block does not match the pinned owner")
+
+        bundle = request.get("mandate_bundle")
+        if not isinstance(bundle, dict):
+            raise WalletError("REPLACEMENT_REQUEST_INVALID", "mandate_bundle")
+        verified, timeline = verify_bundle(bundle)
+        if (verified["principal"]["principal_id"] != owner_principal
+                or str(verified["principal"]["root_public_key"]).lower()
+                   != owner_root):
+            raise WalletError("REPLACEMENT_PRINCIPAL_MISMATCH",
+                              "bundle principal does not match the pinned owner")
+
+        scopes = mandate.get("scopes")
+        if not isinstance(scopes, list) or not scopes or len(scopes) > 16:
+            raise WalletError("REPLACEMENT_SCOPES_INVALID",
+                              "no delegated scopes granted")
+        clean_scopes: list[str] = []
+        for s in scopes:
+            if not isinstance(s, str) or s not in SUPPORTED_SCOPES:
+                raise WalletError("REPLACEMENT_SCOPES_INVALID",
+                                  f"scope not grantable in this preview: {s!r}")
+            clean_scopes.append(s)
+        delegated = repl.get("delegated_scopes")
+        if (not isinstance(delegated, list)
+                or sorted(delegated) != sorted(clean_scopes)):
+            raise WalletError("REPLACEMENT_INTENT_MISMATCH",
+                              "intent delegated_scopes do not match the mandate")
+        if (not isinstance(capabilities, list) or not capabilities
+                or len(capabilities) > 16
+                or any(not isinstance(c, str) or not c for c in capabilities)):
+            raise WalletError("REPLACEMENT_REQUEST_INVALID", "capabilities")
+
+        # The replacement binds to the bundle's head sequence: the intent
+        # must name exactly this head (hash + sequence). A stale or
+        # replayed intent names an older head and is refused here.
+        head_hash = timeline.head_hash
+        head_sequence = timeline.head_sequence
+        if repl.get("head_hash") != head_hash:
+            raise WalletError("REPLACEMENT_HEAD_STALE",
+                              "intent does not bind the bundle head hash")
+        if repl.get("head_sequence") != head_sequence:
+            raise WalletError("REPLACEMENT_HEAD_STALE",
+                              "intent does not bind the bundle head sequence")
+
+        # The old worker stays revoked: its mandate must not be ACTIVE in
+        # the bundle the replacement binds to.
+        old_mandate = timeline.mandates.get(session.mandate_id)
+        if old_mandate is not None and old_mandate.get("status") == "ACTIVE":
+            try:
+                unexpired = parse_time(old_mandate["expires_at"]) > utc_now()
+            except WalletError:
+                unexpired = False
+            if unexpired:
+                raise WalletError("REPLACEMENT_OLD_WORKER_STILL_ACTIVE",
+                                  "old worker's mandate is still active")
+        if (old_mandate is not None
+                and str(old_mandate.get("subject_id") or "") != old_aid):
+            raise WalletError("REPLACEMENT_INTENT_MISMATCH",
+                              "old mandate is not bound to the old worker")
+
+        # The new worker receives only explicitly delegated authority:
+        # exactly one ACTIVE mandate, subject key == new worker key,
+        # scopes == the delegated scopes. Never the old mandate.
+        now = utc_now()
+        active = [m for m in timeline.mandates.values()
+                  if m.get("subject_id") == new_aid
+                  and m.get("status") == "ACTIVE"
+                  and parse_time(m["expires_at"]) > now]
+        if not active:
+            raise WalletError("REPLACEMENT_MANDATE_MISSING",
+                              "no active mandate for the new worker in the bundle")
+        if len(active) > 1:
+            raise WalletError("REPLACEMENT_MANDATE_AMBIGUOUS",
+                              "more than one active mandate for the new worker")
+        grant = active[0]
+        if str(grant.get("subject_public_key") or "").lower() != new_apub:
+            raise WalletError("REPLACEMENT_SUBJECT_KEY_MISMATCH",
+                              "new worker key is not the mandate's subject key")
+        if sorted(grant.get("scopes") or []) != sorted(clean_scopes):
+            raise WalletError("REPLACEMENT_SCOPES_MISMATCH",
+                              "mandate scopes do not match the delegated scopes")
+        new_mid = str(grant["mandate_id"])
+        if new_mid == session.mandate_id:
+            raise WalletError("REPLACEMENT_SAME_MANDATE",
+                              "new mandate must differ from the old mandate")
+
+        # Owner authorization: the pinned root key signs the canonical
+        # replacement intent (everything except the signature itself).
+        sig = repl.get("owner_signature")
+        if not isinstance(sig, str) or _SIG.fullmatch(sig) is None:
+            raise WalletError("REPLACEMENT_OWNER_SIGNATURE_INVALID",
+                              "owner_signature missing or malformed")
+        intent = {k: v for k, v in repl.items() if k != "owner_signature"}
+        expected_intent = {"participant_id", "old_agent_id", "old_mandate_id",
+                           "new_agent_id", "new_agent_public_key",
+                           "head_hash", "head_sequence", "delegated_scopes"}
+        if set(intent) != expected_intent or intent.get("participant_id") != pid:
+            raise WalletError("REPLACEMENT_INTENT_MISMATCH",
+                              "intent shape does not match the request")
+        try:
+            pub = Ed25519PublicKey.from_public_bytes(bytes.fromhex(owner_root))
+            pub.verify(bytes.fromhex(sig), canonical_json(intent))
+        except Exception as exc:
+            raise WalletError("REPLACEMENT_OWNER_SIGNATURE_INVALID",
+                              "owner signature verification failed") from exc
+
+        # Proof of key control, unchanged from join: the new worker signs a
+        # server-issued single-use nonce with its own key.
+        nonce = proof.get("nonce")
+        issued = self._challenges.pop(nonce, None) if isinstance(nonce, str) else None
+        if issued is None or time.time() - issued > NONCE_TTL_SECONDS:
+            raise WalletError("REPLACEMENT_PROOF_INVALID",
+                              "unknown, used, or expired nonce")
+        try:
+            if not isinstance(proof.get("signature"), str):
+                raise ValueError("bad signature encoding")
+            bpub = Ed25519PublicKey.from_public_bytes(bytes.fromhex(new_apub))
+            bpub.verify(bytes.fromhex(proof["signature"]), nonce.encode("utf-8"))
+        except Exception as exc:
+            raise WalletError("REPLACEMENT_PROOF_INVALID",
+                              "new worker signature verification failed") from exc
+
+        # Admit the head last: monotonicity (BUNDLE_HEAD_STALE /
+        # BUNDLE_FORK_QUARANTINED) is enforced here, after every
+        # non-mutating check has passed.
+        admission = self.gate.admit_bundle(verified)
+
+        replaced_at = utc_now().isoformat()
+        self.worker_replacements.append({
+            "participant_id": pid,
+            "old_agent_id": old_aid,
+            "old_mandate_id": session.mandate_id,
+            "new_agent_id": new_aid,
+            "new_mandate_id": new_mid,
+            "head_hash": admission["head_hash"],
+            "head_sequence": admission["head_sequence"],
+            "delegated_scopes": sorted(clean_scopes),
+            "owner_signature": sig,
+            "old_session_receipts": len(session.receipts),
+            "replaced_at": replaced_at,
+        })
+        old_display = session.display_name
+        del self.sessions[pid]
+        dlg = self.delegations.get(pid)
+        if dlg is not None:
+            dlg["status"] = "replaced"
+            dlg["replaced_by"] = new_aid
+            dlg["updated_at"] = replaced_at
+        new_token = secrets.token_urlsafe(32)
+        self.sessions[pid] = ParticipantSession(
+            participant_id=pid, display_name=old_display,
+            agent_id=new_aid, agent_display_name=new_adisplay,
+            agent_public_key=new_apub, token=new_token,
+            owner_principal_id=owner_principal,
+            owner_root_public_key=owner_root,
+            worker_public_key=new_apub, mandate_id=new_mid,
+            mandate_scopes=sorted(clean_scopes),
+            authority_bundle=verified,
+            authority_head_hash=admission["head_hash"],
+            joined_at=replaced_at, standing_checked_at=time.time(),
+            kind="real",
+        )
+        self.events.emit(
+            source="world", kind="worker-replaced",
+            provenance="world-rules",
+            summary=f"{old_display} replaced worker {old_aid} with {new_aid}.",
+            detail={"participant_id": pid, "old_agent_id": old_aid,
+                    "new_agent_id": new_aid,
+                    "old_mandate_id": old_mid, "new_mandate_id": new_mid,
+                    "head_sequence": admission["head_sequence"],
+                    "delegated_scopes": sorted(clean_scopes)},
+        )
+        self._emit_envelope("worker-replaced", {
+            "participant_id": pid, "old_agent_id": old_aid,
+            "new_agent_id": new_aid, "standing": "current",
+        })
+        self.save()
+        return {
+            "participant_id": pid, "old_agent_id": old_aid,
+            "agent_id": new_aid, "token": new_token,
+            "mandate_id": new_mid, "standing": "current",
+            "replaced_at": replaced_at,
             "world": {"location": "workshop", "version": 1},
         }
 
@@ -3517,6 +3792,7 @@ TRACK A -- owner delegation and the deterministic automation worker:
             "commission_contracts": copy.deepcopy(self.commission_contracts),
             "commissions": copy.deepcopy(self.commissions),
             "commission_ledger": copy.deepcopy(self.commission_ledger),
+            "worker_replacements": copy.deepcopy(self.worker_replacements),
         }
         tmp = self._snapshot_path().with_suffix(".json.tmp")
         tmp.write_text(json.dumps(data), encoding="utf-8")
@@ -3614,3 +3890,6 @@ TRACK A -- owner delegation and the deterministic automation worker:
         self.commission_contracts = data.get("commission_contracts") or {}
         self.commissions = data.get("commissions") or {}
         self.commission_ledger = data.get("commission_ledger") or []
+        # Backward compatible: snapshots predating worker replacement
+        # simply have no replacements.
+        self.worker_replacements = data.get("worker_replacements") or []

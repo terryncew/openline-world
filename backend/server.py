@@ -458,6 +458,8 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(200, self.world.challenge())
             elif path == "/api/world/join":
                 self._send(200, self.world.join(body.get("profile")))
+            elif path == "/api/world/replace-worker":
+                self._send(200, self.world.replace_worker(body.get("request")))
             elif path == "/api/world/presence":
                 self._send(200, self.world.presence(
                     body.get("participant_id"), body.get("token"), body.get("presence")))

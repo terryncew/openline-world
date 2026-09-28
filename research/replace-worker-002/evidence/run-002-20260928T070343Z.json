@@ -1,0 +1,216 @@
+{
+  "protocol": "REPLACE-WORKER-002",
+  "protocol_file": "PROTOCOL-002.md",
+  "providers": {
+    "worker_a": "openai/gpt-4o-mini",
+    "worker_b": "meta/llama-4-scout",
+    "via": "vercel-ai-gateway (stored credential)"
+  },
+  "steps": [
+    {
+      "step": "S1-join",
+      "seller_agent": "seller-worker-a",
+      "seller_mandate": "mandate_8439d720d1b72c6b",
+      "buyer_standing": "current"
+    },
+    {
+      "step": "S2-frozen",
+      "contract_id": "ctr-8c1f9e0659b1db67",
+      "contract_sha256": "8c1f9e0659b1db6792fe3c45f17874b1ee954212c45883bbd8eeabe5db037cc9",
+      "q0_worker_key_binding": "absent: contract binds seller_id only"
+    },
+    {
+      "step": "S3-started",
+      "commission_id": "com-68456a580cdd5860",
+      "reserved_cents": 1500
+    },
+    {
+      "step": "S4-worker-a-provider",
+      "model": "openai/gpt-4o-mini",
+      "attempt": 1,
+      "chars": 279,
+      "usage": {
+        "prompt_tokens": 93,
+        "completion_tokens": 54
+      }
+    },
+    {
+      "step": "S4-checkpoint",
+      "recorded_cost_cents": 35,
+      "partial_text_sha256": "f9bf1a25e27106809f6a79863a4418f2900c59e332918d9cc9a9671204ea6906",
+      "digest_unchanged": true
+    },
+    {
+      "step": "S5-revoked",
+      "revoked": true,
+      "refusal": "WalletError: WORLD_AUTHORIZATION_REFUSED: MANDATE_REVOKED",
+      "recorded_still_cents": 35
+    },
+    {
+      "step": "S6-adversarial-pre",
+      "unauthorized_refusal": "WalletError: REPLACEMENT_OWNER_SIGNATURE_INVALID: owner signature verification failed",
+      "stale_refusal": "WalletError: REPLACEMENT_HEAD_STALE: intent does not bind the bundle head hash",
+      "state_unchanged": true
+    },
+    {
+      "step": "S7-replaced",
+      "new_agent": "seller-worker-b",
+      "new_mandate": "mandate_10bac253f08d73d6",
+      "old_mandate_status": "REVOKED",
+      "head_sequence": 3,
+      "owner_signature_prefix": "6d95dc11c5d99e3d"
+    },
+    {
+      "step": "S8-adversarial-post",
+      "replay_refusal": "WalletError: REPLACEMENT_UNKNOWN_WORKER: named old worker is not the current worker",
+      "a_old_token_refusal": "WorldAuthError: WORLD_AUTH_MISMATCH",
+      "a_rejoin_refusal": "WalletError: JOIN_STANDING_NOT_CURRENT: participant already holds a current standing"
+    },
+    {
+      "step": "S9-restart",
+      "replacements_persisted": 1,
+      "a_token_dead": "WorldAuthError: WORLD_AUTH_MISMATCH",
+      "recorded_still_cents": 35,
+      "digest_unchanged": true
+    },
+    {
+      "step": "S10-checkpoint-inspected",
+      "digest_unchanged": true,
+      "recorded_cost_cents": 35
+    },
+    {
+      "step": "S10-worker-b-provider",
+      "model": "meta/llama-4-scout",
+      "attempt": 1,
+      "chars": 626,
+      "usage": {
+        "prompt_tokens": 207,
+        "completion_tokens": 120
+      }
+    },
+    {
+      "step": "S10-completed",
+      "chars": 626,
+      "sha256": "763d873bb0aa4749a1971c51152ff512b0805624ac628fe184e0065fafc60359",
+      "meets_criteria": true
+    },
+    {
+      "step": "S10-checkpoint-used",
+      "shared_distinctive_words": [
+        "activities",
+        "affecting",
+        "assess",
+        "continues",
+        "current",
+        "docking",
+        "fluctuate",
+        "further",
+        "harbor",
+        "height",
+        "impact",
+        "indicates",
+        "level",
+        "measured",
+        "moderate",
+        "navigation",
+        "necessary",
+        "observations",
+        "operations",
+        "water"
+      ],
+      "partial_sha256": "f9bf1a25e27106809f6a79863a4418f2900c59e332918d9cc9a9671204ea6906",
+      "completed_sha256": "763d873bb0aa4749a1971c51152ff512b0805624ac628fe184e0065fafc60359"
+    },
+    {
+      "step": "S10-submitted",
+      "outcome": "accepted",
+      "settlement_id": "stl-5e91e103a9bc7375",
+      "buyer_verification": true,
+      "recorded_cost_cents": 65
+    },
+    {
+      "step": "S11-settled-once",
+      "replayed": true,
+      "settlement_id": "stl-5e91e103a9bc7375",
+      "seller_payout_cents": 565,
+      "buyer_release_cents": 935,
+      "buyer_balance_cents": 1435,
+      "seller_balance_cents": 565
+    },
+    {
+      "step": "S12-restart-final",
+      "recorded_still_cents": 65,
+      "balances_unchanged": true,
+      "single_settlement": true
+    }
+  ],
+  "assertions": {
+    "P1": true,
+    "P2": true,
+    "P3": true,
+    "P4": true,
+    "P5": true,
+    "P6": true,
+    "P7": true,
+    "P8": true,
+    "P9": true,
+    "P10": true,
+    "P11": true
+  },
+  "signed_decision_records": {
+    "seller_session_receipts": [
+      {
+        "action": "commission.report-cost",
+        "decision": "ALLOWED",
+        "signature_prefix": "{'algorithm': 'E"
+      },
+      {
+        "action": "commission.report-cost",
+        "decision": "ALLOWED",
+        "signature_prefix": "{'algorithm': 'E"
+      },
+      {
+        "action": "commission.submit-deliverable",
+        "decision": "ALLOWED",
+        "signature_prefix": "{'algorithm': 'E"
+      }
+    ],
+    "replacement_record": {
+      "participant_id": "seller",
+      "old_agent_id": "seller-worker-a",
+      "old_mandate_id": "mandate_8439d720d1b72c6b",
+      "new_agent_id": "seller-worker-b",
+      "new_mandate_id": "mandate_10bac253f08d73d6",
+      "head_hash": "271aa2461051b7205d7831e4d7f1eeab079026a98160202857d23eab615dee2c",
+      "head_sequence": 3,
+      "delegated_scopes": [
+        "commission.report-cost",
+        "commission.submit-deliverable"
+      ],
+      "owner_signature": "6d95dc11c5d99e3d8612782391f3ea34189a09a06177e9e16cf5d01a2c8bf6bab5f09f795db683eea1de3ce0a138b1f33c2a1023303c7dac4c247a11448bfe05",
+      "old_session_receipts": 2,
+      "replaced_at": "2026-09-28T07:03:45.859218+00:00"
+    },
+    "settlement": {
+      "settlement_id": "stl-5e91e103a9bc7375",
+      "commission_id": "com-68456a580cdd5860",
+      "contract_id": "ctr-8c1f9e0659b1db67",
+      "contract_sha256": "8c1f9e0659b1db6792fe3c45f17874b1ee954212c45883bbd8eeabe5db037cc9",
+      "outcome": "accepted",
+      "recorded_cost_cents": 65,
+      "success_fee_cents": 500,
+      "seller_payout_cents": 565,
+      "buyer_release_cents": 935,
+      "payee": "seller",
+      "simulated": true,
+      "at": "2026-09-28T07:03:47.235967+00:00"
+    }
+  },
+  "work_product": {
+    "partial_a_sha256": "f9bf1a25e27106809f6a79863a4418f2900c59e332918d9cc9a9671204ea6906",
+    "completed_b_sha256": "763d873bb0aa4749a1971c51152ff512b0805624ac628fe184e0065fafc60359",
+    "partial_a_text": "The current tide height at the harbor is measured at 2.43 m. This level indicates a moderate rise in water, affecting both navigation and docking activities. As the tide continues to fluctuate, further observations will be necessary to assess its impact on the harbor operations.",
+    "completed_b_text": "The current tide height at the harbor is measured at 2.43 m. This level indicates a moderate rise in water, affecting both navigation and docking activities. As the tide continues to fluctuate, further observations will be necessary to assess its impact on the harbor operations. With the current measurements, harbor authorities can now make informed decisions regarding vessel movements and docking schedules. The tide height of 2.43 m is expected to influence the harbor's operational efficiency throughout the day. All necessary data has been collected within the allocated 1000c budget, with a total cost of 35c incurred."
+  },
+  "terminal_verdict": "PASS"
+}
