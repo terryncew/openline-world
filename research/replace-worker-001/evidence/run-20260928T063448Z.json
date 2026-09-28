@@ -1,0 +1,78 @@
+{
+  "assertions": {
+    "P1_digest_stable": true,
+    "P2_buyer_authorized_once": true,
+    "P3_checkpoint_preserved": null,
+    "P4_budget_bounded": true,
+    "P5_a_refused": true,
+    "P6_b_joined_public_path": false,
+    "P7_single_settlement": null,
+    "P8_a_post_revocation_spend_zero": true
+  },
+  "commission_id": "com-9bc507547f0e53ce",
+  "digest0": "9019774eb3b3a92a3e92559b9a6d91fbc1bf153b3d238bd35068ac1a17fca242",
+  "protocol": "REPLACE-WORKER-001",
+  "steps": [
+    {
+      "buyer_standing": "current",
+      "seller_agent": "seller-worker-a",
+      "seller_mandate": "mandate_e54bbaaf37a36b95",
+      "step": "S1-join"
+    },
+    {
+      "authorizations": [
+        "buyer",
+        "seller"
+      ],
+      "contract_id": "ctr-9019774eb3b3a92a",
+      "contract_sha256": "9019774eb3b3a92a3e92559b9a6d91fbc1bf153b3d238bd35068ac1a17fca242",
+      "duplicate_authorize_noop": true,
+      "duplicate_authorize_status": "frozen",
+      "step": "S2-frozen"
+    },
+    {
+      "buyer_balance_cents": 500,
+      "commission_id": "com-9bc507547f0e53ce",
+      "reserved_cents": 1500,
+      "step": "S3-started"
+    },
+    {
+      "contract_sha256": "9019774eb3b3a92a3e92559b9a6d91fbc1bf153b3d238bd35068ac1a17fca242",
+      "digest_unchanged": true,
+      "n_cost_events": 2,
+      "recorded_cost_cents": 35,
+      "step": "S4-checkpoint"
+    },
+    {
+      "mandate_id": "mandate_e54bbaaf37a36b95",
+      "refresh_revoked": true,
+      "step": "S5-revoke"
+    },
+    {
+      "a_post_revocation_spend_cents": 0,
+      "recorded_cost_cents_still": 35,
+      "refusal": "WalletError: WORLD_AUTHORIZATION_REFUSED: MANDATE_REVOKED",
+      "step": "S6-refused"
+    },
+    {
+      "agent_id": "seller-worker-b",
+      "mandate_id": "mandate_80550702ebb94db9",
+      "same_owner_root": true,
+      "step": "S7-grant-b"
+    },
+    {
+      "join_error": "WalletError: JOIN_STANDING_NOT_CURRENT: participant already holds a current standing",
+      "joined": false,
+      "step": "S8-join-b"
+    },
+    {
+      "contract_sha256": "9019774eb3b3a92a3e92559b9a6d91fbc1bf153b3d238bd35068ac1a17fca242",
+      "n_settlements": 0,
+      "recorded_cost_cents": 35,
+      "settlement_ids": [],
+      "status": "active",
+      "step": "S10-final"
+    }
+  ],
+  "verdict": "FAIL (mechanism gap): P6 \u2014 the public join path refused Worker B while Worker A's revoked session exists; refusal was 'WalletError: JOIN_STANDING_NOT_CURRENT: participant already holds a current standing'. The commission layer kept the frozen contract and the recorded checkpoint; the session layer has no rejoin path."
+}
