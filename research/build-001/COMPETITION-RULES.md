@@ -15,8 +15,14 @@ does not operate a team.
   are the entry.
 - Hours 48-72: optional sharing, review, and integration. Reuse needs
   the other team's explicit permission and is recorded with
-  attribution (`builds_on`). No permission, no reuse.
+  attribution (`builds_on`). No permission, no reuse. Scoring uses
+  only the frozen hour-48 entries: any post-freeze integration is a
+  separate released build, not a re-scored entry, and does not change
+  acceptance.
 - After hour 72: scoring on the hidden clip, no participant repairs.
+  The hidden clip stays private through evaluation: only the
+  evaluator operates entries on it, using the fixed usability task.
+  Teams never inspect it and cannot patch their entries.
 
 ## Conduct
 
