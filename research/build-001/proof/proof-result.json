@@ -1,0 +1,31 @@
+{
+  "wall_clock_s": 8.1,
+  "peak_rss_mb": 318.6,
+  "output_bytes": 591245,
+  "video": {
+    "w": 720,
+    "h": 1280,
+    "codec": "h264",
+    "pix_fmt": "yuv420p"
+  },
+  "audio": {
+    "codec": "aac"
+  },
+  "duration_s": 14.08,
+  "av_offset_ms": 0.0,
+  "caption_band_px": 64,
+  "bright_px_in_protected_band": 0,
+  "checks": {
+    "width_720": true,
+    "height_1280": true,
+    "video_codec_h264": true,
+    "pix_fmt_yuv420p": true,
+    "audio_codec_aac": true,
+    "audio_present": true,
+    "duration_match_s": true,
+    "av_offset_within_40ms": true,
+    "caption_band_visible": true,
+    "no_caption_in_protected_band": true
+  },
+  "all_checks_pass": true
+}

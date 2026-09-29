@@ -1,0 +1,19 @@
+1
+00:00:00,200 --> 00:00:01,670
+That led to a bigger idea.
+
+2
+00:00:02,400 --> 00:00:05,770
+What if an agent didn't have to rediscover every useful skill?
+
+3
+00:00:06,800 --> 00:00:08,190
+The seller can offer it.
+
+4
+00:00:08,800 --> 00:00:10,240
+The agent can want it.
+
+5
+00:00:11,000 --> 00:00:13,940
+But the buyer decides whether the exact thing gets in.
