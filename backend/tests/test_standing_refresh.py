@@ -14,12 +14,14 @@ import tempfile
 import threading
 import time
 import unittest
+from datetime import timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from custody_client import _Client, _expires  # noqa: E402
+from openline_wallet.clock import utc_now  # noqa: E402
 from openline_wallet.crypto import public_key_hex  # noqa: E402
 from openline_wallet.errors import WalletError  # noqa: E402
 from transport import LocalTransport  # noqa: E402
@@ -66,6 +68,21 @@ class StandingRefreshTests(unittest.TestCase):
         with self.assertRaises(WalletError) as ctx:
             w._require_fresh_standing(session)
         self.assertEqual(ctx.exception.code, "HOLD_STANDING_UNKNOWN")
+
+    def test_freshness_boundary_300s(self):
+        # 299s idle: still fresh, gated actions pass.
+        w = _fresh_world()
+        client, _ = _join(w, "p1")
+        session = _stale(w, "p1", 299)
+        w._require_fresh_standing(session)  # no raise
+        # 301s idle: held, refresh fixes it.
+        _stale(w, "p1", 301)
+        with self.assertRaises(WalletError) as ctx:
+            w._require_fresh_standing(session)
+        self.assertEqual(ctx.exception.code, "HOLD_STANDING_UNKNOWN")
+        out = w.standing_refresh("p1", client.token)
+        self.assertTrue(out["refreshed"])
+        w._require_fresh_standing(session)  # no raise
 
     def test_refresh_after_idle_succeeds_and_acts(self):
         w = _fresh_world()
@@ -187,14 +204,14 @@ class StandingRefreshTests(unittest.TestCase):
         _stale(w, "p1", 400)
         entered = threading.Event()
         proceed = threading.Event()
-        orig = World._active_mandate
+        orig = World._mandate_evidence
 
         def slow(world_self, session):
             entered.set()
             assert proceed.wait(30), "proceed never set"
             return orig(world_self, session)
 
-        World._active_mandate = slow
+        World._mandate_evidence = slow
         errors = []
         try:
             t = threading.Thread(
@@ -210,7 +227,7 @@ class StandingRefreshTests(unittest.TestCase):
             t.join(30)
             self.assertFalse(t.is_alive())
         finally:
-            World._active_mandate = orig
+            World._mandate_evidence = orig
         kind, code = errors[0]
         # The in-flight refresh did not revive anything: refused, revoked.
         self.assertEqual(kind, "wallet")
@@ -230,6 +247,125 @@ class StandingRefreshTests(unittest.TestCase):
         kind, _ = _code_of(lambda: w.standing_refresh("p1", client.token))
         self.assertEqual(kind, "wallet")
         self.assertTrue(w.sessions["p1"].revoked)
+
+
+class StaleBundleTests(unittest.TestCase):
+    """WORLD-REPAIR-002: an expired admitted bundle is STALE evidence, not a
+    dead mandate. standing_refresh must refuse with STANDING_BUNDLE_STALE and
+    mutate nothing -- expiry alone never writes a revocation. Recovery is via
+    authority_refresh with a fresh owner-signed bundle, checked against
+    current authority: it cannot revive an owner-revoked mandate."""
+
+    def test_expired_bundle_refuses_stale_no_mutation(self):
+        w = _fresh_world()
+        client, _ = _join(w, "p1")
+        session = w.sessions["p1"]
+        session.authority_bundle = client.wallet.export_bundle(
+            now=utc_now() - timedelta(seconds=601))
+        checked_before = session.standing_checked_at
+        kind, code = _code_of(
+            lambda: w.standing_refresh("p1", client.token))
+        self.assertEqual((kind, code), ("wallet", "STANDING_BUNDLE_STALE"))
+        self.assertFalse(session.revoked)  # never revoked
+        self.assertEqual(session.standing_checked_at, checked_before)
+
+    def test_stale_refusal_leaves_snapshot_byte_identical(self):
+        import hashlib
+        w = _fresh_world()
+        client, _ = _join(w, "p1")
+        session = w.sessions["p1"]
+        session.authority_bundle = client.wallet.export_bundle(
+            now=utc_now() - timedelta(seconds=601))
+        w.save()
+        before = hashlib.sha256(
+            w._snapshot_path().read_bytes()).hexdigest()
+        kind, code = _code_of(
+            lambda: w.standing_refresh("p1", client.token))
+        self.assertEqual(code, "STANDING_BUNDLE_STALE")
+        after = hashlib.sha256(
+            w._snapshot_path().read_bytes()).hexdigest()
+        self.assertEqual(before, after)  # no save happened
+
+    def test_bundle_ttl_boundary(self):
+        # 599s-old bundle still verifies: refresh succeeds.
+        w = _fresh_world()
+        client, _ = _join(w, "p1")
+        session = w.sessions["p1"]
+        session.authority_bundle = client.wallet.export_bundle(
+            now=utc_now() - timedelta(seconds=599))
+        _stale(w, "p1", 400)
+        out = w.standing_refresh("p1", client.token)
+        self.assertTrue(out["refreshed"])
+        # 601s-old bundle is expired: STALE refusal.
+        session.authority_bundle = client.wallet.export_bundle(
+            now=utc_now() - timedelta(seconds=601))
+        kind, code = _code_of(
+            lambda: w.standing_refresh("p1", client.token))
+        self.assertEqual((kind, code), ("wallet", "STANDING_BUNDLE_STALE"))
+
+    def test_combined_stale_standing_and_stale_bundle(self):
+        w = _fresh_world()
+        client, _ = _join(w, "p1")
+        session = w.sessions["p1"]
+        session.authority_bundle = client.wallet.export_bundle(
+            now=utc_now() - timedelta(seconds=601))
+        _stale(w, "p1", 400)
+        kind, code = _code_of(
+            lambda: w.standing_refresh("p1", client.token))
+        self.assertEqual((kind, code), ("wallet", "STANDING_BUNDLE_STALE"))
+        self.assertFalse(session.revoked)
+
+    def test_stale_recovery_via_fresh_evidence_no_rejoin(self):
+        w = _fresh_world()
+        client, _ = _join(w, "p1")
+        session = w.sessions["p1"]
+        before = (session.participant_id, session.mandate_id,
+                  tuple(session.mandate_scopes), session.owner_principal_id,
+                  session.agent_id)
+        # Bundle expired while idle: the designed recovery path destroyed
+        # the session before WORLD-REPAIR-002. Now it refuses as stale...
+        session.authority_bundle = client.wallet.export_bundle(
+            now=utc_now() - timedelta(seconds=601))
+        kind, code = _code_of(
+            lambda: w.standing_refresh("p1", client.token))
+        self.assertEqual(code, "STANDING_BUNDLE_STALE")
+        self.assertFalse(session.revoked)
+        # ...fresh evidence over the authenticated authority_refresh path...
+        refresh_out = w.authority_refresh(
+            "p1", client.token, client.wallet.export_bundle())
+        self.assertFalse(refresh_out["revoked"])
+        self.assertFalse(session.revoked)
+        # ...and the same session refreshes and acts, no rejoin.
+        out = w.standing_refresh("p1", client.token)
+        self.assertTrue(out["refreshed"])
+        after = (session.participant_id, session.mandate_id,
+                 tuple(session.mandate_scopes), session.owner_principal_id,
+                 session.agent_id)
+        self.assertEqual(before, after)
+        w._require_fresh_standing(session)  # no raise
+        w._assert_standing(session)  # no raise
+
+    def test_fresh_evidence_cannot_revive_revoked_mandate(self):
+        w = _fresh_world()
+        client, _ = _join(w, "p1")
+        session = w.sessions["p1"]
+        # Bundle expired while idle...
+        session.authority_bundle = client.wallet.export_bundle(
+            now=utc_now() - timedelta(seconds=601))
+        kind, code = _code_of(
+            lambda: w.standing_refresh("p1", client.token))
+        self.assertEqual(code, "STANDING_BUNDLE_STALE")
+        # ...and the owner revoked while the participant was away. The
+        # fresh bundle now shows REVOKED: it must mark revoked, not
+        # revive.
+        client.wallet.revoke(client.mandate_id)
+        refresh_out = w.authority_refresh(
+            "p1", client.token, client.wallet.export_bundle())
+        self.assertTrue(refresh_out["revoked"])
+        self.assertTrue(session.revoked)
+        kind, code = _code_of(
+            lambda: w.standing_refresh("p1", client.token))
+        self.assertEqual(code, "JOIN_STANDING_NOT_CURRENT")
 
 
 if __name__ == "__main__":

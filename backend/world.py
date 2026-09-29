@@ -757,24 +757,46 @@ class World:
                 "standing cannot be established as current: "
                 "re-check standing before this action")
 
+    def _mandate_evidence(self, session: ParticipantSession) -> tuple[str, Any]:
+        """Split the authority evidence behind a session into three cases.
+
+        Returns (status, timeline):
+        - "ok": the admitted bundle verifies AND the mandate is ACTIVE and
+          unexpired. timeline is the verified timeline.
+        - "stale": the admitted bundle fails to verify (including expired
+          export). The evidence is too old to judge anything: the caller
+          must refuse WITHOUT mutating authority state. Expiry alone never
+          writes a revocation.
+        - "dead": the bundle verifies but the mandate is revoked, absent,
+          or expired. The owner's current word is against the session.
+
+        Added by WORLD-REPAIR-002: the freshness repair (f940132)
+        conflated "stale" with "dead" and terminally revoked sessions
+        whose bundle had merely expired.
+        """
+        try:
+            _, timeline = verify_bundle(session.authority_bundle)
+        except WalletError:
+            return "stale", None
+        mandate = timeline.mandates.get(session.mandate_id)
+        if mandate is None or mandate.get("status") != "ACTIVE":
+            return "dead", timeline
+        try:
+            if parse_time(mandate["expires_at"]) <= utc_now():
+                return "dead", timeline
+        except WalletError:
+            return "dead", timeline
+        return "ok", timeline
+
     def _active_mandate(self, session: ParticipantSession) -> dict[str, Any] | None:
         """The session's mandate as of the latest admitted authority bundle.
         None when the mandate is revoked, absent, expired, or the bundle no
         longer verifies. The admitted bundle -- not any local copy -- is the
         source of truth."""
-        try:
-            _, timeline = verify_bundle(session.authority_bundle)
-        except WalletError:
+        status, timeline = self._mandate_evidence(session)
+        if status != "ok":
             return None
-        mandate = timeline.mandates.get(session.mandate_id)
-        if mandate is None or mandate.get("status") != "ACTIVE":
-            return None
-        try:
-            if parse_time(mandate["expires_at"]) <= utc_now():
-                return None
-        except WalletError:
-            return None
-        return mandate
+        return timeline.mandates.get(session.mandate_id)
 
     def _assert_standing(self, session: ParticipantSession) -> None:
         """Layer-1 standing re-check before a consequential world action.
@@ -2935,18 +2957,36 @@ TRACK A -- owner delegation and the deterministic automation worker:
         committed just before a revocation landed, every gated action
         re-checks revoked state via `_assert_standing` -- a refresh can
         never un-revoke.
+
+        Stale vs dead (WORLD-REPAIR-002): an admitted bundle that fails
+        to verify (including expired export) is STALE evidence, not a dead
+        mandate. Refresh refuses with STANDING_BUNDLE_STALE and mutates
+        NOTHING -- expiry alone never writes a revocation. The participant
+        may then supply fresh evidence through the authenticated
+        `authority_refresh` path (owner-signed bundle, checked against
+        current authority; it cannot revive an owner-revoked, retired, or
+        expired mandate). Only a VERIFYING bundle whose mandate is
+        revoked, absent, or expired marks the session revoked, mirroring
+        `authority_refresh`.
         """
         with self._lock:
             session = self._auth(participant_id, token)
             if session.revoked:
                 raise WalletError("JOIN_STANDING_NOT_CURRENT",
                                   "mandate revoked: refresh refused")
-            mandate = self._active_mandate(session)
-            if mandate is None:
-                # Dead mandate (revoked, absent, or expired in the
-                # admitted bundle): mark revoked, mirroring
-                # authority_refresh. Never extends expiry, never
-                # widens scope, never revives.
+            status, _timeline = self._mandate_evidence(session)
+            if status == "stale":
+                # Expired/unverifiable admitted bundle: refuse as stale.
+                # No mutation, no save: expiry alone never writes a
+                # revocation. Fresh evidence may be supplied via
+                # authority_refresh.
+                raise WalletError("STANDING_BUNDLE_STALE",
+                                  "admitted bundle expired or unverifiable: "
+                                  "supply fresh evidence")
+            if status == "dead":
+                # Verifying bundle, dead mandate (revoked, absent, or
+                # expired): mark revoked, mirroring authority_refresh.
+                # Never extends expiry, never widens scope, never revives.
                 session.revoked = True
                 self.save()
                 raise WalletError("JOIN_STANDING_NOT_CURRENT",

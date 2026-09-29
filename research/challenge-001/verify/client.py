@@ -218,7 +218,8 @@ def main() -> int:
     ap.add_argument("--cmd", required=True,
                     choices=["create", "contribute", "evaluate", "revoke",
                              "revoke-then-contribute", "register-cascade",
-                             "correct", "board"])
+                             "correct", "board", "refresh-standing",
+                             "refresh-authority"])
     ap.add_argument("--kind", default="patch")
     ap.add_argument("--file")
     ap.add_argument("--title", default="")
@@ -322,6 +323,23 @@ def main() -> int:
             result["revoked"] = True
             result["revoke_latency_s"] = latency
             result["refresh"] = out
+
+        elif args.cmd == "refresh-standing":
+            # Prove possession of the existing session key and refresh
+            # standing after inactivity. No new bundle, no rejoin,
+            # nothing granted. If the admitted bundle has expired the
+            # server refuses with STANDING_BUNDLE_STALE: run
+            # refresh-authority to supply fresh evidence, then retry.
+            out = client.standing_refresh()
+            result["standing_refresh"] = out
+
+        elif args.cmd == "refresh-authority":
+            # Supply fresh evidence: re-export the owner-signed bundle
+            # and submit it over the authenticated authority/refresh
+            # path. Checked against current authority; cannot revive an
+            # owner-revoked, retired, or expired mandate.
+            out = client.refresh()
+            result["authority_refresh"] = out
 
         elif args.cmd == "revoke-then-contribute":
             # Revoke and contribute in ONE process so the presentation

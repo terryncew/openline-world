@@ -450,16 +450,51 @@ class ParticipantClient:
         after inactivity, without a new bundle and without rejoining.
 
         The server re-checks current authority at the commit point: a
-        revoked, retired, or expired mandate is refused. Nothing is
-        granted, extended, or widened -- only the standing check time is
-        re-recorded. Raises ClientError with the server code
-        (WORLD_AUTH_MISMATCH / JOIN_STANDING_NOT_CURRENT) on refusal.
+        revoked, retired, or expired mandate is refused
+        (JOIN_STANDING_NOT_CURRENT). An admitted bundle that fails to
+        verify (including expired export) is refused as STANDING_BUNDLE_STALE
+        -- expiry alone never writes a revocation; supply fresh evidence
+        with refresh() and retry. Nothing is granted, extended, or
+        widened -- only the standing check time is re-recorded. Raises
+        ClientError with the server code on refusal.
         """
         participant_id, token = self._auth()
         return self._post(
             "/api/world/standing/refresh",
             {"participant_id": participant_id, "token": token},
         )
+
+    def recover_standing(self) -> dict[str, Any]:
+        """Recover from an idle session whose admitted bundle has expired.
+
+        Tries standing_refresh(); if the server answers STANDING_BUNDLE_STALE,
+        supplies fresh evidence via refresh() (re-exported owner-signed
+        bundle over the authenticated authority/refresh path) and retries
+        standing_refresh() once. Returns the final refresh result plus a
+        "recovered_via" marker ("direct" or "fresh_evidence").
+
+        Fresh evidence is still checked against current authority: an
+        owner-revoked, retired, or expired mandate cannot be revived --
+        those refusals propagate unchanged. No retirement, no rejoin.
+        """
+        participant_id, token = self._auth()
+        try:
+            out = self._post(
+                "/api/world/standing/refresh",
+                {"participant_id": participant_id, "token": token},
+            )
+            out["recovered_via"] = "direct"
+            return out
+        except ClientError as exc:
+            if exc.code != "STANDING_BUNDLE_STALE":
+                raise
+        self.refresh()
+        out = self._post(
+            "/api/world/standing/refresh",
+            {"participant_id": participant_id, "token": token},
+        )
+        out["recovered_via"] = "fresh_evidence"
+        return out
 
     def revoke(self) -> tuple[float, dict[str, Any]]:
         """Revoke the worker mandate locally, export, and push the new head to
