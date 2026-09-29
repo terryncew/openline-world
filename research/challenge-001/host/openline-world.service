@@ -1,0 +1,37 @@
+# OpenLine World backend (CHALLENGE-001 hosted receiver)
+#
+# One path, kept smallest: this unit runs the Python backend on
+# loopback only. TLS termination is Caddy's own distro unit
+# (caddy.service), which this unit only wants — not manages.
+#
+# Install: copy to /etc/systemd/system/openline-world.service,
+#          systemctl daemon-reload, then enable + start.
+[Unit]
+Description=OpenLine World backend (CHALLENGE-001 hosted receiver)
+Documentation=file:///opt/openline-world/research/challenge-001/host/ops-runbook.md
+After=network.target
+Wants=caddy.service
+
+[Service]
+Type=simple
+User=openline
+Group=openline
+WorkingDirectory=/opt/openline-world
+EnvironmentFile=/etc/openline-world/env
+ExecStart=/usr/bin/python3 /opt/openline-world/backend/server.py
+# Graceful shutdown: SIGTERM lets serve_forever exit; the snapshot is
+# written on every mutation, so no explicit flush is required.
+KillSignal=SIGTERM
+TimeoutStopSec=30
+Restart=on-failure
+RestartSec=5
+
+# Hardening (least that still works; keep it that way)
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/openline-world
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

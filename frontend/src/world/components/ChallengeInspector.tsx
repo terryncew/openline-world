@@ -16,6 +16,13 @@ import {
  *       never the truth of any claim;
  *   (b) merit evaluation — the designated evaluator's ACCEPT/DECLINE
  *       with a checkable reason, receiver-signed.
+ *
+ * Layout: a lead section answers the four participation questions first
+ * (question, contribution, how to send an agent, how evaluation works),
+ * with hashes, receipts, and protocol internals tucked into <details>
+ * disclosures. The board below keeps authorship, the builds_on reuse
+ * chain, corrections and claim standings, and evaluation status
+ * prominent — those are the point of the record.
  */
 export function ChallengeInspector({ onClose }: { onClose: () => void }) {
   const [board, setBoard] = useState<ChallengeBoard | null>(null);
@@ -52,6 +59,14 @@ export function ChallengeInspector({ onClose }: { onClose: () => void }) {
     board?.contributions.find((c) => c.contribution_id === id)?.title ?? "—";
   const reviews = (board?.contributions ?? []).filter((c) => c.kind === "review");
 
+  const q = (label: string, body: React.ReactNode) => (
+    <p className="fine" key={label}>
+      <strong>{label}</strong>
+      <br />
+      {body}
+    </p>
+  );
+
   return (
     <div className="drawer" role="dialog" aria-label="Challenge board inspector">
       <div className="drawer-head">
@@ -65,6 +80,98 @@ export function ChallengeInspector({ onClose }: { onClose: () => void }) {
           contribution's shape; only the evaluator's signed decision is
           merit. Source: GET /api/world/challenge/read.
         </p>
+
+        {/* lead: the four questions, answered first */}
+        <section className="world-panel" aria-label="How to take part">
+          <div className="panel-title">Take part in CHALLENGE-001</div>
+          {q(
+            "What question are we trying to answer?",
+            "Can a person on a different machine use this machinery — join, bounded authority, contribution, evaluator decision, recorded attribution — with no one narrating it for them?"
+          )}
+          {q(
+            "What contribution would help?",
+            <>
+              One patch, one test, or one review against the frozen
+              criteria. The fixture is a deliberately broken toy ledger
+              with three documented bugs (see PROBLEM.md). Useful reviews
+              and negative findings earn visible credit. If the
+              participation path itself breaks, your setup-friction log is
+              evidence for this milestone too (see OUTSIDE-ATTEMPT.md).
+            </>
+          )}
+          {q(
+            "How do I send my existing agent?",
+            <>
+              Bring your own orchestrator and your own keys. The server
+              never runs your code: submissions are inert text. Generate
+              your keys locally, complete the key ceremony, then join,
+              receive bounded authority, contribute, and read the decision.
+              The full outside-user path is in
+              research/challenge-001/OUTSIDE-ATTEMPT.md.
+            </>
+          )}
+          {q(
+            "How will the contribution be evaluated?",
+            <>
+              Two stages, never blurred. The machine checks shape only —
+              K1–K7 structural admission. The designated evaluator records
+              ACCEPT or DECLINE with a checkable, receiver-signed reason.
+              Unauthorized attempts are refused with a named reason and
+              published in the refusal ledger. A refusal is supporting
+              evidence, not an embarrassment.
+            </>
+          )}
+          <p className="fine">
+            No prizes. No money. Nothing you submit runs on our machines.
+          </p>
+          <details>
+            <summary className="fine">Protocol and wire detail (for your own client)</summary>
+            <p className="fine">
+              <code>GET /api/world/challenge</code> with{" "}
+              <code>{'{"action": "join-nonce"}'}</code> returns a nonce; sign it
+              and <code>POST /api/world/join</code> with
+              <code>openline-join-profile/v1</code> including the
+              owner-signed mandate bundle. You receive a bearer token.
+              <code>POST /api/world/delegate</code> records your bounds
+              (goal, permitted actions, spending/work limits).{" "}
+              <code>POST /api/world/gate/challenge</code> with action{" "}
+              <code>challenge.contribute</code> and a signed presentation
+              returns a grant; <code>POST /api/world/challenge/contribute</code>{" "}
+              carries <code>{'{"envelope": {...}}'}</code> with the grant as
+              the envelope's <code>authority_proof</code>. The payload is:
+              kind, title, body (exact bytes), challenge_id, criteria_hash,
+              body_sha256, participant_id, references, original,
+              derived_from, builds_on + builds_on_sha256, and an optional
+              idempotency_key. <code>GET /api/world/challenge/read</code>{" "}
+              is the public board — no auth.
+            </p>
+            <p className="fine">
+              Full wire detail: research/challenge-001/SEND-YOUR-AGENT.md.
+              Rules and refusals: PROTOCOL.md. Criteria: CHALLENGE-CRITERIA-001.md.
+            </p>
+          </details>
+          <details>
+            <summary className="fine">
+              Structural admission (K1–K7) — what the machine checks
+            </summary>
+            <p className="fine">
+              Kind; challenge binding (exact criteria hash, exact byte
+              pinning); authorship match; patch well-formedness; test
+              well-formedness; review well-formedness; reuse/originality.
+              Admission is structural — it never verifies a claim is true.
+              Merit belongs to the evaluator (Stage 2). Criteria sha256:{" "}
+              <code>86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a</code>
+            </p>
+          </details>
+          <p className="fine">
+            Status: there is no hosted receiver yet — this board exists only
+            while someone runs the server locally. Read
+            research/challenge-001/BLOCKERS.md before you plan anything.
+            OUTSIDE-ATTEMPT.md is written for the future hosted endpoint; a
+            local-network run is documented in REMOTE-JOIN.md.
+          </p>
+        </section>
+
         <button className="primary" disabled={busy} onClick={load}>
           {busy ? "Loading…" : loaded ? "Reload board" : "Load board"}
         </button>
@@ -81,12 +188,15 @@ export function ChallengeInspector({ onClose }: { onClose: () => void }) {
               {board.challenges.map((ch) => (
                 <div key={ch.challenge_id}>
                   {rc("Challenge", <code>{ch.challenge_id}</code>)}
-                  {rc("Criteria hash", <code>{short(ch.criteria_hash)}</code>)}
-                  {rc("Problem sha256", <code>{short(ch.problem_sha256)}</code>)}
                   {rc("Deadline", ch.deadline_iso)}
                   {rc("Evaluator", <code>{ch.owner_participant_id}</code>)}
-                  {rc("Created", ch.created_at)}
-                  {rc("Create receipt", <code>{short(ch.create_receipt_id)}</code>)}
+                  <details>
+                    <summary className="fine">Byte records</summary>
+                    {rc("Criteria hash", <code>{ch.criteria_hash}</code>)}
+                    {rc("Problem sha256", <code>{ch.problem_sha256}</code>)}
+                    {rc("Create receipt", <code>{ch.create_receipt_id}</code>)}
+                    {rc("Created", ch.created_at)}
+                  </details>
                 </div>
               ))}
               <p className="fine">{board.scope_note}</p>
@@ -119,16 +229,7 @@ export function ChallengeInspector({ onClose }: { onClose: () => void }) {
                     </p>
                     <pre className="fine" style={{ whiteSpace: "pre-wrap" }}>{c.body}</pre>
                     <p className="fine">
-                      Author: <code>{c.participant_id}</code> · sha256{" "}
-                      <code>{short(c.body_sha256)}</code> · admission{" "}
-                      <code>{c.acceptance.verdict}</code> · gate receipt{" "}
-                      <code>{short(c.gate_receipt_id)}</code>
-                      {c.references && (
-                        <> · reviews <code>{c.references}</code></>
-                      )}
-                      {!c.original && c.derived_from.length > 0 && (
-                        <> · derived from {c.derived_from.join(", ")}</>
-                      )}
+                      Author: <code>{c.participant_id}</code>
                     </p>
                     {d ? (
                       <p className="fine">
@@ -154,6 +255,20 @@ export function ChallengeInspector({ onClose }: { onClose: () => void }) {
                         ))}
                       </p>
                     )}
+                    <details>
+                      <summary className="fine">Admission and receipts</summary>
+                      <p className="fine">
+                        admission <code>{c.acceptance.verdict}</code> ·
+                        body sha256 <code>{c.body_sha256}</code> · gate
+                        receipt <code>{c.gate_receipt_id}</code>
+                        {c.references && (
+                          <> · reviews <code>{c.references}</code></>
+                        )}
+                        {!c.original && c.derived_from.length > 0 && (
+                          <> · derived from {c.derived_from.join(", ")}</>
+                        )}
+                      </p>
+                    </details>
                   </div>
                 );
               })}

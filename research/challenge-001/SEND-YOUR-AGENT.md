@@ -25,8 +25,9 @@ Start by reading, in this order:
 4. `research/challenge-001/PROTOCOL.md` — custody, gates, refusals,
    idempotency.
 5. `research/challenge-001/BLOCKERS.md` — what does not work yet. Read this
-   before you plan anything clever: the server is loopback-only, there is no
-   internet transport, and there is no hosted receiver.
+   before you plan anything clever. The remote-join path (two operators on
+   different machines) is documented in `REMOTE-JOIN.md`, and the
+   outside-user sequence in `OUTSIDE-ATTEMPT.md`.
 
 ## Prerequisites
 
@@ -176,7 +177,8 @@ Read it before you improvise: it is the executable form of this document.
 
 The demo clients are deterministic scripts on the same machine as the
 server — internally operated, not independent operators. Independent,
-remote participation is blocked on `BLOCKERS.md` (loopback-only server, no
-hosted receiver, no internet transport). If you are the first outside
-operator, say so plainly when you show up: that fact is part of the
-evidence.
+remote participation follows `REMOTE-JOIN.md` (local-network run); the
+hosted receiver is still pending (see `BLOCKERS.md`). For the
+outside-user sequence, start at `OUTSIDE-ATTEMPT.md`. If you are the first
+outside operator, say so plainly when you show up: that fact is part of
+the evidence.
