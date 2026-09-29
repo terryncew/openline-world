@@ -205,6 +205,9 @@ from commission import (
 from newsroom_chapter import NewsroomChapter
 from package_acceptance import canonical_package_bytes, evaluate_package
 from report_acceptance import evaluate_report
+from challenge_acceptance import (
+    CHALLENGE_ID, CRITERIA_HASH, evaluate_contribution)
+from challenge_chapter import ChallengeChapter
 from openline_wallet.clock import parse_time, utc_now
 from openline_wallet.crypto import (
     private_key_hex,
@@ -228,6 +231,7 @@ TASK_KINDS = {
     "tidy-notes": "notes.write",
     "summarize": "notes.read",
     "draft": "draft.write",
+    "challenge-contribute": "challenge.contribute",
 }
 # Scopes a join profile may request in this preview. All map to harmless,
 # evaluation-only actions through the participant's own gate.
@@ -241,7 +245,8 @@ TASK_KINDS = {
 # participant's own gate; only an ALLOWED verdict records anything.
 SUPPORTED_SCOPES = {"notes.read", "notes.write", "draft.write", "claimgraph.correct",
                     "newsroom.review", "commission.report-cost",
-                    "commission.submit-deliverable"}
+                    "commission.submit-deliverable",
+                    "challenge.contribute", "challenge.admin"}
 # Parties that transaction terms may name as required authorizers. Both
 # resolve to the listing's poster session: "offerer" for offer listings,
 # "needer" for need listings -- side-specific spellings of the same role,
@@ -453,6 +458,12 @@ class World:
         # Import and review are gated below through the participant's own
         # gate ("newsroom.review") -- never free writes.
         self.newsroom = NewsroomChapter()
+        # The challenge chapter: CHALLENGE-001 contributions, evaluator
+        # decisions, and the refusal ledger. DURABLE: written into the
+        # world snapshot by save() and restored by _load_snapshot()
+        # (unlike the newsroom and claim-graph chapters, which are
+        # session-scoped and intentionally left behind on reset).
+        self.challenge_chapter = ChallengeChapter()
         # Message carriage only: presence/event notices travel as versioned
         # envelopes through this transport. Gate evaluations, wallets,
         # receipts, and transaction records stay in this module -- the
@@ -1680,6 +1691,357 @@ TRACK A -- owner delegation and the deterministic automation worker:
         """The newsroom's inspectable state, from recorded data only."""
         return self.newsroom.describe()
 
+    # -- newsroom: the small desk ---------------------------------------------
+    def newsroom_describe(self) -> dict[str, Any]:
+        """The newsroom's inspectable state, from recorded data only."""
+        return self.newsroom.describe()
+
+    # -- challenge (CHALLENGE-001): the challenge board ------------------------
+    # Public read; gated contribute; evaluator-only evaluate. Contributions
+    # are inert text and are never executed anywhere on this server.
+    def challenge_describe(self) -> dict[str, Any]:
+        """The challenge board: frozen problem reference, contributions with
+        authorship, evaluator decisions, reviews with credit, the refusal
+        ledger, and receipt links. Public: no auth required."""
+        board = self.challenge_chapter.describe()
+        board["challenge_id"] = CHALLENGE_ID
+        board["criteria_hash"] = CRITERIA_HASH
+        board["scope_note"] = (
+            "Structural admission (K1-K7) verifies a contribution's shape, "
+            "not the truth of its claims. Evaluator ACCEPT/DECLINE is the "
+            "designated evaluator's decision under the frozen criteria. "
+            "Submitted code is never executed on this server.")
+        return board
+
+    @staticmethod
+    def _clean_challenge_spec(spec: Any) -> dict[str, Any]:
+        """Validate a challenge-create spec. Only the frozen CHALLENGE-001
+        may be created through this path: the server-side acceptance code
+        hardcodes its id and criteria hash, so a mismatched spec is an
+        input error, never a silent second challenge."""
+        if not isinstance(spec, dict):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "spec")
+        challenge_id = spec.get("challenge_id")
+        if challenge_id != CHALLENGE_ID:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "spec.challenge_id")
+        criteria_hash = spec.get("criteria_hash")
+        if criteria_hash != CRITERIA_HASH:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "spec.criteria_hash")
+        problem_sha256 = spec.get("problem_sha256")
+        if (not isinstance(problem_sha256, str)
+                or re.fullmatch(r"[0-9a-f]{64}", problem_sha256) is None):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "spec.problem_sha256")
+        deadline_iso = spec.get("deadline_iso")
+        try:
+            parse_time(deadline_iso, "deadline")
+        except WalletError:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "spec.deadline_iso")
+        return {"challenge_id": challenge_id, "criteria_hash": criteria_hash,
+                "problem_sha256": problem_sha256, "deadline_iso": deadline_iso}
+
+    def challenge_create(self, participant_id: Any, token: Any, spec: Any,
+                         presentation: Any = None,
+                         idempotency_key: Any = None) -> dict[str, Any]:
+        """Create the frozen challenge. Requires the challenge.admin scope:
+        the owner's worker designates itself the evaluator. The create
+        receipt is receiver-signed."""
+        session = self._auth(participant_id, token)
+        key = self._clean_idempotency_key(idempotency_key)
+        clean = self._clean_challenge_spec(spec)
+
+        def execute() -> dict[str, Any]:
+            self._require_fresh_standing(session)
+            receipt = self._require_allowed(
+                self._evaluate_presentation(session, "challenge.admin",
+                                            presentation))
+            try:
+                challenge = self.challenge_chapter.create(
+                    challenge_id=clean["challenge_id"],
+                    problem_sha256=clean["problem_sha256"],
+                    criteria_hash=clean["criteria_hash"],
+                    deadline_iso=clean["deadline_iso"],
+                    owner_participant_id=session.participant_id,
+                    gate_receipt=receipt,
+                    created_by=session.display_name)
+            except KeyError:
+                raise WalletError("CHALLENGE_ALREADY_EXISTS",
+                                  clean["challenge_id"])
+            self.events.emit(
+                source="world", kind="challenge", provenance="receiver-signed",
+                summary=(f"{session.display_name} created {clean['challenge_id']} "
+                         "and is its designated evaluator."),
+                detail={"challenge_id": clean["challenge_id"],
+                        "evaluator": session.participant_id,
+                        "receipt_id": _receipt_id(receipt)},
+            )
+            self.save()
+            return {"decision": "ALLOWED",
+                    "receipt_id": _receipt_id(receipt),
+                    "reason_codes": list(receipt.get("reason_codes", []) or []),
+                    "challenge": challenge, "replayed": False}
+
+        result, replayed = self._idempotent(
+            session.participant_id, "challenge.create",
+            clean["challenge_id"], key, execute)
+        result = dict(result)
+        result["replayed"] = replayed
+        return result
+
+    @staticmethod
+    def _clean_challenge_contribution(contribution: Any) -> dict[str, Any]:
+        """Validate a contribution and pin its bytes EXACTLY as submitted:
+        no stripping or normalization. The declared sha256 names the stored
+        bytes.
+
+        A contributor-supplied `attestation` (e.g. a self-signed "APPROVED")
+        is accepted on the wire but DISCARDED here: it is not canonicalized,
+        not hashed, not stored, not evaluated, and never appears in any
+        acceptance record. It authorizes nothing; the contribution is
+        evaluated on its merits only.
+        """
+        if not isinstance(contribution, dict):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "contribution")
+        kind = contribution.get("kind")
+        if kind not in ("patch", "test", "review"):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "contribution.kind")
+        title = WorldRules.moderate_text(contribution.get("title"), 120, "title")
+        body = contribution.get("body")
+        if (not isinstance(body, str) or not body.strip()
+                or len(body) > 16384):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "contribution.body")
+        challenge_id = contribution.get("challenge_id")
+        if not isinstance(challenge_id, str) or not challenge_id:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "contribution.challenge_id")
+        criteria_hash = contribution.get("criteria_hash")
+        if not isinstance(criteria_hash, str) or not criteria_hash:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "contribution.criteria_hash")
+        participant_id = contribution.get("participant_id")
+        if not isinstance(participant_id, str) or not participant_id:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "contribution.participant_id")
+        references = contribution.get("references") or ""
+        if not isinstance(references, str):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "contribution.references")
+        original = contribution.get("original", True)
+        if not isinstance(original, bool):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "contribution.original")
+        derived_from = contribution.get("derived_from") or []
+        if (not isinstance(derived_from, list) or len(derived_from) > 8
+                or any(not isinstance(s, str) or len(s) > 200
+                       for s in derived_from)):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "contribution.derived_from")
+        declared = contribution.get("body_sha256")
+        if (not isinstance(declared, str)
+                or re.fullmatch(r"[0-9a-f]{64}", declared) is None):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "contribution.body_sha256")
+        pinned = hashlib.sha256(body.encode("utf-8")).hexdigest()
+        # NOTE: contribution.get("attestation") is deliberately unread here.
+        return {"kind": kind, "title": title, "body": body,
+                "challenge_id": challenge_id, "criteria_hash": criteria_hash,
+                "participant_id": participant_id, "references": references,
+                "original": original, "derived_from": derived_from,
+                "declared_sha256": declared, "pinned_sha256": pinned}
+
+    def challenge_contribute(self, participant_id: Any, token: Any,
+                             contribution: Any, presentation: Any = None,
+                             idempotency_key: Any = None) -> dict[str, Any]:
+        """Submit a challenge contribution (inert text, never executed).
+
+        Inside the gated execution, in order:
+        1. RECEIVER GATE: the worker-signed presentation for
+           "challenge.contribute" is evaluated at the server receiver. A
+           STOPPED verdict is recorded in the refusal ledger with its
+           named reason codes and returned as-is.
+        2. CHALLENGE EXISTS: unknown challenge id is an input error.
+        3. DEADLINE: past the frozen deadline -> refused CHALLENGE_CLOSED.
+        4. BYTE BINDING: declared sha256 must equal the pinned sha256,
+           else refused CHALLENGE_HASH_MISMATCH.
+        5. STRUCTURAL ADMISSION: frozen K1-K7
+           (backend/challenge_acceptance.py) on the pinned bytes, else
+           refused CHALLENGE_ADMISSION_FAILED naming the failed rules.
+        """
+        session = self._auth(participant_id, token)
+        key = self._clean_idempotency_key(idempotency_key)
+        clean = self._clean_challenge_contribution(contribution)
+        challenge = self.challenge_chapter.challenges.get(clean["challenge_id"])
+        if challenge is None:
+            raise WalletError("CHALLENGE_UNKNOWN", clean["challenge_id"])
+
+        def execute() -> dict[str, Any]:
+            self._require_fresh_standing(session)
+            receipt = self._evaluate_presentation(
+                session, "challenge.contribute", presentation)
+            receipt_id = _receipt_id(receipt)
+            gate_codes = list(receipt.get("reason_codes", []) or [])
+            binding = {"declared_sha256": clean["declared_sha256"],
+                       "pinned_sha256": clean["pinned_sha256"],
+                       "match": clean["declared_sha256"] == clean["pinned_sha256"]}
+            acceptance = evaluate_contribution(
+                kind=clean["kind"], title=clean["title"], body=clean["body"],
+                challenge_id=clean["challenge_id"],
+                criteria_hash=clean["criteria_hash"],
+                declared_sha256=clean["declared_sha256"],
+                participant_id=clean["participant_id"],
+                expected_author=session.participant_id,
+                references=clean["references"],
+                original=clean["original"],
+                derived_from=clean["derived_from"],
+                existing_ids=frozenset(
+                    self.challenge_chapter.contribution_ids()))
+
+            def refused(codes: list[str], note: str = "") -> dict[str, Any]:
+                entry = self.challenge_chapter.refuse(
+                    participant_id=session.participant_id,
+                    challenge_id=clean["challenge_id"], contribution_id=None,
+                    reason_codes=codes, gate_receipt=receipt, note=note)
+                self.save()
+                return {"decision": "STOPPED", "receipt_id": receipt_id,
+                        "reason_codes": codes, "binding": binding,
+                        "acceptance": acceptance, "contribution_id": None,
+                        "refusal_id": entry["refusal_id"], "replayed": False}
+
+            if receipt["decision"] != "ALLOWED":
+                # Gate stopped it (e.g. MANDATE_REVOKED,
+                # ACTION_OUTSIDE_MANDATE): the signed refusal is the
+                # response; the refusal ledger records it.
+                return refused(gate_codes, "gate stopped the contribution")
+            try:
+                closed = parse_time(challenge["deadline_iso"]) <= utc_now()
+            except WalletError:
+                closed = True
+            if closed:
+                return refused(gate_codes + ["CHALLENGE_CLOSED"],
+                               "past the frozen deadline")
+            if not binding["match"]:
+                return refused(gate_codes + ["CHALLENGE_HASH_MISMATCH"],
+                               "declared bytes are not the pinned bytes")
+            if acceptance["verdict"] != "ADMITTED":
+                failed = [r["criterion"] for r in acceptance["results"]
+                          if r["result"] != "pass"]
+                return refused(gate_codes + ["CHALLENGE_ADMISSION_FAILED"],
+                               "structural admission failed: "
+                               + ",".join(failed))
+            stored = self.challenge_chapter.contribute(
+                challenge_id=clean["challenge_id"], kind=clean["kind"],
+                title=clean["title"], body=clean["body"],
+                body_sha256=clean["pinned_sha256"],
+                participant_id=session.participant_id,
+                display_name=session.display_name,
+                references=clean["references"], original=clean["original"],
+                derived_from=clean["derived_from"], acceptance=acceptance,
+                gate_receipt=receipt)
+            self.events.emit(
+                source="world", kind="challenge", provenance="receiver-signed",
+                summary=(f"{session.display_name} contributed a {clean['kind']} "
+                         f"to {clean['challenge_id']} "
+                         f"({stored['contribution_id']})."),
+                detail={"contribution_id": stored["contribution_id"],
+                        "kind": clean["kind"],
+                        "participant_id": session.participant_id,
+                        "receipt_id": receipt_id},
+            )
+            self.save()
+            return {"decision": "ALLOWED", "receipt_id": receipt_id,
+                    "reason_codes": gate_codes, "binding": binding,
+                    "acceptance": acceptance,
+                    "contribution_id": stored["contribution_id"],
+                    "refusal_id": None, "replayed": False}
+
+        result, replayed = self._idempotent(
+            session.participant_id, "challenge.contribute",
+            clean["pinned_sha256"], key, execute)
+        result = dict(result)
+        result["replayed"] = replayed
+        return result
+
+    def challenge_evaluate(self, participant_id: Any, token: Any,
+                           contribution_id: Any, decision: Any, reason: Any,
+                           presentation: Any = None,
+                           idempotency_key: Any = None) -> dict[str, Any]:
+        """Record the designated evaluator's merit decision on one admitted
+        contribution. Only the challenge owner (bound at creation) may
+        evaluate; anyone else is refused with EVALUATOR_NOT_OWNER and
+        changes nothing. The decision carries the evaluator's checkable
+        reason and is receiver-signed (gate receipt for challenge.admin)."""
+        session = self._auth(participant_id, token)
+        key = self._clean_idempotency_key(idempotency_key)
+        if not isinstance(contribution_id, str) or not contribution_id:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "contribution_id")
+        if decision not in ("ACCEPT", "DECLINE"):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "decision")
+        reason = WorldRules.moderate_text(reason, 2000, "reason")
+        contribution = self.challenge_chapter.get_contribution(contribution_id)
+        if contribution is None:
+            raise WalletError("CHALLENGE_CONTRIBUTION_UNKNOWN", contribution_id)
+        challenge = self.challenge_chapter.challenges.get(
+            contribution["challenge_id"])
+
+        def execute() -> dict[str, Any]:
+            if (challenge is None
+                    or session.participant_id != challenge["owner_participant_id"]):
+                entry = self.challenge_chapter.refuse(
+                    participant_id=session.participant_id,
+                    challenge_id=contribution["challenge_id"],
+                    contribution_id=contribution_id,
+                    reason_codes=["EVALUATOR_NOT_OWNER"], gate_receipt=None,
+                    note="evaluate attempted by a non-evaluator")
+                self.save()
+                return {"decision": "STOPPED", "receipt_id": None,
+                        "reason_codes": ["EVALUATOR_NOT_OWNER"],
+                        "contribution_id": contribution_id,
+                        "refusal_id": entry["refusal_id"], "replayed": False}
+            self._require_fresh_standing(session)
+            receipt = self._evaluate_presentation(session, "challenge.admin",
+                                                  presentation)
+            receipt_id = _receipt_id(receipt)
+            gate_codes = list(receipt.get("reason_codes", []) or [])
+
+            def refused(codes: list[str], note: str = "") -> dict[str, Any]:
+                entry = self.challenge_chapter.refuse(
+                    participant_id=session.participant_id,
+                    challenge_id=contribution["challenge_id"],
+                    contribution_id=contribution_id,
+                    reason_codes=codes, gate_receipt=receipt, note=note)
+                self.save()
+                return {"decision": "STOPPED", "receipt_id": receipt_id,
+                        "reason_codes": codes,
+                        "contribution_id": contribution_id,
+                        "refusal_id": entry["refusal_id"], "replayed": False}
+
+            if receipt["decision"] != "ALLOWED":
+                return refused(gate_codes, "gate stopped the evaluation")
+            record = self.challenge_chapter.evaluate(
+                contribution_id=contribution_id, decision=decision,
+                reason=reason, evaluator_id=session.participant_id,
+                gate_receipt=receipt)
+            self.events.emit(
+                source="world", kind="challenge", provenance="receiver-signed",
+                summary=(f"{session.display_name} {decision.lower()}ed "
+                         f"contribution {contribution_id}: {reason[:80]}"),
+                detail={"contribution_id": contribution_id,
+                        "decision": decision,
+                        "evaluator": session.participant_id,
+                        "receipt_id": receipt_id},
+            )
+            self.save()
+            return {"decision": "ALLOWED", "receipt_id": receipt_id,
+                    "reason_codes": gate_codes, "evaluation": record,
+                    "contribution_id": contribution_id, "refusal_id": None,
+                    "replayed": False}
+
+        result, replayed = self._idempotent(
+            session.participant_id, "challenge.evaluate",
+            contribution_id + "|" + decision, key, execute)
+        result = dict(result)
+        result["replayed"] = replayed
+        return result
+
     def _gated_newsroom(self, session: ParticipantSession,
                         presentation: Any = None) -> dict[str, Any]:
         """Evaluate the client-supplied worker-signed presentation for
@@ -2858,6 +3220,11 @@ TRACK A -- owner delegation and the deterministic automation worker:
         self.claim_graph = ClaimGraphChapter()
         # Fresh news desk: same session scoping, same leave-behind rule.
         self.newsroom = NewsroomChapter()
+        # Fresh challenge desk: a reset world is a new world — the
+        # receiver key rotates, so old gate receipts verify only against
+        # the old key. Restart (no reset) preserves the chapter via the
+        # snapshot; reset leaves it behind with the closed sessions.
+        self.challenge_chapter = ChallengeChapter()
         # A reset world is a new world: rotate the receiver key and drop
         # the snapshot.
         self.gate = EffectGate("world-receiver")
@@ -3517,6 +3884,9 @@ TRACK A -- owner delegation and the deterministic automation worker:
             "commission_contracts": copy.deepcopy(self.commission_contracts),
             "commissions": copy.deepcopy(self.commissions),
             "commission_ledger": copy.deepcopy(self.commission_ledger),
+            # The challenge chapter is durable: contributions, evaluator
+            # decisions, and the refusal ledger survive a server restart.
+            "challenge": self.challenge_chapter.snapshot(),
         }
         tmp = self._snapshot_path().with_suffix(".json.tmp")
         tmp.write_text(json.dumps(data), encoding="utf-8")
@@ -3614,3 +3984,6 @@ TRACK A -- owner delegation and the deterministic automation worker:
         self.commission_contracts = data.get("commission_contracts") or {}
         self.commissions = data.get("commissions") or {}
         self.commission_ledger = data.get("commission_ledger") or []
+        # Restore the durable challenge chapter: contributions, decisions,
+        # and the refusal ledger survive a server restart.
+        self.challenge_chapter.load(data.get("challenge"))

@@ -524,6 +524,88 @@ export interface NewsroomReviewResult {
   admitted_event_id: string | null;
 }
 
+/* ---------------- challenge (CHALLENGE-001): the challenge board -------- */
+
+/** Everything here is recorded backend data, read-only. Submitted bodies
+ *  are inert text: quoted for display, never executed. Admission
+ *  (K1-K7) is structural; evaluator decisions are merit. */
+export interface ChallengeCriterionResult {
+  criterion: string;
+  check_performed: string;
+  result: string; // pass | fail
+  detail: string;
+}
+
+export interface ChallengeAcceptance {
+  criteria_frozen: string;
+  criteria_hash: string;
+  evaluator: string;
+  evaluated_sha256: string;
+  scope_note: string;
+  results: ChallengeCriterionResult[];
+  verdict: string; // ADMITTED | REFUSED
+}
+
+export interface ChallengeContribution {
+  contribution_id: string;
+  challenge_id: string;
+  kind: string; // patch | test | review
+  title: string;
+  body: string;
+  body_sha256: string;
+  participant_id: string;
+  display_name: string;
+  references: string;
+  original: boolean;
+  derived_from: string[];
+  acceptance: ChallengeAcceptance;
+  gate_receipt_id: string | null;
+  submitted_at: string;
+  status: string; // admitted | accepted | declined
+}
+
+export interface ChallengeDecision {
+  contribution_id: string;
+  challenge_id: string;
+  decision: string; // ACCEPT | DECLINE
+  reason: string;
+  evaluator_id: string;
+  gate_receipt_id: string | null;
+  decided_at: string;
+}
+
+export interface ChallengeRefusal {
+  refusal_id: string;
+  at: string;
+  participant_id: string | null;
+  challenge_id: string | null;
+  contribution_id: string | null;
+  reason_codes: string[];
+  gate_receipt_id: string | null;
+  note: string;
+}
+
+export interface ChallengeRecord {
+  challenge_id: string;
+  problem_sha256: string;
+  criteria_hash: string;
+  deadline_iso: string;
+  owner_participant_id: string;
+  created_by: string;
+  created_at: string;
+  create_receipt_id: string | null;
+}
+
+export interface ChallengeBoard {
+  challenges: ChallengeRecord[];
+  contributions: ChallengeContribution[];
+  decisions: ChallengeDecision[];
+  refusals: ChallengeRefusal[];
+  challenge_id: string;
+  criteria_hash: string;
+  scope_note: string;
+}
+
 async function req<T>(path: string, method: "GET" | "POST" = "GET", body?: unknown): Promise<T> {
   let res: Response;
   try {
@@ -586,6 +668,13 @@ export const worldApi = {
   /** Inspectable newsroom chapter state, from recorded data only. */
   newsroom(): Promise<NewsroomDescribe> {
     return req<NewsroomDescribe>("/newsroom");
+  },
+
+  /** The CHALLENGE-001 board: frozen problem reference, contributions with
+   *  authorship, evaluator decisions, reviews with credit, the refusal
+   *  ledger, receipt links. Public: no auth required. */
+  challenge(): Promise<ChallengeBoard> {
+    return req<ChallengeBoard>("/challenge/read");
   },
 
   /** Submit an actual research artifact for receiver-owned acceptance.

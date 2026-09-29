@@ -366,6 +366,11 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(200, self.world.newsroom_describe())
             elif self.path == "/api/world/challenge":
                 self._send(200, self.world.challenge())
+            elif self.path == "/api/world/challenge/read":
+                # Read-only challenge board. Note: /api/world/challenge
+                # itself is the join-nonce endpoint; the board lives here
+                # so the two never collide.
+                self._send(200, self.world.challenge_describe())
             elif self.path.startswith("/api/world/receipts"):
                 qs = parse_qs(urlparse(self.path).query)
                 self._send(200, self.world.receipts_for(
@@ -503,6 +508,22 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(200, self.world.newsroom_review(
                     body.get("participant_id"), body.get("token"), body.get("proposal_id"),
                     body.get("decision"), body.get("presentation"),
+                    body.get("idempotency_key")))
+            elif path == "/api/world/challenge/create":
+                self._send(200, self.world.challenge_create(
+                    body.get("participant_id"), body.get("token"),
+                    body.get("spec"), body.get("presentation"),
+                    body.get("idempotency_key")))
+            elif path == "/api/world/challenge/contribute":
+                self._send(200, self.world.challenge_contribute(
+                    body.get("participant_id"), body.get("token"),
+                    body.get("contribution"), body.get("presentation"),
+                    body.get("idempotency_key")))
+            elif path == "/api/world/challenge/evaluate":
+                self._send(200, self.world.challenge_evaluate(
+                    body.get("participant_id"), body.get("token"),
+                    body.get("contribution_id"), body.get("decision"),
+                    body.get("reason"), body.get("presentation"),
                     body.get("idempotency_key")))
             elif path == "/api/world/reset":
                 # Fresh isolated sessions; the snapshot is removed.

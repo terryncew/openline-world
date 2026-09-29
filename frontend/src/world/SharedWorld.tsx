@@ -66,6 +66,7 @@ import { WorldScene, type ClaimDeskSummary, type HostState, type NewsroomDeskSum
 import { ModeBadge } from "./components/ModeBadge";
 import { OwnerConsole } from "./components/OwnerConsole";
 import { ResearchInspector } from "./components/ResearchInspector";
+import { ChallengeInspector } from "./components/ChallengeInspector";
 import { CommissionInspector } from "./components/CommissionInspector";
 import { sound, SOUND_ATTRIBUTION } from "../sound/sound";
 import "./world.css";
@@ -427,6 +428,7 @@ export function SharedWorld({ onExit }: { onExit: () => void }) {
   const [panelsOpen, setPanelsOpen] = useState(false);
   /** research inspector: the owner's view of one bounded external-agent run */
   const [researchOpen, setResearchOpen] = useState(false);
+  const [challengeOpen, setChallengeOpen] = useState(false);
   const [commissionOpen, setCommissionOpen] = useState(false);
   /** owner console: the fixed drawer, reachable without walking */
   const [consoleOpen, setConsoleOpen] = useState(false);
@@ -1731,6 +1733,10 @@ token: j.token,
           events={world?.events ?? []}
         />
       )}
+      {/* the challenge board: the public CHALLENGE-001 inspector */}
+      {challengeOpen && (
+        <ChallengeInspector onClose={() => setChallengeOpen(false)} />
+      )}
       {/* the commission inspector: frozen terms, recorded costs, settlement */}
       {commissionOpen && (
         <CommissionInspector
@@ -1928,6 +1934,7 @@ token: j.token,
           panelsOpen={panelsOpen}
           onClosePanels={() => setPanelsOpen(false)}
           onOpenResearch={() => { setPanelsOpen(false); setResearchOpen(true); }}
+          onOpenChallenge={() => { setPanelsOpen(false); setChallengeOpen(true); }}
           onOpenCommission={() => { setPanelsOpen(false); setCommissionOpen(true); }}
           muted={muted}
           onToggleMute={toggleMute}
@@ -3473,6 +3480,8 @@ interface SquareModeProps {
   onClosePanels: () => void;
   /** open the research-session inspector (overlay, both modes) */
   onOpenResearch: () => void;
+  /** open the challenge-board inspector (overlay, both modes) */
+  onOpenChallenge: () => void;
   /** open the commission-ledger inspector (overlay, both modes) */
   onOpenCommission: () => void;
   /** settings, relocated from the old top bar into the drawer */
@@ -3964,11 +3973,14 @@ function SquareMode(p: SquareModeProps) {
                 <button onClick={() => { p.cue("paper", "research session — paper"); p.onOpenResearch(); }}>
                   Research session
                 </button>
+                <button onClick={() => { p.cue("paper", "challenge board — paper"); p.onOpenChallenge(); }}>
+                  Challenge board
+                </button>
                 <button onClick={() => { p.cue("paper", "commission ledger — paper"); p.onOpenCommission(); }}>
                   Commission ledger
                 </button>
               </div>
-              <p className="fine">The same desks as the 3D square — readable without walking over. Research session opens the owner's inspector for the bounded external-agent run.</p>
+              <p className="fine">The same desks as the 3D square — readable without walking over. Research session opens the owner's inspector for the bounded external-agent run. Challenge board opens the public CHALLENGE-001 board (read-only).</p>
             </section>
 
             {/* honesty lanes, compact */}
