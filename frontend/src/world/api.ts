@@ -640,6 +640,13 @@ export interface WorldListing {
   from_kind?: string | null;
   is_sample?: boolean | null;
   created_at?: string | null;
+  /** DISCOVERY-ROOM-001: the disclosure set, verbatim from the backend,
+   *  when kind === "research-question". Absent on older builds — the UI
+   *  renders "not on record", never invented fields. */
+  disclosure?: ResearchDisclosure | null;
+  /** DISCOVERY-ROOM-001: the preserved result, verbatim from the backend
+   *  (recorded at submit time). */
+  research_result?: ResearchResult | null;
 }
 
 export interface BoardFilters {
@@ -674,9 +681,249 @@ export interface WorldAgreement {
   /** Snapshotted from the listing when the agreement was proposed:
    *  the terms both sides consented to. Read verbatim from the record. */
   terms?: { requires?: string[] } | null;
+  /** the listing's task kind, as recorded on the agreement */
+  task_kind?: string | null;
+  /** Worker-signed authorization artifacts, keyed by role ("proposer",
+   *  "counterpart"): ALLOWED receipt + presentation + authority head hash,
+   *  as the backend stores them. */
+  authorizations?: Record<string, unknown> | null;
+  /** DISCOVERY-ROOM-001: the preserved research result, verbatim from the
+   *  backend (recorded at submit time on research-question agreements). */
+  research_result?: ResearchResult | null;
   /** Resolved in the UI, not from the backend: */
   listing_title?: string | null;
   counterpart_display?: string | null;
+}
+
+/* ---------------- research-question listings (DISCOVERY-ROOM-001) -------- */
+
+/** The "research question" listing kind on the Exchange board.
+ *
+ *  CONTRACT (matches backend/world.py on branch work/research-room-001):
+ *    - the backend allowlists "research-question" in TASK_KINDS (need side);
+ *    - POST /needs accepts `task.disclosure` with EXACTLY the keys below —
+ *      8 text fields (max 600 chars), resource_ceiling {amount: positive int,
+ *      unit: "simulated-compute-units"}, acceptance_criteria (1..8 strings,
+ *      each max 200 chars), and reuse_terms (max 800 chars, must contain the
+ *      verbatim IP/scientific-truth disclaimer or the backend refuses with
+ *      WORLD_RULE_DISCLAIMER_REQUIRED). Missing disclosure is refused with
+ *      WORLD_RULE_DISCLOSURE_REQUIRED;
+ *    - the board serializes the stored set as a top-level `disclosure` on
+ *      the listing (the detail also carries it as readable markdown);
+ *    - submit() on a research-question agreement records the outcome under
+ *      the agreement's `result` key: verification outcome + preserved
+ *      experiment outcome + accounting (exact shape: backend-owned; the UI
+ *      renders its known keys verbatim and states when a key is absent).
+ *  A missing disclosure/result renders as "not on record" — never invented. */
+export const RESEARCH_QUESTION_KIND = "research-question";
+
+/** The only unit the backend accepts on a resource ceiling. */
+export const RESEARCH_CEILING_UNIT = "simulated-compute-units";
+
+/** Verbatim disclaimer the backend requires inside reuse_terms. */
+export const RESEARCH_REUSE_DISCLAIMER =
+  "A receipt records an agreement; it does not establish intellectual-property rights or scientific truth.";
+
+export function isResearchQuestion(kind: string | null | undefined): boolean {
+  return kind === RESEARCH_QUESTION_KIND;
+}
+
+/** The disclosure set carried by a research-question listing — the
+ *  backend's field names and shapes, read verbatim. */
+export interface ResearchDisclosure {
+  proposed?: string | null;
+  unproven?: string | null;
+  test_spec?: string | null;
+  required_contribution?: string | null;
+  contributor_receives?: string | null;
+  buyer_receives?: string | null;
+  authorized_by?: string | null;
+  visibility_terms?: string | null;
+  resource_ceiling?: { amount?: number | null; unit?: string | null } | null;
+  acceptance_criteria?: string[] | null;
+  reuse_terms?: string | null;
+}
+
+/** The disclosure form's editable shape. */
+export interface ResearchDisclosureDraft {
+  proposed: string;
+  unproven: string;
+  test_spec: string;
+  required_contribution: string;
+  contributor_receives: string;
+  buyer_receives: string;
+  authorized_by: string;
+  visibility_terms: string;
+  /** positive integer, as typed */
+  resource_ceiling_amount: string;
+  /** one criterion per line, 1..8 */
+  acceptance_criteria: string;
+  /** must keep the verbatim disclaimer */
+  reuse_terms: string;
+}
+
+export const EMPTY_RESEARCH_DISCLOSURE: ResearchDisclosureDraft = {
+  proposed: "",
+  unproven: "",
+  test_spec: "",
+  required_contribution: "",
+  contributor_receives: "",
+  buyer_receives: "",
+  authorized_by: "",
+  visibility_terms: "",
+  resource_ceiling_amount: "",
+  acceptance_criteria: "",
+  reuse_terms: RESEARCH_REUSE_DISCLAIMER,
+};
+
+/** Build the exact `task.disclosure` payload the backend expects, or an
+ *  error string naming the first problem. The backend remains the
+ *  authority — its refusal surfaces verbatim if this check misses
+ *  something. */
+export function buildResearchDisclosure(
+  d: ResearchDisclosureDraft
+): { disclosure: Record<string, unknown> } | { error: string } {
+  const amount = Number(d.resource_ceiling_amount);
+  if (!Number.isInteger(amount) || amount < 1) {
+    return { error: "resource ceiling needs a positive whole-number amount — nothing is guessed" };
+  }
+  const criteria = d.acceptance_criteria
+    .split("\n")
+    .map((c) => c.trim())
+    .filter(Boolean);
+  if (criteria.length < 1 || criteria.length > 8) {
+    return { error: "acceptance criteria need 1 to 8 lines — one frozen criterion per line" };
+  }
+  if (!d.reuse_terms.includes(RESEARCH_REUSE_DISCLAIMER)) {
+    return { error: "reuse terms must keep the verbatim disclaimer — the backend refuses without it" };
+  }
+  return {
+    disclosure: {
+      proposed: d.proposed.trim(),
+      unproven: d.unproven.trim(),
+      test_spec: d.test_spec.trim(),
+      required_contribution: d.required_contribution.trim(),
+      contributor_receives: d.contributor_receives.trim(),
+      buyer_receives: d.buyer_receives.trim(),
+      authorized_by: d.authorized_by.trim(),
+      visibility_terms: d.visibility_terms.trim(),
+      resource_ceiling: { amount, unit: RESEARCH_CEILING_UNIT },
+      acceptance_criteria: criteria,
+      reuse_terms: d.reuse_terms.trim(),
+    },
+  };
+}
+
+/** The preserved result on a research-question agreement. The backend owns
+ *  the exact shape (agreement["result"] = {payload, gate_signed}, the full
+ *  result bound under the gate's Ed25519 signature); the UI renders these
+ *  known keys verbatim when present and states when a key is absent —
+ *  never softened, never reconstructed. */
+export interface ResearchResult {
+  payload?: {
+    kind?: string | null;
+    agreement_id?: string | null;
+    listing_id?: string | null;
+    verification?: {
+      room?: string | null;
+      manifest_file?: string | null;
+      manifest_sha256?: string | null;
+      manifest_sha256_pinned?: string | null;
+      pin_match?: boolean | null;
+      artifacts_listed?: number | null;
+      artifacts_checked?: number | null;
+      matches?: number | null;
+      mismatches?: { path?: string | null; expected?: string | null; actual?: string | null; reason?: string | null }[] | null;
+      checked_at?: string | null;
+    } | null;
+    experiment_outcome?: {
+      source?: string | null;
+      budget?: unknown;
+      replications?: unknown;
+      conditions?: Record<string, { mean_mse?: number | null; std_mse?: number | null; n?: number | null } | null> | null;
+      decision_rule?: string | null;
+      pooled_se?: number | null;
+      improved?: boolean | null;
+      verdict?: string | null;
+    } | null;
+    accounting?: {
+      linked?: boolean | null;
+      commission_id?: string | null;
+      op?: string | null;
+      spent_cents?: number | null;
+      spent_units?: number | null;
+      ceiling_cents?: number | null;
+      ceiling_units?: number | null;
+      unit?: string | null;
+      simulated?: boolean | null;
+      recorded_cost_cents?: number | null;
+      cap_exceeded?: boolean | null;
+      note?: string | null;
+    } | null;
+    note?: string | null;
+    recorded_at?: string | null;
+  } | null;
+  gate_signed?: {
+    payload_hash?: string | null;
+    signature?: { algorithm?: string | null; public_key?: string | null; value?: string | null } | null;
+  } | null;
+}
+
+/** The disclosure on a board listing, or null when the backend carries
+ *  none (older build or non-research listing). */
+export function getResearchDisclosure(l: WorldListing): ResearchDisclosure | null {
+  const raw = l as unknown as { disclosure?: unknown; research_disclosure?: unknown };
+  const d = raw.disclosure ?? raw.research_disclosure;
+  return d && typeof d === "object" ? (d as ResearchDisclosure) : null;
+}
+
+/** The preserved result: the agreement's record first, then the listing's. */
+export function getResearchResult(
+  a: WorldAgreement,
+  l: WorldListing | null
+): ResearchResult | null {
+  const rawA = a as unknown as { result?: unknown; research_result?: unknown };
+  const rawL = l as unknown as { result?: unknown; research_result?: unknown } | null;
+  const r = rawA.result ?? rawA.research_result ?? rawL?.result ?? rawL?.research_result;
+  return r && typeof r === "object" ? (r as ResearchResult) : null;
+}
+
+/** A real POST expected to be refused: returns the backend's refusal
+ *  {code, detail} verbatim instead of throwing. World-rule refusals mint no
+ *  receipt and are unsigned — the backend's own distinction — so the record
+ *  IS the code + detail. Used for the demo's refusal checks. */
+export async function attemptRefusal(
+  path: string,
+  body: unknown
+): Promise<
+  | { refused: true; code: string; detail: string }
+  | { refused: false; data: unknown }
+> {
+  let res: Response;
+  try {
+    res = await fetch(`${BASE}${PREFIX}${path}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+  } catch (e) {
+    return { refused: true, code: "WORLD_BACKEND_UNREACHABLE", detail: String(e) };
+  }
+  let data: unknown = {};
+  try {
+    data = await res.json();
+  } catch {
+    /* non-JSON: code below */
+  }
+  if (!res.ok) {
+    const d = data as { error?: string; detail?: string };
+    return {
+      refused: true,
+      code: typeof d.error === "string" ? d.error : `HTTP ${res.status}`,
+      detail: typeof d.detail === "string" ? d.detail : "",
+    };
+  }
+  return { refused: false, data };
 }
 
 export interface BoardSuggestion {
@@ -758,17 +1005,24 @@ export const squareApi = {
     }
   },
 
-  /** Post a need. The backend allowlists kinds; a rejection surfaces verbatim. */
+  /** Post a need. The backend allowlists kinds; a rejection surfaces verbatim.
+   *  DISCOVERY-ROOM-001: when kind is "research-question", `disclosure`
+   *  (the backend's exact field set) rides inside the task payload for the
+   *  backend to store on the listing. */
   postNeed(
     participant_id: string,
     token: string,
-    need: { kind: string; title: string; detail: string; terms_text?: string }
+    need: { kind: string; title: string; detail: string; terms_text?: string; disclosure?: Record<string, unknown> }
   ): Promise<{ listing_id: string }> {
     // The backend contract names the payload "task" (mirrors /offer), and
     // answers with { need_id } rather than { listing_id }.
-    const { terms_text, ...task } = need;
+    const { terms_text, disclosure, kind, ...task } = need;
+    const payload: Record<string, unknown> = { ...task, kind };
+    if (kind === RESEARCH_QUESTION_KIND && disclosure) {
+      payload.disclosure = disclosure;
+    }
     return squareReq("posting needs", () =>
-      req<{ listing_id?: string; need_id?: string }>("/needs", "POST", { participant_id, token, task }).then((d) => ({
+      req<{ listing_id?: string; need_id?: string }>("/needs", "POST", { participant_id, token, task: payload }).then((d) => ({
         listing_id: d.listing_id ?? d.need_id ?? "unavailable",
       }))
     );
@@ -1045,6 +1299,101 @@ export const escalationsApi = {
         decision,
         ...(note && note.trim() ? { note: note.trim() } : {}),
       })
+    );
+  },
+};
+
+/* ---------------- research rooms: the reproducibility lab ---------------- */
+
+/** A frozen research room: one question, pinned protocol, frozen results.
+ *  Everything here is recorded backend data. The frontend renders what the
+ *  backend published — nothing is computed, inferred, or softened here. */
+export interface ResearchRoomParticipant {
+  id: string;
+  kind: string; // algorithmic-worker | receiver | owner
+  role: string;
+  description: string;
+}
+
+export interface ResearchRoomBadges {
+  "schema-valid": string;
+  "receiver-accepted": string;
+  "scientifically-supported": string;
+  non_implication: string;
+}
+
+export interface ResearchRoomVerdict {
+  primary: string;
+  detail: string;
+}
+
+export interface ResearchRoomArtifact {
+  kind: string;
+  path: string;
+  sha256: string;
+}
+
+export interface ResearchRoomManifest {
+  room_id: string;
+  title: string;
+  question: string;
+  participants: ResearchRoomParticipant[];
+  verdict: ResearchRoomVerdict;
+  badges: ResearchRoomBadges;
+  authority_note: string;
+  protocol_ref: { frozen: string; path: string; sha256: string; note: string };
+  artifacts: ResearchRoomArtifact[];
+}
+
+export interface ResearchRoomConditionStats {
+  n: number;
+  mean_mse: number;
+  std_mse: number;
+  min_mse?: number;
+  max_mse?: number;
+  reached_0_05_count?: number;
+  median_evals_to_0_05?: number;
+  mean_overhead_evals?: number;
+  overhead_pct_of_budget?: number;
+  total_rejections?: number;
+  invalid_count?: number;
+}
+
+export interface ResearchRoomResults {
+  budget: number;
+  replications: number;
+  conditions: Record<string, ResearchRoomConditionStats>;
+  decision: { improved: boolean; rule: string; mean_B?: number; mean_C?: number; pooled_se?: number };
+  experiment_pin?: string;
+}
+
+export interface ResearchRoomReplication {
+  condition: string;
+  replication: number;
+  master_seed?: number;
+  best_mse?: number;
+  evaluations_used?: number;
+  overhead_evals?: number;
+  code_hash?: string;
+  [k: string]: unknown;
+}
+
+export interface ResearchRoomDescribe {
+  room: ResearchRoomManifest;
+  protocol_markdown: string;
+  protocol_sha256: string;
+  results: ResearchRoomResults;
+  replications: ResearchRoomReplication[];
+  evidence_manifest: unknown;
+}
+
+export const researchApi = {
+  /** The frozen room record for repro-lab-001, published by the backend.
+   *  Throws BackendTooOld on builds without the room endpoint; the UI
+   *  renders that honestly instead of inventing the record. */
+  room(): Promise<ResearchRoomDescribe> {
+    return squareReq("the reproducibility lab room record", () =>
+      req<ResearchRoomDescribe>("/rooms/repro-lab-001")
     );
   },
 };

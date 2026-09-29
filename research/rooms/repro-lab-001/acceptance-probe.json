@@ -1,0 +1,77 @@
+{
+  "criteria_frozen": "research/COMMONS-CRITERIA.md (2026-09-26) as amended by research/COMMONS-CRITERIA-2026-09-27.md (K3: trusted-fixture reproduction)",
+  "evaluated_sha256": "a5c16575cba78e9b743b61112e435c051f36455e8ee7291d61e5f4a7f986ce16",
+  "evaluator": "backend/package_acceptance.py (deterministic; no model, no network; study executed only in a separate OS process for receiver-trusted fixture pins, never imported)",
+  "results": [
+    {
+      "check_performed": "Manifest integrity: parses as JSON, schema matches, named files + sha256s match the carried bytes",
+      "criterion": "K1",
+      "detail": "schema ok; 2 file(s) bound by matching sha256",
+      "result": "pass"
+    },
+    {
+      "check_performed": "Required files present and non-empty: study.py, input.csv",
+      "criterion": "K2",
+      "detail": "study.py and input.csv present and non-empty",
+      "result": "pass"
+    },
+    {
+      "check_performed": "Trusted-fixture reproduction: the study executes only when the package's pinned sha256 is a receiver-trusted fixture pin; otherwise the study is not executed and K3 fails (STUDY_EXECUTION_DISABLED). A trusted fixture must exit 0 and its stdout must equal expected_result byte-for-byte",
+      "criterion": "K3",
+      "detail": "reproduction refused: STUDY_EXECUTION_DISABLED: package sha256 'a5c16575cba78e9b743b61112e435c051f36455e8ee7291d61e5f4a7f986ce16' is not a receiver-trusted fixture pin; the study was not executed (trusted-fixture reproduction only; see research/ISOLATION-VERDICT-2026-09-27.md)",
+      "result": "fail"
+    },
+    {
+      "check_performed": "Citations present: >= 2, each with a URL or fixture/producer locator (presence is not support)",
+      "criterion": "K4",
+      "detail": "2 citation(s), each with a locator (presence is not support)",
+      "result": "pass"
+    },
+    {
+      "check_performed": "Limitations stated: non-empty limitations string",
+      "criterion": "K5",
+      "detail": "limitations stated (275 chars)",
+      "result": "pass"
+    },
+    {
+      "check_performed": "Producer review labeled: starts with 'PRODUCER-SUPPLIED REVIEW' and states it grants no acceptance authority",
+      "criterion": "K6",
+      "detail": "labeled producer review present; self-review grants nothing (stated)",
+      "result": "pass"
+    },
+    {
+      "check_performed": "No overclaim phrases in claim, title, limitations, producer review, or citation notes",
+      "criterion": "K7",
+      "detail": "no overclaim phrases (negated mentions in limitations permitted)",
+      "result": "pass"
+    }
+  ],
+  "sandbox": {
+    "error": "STUDY_EXECUTION_DISABLED: package sha256 'a5c16575cba78e9b743b61112e435c051f36455e8ee7291d61e5f4a7f986ce16' is not a receiver-trusted fixture pin; the study was not executed (trusted-fixture reproduction only; see research/ISOLATION-VERDICT-2026-09-27.md)",
+    "executed": false,
+    "exit_code": null,
+    "limits": {
+      "cpu_seconds": 10,
+      "cwd": "fresh temp dir containing only study.py + input.csv",
+      "env": {
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "execution_policy": "trusted-fixture reproduction only: the study executes only for receiver-trusted fixture pins; resource limits bound cost, not access",
+      "max_file_bytes": 1048576,
+      "memory_bytes": 268435456,
+      "network": "shared host namespace (no network namespace on this box)",
+      "stderr_tail_bytes": 2048,
+      "stdin": "DEVNULL",
+      "stdout_cap_bytes": 65536,
+      "wall_timeout_seconds": 15
+    },
+    "stderr_tail": "",
+    "stdout": "",
+    "stdout_truncated": false,
+    "timed_out": false
+  },
+  "scope_note": "\"Passed these named checks under these conditions\" is not scientific truth. The checks verify: the manifest is intact and bound to its files (K1), the required files exist (K2), the study reproduces its declared output for receiver-trusted fixture bytes (K3), citations are present -- not that they support the claim (K4), limitations are stated (K5), the producer's review is labeled as granting nothing (K6), and no overclaim phrases appear (K7). The study runner is not a security sandbox: the recorded limits bound the cost of reproduction, not access, and submitted code executes only for byte-pinned receiver-trusted fixtures. Nothing here verifies that the package's claim is true. This lane does not claim automated peer review, scientific truth, RSI, or outside adoption.",
+  "verdict": "REJECTED"
+}

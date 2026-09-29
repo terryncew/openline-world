@@ -27,6 +27,7 @@ import {
   worldApi,
   squareApi,
   agentApi,
+  researchApi,
   BackendTooOld,
   WORKER_STATE_LABELS,
   type ActivityMode,
@@ -44,6 +45,7 @@ import {
   type NewsroomImportResult,
   type NewsroomReviewResult,
   type OfferKind,
+  type ResearchRoomDescribe,
   type WorldAgreement,
   type WorldEvent,
   type WorldListing,
@@ -58,6 +60,17 @@ import {
   type NewsroomSubmitPackageResult,
   type PackageAcceptance,
   type ResearchPackage,
+  type ResearchDisclosure,
+  type ResearchDisclosureDraft,
+  type ResearchResult,
+  RESEARCH_QUESTION_KIND,
+  RESEARCH_CEILING_UNIT,
+  EMPTY_RESEARCH_DISCLOSURE,
+  buildResearchDisclosure,
+  isResearchQuestion,
+  getResearchDisclosure,
+  getResearchResult,
+  attemptRefusal,
 } from "./api";
 /** Separate key custody: the browser holds each participant's owner and
  *  worker keys; the server keeps only its receiver key. */
@@ -418,7 +431,7 @@ export function SharedWorld({ onExit }: { onExit: () => void }) {
   const [workerNotice, setWorkerNotice] = useState<string | null>(null);
   const [inspectAgreementId, setInspectAgreementId] = useState<string | null>(null);
   const [inspectVisitorId, setInspectVisitorId] = useState<string | null>(null);
-  const [postForm, setPostForm] = useState({ kind: "", title: "", detail: "" });
+  const [postForm, setPostForm] = useState<PostFormValue>({ kind: "", title: "", detail: "", research: { ...EMPTY_RESEARCH_DISCLOSURE } });
   const [squareBusy, setSquareBusy] = useState<string | null>(null);
   const [squareNote, setSquareNote] = useState<string | null>(null);
   const [lastPoll, setLastPoll] = useState<number | null>(null);
@@ -911,15 +924,30 @@ token: j.token,
     }
     setSquareBusy("posting");
     try {
+      let disclosure: Record<string, unknown> | undefined;
+      if (kind === RESEARCH_QUESTION_KIND) {
+        // the disclosure set is validated client-side for a clean demo,
+        // but the backend remains the authority — its refusal surfaces
+        // verbatim if anything is off
+        const built = buildResearchDisclosure(postForm.research);
+        if ("error" in built) {
+          setSquareNote(built.error);
+          return;
+        }
+        disclosure = built.disclosure;
+      }
       const r = await squareApi.postNeed(sq.participant_id, sq.token, {
         kind,
         title,
         detail: postForm.detail.trim(),
         terms_text: STANDARD_TERMS,
+        // the disclosure set rides with a research-question need; the
+        // backend stores it verbatim on the listing for the board to show
+        disclosure,
       });
       agentNote(`${sq.displayName} posted a need: “${title}” (${kind}) — listing ${shortId(r.listing_id)}`);
       cue("paper", "need posted — paper");
-      setPostForm({ kind: "", title: "", detail: "" });
+      setPostForm({ kind: "", title: "", detail: "", research: { ...EMPTY_RESEARCH_DISCLOSURE } });
       await refreshSquare();
     } catch (e) {
       setSquareNote(`Posting failed: ${String(e)}`);
@@ -946,7 +974,7 @@ token: j.token,
       });
       agentNote(`${sq.displayName} offered “${title}” (${kind}) — offer ${shortId(r.offer_id)}`);
       cue("paper", "offer posted — paper");
-      setPostForm({ kind: "", title: "", detail: "" });
+      setPostForm({ kind: "", title: "", detail: "", research: { ...EMPTY_RESEARCH_DISCLOSURE } });
       await refreshSquare();
     } catch (e) {
       setSquareNote(`Posting failed: ${String(e)}`);
@@ -1653,6 +1681,17 @@ token: j.token,
     ? "observed on the board — the backend publishes no allowlist"
     : "no kinds observed yet — the backend publishes no allowlist";
 
+  /** The need-side post form always offers "research-question" alongside the
+   *  observed kinds — the backend allowlists kinds, and a rejection surfaces
+   *  verbatim if it does not know this one yet. */
+  const needKindOptions = useMemo(
+    () => (observedKinds.includes(RESEARCH_QUESTION_KIND)
+      ? observedKinds
+      : [...observedKinds, RESEARCH_QUESTION_KIND]),
+    [observedKinds]
+  );
+  const needKindNote = `${kindNote} · research question is a UI-provided option — the backend allowlists kinds, a rejection surfaces verbatim`;
+
   const myOpenListings = useMemo(
     () => squareSelfId ? boardListings.filter((l) => l.from_participant === squareSelfId && l.status === "open") : [],
     [boardListings, squareSelfId]
@@ -1864,6 +1903,8 @@ token: j.token,
           setFilters={setFilters}
           kindOptions={kindOptions}
           kindNote={kindNote}
+          needKindOptions={needKindOptions}
+          needKindNote={needKindNote}
           squareAgreements={enrichedAgreements}
           agreementsError={agreementsError}
           suggestionList={suggestionList}
@@ -2839,6 +2880,244 @@ function ReviewMarker({ count }: { count: number }) {
   );
 }
 
+/** Short hash chip: first 12 hex chars, full hash in the title. Used on
+ *  every displayed number so each figure links back to its artifact. */
+function hashChip(label: string, full: string | undefined): ReactNode {
+  if (!full) return <span className="fine">{label} hash unavailable</span>;
+  return (
+    <span className="fine">{label}{" "}
+      <span className="mono" title={full}>{full.slice(0, 12)}…</span>
+    </span>
+  );
+}
+
+function fmtMse(v: number | undefined): string {
+  return typeof v === "number" ? v.toFixed(4) : "unavailable";
+}
+
+/** Reproducibility Lab — Room 001. Renders only the frozen room record
+ *  the backend published (GET /api/world/rooms/repro-lab-001); computes
+ *  nothing client-side. The negative result is stated plainly: under the
+ *  frozen decision rule, structured receipts did not improve on ordinary
+ *  sharing. */
+function ResearchRoomLab({
+  onSubmitPackage,
+}: {
+  onSubmitPackage: (pkg: ResearchPackage, sha: string) => Promise<NewsroomSubmitPackageResult | null>;
+}) {
+  const [room, setRoom] = useState<ResearchRoomDescribe | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState<string | null>(null);
+  const [demoBusy, setDemoBusy] = useState(false);
+  const [demoVerdict, setDemoVerdict] = useState<NewsroomSubmitPackageResult | null>(null);
+  const [demoNote, setDemoNote] = useState<string | null>(null);
+
+  useEffect(() => {
+    let live = true;
+    (async () => {
+      try {
+        const r = await researchApi.room();
+        if (live) { setRoom(r); setErr(null); }
+      } catch (e) {
+        if (live) setErr(e instanceof Error ? e.message : String(e));
+      } finally {
+        if (live) setLoading(false);
+      }
+    })();
+    return () => { live = false; };
+  }, []);
+
+  /** Build a minimal package, hash it, then flip one byte in the carried
+   *  study.py WITHOUT updating the hash, and hand both to the gate.
+   *  The receiver's byte binding must refuse it (ARTIFACT_HASH_MISMATCH)
+   *  and store nothing. */
+  const submitInvalidReceipt = async () => {
+    setDemoBusy(true);
+    setDemoVerdict(null);
+    setDemoNote(null);
+    try {
+      const files: Record<string, string> = {
+        "study.py": "# repro-lab-001 invalid-receipt demo\nprint(\"hello\")\n",
+      };
+      const pkg: ResearchPackage = {
+        manifest: {
+          schema: "openline.research.package.v1",
+          title: "Reproducibility Lab — invalid-receipt demo",
+          claim: "A demonstration package whose carried bytes were tampered with after hashing; the gate must refuse it.",
+          producer_id: "repro-lab-001",
+          files: { "study.py": { sha256: await sha256Hex(files["study.py"]) } },
+          expected_result: "",
+          reproduce: "python3 study.py",
+          citations: [],
+          limitations: "Demonstration only. The carried bytes are altered after the package hash is computed so the byte binding fails.",
+          producer_review: "",
+        },
+        files,
+      };
+      const goodSha = await sha256Hex(canonicalJson(pkg));
+      const tampered: ResearchPackage = {
+        manifest: pkg.manifest,
+        files: { ...files, "study.py": files["study.py"].replace('print("hello")', 'print("hellp")') },
+      };
+      const r = await onSubmitPackage(tampered, goodSha);
+      if (!r) {
+        setDemoNote("No verdict: the submission could not reach the gate (no custody client — join the world first). Nothing was stored.");
+      } else {
+        setDemoVerdict(r);
+      }
+    } catch (e) {
+      setDemoNote(`Demo failed before reaching the gate: ${e instanceof Error ? e.message : String(e)}. Nothing was stored.`);
+    } finally {
+      setDemoBusy(false);
+    }
+  };
+
+  const m = room?.room;
+  const results = room?.results;
+  const conditions = results?.conditions ?? {};
+  const condOrder = ["A", "B", "C"].filter((c) => conditions[c]);
+  const replications = [...(room?.replications ?? [])].sort((a, b) =>
+    a.condition === b.condition ? (a.replication ?? 0) - (b.replication ?? 0) : a.condition.localeCompare(b.condition));
+  const artifactSha = (kind: string) => m?.artifacts?.find((a) => a.kind === kind)?.sha256;
+  const condLabel = (c: string) => c === "A" ? "independent" : c === "B" ? "ordinary sharing" : "receipt sharing";
+
+  return (
+    <section className="cg-lane" aria-label="Reproducibility Lab — Room 001">
+      <h4 className="cg-lanehead"><span className="cg-seal" aria-hidden />Reproducibility Lab — Room 001</h4>
+      {loading && <p className="fine">Loading the frozen room record…</p>}
+      {!loading && err && (
+        <p className="fine">The room record is not available from this backend build: {err}. Nothing is invented in its place.</p>
+      )}
+      {!loading && !err && m && (
+        <>
+          {/* 1. the question + the frozen protocol */}
+          <p><strong>{m.question}</strong></p>
+          <p className="fine">
+            Frozen {m.protocol_ref?.frozen ?? "2026-09-28"} · protocol sha256{" "}
+            <span className="mono" title={m.protocol_ref?.sha256}>{(m.protocol_ref?.sha256 ?? "").slice(0, 12)}…</span>
+          </p>
+          <details>
+            <summary className="fine">Frozen protocol — PROTOCOL.md (sha256 <span className="mono" title={m.protocol_ref?.sha256}>{(m.protocol_ref?.sha256 ?? "").slice(0, 12)}…</span>)</summary>
+            <pre className="mono fine nr-pre">{room?.protocol_markdown ?? "protocol text not published by this backend build"}</pre>
+          </details>
+
+          {/* 2. participants and actual roles */}
+          <h5 className="nr-subhead">Participants — actual roles</h5>
+          <ul className="cg-list">
+            {(m.participants ?? []).map((p) => (
+              <li key={p.id}>
+                <span className="mono">{p.id}</span>{" "}
+                <span className={`badge ${p.kind === "receiver" ? "ok" : ""}`}>{p.kind}</span>{" "}
+                <span className="fine">{p.role}</span>
+                {p.kind === "algorithmic-worker" && (
+                  <div className="fine"><strong>algorithmic worker — deterministic code, not an AI scientist.</strong> {p.description}</div>
+                )}
+                {p.kind !== "algorithmic-worker" && <div className="fine">{p.description}</div>}
+              </li>
+            ))}
+          </ul>
+
+          {/* 4. results for A/B/C — the verdict first, plainly */}
+          <h5 className="nr-subhead">Results</h5>
+          <p><strong>{m.verdict?.primary}</strong></p>
+          <p className="fine">{m.verdict?.detail}</p>
+          {condOrder.map((c) => {
+            const s = conditions[c];
+            return (
+              <dl className="parcel-facts" key={c}>
+                <div>
+                  <dt>Condition {c}</dt>
+                  <dd>
+                    {condLabel(c)} · mean MSE <span className="mono">{fmtMse(s.mean_mse)}</span> ±{" "}
+                    <span className="mono">{fmtMse(s.std_mse)}</span> (n={s.n}) · reached 0.05:{" "}
+                    {s.reached_0_05_count ?? "unavailable"}/10{s.overhead_pct_of_budget != null && (
+                      <> · receipt overhead <span className="mono">{s.overhead_pct_of_budget.toFixed(1)}%</span> of budget</>
+                    )} · rejections {s.total_rejections ?? "unavailable"} · invalid {s.invalid_count ?? "unavailable"}
+                  </dd>
+                </div>
+              </dl>
+            );
+          })}
+          <p>{hashChip("aggregate", artifactSha("aggregate"))} · {hashChip("experiment pin", results?.experiment_pin)}</p>
+
+          {/* 3. attempts, costs, records — per replication */}
+          <h5 className="nr-subhead">Attempts, costs, records — 30 replications</h5>
+          <details>
+            <summary className="fine">{replications.length} replications · condition · rep · master seed · best MSE · evals used · overhead evals · code hash</summary>
+            {replications.length === 0 ? (
+              <p className="fine">No replication records published by this backend build.</p>
+            ) : (
+              <ul className="cg-list">
+                {replications.map((r, i) => (
+                  <li key={i} className="mono fine">
+                    {r.condition} · rep {r.replication} · seed {r.master_seed ?? "unavailable"} · best MSE {fmtMse(r.best_mse)} ·{" "}
+                    evals {r.evaluations_used ?? "unavailable"} · overhead {r.overhead_evals ?? "unavailable"} ·{" "}
+                    code <span className="mono" title={r.code_hash}>{(r.code_hash ?? "").slice(0, 12)}…</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </details>
+
+          {/* 5. what the evidence supports / failed / remains unknown */}
+          <h5 className="nr-subhead">What the evidence supports</h5>
+          <ul className="cg-list">
+            <li className="fine">All 30 replications ran to completion and were valid under the frozen failure criteria: 0 invalid, 0 receipts rejected.</li>
+            <li className="fine">The experiment is deterministic: same frozen seeds produce the same outputs, verified by re-running after deleting the results.</li>
+            <li className="fine">Receipt overhead in condition C was measured, not assumed: mean 27.7 receiver evaluations, 6.9% of the 400-evaluation budget.</li>
+          </ul>
+          <h5 className="nr-subhead">What failed</h5>
+          <ul className="cg-list">
+            <li className="fine"><strong>The improvement hypothesis failed.</strong> Condition C mean MSE ({fmtMse(conditions["C"]?.mean_mse)}) did not beat condition B ({fmtMse(conditions["B"]?.mean_mse)}) by the frozen rule (C &lt; B − pooled SE); pooled SE was {fmtMse(results?.decision?.pooled_se)}.</li>
+          </ul>
+          <h5 className="nr-subhead">What remains unknown</h5>
+          <ul className="cg-list">
+            <li className="fine">Whether structured receipts help on other tasks, other budgets, or with other worker algorithms — this experiment tested one synthetic task.</li>
+            <li className="fine">Whether condition C's small speed advantage (median evals to 0.05: 48.5 vs 64 in B) is real or noise.</li>
+            <li className="fine">Whether receipts are useful in general — the workers were fixed algorithms, not autonomous scientists.</li>
+          </ul>
+
+          {/* 6. badges, applied honestly */}
+          <h5 className="nr-subhead">Badges</h5>
+          <ul className="cg-list">
+            <li><span className="badge ok">schema-valid</span> <span className="fine">{m.badges?.["schema-valid"]}</span></li>
+            <li><span className="badge no">not receiver-accepted</span> <span className="fine">The receiver never executed the experiment — it ran offline; the owner froze the protocol, ran the pinned code, and published the artifacts. The gate validated only the submitted package bytes, never the science.</span></li>
+            <li><span className="badge no">not scientifically-supported</span> <span className="fine">Improvement claim: the frozen decision rule was not met. {m.badges?.["scientifically-supported"]}</span></li>
+          </ul>
+          <p className="fine">{m.badges?.non_implication}</p>
+
+          {/* 7. interactive invalid-receipt demo */}
+          <h5 className="nr-subhead">Try the gate — invalid receipt demo</h5>
+          <p className="fine">
+            This builds a minimal package, computes its sha256, then flips one byte in the carried study.py
+            <em> without</em> updating the hash, and hands it to the receiver gate.
+            The gate should refuse it (ARTIFACT_HASH_MISMATCH) and store nothing.
+          </p>
+          <button
+            className="primary"
+            onClick={submitInvalidReceipt}
+            disabled={demoBusy}
+          >
+            {demoBusy ? "Submitting…" : "Submit an invalid receipt (bad signature)"}
+          </button>
+          {demoNote && <p className="fine">{demoNote}</p>}
+          {demoVerdict && (
+            <div className="cg-verdict" role="status">
+              <span className={`badge ${demoVerdict.decision === "ALLOWED" ? "ok" : demoVerdict.decision === "STOPPED" ? "no" : ""}`}>{demoVerdict.decision}</span>
+              {" "}<span className="fine mono">{shortId(demoVerdict.receipt_id)}</span>
+              {demoVerdict.reason_codes.length > 0 && <span className="fine"> · {demoVerdict.reason_codes.join(", ")}</span>}
+              <p className="fine">The receiver refused it. Nothing was stored.</p>
+            </div>
+          )}
+
+          {/* 8. authority note, verbatim */}
+          <p className="fine"><strong>Authority:</strong> {m.authority_note}</p>
+        </>
+      )}
+    </section>
+  );
+}
+
 function NewsroomReveal({
   newsroom, actingOwner, actingAgent, canAct, actingRevoked,
   openDispatchId, onOpenDispatch, nrBusy, nrVerdict,
@@ -3107,6 +3386,12 @@ function NewsroomReveal({
                 <p className="fine">Who may act now: {actingOwner} ({actingAgent}) · mandate includes newsroom.review: <strong>no</strong> · standing: <strong>{actingRevoked ? "revoked" : "current"}</strong>. Submitting a package needs the newsroom.review mandate.</p>
               )}
             </section>
+
+            {/* Reproducibility Lab — Room 001: the frozen room record,
+                rendered from GET /api/world/rooms/repro-lab-001. Frozen
+                protocol, participants, replications, honest negative
+                verdict, and an interactive invalid-receipt demo. */}
+            <ResearchRoomLab onSubmitPackage={onSubmitPackage} />
 
             {/* the report: owner-selected (fixture), recorded claims, cited sources */}
             {report && (
@@ -3419,6 +3704,8 @@ interface SquareModeProps {
   filters: BoardFilters; setFilters: (f: BoardFilters) => void;
   kindOptions: string[];
   kindNote: string;
+  needKindOptions: string[];
+  needKindNote: string;
   squareAgreements: WorldAgreement[];
   agreementsError: string | null;
   suggestionList: BoardSuggestion[];
@@ -3431,8 +3718,8 @@ interface SquareModeProps {
   setInspectVisitorId: (v: string | null) => void;
   inspectVisitor: WorldParticipant | null;
   visitorListings: WorldListing[];
-  postForm: { kind: string; title: string; detail: string };
-  setPostForm: (v: { kind: string; title: string; detail: string }) => void;
+  postForm: PostFormValue;
+  setPostForm: (v: PostFormValue) => void;
   squareBusy: string | null;
   squareNote: string | null; setSquareNote: (v: string | null) => void;
   pollText: string;
@@ -3784,6 +4071,7 @@ function SquareMode(p: SquareModeProps) {
                 listing={p.boardListings.find((l) => l.listing_id === p.inspectAgreement!.listing_id) ?? null}
                 selfId={selfId}
                 squareBusy={p.squareBusy}
+                creds={p.squareSession ? { participant_id: p.squareSession.participant_id, token: p.squareSession.token } : null}
                 onClose={() => p.setInspectAgreementId(null)}
                 onAgree={(id) => p.actOnAgreement(id, "agree")}
                 onDecline={(id) => p.actOnAgreement(id, "decline")}
@@ -3907,6 +4195,15 @@ function SquareMode(p: SquareModeProps) {
             {/* the exchange board, as a list */}
             <section className="world-panel" aria-label="Exchange board">
               <div className="panel-title">Exchange board</div>
+              {/* v0.1.3: the one invitation into the research-question path. */}
+              <p className="fine">
+                <button
+                  className="world-linkbtn"
+                  onClick={() => p.setFilters({ ...p.filters, kind: RESEARCH_QUESTION_KIND })}
+                >
+                  Explore a research question.
+                </button>
+              </p>
               <BoardListPanel {...boardProps} />
             </section>
 
@@ -3925,8 +4222,8 @@ function SquareMode(p: SquareModeProps) {
             {p.intent === "need" && (
               <PostForm
                 side="need"
-                kindOptions={p.kindOptions}
-                kindNote={p.kindNote}
+                kindOptions={p.needKindOptions}
+                kindNote={p.needKindNote}
                 form={p.postForm}
                 setForm={p.setPostForm}
                 busy={p.squareBusy}
@@ -4239,6 +4536,347 @@ function HonestyBadge({ listing, selfId }: { listing: WorldListing; selfId: stri
   return <span className="badge">{listing.from_display_name}</span>;
 }
 
+/* ---------- DISCOVERY-ROOM-001: the research-question loop ---------- */
+
+/** One disclosure row: the backend's verbatim string, or "not on record"
+ *  when the backend carries nothing for the field. Nothing is invented. */
+function DisclosureRow({ label, value }: { label: string; value: string | null | undefined }) {
+  return (
+    <div><dt>{label}</dt><dd>{value ? value : <span className="fine">not on record</span>}</dd></div>
+  );
+}
+
+/** The full disclosure set on a research-question listing. */
+function ResearchDisclosurePanel({ listing }: { listing: WorldListing }) {
+  const d: ResearchDisclosure | null = getResearchDisclosure(listing);
+  return (
+    <section aria-label="Research disclosure set">
+      <div className="panel-title">Research question — the full disclosure set</div>
+      <p className="fine">
+        Who is who: the poster carries their board badge above. In this demo the
+        room operator posts as owner (researcher, internal operator), and any
+        deterministic worker is labeled as a deterministic worker — not an AI
+        scientist.
+      </p>
+      {d ? (
+        <dl className="parcel-facts">
+          <DisclosureRow label="Proposed — what the listing asserts" value={d.proposed} />
+          <DisclosureRow label="Unproven — what remains open" value={d.unproven} />
+          <DisclosureRow label="Test spec — how it would be decided" value={d.test_spec} />
+          <DisclosureRow label="Requested contribution" value={d.required_contribution} />
+          <div>
+            <dt>Resource ceiling (simulated units)</dt>
+            <dd>
+              {d.resource_ceiling && d.resource_ceiling.amount != null ? (
+                <>{d.resource_ceiling.amount} {d.resource_ceiling.unit ?? RESEARCH_CEILING_UNIT}</>
+              ) : (
+                <span className="fine">not on record</span>
+              )}
+            </dd>
+          </div>
+          <div>
+            <dt>Acceptance criteria — frozen</dt>
+            <dd>
+              {d.acceptance_criteria && d.acceptance_criteria.length > 0 ? (
+                <ol className="fine">
+                  {d.acceptance_criteria.map((c, i) => <li key={i}>{c}</li>)}
+                </ol>
+              ) : (
+                <span className="fine">not on record</span>
+              )}
+            </dd>
+          </div>
+          <DisclosureRow label="Contributor receives" value={d.contributor_receives} />
+          <DisclosureRow label="Buyer receives" value={d.buyer_receives} />
+          <DisclosureRow label="Who may authorize / accept" value={d.authorized_by} />
+          <DisclosureRow label="Visibility terms" value={d.visibility_terms} />
+          <DisclosureRow label="Reuse terms" value={d.reuse_terms} />
+        </dl>
+      ) : (
+        <p className="fine">
+          The backend did not return a disclosure set for this listing — nothing
+          is reconstructed. (Older backend builds predate research-question
+          support.)
+        </p>
+      )}
+      <p className="fine">A receipt records an agreement; it does not establish intellectual-property rights or scientific truth.</p>
+      <p className="fine">Simulated funding only. No real payments.</p>
+      <p className="fine">Joining a room grants no additional authority.</p>
+    </section>
+  );
+}
+
+/** The receipt id inside a worker-signed authorization artifact, when one
+ *  is on record. */
+function authReceiptId(a: unknown): string | null {
+  if (!a || typeof a !== "object") return null;
+  const r = (a as { receipt?: unknown }).receipt;
+  if (r && typeof r === "object") {
+    const id = (r as { receipt_id?: unknown }).receipt_id;
+    return typeof id === "string" ? id : null;
+  }
+  return null;
+}
+
+/** The research side of an agreement: the agreed contribution, the
+ *  terms-acceptance artifacts, the preserved result, and the full history.
+ *  Everything reads verbatim from backend records. */
+function ResearchAgreementPanel({
+  agreement, listing, onOpenReceipt,
+}: {
+  agreement: WorldAgreement;
+  listing: WorldListing | null;
+  onOpenReceipt?: (receiptId: string, role: string | null) => void;
+}) {
+  const disclosure = listing ? getResearchDisclosure(listing) : null;
+  const result: ResearchResult | null = getResearchResult(agreement, listing);
+  const auths = agreement.authorizations ?? {};
+  const authRoles = Object.keys(auths);
+  const history = agreement.history ?? [];
+  return (
+    <section aria-label="Research agreement record">
+      <div className="panel-title">Research agreement — contribution, acceptance, result</div>
+      <dl className="parcel-facts">
+        <DisclosureRow
+          label="Agreed contribution"
+          value={disclosure?.required_contribution}
+        />
+        <div>
+          <dt>Terms acceptance</dt>
+          <dd>
+            {authRoles.length === 0 ? (
+              <span className="fine">no acceptance artifacts on record</span>
+            ) : (
+              <ul className="fine">
+                {authRoles.map((role) => {
+                  const rid = authReceiptId(auths[role]);
+                  return (
+                    <li key={role}>
+                      {role} — worker-signed presentation, evaluated by the gate
+                      {rid ? (
+                        <>; receipt{" "}
+                          {onOpenReceipt ? (
+                            <button className="world-linkbtn mono" onClick={() => onOpenReceipt(rid, role)}>
+                              open {shortId(rid)}
+                            </button>
+                          ) : (
+                            <span className="mono">{shortId(rid)}</span>
+                          )}
+                        </>
+                      ) : (
+                        <> — no receipt id on record</>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </dd>
+        </div>
+      </dl>
+      {result?.payload ? (
+        <>
+          <div className="panel-title">Preserved result — gate-signed</div>
+          <dl className="parcel-facts">
+            <div>
+              <dt>Verification evidence</dt>
+              <dd>
+                {result.payload.verification ? (
+                  <>
+                    {result.payload.verification.artifacts_checked ?? <span className="fine">?</span>} artifacts checked,{" "}
+                    <span className={`badge ${(result.payload.verification.mismatches?.length ?? 0) === 0 ? "ok" : "no"}`}>
+                      {(result.payload.verification.mismatches?.length ?? 0) === 0 ? "hashes matched" : `${result.payload.verification.mismatches!.length} mismatched`}
+                    </span>
+                    {result.payload.verification.pin_match !== null && result.payload.verification.pin_match !== undefined && (
+                      <span className="fine"> · manifest pin {result.payload.verification.pin_match ? "matched" : "DID NOT MATCH"}</span>
+                    )}
+                    {result.payload.verification.manifest_sha256 && (
+                      <span className="fine mono"> · manifest {shortId(result.payload.verification.manifest_sha256)}</span>
+                    )}
+                    {(result.payload.verification.mismatches?.length ?? 0) > 0 && (
+                      <ul className="fine">
+                        {result.payload.verification.mismatches!.map((m, i) => (
+                          <li key={i} className="mono">{m.path ?? "?"} — {m.reason ?? "mismatch"}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </>
+                ) : (
+                  <span className="fine">not on record</span>
+                )}
+              </dd>
+            </div>
+            <div>
+              <dt>Experiment outcome — preserved, not re-run</dt>
+              <dd>
+                {result.payload.experiment_outcome ? (
+                  <>
+                    <strong>{result.payload.experiment_outcome.verdict ?? <span className="fine">no verdict on record</span>}</strong>
+                    {result.payload.experiment_outcome.conditions && (
+                      <ul className="fine mono">
+                        {(["A", "B", "C"] as const).map((c) => {
+                          const cond = result.payload!.experiment_outcome!.conditions![c];
+                          return cond ? (
+                            <li key={c}>{c}: {cond.mean_mse ?? "?"} ± {cond.std_mse ?? "?"} (n={cond.n ?? "?"})</li>
+                          ) : null;
+                        })}
+                      </ul>
+                    )}
+                    {result.payload.experiment_outcome.pooled_se != null && (
+                      <span className="fine">pooled SE {result.payload.experiment_outcome.pooled_se}</span>
+                    )}
+                    {result.payload.experiment_outcome.decision_rule && (
+                      <span className="fine"> · rule: {result.payload.experiment_outcome.decision_rule}</span>
+                    )}
+                    {result.payload.experiment_outcome.source && (
+                      <span className="fine mono"> · {result.payload.experiment_outcome.source}</span>
+                    )}
+                  </>
+                ) : (
+                  <span className="fine">not on record</span>
+                )}
+              </dd>
+            </div>
+            <div>
+              <dt>Accounting — simulated</dt>
+              <dd>
+                {result.payload.accounting ? (
+                  result.payload.accounting.linked ? (
+                    <>
+                      spent {result.payload.accounting.spent_units ?? "?"} of {result.payload.accounting.ceiling_units ?? "?"} {result.payload.accounting.unit ?? "simulated units"}
+                      <span className="fine"> (simulated — no real payments)</span>
+                      {result.payload.accounting.cap_exceeded && (
+                        <span className="badge no"> ceiling exceeded</span>
+                      )}
+                    </>
+                  ) : (
+                    <span className="fine">{result.payload.accounting.note ?? "no linked commission — no simulated cost recorded"}</span>
+                  )
+                ) : (
+                  <span className="fine">not on record</span>
+                )}
+              </dd>
+            </div>
+            {result.payload.note && (
+              <div><dt>Receiver's note</dt><dd>{result.payload.note}</dd></div>
+            )}
+            <div>
+              <dt>Gate signature</dt>
+              <dd>
+                {result.gate_signed?.signature ? (
+                  <span className="fine mono">
+                    {result.gate_signed.signature.algorithm ?? "Ed25519"} · key {shortId(result.gate_signed.signature.public_key ?? "")} · sig {shortId(result.gate_signed.signature.value ?? "")}
+                  </span>
+                ) : (
+                  <span className="fine">no signature on record</span>
+                )}
+              </dd>
+            </div>
+          </dl>
+        </>
+      ) : (
+        <p className="fine">
+          No result recorded yet — nothing is shown until the backend records
+          one at submit time.
+        </p>
+      )}
+      <div className="panel-title">Full history</div>
+      {history.length === 0 ? (
+        <p className="fine">no transitions on record</p>
+      ) : (
+        <ul className="fine">
+          {history.map((h, i) => (
+            <li key={i}><span className="ts">{h.at}</span> {h.status}</li>
+          ))}
+        </ul>
+      )}
+      <p className="fine">A receipt records an agreement; it does not establish intellectual-property rights or scientific truth.</p>
+      <p className="fine">Simulated funding only. No real payments.</p>
+    </section>
+  );
+}
+
+/** Demo refusal checks: real backend calls the demo names, refused for real.
+ *  The refusal record is the backend's own: reason code + detail, verbatim.
+ *  World-rule refusals mint no receipt and are unsigned — the backend's own
+ *  distinction, stated here rather than hidden. */
+function RefusalChecks({
+  agreement, selfId, creds,
+}: {
+  agreement: WorldAgreement;
+  selfId: string | null;
+  creds: { participant_id: string; token: string } | null;
+}) {
+  const [last, setLast] = useState<{ action: string; at: string; code: string; detail: string } | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
+  const status = (agreement.status || "").toLowerCase();
+  const iAmCounterpart = selfId !== null && agreement.counterpart === selfId;
+  const tryRefusal = async (action: "agree" | "submit") => {
+    if (!creds) {
+      setLast({ action, at: new Date().toISOString(), code: "NO_SESSION", detail: "no joined session — nothing was attempted" });
+      return;
+    }
+    setBusy(action);
+    try {
+      const r = await attemptRefusal(
+        `/agreements/${encodeURIComponent(agreement.agreement_id)}/${action}`,
+        { participant_id: creds.participant_id, token: creds.token }
+      );
+      if (r.refused) {
+        setLast({ action, at: new Date().toISOString(), code: r.code, detail: r.detail });
+      } else {
+        const st = (r.data as { status?: unknown } | null)?.status;
+        setLast({
+          action,
+          at: new Date().toISOString(),
+          code: "NOT_REFUSED",
+          detail: `the backend accepted it — status ${typeof st === "string" ? st : "unknown"}. The board refreshes on its poll; nothing here is final until the record lands.`,
+        });
+      }
+    } finally {
+      setBusy(null);
+    }
+  };
+  const canTry = creds !== null && status === "proposed";
+  return (
+    <section aria-label="Refusal checks">
+      <div className="panel-title">Refusal checks — real calls, real refusals</div>
+      <p className="fine">
+        Each button makes the real backend call the demo names. The refusal
+        shown is the backend's own record — reason code and detail, verbatim.
+      </p>
+      <div className="cg-control-btns">
+        {canTry && !iAmCounterpart && (
+          <button disabled={busy !== null} onClick={() => tryRefusal("agree")} title="Calls agree from this session — refused unless this session is the counterpart">
+            {busy === "agree" ? "Trying…" : "Try agreeing from this session"}
+          </button>
+        )}
+        {canTry && (
+          <button disabled={busy !== null} onClick={() => tryRefusal("submit")} title="Calls submit while the agreement is still proposed — refused">
+            {busy === "submit" ? "Trying…" : "Try submitting before agreement"}
+          </button>
+        )}
+      </div>
+      {!canTry && (
+        <p className="fine">Refusal checks need a joined session and a proposed agreement — nothing is simulated.</p>
+      )}
+      {last && (
+        <div className="refusal-record">
+          <p>
+            <span className={`badge ${last.code === "NOT_REFUSED" ? "ok" : "no"}`}>
+              {last.code === "NOT_REFUSED" ? "not refused" : "refused"}
+            </span>{" "}
+            <span className="fine mono">{last.at}</span>
+          </p>
+          <p className="fine">attempted: {last.action}</p>
+          <p>reason code: <span className="mono">{last.code}</span></p>
+          {last.detail && <p className="fine">{last.detail}</p>}
+        </div>
+      )}
+    </section>
+  );
+}
+
 function BoardListPanel({
   listings, allListings, filters, onFilters, kindOptions, kindNote,
   selfId, boardSource, boardError, suggestions, suggestError, hasOwnPost, onInspect,
@@ -4332,6 +4970,7 @@ function BoardListPanel({
                   <span className="board-item-side">{l.side === "need" ? "need" : "offer"}</span>
                   <strong>{l.title}</strong>
                   <span className="fine">{l.kind} · {listingStatusWord(l)}</span>
+                  {isResearchQuestion(l.kind) && <span className="badge badge-research">research question</span>}
                   {l.detail && <span className="fine board-item-detail">{l.detail}</span>}
                 </button>
                 <span className="board-item-from"><HonestyBadge listing={l} selfId={selfId} /></span>
@@ -4378,6 +5017,7 @@ function ListingInspect({
           <div><dt>Terms</dt><dd className="fine">{termsText}</dd></div>
           <div><dt>Who may act</dt><dd>{whoMayAct}</dd></div>
         </dl>
+        {isResearchQuestion(listing.kind) && <ResearchDisclosurePanel listing={listing} />}
         {sample && (
           <p className="fine">
             A seeded sample — it demonstrates the board. It is not a real participant
@@ -5063,13 +5703,15 @@ function AgreementsPanel({
 }
 
 function AgreementInspect({
-  agreement, listing, selfId, squareBusy, onClose, onAgree, onDecline, onSubmit, onOpenReceipt,
+  agreement, listing, selfId, squareBusy, creds, onClose, onAgree, onDecline, onSubmit, onOpenReceipt,
 }: {
   agreement: WorldAgreement;
   /** the listing's task record, from the board — null when it is gone */
   listing: WorldListing | null;
   selfId: string | null;
   squareBusy: string | null;
+  /** the viewing session's credentials, for the demo's refusal checks */
+  creds: { participant_id: string; token: string } | null;
   onClose: () => void;
   onAgree: (id: string) => void;
   onDecline: (id: string) => void;
@@ -5127,6 +5769,12 @@ function AgreementInspect({
             onOpenReceipt={onOpenReceipt}
           />
         </ul>
+        {isResearchQuestion(listing?.kind ?? agreement.task_kind) && (
+          <>
+            <ResearchAgreementPanel agreement={agreement} listing={listing} onOpenReceipt={onOpenReceipt} />
+            <RefusalChecks agreement={agreement} selfId={selfId} creds={creds} />
+          </>
+        )}
         <button className="primary" onClick={onClose}>Fold it closed</button>
       </div>
     </div>
@@ -5135,19 +5783,31 @@ function AgreementInspect({
 
 /* ---------- the square: posting ---------- */
 
+/** The post-a-need / offer form value. The `research` draft only applies
+ *  when kind is "research-question" (need side). */
+export interface PostFormValue {
+  kind: string;
+  title: string;
+  detail: string;
+  research: ResearchDisclosureDraft;
+}
+
 function PostForm({
   side, kindOptions, kindNote, form, setForm, busy, termsText, displayName, onPost,
 }: {
   side: "need" | "offer";
   kindOptions: string[];
   kindNote: string;
-  form: { kind: string; title: string; detail: string };
-  setForm: (v: { kind: string; title: string; detail: string }) => void;
+  form: PostFormValue;
+  setForm: (v: PostFormValue) => void;
   busy: string | null;
   termsText: string;
   displayName: string;
   onPost: () => void;
 }) {
+  const isResearch = side === "need" && form.kind === RESEARCH_QUESTION_KIND;
+  const setResearch = (k: keyof ResearchDisclosureDraft, v: string) =>
+    setForm({ ...form, research: { ...form.research, [k]: v } });
   return (
     <section className="world-panel" aria-label={side === "need" ? "Post a need" : "Offer work"}>
       <div className="panel-title">{side === "need" ? "Post a need" : "Offer work or a capability"}</div>
@@ -5174,6 +5834,56 @@ function PostForm({
           <input value={form.detail} onChange={(e) => setForm({ ...form, detail: e.target.value })} maxLength={160} />
         </label>
       </div>
+      {isResearch && (
+        <details className="research-disclosure-form" open>
+          <summary>Disclosure set — what a research question carries</summary>
+          <p className="fine">
+            What is proposed vs what remains unproven, the frozen criteria and
+            budget, who may authorize, and the visibility and reuse terms.
+            Stored verbatim on the listing — the backend requires every field.
+          </p>
+          <div className="world-offerform">
+            <label>Proposed — what the listing asserts
+              <input value={form.research.proposed} onChange={(e) => setResearch("proposed", e.target.value)} maxLength={600} placeholder="the claim being put forward" />
+            </label>
+            <label>Unproven — what remains open
+              <input value={form.research.unproven} onChange={(e) => setResearch("unproven", e.target.value)} maxLength={600} placeholder="what is not yet established" />
+            </label>
+            <label>Test spec — how it would be decided
+              <input value={form.research.test_spec} onChange={(e) => setResearch("test_spec", e.target.value)} maxLength={600} />
+            </label>
+            <label>Required contribution — what is requested
+              <input value={form.research.required_contribution} onChange={(e) => setResearch("required_contribution", e.target.value)} maxLength={600} />
+            </label>
+            <label>Resource ceiling — amount, in {RESEARCH_CEILING_UNIT} (simulated)
+              <input value={form.research.resource_ceiling_amount} onChange={(e) => setResearch("resource_ceiling_amount", e.target.value)} maxLength={12} inputMode="numeric" placeholder="e.g. 5000" />
+            </label>
+            <label>Acceptance criteria — frozen, one per line (1–8)
+              <textarea value={form.research.acceptance_criteria} onChange={(e) => setResearch("acceptance_criteria", e.target.value)} rows={3} maxLength={1800} placeholder={"C1: …\nC2: …"} />
+            </label>
+            <label>Contributor receives
+              <input value={form.research.contributor_receives} onChange={(e) => setResearch("contributor_receives", e.target.value)} maxLength={600} />
+            </label>
+            <label>Buyer receives
+              <input value={form.research.buyer_receives} onChange={(e) => setResearch("buyer_receives", e.target.value)} maxLength={600} />
+            </label>
+            <label>Authorized by — who may authorize / accept
+              <input value={form.research.authorized_by} onChange={(e) => setResearch("authorized_by", e.target.value)} maxLength={600} />
+            </label>
+            <label>Visibility terms
+              <input value={form.research.visibility_terms} onChange={(e) => setResearch("visibility_terms", e.target.value)} maxLength={600} />
+            </label>
+            <label>Reuse terms — must keep the verbatim disclaimer
+              <textarea value={form.research.reuse_terms} onChange={(e) => setResearch("reuse_terms", e.target.value)} rows={3} maxLength={800} />
+            </label>
+          </div>
+          <p className="fine">
+            A receipt records an agreement; it does not establish
+            intellectual-property rights or scientific truth. Simulated funding
+            only. No real payments.
+          </p>
+        </details>
+      )}
       <p className="world-terms"><strong>Terms:</strong> {termsText}</p>
       <button
         className="primary"

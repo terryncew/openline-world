@@ -364,6 +364,8 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(200, self.world.claimgraph_describe())
             elif self.path == "/api/world/newsroom":
                 self._send(200, self.world.newsroom_describe())
+            elif self.path == "/api/world/rooms/repro-lab-001":
+                self._send(200, self.world.repro_lab_room())
             elif self.path == "/api/world/challenge":
                 self._send(200, self.world.challenge())
             elif self.path.startswith("/api/world/receipts"):

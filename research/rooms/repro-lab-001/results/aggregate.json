@@ -1,0 +1,53 @@
+{
+  "budget": 400,
+  "conditions": {
+    "A": {
+      "invalid_count": 0,
+      "max_mse": 0.03668574540872008,
+      "mean_mse": 0.017645592864057476,
+      "mean_overhead_evals": 0,
+      "median_evals_to_0_05": 66.0,
+      "min_mse": 0.009853291155230415,
+      "n": 10,
+      "overhead_pct_of_budget": 0.0,
+      "reached_0_05_count": 10,
+      "std_mse": 0.007811525918668492,
+      "total_rejections": 0
+    },
+    "B": {
+      "invalid_count": 0,
+      "max_mse": 0.03144803032186587,
+      "mean_mse": 0.017671206132053512,
+      "mean_overhead_evals": 0,
+      "median_evals_to_0_05": 64.0,
+      "min_mse": 0.009662122676796754,
+      "n": 10,
+      "overhead_pct_of_budget": 0.0,
+      "reached_0_05_count": 10,
+      "std_mse": 0.007720395648191984,
+      "total_rejections": 0
+    },
+    "C": {
+      "invalid_count": 0,
+      "max_mse": 0.025631556541306885,
+      "mean_mse": 0.01688857691891849,
+      "mean_overhead_evals": 27.7,
+      "median_evals_to_0_05": 48.5,
+      "min_mse": 0.011065710271182869,
+      "n": 10,
+      "overhead_pct_of_budget": 6.925,
+      "reached_0_05_count": 10,
+      "std_mse": 0.005718315143494373,
+      "total_rejections": 0
+    }
+  },
+  "decision": {
+    "improved": false,
+    "mean_B": 0.017671206132053512,
+    "mean_C": 0.01688857691891849,
+    "pooled_se": 0.0030381513629991973,
+    "rule": "C improves on B iff mean_MSE(C) < mean_MSE(B) - pooled_SE"
+  },
+  "experiment_pin": "5a45c7add6646d60613c301d089b131ddf13e922b8c9db5e2dd55de6c61a40a8",
+  "replications": 10
+}

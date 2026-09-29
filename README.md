@@ -14,12 +14,13 @@ verdict, or proof that any real system is safe.
 
 ## Download
 
-**Latest prerelease: [v0.1.2](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2).**
-Verified distribution ZIP: `openline-world-v0.1.2-prerelease.zip`
-(SHA-256 `09667bcf2c9ac195bfa62900f489802f29bf94370d8de96d024d55beae8f7270`).
-v0.1.2 supersedes v0.1.1, whose tag and published asset did not match — the
-[v0.1.2 release notes](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2)
-record the recovery.
+**Latest prerelease: [v0.1.3](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.3).**
+Local developer preview. Verified distribution ZIP: `openline-world-v0.1.3-prerelease.zip`
+(SHA-256 in the release notes).
+v0.1.3 adds the research/discovery milestone (reproducibility lab,
+research-question listing on the Exchange board, manifest-binding
+enforcement). v0.1.2 stays intact.
+[v0.1.3 release notes](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.3)
 
 ![OpenLine World demo](assets/openline-world-demo.gif)
 
@@ -29,10 +30,10 @@ Prerequisites: Python 3.10+, Node ^20.19.0 or >=22.12.0, npm. Nothing is
 billed. No model calls.
 
 ```bash
-# 1. Download openline-world-v0.1.2-prerelease.zip from the link above
-# 2. Unzip it (the ZIP has no enclosing directory, so extract into one):
-unzip openline-world-v0.1.2-prerelease.zip -d openline-world-v0.1.2
-cd openline-world-v0.1.2
+# 1. Download openline-world-v0.1.3-prerelease.zip from the link above
+# 2. Unzip it:
+unzip openline-world-v0.1.3-prerelease.zip
+cd openline-world-v0.1.3
 # 3. Launch:
 ./launch-preview.sh
 ```
@@ -232,16 +233,23 @@ trademark rights and does not imply endorsement by OpenLine.
 
 ## Release provenance
 
-- **Current public prerelease:** [`openline-world-v0.1.2`](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2)
-- **Release commit:** `5345719d68e88043ea9d06213c5a2269c21786bf` (branch `release/v0.1.2`)
-- **Release archive SHA-256:** `09667bcf2c9ac195bfa62900f489802f29bf94370d8de96d024d55beae8f7270`
-- v0.1.2 was recovered from the preserved v0.1.1 archive (SHA-256 `3270248a…`)
-  after the v0.1.1 tag/asset mismatch; the full recovery record is in the
-  release notes and `RECOVERY.md` on the `release/v0.1.2` branch. v0.1.1 is
-  marked superseded.
-- **Earlier prerelease:** `openline-world-v0.1.0` (commit `671598c`, archive
+- **Current public prerelease:** [`openline-world-v0.1.3`](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.3)
+- **Release commit:** the commit tagged `openline-world-v0.1.3` (branch `release/v0.1.3`)
+- **Release archive SHA-256:** recorded in the release notes (verified by
+  re-download after publication)
+- v0.1.3 adds the research/discovery milestone: reproducibility lab,
+  research-question listing on the Exchange board, manifest-binding
+  enforcement (`RESEARCH_MANIFEST_PIN_MISMATCH`), handoff documents, and
+  the first-run guide. Claim ceiling: synthetic experiment, internally
+  operated participants, simulated funding, no demonstrated advantage over
+  ordinary sharing, arbitrary submitted-code execution disabled.
+- **Earlier prereleases:** `openline-world-v0.1.2` (commit `5345719d68e88043ea9d06213c5a2269c21786bf`, archive
+  SHA-256 `09667bcf2c9ac195bfa62900f489802f29bf94370d8de96d024d55beae8f7270`)
+  — kept intact; `openline-world-v0.1.0` (commit `671598c`, archive
   SHA-256 `c50945f1b0832c3035845e06561f9544582d289b6d27089b14b3fa0108726521`)
-  — kept intact.
+  — kept intact. v0.1.1 remains marked superseded (tag/asset mismatch,
+  recorded in the v0.1.2 release notes and `RECOVERY.md` on the
+  `release/v0.1.2` branch).
 - v0.1.0 was exported history-free from the reviewed internal artifact. The private development history is intentionally not included in this public repository.
 - Detailed source lineage, internal provenance references, and this distribution's source digest are recorded in `SOURCE-MANIFEST.md`. Those records document where the release came from; they are not a claim of independent review.
 

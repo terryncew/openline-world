@@ -385,7 +385,7 @@ export const BUNDLE_SCHEMA = "openline.wallet.receiver_bundle.v1";
 export const PRESENTATION_SCHEMA = "openline.wallet.holder_presentation.v1";
 export const JOIN_PROFILE_VERSION = "openline-join-profile/v1";
 
-export const SUPPORTED_SCOPES = ["notes.read", "notes.write", "draft.write", "claimgraph.correct", "newsroom.review"] as const;
+export const SUPPORTED_SCOPES = ["notes.read", "notes.write", "draft.write", "claimgraph.correct", "newsroom.review", "research.verify"] as const;
 export type Scope = (typeof SUPPORTED_SCOPES)[number];
 
 /** All supported scopes: the bound of this preview. Every one is an
@@ -396,6 +396,7 @@ export const TASK_KINDS: Record<string, string> = {
   "tidy-notes": "notes.write",
   summarize: "notes.read",
   draft: "draft.write",
+  "research-question": "research.verify",
 };
 
 const ID_RE = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/;

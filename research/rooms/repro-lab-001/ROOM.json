@@ -1,0 +1,263 @@
+{
+  "artifacts": [
+    {
+      "kind": "protocol",
+      "path": "PROTOCOL.md",
+      "sha256": "8262743816e83ecdfbc55208bb9a7e0816c927a40ef0927f516919676cbb4e26"
+    },
+    {
+      "kind": "experiment-code",
+      "path": "experiment.py",
+      "sha256": "5a45c7add6646d60613c301d089b131ddf13e922b8c9db5e2dd55de6c61a40a8"
+    },
+    {
+      "kind": "experiment-code",
+      "path": "run_all.py",
+      "sha256": "34aa8530378209791c35948dc214171403aacaf934acbfe5f0d517d0cf3bb44f"
+    },
+    {
+      "kind": "pin",
+      "path": "EXPERIMENT.PIN",
+      "sha256": "8c0a5b1d1e6770d4c09b8e37effae527c86f3db3e7c291415ee8e48d56897a57"
+    },
+    {
+      "kind": "room-manifest",
+      "path": "ROOM.json",
+      "sha256": "c88720266514ebf4d88034da1416d9f68a59bd5da4da5665e5e4590c3ed8b005"
+    },
+    {
+      "kind": "report",
+      "path": "REPORT.md",
+      "sha256": "6c6aa697e610f86a7d1265e749bb964736855780c7314c2117a399beb16e2bdb"
+    },
+    {
+      "kind": "acceptance-record",
+      "path": "acceptance-probe.json",
+      "sha256": "dd6c82aab52626d00d1c336f05e054e0ad12b4ffbb2e197d2e151491d3be4db8"
+    },
+    {
+      "kind": "aggregate",
+      "path": "results/aggregate.json",
+      "sha256": "f86adaa741789088a035d2458219dd93a9fe091b259d283779630b5c2a0f407f"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_1.json",
+      "sha256": "6ec470902de4543f43ac660dce767ecd8ea31876093ceca01aa89b03871c5ce7"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_2.json",
+      "sha256": "af56703fdb60ee243c87649f1f302d1951b476350dde5ce34dc509f0b4060788"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_3.json",
+      "sha256": "62d93873c62c0c00dcba7f5175f406728746a4af37e391b06a1cbd6619d2c5aa"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_4.json",
+      "sha256": "8718f05822a91fa8032d9e97ce5e84e93529dbb11e58e66e7a2c7c0cd73120e0"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_5.json",
+      "sha256": "85992b80d7e599bcb1a26e1d972f360b5fa2700e6bc777d7f2cd7f2afd22cebf"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_6.json",
+      "sha256": "dbc580871aed2666772fe04eabd9be1c43e56d4b3ea574ae067ab47a1ead065f"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_7.json",
+      "sha256": "fdbb971ea9c91b7cc583d7f0c2aa9e90f0d242ba4d7a77603055bc4d032ee457"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_8.json",
+      "sha256": "de66daba9495188b0f50b4e4a5f0f3245f8a44f93115b15d893ee175b66c9d72"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_9.json",
+      "sha256": "cabecb74b22d1e3aac5e48e158b177d6c455e5abb7285cfc83d8a9616729c3b5"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_A_rep_10.json",
+      "sha256": "1917604f1b14ca99360f666505bd62c2e6a0409d7f08632d8bdb3c2773ac9a3a"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_1.json",
+      "sha256": "e423713dba6724562cb1b6a4b58b17c688372e5e53950f524685e903cca1a188"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_2.json",
+      "sha256": "b514c74132f2e84a7f83a9f946892ccca4bafe72df690fd5f0a3e2777e0bec3b"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_3.json",
+      "sha256": "c5f57c5b1f464a8b44f7545483283c76f7ad1c26f6a0550c5348976248139a02"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_4.json",
+      "sha256": "6b4848b96428db9eb516c4962349b19d144372155fa6942b4e6dc7578bf74002"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_5.json",
+      "sha256": "60386deb7a791904e1aa9d9e746a8ab837caee37c06fb9e660e09e6c1f43ee67"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_6.json",
+      "sha256": "00ee0c8bfa754080d150081a5f7518055f770c9816c86cadef4777a00ed63ca7"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_7.json",
+      "sha256": "819d18a2e36315fdeb411cc34d4853dc0796718813eae0fc6dd476d0dd1f230d"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_8.json",
+      "sha256": "9d4f61cdf593adb88dcab2ea4d16063df9c9fd2655b78a31982d3732e5b377a2"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_9.json",
+      "sha256": "52629c3a25e8f7bddcfe97c26b8b47c56d5eea450a965cdad63af1ecb7226790"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_B_rep_10.json",
+      "sha256": "bef90ed749d997c4be789de23725a378ead07449c2f8b3396df9fcf2f73fa8ad"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_1.json",
+      "sha256": "f3c4e09f745ec22e104db064b0b5e9d6017c7f440a7bf088714f492cfaab6917"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_2.json",
+      "sha256": "cbc0857c2ec2ab3b69e37c41014c25d60d0b9452bd3c7a7464d4b906b04dc1bc"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_3.json",
+      "sha256": "f268cf9dd921a7e6532fefefeb44ec2791e7866e602e283467d1ea20c4510488"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_4.json",
+      "sha256": "8bfd6f81418ee8f87ba6c5e9da94ae6c5504e9019e23d6486b50c611f751dd64"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_5.json",
+      "sha256": "2fbaae3b6ab55aa74558ad7a39abb03cf20e12fe8d81860c4189dc96d835d07c"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_6.json",
+      "sha256": "9966a1af89cb4ea37b6025afc97a124198ba247f1529c5b2b9445df555d7fd59"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_7.json",
+      "sha256": "342beccf2ee78cc3199b524741ac2c5278fa71300d50f67a6289bfaf664467c2"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_8.json",
+      "sha256": "eef0c347078def82f9670f1ddc94500c04328d6099eccf480b56c6daa86482db"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_9.json",
+      "sha256": "fba69ad067622f974670b04841ede91e4a9acbe2d9d584ebd50b6c528ea5bf07"
+    },
+    {
+      "kind": "result",
+      "path": "results/cond_C_rep_10.json",
+      "sha256": "541b9e2478b278f5b784499b4beb383f429dd109d0f59443ff116f6e644c6ab3"
+    },
+    {
+      "kind": "schema",
+      "path": "../MANIFEST-SCHEMA.md",
+      "sha256": "4ba4bef9c9ceb60d754ff9cfe9d74d42857959e8f19da9136b5a6d08d7371b83"
+    },
+    {
+      "kind": "capture",
+      "path": "capture/room-isolated.png",
+      "sha256": "d292e7d334547d0821fe2e50563e08b7d002808a13161245df14162153b47997"
+    }
+  ],
+  "authority_note": "Room membership grants no spending, execution, or publication authority. The receiver owns acceptance; the room displays frozen records.",
+  "badges": {
+    "non_implication": "None of these implies the others. A schema-valid artifact may fail receiver acceptance; a receiver-accepted package may make a false claim; a statistically met threshold is not scientific truth.",
+    "receiver-accepted": "The receiver's gate allowed the action and its checks passed on the pinned bytes.",
+    "schema-valid": "The artifact parses and its fields match the declared schema.",
+    "scientifically-supported": "The frozen protocol's decision rule was not met for the improvement claim."
+  },
+  "evidence_manifest_sha256": "604fe0d39639481e36d7e6e03c75ec9a2220d27649d1569bdae1566f653c42f7",
+  "participants": [
+    {
+      "description": "Deterministic seeded random search with local refinement. Algorithmic worker, not an AI scientist. Same algorithm in all conditions; only the sharing mechanism differs.",
+      "id": "worker-0",
+      "kind": "algorithmic-worker",
+      "role": "search worker"
+    },
+    {
+      "description": "Deterministic seeded random search with local refinement. Algorithmic worker, not an AI scientist.",
+      "id": "worker-1",
+      "kind": "algorithmic-worker",
+      "role": "search worker"
+    },
+    {
+      "description": "Deterministic seeded random search with local refinement. Algorithmic worker, not an AI scientist.",
+      "id": "worker-2",
+      "kind": "algorithmic-worker",
+      "role": "search worker"
+    },
+    {
+      "description": "Deterministic seeded random search with local refinement. Algorithmic worker, not an AI scientist.",
+      "id": "worker-3",
+      "kind": "algorithmic-worker",
+      "role": "search worker"
+    },
+    {
+      "description": "Validates structured receipts in condition C (schema, Ed25519 signature, score recomputation, hash chain) before they enter the shared log. Owns acceptance; grants no execution authority to workers.",
+      "id": "receiver",
+      "kind": "receiver",
+      "role": "receipt validator"
+    },
+    {
+      "description": "Froze the protocol before any runs, ran the pinned experiment offline, and published the frozen artifacts. The receiver did not execute the experiment code.",
+      "id": "owner",
+      "kind": "owner",
+      "role": "researcher"
+    }
+  ],
+  "protocol_ref": {
+    "frozen": "2026-09-28",
+    "note": "sha256 is of PROTOCOL.md before its freeze stamp (the hash recorded in the stamp).",
+    "path": "PROTOCOL.md",
+    "sha256": "2ba607e0eb6166b28fa4d83130448e0632b1bd0e1cced752380e5c20e2fbffe3"
+  },
+  "question": "Does structured receipt exchange improve a bounded computational search task versus ordinary result sharing?",
+  "room_id": "repro-lab-001",
+  "title": "Reproducibility Lab \u2014 Room 001",
+  "verdict": {
+    "detail": "Condition C mean MSE 0.0169 vs condition B mean MSE 0.0177; pooled SE 0.0030. The frozen decision rule (C < B - pooled_SE) was not met. See REPORT.md.",
+    "primary": "Structured receipts did not improve on ordinary sharing in this experiment."
+  }
+}

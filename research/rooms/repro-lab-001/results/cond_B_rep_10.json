@@ -1,0 +1,24 @@
+{
+  "best_mse": 0.03144803032186587,
+  "budget": 400,
+  "code_hash": "5a45c7add6646d60613c301d089b131ddf13e922b8c9db5e2dd55de6c61a40a8",
+  "condition": "B",
+  "evals_to_reach_0_05": 187,
+  "evaluations_used": 400,
+  "master_seed": 1010,
+  "overhead_evals": 0,
+  "protocol_frozen_hash": "2ba607e0eb6166b28fa4d83130448e0632b1bd0e1cced752380e5c20e2fbffe3",
+  "replication": 10,
+  "theta_star": [
+    1.5,
+    -2.0,
+    0.75,
+    3.25
+  ],
+  "validation": {
+    "input_hash": "3230ddded7c7705198efef2f35b194fcd33bc7bc9ede5935c253e29794bb81dc",
+    "n": 100,
+    "seed": 777002
+  },
+  "worker_algorithm": "deterministic seeded random search with local refinement (algorithmic workers, not AI scientists); see PROTOCOL.md"
+}

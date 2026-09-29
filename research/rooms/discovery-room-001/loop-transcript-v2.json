@@ -1,0 +1,134 @@
+{
+  "version": 2,
+  "steps": [
+    {
+      "step": "participants joined",
+      "owner": "owner-researcher",
+      "contributor": "verifier-1",
+      "observer": "observer-3",
+      "note": "all labeled internal operators; deterministic test clients"
+    },
+    {
+      "step": "listing v2 posted (need, real API)",
+      "need_id": "need-0330b96ce8bd",
+      "kind": "research-question",
+      "manifest_pin_declared": "c4aa89ffd798948459a5b1e9c2909584ff1d654b136f97b14cb6e5e096116533"
+    },
+    {
+      "step": "board() exposes the disclosure set",
+      "disclosure_fields": [
+        "acceptance_criteria",
+        "authorized_by",
+        "buyer_receives",
+        "contributor_receives",
+        "proposed",
+        "required_contribution",
+        "resource_ceiling",
+        "reuse_terms",
+        "test_spec",
+        "unproven",
+        "visibility_terms"
+      ]
+    },
+    {
+      "step": "agreement proposed by contributor",
+      "agreement_id": "agr-84b3f39b2dfb",
+      "status": "proposed"
+    },
+    {
+      "step": "commission frozen + started on the existing simulated ledger",
+      "contract_id": "ctr-f99e3a38354d8ef5",
+      "commission_id": "com-45617f3a4900ca45",
+      "reserved_cents": 1000
+    },
+    {
+      "step": "listing owner agreed (counterpart's explicit act)",
+      "agreement_id": "agr-84b3f39b2dfb",
+      "status": "agreed"
+    },
+    {
+      "step": "submitted through the receiver (binding enforced, pin matched)",
+      "decision": "ALLOWED",
+      "transaction_id": "tx-40d207c8f2a7",
+      "verification_matches": "40/40",
+      "pin_match": true,
+      "manifest_sha256": "c4aa89ffd798948459a5b1e9c2909584ff1d654b136f97b14cb6e5e096116533",
+      "verdict": "C did not beat B",
+      "spent_units": 4,
+      "ceiling_units": 10
+    },
+    {
+      "step": "deliverable submitted; commission settled (simulated funds moved)",
+      "outcome": "accepted",
+      "settlement_id": "stl-42b3516009d4e1bd",
+      "seller_payout_cents": 400,
+      "buyer_release_cents": 600
+    }
+  ],
+  "listing_id": "need-0330b96ce8bd",
+  "agreement_id": "agr-84b3f39b2dfb",
+  "commission_id": "com-45617f3a4900ca45",
+  "transaction_id": "tx-40d207c8f2a7",
+  "result": {
+    "kind": "research-question-result",
+    "agreement_id": "agr-84b3f39b2dfb",
+    "listing_id": "need-0330b96ce8bd",
+    "verification": {
+      "room": "research/rooms/repro-lab-001",
+      "manifest_file": "EVIDENCE-MANIFEST.json",
+      "manifest_sha256": "c4aa89ffd798948459a5b1e9c2909584ff1d654b136f97b14cb6e5e096116533",
+      "manifest_sha256_pinned": "c4aa89ffd798948459a5b1e9c2909584ff1d654b136f97b14cb6e5e096116533",
+      "pin_match": true,
+      "artifacts_listed": 40,
+      "artifacts_checked": 40,
+      "matches": 40,
+      "mismatches": [],
+      "checked_at": "2026-09-29T00:15:02.057253+00:00"
+    },
+    "experiment_outcome": {
+      "source": "research/rooms/repro-lab-001/aggregate.json",
+      "budget": 400,
+      "replications": 10,
+      "conditions": {
+        "A": {
+          "mean_mse": "0.017645592864057476",
+          "std_mse": "0.007811525918668492",
+          "n": 10
+        },
+        "B": {
+          "mean_mse": "0.017671206132053512",
+          "std_mse": "0.007720395648191984",
+          "n": 10
+        },
+        "C": {
+          "mean_mse": "0.01688857691891849",
+          "std_mse": "0.005718315143494373",
+          "n": 10
+        }
+      },
+      "decision_rule": "C improves on B iff mean_MSE(C) < mean_MSE(B) - pooled_SE",
+      "pooled_se": "0.0030381513629991973",
+      "improved": false,
+      "verdict": "C did not beat B"
+    },
+    "accounting": {
+      "linked": true,
+      "commission_id": "com-45617f3a4900ca45",
+      "op": "evidence.verify",
+      "units": 4,
+      "rate_cents": 100,
+      "spent_cents": 400,
+      "spent_units": 4,
+      "ceiling_cents": 1000,
+      "ceiling_units": 10,
+      "unit": "simulated-compute-units",
+      "simulated": true,
+      "recorded_cost_cents": 400,
+      "cap_exceeded": false,
+      "event_id": "ce-4e32d583562210c5"
+    },
+    "note": "The recorded UNFAVORABLE experiment outcome (C did not beat B) completes the loop; it is not a loop failure.",
+    "recorded_at": "2026-09-29T00:15:02.057739+00:00"
+  },
+  "binding_defect_note": "v1 settlement stl-4431fbaca0bf1f7e (agreement agr-3c035b646ce2) is documented as affected by the manifest-binding defect: the v1 listing declared stale pin 604fe0d3..., the receiver recorded pin_match:false, and v1 submit settled anyway. v1 records are preserved unchanged; see ROOM.json defect record."
+}

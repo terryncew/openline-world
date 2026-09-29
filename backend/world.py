@@ -224,11 +224,50 @@ JOIN_PROFILE_VERSION = "openline-join-profile/v1"
 # Allowlisted harmless task kinds -> the existing supported action the
 # ACCEPTOR's agent proposes through the ACCEPTOR's own gate. Offer detail is
 # untrusted; this mapping is the only thing that reaches the receiver.
+#
+# "research-question" is a LISTING KIND on this same Exchange board (there
+# is no separate discovery board). It maps to "research.verify", a harmless
+# evaluation-only action: the gate evaluates the participant's presentation
+# exactly like any other kind. The actual research work (evidence-manifest
+# hash verification) runs as deterministic RECEIVER code inside submit() --
+# no worker-submitted code ever executes.
 TASK_KINDS = {
     "tidy-notes": "notes.write",
     "summarize": "notes.read",
     "draft": "draft.write",
+    "research-question": "research.verify",
 }
+# Disclosure set required on every "research-question" listing. The listing
+# is a question plus its terms: what is claimed, what stays unproven, the
+# test specification, the contribution asked for, the resource ceiling (in
+# simulated units -- the commission ledger's unit, never real money), the
+# acceptance criteria, what each side receives, who authorized the listing,
+# and the visibility/reuse terms. Stored on the listing record (retrievable
+# via board()) and packed into the listing detail as readable markdown so
+# the existing board UI displays it with no frontend change.
+RESEARCH_DISCLOSURE_TEXT_FIELDS = (
+    "proposed",
+    "unproven",
+    "test_spec",
+    "required_contribution",
+    "contributor_receives",
+    "buyer_receives",
+    "authorized_by",
+    "visibility_terms",
+)
+RESEARCH_DISCLOSURE_TEXT_MAX = 600
+RESEARCH_DISCLOSURE_CRITERION_MAX = 200
+RESEARCH_DISCLOSURE_CRITERIA_MAX = 8
+RESEARCH_REUSE_TERMS_MAX = 800
+# Verbatim IP/scientific-truth disclaimer required in every
+# research-question listing's reuse_terms (and in the room manifest).
+RESEARCH_REUSE_DISCLAIMER = (
+    "A receipt records an agreement; it does not establish "
+    "intellectual-property rights or scientific truth."
+)
+# The only unit a research-question resource ceiling may name: the
+# commission system's simulated unit. Simulated funding only.
+RESEARCH_CEILING_UNIT = "simulated-compute-units"
 # Scopes a join profile may request in this preview. All map to harmless,
 # evaluation-only actions through the participant's own gate.
 # "claimgraph.correct" authorizes the claim-graph demo control: posting a
@@ -239,9 +278,13 @@ TASK_KINDS = {
 # incoming article/correction as a dispatch, and accepting or declining a
 # proposed connection to the report. Both actions are evaluated by the
 # participant's own gate; only an ALLOWED verdict records anything.
+# "research.verify" authorizes the research-question lane: proposing,
+# agreeing, and submitting agreements on research-question listings. The
+# action itself is harmless and evaluation-only; the evidence verification
+# runs as deterministic receiver code inside submit().
 SUPPORTED_SCOPES = {"notes.read", "notes.write", "draft.write", "claimgraph.correct",
                     "newsroom.review", "commission.report-cost",
-                    "commission.submit-deliverable"}
+                    "commission.submit-deliverable", "research.verify"}
 # Parties that transaction terms may name as required authorizers. Both
 # resolve to the listing's poster session: "offerer" for offer listings,
 # "needer" for need listings -- side-specific spellings of the same role,
@@ -400,6 +443,15 @@ def _receipt_id(receipt: dict[str, Any]) -> str:
     sig = receipt.get("signature") or {}
     value = sig.get("value", "") if isinstance(sig, dict) else ""
     return str(value)[:16]
+
+
+def _disclosure_ref(disclosure: dict[str, Any] | None) -> str | None:
+    """Stable idempotency-ref component for a listing disclosure set."""
+    if disclosure is None:
+        return None
+    return hashlib.sha256(
+        json.dumps(disclosure, sort_keys=True, separators=(",", ":"),
+                   ensure_ascii=False).encode("utf-8")).hexdigest()
 
 
 def _public_receipt(receipt: dict[str, Any]) -> dict[str, Any]:
@@ -840,7 +892,8 @@ class World:
 
     # -- layer 1: listings (offers and needs) ----------------------------------
     @staticmethod
-    def _clean_task(task: Any) -> tuple[str, str, str, list[str]]:
+    def _clean_task(task: Any) -> tuple[str, str, str, list[str],
+                                        dict[str, Any] | None]:
         """Validate a posted task. The detail is UNTRUSTED input: it is
         stored for display and never reaches a receiver except through the
         allowlisted TASK_KINDS mapping at evaluation time."""
@@ -858,7 +911,69 @@ class World:
         if (not isinstance(requires, list) or len(requires) > 4
                 or any(r not in REQUIRES_PARTIES for r in requires)):
             raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "task.terms.requires")
-        return kind, title, detail, list(requires)
+        disclosure = World._clean_disclosure(kind, task.get("disclosure"))
+        return kind, title, detail, list(requires), disclosure
+
+    @staticmethod
+    def _clean_disclosure(kind: str, raw: Any) -> dict[str, Any] | None:
+        """Validate the research-question disclosure set.
+
+        The disclosure is UNTRUSTED display text: it is stored on the
+        listing for the board() API and the UI, and never reaches a
+        receiver except as data the receiver's own code reads back (the
+        manifest pin). Only the "research-question" kind may carry one.
+        """
+        if kind != "research-question":
+            if raw is not None:
+                raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                     "task.disclosure")
+            return None
+        if not isinstance(raw, dict):
+            raise WorldRuleError("WORLD_RULE_DISCLOSURE_REQUIRED",
+                                 "research-question listings must carry "
+                                 "a disclosure set")
+        expected = set(RESEARCH_DISCLOSURE_TEXT_FIELDS) | {
+            "resource_ceiling", "acceptance_criteria", "reuse_terms"}
+        if set(raw.keys()) != expected:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "task.disclosure fields")
+        clean: dict[str, Any] = {}
+        for name in RESEARCH_DISCLOSURE_TEXT_FIELDS:
+            clean[name] = WorldRules.moderate_text(
+                raw.get(name), RESEARCH_DISCLOSURE_TEXT_MAX,
+                f"task.disclosure.{name}")
+        ceiling = raw.get("resource_ceiling")
+        if not isinstance(ceiling, dict):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "task.disclosure.resource_ceiling")
+        amount = ceiling.get("amount")
+        if (isinstance(amount, bool) or not isinstance(amount, int)
+                or amount < 1):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "task.disclosure.resource_ceiling.amount")
+        if ceiling.get("unit") != RESEARCH_CEILING_UNIT:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "task.disclosure.resource_ceiling.unit")
+        clean["resource_ceiling"] = {
+            "amount": amount, "unit": RESEARCH_CEILING_UNIT}
+        criteria = raw.get("acceptance_criteria")
+        if (not isinstance(criteria, list) or not criteria
+                or len(criteria) > RESEARCH_DISCLOSURE_CRITERIA_MAX
+                or any(not isinstance(c, str) or not c.strip()
+                       or len(c) > RESEARCH_DISCLOSURE_CRITERION_MAX
+                       for c in criteria)):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "task.disclosure.acceptance_criteria")
+        clean["acceptance_criteria"] = [c.strip() for c in criteria]
+        reuse = WorldRules.moderate_text(
+            raw.get("reuse_terms"), RESEARCH_REUSE_TERMS_MAX,
+            "task.disclosure.reuse_terms")
+        if RESEARCH_REUSE_DISCLAIMER not in reuse:
+            raise WorldRuleError("WORLD_RULE_DISCLAIMER_REQUIRED",
+                                 "reuse_terms must carry the verbatim "
+                                 "IP/scientific-truth disclaimer")
+        clean["reuse_terms"] = reuse
+        return clean
 
     def _open_listing_count(self, participant_id: str) -> int:
         """Open offers AND needs count together toward the per-participant cap."""
@@ -869,6 +984,7 @@ class World:
     def _create_listing(self, session: ParticipantSession, side: str,
                         kind: str, title: str, detail: str,
                         requires: list[str],
+                        disclosure: dict[str, Any] | None = None,
                         authorization: dict[str, Any] | None = None) -> dict[str, Any]:
         """Commit one open listing. A listing is a proposal only -- it
         obligates nobody and authorizes nothing. The optional authorization
@@ -890,6 +1006,11 @@ class World:
             "from_kind": session.kind,
             "task": {"kind": kind, "title": title, "detail": detail},
             "terms": {"requires": list(requires)},
+            # The research-question disclosure set (None for other kinds).
+            # Retrievable via board(); the detail carries the same content
+            # as readable markdown for the existing UI.
+            "disclosure": (copy.deepcopy(disclosure)
+                           if disclosure is not None else None),
             "status": "open",
             "sample": False,
             "created_at": utc_now().isoformat(),
@@ -929,7 +1050,7 @@ class World:
         """
         session = self._auth(participant_id, token)
         key = self._clean_idempotency_key(idempotency_key)
-        kind, title, detail, requires = self._clean_task(task)
+        kind, title, detail, requires, disclosure = self._clean_task(task)
 
         def execute() -> dict[str, str]:
             self._assert_standing(session)
@@ -941,13 +1062,15 @@ class World:
                                              authorization)
             record = self._create_listing(session, "offer", kind, title,
                                           detail, requires,
+                                          disclosure=disclosure,
                                           authorization=auth)
             self.save()
             return {"offer_id": record["listing_id"]}
 
         result, replayed = self._idempotent(
             session.participant_id, "offer", (kind, title, detail,
-                                             tuple(requires)),
+                                             tuple(requires),
+                                             _disclosure_ref(disclosure)),
             key, execute)
         if not replayed:
             self._emit_envelope("offer", {
@@ -974,7 +1097,7 @@ class World:
         """
         session = self._auth(participant_id, token)
         key = self._clean_idempotency_key(idempotency_key)
-        kind, title, detail, requires = self._clean_task(task)
+        kind, title, detail, requires, disclosure = self._clean_task(task)
 
         def execute() -> dict[str, str]:
             self._assert_standing(session)
@@ -986,13 +1109,15 @@ class World:
                     if authorization is not None else None)
             record = self._create_listing(session, "need", kind, title,
                                           detail, requires,
+                                          disclosure=disclosure,
                                           authorization=auth)
             self.save()
             return {"need_id": record["listing_id"]}
 
         result, replayed = self._idempotent(
             session.participant_id, "need", (kind, title, detail,
-                                            tuple(requires)),
+                                            tuple(requires),
+                                            _disclosure_ref(disclosure)),
             key, execute)
         if not replayed:
             self._emit_envelope("need", {
@@ -1185,6 +1310,10 @@ class World:
                 },
                 "transaction_id": None,
                 "decision": None,
+                # The research-question result (verification outcome +
+                # preserved experiment outcome + accounting), recorded by
+                # the receiver at submit(); None until then.
+                "result": None,
             }
             self._record_transition(agreement, "proposed")
             self.agreements[agreement_id] = agreement
@@ -1384,6 +1513,23 @@ class World:
             self._require_fresh_standing(fulfiller)
             self._require_fresh_standing(poster)
 
+            # Research-question EXECUTION (fail-closed, pre-settlement): the
+            # receiver runs the evidence-manifest verification itself. Pure
+            # reads here; a missing manifest refuses the submit before any
+            # settlement is recorded.
+            research_pre = None
+            if agreement["task_kind"] == "research-question":
+                research_pre = self._research_prepare_result(
+                    agreement, listing)
+                # BINDING ENFORCEMENT (DISCOVERY-ROOM-001 fix): the receiver
+                # binds the listing, the agreed terms, the evaluated
+                # manifest, the accepted result, and the settlement to the
+                # same declared artifact version. A declared manifest pin
+                # that does not exactly equal the evaluated manifest's
+                # sha256 refuses acceptance AND settlement before effect.
+                self._research_enforce_manifest_binding(
+                    agreement, listing, research_pre)
+
             action = TASK_KINDS[agreement["task_kind"]]
             self._record_transition(agreement, "submitted")
             self._record_transition(agreement, "accepted")
@@ -1407,6 +1553,15 @@ class World:
             agreement["receipts"] = dict(receipt_ids)
             agreement["transaction_id"] = tx_id
             agreement["decision"] = "ALLOWED"
+            # Research-question ACCEPTANCE-side recording: the gate decided
+            # ALLOWED above; the receiver now records the cost on the
+            # existing commission ledger and binds the result (verification
+            # + preserved experiment outcome + accounting) under its own
+            # signature on the agreement and the transaction.
+            if agreement["task_kind"] == "research-question":
+                self._research_finalize_result(
+                    agreement, self.transactions[tx_id], listing,
+                    research_pre)
             self.events.emit(
                 source="world", kind="transaction",
                 provenance="receiver-signed",
@@ -1447,6 +1602,335 @@ class World:
                 "decision": result["decision"],
             })
         return result
+
+    # -- layer 2/3: research-question submit extension ---------------------------
+    # The four components stay distinct:
+    #   AUTHORIZATION = the gate-evaluated worker presentations stored on the
+    #       agreement (propose/agree/submit re-validation) -- existing code.
+    #   EXECUTION     = _research_prepare_result: the receiver's own
+    #       deterministic manifest-verification code (the lab-runner path).
+    #       No worker-submitted code ever executes.
+    #   EVALUATION    = comparison against the acceptance criteria
+    #       (match/mismatch counts, manifest-pin comparison) plus the
+    #       experiment outcome preserved verbatim from the frozen aggregate.
+    #   ACCEPTANCE    = the gate's submit verdict (ALLOWED) and the signed
+    #       result receipt below. The gate accepts the RESULT record, not
+    #       the scientific truth of any claim. Before ACCEPTANCE, the
+    #       receiver enforces manifest binding
+    #       (_research_enforce_manifest_binding): a declared pin that does
+    #       not exactly equal the evaluated manifest's sha256 refuses
+    #       acceptance and settlement before effect
+    #       (RESEARCH_MANIFEST_PIN_MISMATCH).
+    _RESEARCH_ROOM_REL = ("research", "rooms", "repro-lab-001")
+    _RESEARCH_MANIFEST_NAME = "EVIDENCE-MANIFEST.json"
+    _RESEARCH_AGGREGATE_REL = ("results", "aggregate.json")
+    _RESEARCH_COST_OP = "evidence.verify"
+    _RESEARCH_CHECKED_PER_UNIT = 10  # 1 simulated-compute-unit per 10 hashes
+
+    @staticmethod
+    def _research_room_dir() -> Path:
+        return Path(__file__).resolve().parent.parent.joinpath(
+            *World._RESEARCH_ROOM_REL)
+
+    @staticmethod
+    def _research_manifest_pin(disclosure: dict[str, Any]) -> str | None:
+        """The manifest sha256 pin stated in the listing's acceptance
+        criteria (untrusted display text). The receiver compares it against
+        the manifest it actually reads and reports the outcome either way."""
+        text = " ".join(disclosure.get("acceptance_criteria") or [])
+        match = re.search(r"sha256\s+([0-9a-f]{8,64})", text)
+        return match.group(1) if match else None
+
+    def _research_enforce_manifest_binding(
+            self, agreement: dict[str, Any], listing: dict[str, Any],
+            research_pre: dict[str, Any]) -> None:
+        """ACCEPTANCE gate (binding enforcement). The receiver binds the
+        listing, the agreed terms, the evaluated manifest, the accepted
+        result, and the settlement to the same declared artifact version.
+        If the listing declares a manifest pin and it does not EXACTLY
+        equal the evaluated manifest's sha256, acceptance AND settlement
+        are refused BEFORE EFFECT: no transaction is created, no ALLOWED
+        verdict is recorded, no settlement record is written, no commission
+        payout occurs. Pure check; mutates nothing. An unreadable manifest
+        already fails closed inside _research_prepare_result; a listing
+        with no declared pin keeps the existing honest-recording behavior
+        (pin_match reported, never hidden)."""
+        verification = research_pre["verification"]
+        declared = verification.get("manifest_sha256_pinned")
+        if declared is None:
+            return
+        actual = verification.get("manifest_sha256")
+        if declared != actual:
+            raise WalletError(
+                "RESEARCH_MANIFEST_PIN_MISMATCH",
+                f"listing declares manifest sha256 {declared} but the "
+                f"receiver evaluated {actual}; the listing, agreed terms, "
+                f"evaluated manifest, accepted result, and settlement "
+                f"cannot be bound to one artifact version -- acceptance "
+                f"and settlement refused before effect")
+
+    def _research_prepare_result(self, agreement: dict[str, Any],
+                                 listing: dict[str, Any]) -> dict[str, Any]:
+        """EXECUTION: run the evidence-manifest verification as deterministic
+        receiver code. Pure reads; mutates nothing. A hash MISMATCH is data
+        (recorded); an unreadable manifest means the contribution cannot be
+        verified, so submit is refused before any settlement (fail closed).
+        """
+        room = self._research_room_dir()
+        manifest_file = room / self._RESEARCH_MANIFEST_NAME
+        try:
+            manifest_bytes = manifest_file.read_bytes()
+            manifest = json.loads(manifest_bytes.decode("utf-8"))
+        except (OSError, ValueError) as exc:
+            raise WalletError("RESEARCH_EVIDENCE_UNAVAILABLE",
+                              f"cannot read {manifest_file}: {exc}")
+        entries = manifest.get("artifacts")
+        if not isinstance(entries, list):
+            raise WalletError("RESEARCH_EVIDENCE_UNAVAILABLE",
+                              "manifest has no artifact list")
+        manifest_sha256 = hashlib.sha256(manifest_bytes).hexdigest()
+        mismatches: list[dict[str, Any]] = []
+        checked = 0
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            rel = entry.get("path")
+            expected = entry.get("sha256")
+            if not isinstance(rel, str) or not isinstance(expected, str):
+                continue
+            checked += 1
+            try:
+                actual = hashlib.sha256(
+                    (room / rel).read_bytes()).hexdigest()
+            except OSError:
+                mismatches.append({"path": rel, "expected": expected,
+                                   "actual": None, "reason": "missing"})
+                continue
+            if actual != expected.lower():
+                mismatches.append({"path": rel, "expected": expected,
+                                   "actual": actual,
+                                   "reason": "hash-mismatch"})
+        disclosure = listing.get("disclosure") or {}
+        pinned = self._research_manifest_pin(disclosure)
+        verification = {
+            "room": "/".join(self._RESEARCH_ROOM_REL),
+            "manifest_file": self._RESEARCH_MANIFEST_NAME,
+            "manifest_sha256": manifest_sha256,
+            "manifest_sha256_pinned": pinned,
+            "pin_match": (pinned is not None
+                          and manifest_sha256.startswith(pinned)),
+            "artifacts_listed": len(entries),
+            "artifacts_checked": checked,
+            "matches": checked - len(mismatches),
+            "mismatches": mismatches,
+            "checked_at": utc_now().isoformat(),
+        }
+        outcome = self._research_experiment_outcome(room)
+        com = self._research_find_commission(agreement)
+        accounting = self._research_accounting_preview(agreement, com,
+                                                       checked)
+        return {"verification": verification,
+                "experiment_outcome": outcome,
+                "accounting": accounting,
+                "commission": com}
+
+    def _research_experiment_outcome(self, room: Path) -> dict[str, Any]:
+        """EVALUATION (experiment half): read the frozen aggregate verbatim.
+        The receiver never re-runs the experiment; it preserves the outcome,
+        favorable or not. A recorded UNFAVORABLE outcome completes the loop;
+        it is not a loop failure."""
+        agg_file = room.joinpath(*self._RESEARCH_AGGREGATE_REL)
+        try:
+            agg = json.loads(agg_file.read_bytes().decode("utf-8"))
+        except (OSError, ValueError) as exc:
+            raise WalletError("RESEARCH_EVIDENCE_UNAVAILABLE",
+                              f"cannot read {agg_file}: {exc}")
+        conditions: dict[str, Any] = {}
+        for name in ("A", "B", "C"):
+            cond = (agg.get("conditions") or {}).get(name) or {}
+            conditions[name] = {
+                "mean_mse": cond.get("mean_mse"),
+                "std_mse": cond.get("std_mse"),
+                "n": cond.get("n"),
+            }
+        decision = agg.get("decision") or {}
+        improved = bool(decision.get("improved"))
+        return {
+            "source": "/".join(self._RESEARCH_ROOM_REL + (
+                self._RESEARCH_AGGREGATE_REL[-1],)),
+            "budget": agg.get("budget"),
+            "replications": agg.get("replications"),
+            "conditions": conditions,
+            "decision_rule": decision.get("rule"),
+            "pooled_se": decision.get("pooled_se"),
+            "improved": improved,
+            "verdict": "C beat B" if improved else "C did not beat B",
+        }
+
+    def _research_find_commission(
+            self, agreement: dict[str, Any]) -> dict[str, Any] | None:
+        """Link to the EXISTING commission ledger: an active commission
+        whose frozen contract names this agreement in its job task, between
+        the listing owner (buyer) and the contributor (seller). No second
+        ledger is created."""
+        for com in self.commissions.values():
+            contract = com.get("contract") or {}
+            job = contract.get("job") or {}
+            if (com.get("status") == "active"
+                    and contract.get("buyer_id") == agreement["counterpart"]
+                    and contract.get("seller_id") == agreement["proposer"]
+                    and agreement["agreement_id"]
+                    in str(job.get("task", ""))):
+                return com
+        return None
+
+    def _research_accounting_preview(
+            self, agreement: dict[str, Any], com: dict[str, Any] | None,
+            checked: int) -> dict[str, Any]:
+        """Spent-vs-ceiling preview from the real commission ledger.
+        Units are deterministic receiver arithmetic: one
+        simulated-compute-unit per _RESEARCH_CHECKED_PER_UNIT hashes
+        recomputed."""
+        units = max(1, -(-checked // self._RESEARCH_CHECKED_PER_UNIT))
+        if com is None:
+            return {"linked": False, "commission_id": None,
+                    "note": "no active linked commission found; "
+                            "no simulated cost recorded"}
+        contract = com["contract"]
+        rate = next(
+            (entry["rate_cents"]
+             for entry in contract["permitted_operations"]
+             if entry["op"] == self._RESEARCH_COST_OP),
+            None)
+        if rate is None:
+            raise WalletError("COMMISSION_COST_OP_UNKNOWN",
+                              self._RESEARCH_COST_OP)
+        cost_cents = rate * units
+        ceiling_cents = contract["max_cost_cents"]
+        return {
+            "linked": True,
+            "commission_id": com["commission_id"],
+            "op": self._RESEARCH_COST_OP,
+            "units": units,
+            "rate_cents": rate,
+            "spent_cents": cost_cents,
+            "spent_units": units,
+            "ceiling_cents": ceiling_cents,
+            "ceiling_units": ceiling_cents // rate,
+            "unit": RESEARCH_CEILING_UNIT,
+            "simulated": True,
+            "recorded_cost_cents": com["recorded_cost_cents"],
+            "cap_exceeded": (com["recorded_cost_cents"] + cost_cents
+                             > ceiling_cents),
+        }
+
+    @staticmethod
+    def _research_signable(value: Any) -> Any:
+        """Render a result payload signable: the canonical signer forbids
+        floats, so experiment numbers become their exact repr strings
+        (round-trip safe; no precision is lost)."""
+        if isinstance(value, float):
+            return repr(value)
+        if isinstance(value, dict):
+            return {k: World._research_signable(v)
+                    for k, v in value.items()}
+        if isinstance(value, (list, tuple)):
+            return [World._research_signable(v) for v in value]
+        return value
+
+    def _research_finalize_result(
+            self, agreement: dict[str, Any], tx: dict[str, Any],
+            listing: dict[str, Any],
+            pre: dict[str, Any]) -> dict[str, Any]:
+        """ACCEPTANCE-side recording. The gate already decided ALLOWED (the
+        submit settlement above). The receiver now records the cost event on
+        the EXISTING commission ledger and binds the full result under the
+        gate's signature. Mismatches are reported, never hidden."""
+        com = pre["commission"]
+        accounting = pre["accounting"]
+        if com is not None:
+            if accounting["cap_exceeded"]:
+                com["status"] = "stopped_cap"
+                settlement = self._commission_settle(com, "stopped_cap")
+                self.events.emit(
+                    source="world", kind="commission.cap",
+                    provenance="commission",
+                    summary=(f"Commission {com['commission_id']} hit its "
+                             "cost cap on the research verification; "
+                             "settled costs-only."),
+                    detail={"commission_id": com["commission_id"],
+                            "settlement_id":
+                                settlement["settlement_id"]},
+                )
+                accounting["status"] = "stopped_cap"
+                accounting["settlement_id"] = settlement["settlement_id"]
+            else:
+                event = {
+                    "event_id": "ce-" + secrets.token_hex(8),
+                    "op": accounting["op"],
+                    "units": accounting["units"],
+                    "rate_cents": accounting["rate_cents"],
+                    "cost_cents": accounting["spent_cents"],
+                    "claimed_cents": None,
+                    "receipt_id": agreement["receipts"]["fulfiller"],
+                    "provenance": "receiver-executed",
+                    "note": ("receiver-executed manifest verification; "
+                             "no worker presentation; deterministic "
+                             "receiver arithmetic over the frozen "
+                             "contract rate"),
+                    "at": utc_now().isoformat(),
+                }
+                com["cost_events"].append(event)
+                com["recorded_cost_cents"] += accounting["spent_cents"]
+                accounting["event_id"] = event["event_id"]
+                accounting["recorded_cost_cents"] = (
+                    com["recorded_cost_cents"])
+                self.events.emit(
+                    source="world", kind="commission.cost_recorded",
+                    provenance="commission",
+                    summary=(f"Commission {com['commission_id']}: "
+                             f"{accounting['op']} x{accounting['units']} = "
+                             f"{accounting['spent_cents']}c recorded "
+                             "(simulated, receiver-executed)."),
+                    detail={"commission_id": com["commission_id"],
+                            "event_id": event["event_id"],
+                            "cost_cents": accounting["spent_cents"],
+                            "recorded_cost_cents":
+                                com["recorded_cost_cents"]},
+                )
+        payload = self._research_signable({
+            "kind": "research-question-result",
+            "agreement_id": agreement["agreement_id"],
+            "listing_id": agreement["listing_id"],
+            "verification": pre["verification"],
+            "experiment_outcome": pre["experiment_outcome"],
+            "accounting": accounting,
+            "note": ("The recorded UNFAVORABLE experiment outcome "
+                     "(C did not beat B) completes the loop; it is not a "
+                     "loop failure."),
+            "recorded_at": utc_now().isoformat(),
+        })
+        signed = sign_record(payload, self.gate.gate_key)
+        record = {"payload": payload, "gate_signed": signed}
+        agreement["result"] = copy.deepcopy(record)
+        tx["result"] = copy.deepcopy(record)
+        verification = pre["verification"]
+        self.events.emit(
+            source="world", kind="research.verified",
+            provenance="receiver",
+            summary=(f"Research verification settled on agreement "
+                     f"{agreement['agreement_id']}: "
+                     f"{verification['matches']}/"
+                     f"{verification['artifacts_checked']} artifact hashes "
+                     f"match; experiment outcome preserved "
+                     f"({pre['experiment_outcome']['verdict']})."),
+            detail={"agreement_id": agreement["agreement_id"],
+                    "matches": verification["matches"],
+                    "mismatches": len(verification["mismatches"]),
+                    "pin_match": verification["pin_match"],
+                    "verdict": pre["experiment_outcome"]["verdict"]},
+        )
+        return record
 
     def withdraw_listing(self, participant_id: Any, token: Any,
                          listing_id: Any,
@@ -2140,6 +2624,43 @@ TRACK A -- owner delegation and the deterministic automation worker:
             session.participant_id, "newsroom.review", proposal_id, key, execute)
         return result
 
+    def repro_lab_room(self) -> dict[str, Any]:
+        """The repro-lab-001 room: frozen experiment records, read from disk.
+
+        Read-only and public: the artifacts were frozen by the researcher
+        before any runs, the experiment was run offline (never by the
+        receiver), and nothing here is recomputed per request. The room
+        displays records; membership grants no spending, execution, or
+        publication authority. The receiver owns acceptance.
+        """
+        room_dir = (Path(__file__).resolve().parent.parent
+                    / "research" / "rooms" / "repro-lab-001")
+
+        def read_json(rel: str) -> Any:
+            with open(room_dir / rel, encoding="utf-8") as fh:
+                return json.load(fh)
+
+        room = read_json("ROOM.json")
+        results_dir = room_dir / "results"
+        replications: list[dict[str, Any]] = []
+        for path in results_dir.glob("cond_*.json"):
+            with open(path, encoding="utf-8") as fh:
+                replications.append(json.load(fh))
+        replications.sort(key=lambda r: (str(r.get("condition", "")),
+                                         int(r.get("replication", 0))))
+        manifest_path = room_dir / "EVIDENCE-MANIFEST.json"
+        evidence_manifest = (read_json("EVIDENCE-MANIFEST.json")
+                             if manifest_path.exists() else None)
+        return {
+            "room": room,
+            "protocol_markdown": (room_dir / "PROTOCOL.md").read_text(
+                encoding="utf-8"),
+            "protocol_sha256": room["protocol_ref"]["sha256"],
+            "results": read_json("results/aggregate.json"),
+            "replications": replications,
+            "evidence_manifest": evidence_manifest,
+        }
+
     def authority_refresh(self, participant_id: Any, token: Any,
                           bundle: Any) -> dict[str, Any]:
         """Admit an updated owner-signed authority bundle for a session.
@@ -2294,6 +2815,10 @@ TRACK A -- owner delegation and the deterministic automation worker:
                 "title": listing["task"]["title"],
                 "detail": listing["task"]["detail"],
                 "terms": copy.deepcopy(listing["terms"]),
+                # The research-question disclosure set (None for other
+                # kinds). The detail carries the same content as readable
+                # markdown for the existing UI.
+                "disclosure": copy.deepcopy(listing.get("disclosure")),
                 "from_participant": listing["from_participant"],
                 "from_display_name": listing["from_display_name"],
                 "from_kind": listing.get("from_kind", "real"),

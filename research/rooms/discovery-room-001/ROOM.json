@@ -1,0 +1,111 @@
+{
+  "room_id": "discovery-room-001",
+  "title": "Discovery Room 001 — one inspectable question-to-result loop",
+  "question": "Does structured receipt exchange improve a bounded computational search task?",
+  "protocol_ref": {
+    "path": null,
+    "sha256": null,
+    "frozen": null,
+    "note": "Discovery room, not a repro-lab room: no separate PROTOCOL.md. The execution path is the deterministic receiver code backend/world.py (_research_prepare_result / _research_finalize_result), pinned by the repo commit."
+  },
+  "participants": [
+    {
+      "id": "owner-researcher",
+      "role": "listing owner / research buyer",
+      "kind": "owner",
+      "description": "Internal operator. Posted the research question; funded and started the commission on the simulated ledger."
+    },
+    {
+      "id": "verifier-1",
+      "role": "contributor / seller",
+      "kind": "algorithmic-worker",
+      "description": "Internal operator. Deterministic test client, not an AI scientist. Proposed the agreement, submitted through the receiver, delivered the verification report."
+    },
+    {
+      "id": "observer-3",
+      "role": "uninvolved third party",
+      "kind": "algorithmic-worker",
+      "description": "Internal operator. Deterministic test client. Attempted agree() as a non-counterpart; refused with WORLD_RULE_NOT_COUNTERPART."
+    },
+    {
+      "id": "receiver",
+      "role": "gate / acceptance owner",
+      "kind": "receiver",
+      "description": "The world's EffectGate receiver. Evaluated presentations, ran the manifest verification, recorded the cost, accepted the result."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "seed_discovery.py",
+      "sha256": "95a8e34ead9ad90ed00e4ff8f9f7a25fa7595c51a19e4018bf4a8eeebc66327e",
+      "kind": "experiment-code"
+    },
+    {
+      "path": "loop-transcript.json",
+      "sha256": "607c214085c38e97c554abdcede2c9b2f53ad09b40b38e543c1cfbd33e02283f",
+      "kind": "result"
+    },
+    {
+      "path": "REPORT.md",
+      "sha256": "f97a65b1f82d0457b5b5fff1f6d9e31a4f7294829e330a6ec0f28fd45549341c",
+      "kind": "report"
+    },
+    {
+      "path": "ROOM.json",
+      "sha256": "2da8a4330d9d3bdd6dca9f3b626561c37d3dd1b46590f1ccd9727049935c4e41",
+      "kind": "room-manifest"
+    },
+    {
+      "path": "seed_discovery_v2.py",
+      "sha256": "e718bc51d31b52129fa720790a722dec0e3db13e3121d4221904870913810a38",
+      "kind": "experiment-code"
+    },
+    {
+      "path": "loop-transcript-v2.json",
+      "sha256": "c83abcb7de286b47748cc56cbc2ff88265143bdab1339d9dd98c9a08080b0b02",
+      "kind": "result"
+    }
+  ],
+  "authority_note": "Room membership grants no spending, execution, or publication authority. The receiver owns acceptance; the room displays frozen records.",
+  "badges": {
+    "schema-valid": "The listing disclosure parses and matches the declared disclosure schema; reuse_terms carries the verbatim disclaimer.",
+    "receiver-accepted": "The gate accepted the agreement submit; the verification result is recorded and gate-signed.",
+    "scientifically-supported": "NOT EARNED: the frozen protocol's decision rule was not met (C did not beat B). The loop completes on this unfavorable result; the result is preserved, not endorsed.",
+    "non_implication": "None of these implies the others. A schema-valid artifact may fail receiver acceptance; a receiver-accepted package may make a false claim; a statistically met threshold is not scientific truth."
+  },
+  "verdict": {
+    "primary": "One complete loop: question -> agreed contribution -> supported experiment -> result + accounting returned to the question.",
+    "detail": "40/40 artifact hashes match; manifest pin mismatch reported (604fe0d3... vs c4aa89ff...); experiment outcome preserved verbatim: C did not beat B. Spent 4/10 simulated-compute-units on the existing commission ledger."
+  },
+  "reuse_terms": "Artifacts reusable for verification. No IP transfer. A receipt records an agreement; it does not establish intellectual-property rights or scientific truth.",
+  "evidence_manifest_sha256": "7b8fbb3c70b9e275f847428d6fc8e7fd8e85aac2777fbad748b9f6e4b645aaf9",
+  "binding_defect": {
+    "kind": "appended-defect-record",
+    "when": "2026-09-29T00:14Z",
+    "what": "v1 listing (seed_discovery.py) declared the stale manifest pin 604fe0d3... (copied from repro-lab-001 ROOM.json evidence_manifest_sha256, recorded before the manifest was regenerated). The receiver evaluated the real manifest (c4aa89ff...), recorded pin_match:false, but v1 submit settled anyway -- binding was informational, not enforced.",
+    "affected": {
+      "agreement_id": "agr-3c035b646ce2",
+      "transaction_id": "tx-38552353d2b3",
+      "settlement_id": "stl-4431fbaca0bf1f7e",
+      "status": "documented as affected by the binding defect; preserved, not erased or rewritten"
+    },
+    "fix": "World._research_enforce_manifest_binding: a declared pin that does not exactly equal the evaluated manifest's sha256 now raises RESEARCH_MANIFEST_PIN_MISMATCH before any acceptance or settlement effect.",
+    "regression_test": "backend/tests/test_discovery_room.py::test_stale_manifest_pin_refuses_acceptance_and_settlement"
+  },
+  "corrected_loop_v2": {
+    "kind": "appended-record",
+    "listing_id": "need-0330b96ce8bd",
+    "listing_version": 2,
+    "agreement_id": "agr-84b3f39b2dfb",
+    "transaction_id": "tx-40d207c8f2a7",
+    "commission_id": "com-45617f3a4900ca45",
+    "settlement_id": "stl-42b3516009d4e1bd",
+    "declared_pin": "c4aa89ffd798948459a5b1e9c2909584ff1d654b136f97b14cb6e5e096116533",
+    "pin_match": true,
+    "verification": "40/40 artifact hashes recomputed and matched, 0 mismatches",
+    "verdict_preserved": "C did not beat B (A 0.0176±0.0078, B 0.0177±0.0077, C 0.0169±0.0057, pooled_SE 0.00304)",
+    "settlement": "seller payout 400c, buyer released 600c (simulated)",
+    "driver": "seed_discovery_v2.py",
+    "world_snapshot": "world-state-v2/"
+  }
+}

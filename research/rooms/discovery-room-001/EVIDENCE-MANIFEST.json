@@ -1,0 +1,37 @@
+{
+  "room_id": "discovery-room-001",
+  "generated": "2026-09-29T00:15:23.916639+00:00",
+  "artifacts": [
+    {
+      "path": "seed_discovery.py",
+      "sha256": "95a8e34ead9ad90ed00e4ff8f9f7a25fa7595c51a19e4018bf4a8eeebc66327e",
+      "kind": "experiment-code"
+    },
+    {
+      "path": "loop-transcript.json",
+      "sha256": "607c214085c38e97c554abdcede2c9b2f53ad09b40b38e543c1cfbd33e02283f",
+      "kind": "result"
+    },
+    {
+      "path": "REPORT.md",
+      "sha256": "f97a65b1f82d0457b5b5fff1f6d9e31a4f7294829e330a6ec0f28fd45549341c",
+      "kind": "report"
+    },
+    {
+      "path": "ROOM.json",
+      "sha256": "9372d33c6ae59eb9a843b4311019de4a4fa2c01c5283c7b5ac8c9a7481be9960",
+      "kind": "room-manifest"
+    },
+    {
+      "path": "seed_discovery_v2.py",
+      "sha256": "e718bc51d31b52129fa720790a722dec0e3db13e3121d4221904870913810a38",
+      "kind": "experiment-code"
+    },
+    {
+      "path": "loop-transcript-v2.json",
+      "sha256": "c83abcb7de286b47748cc56cbc2ff88265143bdab1339d9dd98c9a08080b0b02",
+      "kind": "result"
+    }
+  ],
+  "verification": "recompute sha256 of each path; any mismatch invalidates that artifact's display"
+}

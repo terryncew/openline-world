@@ -727,9 +727,11 @@ textarea.nr-field { resize: vertical; }
 .badge-host { border-color: #c9a227; color: #e8c95c; background: #c9a22722; }
 .badge-you { border-color: var(--coral); color: #ff9a86; background: #e0604f22; }
 .badge-sample { border-style: dashed; color: var(--cream-dim); }
+.badge-research { border-color: var(--brass, #c9a227); color: var(--cream); background: #c9a2272e; }
 .parcel-paper .badge-host { color: #7d5f36; border-color: #c9a227; background: #c9a22718; }
 .parcel-paper .badge-you { color: #a02c1e; border-color: var(--coral); background: #e0604f18; }
 .parcel-paper .badge-sample { color: #6b5b40; }
+.parcel-paper .badge-research { color: #6b5518; border-color: #c9a227; background: #c9a22722; }
 
 /* Agreements — five stages, legible by shape + motion + label, never color alone. */
 .ag-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
