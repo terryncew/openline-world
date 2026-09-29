@@ -484,6 +484,9 @@ class Handler(BaseHTTPRequestHandler):
             elif path == "/api/world/authority/refresh":
                 self._send(200, self.world.authority_refresh(
                     body.get("participant_id"), body.get("token"), body.get("bundle")))
+            elif path == "/api/world/standing/refresh":
+                self._send(200, self.world.standing_refresh(
+                    body.get("participant_id"), body.get("token")))
             elif path == "/api/world/receipts/share":
                 self._send(200, self.world.share_receipt(
                     body.get("participant_id"), body.get("token"), body.get("receipt_id")))

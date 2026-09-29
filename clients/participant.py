@@ -445,6 +445,22 @@ class ParticipantClient:
         self._bundle = bundle
         return resp
 
+    def standing_refresh(self) -> dict[str, Any]:
+        """Prove possession of the existing session key and refresh standing
+        after inactivity, without a new bundle and without rejoining.
+
+        The server re-checks current authority at the commit point: a
+        revoked, retired, or expired mandate is refused. Nothing is
+        granted, extended, or widened -- only the standing check time is
+        re-recorded. Raises ClientError with the server code
+        (WORLD_AUTH_MISMATCH / JOIN_STANDING_NOT_CURRENT) on refusal.
+        """
+        participant_id, token = self._auth()
+        return self._post(
+            "/api/world/standing/refresh",
+            {"participant_id": participant_id, "token": token},
+        )
+
     def revoke(self) -> tuple[float, dict[str, Any]]:
         """Revoke the worker mandate locally, export, and push the new head to
         the world. Returns (latency_seconds, server response): the measured

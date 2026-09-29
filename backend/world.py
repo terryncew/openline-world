@@ -430,6 +430,9 @@ class World:
             Path(__file__).resolve().parent / "data" / "world")
         self._data_root.mkdir(parents=True, exist_ok=True)
         self.sessions: dict[str, ParticipantSession] = {}
+        # Owner-retired session records (frozen at retire time): attribution
+        # and receipts survive; authority does not. See retire_participant.
+        self.retired_sessions: list[dict[str, Any]] = []
         self.offers: dict[str, dict[str, Any]] = {}
         self.needs: dict[str, dict[str, Any]] = {}
         self.agreements: dict[str, dict[str, Any]] = {}
@@ -654,6 +657,72 @@ class World:
             "mandate_id": mandate_id, "standing": "current",
             "world": {"location": "workshop", "version": 1},
         }
+
+    def retire_participant(self, participant_id: Any,
+                           retired_by: str = "owner") -> dict[str, Any]:
+        """Owner-operator retirement of one participant session.
+
+        NOT exposed on HTTP: invoke via backend/admin_retire.py over SSH
+        while the server is stopped. That is the owner-authorization
+        boundary — participants cannot retire anyone's session because the
+        capability does not exist on the wire.
+
+        Effects: the participant's slot is freed; the session's authority
+        (token, mandate standing, delegations, idempotency ledger,
+        escalations, simulated balance) is invalidated; contributions,
+        receipts, attribution, other sessions, and the receiver gate key
+        are preserved. Rejoining later creates a fresh session with a
+        fresh grant — old permissions do not revive.
+        """
+        pid = self._id_field(participant_id, "participant.id")
+        session = self.sessions.pop(pid, None)
+        if session is None:
+            raise WalletError("RETIRE_NO_SUCH_SESSION",
+                              f"no current session for {pid}")
+        archived = {
+            "participant_id": session.participant_id,
+            "display_name": session.display_name,
+            "agent_id": session.agent_id,
+            "agent_display_name": session.agent_display_name,
+            "agent_public_key": session.agent_public_key,
+            "owner_principal_id": session.owner_principal_id,
+            "owner_root_public_key": session.owner_root_public_key,
+            "worker_public_key": session.worker_public_key,
+            "mandate_id": session.mandate_id,
+            "mandate_scopes": list(session.mandate_scopes),
+            "authority_head_hash": session.authority_head_hash,
+            "receipts": copy.deepcopy(session.receipts),
+            "joined_at": session.joined_at,
+            "kind": session.kind,
+            "retired_at": utc_now().isoformat(),
+            "retired_by": str(retired_by),
+        }
+        self.retired_sessions.append(archived)
+        # Session-scoped authority dies with the session: the idempotency
+        # ledger, delegations, pending escalations, and simulated balance
+        # for this participant id are cleared so a rejoined session
+        # starts clean and cannot revive old permissions.
+        self._idempotency = {k: v for k, v in self._idempotency.items()
+                             if k[0] != pid}
+        self.delegations.pop(pid, None)
+        self.escalations = {
+            eid: esc for eid, esc in self.escalations.items()
+            if not (isinstance(esc, dict)
+                    and esc.get("participant_id") == pid)}
+        self.simulated_balances.pop(pid, None)
+        self.events.emit(
+            source="world", kind="retire", provenance="owner-authorized",
+            summary=f"{session.display_name} retired by {retired_by}; "
+                    f"slot freed, authority invalidated, history preserved.",
+            detail={"participant_id": pid, "agent_id": session.agent_id,
+                    "mandate_id": session.mandate_id,
+                    "receipts_archived": len(archived["receipts"])},
+        )
+        self.save()
+        return {"retired": True, "participant_id": pid,
+                "retired_at": archived["retired_at"],
+                "retired_by": archived["retired_by"],
+                "receipts_archived": len(archived["receipts"])}
 
     # -- auth boundary (bearer token check) ----------------------------------
     def _auth(self, participant_id: Any, token: Any) -> ParticipantSession:
@@ -2849,6 +2918,54 @@ TRACK A -- owner delegation and the deterministic automation worker:
             "head_sequence": admission["head_sequence"],
         }
 
+    def standing_refresh(self, participant_id: Any, token: Any) -> dict[str, Any]:
+        """Possession-proof standing refresh after inactivity.
+
+        The bearer token IS the possession proof (constant-time compare
+        in `_auth`). The world then re-checks CURRENT authority at the
+        commit point: the stored owner-signed bundle is re-verified and
+        the mandate must be ACTIVE and unexpired. Nothing is granted,
+        extended, or widened -- mandate id, scopes, and expiry are
+        untouched; only `standing_checked_at` is re-recorded.
+
+        Revocation wins the race: check-then-commit runs under
+        `self._lock`, and the commit point re-checks `session.revoked`
+        immediately before the write, so a revocation admitted during
+        an in-flight refresh is observed here. Even if a refresh
+        committed just before a revocation landed, every gated action
+        re-checks revoked state via `_assert_standing` -- a refresh can
+        never un-revoke.
+        """
+        with self._lock:
+            session = self._auth(participant_id, token)
+            if session.revoked:
+                raise WalletError("JOIN_STANDING_NOT_CURRENT",
+                                  "mandate revoked: refresh refused")
+            mandate = self._active_mandate(session)
+            if mandate is None:
+                # Dead mandate (revoked, absent, or expired in the
+                # admitted bundle): mark revoked, mirroring
+                # authority_refresh. Never extends expiry, never
+                # widens scope, never revives.
+                session.revoked = True
+                self.save()
+                raise WalletError("JOIN_STANDING_NOT_CURRENT",
+                                  "no active mandate: refresh refused")
+            # Commit point: re-check revocation immediately before the
+            # write so a revocation admitted during this refresh wins.
+            if session.revoked:
+                raise WalletError("JOIN_STANDING_NOT_CURRENT",
+                                  "mandate revoked: refresh refused")
+            session.standing_checked_at = time.time()
+            self.save()
+            return {
+                "refreshed": True,
+                "participant_id": session.participant_id,
+                "mandate_id": session.mandate_id,
+                "scopes": list(session.mandate_scopes),
+                "standing_checked_at": session.standing_checked_at,
+            }
+
     # -- receipts: private per participant, explicit share only ---------------
     def receipts_for(self, participant_id: Any, token: Any) -> dict[str, Any]:
         session = self._auth(participant_id, token)
@@ -4149,6 +4266,9 @@ TRACK A -- owner delegation and the deterministic automation worker:
             "agreements": copy.deepcopy(self.agreements),
             "transactions": copy.deepcopy(self.transactions),
             "shared_receipts": copy.deepcopy(self.shared_receipts),
+            # Owner-retired session records: attribution and receipts
+            # survive retirement; authority does not.
+            "retired_sessions": copy.deepcopy(self.retired_sessions),
             "idempotency": [
                 {"participant_id": pid, "label": label, "key": key,
                  "ref": self._freeze_ref(entry["ref"]),
@@ -4264,3 +4384,5 @@ TRACK A -- owner delegation and the deterministic automation worker:
         # Restore the durable challenge chapter: contributions, decisions,
         # and the refusal ledger survive a server restart.
         self.challenge_chapter.load(data.get("challenge"))
+        # Owner-retired session records: absent in pre-repair snapshots.
+        self.retired_sessions = list(data.get("retired_sessions") or [])
