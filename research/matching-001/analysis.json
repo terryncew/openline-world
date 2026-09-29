@@ -1,0 +1,226 @@
+{
+  "metrics": {
+    "A": {
+      "offered": 48,
+      "accepted": 34,
+      "declined": 0,
+      "unfinished": 14,
+      "unresolved": 0,
+      "acceptance_rate": 0.7083,
+      "acceptance_ci95": [
+        0.5682,
+        0.8176
+      ],
+      "total_buyer_spend_cents": 13373,
+      "cost_per_accepted_cents": 393.3,
+      "spend_never_accepted_cents": 1298,
+      "matching_overhead_cents": 485,
+      "n_selections": 97
+    },
+    "B": {
+      "offered": 48,
+      "accepted": 34,
+      "declined": 0,
+      "unfinished": 14,
+      "unresolved": 0,
+      "acceptance_rate": 0.7083,
+      "acceptance_ci95": [
+        0.5682,
+        0.8176
+      ],
+      "total_buyer_spend_cents": 13598,
+      "cost_per_accepted_cents": 399.9,
+      "spend_never_accepted_cents": 1228,
+      "matching_overhead_cents": 390,
+      "n_selections": 78
+    }
+  },
+  "per_block_cpa_difference_A_minus_B_cents": [
+    -7.5,
+    -5.0,
+    -6.0,
+    -6.2,
+    -8.3,
+    -7.0,
+    -7.5,
+    -6.2
+  ],
+  "mean_difference_cents": -6.7,
+  "sd_difference_cents": 1.1,
+  "verdict": "NO IMPROVEMENT: B cost per accepted result (399.9c) >= A's (393.3c).",
+  "sensitivity": {
+    "matching_fee_0_success_fee_150": {
+      "A": {
+        "cost_per_accepted_cents": 229.1
+      },
+      "B": {
+        "cost_per_accepted_cents": 238.5
+      },
+      "verdict_holds": false
+    },
+    "matching_fee_0_success_fee_600": {
+      "A": {
+        "cost_per_accepted_cents": 679.1
+      },
+      "B": {
+        "cost_per_accepted_cents": 688.5
+      },
+      "verdict_holds": false
+    },
+    "matching_fee_20_success_fee_150": {
+      "A": {
+        "cost_per_accepted_cents": 286.1
+      },
+      "B": {
+        "cost_per_accepted_cents": 284.4
+      },
+      "verdict_holds": true
+    },
+    "matching_fee_20_success_fee_600": {
+      "A": {
+        "cost_per_accepted_cents": 736.1
+      },
+      "B": {
+        "cost_per_accepted_cents": 734.4
+      },
+      "verdict_holds": true
+    }
+  },
+  "seller_table": {
+    "A": {
+      "mw-s1": {
+        "attempts": 27,
+        "accepted": 5,
+        "revenue_cents": 2580,
+        "execution_cost_cents": 810,
+        "net_cents": 1770
+      },
+      "mw-s2": {
+        "attempts": 31,
+        "accepted": 21,
+        "revenue_cents": 7044,
+        "execution_cost_cents": 558,
+        "net_cents": 6486
+      },
+      "mw-s3": {
+        "attempts": 12,
+        "accepted": 8,
+        "revenue_cents": 3264,
+        "execution_cost_cents": 480,
+        "net_cents": 2784
+      },
+      "mw-s4": {
+        "attempts": 0,
+        "accepted": 0,
+        "revenue_cents": 0,
+        "execution_cost_cents": 0,
+        "net_cents": 0
+      },
+      "mw-s5": {
+        "attempts": 0,
+        "accepted": 0,
+        "revenue_cents": 0,
+        "execution_cost_cents": 0,
+        "net_cents": 0
+      },
+      "mw-s6": {
+        "attempts": 0,
+        "accepted": 0,
+        "revenue_cents": 0,
+        "execution_cost_cents": 0,
+        "net_cents": 0
+      }
+    },
+    "B": {
+      "mw-s1": {
+        "attempts": 35,
+        "accepted": 5,
+        "revenue_cents": 2900,
+        "execution_cost_cents": 1050,
+        "net_cents": 1850
+      },
+      "mw-s2": {
+        "attempts": 31,
+        "accepted": 21,
+        "revenue_cents": 7044,
+        "execution_cost_cents": 558,
+        "net_cents": 6486
+      },
+      "mw-s3": {
+        "attempts": 12,
+        "accepted": 8,
+        "revenue_cents": 3264,
+        "execution_cost_cents": 480,
+        "net_cents": 2784
+      },
+      "mw-s4": {
+        "attempts": 0,
+        "accepted": 0,
+        "revenue_cents": 0,
+        "execution_cost_cents": 0,
+        "net_cents": 0
+      },
+      "mw-s5": {
+        "attempts": 0,
+        "accepted": 0,
+        "revenue_cents": 0,
+        "execution_cost_cents": 0,
+        "net_cents": 0
+      },
+      "mw-s6": {
+        "attempts": 0,
+        "accepted": 0,
+        "revenue_cents": 0,
+        "execution_cost_cents": 0,
+        "net_cents": 0
+      }
+    }
+  },
+  "capable_sellers_ge3_accepted": [
+    "mw-s1",
+    "mw-s2",
+    "mw-s3"
+  ],
+  "capable_seller_nets_cents": {
+    "mw-s1": {
+      "A": 1770,
+      "B": 1850
+    },
+    "mw-s2": {
+      "A": 6486,
+      "B": 6486
+    },
+    "mw-s3": {
+      "A": 2784,
+      "B": 2784
+    }
+  },
+  "controls": {
+    "C4_no_affordable_offer": {
+      "A": {
+        "task_outcome": "declined",
+        "total_buyer_spend_cents": 0
+      },
+      "B": {
+        "task_outcome": "declined",
+        "total_buyer_spend_cents": 0
+      },
+      "pass": true
+    },
+    "C6_frozen_criteria": {
+      "pass": true,
+      "rejected_commission": "com-a55c89f4f2c1b480",
+      "relaxed_contract_id": "ctr-e24305b049873f28",
+      "original_contract_id": "ctr-b6f9bf04b0d06fca"
+    },
+    "C7_no_duplicate_settlement": {
+      "pass": true,
+      "commission_id": "com-b49b763c89a03a71",
+      "settlement_id": "stl-879e283da9015aee"
+    },
+    "C5_budget_enforcement": {
+      "pass": true
+    }
+  },
+  "claim_ceiling": "Internal simulated market evidence only. This does not establish real demand, independent counterparties, sustainable seller income, or profitable arbitrage."
+}

@@ -1,0 +1,2623 @@
+{
+  "cutoff_iso": "2026-09-29T02:32:50.653354+00:00",
+  "session_ceiling_cents": 40000,
+  "history_summary": {
+    "mw-s1": {
+      "n": 4,
+      "k": 3,
+      "other_class_n": 0
+    },
+    "mw-s2": {
+      "n": 4,
+      "k": 2,
+      "other_class_n": 0
+    },
+    "mw-s3": {
+      "n": 4,
+      "k": 3,
+      "other_class_n": 0
+    },
+    "mw-s4": {
+      "n": 4,
+      "k": 3,
+      "other_class_n": 0
+    },
+    "mw-s5": {
+      "n": 4,
+      "k": 2,
+      "other_class_n": 0
+    },
+    "mw-s6": {
+      "n": 0,
+      "k": 0,
+      "other_class_n": 2
+    }
+  },
+  "policies": {
+    "A": {
+      "tasks": [
+        {
+          "task_id": "A-b1-t1-01",
+          "harbor": "pool",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-b49b763c89a03a71",
+              "submit_tag": "submit-A-A-b1-t1-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b1-t1-02",
+          "harbor": "arm",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-a8d4fcc5363cc47b",
+              "submit_tag": "submit-A-A-b1-t1-02-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b1-t1-03",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for channel; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-d8938fa1a06b0bad",
+              "submit_tag": "submit-A-A-b1-t1-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-204629b3ba9e8f81",
+              "submit_tag": "submit-A-A-b1-t1-03-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b1-t1-04",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-4dbc01b4d3c0c0eb",
+              "submit_tag": "submit-A-A-b1-t1-04-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b1-t1-05",
+          "harbor": "sound",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for sound; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-54f512fa4623c0cb",
+              "submit_tag": "submit-A-A-b1-t1-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "rejected",
+              "commission_id": "com-441e3afd93185f7d",
+              "submit_tag": "submit-A-A-b1-t1-05-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 72,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b1-t1-06",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-c9abf9e55c41364e",
+              "submit_tag": "submit-A-A-b1-t1-06-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for strait; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-f922b47a8214b076",
+              "submit_tag": "submit-A-A-b1-t1-06-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b2-t2-01",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-41228393dbfb59ea",
+              "submit_tag": "submit-A-A-b2-t2-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for strait; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-4f5aaeaeeb0478e3",
+              "submit_tag": "submit-A-A-b2-t2-01-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b2-t2-02",
+          "harbor": "bight",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for bight; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-babbb5f686939af6",
+              "submit_tag": "submit-A-A-b2-t2-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.32 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-13db7338c72c7d59",
+              "submit_tag": "submit-A-A-b2-t2-02-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b2-t2-03",
+          "harbor": "basin",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-eca5e44eb72262c9",
+              "submit_tag": "submit-A-A-b2-t2-03-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b2-t2-04",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-e20050b45223504e",
+              "submit_tag": "submit-A-A-b2-t2-04-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b2-t2-05",
+          "harbor": "haven",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for haven; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-21f7d04b8ba6d0d4",
+              "submit_tag": "submit-A-A-b2-t2-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b2-t2-06",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for channel; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-7839f07282cbe267",
+              "submit_tag": "submit-A-A-b2-t2-06-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-19dbcbe8eb688dbc",
+              "submit_tag": "submit-A-A-b2-t2-06-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b3-t3-01",
+          "harbor": "roads",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for roads; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-cef959d70bf368ad",
+              "submit_tag": "submit-A-A-b3-t3-01-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b3-t3-02",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for channel; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-12128d7470755d7e",
+              "submit_tag": "submit-A-A-b3-t3-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-0fda260bc46338fb",
+              "submit_tag": "submit-A-A-b3-t3-02-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b3-t3-03",
+          "harbor": "arm",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-e32bd12dd580ad5c",
+              "submit_tag": "submit-A-A-b3-t3-03-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b3-t3-04",
+          "harbor": "pool",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-029997412fa916f5",
+              "submit_tag": "submit-A-A-b3-t3-04-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b3-t3-05",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-9b439d2adc213dcf",
+              "submit_tag": "submit-A-A-b3-t3-05-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b3-t3-06",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-9f68dc61e397924c",
+              "submit_tag": "submit-A-A-b3-t3-06-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for strait; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-3478d9aba57a061b",
+              "submit_tag": "submit-A-A-b3-t3-06-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b4-t4-01",
+          "harbor": "arm",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-36af238c7907c51c",
+              "submit_tag": "submit-A-A-b4-t4-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b4-t4-02",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-4b9c73b665aadcf5",
+              "submit_tag": "submit-A-A-b4-t4-02-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b4-t4-03",
+          "harbor": "sound",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for sound; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-2fbcc12774cef0a3",
+              "submit_tag": "submit-A-A-b4-t4-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "rejected",
+              "commission_id": "com-6f47709db6fac09c",
+              "submit_tag": "submit-A-A-b4-t4-03-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 72,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b4-t4-04",
+          "harbor": "roads",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for roads; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-a37684dc325a963e",
+              "submit_tag": "submit-A-A-b4-t4-04-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b4-t4-05",
+          "harbor": "bight",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for bight; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-96cccfee15a9cc94",
+              "submit_tag": "submit-A-A-b4-t4-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.32 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-234a56dfe60e2344",
+              "submit_tag": "submit-A-A-b4-t4-05-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b4-t4-06",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-c797dcb8ea1bd1ff",
+              "submit_tag": "submit-A-A-b4-t4-06-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for strait; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-7cbb6ed20b083e0c",
+              "submit_tag": "submit-A-A-b4-t4-06-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b5-t5-01",
+          "harbor": "pool",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-b70a8f50b7e09157",
+              "submit_tag": "submit-A-A-b5-t5-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b5-t5-02",
+          "harbor": "sound",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for sound; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-cc80c6f67e5aa21a",
+              "submit_tag": "submit-A-A-b5-t5-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "rejected",
+              "commission_id": "com-61037c3c00873297",
+              "submit_tag": "submit-A-A-b5-t5-02-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 72,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b5-t5-03",
+          "harbor": "firth",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-68bad724f0045d5f",
+              "submit_tag": "submit-A-A-b5-t5-03-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for firth; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-634f300264fda2be",
+              "submit_tag": "submit-A-A-b5-t5-03-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b5-t5-04",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for channel; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-6e99e7c3ed085204",
+              "submit_tag": "submit-A-A-b5-t5-04-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-ad5e233522213379",
+              "submit_tag": "submit-A-A-b5-t5-04-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b5-t5-05",
+          "harbor": "basin",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-b20a20a20b1bc695",
+              "submit_tag": "submit-A-A-b5-t5-05-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b5-t5-06",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-b7b27c43c3fcec38",
+              "submit_tag": "submit-A-A-b5-t5-06-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for strait; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-bee0b28cc3f1c48f",
+              "submit_tag": "submit-A-A-b5-t5-06-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b6-t6-01",
+          "harbor": "sound",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for sound; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-6fdd79b8ade2cda9",
+              "submit_tag": "submit-A-A-b6-t6-01-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "rejected",
+              "commission_id": "com-0cf6e37a33d34813",
+              "submit_tag": "submit-A-A-b6-t6-01-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 72,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b6-t6-02",
+          "harbor": "roads",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for roads; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-4f09b2f9fbc76a57",
+              "submit_tag": "submit-A-A-b6-t6-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b6-t6-03",
+          "harbor": "gulf",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-93e8fe8f765436a2",
+              "submit_tag": "submit-A-A-b6-t6-03-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b6-t6-04",
+          "harbor": "arm",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-493a8ff9d4c5c4c6",
+              "submit_tag": "submit-A-A-b6-t6-04-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b6-t6-05",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-d47b405bcaf9c6d6",
+              "submit_tag": "submit-A-A-b6-t6-05-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b6-t6-06",
+          "harbor": "pool",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-a1bf4828b9fd0f87",
+              "submit_tag": "submit-A-A-b6-t6-06-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b7-t7-01",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-8e5b3ad155219efa",
+              "submit_tag": "submit-A-A-b7-t7-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b7-t7-02",
+          "harbor": "firth",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-e71fb3d75683aea4",
+              "submit_tag": "submit-A-A-b7-t7-02-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for firth; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-2848d6c50917b098",
+              "submit_tag": "submit-A-A-b7-t7-02-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b7-t7-03",
+          "harbor": "basin",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-c72fa60bd18b5519",
+              "submit_tag": "submit-A-A-b7-t7-03-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b7-t7-04",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for channel; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-17c5dcfa35a2ee0a",
+              "submit_tag": "submit-A-A-b7-t7-04-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-f1fbb9b293687ad8",
+              "submit_tag": "submit-A-A-b7-t7-04-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b7-t7-05",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-3d23281788c18b1c",
+              "submit_tag": "submit-A-A-b7-t7-05-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for strait; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-cad4576e1f12e149",
+              "submit_tag": "submit-A-A-b7-t7-05-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b7-t7-06",
+          "harbor": "gulf",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-549a0afcdd332117",
+              "submit_tag": "submit-A-A-b7-t7-06-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b8-t8-01",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-b7f0819975ea371d",
+              "submit_tag": "submit-A-A-b8-t8-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b8-t8-02",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-e76cc5ecbb873659",
+              "submit_tag": "submit-A-A-b8-t8-02-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for strait; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-96c94c34f57b2371",
+              "submit_tag": "submit-A-A-b8-t8-02-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b8-t8-03",
+          "harbor": "roads",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for roads; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-e2292fb597219db2",
+              "submit_tag": "submit-A-A-b8-t8-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b8-t8-04",
+          "harbor": "basin",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-a28512a347c0fc81",
+              "submit_tag": "submit-A-A-b8-t8-04-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b8-t8-05",
+          "harbor": "bight",
+          "attempts": [
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for bight; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-d37b76ba8cee2937",
+              "submit_tag": "submit-A-A-b8-t8-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.32 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-3f026f62d0ee8996",
+              "submit_tag": "submit-A-A-b8-t8-05-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "A-b8-t8-06",
+          "harbor": "firth",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-ee28a5d9e31a7c4a",
+              "submit_tag": "submit-A-A-b8-t8-06-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s6",
+              "outcome": "declined",
+              "reason": "mw-s6: no log entry for firth; declining contract"
+            },
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-e9440498e24369a3",
+              "submit_tag": "submit-A-A-b8-t8-06-a2",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        }
+      ],
+      "matching_fees_cents": 485,
+      "buyer_chain_spend_cents": 12888,
+      "total_buyer_spend_cents": 13373
+    },
+    "B": {
+      "tasks": [
+        {
+          "task_id": "B-b1-t1-01",
+          "harbor": "pool",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-0187f1d77490d2ff",
+              "submit_tag": "submit-B-B-b1-t1-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b1-t1-02",
+          "harbor": "arm",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-098bd5d954fb8c93",
+              "submit_tag": "submit-B-B-b1-t1-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.95 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-0a6ad0bcd96acbd6",
+              "submit_tag": "submit-B-B-b1-t1-02-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b1-t1-03",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-57c64bcc1af7e429",
+              "submit_tag": "submit-B-B-b1-t1-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-6d6b6a8149426f05",
+              "submit_tag": "submit-B-B-b1-t1-03-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b1-t1-04",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-a12a3742eade5f02",
+              "submit_tag": "submit-B-B-b1-t1-04-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b1-t1-05",
+          "harbor": "sound",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-8317bd1b064b2997",
+              "submit_tag": "submit-B-B-b1-t1-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "rejected",
+              "commission_id": "com-510265e331a6483c",
+              "submit_tag": "submit-B-B-b1-t1-05-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 72,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b1-t1-06",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-3982e628e5af4c2c",
+              "submit_tag": "submit-B-B-b1-t1-06-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-39aca3cd0926f4f0",
+              "submit_tag": "submit-B-B-b1-t1-06-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b2-t2-01",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-508682947aa69285",
+              "submit_tag": "submit-B-B-b2-t2-01-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-aaf2af587da5684a",
+              "submit_tag": "submit-B-B-b2-t2-01-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b2-t2-02",
+          "harbor": "bight",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-38a43657d3ec6d22",
+              "submit_tag": "submit-B-B-b2-t2-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.32 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-2bc7dd38ce69a7ed",
+              "submit_tag": "submit-B-B-b2-t2-02-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b2-t2-03",
+          "harbor": "basin",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-30cbf08bb1886fd4",
+              "submit_tag": "submit-B-B-b2-t2-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.83 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-3271e239484d3d53",
+              "submit_tag": "submit-B-B-b2-t2-03-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b2-t2-04",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-2f463c7db8a229ff",
+              "submit_tag": "submit-B-B-b2-t2-04-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b2-t2-05",
+          "harbor": "haven",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-a7245d16741cc9e8",
+              "submit_tag": "submit-B-B-b2-t2-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b2-t2-06",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-96a6b5675888671d",
+              "submit_tag": "submit-B-B-b2-t2-06-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-ad5b4f89d2ef0bb3",
+              "submit_tag": "submit-B-B-b2-t2-06-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b3-t3-01",
+          "harbor": "roads",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-dbcbefd7bdb823fb",
+              "submit_tag": "submit-B-B-b3-t3-01-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b3-t3-02",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-36ec957f8cb1c703",
+              "submit_tag": "submit-B-B-b3-t3-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-7aad29a248e74f22",
+              "submit_tag": "submit-B-B-b3-t3-02-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b3-t3-03",
+          "harbor": "arm",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-43caa1904dc43312",
+              "submit_tag": "submit-B-B-b3-t3-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.95 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-a136668b3e9a9a64",
+              "submit_tag": "submit-B-B-b3-t3-03-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b3-t3-04",
+          "harbor": "pool",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-149e1e18594e22e5",
+              "submit_tag": "submit-B-B-b3-t3-04-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b3-t3-05",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-a1f94ac9c9f43ef9",
+              "submit_tag": "submit-B-B-b3-t3-05-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b3-t3-06",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-667d4f79e1c52292",
+              "submit_tag": "submit-B-B-b3-t3-06-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-bd5db50e097b9552",
+              "submit_tag": "submit-B-B-b3-t3-06-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b4-t4-01",
+          "harbor": "arm",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-ec0e049c084e7fed",
+              "submit_tag": "submit-B-B-b4-t4-01-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.95 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-ce5c30c6f2bec60f",
+              "submit_tag": "submit-B-B-b4-t4-01-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b4-t4-02",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-899de35695f5eb09",
+              "submit_tag": "submit-B-B-b4-t4-02-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b4-t4-03",
+          "harbor": "sound",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-3b8cd212ab9eb9b8",
+              "submit_tag": "submit-B-B-b4-t4-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "rejected",
+              "commission_id": "com-65055bccfc383daa",
+              "submit_tag": "submit-B-B-b4-t4-03-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 72,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b4-t4-04",
+          "harbor": "roads",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-c401808252234e65",
+              "submit_tag": "submit-B-B-b4-t4-04-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b4-t4-05",
+          "harbor": "bight",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-0bfd909ab91df626",
+              "submit_tag": "submit-B-B-b4-t4-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.32 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-fda92118f07ef250",
+              "submit_tag": "submit-B-B-b4-t4-05-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b4-t4-06",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-ff1a9ebdb011bb3f",
+              "submit_tag": "submit-B-B-b4-t4-06-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-70d94aa9768e58b0",
+              "submit_tag": "submit-B-B-b4-t4-06-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b5-t5-01",
+          "harbor": "pool",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-2ff9a35fe9b5158c",
+              "submit_tag": "submit-B-B-b5-t5-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b5-t5-02",
+          "harbor": "sound",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-52ab1efcd135c415",
+              "submit_tag": "submit-B-B-b5-t5-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "rejected",
+              "commission_id": "com-b9833eac277ccef8",
+              "submit_tag": "submit-B-B-b5-t5-02-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 72,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b5-t5-03",
+          "harbor": "firth",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-f00143b79edb93e8",
+              "submit_tag": "submit-B-B-b5-t5-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-3949ac569bf9a766",
+              "submit_tag": "submit-B-B-b5-t5-03-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b5-t5-04",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-51a12c90e6e22d5f",
+              "submit_tag": "submit-B-B-b5-t5-04-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-a2aa9abbcd5203bc",
+              "submit_tag": "submit-B-B-b5-t5-04-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b5-t5-05",
+          "harbor": "basin",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-7ff161a7747d4d83",
+              "submit_tag": "submit-B-B-b5-t5-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.83 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-3094362860d3eff2",
+              "submit_tag": "submit-B-B-b5-t5-05-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b5-t5-06",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-ca360a11671d66a1",
+              "submit_tag": "submit-B-B-b5-t5-06-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-f0bd7f54390bee58",
+              "submit_tag": "submit-B-B-b5-t5-06-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b6-t6-01",
+          "harbor": "sound",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-f196374e284c75bf",
+              "submit_tag": "submit-B-B-b6-t6-01-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "rejected",
+              "commission_id": "com-c3d1f4e2b90664ea",
+              "submit_tag": "submit-B-B-b6-t6-01-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 72,
+              "reasons": [
+                "missing required text: '4.47 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b6-t6-02",
+          "harbor": "roads",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-686685b54898ab20",
+              "submit_tag": "submit-B-B-b6-t6-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b6-t6-03",
+          "harbor": "gulf",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-fc37be542012bc27",
+              "submit_tag": "submit-B-B-b6-t6-03-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b6-t6-04",
+          "harbor": "arm",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-9f8ffa15e8ab171b",
+              "submit_tag": "submit-B-B-b6-t6-04-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '4.95 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-ba4a3eb2e665e72b",
+              "submit_tag": "submit-B-B-b6-t6-04-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b6-t6-05",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-7d8b6aeb73a6b528",
+              "submit_tag": "submit-B-B-b6-t6-05-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b6-t6-06",
+          "harbor": "pool",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-9df86335eef9f80c",
+              "submit_tag": "submit-B-B-b6-t6-06-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b7-t7-01",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-1d60fe1ec7fd5bc1",
+              "submit_tag": "submit-B-B-b7-t7-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b7-t7-02",
+          "harbor": "firth",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-e5fc054bebe675b8",
+              "submit_tag": "submit-B-B-b7-t7-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-af9e89240883e7de",
+              "submit_tag": "submit-B-B-b7-t7-02-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b7-t7-03",
+          "harbor": "basin",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-26ec2b3dd5f53a68",
+              "submit_tag": "submit-B-B-b7-t7-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.83 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-7e8c3f762d17b634",
+              "submit_tag": "submit-B-B-b7-t7-03-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b7-t7-04",
+          "harbor": "channel",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-9b6bc441c7b6bd2c",
+              "submit_tag": "submit-B-B-b7-t7-04-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '2.21 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-9bc23823d441ddb4",
+              "submit_tag": "submit-B-B-b7-t7-04-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b7-t7-05",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-ab1458d5622741b8",
+              "submit_tag": "submit-B-B-b7-t7-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-036613305098e043",
+              "submit_tag": "submit-B-B-b7-t7-05-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b7-t7-06",
+          "harbor": "gulf",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-f558d1aba28e5527",
+              "submit_tag": "submit-B-B-b7-t7-06-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b8-t8-01",
+          "harbor": "reach",
+          "attempts": [
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-66f6ec263c51f91d",
+              "submit_tag": "submit-B-B-b8-t8-01-a1",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b8-t8-02",
+          "harbor": "strait",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-847e6cafae310a58",
+              "submit_tag": "submit-B-B-b8-t8-02-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-e5bae2c64c4674d7",
+              "submit_tag": "submit-B-B-b8-t8-02-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '1.58 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b8-t8-03",
+          "harbor": "roads",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "accepted",
+              "commission_id": "com-21c059743e617e3c",
+              "submit_tag": "submit-B-B-b8-t8-03-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 340,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b8-t8-04",
+          "harbor": "basin",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-328ccdadc4e7ec78",
+              "submit_tag": "submit-B-B-b8-t8-04-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.83 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "accepted",
+              "commission_id": "com-d8c67a8fea72b7c0",
+              "submit_tag": "submit-B-B-b8-t8-04-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 324,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b8-t8-05",
+          "harbor": "bight",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-cdc1228a660c842c",
+              "submit_tag": "submit-B-B-b8-t8-05-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '1.32 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s3",
+              "outcome": "accepted",
+              "commission_id": "com-33600f16de990ef6",
+              "submit_tag": "submit-B-B-b8-t8-05-a2",
+              "recorded_cost_cents": 72,
+              "success_fee_cents": 300,
+              "seller_payout_cents": 372,
+              "reasons": []
+            }
+          ],
+          "outcome": "accepted",
+          "buyer_spend_cents": 0
+        },
+        {
+          "task_id": "B-b8-t8-06",
+          "harbor": "firth",
+          "attempts": [
+            {
+              "worker_id": "mw-s1",
+              "outcome": "rejected",
+              "commission_id": "com-29eff9fd18181d19",
+              "submit_tag": "submit-B-B-b8-t8-06-a1",
+              "recorded_cost_cents": 40,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 40,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            },
+            {
+              "worker_id": "mw-s2",
+              "outcome": "rejected",
+              "commission_id": "com-9d9dd66c7b041322",
+              "submit_tag": "submit-B-B-b8-t8-06-a2",
+              "recorded_cost_cents": 24,
+              "success_fee_cents": 0,
+              "seller_payout_cents": 24,
+              "reasons": [
+                "missing required text: '3.08 m'"
+              ]
+            }
+          ],
+          "outcome": "unfinished",
+          "buyer_spend_cents": 0
+        }
+      ],
+      "matching_fees_cents": 390,
+      "buyer_chain_spend_cents": 13208,
+      "total_buyer_spend_cents": 13598
+    }
+  },
+  "controls": {
+    "C4_no_affordable_offer": {
+      "A": {
+        "task_outcome": "declined",
+        "total_buyer_spend_cents": 0
+      },
+      "B": {
+        "task_outcome": "declined",
+        "total_buyer_spend_cents": 0
+      },
+      "pass": true
+    },
+    "C6_frozen_criteria": {
+      "pass": true,
+      "rejected_commission": "com-a55c89f4f2c1b480",
+      "relaxed_contract_id": "ctr-e24305b049873f28",
+      "original_contract_id": "ctr-b6f9bf04b0d06fca"
+    },
+    "C7_no_duplicate_settlement": {
+      "pass": true,
+      "commission_id": "com-b49b763c89a03a71",
+      "settlement_id": "stl-879e283da9015aee"
+    },
+    "C5_budget_enforcement": {
+      "pass": true
+    }
+  },
+  "claim_ceiling": "Internal simulated market evidence only. This does not establish real demand, independent counterparties, sustainable seller income, or profitable arbitrage."
+}

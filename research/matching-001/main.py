@@ -34,9 +34,9 @@ def control_c4(world: World, reason_log, cutoff_iso: str) -> dict:
     out = {}
     for policy in ("A", "B"):
         buyer_pid = f"mw-buyer-c4{policy.lower()}"
-        buyer = get_client(world, buyer_pid)
-        world.fund_simulated(buyer.pid, buyer.token, 10,
-                             idempotency_key=f"m1-fund-c4{policy}")
+        # NOTE: run_policy funds the buyer itself; do not fund here too
+        # (double-fund bug fixed 2026-09-28: two different idempotency keys
+        # funded 10c twice, breaking the C4 zero-spend assertion).
         rep = run_policy(world, policy, cutoff_iso,
                          reason_log,
                          blocks=[[EVAL["blocks"][0][0]]],
@@ -115,9 +115,13 @@ def control_c7(world: World, eval_reports: dict) -> dict:
     seller_pid = com["contract"]["seller_id"]
     from run_all import get_client as _gc
     seller = _gc(world, seller_pid)
-    # Re-submit with the SAME key: must replay, not re-settle.
+    # Re-submit with the SAME key and the SAME deliverable text: must
+    # replay the single recorded settlement, not re-settle. (Submitting
+    # different text under the same key is correctly a
+    # WORLD_IDEMPOTENCY_CONFLICT, not a replay.)
+    same_text = com["deliverable"]["text"]
     again = world.commission_submit_deliverable(
-        seller.pid, seller.token, com_id, "anything",
+        seller.pid, seller.token, com_id, same_text,
         seller.presentation(world, "commission.submit-deliverable"),
         idempotency_key=tag)
     assert again.get("replayed") is True, "C7: expected a replay"
