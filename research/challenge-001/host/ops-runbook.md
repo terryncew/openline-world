@@ -11,7 +11,28 @@ and honestly labeled. Everything here assumes the kit in this directory
 | `/opt/openline-world` | checkout of the repo (branch with CHALLENGE-001) |
 | `/etc/openline-world/env` | `openline-world.env` — WORKSHOP_HOST stays 127.0.0.1 |
 | `/var/lib/openline-world` | WORLD_DATA_DIR — `world-snapshot.json` lives here |
+| `/var/lib/openline-world/backups` | nightly snapshot tarballs (14-day rotation) |
 | `/var/log/caddy/challenge-access.log` | proxy access log (metadata only) |
+
+## First boot: publish the TLS fingerprint
+
+There is no domain and no ACME. The edge serves a self-signed
+certificate from Caddy's internal CA; the certificate's SHA-256
+fingerprint is the participants' only trust anchor, pinned out of
+band (REMOTE-JOIN.md). After the first start:
+
+```
+openssl s_client -connect 127.0.0.1:443 </dev/null 2>/dev/null \
+  | openssl x509 -outform DER 2>/dev/null | sha256sum
+```
+
+Send that fingerprint to each invited participant over the same
+out-of-band channel as their mandate bundle — never in the same
+message as the bundle is not required, but both travel owner-to-
+participant, never through the receiver itself. The fingerprint
+persists in Caddy's storage across restarts (verified); a host
+rebuild generates a new one, which must be republished before any
+participant connects.
 
 ## Access controls (enforced by the receiver, not the proxy)
 
@@ -24,29 +45,40 @@ and honestly labeled. Everything here assumes the kit in this directory
 - Everything else requires an active bearer session, and every gated
   action (`challenge.contribute`, `challenge.evaluate`,
   `claimgraph.correct`, …) additionally requires a worker-signed
-  presentation over a single-use receiver challenge. The proxy adds rate
-  limits and the 1 MB body cap; it never issues, checks, or replays
-  authority. No IP allow-listing is needed for correctness.
+  presentation over a single-use receiver challenge. The proxy adds
+  only the 256 KB body cap (no rate limiting in stock Caddy; see
+  Caddyfile); it never issues, checks, or replays authority. No IP
+  allow-listing is needed for correctness.
 
 ## Nightly backup
 
-One cron line on the host (run as the `openline` user), shipping the
-snapshot off the machine. The snapshot is written on every mutation
-(`World.save()` after each accepted/rejected state change), so a
-plain copy is always current — no lock, no quiesce needed beyond the
-normal snapshot write.
+One cron line on the host (run as the `openline` user). The snapshot
+is written on every mutation (`World.save()` after each
+accepted/rejected state change), so a plain tarball is always
+current — no lock, no quiesce needed beyond the normal snapshot write.
 
 ```
-0 3 * * * rsync -a --delete /var/lib/openline-world/ backup@backup-store:/backups/challenge-receiver/$(date +\%F)/ --log-file=/var/log/challenge-backup.log
+0 3 * * * tar -czf /var/lib/openline-world/backups/snapshot-$(date +\%F).tar.gz -C /var/lib/openline-world world-snapshot.json && find /var/lib/openline-world/backups -name 'snapshot-*.tar.gz' -mtime +14 -delete
 ```
 
-Keep 14 daily copies on the store. Verify one restore per month (see below).
+Keep 14 daily tarballs on the host. The off-host copy is pulled by
+the owner from their own machine (no backup-store account exists and
+none is provisioned by this kit):
+
+```
+scp openline@<server-ip>:/var/lib/openline-world/backups/snapshot-$(date +%F).tar.gz ~/challenge-backups/
+```
+
+Stated plainly: if the host dies between pulls, everything newer
+than the last pull is lost. There is no second copy until the owner
+pulls. If that loss window is unacceptable, provisioning a real
+backup target is a new decision.
 
 ## Two-command restore
 
 ```
 systemctl stop openline-world.service
-rsync -a backup@backup-store:/backups/challenge-receiver/2026-09-27/ /var/lib/openline-world/ && systemctl start openline-world.service
+tar -xzf snapshot-2026-09-27.tar.gz -C /var/lib/openline-world/ && systemctl start openline-world.service
 ```
 
 The snapshot includes the receiver gate's private key, the pinned
@@ -93,9 +125,11 @@ gate challenge (idempotency keys make replays safe).
 ## If the host dies
 
 Provision a fresh VPS, install Caddy + the backend (same kit), restore
-the latest snapshot with the two-command procedure, point DNS back.
-No participant data lives on their machines except their own keys —
-their recorded contributions are all in the snapshot.
+the latest pulled tarball with the two-command procedure, extract and
+republish the NEW TLS fingerprint out of band (it changes on rebuild),
+and re-issue mandate bundles as needed. No participant data lives on
+their machines except their own keys — their recorded contributions
+are all in the snapshot, up to the last pull.
 
 ## What this runbook does not cover
 

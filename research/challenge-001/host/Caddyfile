@@ -1,37 +1,46 @@
-# CHALLENGE-001 hosted receiver — TLS edge (proposal; not deployed)
+# CHALLENGE-001 hosted receiver — TLS edge (verified 2026-09-28 with
+# real Caddy v2.10.2 against a disposable backend; NOT yet run on the
+# production host).
 #
 # Caddy terminates TLS and reverse-proxies to the loopback-only backend.
 # The backend keeps binding 127.0.0.1 (WORKSHOP_HOST); it is never
-# exposed directly. Substitute the real domain and certificate paths
-# before use.
+# exposed directly.
+#
+# No domain, no ACME: the site address is the server's public IP and the
+# certificate is self-signed from Caddy's internal CA (`tls internal`).
+# Participants pin the certificate's SHA-256 fingerprint out of band
+# (see REMOTE-JOIN.md); the pin is the only trust anchor. The fingerprint
+# persists in Caddy's storage across restarts — a host rebuild generates
+# a new one, which is published out of band before any participant
+# connects.
 
 {
 	admin off
 }
 
-{$CHALLENGE_DOMAIN:challenge.example.com} {
+https://<server-ip> {
 
-	# TLS: Caddy's automatic HTTPS (Let's Encrypt) is preferred when a
-	# real domain is available. For a pre-provisioned certificate, use:
-	# tls /etc/caddy/certs/fullchain.pem /etc/caddy/certs/privkey.pem
-	tls {$ACME_EMAIL:hostmaster@example.com}
+	tls internal
 
-	# Request body cap: 1 MB. The world server enforces its own, smaller
-	# ceilings (256 KB HTTP bodies; 16 KB per contribution) and exact
-	# byte pinning; the proxy cap is a coarse edge guard.
+	# Request body cap: 256 KB, aligned with the world server's own
+	# 256 KB HTTP body ceiling. Oversized bodies get a uniform 413 at
+	# the edge (verified: a 2 MB POST returns 413). The contribution
+	# body's own cap is 16 KB; legitimate ceremony traffic is far
+	# smaller than this limit. Do NOT raise the edge cap above the
+	# backend's ceiling: a sub-edge-cap oversized body otherwise reaches
+	# the backend, which aborts the connection mid-stream and the edge
+	# reports a confusing 502 (observed in testing).
 	request_body {
-		max_size 1MB
+		max_size 256KB
 	}
 
-	# Per-IP rate limits. Caddy >= 2.8 has rate_limit built in; verify the
-	# installed version supports this block before relying on it.
-	rate_limit {
-		zone challenge_ip {
-			key {remote_host}
-		}
-		events 120
-		window 1m
-	}
+	# No proxy-level rate limiting: stock Caddy v2.10.2 ships no
+	# `rate_limit` directive (verified via `caddy list-modules`), and the
+	# threat model is one invited participant with a manually issued
+	# per-participant mandate — not the open internet. If the
+	# participant set grows, revisit with an explicit module choice.
+	# Abuse is handled by the receiver: per-mandate scopes, 600s bundle
+	# TTLs, single-use gate challenges, and the refusal ledger.
 
 	# Only one route: everything goes to the loopback backend. No direct
 	# backend exposure anywhere on this host's public interfaces.
@@ -40,11 +49,11 @@
 		header_up X-Real-IP {remote_host}
 	}
 
-	# Access log policy: method, path, status, latency, request id only.
-	# Authorization headers, request bodies, and response bodies are
-	# dropped at the log formatter. Receipt ids are application data:
-	# they are issued and recorded by the receiver, not the proxy, and
-	# stay in the world's durable store — never in these logs.
+	# Access log policy: method, path, status, latency, TLS info only.
+	# Headers and bodies are dropped at the formatter (verified: the
+	# emitted lines carry request metadata only). Receipt ids are
+	# application data: issued and recorded by the receiver, not the
+	# proxy, and stay in the world's durable store — never in these logs.
 	log {
 		output file /var/log/caddy/challenge-access.log
 		format filter {

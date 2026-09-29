@@ -33,7 +33,7 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 sys.path.insert(0, str(_REPO_ROOT / "backend" / "vendor"))
 
 from openline_wallet.wallet import Wallet  # noqa: E402

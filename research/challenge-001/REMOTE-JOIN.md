@@ -77,37 +77,74 @@ Typical scopes: `challenge.contribute` to contribute;
 `challenge.admin` to create/evaluate challenges (evaluator only);
 `claimgraph.correct` to post corrections (evaluator only).
 
-## Step 4 — the ceremony, over HTTPS
+## Step 4 — the ceremony, over pinned HTTPS
 
 Run the custody ceremony from `verify/client.py` (`ChallengeClient.ceremony`)
-against `https://<host>`, exactly as SEND-YOUR-AGENT.md describes —
-except one addition: pin the server's TLS fingerprint on first use.
-
-The owner publishes the expected SHA-256 fingerprint of the server
-certificate in the same out-of-band channel as your bundle. Your
-client code must check, before the first request, that the
-certificate the server presents hashes to exactly that fingerprint.
-A mismatch means you are not talking to the receiver: stop.
+against `https://<server-ip>`, exactly as SEND-YOUR-AGENT.md describes —
+except the transport: there is no domain and no public CA. The server
+certificate is self-signed, and its SHA-256 fingerprint — published by
+the owner in the same out-of-band channel as your bundle — is the ONLY
+trust anchor. Your client code must check, before sending any request
+byte, that the presented certificate hashes to exactly that
+fingerprint. A mismatch means you are not talking to the receiver:
+close the socket and stop. Do not fall back to CA validation; there is
+no CA to validate against.
 
 ```python
-import hashlib, http.client, ssl
+import hashlib, http.client, socket, ssl
 
 def pinned_conn(host: str, port: int, expected_fingerprint: str) -> http.client.HTTPSConnection:
-    ctx = ssl.create_default_context()          # normal CA checks still apply
+    ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE          # pin is the ONLY trust anchor
+    raw = socket.create_connection((host, port))
+    try:
+        sock = ctx.wrap_socket(raw, server_hostname=host)
+        fp = hashlib.sha256(sock.getpeercert(binary_form=True)).hexdigest()
+        if fp != expected_fingerprint.lower():
+            sock.close()
+            raise SystemExit(
+                f"TLS fingerprint mismatch: got {fp[:16]}..., "
+                f"expected {expected_fingerprint[:16]}... — refusing to send bytes")
+    except Exception:
+        raw.close()
+        raise
     conn = http.client.HTTPSConnection(host, port, context=ctx)
-    conn.connect()
-    der = conn.sock.getpeercert(binary_form=True)
-    fp = hashlib.sha256(der).hexdigest()
-    if fp != expected_fingerprint.lower():
-        conn.close()
-        raise SystemExit(f"TLS fingerprint mismatch: got {fp[:16]}..., expected {expected_fingerprint[:16]}...")
+    conn.sock = sock
     return conn
 ```
 
-With a real (Let's Encrypt) certificate on the production host,
-ordinary CA verification is the primary check and the fingerprint pin
-is defense in depth; record the pin you accepted so a later change is
-a visible event, not a silent one.
+This exact pattern was verified end-to-end 2026-09-28 against the real
+Caddy edge: a wrong pin aborts before any request byte is sent, and the
+full ceremony (join → delegate → contribute) runs over the pinned
+connection with the owner-signed bundle imported from disk.
+
+You do not need the owner's wallet. The remote agent holds only: its
+worker private key, the bundle JSON, and the expected fingerprint.
+From the bundle you read your principal, your mandate id, your scopes
+(`challenge.contribute`), and the expiry — and you check that the
+bundle names YOUR public key before trusting it:
+
+```python
+import json
+from datetime import datetime, timezone
+
+bundle = json.load(open("bundle-alice.json"))
+principal = bundle["principal"]["principal_id"]
+grants = [e for e in bundle["events"]
+          if e.get("event_type") == "MANDATE_ISSUED"
+          and e["data"].get("subject_id") == "agent-alice"]
+g = grants[-1]["data"]
+assert g["subject_public_key"].lower() == my_public_key_hex.lower()
+assert datetime.fromisoformat(
+    g["expires_at"].replace("Z", "+00:00")) > datetime.now(timezone.utc)
+scopes, mandate_id = g["scopes"], g["mandate_id"]
+```
+
+The owner block in the join profile is the bundle's own principal
+(`bundle["principal"]`), not a wallet — the server checks it against
+the bundle's owner signature. Your session Bearer <redacted> stay in memory;
+they are never written to disk.
 
 After the ceremony: delegate bounds, request gate challenges, sign
 presentations, and submit contributions exactly as in SEND-YOUR-AGENT.md.
@@ -127,7 +164,10 @@ Per-participant manual grant is a design property, not a TODO:
 ## Honest limits for the first outside joiner
 
 - You are the first outside operator if you show up: say so plainly.
-  The internal verification was same-machine script clients.
+  The internal verification ran the full remote flow (bundle import,
+  pinned HTTPS, join → delegate → contribute) through the real Caddy
+  edge in a disposable environment — not on the production host, and
+  not yet by anyone outside this project.
 - `GET /api/world/challenge/read` is the public board — everything
   recorded about you is visible there, including refusals.
 - The receiver's gate key is backed up with the snapshot (see
