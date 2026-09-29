@@ -17,7 +17,20 @@ took part.
 
 What this demonstrates: the machinery works end to end — custody ceremony,
 gates, K1–K7 structural admission, evaluator decisions, the five frozen
-controls, restart persistence, idempotent replay. What it does NOT
-demonstrate: independent adoption, remote operation, or the protocol
-surviving contact with a party this runtime does not control. That is the
-explicit next step in `research/challenge-001/BLOCKERS.md`.
+controls, restart persistence, idempotent replay, the credit cascade
+(explicit byte-bound reuse chains, owner-signed claim linkage, the
+unauthorized-correction control, and an authorized correction whose
+reassessment is computed by the claim graph's existing engine —
+QUARANTINE on the corrected review's claims, UNAFFECTED on the patch
+and the independent control, original bytes and decisions preserved).
+What it does NOT demonstrate: independent adoption, remote operation, or
+the protocol surviving contact with a party this runtime does not
+control. That is the explicit next step in
+`research/challenge-001/BLOCKERS.md`.
+
+Credit note: the recorded attribution is never proof of ownership,
+never deserved compensation, and never a claim of scientific truth. It
+is the evaluator's public record of what was accepted and what was
+reused. The correction event in the cascade scenario is a deliberate
+demonstration of the authorized-correction mechanism, not a claim that
+the review's finding was wrong.

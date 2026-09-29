@@ -13,7 +13,9 @@ with the owner-signed mandate bundle (see `clients/participant.py` and
 
 The mandate must grant the scopes the participant will use:
 - `challenge.contribute` — submit patch/test/review contributions.
-- `challenge.admin` — create challenges and record evaluations. Owner only.
+- `challenge.admin` — create challenges, record evaluations, and register
+  claim-graph linkage. Owner only.
+- `claimgraph.correct` — post authorized correction events. Evaluator only.
 
 ## 2. Explicit authorization (delegate bounds)
 
@@ -40,6 +42,19 @@ bound + ADMITTED contribution is stored. A contributor-carried
 "self-approval" attestation is accepted on the wire but discarded: it
 authorizes nothing and appears nowhere.
 
+A contribution may declare explicit reuse links, `builds_on`: a list of
+`{contribution_id, what_reused}` naming which recorded contributions it
+builds on. The links are byte-bound the same way as the body: the
+declared `builds_on_sha256` must equal the sha256 of the canonical
+encoding of the stored links (sort_keys, compact separators —
+`backend/world.py::_canonical_builds_on`; clients pin the same encoding).
+A mismatch is refused with `CHALLENGE_BUILDS_ON_HASH_MISMATCH`; a link
+naming an unknown contribution is refused with
+`CHALLENGE_BUILDS_ON_UNKNOWN`. The links are wire/input validation, not
+a new acceptance criterion: K1–K7 are frozen. The review may cite the
+patch, but the reuse chain is what the contributor declares — nothing
+is inferred.
+
 ## 4. Evaluation / acceptance record
 
 Only the designated evaluator (the challenge owner) may evaluate:
@@ -56,6 +71,43 @@ problem and criteria hash, every contribution with its authorship,
 structural admission record, evaluator decisions with reasons, reviews
 (including negative findings) with visible credit, and links to receipts.
 
+## 6. Credit cascade (linkage, correction, reassessment)
+
+Recorded attribution is never proof of ownership, never deserved
+compensation, and never a claim of scientific truth. It is the
+evaluator's public record of what was accepted and what was reused.
+
+The owner links accepted contributions as claim nodes:
+`POST /api/world/challenge/cascade/register` with `challenge.admin`.
+Each link names an ACCEPTED contribution, a `finding_quote` that must
+occur verbatim in the recorded body, and an optional `depends_on`
+naming another linked contribution. Non-accepted links are refused with
+`CHALLENGE_CASCADE_LINK_NOT_ACCEPTED`; non-verbatim quotes with
+`CHALLENGE_CASCADE_QUOTE_MISMATCH`; unknown dependencies with
+`CHALLENGE_CASCADE_DEPENDENCY_UNKNOWN`. Registration is an explicit
+owner-signed act — nothing is inferred from text similarity.
+
+Correction is authorized, not destructive:
+`POST /api/world/claimgraph/correct` with `claimgraph.correct`, naming
+the source of a linked contribution. A contributor without the scope is
+refused with `ACTION_OUTSIDE_MANDATE`; nothing is appended. An
+authorized event (CORRECTED / WITHDRAWN) runs the claim graph's existing
+propagation over the receiver-admitted edge policy: the corrected
+source's assertion claims are exposed (QUARANTINE / SOURCE_BASIS_LOST),
+dependents are reassessed (QUARANTINE /
+ALL_ADMITTED_SUPPORT_PATHS_LOST), independent reports stay UNAFFECTED.
+
+A correction never rewrites history. The original contribution bytes
+stay pinned, the ACCEPT/DECLINE decisions stand, every snapshot and
+receipt stays byte-identical and inspectable. The event is one
+continuous record: correction plus reassessment, not deletion.
+
+The extended demo runs this as a deliberate demonstration event: the
+evaluator corrects the accepted review's key finding to test the
+mechanism. It is not a claim the finding was wrong. The review's claims
+reassess to QUARANTINE, the patch and the independent control stay
+UNAFFECTED, the original bytes and decisions are preserved.
+
 ## The refused-unauthorized path
 
 - Revoked mandate → gate STOPPED, reason `MANDATE_REVOKED`. Nothing stored;
@@ -63,6 +115,15 @@ structural admission record, evaluator decisions with reasons, reviews
 - Missing scope → `ACTION_OUTSIDE_MANDATE`.
 - Non-evaluator evaluate → `EVALUATOR_NOT_OWNER`.
 - Wrong byte binding → `CHALLENGE_HASH_MISMATCH`.
+- Reuse-link byte binding wrong → `CHALLENGE_BUILDS_ON_HASH_MISMATCH`;
+  reuse link naming an unknown contribution →
+  `CHALLENGE_BUILDS_ON_UNKNOWN`.
+- Cascade registration: non-evaluator → `EVALUATOR_NOT_OWNER`;
+  non-accepted contribution → `CHALLENGE_CASCADE_LINK_NOT_ACCEPTED`;
+  non-verbatim quote → `CHALLENGE_CASCADE_QUOTE_MISMATCH`;
+  unknown dependency → `CHALLENGE_CASCADE_DEPENDENCY_UNKNOWN`.
+- Correction without `claimgraph.correct` → `ACTION_OUTSIDE_MANDATE`;
+  nothing is appended.
 - Failed structural admission → `CHALLENGE_ADMISSION_FAILED` naming the
   failed K rule.
 - After the deadline → `CHALLENGE_CLOSED`.

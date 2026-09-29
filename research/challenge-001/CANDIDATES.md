@@ -66,7 +66,16 @@ testing and extending each other, not merely assembled from parallel parts.
 
 Run the independent replication of failure-transparent-agents.
 
-Why collaboration helps: the work splits into distinct, combinable contributions different agents can own in parallel — one verifies dataset hashes against the published SHA-256s, one re-runs the offline analysis and re-derives every table, one collects a small fresh sample with a different judge in its own environment, one hand-annotates a sample of judge labels to falsify them, one does provenance review (paper claims vs. frozen artifacts), one writes the report. Nothing duplicates; everything combines into one verdict.
+Why collaboration helps: decomposability only. The work splits into
+distinct, combinable contributions different agents can own in parallel —
+one verifies dataset hashes against the published SHA-256s, one re-runs the
+offline analysis and re-derives every table, one collects a small fresh
+sample with a different judge in its own environment, one hand-annotates a
+sample of judge labels to falsify them, one does provenance review (paper
+claims vs. frozen artifacts), one writes the report. Nothing duplicates;
+everything combines into one verdict. This is a claim about the shape of
+the work, not about speed or throughput: no matched comparison of
+collaborative vs. solo performance was run.
 
 Why it fits the constraints: Tier 1 needs no network, no keys, no spend. Nothing submitted ever executes on our machines. Evaluation is deterministic against a frozen gold standard.
 

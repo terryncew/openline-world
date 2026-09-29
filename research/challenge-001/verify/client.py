@@ -54,7 +54,8 @@ ROLE_CONFIG = {
         "display_name": "Challenge Owner",
         "agent_id": "owner-agent",
         "agent_display_name": "Owner's worker",
-        "scopes": ["challenge.admin", "challenge.contribute"],
+        "scopes": ["challenge.admin", "challenge.contribute",
+                   "claimgraph.correct"],
     },
     "contrib-a": {
         "participant_id": "participant-a",
@@ -133,6 +134,40 @@ class ChallengeClient(ParticipantClient):
     def board(self) -> dict:
         return self._get("/api/world/challenge/read")
 
+    def register_cascade(self, registration: dict,
+                         idempotency_key: str | None = None) -> dict:
+        participant_id, token = self._auth()
+        presentation = self.authorize("challenge.admin")
+        return self._post("/api/world/challenge/cascade/register", {
+            "participant_id": participant_id,
+            "token": token,
+            "registration": registration,
+            "presentation": presentation,
+            "idempotency_key": idempotency_key or uuid.uuid4().hex,
+        })
+
+    def correct(self, status: str, source_id: str | None,
+                notice: str | None, reason: str | None,
+                idempotency_key: str | None = None) -> dict:
+        participant_id, token = self._auth()
+        presentation = self.authorize("claimgraph.correct")
+        return self._post("/api/world/claimgraph/correct", {
+            "participant_id": participant_id,
+            "token": token,
+            "status": status,
+            "source_id": source_id,
+            "notice_text": notice,
+            "reason": reason,
+            "presentation": presentation,
+            "idempotency_key": idempotency_key or uuid.uuid4().hex,
+        })
+
+
+def _canonical(obj: object) -> str:
+    # Must match backend/world.py _canonical_builds_on exactly: the
+    # declared builds_on_sha256 names the stored links byte for byte.
+    return json.dumps(obj, sort_keys=True, separators=(",", ":"))
+
 
 def emit(obj: dict) -> None:
     print(json.dumps(obj))
@@ -182,11 +217,20 @@ def main() -> int:
     ap.add_argument("--keydir", required=True)
     ap.add_argument("--cmd", required=True,
                     choices=["create", "contribute", "evaluate", "revoke",
-                             "revoke-then-contribute", "board"])
+                             "revoke-then-contribute", "register-cascade",
+                             "correct", "board"])
     ap.add_argument("--kind", default="patch")
     ap.add_argument("--file")
     ap.add_argument("--title", default="")
     ap.add_argument("--references", default="")
+    ap.add_argument("--builds-on", default="[]",
+                    help="JSON array of {contribution_id, what_reused} "
+                         "reuse links, byte-bound to the contribution")
+    ap.add_argument("--registration-file", default="",
+                    help="JSON file with the cascade registration payload")
+    ap.add_argument("--status", default="CORRECTED")
+    ap.add_argument("--source-id", default=None)
+    ap.add_argument("--notice", default=None)
     ap.add_argument("--decision", default="ACCEPT")
     ap.add_argument("--reason", default="")
     ap.add_argument("--contribution-id", default="")
@@ -251,7 +295,11 @@ def main() -> int:
                 "references": args.references,
                 "original": True,
                 "derived_from": [],
+                "builds_on": json.loads(args.builds_on),
             }
+            contribution["builds_on_sha256"] = hashlib.sha256(
+                _canonical(contribution["builds_on"]).encode("utf-8")
+            ).hexdigest()
             if args.with_attestation:
                 # A contributor-carried self-approval. The server must
                 # accept it on the wire and discard it: it authorizes
@@ -296,10 +344,26 @@ def main() -> int:
                 "references": args.references,
                 "original": True,
                 "derived_from": [],
+                "builds_on": [],
+                "builds_on_sha256": hashlib.sha256(
+                    _canonical([]).encode("utf-8")).hexdigest(),
             }
             out = client.contribute(contribution,
                                     idempotency_key=args.idempotency_key)
             result["contribute"] = out
+
+        elif args.cmd == "register-cascade":
+            registration = json.loads(
+                Path(args.registration_file).read_text(encoding="utf-8"))
+            out = client.register_cascade(
+                registration, idempotency_key=args.idempotency_key)
+            result["register_cascade"] = out
+
+        elif args.cmd == "correct":
+            out = client.correct(args.status, args.source_id, args.notice,
+                                 args.reason or None,
+                                 idempotency_key=args.idempotency_key)
+            result["correct"] = out
 
         elif args.cmd == "board":
             result["board"] = client.board()

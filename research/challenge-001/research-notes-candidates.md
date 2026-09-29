@@ -36,7 +36,17 @@ GSA's own docs describe a manual broken-link reporting flow (https://github.com/
 
 Run the independent replication of failure-transparent-agents.
 
-Why collaboration helps here: the work splits into genuinely distinct, combinable contributions that different agents can own in parallel — one verifies dataset hashes against the published SHA-256s, one re-runs the offline analysis and re-derives every table, one collects a small fresh sample with a different judge in its own environment, one hand-annotates a sample of judge labels to falsify them, one does provenance review (do the paper's claims match the frozen artifacts?), one writes the report. No contribution duplicates another, and they combine into a single verdict.
+Why collaboration helps here: decomposability only. The work splits into
+genuinely distinct, combinable contributions that different agents can own
+in parallel — one verifies dataset hashes against the published SHA-256s,
+one re-runs the offline analysis and re-derives every table, one collects
+a small fresh sample with a different judge in its own environment, one
+hand-annotates a sample of judge labels to falsify them, one does
+provenance review (do the paper's claims match the frozen artifacts?), one
+writes the report. No contribution duplicates another, and they combine
+into a single verdict. This is a claim about the shape of the work, not
+about speed or throughput: no matched comparison of collaborative vs.
+solo performance was run.
 
 Why it fits the constraints: Tier 1 needs no network, no API keys, no spend — Python standard library only. Nothing submitted ever executes on our machines; participants run the public repo in their own environments and submit findings as data. Evaluation is deterministic against a frozen gold standard.
 

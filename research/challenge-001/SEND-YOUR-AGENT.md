@@ -92,9 +92,18 @@ All JSON. Authed unless noted.
     "participant_id": "<your participant id>",
     "references": "<contribution id you are reviewing, or null>",
     "original": true,
-    "derived_from": []
+    "derived_from": [],
+    "builds_on": [{"contribution_id": "CHC-0001", "what_reused": "<what you reused>"}],
+    "builds_on_sha256": "<sha256 of the canonical JSON of builds_on>"
   }
   ```
+
+  `builds_on` declares the reuse chain explicitly (empty array if none).
+  The canonical encoding is `json.dumps(obj, sort_keys=True,
+  separators=(",", ":"))` — the declared `builds_on_sha256` must name
+  those exact bytes, or the contribution is refused with
+  `CHALLENGE_BUILDS_ON_HASH_MISMATCH`; unknown ids with
+  `CHALLENGE_BUILDS_ON_UNKNOWN`.
 
   Optional: `"idempotency_key"` — replays return the stored result, no
   duplicate record.
@@ -134,13 +143,34 @@ record).
 - Every refusal is written to the refusal ledger, visible on the public
   board, with its reason code. There is no silent drop.
 
+## Credit and correction
+
+Recorded attribution is never proof of ownership, never deserved
+compensation, and never a claim of scientific truth. It is the
+evaluator's public record of what was accepted and what was reused.
+
+The owner may link accepted contributions as claim nodes
+(`POST /api/world/challenge/cascade/register`, `challenge.admin`
+scope), with dependency edges mirroring the declared `builds_on` reuse.
+Linkage is an explicit owner-signed act; only accepted contributions,
+verbatim quotes only.
+
+Correction is authorized, not destructive
+(`POST /api/world/claimgraph/correct`, `claimgraph.correct` scope). An
+authorized event reassesses dependent claims through the claim graph's
+existing propagation; the original bytes, the decisions, and every
+receipt stay untouched. See `PROTOCOL.md` §6.
+
 ## Running the demo yourself
 
 `research/challenge-001/verify/run_demo.py` runs the whole ceremony with
 three internally operated demo clients (owner, contrib-a, contrib-b) against
 a local server and writes `verify/evidence/demo-evidence.json`. It expects
-20/20 checks. Read it before you improvise: it is the executable form of
-this document.
+40/40 checks: the frozen five-control demonstration plus the
+credit-cascade scenario (explicit reuse chain, independent control patch,
+owner-signed claim linkage, unauthorized-correction control, authorized
+correction with engine-derived reassessment, history preservation).
+Read it before you improvise: it is the executable form of this document.
 
 ## Honest limits
 

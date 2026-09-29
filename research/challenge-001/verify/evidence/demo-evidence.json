@@ -3,7 +3,7 @@
     {
       "create": {
         "decision": "ALLOWED",
-        "receipt_id": "4dcf4fa5d29f9a93",
+        "receipt_id": "620f2c50fc5ea538",
         "reason_codes": [],
         "challenge": {
           "challenge_id": "CHALLENGE-001",
@@ -12,8 +12,8 @@
           "deadline_iso": "2026-10-12T00:00:00+00:00",
           "owner_participant_id": "challenge-owner",
           "created_by": "Challenge Owner",
-          "created_at": "2026-09-29T04:26:55.038477+00:00",
-          "create_receipt_id": "4dcf4fa5d29f9a93"
+          "created_at": "2026-09-29T04:50:20.821001+00:00",
+          "create_receipt_id": "620f2c50fc5ea538"
         },
         "replayed": false
       }
@@ -21,12 +21,15 @@
     {
       "a_patch": {
         "decision": "ALLOWED",
-        "receipt_id": "97ff5997232f4ba4",
+        "receipt_id": "68fc2f7a2e5ae8cf",
         "reason_codes": [],
         "binding": {
           "declared_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
           "pinned_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
-          "match": true
+          "match": true,
+          "builds_on_declared_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_pinned_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_match": true
         },
         "acceptance": {
           "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
@@ -76,12 +79,15 @@
     {
       "b_review": {
         "decision": "ALLOWED",
-        "receipt_id": "d49422af03d68159",
+        "receipt_id": "3ac7372ab36f0940",
         "reason_codes": [],
         "binding": {
           "declared_sha256": "5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53",
           "pinned_sha256": "5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53",
-          "match": true
+          "match": true,
+          "builds_on_declared_sha256": "86cf3fc25d1716d791d7db16f9eb1511a9d9697fae22456b694c6c162f9e3d64",
+          "builds_on_pinned_sha256": "86cf3fc25d1716d791d7db16f9eb1511a9d9697fae22456b694c6c162f9e3d64",
+          "builds_on_match": true
         },
         "acceptance": {
           "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
@@ -131,12 +137,15 @@
     {
       "b_test": {
         "decision": "ALLOWED",
-        "receipt_id": "632d6e89622ae9e8",
+        "receipt_id": "2e84fb60ab59db8c",
         "reason_codes": [],
         "binding": {
           "declared_sha256": "aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da",
           "pinned_sha256": "aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da",
-          "match": true
+          "match": true,
+          "builds_on_declared_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_pinned_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_match": true
         },
         "acceptance": {
           "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
@@ -186,7 +195,7 @@
     {
       "eval_patch": {
         "decision": "ALLOWED",
-        "receipt_id": "cf4141ea969a3db5",
+        "receipt_id": "e852eaa5d6b5c321",
         "reason_codes": [],
         "evaluation": {
           "contribution_id": "CHC-0001",
@@ -194,8 +203,8 @@
           "decision": "ACCEPT",
           "reason": "diff is well-formed; the one-line change matches EXPECTED.md for BUG-1 (range gives 3 windows)",
           "evaluator_id": "challenge-owner",
-          "gate_receipt_id": "cf4141ea969a3db5",
-          "decided_at": "2026-09-29T04:26:56.134425+00:00"
+          "gate_receipt_id": "e852eaa5d6b5c321",
+          "decided_at": "2026-09-29T04:50:21.892460+00:00"
         },
         "contribution_id": "CHC-0001",
         "refusal_id": null,
@@ -205,7 +214,7 @@
     {
       "eval_test": {
         "decision": "ALLOWED",
-        "receipt_id": "761fc63bd8b34e46",
+        "receipt_id": "1ea11255d2f23f99",
         "reason_codes": [],
         "evaluation": {
           "contribution_id": "CHC-0003",
@@ -213,8 +222,8 @@
           "decision": "DECLINE",
           "reason": "bundles BUG-1 and BUG-2; one bug per test",
           "evaluator_id": "challenge-owner",
-          "gate_receipt_id": "761fc63bd8b34e46",
-          "decided_at": "2026-09-29T04:26:56.359578+00:00"
+          "gate_receipt_id": "1ea11255d2f23f99",
+          "decided_at": "2026-09-29T04:50:22.134137+00:00"
         },
         "contribution_id": "CHC-0003",
         "refusal_id": null,
@@ -224,7 +233,7 @@
     {
       "eval_review": {
         "decision": "ALLOWED",
-        "receipt_id": "be490d5351894b13",
+        "receipt_id": "0d9232b4f783a933",
         "reason_codes": [],
         "evaluation": {
           "contribution_id": "CHC-0002",
@@ -232,8 +241,8 @@
           "decision": "ACCEPT",
           "reason": "checkable finding verified by reading: range(3) is three windows, matching EXPECTED.md",
           "evaluator_id": "challenge-owner",
-          "gate_receipt_id": "be490d5351894b13",
-          "decided_at": "2026-09-29T04:26:56.582174+00:00"
+          "gate_receipt_id": "0d9232b4f783a933",
+          "decided_at": "2026-09-29T04:50:22.363204+00:00"
         },
         "contribution_id": "CHC-0002",
         "refusal_id": null,
@@ -255,12 +264,15 @@
     {
       "control_attestation": {
         "decision": "ALLOWED",
-        "receipt_id": "d1d4004bbd5172b9",
+        "receipt_id": "0b3e0c828a16e59a",
         "reason_codes": [],
         "binding": {
           "declared_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
           "pinned_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
-          "match": true
+          "match": true,
+          "builds_on_declared_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_pinned_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_match": true
         },
         "acceptance": {
           "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
@@ -310,14 +322,17 @@
     {
       "control_revoked": {
         "decision": "STOPPED",
-        "receipt_id": "6862806e4a8c5c6b",
+        "receipt_id": "b8fbd33f5de2ee79",
         "reason_codes": [
           "MANDATE_REVOKED"
         ],
         "binding": {
           "declared_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
           "pinned_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
-          "match": true
+          "match": true,
+          "builds_on_declared_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_pinned_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_match": true
         },
         "acceptance": {
           "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
@@ -363,6 +378,119 @@
         "refusal_id": "RFS-0002",
         "replayed": false
       }
+    },
+    {
+      "control_patch": {
+        "decision": "ALLOWED",
+        "receipt_id": "57963dc43696173d",
+        "reason_codes": [],
+        "binding": {
+          "declared_sha256": "094dd43c4c2bddc53be74445ba7128d9f757cf4b25e24df6e07e1c65f7956322",
+          "pinned_sha256": "094dd43c4c2bddc53be74445ba7128d9f757cf4b25e24df6e07e1c65f7956322",
+          "match": true,
+          "builds_on_declared_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_pinned_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "builds_on_match": true
+        },
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "094dd43c4c2bddc53be74445ba7128d9f757cf4b25e24df6e07e1c65f7956322",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind patch; title 36 chars; body 362 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K4",
+              "check_performed": "patch: unified-diff headers, @@ hunk, ledger.py target",
+              "result": "pass",
+              "detail": "unified diff with headers, hunk, and ledger.py target"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "contribution_id": "CHC-0005",
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "eval_control": {
+        "decision": "ALLOWED",
+        "receipt_id": "e048df3f345317a0",
+        "reason_codes": [],
+        "evaluation": {
+          "contribution_id": "CHC-0005",
+          "challenge_id": "CHALLENGE-001",
+          "decision": "ACCEPT",
+          "reason": "diff is well-formed; math.floor(x + 0.5) is half-up, and EXPECTED.md requires apply_discount(5, 50) == 3",
+          "evaluator_id": "challenge-owner",
+          "gate_receipt_id": "e048df3f345317a0",
+          "decided_at": "2026-09-29T04:50:25.005970+00:00"
+        },
+        "contribution_id": "CHC-0005",
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "register_cascade": {
+        "decision": "ALLOWED",
+        "receipt_id": "f3f3d39a30e56d8b",
+        "reason_codes": [],
+        "report_id": "challenge-cascade:accepted-pair",
+        "sources": {
+          "CHC-0001": "source:sha256:8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "CHC-0002": "source:sha256:5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53"
+        },
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "register_control": {
+        "decision": "ALLOWED",
+        "receipt_id": "455af4fe5e7dae8e",
+        "reason_codes": [],
+        "report_id": "challenge-cascade:control",
+        "sources": {
+          "CHC-0005": "source:sha256:094dd43c4c2bddc53be74445ba7128d9f757cf4b25e24df6e07e1c65f7956322"
+        },
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "correction": {
+        "decision": "ALLOWED",
+        "receipt_id": "5170ba57a8f92ade",
+        "reason_codes": [],
+        "event_id": "source-status-event:sha256:1308d784e23c7103ec12997c193f0e52048544a200fec127329e1955c923ab2e",
+        "replayed": false
+      }
     }
   ],
   "board_after_restart": {
@@ -374,8 +502,8 @@
         "deadline_iso": "2026-10-12T00:00:00+00:00",
         "owner_participant_id": "challenge-owner",
         "created_by": "Challenge Owner",
-        "created_at": "2026-09-29T04:26:55.038477+00:00",
-        "create_receipt_id": "4dcf4fa5d29f9a93"
+        "created_at": "2026-09-29T04:50:20.821001+00:00",
+        "create_receipt_id": "620f2c50fc5ea538"
       }
     ],
     "contributions": [
@@ -391,6 +519,8 @@
         "references": "",
         "original": true,
         "derived_from": [],
+        "builds_on": [],
+        "builds_on_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         "acceptance": {
           "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
           "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
@@ -431,8 +561,8 @@
           ],
           "verdict": "ADMITTED"
         },
-        "gate_receipt_id": "97ff5997232f4ba4",
-        "submitted_at": "2026-09-29T04:26:55.375529+00:00",
+        "gate_receipt_id": "68fc2f7a2e5ae8cf",
+        "submitted_at": "2026-09-29T04:50:21.091009+00:00",
         "status": "accepted"
       },
       {
@@ -447,6 +577,13 @@
         "references": "CHC-0001",
         "original": true,
         "derived_from": [],
+        "builds_on": [
+          {
+            "contribution_id": "CHC-0001",
+            "what_reused": "the one-line diff for BUG-1; the range-gives-3-windows check"
+          }
+        ],
+        "builds_on_sha256": "86cf3fc25d1716d791d7db16f9eb1511a9d9697fae22456b694c6c162f9e3d64",
         "acceptance": {
           "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
           "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
@@ -487,8 +624,8 @@
           ],
           "verdict": "ADMITTED"
         },
-        "gate_receipt_id": "d49422af03d68159",
-        "submitted_at": "2026-09-29T04:26:55.680235+00:00",
+        "gate_receipt_id": "3ac7372ab36f0940",
+        "submitted_at": "2026-09-29T04:50:21.426785+00:00",
         "status": "accepted"
       },
       {
@@ -503,6 +640,8 @@
         "references": "",
         "original": true,
         "derived_from": [],
+        "builds_on": [],
+        "builds_on_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         "acceptance": {
           "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
           "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
@@ -543,8 +682,8 @@
           ],
           "verdict": "ADMITTED"
         },
-        "gate_receipt_id": "632d6e89622ae9e8",
-        "submitted_at": "2026-09-29T04:26:55.909784+00:00",
+        "gate_receipt_id": "2e84fb60ab59db8c",
+        "submitted_at": "2026-09-29T04:50:21.672976+00:00",
         "status": "declined"
       },
       {
@@ -559,6 +698,8 @@
         "references": "",
         "original": true,
         "derived_from": [],
+        "builds_on": [],
+        "builds_on_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         "acceptance": {
           "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
           "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
@@ -599,8 +740,8 @@
           ],
           "verdict": "ADMITTED"
         },
-        "gate_receipt_id": "d1d4004bbd5172b9",
-        "submitted_at": "2026-09-29T04:26:57.037758+00:00",
+        "gate_receipt_id": "0b3e0c828a16e59a",
+        "submitted_at": "2026-09-29T04:50:22.836647+00:00",
         "status": "admitted"
       }
     ],
@@ -611,8 +752,8 @@
         "decision": "ACCEPT",
         "reason": "diff is well-formed; the one-line change matches EXPECTED.md for BUG-1 (range gives 3 windows)",
         "evaluator_id": "challenge-owner",
-        "gate_receipt_id": "cf4141ea969a3db5",
-        "decided_at": "2026-09-29T04:26:56.134425+00:00"
+        "gate_receipt_id": "e852eaa5d6b5c321",
+        "decided_at": "2026-09-29T04:50:21.892460+00:00"
       },
       {
         "contribution_id": "CHC-0003",
@@ -620,8 +761,8 @@
         "decision": "DECLINE",
         "reason": "bundles BUG-1 and BUG-2; one bug per test",
         "evaluator_id": "challenge-owner",
-        "gate_receipt_id": "761fc63bd8b34e46",
-        "decided_at": "2026-09-29T04:26:56.359578+00:00"
+        "gate_receipt_id": "1ea11255d2f23f99",
+        "decided_at": "2026-09-29T04:50:22.134137+00:00"
       },
       {
         "contribution_id": "CHC-0002",
@@ -629,14 +770,14 @@
         "decision": "ACCEPT",
         "reason": "checkable finding verified by reading: range(3) is three windows, matching EXPECTED.md",
         "evaluator_id": "challenge-owner",
-        "gate_receipt_id": "be490d5351894b13",
-        "decided_at": "2026-09-29T04:26:56.582174+00:00"
+        "gate_receipt_id": "0d9232b4f783a933",
+        "decided_at": "2026-09-29T04:50:22.363204+00:00"
       }
     ],
     "refusals": [
       {
         "refusal_id": "RFS-0001",
-        "at": "2026-09-29T04:26:56.809552+00:00",
+        "at": "2026-09-29T04:50:22.599144+00:00",
         "participant_id": "participant-b",
         "challenge_id": "CHALLENGE-001",
         "contribution_id": "CHC-0002",
@@ -648,26 +789,179 @@
       },
       {
         "refusal_id": "RFS-0002",
-        "at": "2026-09-29T04:26:57.610460+00:00",
+        "at": "2026-09-29T04:50:23.342109+00:00",
         "participant_id": "participant-b",
         "challenge_id": "CHALLENGE-001",
         "contribution_id": null,
         "reason_codes": [
           "MANDATE_REVOKED"
         ],
-        "gate_receipt_id": "6862806e4a8c5c6b",
+        "gate_receipt_id": "b8fbd33f5de2ee79",
         "note": "gate stopped the contribution"
       }
     ],
     "challenge_id": "CHALLENGE-001",
     "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
-    "scope_note": "Structural admission (K1-K7) verifies a contribution's shape, not the truth of its claims. Evaluator ACCEPT/DECLINE is the designated evaluator's decision under the frozen criteria. Submitted code is never executed on this server."
+    "scope_note": "Structural admission (K1-K7) verifies a contribution's shape, not the truth of its claims. Evaluator ACCEPT/DECLINE is the designated evaluator's decision under the frozen criteria. Submitted code is never executed on this server.",
+    "cascade": {
+      "reports": [],
+      "events": [],
+      "preservation": "A correction event never rewrites history. The original contribution bytes stay pinned in the challenge record, the evaluator's ACCEPT/DECLINE decisions stand, and every claim-graph snapshot and receipt stays byte-identical and inspectable. A correction proposes reassessment; it does not undo a completed action."
+    }
+  },
+  "cascade_board": {
+    "reports": [
+      {
+        "report_id": "challenge-cascade:accepted-pair",
+        "title": "Accepted patch + review, with the recorded reuse edge",
+        "claims": [
+          {
+            "claim_id": "claim:sha256:024385ea017641ea640e4df697a28335893a32aa0351f9d54aefe5a7a52ae48f",
+            "kind": "SOURCE_ASSERTION",
+            "text": "Finding: the patch changes exactly one expression,",
+            "contribution_id": "CHC-0002",
+            "standing": {
+              "classification": "QUARANTINE",
+              "reason": "SOURCE_BASIS_LOST"
+            }
+          },
+          {
+            "claim_id": "claim:sha256:6580827280e31b5f3af00a9121d02ba7659898ac5703d8549460eebeacd93b6e",
+            "kind": "INFERENCE",
+            "text": "CHC-0002 builds on CHC-0001 and its conclusion holds.",
+            "contribution_id": "CHC-0002",
+            "standing": {
+              "classification": "QUARANTINE",
+              "reason": "ALL_ADMITTED_SUPPORT_PATHS_LOST"
+            }
+          },
+          {
+            "claim_id": "claim:sha256:e3f6f2e2724e6942fa83492d9229a0048f268d8f4011e6caf46767240a81477c",
+            "kind": "INFERENCE",
+            "text": "CHC-0001 fixes the rolling_sum off-by-one (BUG-1).",
+            "contribution_id": "CHC-0001",
+            "standing": {
+              "classification": "UNAFFECTED",
+              "reason": null
+            }
+          },
+          {
+            "claim_id": "claim:sha256:e47f8a7719c96ec2935b21e3bef5e5af58bc0440d58c6bc4db70b670be15ba6e",
+            "kind": "SOURCE_ASSERTION",
+            "text": "for i in range(len(values) - window + 1):",
+            "contribution_id": "CHC-0001",
+            "standing": {
+              "classification": "UNAFFECTED",
+              "reason": null
+            }
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "relation:sha256:19d6b0cab97696402774a8aac0a5083a7941f9e313565f97680d53370606f524",
+            "from_claim_id": "claim:sha256:e47f8a7719c96ec2935b21e3bef5e5af58bc0440d58c6bc4db70b670be15ba6e",
+            "to_claim_id": "claim:sha256:e3f6f2e2724e6942fa83492d9229a0048f268d8f4011e6caf46767240a81477c",
+            "relation": "SUPPORTS",
+            "authority": "hard"
+          },
+          {
+            "relation_id": "relation:sha256:3a09f2e298cb20319918c1a52225b9f32ef00a73f9d82ad969d15f5a5639aaaf",
+            "from_claim_id": "claim:sha256:6580827280e31b5f3af00a9121d02ba7659898ac5703d8549460eebeacd93b6e",
+            "to_claim_id": "claim:sha256:e47f8a7719c96ec2935b21e3bef5e5af58bc0440d58c6bc4db70b670be15ba6e",
+            "relation": "DEPENDS_ON",
+            "authority": "hard"
+          },
+          {
+            "relation_id": "relation:sha256:40ab080164915286942401579136fd23a0a8992481956185f2bd24659d4d0722",
+            "from_claim_id": "claim:sha256:024385ea017641ea640e4df697a28335893a32aa0351f9d54aefe5a7a52ae48f",
+            "to_claim_id": "claim:sha256:6580827280e31b5f3af00a9121d02ba7659898ac5703d8549460eebeacd93b6e",
+            "relation": "SUPPORTS",
+            "authority": "hard"
+          }
+        ],
+        "receipt": {
+          "schema": "openline.claim-graph.receipt.v1",
+          "issuer": "workshop:claim-graph-desk",
+          "issued_at": "2026-09-25T20:00:00Z",
+          "graph_state_root": "8f7eb0cfb48211a17469b8b4a5a7587004b7da3fde634a7ab8cc1f6563e44a37",
+          "claim_count": 4,
+          "relation_count": 3,
+          "public_key": "a40f9945fe33f3e32448d921409dfb7825981b147072485aa5515ced54f9813c",
+          "signature": "606df6f83d3d4785b84bc89104bd9f52135e5231f862123163ae6a65117c5dcca99fc325d87c54fb43effaa65fc9579c5b1aa56f3fd11669d67d8a54e2c9bd0a",
+          "claim_boundary": "The signer commits to this graph state and its declared source anchors. The receipt does not certify truth, semantic fidelity, completeness, or signer identity."
+        }
+      },
+      {
+        "report_id": "challenge-cascade:control",
+        "title": "Independent control: accepted BUG-2 patch",
+        "claims": [
+          {
+            "claim_id": "claim:sha256:9e56b67c1c4b2a971ad45c16909793e79eb0c9df3cfeea19c7f1dfd99803603e",
+            "kind": "SOURCE_ASSERTION",
+            "text": "return math.floor(price_cents * (100 - pct) / 100 + 0.5)",
+            "contribution_id": "CHC-0005",
+            "standing": {
+              "classification": "UNAFFECTED",
+              "reason": null
+            }
+          },
+          {
+            "claim_id": "claim:sha256:f9efd49b7915d35855baab36955e06be4bd6d40afc3f8ec8e941c152dea1098b",
+            "kind": "INFERENCE",
+            "text": "CHC-0005 fixes the banker's-rounding bug (BUG-2), independently supported.",
+            "contribution_id": "CHC-0005",
+            "standing": {
+              "classification": "UNAFFECTED",
+              "reason": null
+            }
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "relation:sha256:1e0a5e5e8a6d200ed3b971d646e5bd6f7f77bc6a8d5f27e343b6d4e6a2216561",
+            "from_claim_id": "claim:sha256:9e56b67c1c4b2a971ad45c16909793e79eb0c9df3cfeea19c7f1dfd99803603e",
+            "to_claim_id": "claim:sha256:f9efd49b7915d35855baab36955e06be4bd6d40afc3f8ec8e941c152dea1098b",
+            "relation": "SUPPORTS",
+            "authority": "hard"
+          }
+        ],
+        "receipt": {
+          "schema": "openline.claim-graph.receipt.v1",
+          "issuer": "workshop:claim-graph-desk",
+          "issued_at": "2026-09-25T20:00:00Z",
+          "graph_state_root": "44d2c1925ba62468f5d8d24fd209021be03c7a358d83401e3de164a2403f7898",
+          "claim_count": 2,
+          "relation_count": 1,
+          "public_key": "a40f9945fe33f3e32448d921409dfb7825981b147072485aa5515ced54f9813c",
+          "signature": "362dd797f368494db671d349d74397617ac26826f7a02d63497ef6d96580573f1270fd429b930c6b02671e6ee3a572d293a5fb9a2eb8dac39b661218edc96f01",
+          "claim_boundary": "The signer commits to this graph state and its declared source anchors. The receipt does not certify truth, semantic fidelity, completeness, or signer identity."
+        }
+      }
+    ],
+    "events": [
+      {
+        "event_id": "source-status-event:sha256:1308d784e23c7103ec12997c193f0e52048544a200fec127329e1955c923ab2e",
+        "status": "CORRECTED",
+        "effective_at": "2026-09-29T04:50:26.504791+00:00",
+        "asserted_by": "world:participant:challenge-owner",
+        "reason": "Evaluator-signed demonstration correction: reassess the dependents of the review's key finding under the receiver-admitted edge policy.",
+        "affected": [
+          {
+            "source_id": "source:sha256:5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53",
+            "contribution_id": "CHC-0002",
+            "label": "accepted review CHC-0002 \u2014 Review of the rolling_sum off-by-one patch"
+          }
+        ],
+        "replayed": false
+      }
+    ],
+    "preservation": "A correction event never rewrites history. The original contribution bytes stay pinned in the challenge record, the evaluator's ACCEPT/DECLINE decisions stand, and every claim-graph snapshot and receipt stays byte-identical and inspectable. A correction proposes reassessment; it does not undo a completed action."
   },
   "checks": [
     {
       "name": "owner creates CHALLENGE-001",
       "pass": true,
-      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"4dcf4fa5d29f9a93\", \"reason_codes\": [], \"challenge\": {\"challenge_id\": \"CHALLENGE-001\", \"problem_sha256\": \"213994dc13923d1fd455dec5b9f2aa1687960c35f9702e8ddbbc2a2af5729ad0\", \"criteria_hash\": \"86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a\", \"dea"
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"620f2c50fc5ea538\", \"reason_codes\": [], \"challenge\": {\"challenge_id\": \"CHALLENGE-001\", \"problem_sha256\": \"213994dc13923d1fd455dec5b9f2aa1687960c35f9702e8ddbbc2a2af5729ad0\", \"criteria_hash\": \"86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a\", \"dea"
     },
     {
       "name": "create receipt recorded",
@@ -677,7 +971,7 @@
     {
       "name": "A patch admitted",
       "pass": true,
-      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"97ff5997232f4ba4\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"match\": true}, \"acceptance\": {\"criter"
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"68fc2f7a2e5ae8cf\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"match\": true, \"builds_on_declared_sha"
     },
     {
       "name": "A delegated before contributing",
@@ -687,27 +981,27 @@
     {
       "name": "B review admitted",
       "pass": true,
-      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"d49422af03d68159\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53\", \"pinned_sha256\": \"5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53\", \"match\": true}, \"acceptance\": {\"criter"
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"3ac7372ab36f0940\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53\", \"pinned_sha256\": \"5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53\", \"match\": true, \"builds_on_declared_sha"
     },
     {
       "name": "B two-bug test structurally admitted (not machine-refused)",
       "pass": true,
-      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"632d6e89622ae9e8\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da\", \"pinned_sha256\": \"aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da\", \"match\": true}, \"acceptance\": {\"criter"
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"2e84fb60ab59db8c\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da\", \"pinned_sha256\": \"aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da\", \"match\": true, \"builds_on_declared_sha"
     },
     {
       "name": "owner ACCEPTs the patch",
       "pass": true,
-      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"cf4141ea969a3db5\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0001\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"ACCEPT\", \"reason\": \"diff is well-formed; the one-line change matches EXPECTED.md for BUG-1 (range gives 3 windows)\", \"evaluator_id"
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"e852eaa5d6b5c321\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0001\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"ACCEPT\", \"reason\": \"diff is well-formed; the one-line change matches EXPECTED.md for BUG-1 (range gives 3 windows)\", \"evaluator_id"
     },
     {
       "name": "owner DECLINEs the two-bug test with checkable reason",
       "pass": true,
-      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"761fc63bd8b34e46\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0003\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"DECLINE\", \"reason\": \"bundles BUG-1 and BUG-2; one bug per test\", \"evaluator_id\": \"challenge-owner\", \"gate_receipt_id\": \"761fc63bd8"
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"1ea11255d2f23f99\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0003\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"DECLINE\", \"reason\": \"bundles BUG-1 and BUG-2; one bug per test\", \"evaluator_id\": \"challenge-owner\", \"gate_receipt_id\": \"1ea11255d2"
     },
     {
       "name": "owner ACCEPTs the review (visible credit)",
       "pass": true,
-      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"be490d5351894b13\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0002\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"ACCEPT\", \"reason\": \"checkable finding verified by reading: range(3) is three windows, matching EXPECTED.md\", \"evaluator_id\": \"chal"
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"0d9232b4f783a933\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0002\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"ACCEPT\", \"reason\": \"checkable finding verified by reading: range(3) is three windows, matching EXPECTED.md\", \"evaluator_id\": \"chal"
     },
     {
       "name": "contributor evaluate refused EVALUATOR_NOT_OWNER",
@@ -717,12 +1011,12 @@
     {
       "name": "contribution with self-attestation admitted on merits",
       "pass": true,
-      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"d1d4004bbd5172b9\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"match\": true}, \"acceptance\": {\"criter"
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"0b3e0c828a16e59a\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"match\": true, \"builds_on_declared_sha"
     },
     {
       "name": "attestation appears nowhere in the stored record",
       "pass": true,
-      "detail": "[\"contribution_id\", \"challenge_id\", \"kind\", \"title\", \"body\", \"body_sha256\", \"participant_id\", \"display_name\", \"references\", \"original\", \"derived_from\", \"acceptance\", \"gate_receipt_id\", \"submitted_at\", \"status\"]"
+      "detail": "[\"contribution_id\", \"challenge_id\", \"kind\", \"title\", \"body\", \"body_sha256\", \"participant_id\", \"display_name\", \"references\", \"original\", \"derived_from\", \"builds_on\", \"builds_on_sha256\", \"acceptance\", \"gate_receipt_id\", \"submitted_at\", \"status\"]"
     },
     {
       "name": "B mandate revoked",
@@ -732,7 +1026,7 @@
     {
       "name": "revoked contribution refused MANDATE_REVOKED",
       "pass": true,
-      "detail": "{\"decision\": \"STOPPED\", \"receipt_id\": \"6862806e4a8c5c6b\", \"reason_codes\": [\"MANDATE_REVOKED\"], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"match\": true}, \"acce"
+      "detail": "{\"decision\": \"STOPPED\", \"receipt_id\": \"b8fbd33f5de2ee79\", \"reason_codes\": [\"MANDATE_REVOKED\"], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"match\": true, \"build"
     },
     {
       "name": "revoked refusal recorded in the refusal ledger",
@@ -742,7 +1036,7 @@
     {
       "name": "duplicate contribute replays (no double record)",
       "pass": true,
-      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"97ff5997232f4ba4\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d"
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"68fc2f7a2e5ae8cf\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d"
     },
     {
       "name": "contributions survive a server restart",
@@ -761,6 +1055,106 @@
     },
     {
       "name": "unauthenticated GET of the board works",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "patch records an explicit empty reuse chain, byte-bound",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "review records the explicit builds_on link, byte-bound",
+      "pass": true,
+      "detail": "[{\"contribution_id\": \"CHC-0001\", \"what_reused\": \"the one-line diff for BUG-1; the range-gives-3-windows check\"}]"
+    },
+    {
+      "name": "control patch (BUG-2) admitted",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"57963dc43696173d\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"094dd43c4c2bddc53be74445ba7128d9f757cf4b25e24df6e07e1c65f7956322\", \"pinned_sha256\": \"094dd43c4c2bddc53be74445ba7128d9f757cf4b25e24df6e07e1c65f7956322\", \"match\": true, \"builds_on_declared_sha"
+    },
+    {
+      "name": "owner ACCEPTs the control patch",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"e048df3f345317a0\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0005\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"ACCEPT\", \"reason\": \"diff is well-formed; math.floor(x + 0.5) is half-up, and EXPECTED.md requires apply_discount(5, 50) == 3\", \"ev"
+    },
+    {
+      "name": "owner links accepted patch+review as claim nodes",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"f3f3d39a30e56d8b\", \"reason_codes\": [], \"report_id\": \"challenge-cascade:accepted-pair\", \"sources\": {\"CHC-0001\": \"source:sha256:8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"CHC-0002\": \"source:sha256:5743e2065803fd7dce96ba9fb141adaf914bdd49a"
+    },
+    {
+      "name": "registration returns the review's source id",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "owner links the control patch as an independent report",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"455af4fe5e7dae8e\", \"reason_codes\": [], \"report_id\": \"challenge-cascade:control\", \"sources\": {\"CHC-0005\": \"source:sha256:094dd43c4c2bddc53be74445ba7128d9f757cf4b25e24df6e07e1c65f7956322\"}, \"refusal_id\": null, \"replayed\": false}"
+    },
+    {
+      "name": "correction without the scope is STOPPED",
+      "pass": true,
+      "detail": "{\"decision\": \"STOPPED\", \"receipt_id\": \"4aeee1b120463521\", \"reason_codes\": [\"ACTION_OUTSIDE_MANDATE\"], \"event_id\": null, \"replayed\": false}"
+    },
+    {
+      "name": "stopped correction appends no event",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "evaluator correction is ALLOWED with an event id",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"5170ba57a8f92ade\", \"reason_codes\": [], \"event_id\": \"source-status-event:sha256:1308d784e23c7103ec12997c193f0e52048544a200fec127329e1955c923ab2e\", \"replayed\": false}"
+    },
+    {
+      "name": "one correction event on the record",
+      "pass": true,
+      "detail": "[{\"event_id\": \"source-status-event:sha256:1308d784e23c7103ec12997c193f0e52048544a200fec127329e1955c923ab2e\", \"status\": \"CORRECTED\", \"effective_at\": \"2026-09-29T04:50:26.504791+00:00\", \"asserted_by\": \"world:participant:challenge-owner\", \"reason\": \"Evaluator-signed demonstration correction: reassess t"
+    },
+    {
+      "name": "event targets the review's source",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "patch claims stay UNAFFECTED",
+      "pass": true,
+      "detail": "{\"classification\": \"UNAFFECTED\", \"reason\": null}"
+    },
+    {
+      "name": "review assertion claim QUARANTINE / SOURCE_BASIS_LOST",
+      "pass": true,
+      "detail": "{\"classification\": \"QUARANTINE\", \"reason\": \"SOURCE_BASIS_LOST\"}"
+    },
+    {
+      "name": "review inference claim QUARANTINE / ALL_ADMITTED_SUPPORT_PATHS_LOST",
+      "pass": true,
+      "detail": "{\"classification\": \"QUARANTINE\", \"reason\": \"ALL_ADMITTED_SUPPORT_PATHS_LOST\"}"
+    },
+    {
+      "name": "independent control claims stay UNAFFECTED",
+      "pass": true,
+      "detail": "[{\"classification\": \"UNAFFECTED\", \"reason\": null}, {\"classification\": \"UNAFFECTED\", \"reason\": null}]"
+    },
+    {
+      "name": "original review bytes unchanged by the correction",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "historical ACCEPT decision for the review still stands",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "claim-graph receipts byte-identical after the event",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refusals still on the record alongside the correction",
       "pass": true,
       "detail": ""
     }

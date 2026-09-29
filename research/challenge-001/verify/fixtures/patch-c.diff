@@ -1,0 +1,8 @@
+--- a/toy-app/ledger.py
++++ b/toy-app/ledger.py
+@@ -20,6 +20,6 @@
+ def apply_discount(price_cents, pct):
+     """Apply a percentage discount; result in whole cents, half-up."""
+     # BUG-2: round() is banker's rounding (half to even), not half-up.
+-    return round(price_cents * (100 - pct) / 100)
++    return math.floor(price_cents * (100 - pct) / 100 + 0.5)
