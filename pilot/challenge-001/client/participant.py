@@ -461,6 +461,19 @@ class ParticipantClient:
         self._bundle = bundle
         return resp
 
+    # -- standing refresh (working-copy addition, pending publication) --------
+
+    def standing_refresh(self) -> dict[str, Any]:
+        """Prove possession of the existing session key and refresh standing
+        after inactivity, without a new bundle and without rejoining.
+        Mirrors the committed repo change in openline-world
+        (clients/participant.py); the server route is already deployed."""
+        participant_id, token = self._auth()
+        return self._post(
+            "/api/world/standing/refresh",
+            {"participant_id": participant_id, "token": token},
+        )
+
     def revoke(self) -> tuple[float, dict[str, Any]]:
         """Revoke the worker mandate locally, export, and push the new head to
         the world. Returns (latency_seconds, server response): the measured

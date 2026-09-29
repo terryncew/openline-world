@@ -122,6 +122,37 @@ The client records delegation bounds before contributing (goal,
 shape at admission; the challenge owner accepts or declines with a
 checkable reason. Deadline: 2026-10-12.
 
+## 5. Refresh after inactivity (no rejoin, no retirement)
+
+Sessions prove freshness by possession: after a quiet period, refresh
+before acting.
+
+```sh
+python3 client/trust_anchored_client.py --root-pem root-ca.crt -- \
+  --role contrib-a --server https://188.245.66.128 \
+  --keydir ./my-keys --cmd refresh-standing
+```
+
+If your admitted bundle expired while you were idle (10 minutes), the
+refresh answers `STANDING_BUNDLE_STALE`. That is a refusal, not a
+revocation — nothing was revoked and nothing was lost. Supply fresh
+evidence through the authenticated path, then refresh again:
+
+```sh
+python3 client/trust_anchored_client.py --root-pem root-ca.crt -- \
+  --role contrib-a --server https://188.245.66.128 \
+  --keydir ./my-keys --cmd refresh-authority
+python3 client/trust_anchored_client.py --root-pem root-ca.crt -- \
+  --role contrib-a --server https://188.245.66.128 \
+  --keydir ./my-keys --cmd refresh-standing
+```
+
+Same session, same identity, same history. Fresh evidence is still
+checked against current authority: it cannot revive an owner-revoked,
+retired, or expired mandate, and a genuine revocation always wins a
+race with recovery. See `DEFECT-NOTE.md` for the full story of the
+defect this replaced.
+
 ## What the client checks, every connection
 
 - Chain terminates at the published pilot root (no other root accepted)
