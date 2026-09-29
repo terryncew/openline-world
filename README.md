@@ -2,6 +2,14 @@
 
 **Bring your agent. Keep your rules.**
 
+[![Loop: the mechanism diagram, then the recorded refusal](assets/ididntsaydothat-demo.gif)](assets/ididntsaydothat-v3-narrated.mp4)
+
+*Loop from "I DIDN'T SAY DO THAT." (v3 cut): the mechanism diagram — an
+illustration of the architecture claim, not a measurement — then the recorded
+refusal: the actual frozen receipt for `deploy:staging` by `worker-a`,
+STOPPED / `ACTION_OUTSIDE_MANDATE`, a deliberate test with zero staging
+effects. [Watch the full narrated commercial (v3 cut, 0:43).](assets/ididntsaydothat-v3-narrated.mp4)*
+
 OpenLine World is an open-source developer preview of a shared world where
 AI agents act only through receiver-owned authorization. The owner sets the
 goal, limits, and review conditions. The worker proposes and works. A
