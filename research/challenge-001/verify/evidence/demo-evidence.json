@@ -1,0 +1,769 @@
+{
+  "steps": [
+    {
+      "create": {
+        "decision": "ALLOWED",
+        "receipt_id": "4dcf4fa5d29f9a93",
+        "reason_codes": [],
+        "challenge": {
+          "challenge_id": "CHALLENGE-001",
+          "problem_sha256": "213994dc13923d1fd455dec5b9f2aa1687960c35f9702e8ddbbc2a2af5729ad0",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "deadline_iso": "2026-10-12T00:00:00+00:00",
+          "owner_participant_id": "challenge-owner",
+          "created_by": "Challenge Owner",
+          "created_at": "2026-09-29T04:26:55.038477+00:00",
+          "create_receipt_id": "4dcf4fa5d29f9a93"
+        },
+        "replayed": false
+      }
+    },
+    {
+      "a_patch": {
+        "decision": "ALLOWED",
+        "receipt_id": "97ff5997232f4ba4",
+        "reason_codes": [],
+        "binding": {
+          "declared_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "pinned_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "match": true
+        },
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind patch; title 26 chars; body 229 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K4",
+              "check_performed": "patch: unified-diff headers, @@ hunk, ledger.py target",
+              "result": "pass",
+              "detail": "unified diff with headers, hunk, and ledger.py target"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "contribution_id": "CHC-0001",
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "b_review": {
+        "decision": "ALLOWED",
+        "receipt_id": "d49422af03d68159",
+        "reason_codes": [],
+        "binding": {
+          "declared_sha256": "5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53",
+          "pinned_sha256": "5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53",
+          "match": true
+        },
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind review; title 42 chars; body 931 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K6",
+              "check_performed": "review: references an existing contribution id, states a checkable finding",
+              "result": "pass",
+              "detail": "reviews CHC-0001 with a checkable finding"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "contribution_id": "CHC-0002",
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "b_test": {
+        "decision": "ALLOWED",
+        "receipt_id": "632d6e89622ae9e8",
+        "reason_codes": [],
+        "binding": {
+          "declared_sha256": "aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da",
+          "pinned_sha256": "aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da",
+          "match": true
+        },
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind test; title 33 chars; body 1106 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K5",
+              "check_performed": "test: names toy-app target, cites EXPECTED.md, asserts (one-bug-per-test is evaluator merit, not structural)",
+              "result": "pass",
+              "detail": "failing-test file naming the target and expected behavior"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "contribution_id": "CHC-0003",
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "eval_patch": {
+        "decision": "ALLOWED",
+        "receipt_id": "cf4141ea969a3db5",
+        "reason_codes": [],
+        "evaluation": {
+          "contribution_id": "CHC-0001",
+          "challenge_id": "CHALLENGE-001",
+          "decision": "ACCEPT",
+          "reason": "diff is well-formed; the one-line change matches EXPECTED.md for BUG-1 (range gives 3 windows)",
+          "evaluator_id": "challenge-owner",
+          "gate_receipt_id": "cf4141ea969a3db5",
+          "decided_at": "2026-09-29T04:26:56.134425+00:00"
+        },
+        "contribution_id": "CHC-0001",
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "eval_test": {
+        "decision": "ALLOWED",
+        "receipt_id": "761fc63bd8b34e46",
+        "reason_codes": [],
+        "evaluation": {
+          "contribution_id": "CHC-0003",
+          "challenge_id": "CHALLENGE-001",
+          "decision": "DECLINE",
+          "reason": "bundles BUG-1 and BUG-2; one bug per test",
+          "evaluator_id": "challenge-owner",
+          "gate_receipt_id": "761fc63bd8b34e46",
+          "decided_at": "2026-09-29T04:26:56.359578+00:00"
+        },
+        "contribution_id": "CHC-0003",
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "eval_review": {
+        "decision": "ALLOWED",
+        "receipt_id": "be490d5351894b13",
+        "reason_codes": [],
+        "evaluation": {
+          "contribution_id": "CHC-0002",
+          "challenge_id": "CHALLENGE-001",
+          "decision": "ACCEPT",
+          "reason": "checkable finding verified by reading: range(3) is three windows, matching EXPECTED.md",
+          "evaluator_id": "challenge-owner",
+          "gate_receipt_id": "be490d5351894b13",
+          "decided_at": "2026-09-29T04:26:56.582174+00:00"
+        },
+        "contribution_id": "CHC-0002",
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "control_self_approval": {
+        "decision": "STOPPED",
+        "receipt_id": null,
+        "reason_codes": [
+          "EVALUATOR_NOT_OWNER"
+        ],
+        "contribution_id": "CHC-0002",
+        "refusal_id": "RFS-0001",
+        "replayed": false
+      }
+    },
+    {
+      "control_attestation": {
+        "decision": "ALLOWED",
+        "receipt_id": "d1d4004bbd5172b9",
+        "reason_codes": [],
+        "binding": {
+          "declared_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "pinned_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "match": true
+        },
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind patch; title 45 chars; body 229 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K4",
+              "check_performed": "patch: unified-diff headers, @@ hunk, ledger.py target",
+              "result": "pass",
+              "detail": "unified diff with headers, hunk, and ledger.py target"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "contribution_id": "CHC-0004",
+        "refusal_id": null,
+        "replayed": false
+      }
+    },
+    {
+      "control_revoked": {
+        "decision": "STOPPED",
+        "receipt_id": "6862806e4a8c5c6b",
+        "reason_codes": [
+          "MANDATE_REVOKED"
+        ],
+        "binding": {
+          "declared_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "pinned_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "match": true
+        },
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind patch; title 22 chars; body 229 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K4",
+              "check_performed": "patch: unified-diff headers, @@ hunk, ledger.py target",
+              "result": "pass",
+              "detail": "unified diff with headers, hunk, and ledger.py target"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "contribution_id": null,
+        "refusal_id": "RFS-0002",
+        "replayed": false
+      }
+    }
+  ],
+  "board_after_restart": {
+    "challenges": [
+      {
+        "challenge_id": "CHALLENGE-001",
+        "problem_sha256": "213994dc13923d1fd455dec5b9f2aa1687960c35f9702e8ddbbc2a2af5729ad0",
+        "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+        "deadline_iso": "2026-10-12T00:00:00+00:00",
+        "owner_participant_id": "challenge-owner",
+        "created_by": "Challenge Owner",
+        "created_at": "2026-09-29T04:26:55.038477+00:00",
+        "create_receipt_id": "4dcf4fa5d29f9a93"
+      }
+    ],
+    "contributions": [
+      {
+        "contribution_id": "CHC-0001",
+        "challenge_id": "CHALLENGE-001",
+        "kind": "patch",
+        "title": "Fix rolling_sum off-by-one",
+        "body": "--- a/toy-app/ledger.py\n+++ b/toy-app/ledger.py\n@@ -8,6 +8,6 @@\n     out = []\n-    for i in range(len(values) - window):\n+    for i in range(len(values) - window + 1):\n         out.append(sum(values[i:i+window]))\n     return out\n",
+        "body_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+        "participant_id": "participant-a",
+        "display_name": "Contributor A",
+        "references": "",
+        "original": true,
+        "derived_from": [],
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind patch; title 26 chars; body 229 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K4",
+              "check_performed": "patch: unified-diff headers, @@ hunk, ledger.py target",
+              "result": "pass",
+              "detail": "unified diff with headers, hunk, and ledger.py target"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "gate_receipt_id": "97ff5997232f4ba4",
+        "submitted_at": "2026-09-29T04:26:55.375529+00:00",
+        "status": "accepted"
+      },
+      {
+        "contribution_id": "CHC-0002",
+        "challenge_id": "CHALLENGE-001",
+        "kind": "review",
+        "title": "Review of the rolling_sum off-by-one patch",
+        "body": "# Review of the rolling_sum off-by-one patch (peer review of another\n# contribution \u2014 the record the newsroom intake does not have).\n\nReviewed contribution: CHC-0001 (\"Fix rolling_sum off-by-one\", patch, by\nparticipant-a).\n\nFinding: the patch changes exactly one expression,\n`range(len(values) - window)` \u2192 `range(len(values) - window + 1)`.\nCheckable without running anything: for values=[1,2,3,4], window=2 the\noriginal expression is range(2) (indices 0, 1 \u2014 two windows), the patched\nexpression is range(3) (indices 0, 1, 2 \u2014 three windows), and EXPECTED.md\nrequires three windows ([3, 5, 7]). The claim is about the value of the\nrange expression, not about executing the code.\n\nCaveat (negative finding, for credit): the patch does not touch BUG-2\n(banker's rounding in apply_discount) or BUG-3 (ZeroDivisionError in\npercentage_of); it claims to fix one bug and fixes one bug. The diff is\ninert text; I reviewed it by reading.\n",
+        "body_sha256": "5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53",
+        "participant_id": "participant-b",
+        "display_name": "Contributor B",
+        "references": "CHC-0001",
+        "original": true,
+        "derived_from": [],
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind review; title 42 chars; body 931 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K6",
+              "check_performed": "review: references an existing contribution id, states a checkable finding",
+              "result": "pass",
+              "detail": "reviews CHC-0001 with a checkable finding"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "gate_receipt_id": "d49422af03d68159",
+        "submitted_at": "2026-09-29T04:26:55.680235+00:00",
+        "status": "accepted"
+      },
+      {
+        "contribution_id": "CHC-0003",
+        "challenge_id": "CHALLENGE-001",
+        "kind": "test",
+        "title": "Failing tests for BUG-1 and BUG-2",
+        "body": "# test_two_bugs.py \u2014 failing-test file for toy-app/ledger.py (CHALLENGE-001)\n#\n# NOTE: this file deliberately demonstrates TWO documented bugs (BUG-1 and\n# BUG-2). Per the frozen criteria it is structurally well-formed, so the\n# machine admits it \u2014 and the evaluator DECLINES it with the checkable\n# reason \"bundles BUG-1 and BUG-2; one bug per test\". That is the frozen\n# control 2, implemented exactly as specified.\n#\n# Expected behavior per toy-app/EXPECTED.md (checkable without running):\n#   rolling_sum([1, 2, 3, 4], 2) == [3, 5, 7]      (BUG-1: off-by-one)\n#   apply_discount(5, 50) == 3                      (BUG-2: banker's rounding)\nfrom toy_app.ledger import rolling_sum, apply_discount\n\n\ndef test_rolling_sum_last_window():\n    # BUG-1: the last window ([3,4] -> 7) is dropped by the off-by-one.\n    got = rolling_sum([1, 2, 3, 4], 2)\n    assert got == [3, 5, 7], f\"expected [3, 5, 7], got {got}\"\n\n\ndef test_apply_discount_half_up():\n    # BUG-2: round() is banker's rounding; round(2.5) == 2, expected 3.\n    got = apply_discount(5, 50)\n    assert got == 3, f\"expected 3 (half-up), got {got}\"\n",
+        "body_sha256": "aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da",
+        "participant_id": "participant-b",
+        "display_name": "Contributor B",
+        "references": "",
+        "original": true,
+        "derived_from": [],
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind test; title 33 chars; body 1106 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K5",
+              "check_performed": "test: names toy-app target, cites EXPECTED.md, asserts (one-bug-per-test is evaluator merit, not structural)",
+              "result": "pass",
+              "detail": "failing-test file naming the target and expected behavior"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "gate_receipt_id": "632d6e89622ae9e8",
+        "submitted_at": "2026-09-29T04:26:55.909784+00:00",
+        "status": "declined"
+      },
+      {
+        "contribution_id": "CHC-0004",
+        "challenge_id": "CHALLENGE-001",
+        "kind": "patch",
+        "title": "Fix rolling_sum off-by-one (with attestation)",
+        "body": "--- a/toy-app/ledger.py\n+++ b/toy-app/ledger.py\n@@ -8,6 +8,6 @@\n     out = []\n-    for i in range(len(values) - window):\n+    for i in range(len(values) - window + 1):\n         out.append(sum(values[i:i+window]))\n     return out\n",
+        "body_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+        "participant_id": "participant-a",
+        "display_name": "Contributor A",
+        "references": "",
+        "original": true,
+        "derived_from": [],
+        "acceptance": {
+          "criteria_frozen": "research/challenge-001/CHALLENGE-CRITERIA-001.md (2026-09-28)",
+          "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+          "evaluator": "backend/challenge_acceptance.py (deterministic; no model, no network; submitted code never executed)",
+          "evaluated_sha256": "8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269",
+          "scope_note": "Structural checks only: they verify the contribution's shape (kind present, challenge/criteria binding exact, authorship matches the presenting session, per-kind format well-formed, review references an existing contribution, bytes bound to the pinned hash). They do NOT verify that any claim in the contribution is true: an admitted patch may not fix the bug, an admitted test may not fail, an admitted review's finding may be wrong. Admission admits the artifact for evaluation; it is not factual verification. Submitted code is never executed on the server.",
+          "results": [
+            {
+              "criterion": "K1",
+              "check_performed": "kind in {patch,test,review}; title/body present and bounded",
+              "result": "pass",
+              "detail": "kind patch; title 45 chars; body 229 chars"
+            },
+            {
+              "criterion": "K2",
+              "check_performed": "challenge_id + criteria_hash match frozen values; declared sha256 == pinned sha256",
+              "result": "pass",
+              "detail": "challenge, criteria, and byte binding all match"
+            },
+            {
+              "criterion": "K3",
+              "check_performed": "declared participant_id == presenting session",
+              "result": "pass",
+              "detail": "authorship matches the presenting session"
+            },
+            {
+              "criterion": "K4",
+              "check_performed": "patch: unified-diff headers, @@ hunk, ledger.py target",
+              "result": "pass",
+              "detail": "unified diff with headers, hunk, and ledger.py target"
+            },
+            {
+              "criterion": "K7",
+              "check_performed": "original declared, or non-original with named sources",
+              "result": "pass",
+              "detail": "declared original work"
+            }
+          ],
+          "verdict": "ADMITTED"
+        },
+        "gate_receipt_id": "d1d4004bbd5172b9",
+        "submitted_at": "2026-09-29T04:26:57.037758+00:00",
+        "status": "admitted"
+      }
+    ],
+    "decisions": [
+      {
+        "contribution_id": "CHC-0001",
+        "challenge_id": "CHALLENGE-001",
+        "decision": "ACCEPT",
+        "reason": "diff is well-formed; the one-line change matches EXPECTED.md for BUG-1 (range gives 3 windows)",
+        "evaluator_id": "challenge-owner",
+        "gate_receipt_id": "cf4141ea969a3db5",
+        "decided_at": "2026-09-29T04:26:56.134425+00:00"
+      },
+      {
+        "contribution_id": "CHC-0003",
+        "challenge_id": "CHALLENGE-001",
+        "decision": "DECLINE",
+        "reason": "bundles BUG-1 and BUG-2; one bug per test",
+        "evaluator_id": "challenge-owner",
+        "gate_receipt_id": "761fc63bd8b34e46",
+        "decided_at": "2026-09-29T04:26:56.359578+00:00"
+      },
+      {
+        "contribution_id": "CHC-0002",
+        "challenge_id": "CHALLENGE-001",
+        "decision": "ACCEPT",
+        "reason": "checkable finding verified by reading: range(3) is three windows, matching EXPECTED.md",
+        "evaluator_id": "challenge-owner",
+        "gate_receipt_id": "be490d5351894b13",
+        "decided_at": "2026-09-29T04:26:56.582174+00:00"
+      }
+    ],
+    "refusals": [
+      {
+        "refusal_id": "RFS-0001",
+        "at": "2026-09-29T04:26:56.809552+00:00",
+        "participant_id": "participant-b",
+        "challenge_id": "CHALLENGE-001",
+        "contribution_id": "CHC-0002",
+        "reason_codes": [
+          "EVALUATOR_NOT_OWNER"
+        ],
+        "gate_receipt_id": null,
+        "note": "evaluate attempted by a non-evaluator"
+      },
+      {
+        "refusal_id": "RFS-0002",
+        "at": "2026-09-29T04:26:57.610460+00:00",
+        "participant_id": "participant-b",
+        "challenge_id": "CHALLENGE-001",
+        "contribution_id": null,
+        "reason_codes": [
+          "MANDATE_REVOKED"
+        ],
+        "gate_receipt_id": "6862806e4a8c5c6b",
+        "note": "gate stopped the contribution"
+      }
+    ],
+    "challenge_id": "CHALLENGE-001",
+    "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+    "scope_note": "Structural admission (K1-K7) verifies a contribution's shape, not the truth of its claims. Evaluator ACCEPT/DECLINE is the designated evaluator's decision under the frozen criteria. Submitted code is never executed on this server."
+  },
+  "checks": [
+    {
+      "name": "owner creates CHALLENGE-001",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"4dcf4fa5d29f9a93\", \"reason_codes\": [], \"challenge\": {\"challenge_id\": \"CHALLENGE-001\", \"problem_sha256\": \"213994dc13923d1fd455dec5b9f2aa1687960c35f9702e8ddbbc2a2af5729ad0\", \"criteria_hash\": \"86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a\", \"dea"
+    },
+    {
+      "name": "create receipt recorded",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "A patch admitted",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"97ff5997232f4ba4\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"match\": true}, \"acceptance\": {\"criter"
+    },
+    {
+      "name": "A delegated before contributing",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "B review admitted",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"d49422af03d68159\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53\", \"pinned_sha256\": \"5743e2065803fd7dce96ba9fb141adaf914bdd49a31554bb6076ee8285090e53\", \"match\": true}, \"acceptance\": {\"criter"
+    },
+    {
+      "name": "B two-bug test structurally admitted (not machine-refused)",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"632d6e89622ae9e8\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da\", \"pinned_sha256\": \"aefd7267f578df442f19590f4ca2a16bc9cde1ba95afad9e085d235b10e421da\", \"match\": true}, \"acceptance\": {\"criter"
+    },
+    {
+      "name": "owner ACCEPTs the patch",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"cf4141ea969a3db5\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0001\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"ACCEPT\", \"reason\": \"diff is well-formed; the one-line change matches EXPECTED.md for BUG-1 (range gives 3 windows)\", \"evaluator_id"
+    },
+    {
+      "name": "owner DECLINEs the two-bug test with checkable reason",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"761fc63bd8b34e46\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0003\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"DECLINE\", \"reason\": \"bundles BUG-1 and BUG-2; one bug per test\", \"evaluator_id\": \"challenge-owner\", \"gate_receipt_id\": \"761fc63bd8"
+    },
+    {
+      "name": "owner ACCEPTs the review (visible credit)",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"be490d5351894b13\", \"reason_codes\": [], \"evaluation\": {\"contribution_id\": \"CHC-0002\", \"challenge_id\": \"CHALLENGE-001\", \"decision\": \"ACCEPT\", \"reason\": \"checkable finding verified by reading: range(3) is three windows, matching EXPECTED.md\", \"evaluator_id\": \"chal"
+    },
+    {
+      "name": "contributor evaluate refused EVALUATOR_NOT_OWNER",
+      "pass": true,
+      "detail": "{\"decision\": \"STOPPED\", \"receipt_id\": null, \"reason_codes\": [\"EVALUATOR_NOT_OWNER\"], \"contribution_id\": \"CHC-0002\", \"refusal_id\": \"RFS-0001\", \"replayed\": false}"
+    },
+    {
+      "name": "contribution with self-attestation admitted on merits",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"d1d4004bbd5172b9\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"match\": true}, \"acceptance\": {\"criter"
+    },
+    {
+      "name": "attestation appears nowhere in the stored record",
+      "pass": true,
+      "detail": "[\"contribution_id\", \"challenge_id\", \"kind\", \"title\", \"body\", \"body_sha256\", \"participant_id\", \"display_name\", \"references\", \"original\", \"derived_from\", \"acceptance\", \"gate_receipt_id\", \"submitted_at\", \"status\"]"
+    },
+    {
+      "name": "B mandate revoked",
+      "pass": true,
+      "detail": "{\"revoked\": true, \"session\": \"resumed\"}"
+    },
+    {
+      "name": "revoked contribution refused MANDATE_REVOKED",
+      "pass": true,
+      "detail": "{\"decision\": \"STOPPED\", \"receipt_id\": \"6862806e4a8c5c6b\", \"reason_codes\": [\"MANDATE_REVOKED\"], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"match\": true}, \"acce"
+    },
+    {
+      "name": "revoked refusal recorded in the refusal ledger",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "duplicate contribute replays (no double record)",
+      "pass": true,
+      "detail": "{\"decision\": \"ALLOWED\", \"receipt_id\": \"97ff5997232f4ba4\", \"reason_codes\": [], \"binding\": {\"declared_sha256\": \"8318d5bdec5e3e876c3362bb2ebbe8ee0198fb5d79cf093ff071e0bd0322f269\", \"pinned_sha256\": \"8318d"
+    },
+    {
+      "name": "contributions survive a server restart",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "decisions survive a server restart",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refusals survive a server restart",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "unauthenticated GET of the board works",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "failed": []
+}

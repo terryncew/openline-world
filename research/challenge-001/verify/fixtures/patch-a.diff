@@ -1,0 +1,8 @@
+--- a/toy-app/ledger.py
++++ b/toy-app/ledger.py
+@@ -8,6 +8,6 @@
+     out = []
+-    for i in range(len(values) - window):
++    for i in range(len(values) - window + 1):
+         out.append(sum(values[i:i+window]))
+     return out
