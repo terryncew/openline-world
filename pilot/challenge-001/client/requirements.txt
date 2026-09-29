@@ -1,0 +1,9 @@
+# CHALLENGE-001 pilot client bundle — dependencies.
+#
+# The trust-anchored transport (trust_anchored_client.py) is standard
+# library only. The challenge client needs Ed25519 (key generation,
+# mandate/announcement signature verification, worker presentations).
+cryptography==50.0.1
+
+# Install:  python3 -m pip install -r requirements.txt
+# (cryptography ships wheels for all major platforms; no compiler needed.)

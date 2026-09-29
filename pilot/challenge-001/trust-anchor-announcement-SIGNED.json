@@ -1,0 +1,33 @@
+{
+  "announcement_type": "root-trust-anchor",
+  "bindings": {
+    "challenge_id": "CHALLENGE-001",
+    "criteria_hash": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+    "problem_sha256": "213994dc13923d1fd455dec5b9f2aa1687960c35f9702e8ddbbc2a2af5729ad0"
+  },
+  "canonicalization": "olp-canonical-json-int-v1",
+  "challenge_id": "CHALLENGE-001",
+  "issued_at": "2026-09-29T19:37:18+00:00",
+  "migration_rationale": "Caddy 'tls internal' leaf certificates rotate roughly every 8-12 hours, forcing a new owner-signed announcement per rotation. Pinning the stable root CA ends that cycle: leaf rotations no longer change what clients trust.",
+  "root_ca": {
+    "sha256_fingerprint": "8850658ea490bbd9ce9d4920ac4bd863727cd37785071e3ee0a974bbec3a7eaf",
+    "pem": "-----BEGIN CERTIFICATE-----\nMIIBpTCCAUqgAwIBAgIRALosrkeSiJskeQ4rmzSqMXAwCgYIKoZIzj0EAwIwMDEu\nMCwGA1UEAxMlQ2FkZHkgTG9jYWwgQXV0aG9yaXR5IC0gMjAyNiBFQ0MgUm9vdDAe\nFw0yNjA5MjkwNjM3MTNaFw0zNjA4MDcwNjM3MTNaMDAxLjAsBgNVBAMTJUNhZGR5\nIExvY2FsIEF1dGhvcml0eSAtIDIwMjYgRUNDIFJvb3QwWTATBgcqhkjOPQIBBggq\nhkjOPQMBBwNCAAQi9Zd1t5DMrQJPVlOhDTvj+oFKsc3Il255jJL2XqMUWzh4avKw\nn2oXZ0D+DUmyjqXGqJHy3ZHspmF+VsQItbH4o0UwQzAOBgNVHQ8BAf8EBAMCAQYw\nEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQUW0KwsCPa5U0lLiGCWaA77eo6\nyw4wCgYIKoZIzj0EAwIDSQAwRgIhALHsIaiLCiVbo7Kgt0k9cpNQXl2oxNBuM42+\nOsV2ak09AiEApA+BklXzveTgLnebGc3V0w9rQQg5oPlBCRZ/9WFGpqA=\n-----END CERTIFICATE-----\n",
+    "subject": "CN = Caddy Local Authority - 2026 ECC Root",
+    "serial": "BA2CAE4792889B24790E2B9B34AA3170",
+    "not_before": "2026-09-29T06:37:13Z",
+    "not_after": "2036-08-07T06:37:13Z"
+  },
+  "schema": "openline.trust_anchor_announcement.v1",
+  "supersedes": {
+    "method": "leaf-fingerprint-pinning",
+    "statement": "The staged leaf pin fcd5be5c... is superseded and must never be used as a connection method. Clients must pin the root CA below, not any leaf fingerprint.",
+    "superseded_pin": "fcd5be5c5a7da1db1aecd3ff79bb5c17ae10eb37662caded492188c81b18150e",
+    "superseded_pin_expires_at": "2026-09-30T02:47:13Z"
+  },
+  "payload_hash": "0a4a5fc5f8a7c95a98253ebb9505a7a6945e8f25ca5a1f040b14edec83f8a613",
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "b4c991fb5b1ba2db995cd0ee67d1087cbea8111f1f5bb0c2372d689572ef2d61",
+    "value": "5f2664e411be830637f7ff1ad6d9c3f8c63b5c78683aa7d8acba826e9d8d8f9663a844e3a9d0f792333bcaa3efaa81de6eff41e6acbd1bf9d1bf6c8150268004"
+  }
+}
