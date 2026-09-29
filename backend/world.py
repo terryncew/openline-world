@@ -407,6 +407,13 @@ def _receipt_id(receipt: dict[str, Any]) -> str:
     return str(value)[:16]
 
 
+def _canonical_builds_on(builds_on: list[dict[str, Any]]) -> str:
+    """Canonical bytes of the builds_on reuse links. Both the demo client
+    and the server pin the same encoding, so the declared builds_on_sha256
+    names exactly the stored links."""
+    return json.dumps(builds_on, sort_keys=True, separators=(",", ":"))
+
+
 def _public_receipt(receipt: dict[str, Any]) -> dict[str, Any]:
     keep = ["schema", "gate_id", "gate_public_key", "principal_id", "mandate_id",
             "subject_id", "action", "decision", "reason_codes", "presentation_hash",
@@ -1639,23 +1646,39 @@ TRACK A -- owner delegation and the deterministic automation worker:
 
     def claimgraph_correct(self, participant_id: Any, token: Any, status: Any,
                            presentation: Any = None,
-                           idempotency_key: Any = None) -> dict[str, Any]:
-        """Append a correction or withdrawal event for the harbor log --
-        but only as an authorized action. The participant's worker-signed
-        presentation is evaluated at the server receiver for
-        "claimgraph.correct" exactly like any other propose: standing must
-        be establishable as current, and only an ALLOWED verdict appends the
-        event. A STOPPED verdict is returned as-is and appends nothing.
+                           idempotency_key: Any = None,
+                           source_id: Any = None,
+                           notice_text: Any = None,
+                           reason: Any = None) -> dict[str, Any]:
+        """Append a correction or withdrawal event -- but only as an
+        authorized action. The participant's worker-signed presentation is
+        evaluated at the server receiver for "claimgraph.correct" exactly
+        like any other propose: standing must be establishable as current,
+        and only an ALLOWED verdict appends the event. A STOPPED verdict is
+        returned as-is and appends nothing.
 
-        The event and its deterministic impact report are computed by the
-        real claim-graph machinery (claim_graph_chapter.py): snapshots and
-        receipts are never mutated, so previous receipts stay inspectable
-        and unchanged.
+        With source_id=None this is the original desk path: the harbor-log
+        event. With a source_id naming a recorded source (e.g. an accepted
+        challenge contribution's source), the event targets that source and
+        the notice/reason are recorded with it. Either way the event and
+        its deterministic impact report are computed by the real claim-graph
+        machinery (claim_graph_chapter.py): snapshots and receipts are never
+        mutated, so previous receipts stay inspectable and unchanged.
         """
         session = self._auth(participant_id, token)
         key = self._clean_idempotency_key(idempotency_key)
         if status not in ALLOWED_EVENT_STATUSES:
             raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "status")
+        if source_id is not None and (
+                not isinstance(source_id, str) or not source_id
+                or len(source_id) > 200):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "source_id")
+        if notice_text is not None and (
+                not isinstance(notice_text, str) or not notice_text
+                or len(notice_text) > 2000):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "notice_text")
+        reason = (WorldRules.moderate_text(reason, 2000, "reason")
+                  if reason is not None else None)
 
         def execute() -> dict[str, Any]:
             self._require_fresh_standing(session)
@@ -1669,21 +1692,28 @@ TRACK A -- owner delegation and the deterministic automation worker:
             if receipt["decision"] != "ALLOWED":
                 return {**base, "event_id": None, "replayed": False}
             entry = self.claim_graph.append_event(
-                status, asserted_by=f"world:participant:{session.participant_id}")
+                status, asserted_by=f"world:participant:{session.participant_id}",
+                source_id=source_id, notice_text=notice_text, reason=reason)
+            target = ("the harbor log" if source_id is None
+                      else f"source {source_id}")
             self.events.emit(
                 source="world", kind="claim-graph", provenance="receiver-signed",
-                summary=(f"{session.display_name} posted a {status} event for the harbor log. "
+                summary=(f"{session.display_name} posted a {status} event for {target}. "
                          "The receiver allowed it; the desk shows the computed impact."),
                 detail={"participant_id": session.participant_id,
                         "event_id": entry["event"]["event_id"], "status": status,
+                        "source_id": source_id,
                         "replayed": entry.get("replayed", False)},
             )
             self.save()
             return {**base, "event_id": entry["event"]["event_id"],
                     "replayed": entry.get("replayed", False)}
 
-        result, _replayed = self._idempotent(
-            session.participant_id, "claimgraph.correct", status, key, execute)
+        result, key_replayed = self._idempotent(
+            session.participant_id, "claimgraph.correct",
+            status + "|" + (source_id or ""), key, execute)
+        result = dict(result)
+        result["replayed"] = bool(key_replayed or result.get("replayed"))
         return result
 
     # -- newsroom: the small desk ---------------------------------------------
@@ -1711,6 +1741,11 @@ TRACK A -- owner delegation and the deterministic automation worker:
             "not the truth of its claims. Evaluator ACCEPT/DECLINE is the "
             "designated evaluator's decision under the frozen criteria. "
             "Submitted code is never executed on this server.")
+        # The credit cascade: accepted contributions linked as claim nodes
+        # with dependency edges, plus the authorized correction record.
+        # Refusals are supporting evidence, not an embarrassment: each one
+        # is a signed receiver verdict with a named reason.
+        board["cascade"] = self.claim_graph.describe_challenge_cascade()
         return board
 
     @staticmethod
@@ -1793,6 +1828,10 @@ TRACK A -- owner delegation and the deterministic automation worker:
         no stripping or normalization. The declared sha256 names the stored
         bytes.
 
+        The explicit reuse links (`builds_on`) are byte-bound the same way:
+        the declared builds_on_sha256 must equal the sha256 of the canonical
+        encoding of the stored links.
+
         A contributor-supplied `attestation` (e.g. a self-signed "APPROVED")
         is accepted on the wire but DISCARDED here: it is not canonicalized,
         not hashed, not stored, not evaluated, and never appears in any
@@ -1835,6 +1874,34 @@ TRACK A -- owner delegation and the deterministic automation worker:
                        for s in derived_from)):
             raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
                                  "contribution.derived_from")
+        builds_on = contribution.get("builds_on") or []
+        if not isinstance(builds_on, list) or len(builds_on) > 8:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "contribution.builds_on")
+        clean_links: list[dict[str, Any]] = []
+        for link in builds_on:
+            if (not isinstance(link, dict)
+                    or set(link) != {"contribution_id", "what_reused"}):
+                raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                     "contribution.builds_on")
+            link_id = link["contribution_id"]
+            what = link["what_reused"]
+            if (not isinstance(link_id, str) or not link_id
+                    or len(link_id) > 64):
+                raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                     "contribution.builds_on.contribution_id")
+            if not isinstance(what, str) or not what or len(what) > 500:
+                raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                     "contribution.builds_on.what_reused")
+            clean_links.append({"contribution_id": link_id,
+                                "what_reused": what})
+        declared_builds_on = contribution.get("builds_on_sha256")
+        if (not isinstance(declared_builds_on, str)
+                or re.fullmatch(r"[0-9a-f]{64}", declared_builds_on) is None):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "contribution.builds_on_sha256")
+        pinned_builds_on = hashlib.sha256(
+            _canonical_builds_on(clean_links).encode("utf-8")).hexdigest()
         declared = contribution.get("body_sha256")
         if (not isinstance(declared, str)
                 or re.fullmatch(r"[0-9a-f]{64}", declared) is None):
@@ -1846,6 +1913,9 @@ TRACK A -- owner delegation and the deterministic automation worker:
                 "challenge_id": challenge_id, "criteria_hash": criteria_hash,
                 "participant_id": participant_id, "references": references,
                 "original": original, "derived_from": derived_from,
+                "builds_on": clean_links,
+                "declared_builds_on_sha256": declared_builds_on,
+                "pinned_builds_on_sha256": pinned_builds_on,
                 "declared_sha256": declared, "pinned_sha256": pinned}
 
     def challenge_contribute(self, participant_id: Any, token: Any,
@@ -1861,7 +1931,11 @@ TRACK A -- owner delegation and the deterministic automation worker:
         2. CHALLENGE EXISTS: unknown challenge id is an input error.
         3. DEADLINE: past the frozen deadline -> refused CHALLENGE_CLOSED.
         4. BYTE BINDING: declared sha256 must equal the pinned sha256,
-           else refused CHALLENGE_HASH_MISMATCH.
+           else refused CHALLENGE_HASH_MISMATCH. The explicit reuse links
+           (`builds_on`) are bound the same way: declared builds_on_sha256
+           must equal the pinned sha256 of the canonical link bytes, else
+           refused CHALLENGE_BUILDS_ON_HASH_MISMATCH; a link naming an
+           unknown contribution is refused CHALLENGE_BUILDS_ON_UNKNOWN.
         5. STRUCTURAL ADMISSION: frozen K1-K7
            (backend/challenge_acceptance.py) on the pinned bytes, else
            refused CHALLENGE_ADMISSION_FAILED naming the failed rules.
@@ -1881,7 +1955,14 @@ TRACK A -- owner delegation and the deterministic automation worker:
             gate_codes = list(receipt.get("reason_codes", []) or [])
             binding = {"declared_sha256": clean["declared_sha256"],
                        "pinned_sha256": clean["pinned_sha256"],
-                       "match": clean["declared_sha256"] == clean["pinned_sha256"]}
+                       "match": clean["declared_sha256"] == clean["pinned_sha256"],
+                       "builds_on_declared_sha256":
+                           clean["declared_builds_on_sha256"],
+                       "builds_on_pinned_sha256":
+                           clean["pinned_builds_on_sha256"],
+                       "builds_on_match":
+                           clean["declared_builds_on_sha256"]
+                           == clean["pinned_builds_on_sha256"]}
             acceptance = evaluate_contribution(
                 kind=clean["kind"], title=clean["title"], body=clean["body"],
                 challenge_id=clean["challenge_id"],
@@ -1921,6 +2002,17 @@ TRACK A -- owner delegation and the deterministic automation worker:
             if not binding["match"]:
                 return refused(gate_codes + ["CHALLENGE_HASH_MISMATCH"],
                                "declared bytes are not the pinned bytes")
+            if not binding["builds_on_match"]:
+                return refused(gate_codes + ["CHALLENGE_BUILDS_ON_HASH_MISMATCH"],
+                               "declared builds_on bytes are not the pinned "
+                               "reuse links")
+            known_ids = self.challenge_chapter.contribution_ids()
+            unknown = [link["contribution_id"] for link in clean["builds_on"]
+                       if link["contribution_id"] not in known_ids]
+            if unknown:
+                return refused(gate_codes + ["CHALLENGE_BUILDS_ON_UNKNOWN"],
+                               "builds_on references unknown contribution(s): "
+                               + ",".join(unknown))
             if acceptance["verdict"] != "ADMITTED":
                 failed = [r["criterion"] for r in acceptance["results"]
                           if r["result"] != "pass"]
@@ -1934,7 +2026,10 @@ TRACK A -- owner delegation and the deterministic automation worker:
                 participant_id=session.participant_id,
                 display_name=session.display_name,
                 references=clean["references"], original=clean["original"],
-                derived_from=clean["derived_from"], acceptance=acceptance,
+                derived_from=clean["derived_from"],
+                builds_on=clean["builds_on"],
+                builds_on_sha256=clean["pinned_builds_on_sha256"],
+                acceptance=acceptance,
                 gate_receipt=receipt)
             self.events.emit(
                 source="world", kind="challenge", provenance="receiver-signed",
@@ -2040,6 +2135,188 @@ TRACK A -- owner delegation and the deterministic automation worker:
             contribution_id + "|" + decision, key, execute)
         result = dict(result)
         result["replayed"] = replayed
+        return result
+
+    @staticmethod
+    def _clean_cascade_registration(registration: Any) -> dict[str, Any]:
+        """Validate a cascade-linkage registration. The linkage is the
+        evaluator's declared record: only accepted contributions, verbatim
+        quotes from the recorded bodies, dependencies naming other linked
+        contributions. Nothing is inferred."""
+        if not isinstance(registration, dict):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID", "registration")
+        challenge_id = registration.get("challenge_id")
+        if challenge_id != CHALLENGE_ID:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "registration.challenge_id")
+        report_id = registration.get("report_id")
+        if (not isinstance(report_id, str) or not report_id
+                or len(report_id) > 120):
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "registration.report_id")
+        title = WorldRules.moderate_text(registration.get("title"), 120,
+                                         "registration.title")
+        links = registration.get("links")
+        if not isinstance(links, list) or not links or len(links) > 16:
+            raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                 "registration.links")
+        clean_links: list[dict[str, Any]] = []
+        for link in links:
+            if not isinstance(link, dict):
+                raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                     "registration.links")
+            contribution_id = link.get("contribution_id")
+            if (not isinstance(contribution_id, str) or not contribution_id
+                    or len(contribution_id) > 64):
+                raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                     "registration.links.contribution_id")
+            finding_quote = link.get("finding_quote")
+            if (not isinstance(finding_quote, str) or not finding_quote
+                    or len(finding_quote) > 2000):
+                raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                     "registration.links.finding_quote")
+            finding_text = WorldRules.moderate_text(
+                link.get("finding_text"), 500, "registration.links.finding_text")
+            claim_text = WorldRules.moderate_text(
+                link.get("claim_text"), 500, "registration.links.claim_text")
+            depends_on = link.get("depends_on")
+            if depends_on is not None and (
+                    not isinstance(depends_on, str) or not depends_on
+                    or len(depends_on) > 64):
+                raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                     "registration.links.depends_on")
+            clean_links.append({
+                "contribution_id": contribution_id,
+                "finding_quote": finding_quote,
+                "finding_text": finding_text,
+                "claim_text": claim_text,
+                "depends_on": depends_on,
+            })
+        for link in clean_links:
+            # A self-dependency is a malformed edge declaration, not a
+            # semantic refusal: wire input invalid.
+            if link["depends_on"] == link["contribution_id"]:
+                raise WorldRuleError("WORLD_RULE_INPUT_INVALID",
+                                     "registration.links.depends_on")
+        return {"challenge_id": challenge_id, "report_id": report_id,
+                "title": title, "links": clean_links}
+
+    def challenge_cascade_register(self, participant_id: Any, token: Any,
+                                   registration: Any, presentation: Any = None,
+                                   idempotency_key: Any = None) -> dict[str, Any]:
+        """Link ACCEPTED challenge contributions as claim nodes in the claim
+        graph, with dependency edges.
+
+        Only the challenge owner (bound at creation) may register, with a
+        worker-signed presentation for "challenge.admin" evaluated at the
+        server receiver. Each linked contribution must exist and be ACCEPTED;
+        each finding_quote must occur verbatim in the recorded body. The
+        registered source is the contribution's recorded body bytes; the
+        dependency edges mirror the recorded builds_on links. A later
+        authorized correction event then propagates through the engine's
+        existing rules: the corrected source's claims are exposed, recorded
+        dependents are reassessed, original bytes and historical decisions
+        are untouched.
+        """
+        session = self._auth(participant_id, token)
+        key = self._clean_idempotency_key(idempotency_key)
+        clean = self._clean_cascade_registration(registration)
+        challenge = self.challenge_chapter.challenges.get(clean["challenge_id"])
+
+        def execute() -> dict[str, Any]:
+            if (challenge is None
+                    or session.participant_id != challenge["owner_participant_id"]):
+                entry = self.challenge_chapter.refuse(
+                    participant_id=session.participant_id,
+                    challenge_id=clean["challenge_id"],
+                    contribution_id=None,
+                    reason_codes=["EVALUATOR_NOT_OWNER"], gate_receipt=None,
+                    note="cascade registration attempted by a non-evaluator")
+                self.save()
+                return {"decision": "STOPPED", "receipt_id": None,
+                        "reason_codes": ["EVALUATOR_NOT_OWNER"],
+                        "refusal_id": entry["refusal_id"], "replayed": False}
+            self._require_fresh_standing(session)
+            receipt = self._evaluate_presentation(session, "challenge.admin",
+                                                  presentation)
+            receipt_id = _receipt_id(receipt)
+            gate_codes = list(receipt.get("reason_codes", []) or [])
+
+            def refused(codes: list[str], note: str = "") -> dict[str, Any]:
+                entry = self.challenge_chapter.refuse(
+                    participant_id=session.participant_id,
+                    challenge_id=clean["challenge_id"],
+                    contribution_id=None,
+                    reason_codes=codes, gate_receipt=receipt, note=note)
+                self.save()
+                return {"decision": "STOPPED", "receipt_id": receipt_id,
+                        "reason_codes": codes,
+                        "refusal_id": entry["refusal_id"], "replayed": False}
+
+            if receipt["decision"] != "ALLOWED":
+                return refused(gate_codes, "gate stopped the registration")
+            linked_ids = {link["contribution_id"] for link in clean["links"]}
+            links: list[dict[str, Any]] = []
+            for link in clean["links"]:
+                contribution_id = link["contribution_id"]
+                contribution = self.challenge_chapter.get_contribution(
+                    contribution_id)
+                if contribution is None:
+                    return refused(
+                        gate_codes + ["CHALLENGE_CONTRIBUTION_UNKNOWN"],
+                        f"unknown contribution {contribution_id}")
+                if contribution["status"] != "accepted":
+                    return refused(
+                        gate_codes + ["CHALLENGE_CASCADE_LINK_NOT_ACCEPTED"],
+                        f"{contribution_id} is not an ACCEPTED contribution")
+                if link["finding_quote"] not in contribution["body"]:
+                    return refused(
+                        gate_codes + ["CHALLENGE_CASCADE_QUOTE_MISMATCH"],
+                        f"finding_quote is not verbatim in the recorded "
+                        f"body of {contribution_id}")
+                depends_on = link["depends_on"]
+                if (depends_on is not None
+                        and depends_on not in linked_ids):
+                    return refused(
+                        gate_codes + ["CHALLENGE_CASCADE_DEPENDENCY_UNKNOWN"],
+                        f"depends_on {depends_on} is not a linked contribution")
+                source = self.claim_graph.register_contribution_source(
+                    content=contribution["body"],
+                    locator=f"challenge://{contribution_id}/body",
+                    label=(f"accepted {contribution['kind']} "
+                           f"{contribution_id} — {contribution['title']}"))
+                self.claim_graph.challenge_sources[source["source_id"]] = (
+                    contribution_id)
+                links.append({**link, "source_id": source["source_id"]})
+            out = self.claim_graph.register_challenge_cascade_report(
+                report_id=clean["report_id"], title=clean["title"],
+                links=links,
+                asserted_by=f"world:participant:{session.participant_id}")
+            report = out["report"]
+            replayed_report = out["replayed"]
+            self.events.emit(
+                source="world", kind="challenge", provenance="receiver-signed",
+                summary=(f"{session.display_name} linked "
+                         f"{len(links)} accepted contribution(s) as claim "
+                         f"nodes ({report['report_id']})."),
+                detail={"report_id": report["report_id"],
+                        "contribution_ids": [link["contribution_id"]
+                                             for link in links],
+                        "participant_id": session.participant_id,
+                        "receipt_id": receipt_id},
+            )
+            self.save()
+            return {"decision": "ALLOWED", "receipt_id": receipt_id,
+                    "reason_codes": gate_codes, "report_id": report["report_id"],
+                    "sources": {link["contribution_id"]: link["source_id"]
+                                for link in links},
+                    "refusal_id": None, "replayed": replayed_report}
+
+        result, replayed = self._idempotent(
+            session.participant_id, "challenge.cascade.register",
+            clean["report_id"], key, execute)
+        result = dict(result)
+        result["replayed"] = bool(replayed or result.get("replayed"))
         return result
 
     def _gated_newsroom(self, session: ParticipantSession,

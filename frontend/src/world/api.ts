@@ -558,10 +558,17 @@ export interface ChallengeContribution {
   references: string;
   original: boolean;
   derived_from: string[];
+  builds_on: ChallengeBuildsOn[];
+  builds_on_sha256: string;
   acceptance: ChallengeAcceptance;
   gate_receipt_id: string | null;
   submitted_at: string;
   status: string; // admitted | accepted | declined
+}
+
+export interface ChallengeBuildsOn {
+  contribution_id: string;
+  what_reused: string;
 }
 
 export interface ChallengeDecision {
@@ -604,6 +611,61 @@ export interface ChallengeBoard {
   challenge_id: string;
   criteria_hash: string;
   scope_note: string;
+  cascade: ChallengeCascade | null;
+}
+
+/** The credit cascade: accepted contributions linked as claim nodes with
+ *  dependency edges, plus the authorized correction record. Everything is
+ *  recorded backend data from GET /api/world/challenge/read. */
+export interface ChallengeCascadeClaimStanding {
+  classification: string; // QUARANTINE | SURVIVES | AFFECTED_UNRESOLVED | UNAFFECTED
+  reason: string | null;
+}
+
+export interface ChallengeCascadeClaim {
+  claim_id: string;
+  kind: string; // SOURCE_ASSERTION | INFERENCE
+  text: string;
+  contribution_id: string | null;
+  standing: ChallengeCascadeClaimStanding | null; // null = not yet assessed
+}
+
+export interface ChallengeCascadeRelation {
+  relation_id: string;
+  from_claim_id: string;
+  to_claim_id: string;
+  relation: string; // SUPPORTS | DEPENDS_ON
+  authority: string; // hard | unadmitted
+}
+
+export interface ChallengeCascadeReport {
+  report_id: string;
+  title: string;
+  claims: ChallengeCascadeClaim[];
+  relations: ChallengeCascadeRelation[];
+  receipt: Record<string, unknown>;
+}
+
+export interface ChallengeCascadeEventTarget {
+  source_id: string;
+  contribution_id: string | null;
+  label: string;
+}
+
+export interface ChallengeCascadeEvent {
+  event_id: string;
+  status: string; // CORRECTED | WITHDRAWN
+  effective_at: string;
+  asserted_by: string;
+  reason: string;
+  affected: ChallengeCascadeEventTarget[];
+  replayed: boolean;
+}
+
+export interface ChallengeCascade {
+  reports: ChallengeCascadeReport[];
+  events: ChallengeCascadeEvent[];
+  preservation: string;
 }
 
 async function req<T>(path: string, method: "GET" | "POST" = "GET", body?: unknown): Promise<T> {

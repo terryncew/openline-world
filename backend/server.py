@@ -490,7 +490,9 @@ class Handler(BaseHTTPRequestHandler):
             elif path == "/api/world/claimgraph/correct":
                 self._send(200, self.world.claimgraph_correct(
                     body.get("participant_id"), body.get("token"), body.get("status"),
-                    body.get("presentation"), body.get("idempotency_key")))
+                    body.get("presentation"), body.get("idempotency_key"),
+                    body.get("source_id"), body.get("notice_text"),
+                    body.get("reason")))
             elif path == "/api/world/newsroom/import":
                 self._send(200, self.world.newsroom_import(
                     body.get("participant_id"), body.get("token"), body.get("article"),
@@ -524,6 +526,11 @@ class Handler(BaseHTTPRequestHandler):
                     body.get("participant_id"), body.get("token"),
                     body.get("contribution_id"), body.get("decision"),
                     body.get("reason"), body.get("presentation"),
+                    body.get("idempotency_key")))
+            elif path == "/api/world/challenge/cascade/register":
+                self._send(200, self.world.challenge_cascade_register(
+                    body.get("participant_id"), body.get("token"),
+                    body.get("registration"), body.get("presentation"),
                     body.get("idempotency_key")))
             elif path == "/api/world/reset":
                 # Fresh isolated sessions; the snapshot is removed.

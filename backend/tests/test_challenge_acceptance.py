@@ -19,6 +19,7 @@ Run:  ~/workspace/.venvs/workshop/bin/python -m unittest discover -s tests
 from backend/.
 """
 import hashlib
+import json
 import sys
 import tempfile
 import unittest
@@ -213,6 +214,8 @@ class TestChapterPersistence(unittest.TestCase):
                               PATCH_BODY.encode()).hexdigest(),
                           participant_id="alice", display_name="Alice",
                           references="", original=True, derived_from=[],
+                          builds_on=[], builds_on_sha256=hashlib.sha256(
+                              b"[]").hexdigest(),
                           acceptance={"verdict": "ADMITTED"},
                           gate_receipt={})
         ch.evaluate(contribution_id=c["contribution_id"], decision="ACCEPT",
@@ -233,6 +236,8 @@ class TestChapterPersistence(unittest.TestCase):
                             title="t2", body="x", body_sha256="y",
                             participant_id="b", display_name="B",
                             references="", original=True, derived_from=[],
+                            builds_on=[], builds_on_sha256=hashlib.sha256(
+                                b"[]").hexdigest(),
                             acceptance={"verdict": "ADMITTED"},
                             gate_receipt={})
         self.assertEqual(c2["contribution_id"], "CHC-0002")
@@ -245,6 +250,7 @@ def _spec():
 
 
 def _contribution(client, kind, body, **kw):
+    builds_on = kw.get("builds_on", [])
     params = {"kind": kind, "title": kw.get("title", f"{kind} by {client.pid}"),
               "body": body, "challenge_id": CHALLENGE_ID,
               "criteria_hash": CRITERIA_HASH,
@@ -252,7 +258,12 @@ def _contribution(client, kind, body, **kw):
               "participant_id": client.pid,
               "references": kw.get("references", ""),
               "original": kw.get("original", True),
-              "derived_from": kw.get("derived_from", [])}
+              "derived_from": kw.get("derived_from", []),
+              "builds_on": builds_on,
+              "builds_on_sha256": hashlib.sha256(
+                  json.dumps(builds_on, sort_keys=True,
+                             separators=(",", ":")).encode("utf-8")
+              ).hexdigest()}
     return params
 
 

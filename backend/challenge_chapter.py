@@ -73,7 +73,8 @@ class ChallengeChapter:
     def contribute(self, *, challenge_id: str, kind: str, title: str,
                    body: str, body_sha256: str, participant_id: str,
                    display_name: str, references: str, original: bool,
-                   derived_from: list[str], acceptance: dict[str, Any],
+                   derived_from: list[str], builds_on: list[dict[str, Any]],
+                   builds_on_sha256: str, acceptance: dict[str, Any],
                    gate_receipt: dict[str, Any]) -> dict[str, Any]:
         self._seq += 1
         contribution = {
@@ -88,6 +89,11 @@ class ChallengeChapter:
             "references": references,
             "original": original,
             "derived_from": list(derived_from),
+            # Explicit reuse: [{contribution_id, what_reused}]. Declared by
+            # the contributor, byte-bound like the body (declared/pinned
+            # sha256 over the canonical link bytes must match).
+            "builds_on": [dict(link) for link in builds_on],
+            "builds_on_sha256": builds_on_sha256,
             "acceptance": copy.deepcopy(acceptance),
             "gate_receipt_id": _receipt_id(gate_receipt),
             "submitted_at": _utc_now_iso(),

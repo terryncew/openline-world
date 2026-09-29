@@ -24,6 +24,7 @@ Honesty rules, enforced by construction:
 """
 from __future__ import annotations
 
+import hashlib
 import sys
 from pathlib import Path
 from typing import Any
@@ -146,6 +147,14 @@ class ClaimGraphChapter:
         # Append-only history: [{"event": ..., "reports": {report_id: impact_report}}].
         # Snapshots and receipts are never mutated by an event.
         self.history: list[dict[str, Any]] = []
+
+        # Challenge-cascade linkage (challenge board credit cascade): sources
+        # built from accepted contributions' recorded bodies, reports
+        # registered for them, and correction events targeting them.
+        self.challenge_sources: dict[str, str] = {}  # source_id -> contribution_id
+        self.challenge_report_ids: list[str] = []
+        self.challenge_links: dict[str, dict[str, Any]] = {}  # contribution_id -> link record
+        self.challenge_event_ids: list[str] = []
 
     # -- construction ----------------------------------------------------
 
@@ -315,6 +324,132 @@ class ClaimGraphChapter:
         self.reports.append(report)
         return report
 
+    # -- challenge-cascade linkage: accepted contributions as claim nodes ----
+
+    def register_contribution_source(self, *, content: str, locator: str,
+                                     label: str) -> dict[str, Any]:
+        """Build and record a source from an accepted contribution's recorded
+        body bytes. Idempotent by locator: the same locator returns the
+        existing source, never a duplicate."""
+        for source in self.sources.values():
+            if source.get("locator") == locator:
+                return source
+        source = build_source(content, locator=locator)
+        self.sources[source["source_id"]] = source
+        self.source_labels[source["source_id"]] = label
+        return source
+
+    def register_challenge_cascade_report(self, *, report_id: str, title: str,
+                                          links: list[dict[str, Any]],
+                                          asserted_by: str) -> dict[str, Any]:
+        """Register accepted challenge contributions as claim nodes in one
+        report, with dependency edges.
+
+        Each link carries: contribution_id, source_id (a registered
+        contribution source), finding_quote (verbatim bytes of that source),
+        finding_text, claim_text, and depends_on (another linked
+        contribution_id, or None).
+
+        Per link: a SOURCE_ASSERTION claim whose text is the verbatim
+        finding quote, anchored (QUOTE, hard) on that span of the recorded
+        source body (quote mode requires claim text == anchored quote, so
+        only verbatim quotes link), and an INFERENCE claim carrying
+        claim_text with a hard SUPPORTS edge from the assertion. A
+        depends_on link adds a hard DEPENDS_ON edge from the dependent's
+        inference claim to the prerequisite's assertion claim -- the
+        recorded builds_on edge, in graph form. finding_text is the
+        human description of the finding, kept in the link record.
+
+        Idempotent by report_id. Snapshots and receipts of existing reports
+        are untouched. This records structure only; standing is never
+        assigned here -- only the engine's existing propagation rules ever
+        classify these claims.
+        """
+        for report in self.reports:
+            if report["report_id"] == report_id:
+                return {"report": report, "replayed": True}
+        by_contribution: dict[str, tuple[dict, dict]] = {}
+        claims: list[dict[str, Any]] = []
+        relations: list[dict[str, Any]] = []
+        hard_ids: list[str] = []
+        for link in links:
+            source = self.sources.get(str(link["source_id"]))
+            if source is None:
+                raise KeyError(f"unknown source: {link['source_id']!r}")
+            try:
+                anchor = provenance_anchor(
+                    source, str(link["finding_quote"]),
+                    mode="QUOTE", asserted_by=asserted_by)
+            except (ValueError, KeyError) as exc:
+                raise ValueError(
+                    "finding_quote is not verbatim in the recorded source "
+                    f"for {link['contribution_id']}: {exc}") from exc
+            c_src = create_claim(
+                kind="SOURCE_ASSERTION",
+                text=str(link["finding_quote"]),
+                asserted_by=asserted_by,
+                provenance=[anchor],
+            )
+            c_inf = create_claim(
+                kind="INFERENCE",
+                text=str(link["claim_text"]),
+                asserted_by=asserted_by,
+            )
+            r_support = create_relation(
+                source_claim_id=c_src["claim_id"],
+                target_claim_id=c_inf["claim_id"],
+                relation="SUPPORTS", asserted_by=asserted_by)
+            claims.extend([c_src, c_inf])
+            relations.append(r_support)
+            hard_ids.append(r_support["relation_id"])
+            by_contribution[str(link["contribution_id"])] = (c_src, c_inf)
+        for link in links:
+            prerequisite = link.get("depends_on")
+            if not prerequisite:
+                continue
+            if str(prerequisite) not in by_contribution:
+                raise ValueError(
+                    f"depends_on {prerequisite!r} is not a linked contribution")
+            dep_src, _ = by_contribution[str(prerequisite)]
+            _, c_inf = by_contribution[str(link["contribution_id"])]
+            r_depends = create_relation(
+                source_claim_id=c_inf["claim_id"],
+                target_claim_id=dep_src["claim_id"],
+                relation="DEPENDS_ON", asserted_by=asserted_by)
+            relations.append(r_depends)
+            hard_ids.append(r_depends["relation_id"])
+        snapshot = create_snapshot(claims=claims, relations=relations)
+        receipt = sign_snapshot(
+            snapshot, self.sources,
+            private_key=self._key, issuer=ISSUER, issued_at=ISSUED_AT,
+            parent_snapshots=[],
+        )
+        policy = create_impact_policy(
+            snapshot,
+            hard_relation_ids=hard_ids,
+            decision_claim_ids=[],
+        )
+        report = {
+            "report_id": report_id,
+            "title": title,
+            "placement": "challenge board — credit cascade",
+            "snapshot": snapshot,
+            "receipt": receipt,
+            "policy": policy,
+        }
+        self.reports.append(report)
+        self.challenge_report_ids.append(report_id)
+        for link in links:
+            c_src, c_inf = by_contribution[str(link["contribution_id"])]
+            self.challenge_links[str(link["contribution_id"])] = {
+                "report_id": report_id,
+                "source_id": str(link["source_id"]),
+                "assertion_claim_id": c_src["claim_id"],
+                "inference_claim_id": c_inf["claim_id"],
+                "finding_text": str(link["finding_text"]),
+            }
+        return {"report": report, "replayed": False}
+
     # -- events ------------------------------------------------------------
 
     def _a1_anchor_span(self) -> dict[str, int]:
@@ -325,9 +460,20 @@ class ClaimGraphChapter:
                     return dict(anchor["span"])
         raise RuntimeError("fixture: gauge anchor missing from report A")
 
-    def append_event(self, status: str, *, asserted_by: str) -> dict[str, Any]:
-        """Admit one source-status event for the harbor log and compute the
-        deterministic impact under each report's receiver-admitted policy.
+    def append_event(self, status: str, *, asserted_by: str,
+                     source_id: str | None = None,
+                     notice_text: str | None = None,
+                     reason: str | None = None) -> dict[str, Any]:
+        """Admit one source-status event and compute the deterministic impact
+        under each report's receiver-admitted policy.
+
+        With source_id=None (default) this is the original desk path: the
+        harbor-log correction/withdrawal, byte-for-byte unchanged. With a
+        source_id naming a recorded source (e.g. an accepted contribution's
+        source), the event targets that whole source -- omitting spans
+        means the entire source is in scope -- and the notice is recorded
+        as its own source. Propagation is the engine's existing rules in
+        both cases: no new machinery.
 
         Returns the history entry: {"event", "reports": {report_id: report}}.
         The same correction is never recorded twice: if a non-replayed event
@@ -339,7 +485,56 @@ class ClaimGraphChapter:
         """
         if status not in ALLOWED_EVENT_STATUSES:
             raise ValueError(f"unsupported event status: {status!r}")
-        affected_source_ids = sorted([self._log["source_id"]])
+        if source_id is None:
+            notice = (self._correction_notice if status == STATUS_CORRECTED
+                      else self._withdrawal_notice)
+            notice_quote = (CORRECTION_QUOTE if status == STATUS_CORRECTED
+                            else WITHDRAWAL_QUOTE)
+            evidence = [provenance_anchor(
+                notice, notice_quote, mode="QUOTE", asserted_by=asserted_by)]
+            affected: list[dict[str, Any]] = (
+                [{"source_id": self._log["source_id"],
+                  "spans": [self._a1_anchor_span()]}]
+                if status == STATUS_CORRECTED
+                else [{"source_id": self._log["source_id"]}]
+            )
+            reason_text = (
+                "The harbor log correction explicitly reports the tide-gauge entry was misrecorded."
+                if status == STATUS_CORRECTED
+                else "The harbor log morning-watch entry was withdrawn pending review."
+            )
+            return self._append_event(status, affected, evidence,
+                                      reason_text, asserted_by)
+        if source_id not in self.sources:
+            raise KeyError(f"unknown source: {source_id}")
+        label = self.source_labels.get(source_id, source_id)
+        notice_body = (notice_text
+                       or f"Correction notice: {label}.")
+        notice_src = self.register_contribution_source(
+            content=notice_body,
+            locator=("correction-notice:"
+                     + hashlib.sha256(notice_body.encode("utf-8")).hexdigest()[:16]),
+            label=f"correction notice — {label}",
+        )
+        evidence = [provenance_anchor(
+            notice_src, notice_body, mode="QUOTE", asserted_by=asserted_by)]
+        affected = [{"source_id": source_id}]
+        reason_text = (reason
+                       or f"Evaluator-signed {status} event for {label}.")
+        entry = self._append_event(status, affected, evidence,
+                                   reason_text, asserted_by)
+        if (not entry.get("replayed")
+                and entry["event"]["event_id"] not in self.challenge_event_ids):
+            self.challenge_event_ids.append(entry["event"]["event_id"])
+        return entry
+
+    def _append_event(self, status: str, affected: list[dict[str, Any]],
+                      evidence: list[dict[str, Any]], reason: str,
+                      asserted_by: str) -> dict[str, Any]:
+        """Compute and record the deterministic impact of one event across
+        every report. Snapshots and receipts are never mutated."""
+        affected_source_ids = sorted(str(item.get("source_id"))
+                                     for item in affected)
         for entry in self.history:
             if entry.get("replayed"):
                 continue
@@ -348,23 +543,10 @@ class ClaimGraphChapter:
                 str(item.get("source_id")) for item in event.get("affected", []))
             if event.get("status") == status and prior_sources == affected_source_ids:
                 return {**entry, "replayed": True}
-        notice = self._correction_notice if status == STATUS_CORRECTED else self._withdrawal_notice
-        notice_quote = CORRECTION_QUOTE if status == STATUS_CORRECTED else WITHDRAWAL_QUOTE
-        reason = (
-            "The harbor log correction explicitly reports the tide-gauge entry was misrecorded."
-            if status == STATUS_CORRECTED
-            else "The harbor log morning-watch entry was withdrawn pending review."
-        )
-        affected: list[dict[str, Any]] = (
-            [{"source_id": self._log["source_id"], "spans": [self._a1_anchor_span()]}]
-            if status == STATUS_CORRECTED
-            else [{"source_id": self._log["source_id"]}]
-        )
         event = create_source_status_event(
             status=status,
             affected=affected,
-            evidence=[provenance_anchor(
-                notice, notice_quote, mode="QUOTE", asserted_by=asserted_by)],
+            evidence=evidence,
             asserted_by=asserted_by,
             effective_at=_utc_now_iso(),
             reason=reason,
@@ -536,6 +718,91 @@ class ClaimGraphChapter:
                 "it does not claim every dependency is represented. A signature commits "
                 "to one exact state; it does not certify truth. A correction proposes "
                 "review; it does not undo a completed action and it does not rewrite a receipt."
+            ),
+        }
+
+    def describe_challenge_cascade(self) -> dict[str, Any]:
+        """The challenge board's correction record: cascade reports, challenge
+        correction events, and per-claim standings from the latest impact.
+        Everything here is recorded backend data, from the linked
+        contributions' registered sources and the engine's impact reports.
+        A standing of None means no correction event has been assessed yet.
+        """
+        impacts = self.latest_impact()
+        reports_out = []
+        for report in self.reports:
+            if report["report_id"] not in self.challenge_report_ids:
+                continue
+            snapshot = report["snapshot"]
+            impact = impacts.get(report["report_id"]) if impacts else None
+            standings = self._classifications(impact)
+            claim_to_contribution = {}
+            for contribution_id, link in self.challenge_links.items():
+                if link["report_id"] != report["report_id"]:
+                    continue
+                claim_to_contribution[link["assertion_claim_id"]] = contribution_id
+                claim_to_contribution[link["inference_claim_id"]] = contribution_id
+            claims_out = []
+            for claim in snapshot.get("claims", []):
+                claim_id = str(claim["claim_id"])
+                claims_out.append({
+                    "claim_id": claim_id,
+                    "kind": str(claim.get("kind")),
+                    "text": str(claim.get("text")),
+                    "contribution_id": claim_to_contribution.get(claim_id),
+                    # None before any event: the UI must say "not yet assessed".
+                    "standing": standings.get(claim_id),
+                })
+            hard = set(map(str, report["policy"].get("hard_relation_ids", [])))
+            relations_out = []
+            for relation in snapshot.get("relations", []):
+                relation_id = str(relation["relation_id"])
+                relations_out.append({
+                    "relation_id": relation_id,
+                    "from_claim_id": str(relation["source_claim_id"]),
+                    "to_claim_id": str(relation["target_claim_id"]),
+                    "relation": str(relation["relation"]),
+                    "authority": "hard" if relation_id in hard else "unadmitted",
+                })
+            reports_out.append({
+                "report_id": report["report_id"],
+                "title": report["title"],
+                "claims": claims_out,
+                "relations": relations_out,
+                "receipt": self._public_receipt(report["receipt"]),
+            })
+        events_out = []
+        for entry in self.history:
+            event = entry["event"]
+            if event.get("event_id") not in self.challenge_event_ids:
+                continue
+            affected = []
+            for item in event.get("affected", []):
+                source_id = str(item.get("source_id", ""))
+                affected.append({
+                    "source_id": source_id,
+                    "contribution_id": self.challenge_sources.get(source_id),
+                    "label": self.source_labels.get(source_id, source_id),
+                })
+            events_out.append({
+                "event_id": event.get("event_id"),
+                "status": event.get("status"),
+                "effective_at": event.get("effective_at"),
+                "asserted_by": event.get("asserted_by"),
+                "reason": event.get("reason"),
+                "affected": affected,
+                "replayed": entry.get("replayed", False),
+            })
+        return {
+            "reports": reports_out,
+            "events": events_out,
+            "preservation": (
+                "A correction event never rewrites history. The original "
+                "contribution bytes stay pinned in the challenge record, the "
+                "evaluator's ACCEPT/DECLINE decisions stand, and every "
+                "claim-graph snapshot and receipt stays byte-identical and "
+                "inspectable. A correction proposes reassessment; it does "
+                "not undo a completed action."
             ),
         }
 

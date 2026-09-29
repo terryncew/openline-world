@@ -4,7 +4,6 @@ import {
   type ChallengeBoard,
   type ChallengeContribution,
 } from "../api";
-
 /**
  * ChallengeInspector — the public board for CHALLENGE-001.
  *
@@ -49,6 +48,8 @@ export function ChallengeInspector({ onClose }: { onClose: () => void }) {
     id ? `${id.slice(0, 12)}…` : "—";
   const decisionFor = (c: ChallengeContribution) =>
     board?.decisions.find((d) => d.contribution_id === c.contribution_id);
+  const titleFor = (id: string) =>
+    board?.contributions.find((c) => c.contribution_id === id)?.title ?? "—";
   const reviews = (board?.contributions ?? []).filter((c) => c.kind === "review");
 
   return (
@@ -141,6 +142,18 @@ export function ChallengeInspector({ onClose }: { onClose: () => void }) {
                     ) : (
                       <p className="fine">Awaiting evaluator decision.</p>
                     )}
+                    {(c.builds_on ?? []).length > 0 && (
+                      <p className="fine">
+                        Reuse chain:{" "}
+                        {(c.builds_on ?? []).map((b) => (
+                          <span key={b.contribution_id}>
+                            builds on <code>{b.contribution_id}</code> —{" "}
+                            {titleFor(b.contribution_id)} ·{" "}
+                            <span className="fine">{b.what_reused}</span>
+                          </span>
+                        ))}
+                      </p>
+                    )}
                   </div>
                 );
               })}
@@ -179,9 +192,84 @@ export function ChallengeInspector({ onClose }: { onClose: () => void }) {
               })}
             </section>
 
+            {/* correction and reassessment — the continuous record */}
+            <section className="world-panel" aria-label="Correction and reassessment">
+              <div className="panel-title">Correction and reassessment — one continuous record</div>
+              <p className="fine">
+                Accepted contributions are linked as claim nodes with
+                dependency edges (the recorded reuse chain, in graph form).
+                An evaluator-signed correction then propagates through the
+                existing rules: the corrected source's claims are exposed,
+                recorded dependents are reassessed, and the original bytes
+                and the evaluator's decisions stay on the record, unchanged.
+              </p>
+              {(!board.cascade ||
+                (board.cascade.reports.length === 0 && board.cascade.events.length === 0)) && (
+                <p className="fine">No claim linkage or correction events recorded yet.</p>
+              )}
+              {board.cascade?.events.map((e) => (
+                <div key={e.event_id} className="ri-dispatch">
+                  <div className="row">
+                    <span className="k">Correction event</span>
+                    <code className="v">{short(e.event_id)}</code>
+                  </div>
+                  <p className="fine">
+                    <span className="badge no">{e.status}</span>{" "}
+                    asserted by <code>{e.asserted_by}</code> · {e.effective_at}
+                    {e.replayed && <span className="fine"> (replayed)</span>}
+                  </p>
+                  <p className="fine">{e.reason}</p>
+                  {(e.affected ?? []).map((a) => (
+                    <p className="fine" key={a.source_id}>
+                      corrected: <code>{a.contribution_id ?? a.source_id}</code>{" "}
+                      — {a.label}
+                    </p>
+                  ))}
+                </div>
+              ))}
+              {board.cascade?.reports.map((r) => (
+                <div key={r.report_id} className="ri-dispatch">
+                  <div className="row">
+                    <span className="k">Claim report</span>
+                    <code className="v">{r.report_id}</code>
+                  </div>
+                  <p className="fine"><strong>{r.title}</strong></p>
+                  {(r.claims ?? []).map((cl) => (
+                    <p className="fine" key={cl.claim_id}>
+                      <code>{cl.contribution_id ?? "—"}</code> · {cl.kind}:{" "}
+                      {cl.text}{" "}
+                      <span className={`badge ${cl.standing ? (cl.standing.classification === "UNAFFECTED" ? "ok" : "no") : ""}`}>
+                        {cl.standing ? cl.standing.classification : "not yet assessed"}
+                      </span>
+                      {cl.standing?.reason && (
+                        <span className="fine"> — {cl.standing.reason}</span>
+                      )}
+                    </p>
+                  ))}
+                  {(r.relations ?? []).map((rel) => (
+                    <p className="fine" key={rel.relation_id}>
+                      dependency: <code>{rel.from_claim_id.slice(0, 8)}…</code>{" "}
+                      {rel.relation}{" "}
+                      <code>{rel.to_claim_id.slice(0, 8)}…</code>{" "}
+                      <span className="fine">({rel.authority})</span>
+                    </p>
+                  ))}
+                </div>
+              ))}
+              {board.cascade?.preservation && (
+                <p className="fine">{board.cascade.preservation}</p>
+              )}
+            </section>
+
             {/* refusal ledger */}
             <section className="world-panel ri-testcontrol" aria-label="Refusal ledger">
               <div className="panel-title">Refusal ledger — named reasons</div>
+              <p className="fine">
+                Refusals are supporting evidence, not an embarrassment: each
+                one is a signed receiver verdict with a named reason, part of
+                the same continuous record as the acceptances and the
+                corrections above.
+              </p>
               {(board.refusals ?? []).length === 0 && (
                 <p className="fine">No refusals recorded.</p>
               )}
