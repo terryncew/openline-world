@@ -6,6 +6,40 @@ Raw notes: `research-notes-candidates.md` (primary-source links inline below).
 Standing rule, applied to every row: a plausible beneficiary is not an agreed
 participant. Default for all five: **nobody has agreed to anything.**
 
+## Primary selection lens: Credit Cascade (applied 2026-09-29)
+
+Per the owner's amendment: favor the worthwhile task where one participant's
+contribution can be **tested, extended, or combined by another** to produce a
+useful shared artifact. This is the primary lens. The written maintainer
+invitation and the no-execution fit remain in force as secondary criteria.
+
+Cascade scoring, best first:
+
+1. **Candidate 1 — strongest cascade.** The shared artifact is a single
+   replication report with a verdict, and every contribution type genuinely
+   tests or extends another: the hash verification underwrites the
+   re-derivation; the hand-annotation tries to falsify the judge labels the
+   re-derivation depends on; the fresh sample extends the re-derivation with
+   new data; the provenance review tests the paper's claims against the
+   frozen artifacts the others used. Nothing is parallel busywork; each step
+   has a named predecessor it checks.
+2. **Candidate 4 — strong combination, thinner testing.** Rows accumulate
+   into one public ledger (a real shared artifact), each row independently
+   checkable, and pattern analysis builds on the rows. But most
+   contributions are parallel row-filling; participant-to-participant
+   testing is mostly spot-checking, not extension. Closest alternative.
+3. **Candidate 3 — moderate.** Automated flags combine into a dataset, and
+   each human confirmation genuinely tests one flag. The test chain is real
+   but shallow: one flag, one confirmation, no extension step.
+4. **Candidate 2 — moderate.** Same shape as 4 (rows into a dataset) with
+   less testing between participants than 3.
+5. **Candidate 5 — weakest.** Combinable in principle (builder, fixture
+   author, reviewer), but speculative with no adopter.
+
+The lens confirms the recommendation rather than changing it: candidate 1
+is the only one where the shared artifact is *produced by* participants
+testing and extending each other, not merely assembled from parallel parts.
+
 ## Comparison
 
 | # | Candidate (area) | Bounded question | Public deliverable | Evaluation under no-execution rule | Still open? | Interested party — agreed? |
@@ -28,7 +62,7 @@ participant. Default for all five: **nobody has agreed to anything.**
 
 **5. DCAT-US link-liveness checker.** GSA's docs describe a manual broken-link reporting flow (https://github.com/gsa/datagov-11ty/blob/HEAD/pages/contact.md); their automated weekly link QA covers only their documentation site (https://github.com/GSA/resources.data.gov/blob/HEAD/README.md), not the 364,095-dataset catalog. Bounded version: one-week build of a reviewed, documented, fixture-tested checker emitting signed machine-readable reports. Most speculative — no maintainer asked for it by name, and a tool without an adopter is a demo.
 
-## Recommendation: candidate 1
+## Recommendation: candidate 1 (confirmed under the Credit Cascade lens)
 
 Run the independent replication of failure-transparent-agents.
 

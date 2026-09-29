@@ -1,29 +1,27 @@
 # Draft challenge invitation — CHALLENGE-001
 
-DRAFT. Not sent. No outreach.
+DRAFT. Not sent. No outreach. Goes out only when the participation path is ready.
 
 ---
 
-CHALLENGE-001: Reproduce it yourself.
+CHALLENGE-001: Reproduce it together.
 
 A benchmark claims a four-field evidence contract cuts false-success claims from 32.0% to 1.3%. The code, data, and frozen labels are public. Nobody has independently checked the numbers.
 
-That is the challenge. Check them.
+One person checking is a second opinion. Several people checking, each building on the last person's work, is a replication.
 
-The target is junru-zhu/failure-transparent-agents, v0.3.0. MIT licensed. The confirmatory study: 100 tasks, three models, 1,800 responses, model-judged. The published claim: false-success falls from 32.0% (baseline) to 11.8% (transparency instruction) to 1.3% (evidence contract).
+Here is how the week divides. One participant verifies the frozen dataset hashes against the published SHA-256s. Another re-runs the offline analysis and re-derives every number in the paper's tables. Another hand-annotates a sample of the judge's labels, trying to falsify them. Another collects a small fresh sample with a different judge, in their own environment. Another reviews the paper's claims against the frozen artifacts. Each contribution cites the one it builds on. The shared artifact is the replication report: which numbers reproduced, which did not, stated in plain language.
 
-Two tiers. Tier 1 costs nothing. Verify the frozen dataset hashes. Re-run the offline analysis. Re-derive every number in the paper's tables from the frozen labels. Report what matches and what does not.
+Two tiers. Tier 1 costs nothing: hashes, re-derivation, annotation. Tier 2 is optional and small: a fresh sample on your own API key, in your own environment. The author's own Claude arm cost $2.38 for 600 responses. A 90-response sample costs cents.
 
-Tier 2 is optional and small. Collect a fresh sample with a different judge, in your own environment, on your own API key. Test whether the direction holds. The author's own Claude arm cost $2.38 for 600 responses. A 90-response sample costs cents.
+Rules. One week. Work in your own environment. Submit findings as data, not code. Nothing you submit runs on our machines. Every claim cites the frozen artifact it came from, and every contribution names the contribution it builds on. A refusal is supporting evidence. Publish it the same way. A non-replication is a result.
 
-Rules. One week. Work in your own environment. Submit findings as data, not code. Nothing you submit runs on our machines. Every claim cites the frozen artifact it came from. A non-replication is a result. Publish it the same way.
+What credit means here: recorded attribution. Your name stays on your contribution, and the chain of who built on what stays visible. It is not proof of ownership, not payment, not a claim of scientific truth.
 
-What you produce: an independent replication report. It states, in plain language, which published numbers reproduced and which did not. It is useful either way. If the numbers hold, the benchmark gets its first independent check. If they do not, the field learns that before building on it.
+Honest caveats. The benchmark is model-judge-only. Version 0.3.0 is not human-validated. The author says so himself. This challenge checks the arithmetic and the direction, nothing more. The author has not agreed to participate. His README invites independent replications. That invitation is public. It is not a partnership.
 
-Honest caveats. The benchmark is model-judge-only. Version 0.3.0 is not human-validated. The author says so himself. This challenge does not fix that. It checks the arithmetic and the direction, nothing more. The author has not agreed to participate. His README invites independent replications. That invitation is public. It is not a partnership.
+No prizes. No money changes hands. No staged adversaries, no theater.
 
-No prizes. No money changes hands. Bring your own API key or stay in Tier 1.
-
-If you have an agent or an orchestrator and a week, this is real work with a public artifact at the end.
+The participation path is being built in the open. This invitation goes out when it is ready.
 
 — Terrynce
