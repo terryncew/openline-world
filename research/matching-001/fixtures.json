@@ -1,0 +1,292 @@
+{
+  "seed": 20260928,
+  "harbors": [
+    {
+      "harbor": "harbor",
+      "true_height_m": "2.43"
+    },
+    {
+      "harbor": "marina",
+      "true_height_m": "1.87"
+    },
+    {
+      "harbor": "cove",
+      "true_height_m": "3.12"
+    },
+    {
+      "harbor": "inlet",
+      "true_height_m": "0.95"
+    },
+    {
+      "harbor": "bay",
+      "true_height_m": "4.20"
+    },
+    {
+      "harbor": "quay",
+      "true_height_m": "2.05"
+    },
+    {
+      "harbor": "dock",
+      "true_height_m": "1.44"
+    },
+    {
+      "harbor": "pier",
+      "true_height_m": "3.66"
+    },
+    {
+      "harbor": "jetty",
+      "true_height_m": "2.78"
+    },
+    {
+      "harbor": "wharf",
+      "true_height_m": "1.19"
+    },
+    {
+      "harbor": "anchorage",
+      "true_height_m": "5.02"
+    },
+    {
+      "harbor": "lagoon",
+      "true_height_m": "0.61"
+    },
+    {
+      "harbor": "roads",
+      "true_height_m": "3.35"
+    },
+    {
+      "harbor": "haven",
+      "true_height_m": "2.90"
+    },
+    {
+      "harbor": "sound",
+      "true_height_m": "4.47"
+    },
+    {
+      "harbor": "strait",
+      "true_height_m": "1.58"
+    },
+    {
+      "harbor": "channel",
+      "true_height_m": "2.21"
+    },
+    {
+      "harbor": "basin",
+      "true_height_m": "3.83"
+    },
+    {
+      "harbor": "pool",
+      "true_height_m": "0.84"
+    },
+    {
+      "harbor": "reach",
+      "true_height_m": "2.67"
+    },
+    {
+      "harbor": "arm",
+      "true_height_m": "4.95"
+    },
+    {
+      "harbor": "bight",
+      "true_height_m": "1.32"
+    },
+    {
+      "harbor": "firth",
+      "true_height_m": "3.08"
+    },
+    {
+      "harbor": "gulf",
+      "true_height_m": "2.14"
+    }
+  ],
+  "history_pool": [
+    "harbor",
+    "marina",
+    "cove",
+    "inlet",
+    "bay",
+    "quay",
+    "dock",
+    "pier",
+    "jetty",
+    "wharf",
+    "anchorage",
+    "lagoon"
+  ],
+  "evaluation_pool": [
+    "roads",
+    "haven",
+    "sound",
+    "strait",
+    "channel",
+    "basin",
+    "pool",
+    "reach",
+    "arm",
+    "bight",
+    "firth",
+    "gulf"
+  ],
+  "units_per_attempt": 4,
+  "success_fee_cents": 300,
+  "matching_fee_cents": 5,
+  "workers": [
+    {
+      "worker_id": "mw-s1",
+      "posted_rate_cents_per_unit": 10,
+      "units_per_attempt": 4,
+      "attempt_price_cents": 40,
+      "execution_cost_cents_per_attempt": 30,
+      "fact_entries": 18,
+      "correct_entries": 9,
+      "stale_entries": 9,
+      "facts": {
+        "harbor": "1.93",
+        "marina": "1.87",
+        "cove": "3.12",
+        "inlet": "1.05",
+        "bay": "4.20",
+        "quay": "2.05",
+        "dock": "1.44",
+        "anchorage": "5.02",
+        "lagoon": "0.61",
+        "roads": "3.35",
+        "haven": "2.90",
+        "sound": "4.17",
+        "strait": "1.38",
+        "channel": "2.11",
+        "basin": "3.33",
+        "arm": "5.35",
+        "bight": "0.82",
+        "firth": "2.88"
+      }
+    },
+    {
+      "worker_id": "mw-s2",
+      "posted_rate_cents_per_unit": 6,
+      "units_per_attempt": 4,
+      "attempt_price_cents": 24,
+      "execution_cost_cents_per_attempt": 18,
+      "fact_entries": 17,
+      "correct_entries": 9,
+      "stale_entries": 8,
+      "facts": {
+        "harbor": "2.93",
+        "marina": "1.87",
+        "cove": "3.12",
+        "inlet": "0.95",
+        "bay": "4.60",
+        "dock": "1.44",
+        "pier": "4.06",
+        "wharf": "1.59",
+        "anchorage": "4.62",
+        "lagoon": "0.91",
+        "strait": "2.08",
+        "basin": "3.83",
+        "pool": "0.84",
+        "reach": "2.67",
+        "arm": "4.95",
+        "firth": "2.58",
+        "gulf": "2.14"
+      }
+    },
+    {
+      "worker_id": "mw-s3",
+      "posted_rate_cents_per_unit": 18,
+      "units_per_attempt": 4,
+      "attempt_price_cents": 72,
+      "execution_cost_cents_per_attempt": 40,
+      "fact_entries": 20,
+      "correct_entries": 16,
+      "stale_entries": 4,
+      "facts": {
+        "marina": "1.87",
+        "cove": "3.12",
+        "inlet": "1.05",
+        "quay": "1.55",
+        "dock": "1.44",
+        "pier": "3.66",
+        "jetty": "2.78",
+        "wharf": "1.19",
+        "anchorage": "5.02",
+        "lagoon": "0.61",
+        "roads": "3.35",
+        "haven": "2.90",
+        "sound": "4.37",
+        "strait": "1.58",
+        "channel": "2.21",
+        "basin": "3.83",
+        "pool": "0.84",
+        "arm": "4.95",
+        "bight": "1.32",
+        "gulf": "2.44"
+      }
+    },
+    {
+      "worker_id": "mw-s4",
+      "posted_rate_cents_per_unit": 30,
+      "units_per_attempt": 4,
+      "attempt_price_cents": 120,
+      "execution_cost_cents_per_attempt": 60,
+      "fact_entries": 14,
+      "correct_entries": 11,
+      "stale_entries": 3,
+      "facts": {
+        "harbor": "2.63",
+        "marina": "1.87",
+        "bay": "4.20",
+        "dock": "1.44",
+        "pier": "3.96",
+        "jetty": "2.78",
+        "roads": "3.35",
+        "haven": "2.90",
+        "sound": "4.67",
+        "strait": "1.58",
+        "basin": "3.83",
+        "bight": "1.32",
+        "firth": "3.08",
+        "gulf": "2.14"
+      }
+    },
+    {
+      "worker_id": "mw-s5",
+      "posted_rate_cents_per_unit": 45,
+      "units_per_attempt": 4,
+      "attempt_price_cents": 180,
+      "execution_cost_cents_per_attempt": 90,
+      "fact_entries": 18,
+      "correct_entries": 12,
+      "stale_entries": 6,
+      "facts": {
+        "harbor": "2.43",
+        "marina": "1.47",
+        "cove": "3.52",
+        "inlet": "0.65",
+        "bay": "4.20",
+        "pier": "3.66",
+        "jetty": "2.98",
+        "anchorage": "5.02",
+        "lagoon": "0.61",
+        "roads": "3.45",
+        "haven": "2.90",
+        "sound": "4.47",
+        "strait": "1.78",
+        "basin": "3.83",
+        "pool": "0.84",
+        "reach": "2.67",
+        "firth": "3.08",
+        "gulf": "2.14"
+      }
+    },
+    {
+      "worker_id": "mw-s6",
+      "posted_rate_cents_per_unit": 8,
+      "units_per_attempt": 4,
+      "attempt_price_cents": 32,
+      "execution_cost_cents_per_attempt": 20,
+      "fact_entries": 0,
+      "correct_entries": 0,
+      "stale_entries": 0,
+      "facts": {}
+    }
+  ]
+}

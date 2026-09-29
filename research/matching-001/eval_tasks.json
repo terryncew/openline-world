@@ -1,0 +1,213 @@
+{
+  "seed": 20260929,
+  "blocks": [
+    [
+      {
+        "task_id": "t1-01",
+        "harbor": "pool"
+      },
+      {
+        "task_id": "t1-02",
+        "harbor": "arm"
+      },
+      {
+        "task_id": "t1-03",
+        "harbor": "channel"
+      },
+      {
+        "task_id": "t1-04",
+        "harbor": "reach"
+      },
+      {
+        "task_id": "t1-05",
+        "harbor": "sound"
+      },
+      {
+        "task_id": "t1-06",
+        "harbor": "strait"
+      }
+    ],
+    [
+      {
+        "task_id": "t2-01",
+        "harbor": "strait"
+      },
+      {
+        "task_id": "t2-02",
+        "harbor": "bight"
+      },
+      {
+        "task_id": "t2-03",
+        "harbor": "basin"
+      },
+      {
+        "task_id": "t2-04",
+        "harbor": "reach"
+      },
+      {
+        "task_id": "t2-05",
+        "harbor": "haven"
+      },
+      {
+        "task_id": "t2-06",
+        "harbor": "channel"
+      }
+    ],
+    [
+      {
+        "task_id": "t3-01",
+        "harbor": "roads"
+      },
+      {
+        "task_id": "t3-02",
+        "harbor": "channel"
+      },
+      {
+        "task_id": "t3-03",
+        "harbor": "arm"
+      },
+      {
+        "task_id": "t3-04",
+        "harbor": "pool"
+      },
+      {
+        "task_id": "t3-05",
+        "harbor": "reach"
+      },
+      {
+        "task_id": "t3-06",
+        "harbor": "strait"
+      }
+    ],
+    [
+      {
+        "task_id": "t4-01",
+        "harbor": "arm"
+      },
+      {
+        "task_id": "t4-02",
+        "harbor": "reach"
+      },
+      {
+        "task_id": "t4-03",
+        "harbor": "sound"
+      },
+      {
+        "task_id": "t4-04",
+        "harbor": "roads"
+      },
+      {
+        "task_id": "t4-05",
+        "harbor": "bight"
+      },
+      {
+        "task_id": "t4-06",
+        "harbor": "strait"
+      }
+    ],
+    [
+      {
+        "task_id": "t5-01",
+        "harbor": "pool"
+      },
+      {
+        "task_id": "t5-02",
+        "harbor": "sound"
+      },
+      {
+        "task_id": "t5-03",
+        "harbor": "firth"
+      },
+      {
+        "task_id": "t5-04",
+        "harbor": "channel"
+      },
+      {
+        "task_id": "t5-05",
+        "harbor": "basin"
+      },
+      {
+        "task_id": "t5-06",
+        "harbor": "strait"
+      }
+    ],
+    [
+      {
+        "task_id": "t6-01",
+        "harbor": "sound"
+      },
+      {
+        "task_id": "t6-02",
+        "harbor": "roads"
+      },
+      {
+        "task_id": "t6-03",
+        "harbor": "gulf"
+      },
+      {
+        "task_id": "t6-04",
+        "harbor": "arm"
+      },
+      {
+        "task_id": "t6-05",
+        "harbor": "reach"
+      },
+      {
+        "task_id": "t6-06",
+        "harbor": "pool"
+      }
+    ],
+    [
+      {
+        "task_id": "t7-01",
+        "harbor": "reach"
+      },
+      {
+        "task_id": "t7-02",
+        "harbor": "firth"
+      },
+      {
+        "task_id": "t7-03",
+        "harbor": "basin"
+      },
+      {
+        "task_id": "t7-04",
+        "harbor": "channel"
+      },
+      {
+        "task_id": "t7-05",
+        "harbor": "strait"
+      },
+      {
+        "task_id": "t7-06",
+        "harbor": "gulf"
+      }
+    ],
+    [
+      {
+        "task_id": "t8-01",
+        "harbor": "reach"
+      },
+      {
+        "task_id": "t8-02",
+        "harbor": "strait"
+      },
+      {
+        "task_id": "t8-03",
+        "harbor": "roads"
+      },
+      {
+        "task_id": "t8-04",
+        "harbor": "basin"
+      },
+      {
+        "task_id": "t8-05",
+        "harbor": "bight"
+      },
+      {
+        "task_id": "t8-06",
+        "harbor": "firth"
+      }
+    ]
+  ]
+}
