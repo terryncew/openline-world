@@ -235,9 +235,23 @@ class ParticipantClient:
         except URLError as exc:
             raise ClientError("CLIENT_CONNECTION_FAILED", str(exc)) from exc
         try:
-            return json.loads(raw) if raw.strip() else None
+            parsed = json.loads(raw) if raw.strip() else None
         except ValueError as exc:
             raise ClientError("CLIENT_BAD_RESPONSE", f"non-JSON from {path}") from exc
+        # Wire-shape guard (transport hardening): the server's contract is
+        # that error bodies ({"error": ...}) are always sent with a non-200
+        # status (403/404/409). An HTTP 200 carrying the error shape is
+        # transport corruption — observed on the public path as a 200 with
+        # a mismatched {"error": ...} body — never a server verdict. Treat
+        # it as a transport failure (safe to retry), never as a success.
+        if isinstance(parsed, dict) and "error" in parsed:
+            raise ClientError(
+                "CLIENT_TRANSPORT_FAILURE",
+                f"HTTP 200 from {path} carried an error-shaped body "
+                f"(error={parsed.get('error')!r}); treating as transport "
+                "corruption — safe to retry, not a server verdict",
+            )
+        return parsed
 
     def _get(self, path: str) -> Any:
         return self._request("GET", path)
