@@ -493,3 +493,106 @@ class ParticipantClient:
         latency = time.perf_counter() - t0
         self._bundle = bundle
         return latency, resp
+
+    # -- participant retirement (owner-signed, irreversible) -------------------
+
+    RETIRE_MESSAGE_PREFIX = "openline-world/retire/v1:"
+
+    def retire_session(self) -> dict[str, Any]:
+        """Owner-signed irreversible retirement of this participant's session.
+
+        The owner signs the action-bound message
+        ``openline-world/retire/v1:{participant_id}:{nonce}`` with the owner
+        ROOT key pinned at join (not the worker key: retirement is an owner
+        act). The nonce is server-issued, single-use, TTL-bound
+        (GET /api/world/challenge, same proof-of-control endpoint as join).
+
+        Server effects: the session is archived irreversibly, all future
+        worker authority for it dies, the logical slot is freed for a fresh
+        join, and history / receipts / attribution are preserved. The
+        receiver returns a signed RETIRED receipt, which is verified here
+        before this client drops its session: an unverified retirement is
+        refused and the local session is kept, so a garbled response can
+        never strand the owner without a token or a way back in.
+
+        After a verified retirement this client holds no session: the
+        cached bearer token is discarded and any further authed call
+        raises CLIENT_NOT_JOINED. There is no un-retire; a later join
+        starts a fresh session.
+        """
+        participant_id, _token = self._auth()
+        if self._root_key is None:
+            raise ClientError("CLIENT_NO_CEREMONY", "ceremony() first")
+        nonce = self._get("/api/world/challenge").get("nonce")
+        if not nonce:
+            raise ClientError("CLIENT_BAD_RESPONSE",
+                              "challenge returned no nonce")
+        message = f"{self.RETIRE_MESSAGE_PREFIX}{participant_id}:{nonce}"
+        owner_signature = self._root_key.sign(
+            message.encode("utf-8")).hex()
+        resp = self._post("/api/world/retire", {
+            "participant_id": participant_id,
+            "nonce": nonce,
+            "owner_signature": owner_signature,
+        })
+        if not isinstance(resp, dict) or resp.get("retired") is not True:
+            raise ClientError("CLIENT_BAD_RESPONSE",
+                              "retire returned no retirement confirmation")
+        receipt = resp.get("receipt")
+        verified, detail = self._verify_retirement_receipt(
+            participant_id, receipt)
+        if not verified:
+            # Fail closed: do not drop the local session on unverified
+            # news. The owner keeps their token and can retry or inspect.
+            raise ClientError("CLIENT_RETIRE_UNVERIFIED", detail)
+        # The session is dead server-side and the receiver's verdict is
+        # verified. Kill it client-side too: drop the bearer token from
+        # memory and delete the cached token file so this client cannot
+        # act further for the retired session.
+        self._token = None
+        try:
+            (self.key_dir / ".session-token").unlink()
+        except OSError:
+            pass
+        return {
+            "retired": True,
+            "participant_id": participant_id,
+            "retired_at": resp.get("retired_at"),
+            "receipt_verified": True,
+            "receipt_verify_detail": detail,
+            "receipt": receipt,
+        }
+
+    @staticmethod
+    def _verify_retirement_receipt(participant_id: str,
+                                   receipt: Any) -> tuple[bool, str]:
+        """Verify the receiver's signed RETIRED receipt.
+
+        Returns (ok, detail). Checks the receipt schema, the Ed25519
+        signature over the canonical body, that the signer is the claimed
+        gate key, and that the receipt names this participant with a
+        RETIRED decision.
+        """
+        if not isinstance(receipt, dict):
+            return False, "receipt missing or malformed"
+        if receipt.get("schema") != "openline.world.retirement_receipt.v1":
+            return False, \
+                f"unexpected receipt schema: {receipt.get('schema')!r}"
+        ok, why = wcrypto.verify_record(receipt)
+        if not ok:
+            return False, f"receipt signature invalid: {why}"
+        sig_key = (receipt.get("signature") or {}).get("public_key", "")
+        gate_key = receipt.get("gate_public_key", "")
+        try:
+            if wcrypto.normalize_public_key(
+                    sig_key) != wcrypto.normalize_public_key(gate_key):
+                return False, "receipt signer != claimed gate key"
+        except Exception as exc:
+            return False, f"receipt key encoding invalid: {exc}"
+        if receipt.get("participant_id") != participant_id:
+            return False, "receipt names a different participant"
+        if receipt.get("decision") != "RETIRED":
+            return False, \
+                f"receipt decision != RETIRED: {receipt.get('decision')!r}"
+        return True, ("Ed25519 signature valid; signer is the claimed gate "
+                      "key; schema, participant, and RETIRED decision match")

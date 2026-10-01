@@ -27,6 +27,12 @@ Usage:
       --cmd revoke            # revoke own mandate, refresh at receiver
   python client.py --role contrib-b --server ... --keydir .keys/b \
       --cmd contribute ...    # after revocation: expect STOPPED MANDATE_REVOKED
+  python client.py --role contrib-a --server ... --keydir .keys/a \
+      --cmd retire            # owner-signed irreversible retirement of
+                              # this participant's session: slot freed for a
+                              # fresh join, worker authority dies, history
+                              # preserved. Distinct from --cmd revoke, which
+                              # revokes the worker mandate only.
 
 Every result is printed as one JSON object on stdout. Private keys and
 bearer tokens never appear in stdout: only ids, hashes, and verdicts.
@@ -221,7 +227,7 @@ def main() -> int:
                     choices=["create", "contribute", "evaluate", "revoke",
                              "revoke-then-contribute", "register-cascade",
                              "correct", "board", "refresh-standing",
-                             "refresh-authority"])
+                             "refresh-authority", "retire"])
     ap.add_argument("--kind", default="patch")
     ap.add_argument("--file")
     ap.add_argument("--title", default="")
@@ -324,6 +330,17 @@ def main() -> int:
             result["revoked"] = True
             result["revoke_latency_s"] = latency
             result["refresh"] = out
+
+        elif args.cmd == "retire":
+            # Owner-signed irreversible retirement of this participant's
+            # session. Frees the logical slot for a fresh join, kills all
+            # future worker authority for this session, preserves history,
+            # receipts, and attribution. The receiver's signed RETIRED
+            # receipt is verified before this client drops its session;
+            # an unverified retirement is refused and the session kept.
+            out = client.retire_session()
+            result["retire"] = out
+            result["session"] = "retired"
 
         elif args.cmd == "refresh-standing":
             # Prove possession of the existing session key and refresh
