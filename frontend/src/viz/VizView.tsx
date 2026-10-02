@@ -114,7 +114,16 @@ function captionFor(events: WEvent[], cursorSeq: number): string {
 
 /* ---------------- the view ---------------- */
 
-export function VizView({ onExit }: { onExit: () => void }) {
+export function VizView({
+  onExit,
+  autoRunDemo = false,
+  exitLabel = "Exit",
+}: {
+  onExit: () => void;
+  /** square entry only: run the demo once on mount, same code path as the button */
+  autoRunDemo?: boolean;
+  exitLabel?: string;
+}) {
   const bench = useMemo(benchN, []);
   const [liveEvents, setLiveEvents] = useState<WEvent[]>([]);
   // Paced reveal: the timeline shows a prefix of the raw stream, holding
@@ -263,6 +272,19 @@ export function VizView({ onExit }: { onExit: () => void }) {
     }
   }, [demoRunning]);
 
+  // square entry: run the demo once on mount through the same path as
+  // the "Run the live demo" button. The viz's own director still owns the
+  // POSTs; the square never calls it directly.
+  const autoStarted = useRef(false);
+  useEffect(() => {
+    if (autoRunDemo && !autoStarted.current) {
+      autoStarted.current = true;
+      runDemo();
+    }
+    // runDemo is stable; run once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoRunDemo]);
+
   // timeline-driven camera close-ups. Only when the user hasn't taken
   // the camera themselves (view === "world").
   const closeup: VizCloseup = useMemo(() => {
@@ -346,7 +368,7 @@ export function VizView({ onExit }: { onExit: () => void }) {
           <button className="viz-btn" onClick={() => setCameraView("worker")}>Follow worker</button>
           <button className="viz-btn" onClick={() => setCameraView("receiver")}>Receiver</button>
           <button className="viz-btn" onClick={() => setCameraView("records")}>Records</button>
-          <button className="viz-btn" onClick={onExit}>Exit</button>
+          <button className="viz-btn" onClick={onExit}>{exitLabel}</button>
         </div>
       </header>
       {streamError && <div className="viz-err">{streamError}</div>}
