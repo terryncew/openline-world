@@ -6,8 +6,8 @@
  * that decides whether a consequence happens. Nothing passes the threshold
  * plane without a real decision event:
  *   ALLOWED  — the lintel lifts, a green ripple runs on the far side.
- *   STOPPED  — the packet halts at the threshold and rebounds (see
- *              ProposalPackets); a red ring marks the refusal.
+ *   STOPPED  — the packet halts at the threshold and dissolves in place
+ *              (see ProposalPackets); a red ring marks the refusal.
  *
  * The flash and lintel react only to decision events already in state —
  * animation timing is visual, the verdict is data.
@@ -53,14 +53,18 @@ export function ReceiverGate({
     if (lintel) {
       lintel.position.y = THREE.MathUtils.damp(lintel.position.y, 3.35 + liftTarget, 4, 0.016);
     }
-    // decision flash ring at the threshold
+    // decision flash ring at the threshold. STOPPED holds longer and
+    // larger — the refusal is the consequential beat and must be
+    // unmissable. Durations here are visual; the verdict is data.
     const flash = flashRef.current;
     if (flash && flashStart.current >= 0) {
+      const stopped = lastDecision?.status !== "allowed";
+      const life = stopped ? 3.2 : 2.2;
       const age = t - flashStart.current;
-      if (age < 2.2) {
-        const k = age / 2.2;
+      if (age < life) {
+        const k = age / life;
         flash.visible = true;
-        flash.scale.setScalar(0.6 + k * 2.6);
+        flash.scale.setScalar((stopped ? 0.9 : 0.6) + k * (stopped ? 3.4 : 2.6));
         (flash.material as THREE.MeshBasicMaterial).opacity = 0.75 * (1 - k);
         (flash.material as THREE.MeshBasicMaterial).color.set(
           lastDecision?.status === "allowed" ? ALLOW_GREEN : STOP_RED

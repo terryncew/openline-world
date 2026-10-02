@@ -17,6 +17,7 @@ import {
 import { reduceEvents } from "./reducer";
 import { fetchSnapshot, subscribeLive } from "./source";
 import { runDemoScript } from "./director";
+import { revealDelay, isReplacementOnboard } from "./pacing";
 import { VizCanvas } from "./scene/VizCanvas";
 import { OwnerObelisk } from "./scene/OwnerObelisk";
 import { WorkerSwarm } from "./scene/WorkerSwarm";
@@ -25,7 +26,7 @@ import { ReceiverGate } from "./scene/ReceiverGate";
 import { ProposalPackets } from "./scene/ProposalPackets";
 import { ReceiptTablets } from "./scene/ReceiptTablets";
 import { SpeechPuffs, UnrecognizedMarkers } from "./scene/SpeechPuffs";
-import { CameraRig, type VizCameraView } from "./scene/CameraRig";
+import { CameraRig, type VizCameraView, type VizCloseup } from "./scene/CameraRig";
 import { Timeline, type ReplayState } from "./Timeline";
 import { Inspector, type VizSelection } from "./Inspector";
 import type { Snapshot } from "../api";
@@ -89,9 +90,11 @@ function captionFor(events: WEvent[], cursorSeq: number): string {
   const s = (v: unknown) => (typeof v === "string" ? v : "");
   switch (last.kind) {
     case "mandate":
-      return d.status === "REVOKED"
-        ? "The owner revoked the mandate. The seal dims and sinks — the records stay."
-        : `${s(d.mandate_id).replace(/^mandate-/, "").replace(/-\d+$/, "")} enters with a new mandate. The seal belongs to the owner, not the worker.`;
+      if (d.status === "REVOKED")
+        return "The owner revoked the mandate. The seal dims and sinks — the records stay.";
+      if (isReplacementOnboard(last, vis))
+        return "New worker. Same rules. Same records.";
+      return `${s(d.mandate_id).replace(/^mandate-/, "").replace(/-\d+$/, "")} enters with a new mandate. The seal belongs to the owner, not the worker.`;
     case "proposal":
       return `${s(d.helper)} proposes ${s(d.action)}. The packet carries a claim to the gate — nothing decided yet.`;
     case "decision":
@@ -114,21 +117,31 @@ function captionFor(events: WEvent[], cursorSeq: number): string {
 export function VizView({ onExit }: { onExit: () => void }) {
   const bench = useMemo(benchN, []);
   const [liveEvents, setLiveEvents] = useState<WEvent[]>([]);
-  const [cursorSeq, setCursorSeq] = useState<number | null>(null); // null = live
-  const [replayState, setReplayState] = useState<ReplayState>("idle");
+  // Paced reveal: the timeline shows a prefix of the raw stream, holding
+  // on consequential beats (see pacing.ts). The reducer still sees the
+  // same events in the same order — pacing is stage direction only.
+  const [revealed, setRevealed] = useState<WEvent[]>([]);
+  const liveRef = useRef<WEvent[]>([]);
+  liveRef.current = liveEvents;
+  const scheduledIdx = useRef(-1);
+  const [cursorSeq, setCursorSeq] = useState<number | null>(null); // null = live edge of revealed
+  const [replayState, setReplayState] = useState<ReplayState>("live");
   const [speed, setSpeed] = useState(1);
   const [selection, setSelection] = useState<VizSelection>(null);
   const [cameraView, setCameraView] = useState<VizCameraView>("world");
   const [demoRunning, setDemoRunning] = useState(false);
   const [snap, setSnap] = useState<Snapshot | null>(null);
   const [streamError, setStreamError] = useState<string | null>(null);
+  // re-render tick so the gate close-up eases back after a receipt lands
+  const [graceTick, setGraceTick] = useState(0);
+  const [receiptAt, setReceiptAt] = useState(0);
   const seenRef = useRef(new Set<string>());
   const stopDemoRef = useRef(false);
   const [streamEpoch, setStreamEpoch] = useState(0);
 
   const events = useMemo(
-    () => (bench > 0 ? benchEvents(bench) : liveEvents),
-    [bench, liveEvents]
+    () => (bench > 0 ? benchEvents(bench) : revealed),
+    [bench, revealed]
   );
 
   // read-only subscription: backlog replay then live tail.
@@ -139,6 +152,8 @@ export function VizView({ onExit }: { onExit: () => void }) {
     if (bench > 0) return;
     seenRef.current.clear();
     setLiveEvents([]);
+    setRevealed([]);
+    scheduledIdx.current = -1;
     const unsub = subscribeLive(0, (ev) => {
       if (seenRef.current.has(ev.event_id)) return;
       seenRef.current.add(ev.event_id);
@@ -150,6 +165,42 @@ export function VizView({ onExit }: { onExit: () => void }) {
       unsub();
     };
   }, [bench, streamEpoch]);
+
+  // Paced reveal: in live/replaying states, reveal the next raw event
+  // after the hold for the last revealed beat. Paused/scrubbed states
+  // freeze the reveal; replay restarts it from seq 0.
+  useEffect(() => {
+    if (bench > 0) return;
+    if (replayState !== "live" && replayState !== "replaying") return;
+    if (revealed.length >= liveRef.current.length) return;
+    if (scheduledIdx.current === revealed.length) return;
+    scheduledIdx.current = revealed.length;
+    const last = revealed.length ? revealed[revealed.length - 1] : null;
+    const delay = revealDelay(last, revealed) / speed;
+    const t = setTimeout(() => {
+      scheduledIdx.current = -1;
+      setRevealed((r) => {
+        const src = liveRef.current;
+        return r.length < src.length ? [...r, src[r.length]] : r;
+      });
+    }, delay);
+    return () => {
+      clearTimeout(t);
+      scheduledIdx.current = -1;
+    };
+  }, [bench, replayState, liveEvents, revealed, speed]);
+
+  // when a receipt is revealed, the close-up holds ~1.5s so the tablet
+  // landing is seen, then the camera eases back to the world view
+  const lastRevealed = revealed[revealed.length - 1];
+  useEffect(() => {
+    if (bench > 0) return;
+    if (lastRevealed?.kind === "receipt") {
+      setReceiptAt(performance.now());
+      const t = setTimeout(() => setGraceTick((g) => g + 1), 1600);
+      return () => clearTimeout(t);
+    }
+  }, [bench, lastRevealed]);
 
   const maxSeq = events.length ? events[events.length - 1].seq : 0;
   const effectiveCursor = cursorSeq ?? maxSeq;
@@ -165,31 +216,28 @@ export function VizView({ onExit }: { onExit: () => void }) {
 
   const ownerPrincipal = snap?.gate.principal_id ?? null;
 
-  // replay driver: step the cursor through persisted seqs
-  useEffect(() => {
-    if (replayState !== "replaying") return;
-    const seqs = events.map((e) => e.seq).filter((s) => s > effectiveCursor);
-    if (seqs.length === 0) {
-      setReplayState("live");
-      setCursorSeq(null);
-      return;
-    }
-    const t = setTimeout(() => {
-      setCursorSeq(seqs[0]);
-    }, 900 / speed);
-    return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [replayState, events, effectiveCursor, speed]);
-
+  // replay: restart the paced reveal from the first persisted event
   const doReplay = useCallback(() => {
-    setCursorSeq(events.length ? events[0].seq - 1 : 0);
+    scheduledIdx.current = -1;
+    setRevealed([]);
+    setCursorSeq(null);
     setReplayState("replaying");
-  }, [events]);
+  }, []);
   const doStep = useCallback(() => {
     setReplayState("paused");
-    const next = events.map((e) => e.seq).find((s) => s > effectiveCursor);
-    if (next != null) setCursorSeq(next);
-  }, [events, effectiveCursor]);
+    if (cursorSeq != null) {
+      // scrubbed back: step the cursor through revealed events
+      const next = revealed.map((e) => e.seq).find((s) => s > cursorSeq);
+      if (next != null) setCursorSeq(next);
+      return;
+    }
+    // at the live edge: reveal exactly one more event, bypassing the hold
+    scheduledIdx.current = -1;
+    setRevealed((r) => {
+      const src = liveRef.current;
+      return r.length < src.length ? [...r, src[r.length]] : r;
+    });
+  }, [revealed, cursorSeq]);
 
   const runDemo = useCallback(async () => {
     if (demoRunning) return;
@@ -215,15 +263,27 @@ export function VizView({ onExit }: { onExit: () => void }) {
     }
   }, [demoRunning]);
 
-  // focus hint for the camera from the latest visible event
-  const focusHint = useMemo(() => {
+  // timeline-driven camera close-ups. Only when the user hasn't taken
+  // the camera themselves (view === "world").
+  const closeup: VizCloseup = useMemo(() => {
+    if (cameraView !== "world") return null;
     const vis = events.filter((e) => e.seq <= effectiveCursor);
-    const last = vis[vis.length - 1];
+    const last = vis[vis.length - 1] as WEvent & { detail?: Record<string, unknown> };
     if (!last) return null;
-    if (last.kind === "proposal" || last.kind === "decision") return "gate" as const;
-    if (last.kind === "receipt") return "world" as const;
+    if (last.kind === "mandate") {
+      const st = last.detail?.status;
+      if (st !== "REVOKED" && isReplacementOnboard(last, vis)) return "replacement";
+      return null;
+    }
+    if (last.kind === "proposal" || last.kind === "decision") return "gate";
+    if (last.kind === "receipt") {
+      // the landing render (receiptAt not yet set) or the grace window
+      return receiptAt === 0 || performance.now() - receiptAt < 1500 ? "gate" : null;
+    }
     return null;
-  }, [events, effectiveCursor]);
+    // graceTick re-runs this after the window lapses
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [events, effectiveCursor, cameraView, receiptAt, graceTick]);
 
   const followWorkerId =
     selection?.kind === "worker"
@@ -296,7 +356,7 @@ export function VizView({ onExit }: { onExit: () => void }) {
             view={cameraView}
             workers={scene.workers}
             followWorkerId={followWorkerId}
-            focusHint={focusHint}
+            closeup={closeup}
           />
           <OwnerObelisk onSelect={() => setSelection({ kind: "owner" })} />
           <WorkerSwarm

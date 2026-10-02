@@ -79,7 +79,7 @@ export function SpeechPuffs({
 
   if (n === 0) return null;
   return (
-    <instancedMesh ref={ref} args={[undefined, undefined, Math.max(n, 1)]}>
+    <instancedMesh frustumCulled={false} ref={ref} args={[undefined, undefined, Math.max(n, 1)]}>
       {/* a small speech diamond: the claim, kept near its speaker */}
       <octahedronGeometry args={[0.3]} />
       <meshBasicMaterial color="#a9c3d9" transparent opacity={0.75} toneMapped={false} />
@@ -109,7 +109,7 @@ export function UnrecognizedMarkers({ items }: { items: VizUnrecognized[] }) {
 
   if (n === 0) return null;
   return (
-    <instancedMesh ref={ref} args={[undefined, undefined, Math.max(n, 1)]}>
+    <instancedMesh frustumCulled={false} ref={ref} args={[undefined, undefined, Math.max(n, 1)]}>
       <dodecahedronGeometry args={[0.28]} />
       <meshStandardMaterial roughness={0.9} />
     </instancedMesh>

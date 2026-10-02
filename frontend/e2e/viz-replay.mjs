@@ -103,10 +103,12 @@ async function main() {
       if (j.finished && i < 8) throw new Error(`demo finished early at step ${i}`);
       await sleep(400);
     }
-    // 2 boot + 21 step events = 23
+    // 2 boot + 21 step events = 23. The viz reveals events on a paced
+    // timeline (STOP holds 2s, replacement 2.8s), so the drain takes a
+    // while after the last advance — the logical order is unchanged.
     await page.waitForFunction(
       () => window.__vizDebug && window.__vizDebug.eventCount >= 23,
-      null, { timeout: 20000 }
+      null, { timeout: 75000 }
     );
     await sleep(1500); // let the stream settle
 
@@ -153,15 +155,29 @@ async function main() {
     await sleep(1200);
     await page.screenshot({ path: `${SHOTS}/02-allowed.png` });
 
-    // 3. STOPPED — config.write refusal
+    // 3. STOPPED — config.write refusal. Capture at +0.7s: the stopped packet
+    // is mid-shudder at near-full scale (the 1.6s dissolve shrinks it fast),
+    // and the red verdict flash is up. Camera has been converging on the
+    // gate close-up since step 2.
     await setCursor(seqOf("decision", 2));
-    await sleep(1200);
+    await sleep(700);
     await page.screenshot({ path: `${SHOTS}/03-stopped.png` });
 
     // 4. full history: receipts arc after worker replacement
     await page.evaluate(() => window.__vizDebug.goLive());
     await sleep(2500);
     await page.screenshot({ path: `${SHOTS}/04-receipts-after-replacement.png` });
+
+    // 5. replacement payoff, mid-beat: juniper's mandate lands, the new
+    // seal descends from the obelisk while wren's seal lies dead and the
+    // tablets sit untouched. Scrubbing re-triggers the entrance
+    // choreography, so catch it mid-descent.
+    const juniperMandate = dbg.events
+      .filter((e) => e.kind === "mandate" && /juniper/i.test(e.summary))
+      .map((e) => e.seq)[0];
+    await setCursor(juniperMandate);
+    await sleep(2000); // camera converges on the payoff framing; seal locks in
+    await page.screenshot({ path: `${SHOTS}/05-replacement-payoff.png` });
 
     console.log("screenshots written to", SHOTS);
     const jsErrors = errors.filter((e) => !/ResizeObserver/.test(e));

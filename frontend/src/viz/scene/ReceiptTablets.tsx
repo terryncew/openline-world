@@ -57,7 +57,7 @@ export function ReceiptTablets({
         <planeGeometry args={[7.5, 11.5]} />
         <meshStandardMaterial color="#dccfae" roughness={1} />
       </mesh>
-      <instancedMesh
+      <instancedMesh frustumCulled={false}
         ref={ref}
         args={[undefined, undefined, Math.max(n, 1)]}
         onClick={(e) => {

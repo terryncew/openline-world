@@ -28,9 +28,13 @@ export interface DirectorOpts {
  * Reset into a fresh isolated session, then advance the real 9-step
  * custody demo with holds. Every decision shown comes from the backend's
  * EffectGate; this only paces the presentation.
+ *
+ * The per-step hold is short on purpose: the viz's paced event reveal
+ * (pacing.ts) now owns the beat holds (STOP 2s, replacement 2.8s, ...),
+ * so the director just keeps steps from piling up.
  */
 export async function runDemoScript(opts: DirectorOpts = {}): Promise<void> {
-  const { holdMs = 2600, onStep, onReset, shouldStop } = opts;
+  const { holdMs = 1200, onStep, onReset, shouldStop } = opts;
   await api.resetDemo();
   onReset?.();
   for (let i = 0; i < 9; i++) {
