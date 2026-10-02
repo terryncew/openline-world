@@ -15,7 +15,7 @@ import {
   type WEvent,
 } from "./protocol";
 import { reduceEvents } from "./reducer";
-import { fetchSnapshot, subscribeLive } from "./source";
+import { fetchSnapshot, subscribeLive, isStaticDemo } from "./source";
 import { runDemoScript } from "./director";
 import { revealDelay, isReplacementOnboard } from "./pacing";
 import { VizCanvas } from "./scene/VizCanvas";
@@ -250,6 +250,15 @@ export function VizView({
 
   const runDemo = useCallback(async () => {
     if (demoRunning) return;
+    if (isStaticDemo()) {
+      // No backend in the static preview: the recorded event log is
+      // already streaming from the bundled JSON through the same paced
+      // reveal. Nothing to drive; just make sure we're at the live edge.
+      setCursorSeq(null);
+      setReplayState("live");
+      fetchSnapshot().then(setSnap).catch(() => {});
+      return;
+    }
     setDemoRunning(true);
     stopDemoRef.current = false;
     setCursorSeq(null);
@@ -436,6 +445,7 @@ export function VizView({
         onRunDemo={runDemo}
         demoRunning={demoRunning}
         caption={captionFor(events, effectiveCursor)}
+        staticMode={isStaticDemo()}
       />
       {bench > 0 && <BenchMeter />}
     </div>

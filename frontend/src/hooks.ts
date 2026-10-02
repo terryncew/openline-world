@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { api, type Snapshot, type WEvent } from "./api";
+import { isStaticDemo, staticUrl } from "./viz/source";
 
 export interface WorkshopState {
   snap: Snapshot | null;
@@ -22,10 +23,23 @@ export function useWorkshop(): WorkshopState {
   const seenRef = useRef(new Set<string>());
 
   const refresh = useCallback(() => {
+    if (isStaticDemo()) {
+      // static preview: snapshot from the recorded run; the live
+      // workshop hook has no backend to talk to.
+      fetch(staticUrl("state.json"))
+        .then((r) => r.json() as Promise<Snapshot>)
+        .then(setSnap)
+        .catch((e) => setError(String(e)));
+      return;
+    }
     api.state().then(setSnap).catch((e) => setError(String(e)));
   }, []);
 
   useEffect(() => {
+    if (isStaticDemo()) {
+      refresh();
+      return;
+    }
     refresh();
     const es = new EventSource(api.streamUrl);
     es.onmessage = (msg) => {

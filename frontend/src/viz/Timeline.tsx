@@ -25,6 +25,7 @@ export function Timeline({
   onRunDemo,
   demoRunning,
   caption,
+  staticMode,
 }: {
   events: WEvent[];
   cursorSeq: number;
@@ -39,6 +40,8 @@ export function Timeline({
   onRunDemo: () => void;
   demoRunning: boolean;
   caption: string;
+  /** static preview (?static=1): no backend, the demo is a recording */
+  staticMode?: boolean;
 }) {
   const seqs = events.map((e) => e.seq);
   const min = seqs.length ? Math.min(...seqs) : 0;
@@ -48,9 +51,15 @@ export function Timeline({
   return (
     <div className="viz-timeline">
       <div className="viz-timeline-row">
-        <button className="viz-btn primary" onClick={onRunDemo} disabled={demoRunning}>
-          {demoRunning ? "Demo running…" : "Run the live demo"}
-        </button>
+        {staticMode ? (
+          <button className="viz-btn primary" onClick={onReplay} title="Replay the recorded demo run">
+            ↺ Replay recorded demo
+          </button>
+        ) : (
+          <button className="viz-btn primary" onClick={onRunDemo} disabled={demoRunning}>
+            {demoRunning ? "Demo running…" : "Run the live demo"}
+          </button>
+        )}
         <button className="viz-btn" onClick={onReplay} title="Replay from the first event">
           Replay
         </button>

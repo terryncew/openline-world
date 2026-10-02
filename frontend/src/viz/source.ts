@@ -17,6 +17,41 @@ import type { WEvent, Snapshot, ReceiptInfo } from "../api";
 
 const EVENTS_URL = "/api/events";
 
+/**
+ * Static preview mode (?static=1): serve a recorded REAL demo run from
+ * bundled JSON instead of the live backend. Every event in the recording
+ * was captured from an actual backend run — the reducer, paced reveal,
+ * and choreography downstream are byte-identical. Still GET-only.
+ * This exists so the visualization can be previewed where no backend
+ * can run (e.g. a phone). It is not a simulation: it is a recording.
+ */
+export function isStaticDemo(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("static") === "1"
+  );
+}
+
+/** URL for a bundled static-preview asset (recorded demo data). */
+export function staticUrl(name: string): string {
+  return `${staticBase()}demo-static/${name}`;
+}
+
+function staticBase(): string {
+  try {
+    const b = (import.meta as unknown as { env?: { BASE_URL?: string } }).env?.BASE_URL;
+    return b || "/";
+  } catch {
+    return "/";
+  }
+}
+
+async function fetchStaticJson<T>(name: string): Promise<T> {
+  const res = await fetch(staticUrl(name));
+  if (!res.ok) throw new Error(`static ${name} missing: HTTP ${res.status}`);
+  return (await res.json()) as T;
+}
+
 function parseEvent(data: string): WEvent | null {
   try {
     const ev = JSON.parse(data) as WEvent;
@@ -67,8 +102,28 @@ export function fetchHistory(since = 0, quiesceMs = 1200): Promise<WEvent[]> {
 }
 
 /** Open a live subscription from seq `since` onward. The persisted backlog
- *  replays first, then live events stream. Returns an unsubscribe fn. */
+ *  replays first, then live events stream. Returns an unsubscribe fn.
+ *  In static mode the recorded event log streams from bundled JSON with
+ *  the same callback contract. */
 export function subscribeLive(since: number, cb: (ev: WEvent) => void): () => void {
+  if (isStaticDemo()) {
+    let cancelled = false;
+    fetchStaticJson<WEvent[]>("events.json")
+      .then((events) => {
+        events
+          .filter((ev) => typeof ev.seq === "number" && ev.seq >= since)
+          .forEach((ev, i) => {
+            // stagger delivery; the paced reveal (pacing.ts) owns the beats
+            setTimeout(() => {
+              if (!cancelled && typeof ev.event_id === "string") cb(ev);
+            }, i * 150);
+          });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }
   const es = new EventSource(`${EVENTS_URL}?since=${since}`);
   es.onmessage = (msg) => {
     const ev = parseEvent(msg.data);
@@ -79,6 +134,7 @@ export function subscribeLive(since: number, cb: (ev: WEvent) => void): () => vo
 
 /** Read-only snapshot: helpers, gate, demo step. Never mutates. */
 export async function fetchSnapshot(): Promise<Snapshot> {
+  if (isStaticDemo()) return fetchStaticJson<Snapshot>("state.json");
   const res = await fetch("/api/state");
   if (!res.ok) throw new Error(`snapshot failed: HTTP ${res.status}`);
   return (await res.json()) as Snapshot;
@@ -86,6 +142,10 @@ export async function fetchSnapshot(): Promise<Snapshot> {
 
 /** Read-only full receipt history. Never mutates. */
 export async function fetchReceipts(): Promise<ReceiptInfo[]> {
+  if (isStaticDemo()) {
+    const data = await fetchStaticJson<{ receipts?: ReceiptInfo[] }>("receipts.json");
+    return Array.isArray(data.receipts) ? data.receipts : [];
+  }
   const res = await fetch("/api/receipts");
   if (!res.ok) throw new Error(`receipts failed: HTTP ${res.status}`);
   const data = (await res.json()) as { receipts?: ReceiptInfo[] };
