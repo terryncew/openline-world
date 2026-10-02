@@ -1,0 +1,151 @@
+/* OpenLine World visualization — viz.css
+ * Warm, bright, legible chrome around the 3D scene. Plain words only. */
+
+.viz-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f4ead6;
+  color: #2b2b26;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.viz-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #d9cba6;
+  background: #faf3e3;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.viz-brand strong { font-size: 15px; }
+.viz-fine { font-size: 12px; color: #7a6f56; margin-left: 10px; }
+
+.viz-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.viz-btn {
+  border: 1px solid #c9b98f;
+  background: #fffdf6;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #2b2b26;
+}
+.viz-btn:hover { background: #f6ecd4; }
+.viz-btn:disabled { opacity: 0.5; cursor: default; }
+.viz-btn.primary {
+  background: #2f6b45;
+  border-color: #2f6b45;
+  color: #fff;
+}
+.viz-btn.primary:hover { background: #275a3a; }
+
+.viz-err {
+  background: #f6d9d2;
+  color: #7d2f22;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.viz-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.viz-stage canvas { display: block; }
+
+.viz-inspector {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 320px;
+  max-width: calc(100% - 24px);
+  max-height: calc(100% - 24px);
+  overflow: auto;
+  background: rgba(255, 253, 246, 0.96);
+  border: 1px solid #d9cba6;
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 18px rgba(90, 70, 40, 0.15);
+  font-size: 13px;
+}
+.viz-inspector-title { font-weight: 700; margin-bottom: 8px; font-size: 14px; }
+.viz-x {
+  float: right;
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #7a6f56;
+}
+.viz-row { display: flex; gap: 8px; margin: 4px 0; }
+.viz-k { color: #7a6f56; min-width: 74px; }
+.viz-v { word-break: break-word; }
+
+.viz-prov { margin: 8px 0; padding: 8px; background: #f6ecd4; border-radius: 8px; }
+.viz-prov-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-right: 8px;
+  color: #fff;
+}
+.prov-agent-reported { background: #5b7a99; }
+.prov-receiver-signed { background: #2f6b45; }
+.prov-owner-signed { background: #b5651d; }
+.prov-adapter-mapped { background: #8a7f66; }
+.prov-unknown { background: #666; }
+.viz-prov-text { font-size: 12px; }
+
+.viz-legend { margin-top: 10px; font-size: 12px; color: #5a5240; }
+.viz-legend div { margin: 4px 0; }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.sw-claim { background: #7fa8c9; }
+.sw-authority { background: #4d7d5f; }
+.sw-owner { background: #c9a227; }
+.sw-speech { background: #a9c3d9; }
+
+.viz-receipt-json { margin-top: 8px; }
+.viz-receipt-json summary { cursor: pointer; color: #2f6b45; font-size: 12px; }
+.viz-receipt-json pre {
+  font-size: 11px;
+  background: #f1e8d2;
+  padding: 8px;
+  border-radius: 8px;
+  overflow: auto;
+  max-height: 260px;
+}
+
+.viz-timeline {
+  border-top: 1px solid #d9cba6;
+  background: #faf3e3;
+  padding: 10px 16px 12px;
+}
+.viz-timeline-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.viz-speed { font-size: 12px; color: #7a6f56; display: flex; align-items: center; gap: 6px; }
+.viz-speed select {
+  border: 1px solid #c9b98f;
+  border-radius: 6px;
+  background: #fffdf6;
+  padding: 4px 6px;
+}
+.viz-scrub { width: 100%; margin: 8px 0 4px; accent-color: #2f6b45; }
+.viz-caption { font-size: 14px; min-height: 20px; }
+
+.viz-bench {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(30, 30, 30, 0.85);
+  color: #fff;
+  font-family: monospace;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 8px;
+}

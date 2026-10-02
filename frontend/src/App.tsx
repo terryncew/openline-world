@@ -9,6 +9,7 @@ import { useTour } from "./tour/useTour";
 import { TourOverlay } from "./tour/TourOverlay";
 import { WhatChanged } from "./changed/WhatChanged";
 import { SharedWorld } from "./world/SharedWorld";
+import { VizView } from "./viz/VizView";
 import "./styles.css";
 
 const HELPER_FOCUS: Record<string, Focus> = {
@@ -38,7 +39,10 @@ function focusFor(step: number, fallback: Focus): Focus {
 
 export default function App() {
   const w = useWorkshop();
-  const [view, setView] = useState<"watch" | "explore" | "changed" | "world">("watch");
+  const [view, setView] = useState<"watch" | "explore" | "changed" | "world" | "viz">(() => {
+    const v = new URLSearchParams(window.location.search).get("view");
+    return v === "viz" ? "viz" : "watch";
+  });
   const [walk, setWalk] = useState(false);
   const [listView, setListView] = useState(false);
   const [showRecords, setShowRecords] = useState(false);
@@ -151,6 +155,19 @@ export default function App() {
     );
   }
 
+  if (view === "viz") {
+    return (
+      <div className="app">
+        <VizView
+          onExit={() => {
+            setView("explore");
+            refresh();
+          }}
+        />
+      </div>
+    );
+  }
+
   if (view === "watch") {
     return (
       <div className="app watch">
@@ -204,6 +221,7 @@ export default function App() {
         </div>
         <div className="controls">
           <button onClick={() => setView("watch")}>Watch the tour</button>
+          <button onClick={() => setView("viz")}>Visualize</button>
           <button onClick={() => setView("world")}>World</button>
           <button onClick={() => setView("changed")}>What changed?</button>
           <button onClick={() => w.setMode(snap.mode === "demo" ? "connected" : "demo")}>
