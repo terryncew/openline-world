@@ -80,7 +80,10 @@ export function ReceiverGate({
     const seq = lastDecision?.decisionSeq ?? null;
     if (seq !== seenDecisionSeq.current) {
       seenDecisionSeq.current = seq;
-      flashStart.current = t;
+      // Edge-triggered on a real decision. Scrubbing to an undecided
+      // state must NOT replay a verdict flash — there is no decision
+      // in state, so the gate stays dark.
+      flashStart.current = seq != null ? t : -1;
     }
     const decided = flashStart.current >= 0;
     const age = decided ? t - flashStart.current : Infinity;

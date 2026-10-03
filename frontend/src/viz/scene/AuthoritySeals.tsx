@@ -21,8 +21,9 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import type { VizAuthority, VizWorker } from "../protocol";
+import type { VizAuthority, VizProposal, VizReceipt, VizWorker } from "../protocol";
 import { sealPos, workerHome } from "./layout";
+import { stagePos, useFigures } from "./workerMotion";
 import { OBELISK_ANCHOR } from "./OwnerObelisk";
 
 const DESCENT_FROM: [number, number, number] = [-7.5, 6.5, -3.5];
@@ -36,11 +37,15 @@ const easeInOut = (k: number) =>
 export function AuthoritySeals({
   authorities,
   workers,
+  proposals,
+  receipts,
   selectedMandate,
   onSelect,
 }: {
   authorities: VizAuthority[];
   workers: VizWorker[];
+  proposals: VizProposal[];
+  receipts: VizReceipt[];
   selectedMandate: string | null;
   onSelect: (mandateId: string | null) => void;
 }) {
@@ -137,13 +142,22 @@ export function AuthoritySeals({
 
   useFrame(() => {
     const t = nowS();
+    const nowMs = performance.now();
+    const figured = useFigures(workers.length);
     const aMesh = activeRef.current;
     const rMesh = revokedRef.current;
+    // Seal anchor: above the worker's staged position, so the seal
+    // follows the carry to the gate and stays put on revocation.
+    const anchorOf = (a: VizAuthority): [number, number, number] => {
+      const wi = workerIndex.get(a.workerId);
+      const w = wi == null ? undefined : workers[wi];
+      if (w && figured) return stagePos(w, wi!, proposals, receipts, nowMs);
+      return homeOf.get(a.mandateId) ?? [0, 0, 0];
+    };
     if (aMesh && active.length <= 128) {
       for (let i = 0; i < active.length; i++) {
         const a = active[i];
-        const home = homeOf.get(a.mandateId) ?? [0, 0, 0];
-        const target = sealPos(home as [number, number, number], false);
+        const target = sealPos(anchorOf(a), false);
         animatedPos(a.mandateId, target, true, t, tmpV);
         const b0 = bornAtRef.current.get(a.mandateId);
         const bornK = b0 == null ? 1 : Math.min(1, (t - b0) / DESCENT_SECS);
@@ -169,8 +183,7 @@ export function AuthoritySeals({
     if (rMesh) {
       for (let i = 0; i < revoked.length; i++) {
         const a = revoked[i];
-        const home = homeOf.get(a.mandateId) ?? [0, 0, 0];
-        const target = sealPos(home as [number, number, number], true);
+        const target = sealPos(anchorOf(a), true);
         animatedPos(a.mandateId, target, false, t, tmpV);
         dummy.position.copy(tmpV);
         dummy.rotation.set(Math.PI / 2.4, 0.4, 0);

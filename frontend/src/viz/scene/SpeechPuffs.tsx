@@ -13,23 +13,29 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { hashStr, type VizSpeech, type VizUnrecognized, type VizWorker } from "../protocol";
+import { hashStr, type VizProposal, type VizReceipt, type VizSpeech, type VizUnrecognized, type VizWorker } from "../protocol";
 import { workerHome } from "./layout";
+import { stagePos, useFigures } from "./workerMotion";
 
 const dummy = new THREE.Object3D();
 
 export function SpeechPuffs({
   speeches,
   workers,
+  proposals,
+  receipts,
 }: {
   speeches: VizSpeech[];
   workers: VizWorker[];
+  proposals: VizProposal[];
+  receipts: VizReceipt[];
 }) {
   const ref = useRef<THREE.InstancedMesh>(null);
   // show only recent speech (last 4), older ones fade from the scene —
   // the event log keeps the record; the puff is just the moment
   const recent = speeches.slice(-4);
   const n = recent.length;
+  const figured = useFigures(workers.length);
 
   const workerIndex = useMemo(() => {
     const m = new Map<string, number>();
@@ -37,27 +43,43 @@ export function SpeechPuffs({
     return m;
   }, [workers]);
 
-  const anchors = useMemo(
+  const speakerOf = useMemo(
     () =>
       recent.map((s) => {
         const wi = workerIndex.get(s.workerId) ?? 0;
-        const home = workerHome(wi, s.workerId);
-        return home;
+        return { wi, workerId: s.workerId };
       }),
     [recent, workerIndex]
   );
+
+  const liveAnchor = (i: number, out: { x: number; z: number }) => {
+    const { wi, workerId } = speakerOf[i];
+    const w = workers[wi];
+    if (w && figured) {
+      const p = stagePos(w, wi, proposals, receipts, performance.now());
+      out.x = p[0];
+      out.z = p[2];
+    } else {
+      const h = workerHome(wi, workerId);
+      out.x = h[0];
+      out.z = h[2];
+    }
+  };
+  const anchorTmp = useMemo(() => ({ x: 0, z: 0 }), []);
 
   useLayoutEffect(() => {
     const mesh = ref.current;
     if (!mesh) return;
     for (let i = 0; i < n; i++) {
-      dummy.position.set(anchors[i][0], 2.1, anchors[i][2]);
+      liveAnchor(i, anchorTmp);
+      dummy.position.set(anchorTmp.x, 2.1, anchorTmp.z);
       dummy.scale.setScalar(1);
       dummy.updateMatrix();
       mesh.setMatrixAt(i, dummy.matrix);
     }
     mesh.instanceMatrix.needsUpdate = true;
-  }, [n, anchors]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [n, anchorTmp]);
 
   useFrame(({ clock }) => {
     const mesh = ref.current;
@@ -65,10 +87,11 @@ export function SpeechPuffs({
     const t = clock.elapsedTime;
     for (let i = 0; i < n; i++) {
       const ph = (hashStr(recent[i].id) % 1000) / 1000 * Math.PI * 2;
+      liveAnchor(i, anchorTmp);
       dummy.position.set(
-        anchors[i][0] + Math.sin(t * 0.9 + ph) * 0.08,
+        anchorTmp.x + Math.sin(t * 0.9 + ph) * 0.08,
         2.1 + Math.sin(t * 1.3 + ph) * 0.1,
-        anchors[i][2]
+        anchorTmp.z
       );
       dummy.scale.setScalar(0.9 + Math.sin(t * 2 + ph) * 0.08);
       dummy.updateMatrix();

@@ -21,6 +21,9 @@ import { revealDelay, isReplacementOnboard } from "./pacing";
 import { VizCanvas } from "./scene/VizCanvas";
 import { OwnerObelisk } from "./scene/OwnerObelisk";
 import { WorkerSwarm } from "./scene/WorkerSwarm";
+import { WorkerFigures } from "./scene/WorkerFigures";
+import { Workroom } from "./scene/Workroom";
+import { useFigures } from "./scene/workerMotion";
 import { AuthoritySeals } from "./scene/AuthoritySeals";
 import { ReceiverGate } from "./scene/ReceiverGate";
 import { ProposalPackets } from "./scene/ProposalPackets";
@@ -355,13 +358,6 @@ export function VizView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events, effectiveCursor, cameraView, receiptAt, graceTick]);
 
-  const followWorkerId =
-    selection?.kind === "worker"
-      ? selection.id
-      : scene.workers.length
-        ? scene.workers[scene.workers.length - 1].workerId
-        : null;
-
   // debug hook for automated tests: logical state only, no DOM internals
   useEffect(() => {
     (window as unknown as { __vizDebug?: unknown }).__vizDebug = {
@@ -413,7 +409,7 @@ export function VizView({
         </div>
         <div className="workshop-views" role="group" aria-label="Camera views">
           <button className={`view-tag ${cameraView === "world" ? "set" : ""}`} onClick={() => setCameraView("world")}>Room</button>
-          <button className={`view-tag ${cameraView === "worker" ? "set" : ""}`} onClick={() => setCameraView("worker")}>Worker</button>
+          <button className={`view-tag ${cameraView === "worker" ? "set" : ""}`} onClick={() => setCameraView("worker")}>Workroom</button>
           <button className={`view-tag ${cameraView === "receiver" ? "set" : ""}`} onClick={() => setCameraView("receiver")}>Gate</button>
           <button className={`view-tag ${cameraView === "records" ? "set" : ""}`} onClick={() => setCameraView("records")}>Records</button>
           <button className="view-tag exit" onClick={handleExit}>{exitLabel}</button>
@@ -424,19 +420,31 @@ export function VizView({
         <VizCanvas>
           <CameraRig
             view={cameraView}
-            workers={scene.workers}
-            followWorkerId={followWorkerId}
             closeup={closeup}
           />
+          <Workroom workerCount={scene.workers.length} />
           <OwnerObelisk onSelect={() => setSelection({ kind: "owner" })} />
-          <WorkerSwarm
-            workers={scene.workers}
-            selectedId={selection?.kind === "worker" ? selection.id : null}
-            onSelect={(id) => setSelection(id ? { kind: "worker", id } : null)}
-          />
+          {useFigures(scene.workers.length) ? (
+            <WorkerFigures
+              workers={scene.workers}
+              proposals={scene.proposals}
+              receipts={scene.receipts}
+              speeches={scene.speeches}
+              selectedId={selection?.kind === "worker" ? selection.id : null}
+              onSelect={(id) => setSelection(id ? { kind: "worker", id } : null)}
+            />
+          ) : (
+            <WorkerSwarm
+              workers={scene.workers}
+              selectedId={selection?.kind === "worker" ? selection.id : null}
+              onSelect={(id) => setSelection(id ? { kind: "worker", id } : null)}
+            />
+          )}
           <AuthoritySeals
             authorities={scene.authorities}
             workers={scene.workers}
+            proposals={scene.proposals}
+            receipts={scene.receipts}
             selectedMandate={selection?.kind === "seal" ? selection.id : null}
             onSelect={(id) => setSelection(id ? { kind: "seal", id } : null)}
           />
@@ -447,6 +455,7 @@ export function VizView({
           <ProposalPackets
             proposals={scene.proposals}
             workers={scene.workers}
+            receipts={scene.receipts}
             onSelect={(id) => setSelection(id ? { kind: "packet", id } : null)}
           />
           <ReceiptTablets
@@ -454,7 +463,12 @@ export function VizView({
             selectedId={selection?.kind === "receipt" ? selection.id : null}
             onSelect={(id) => setSelection(id ? { kind: "receipt", id } : null)}
           />
-          <SpeechPuffs speeches={scene.speeches} workers={scene.workers} />
+          <SpeechPuffs
+            speeches={scene.speeches}
+            workers={scene.workers}
+            proposals={scene.proposals}
+            receipts={scene.receipts}
+          />
           <UnrecognizedMarkers items={scene.unrecognized} />
         </VizCanvas>
         <Ledger
