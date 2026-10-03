@@ -325,17 +325,17 @@ function SceneFrame({
       // sits off-center left; library and repair frame the midground;
       // a tree and the fence/cart give foreground occlusion. This is not
       // the landscape camera narrowed.
-    const wantFov = portrait ? 52 : 38;
-    const wantX = portrait ? -4.7 : 2.4;
-    const wantY = portrait ? 3.6 : 5.8;
-    const wantZ = portrait ? 13.1 : 12.8;
+    const wantFov = portrait ? 58 : 38;
+    const wantX = portrait ? -6.0 : 2.4;
+    const wantY = portrait ? 3.0 : 5.8;
+    const wantZ = portrait ? 14.5 : 12.8;
     if (pc.fov !== wantFov) {
       pc.fov = wantFov;
       pc.updateProjectionMatrix();
     }
     const sway = paused ? 0 : portrait ? 0.12 : 0.25;
     camera.position.set(wantX + Math.sin(clock.elapsedTime * 0.11) * sway, wantY, wantZ);
-    camera.lookAt(portrait ? 2.7 : 0.7, portrait ? 0.65 : 0.9, portrait ? -2.9 : -1.2);
+    camera.lookAt(portrait ? 3.4 : 0.7, portrait ? 0.5 : 0.9, portrait ? -3.4 : -1.2);
   });
   return <Scene clockRef={clockRef} paused={paused} />;
 }

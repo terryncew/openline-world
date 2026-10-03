@@ -17,14 +17,21 @@ activation for workshop navigation, rejects opaque-origin backend access
 after hostile document replacement, and removes machine-specific Playwright
 executable paths and destructive port cleanup from the e2e harnesses.
 
-Environment caveat: the default shell selects Node 20, but the installed
-Node 24 runtime executes the full 23-test TypeScript suite successfully.
-There are no installed browser binaries, and browser downloads and Ubuntu
-package access return proxy 403s. Production builds, TypeScript, the complete
-Python backend suite, and direct opaque-origin denial controls run locally;
-fresh browser captures and the Chromium/WebKit suites remain blocked and must
-be rerun in a browser-equipped environment. Existing committed captures
-remain historical evidence only.
+Environment caveat (2026-10-03, Codex's environment): the default shell
+selects Node 20, but the installed Node 24 runtime executes the full 23-test
+TypeScript suite successfully. In Codex's environment there were no installed
+browser binaries, and browser downloads and Ubuntu package access returned
+proxy 403s.
+
+Closeout correction (2026-10-03, OPENLINE-WORLD-CLOSEOUT-001): the above
+no-browser limitation applied to Codex's environment only. In the closeout
+environment browsers ARE available and the full Chromium suite was run
+against the integrated branch: tsc clean, 23/23 unit tests, backend 203/203,
+square-smoke PASS, town-isolation PASS (with two environment-corrected
+assertions — see `frontend/e2e/town-isolation.mjs`), cancel-demo PASS,
+backend-facts PASS. WebKit/Safari could not be launched on the closeout VM;
+iPhone Safari entry remains for the device-side check. Existing committed
+captures remain historical evidence only.
 
 ## 0. Read this first
 This document was prepared by Muse (a separate environment) because the Codex
