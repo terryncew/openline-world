@@ -27,8 +27,8 @@ import { ProposalPackets } from "./scene/ProposalPackets";
 import { ReceiptTablets } from "./scene/ReceiptTablets";
 import { SpeechPuffs, UnrecognizedMarkers } from "./scene/SpeechPuffs";
 import { CameraRig, type VizCameraView, type VizCloseup } from "./scene/CameraRig";
-import { Timeline, type ReplayState } from "./Timeline";
-import { Inspector, type VizSelection } from "./Inspector";
+import { ControlBench, type ReplayState } from "./ControlBench";
+import { Ledger, type VizSelection } from "./Ledger";
 import type { Snapshot } from "../api";
 import "./viz.css";
 
@@ -406,19 +406,19 @@ export function VizView({
 
   return (
     <div className="viz-root">
-      <header className="viz-topbar">
-        <div className="viz-brand">
-          <strong>OpenLine World — visualization</strong>
-          <span className="viz-fine">read-only: every object traces to a real event</span>
+      <div className="workshop-plate">
+        <div className="workshop-plate-sign">
+          <strong>The Workshop</strong>
+          <span className="workshop-plate-fine">where consequential work is checked and recorded</span>
         </div>
-        <div className="viz-controls">
-          <button className="viz-btn" onClick={() => setCameraView("world")}>World</button>
-          <button className="viz-btn" onClick={() => setCameraView("worker")}>Follow worker</button>
-          <button className="viz-btn" onClick={() => setCameraView("receiver")}>Receiver</button>
-          <button className="viz-btn" onClick={() => setCameraView("records")}>Records</button>
-          <button className="viz-btn" onClick={handleExit}>{exitLabel}</button>
+        <div className="workshop-views" role="group" aria-label="Camera views">
+          <button className={`view-tag ${cameraView === "world" ? "set" : ""}`} onClick={() => setCameraView("world")}>Room</button>
+          <button className={`view-tag ${cameraView === "worker" ? "set" : ""}`} onClick={() => setCameraView("worker")}>Worker</button>
+          <button className={`view-tag ${cameraView === "receiver" ? "set" : ""}`} onClick={() => setCameraView("receiver")}>Gate</button>
+          <button className={`view-tag ${cameraView === "records" ? "set" : ""}`} onClick={() => setCameraView("records")}>Records</button>
+          <button className="view-tag exit" onClick={handleExit}>{exitLabel}</button>
         </div>
-      </header>
+      </div>
       {streamError && <div className="viz-err">{streamError}</div>}
       <main className="viz-stage">
         <VizCanvas>
@@ -457,7 +457,7 @@ export function VizView({
           <SpeechPuffs speeches={scene.speeches} workers={scene.workers} />
           <UnrecognizedMarkers items={scene.unrecognized} />
         </VizCanvas>
-        <Inspector
+        <Ledger
           selection={selection}
           workers={scene.workers}
           authorities={scene.authorities}
@@ -467,7 +467,7 @@ export function VizView({
           onClose={() => setSelection(null)}
         />
       </main>
-      <Timeline
+      <ControlBench
         events={events}
         cursorSeq={effectiveCursor}
         onCursor={(s) => {

@@ -23,14 +23,20 @@ import * as THREE from "three";
 import type { VizWorker } from "../protocol";
 import { workerHome } from "./layout";
 import { GATE_FOCUS } from "./ProposalPackets";
+import { VIZ_SMALL_SCREEN } from "./VizCanvas";
 
 export type VizCameraView = "world" | "worker" | "receiver" | "records";
 
-/** Timeline-driven close-ups. Null = rest at the view framing. */
+/** Bench-driven close-ups. Null = rest at the view framing. */
 export type VizCloseup = "gate" | "replacement" | null;
 
 const WORLD_POS: [number, number, number] = [0, 9.5, 15];
 const WORLD_TGT: [number, number, number] = [1.2, 0.8, 0];
+/* Portrait: its own authored framing, not a narrowed desktop shot —
+ * a medium shot of the consequential core: gate mouth, cream lane,
+ * archive rack. Same world state, different composition. */
+const WORLD_POS_PORTRAIT: [number, number, number] = [-1.5, 5.5, 8.5];
+const WORLD_TGT_PORTRAIT: [number, number, number] = [7.5, 0.8, -0.5];
 const RECEIVER_POS: [number, number, number] = [11.5, 4.5, 7.5];
 const RECORDS_POS: [number, number, number] = [14.5, 6, -6];
 const RECORDS_TGT: [number, number, number] = [10.5, 0.5, 0];
@@ -57,7 +63,7 @@ export function CameraRig({
   view: VizCameraView;
   workers: VizWorker[];
   followWorkerId: string | null;
-  /** Timeline-driven close-up; only applies when view === "world". */
+  /** Bench-driven close-up; only applies when view === "world". */
   closeup: VizCloseup;
 }) {
   const { camera } = useThree();
@@ -73,8 +79,10 @@ export function CameraRig({
 
   useFrame((_, dt) => {
     const dtc = Math.min(dt, 0.05);
-    let p: [number, number, number] = WORLD_POS;
-    let g: [number, number, number] = WORLD_TGT;
+    const worldPos = VIZ_SMALL_SCREEN ? WORLD_POS_PORTRAIT : WORLD_POS;
+    const worldTgt = VIZ_SMALL_SCREEN ? WORLD_TGT_PORTRAIT : WORLD_TGT;
+    let p: [number, number, number] = worldPos;
+    let g: [number, number, number] = worldTgt;
 
     if (view === "receiver") {
       p = RECEIVER_POS;
