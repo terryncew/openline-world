@@ -12,6 +12,7 @@
 import { PAL, matte, BlobShadow, Hinge, Limb } from "../kit";
 import { loop, pulse, bump, d } from "../acting";
 import * as THREE from "three";
+import { crankHandleAt, CRANK_CENTER, CRANK_HANDLE_Z, CRANK_RADIUS } from "./motion";
 
 const D = 14;
 
@@ -74,8 +75,6 @@ function StretchLimb({
   );
 }
 
-const CRANK_C: [number, number, number] = [0.95, 1.02, 0];
-const CRANK_R = 0.2;
 
 export function Tinkerer({
   t,
@@ -98,11 +97,19 @@ export function Tinkerer({
   const eyeWide = pulse(T, 0.2, 1.0, 2.6, 3.4, 1.35);
 
   // hand tracks the crank handle while reaching
-  const hx = CRANK_C[0];
-  const hy = CRANK_C[1] + Math.sin(theta) * CRANK_R;
-  const hz = CRANK_C[2] + Math.cos(theta) * CRANK_R;
-  const shoulder: [number, number, number] = [0.18, 1.22, 0.3];
-  const hand: [number, number, number] = reach > 0.02 ? [hx, hy, hz] : [0.3, 0.66, 0.35];
+  const contact = crankHandleAt(theta);
+  const shoulderLocal: [number, number, number] = [0.18, 1.04, 0.16];
+  const shoulder: [number, number, number] = [
+    shoulderLocal[0],
+    Math.cos(lean) * shoulderLocal[1] - Math.sin(lean) * shoulderLocal[2],
+    Math.sin(lean) * shoulderLocal[1] + Math.cos(lean) * shoulderLocal[2],
+  ];
+  const rest: [number, number, number] = [0.34, 0.66, 0.32];
+  const hand: [number, number, number] = [
+    rest[0] + (contact[0] - rest[0]) * reach,
+    rest[1] + (contact[1] - rest[1]) * reach,
+    rest[2] + (contact[2] - rest[2]) * reach,
+  ];
 
   // spinner: geared 3x off the crank, wobbles while sputtering
   const spinnerAngle = theta * 3;
@@ -128,7 +135,7 @@ export function Tinkerer({
       <BlobShadow r={0.5} />
 
       {/* the pump mechanism (scenery) */}
-      <group position={[0.95, 0, 0]}>
+      <group position={[CRANK_CENTER[0], 0, CRANK_CENTER[2]]}>
         <mesh position={[0, 0.25, 0]}>
           <boxGeometry args={[0.5, 0.5, 0.5]} />
           {matte(PAL.woodDark)}
@@ -138,12 +145,12 @@ export function Tinkerer({
           {matte(PAL.blue)}
         </mesh>
         {/* crank disc + handle */}
-        <group position={[0, 1.02, 0]} rotation={[theta, 0, 0]}>
+        <group position={[0, CRANK_CENTER[1], 0]} rotation={[theta, 0, 0]}>
           <mesh>
             <cylinderGeometry args={[0.2, 0.2, 0.06, 18]} />
             {matte(PAL.terracottaDark)}
           </mesh>
-          <mesh position={[0, CRANK_R, 0.08]} rotation={[Math.PI / 2, 0, 0]}>
+          <mesh position={[0, CRANK_RADIUS, CRANK_HANDLE_Z]} rotation={[Math.PI / 2, 0, 0]}>
             <cylinderGeometry args={[0.035, 0.035, 0.16, 10]} />
             {matte(PAL.wood)}
           </mesh>
@@ -240,6 +247,8 @@ export function Tinkerer({
     </group>
   );
 }
+
+export { crankHandleAt } from "./motion";
 
 export const TINKERER_LOOP = D;
 export function tinkererPoseAt(t: number) {

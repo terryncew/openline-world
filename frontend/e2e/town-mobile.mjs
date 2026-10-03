@@ -1,7 +1,6 @@
 import { chromium } from "playwright";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const browser = await chromium.launch({
-  executablePath: "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
   args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
 });
 for (const [w, h, name] of [[390, 844, "390x844"], [430, 932, "430x932"]]) {

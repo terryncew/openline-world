@@ -13,7 +13,7 @@
  * fidelity measures (dpr cap, instancing, no postprocessing) are described
  * in BENCHMARK.md instead.
  */
-import { spawn, execSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -23,7 +23,6 @@ const repo = resolve(here, "..", "..");
 
 const BACKEND_PORT = 18472;
 const VITE_PORT = 15174;
-const CHROME = "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome";
 
 function waitFor(url, timeoutMs = 30000) {
   const t0 = Date.now();
@@ -57,10 +56,7 @@ async function benchAt(page, n) {
 }
 
 async function main() {
-  for (const p of [BACKEND_PORT, VITE_PORT]) {
-    try { execSync(`fuser -k ${p}/tcp 2>/dev/null`); } catch { /* none */ }
-  }
-  await sleep(500);
+
   const backend = spawn("python3", ["backend/server.py"], {
     cwd: repo, env: { ...process.env, WORKSHOP_PORT: String(BACKEND_PORT) }, stdio: "ignore",
   });
@@ -76,8 +72,7 @@ async function main() {
     await waitFor(`http://127.0.0.1:${VITE_PORT}/`);
     const { chromium } = await import("playwright");
     const browser = await chromium.launch({
-      executablePath: CHROME,
-      args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
+            args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
     });
     const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
     const results = [];

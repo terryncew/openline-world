@@ -19,7 +19,7 @@
  *
  * Also captures 4 screenshots into src/viz/screenshots/.
  */
-import { spawn, execSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -52,11 +52,7 @@ function waitFor(url, timeoutMs = 30000) {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function main() {
-  // preflight: clear leftovers from killed runs on our ports
-  for (const p of [BACKEND_PORT, VITE_PORT]) {
-    try { execSync(`fuser -k ${p}/tcp 2>/dev/null`); } catch { /* none */ }
-  }
-  await sleep(500);
+
   const backend = spawn("python3", ["backend/server.py"], {
     cwd: repo, env: { ...process.env, WORKSHOP_PORT: String(BACKEND_PORT) },
     stdio: "ignore",
@@ -76,7 +72,6 @@ async function main() {
     const { chromium } = await import("playwright");
     const browser = await chromium.launch({
       // use the pre-installed chromium build (no download in this env)
-      executablePath: "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
       args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
     });
     const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });

@@ -1,5 +1,31 @@
 # WORLD-SQUARE-001R — Codex execution handoff
 
+## Current continuation status (2026-10-03)
+
+The historical handoff below is preserved as requested, but its claims that
+the 001R specification and rebuild do not exist are obsolete. The binding
+specification is now `WORLD_SQUARE_001R_SPEC.md`; the rebuilt Square, opaque
+iframe boundary, workshop entry/return, cancellation, and default-disabled
+vizbench are present on the continuation branch.
+
+The Codex polish pass fixes the carrier's one-way loaded travel and mirrored
+loop seam, derives the tinkerer hand from the visible crank's transformed
+anchor, corrects the helper's shoulder placement, makes responsive camera
+composition and doorway motion obey pause/reduced-motion startup, and gives
+fixed lane geometry stable React ownership. It also requires transient user
+activation for workshop navigation, rejects opaque-origin backend access
+after hostile document replacement, and removes machine-specific Playwright
+executable paths and destructive port cleanup from the e2e harnesses.
+
+Environment caveat: the default shell selects Node 20, but the installed
+Node 24 runtime executes the full 23-test TypeScript suite successfully.
+There are no installed browser binaries, and browser downloads and Ubuntu
+package access return proxy 403s. Production builds, TypeScript, the complete
+Python backend suite, and direct opaque-origin denial controls run locally;
+fresh browser captures and the Chromium/WebKit suites remain blocked and must
+be rerun in a browser-equipped environment. Existing committed captures
+remain historical evidence only.
+
 ## 0. Read this first
 This document was prepared by Muse (a separate environment) because the Codex
 executor's GitHub integration is read-only and could not push. Nothing in this

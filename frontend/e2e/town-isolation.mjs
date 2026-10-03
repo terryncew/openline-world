@@ -8,7 +8,7 @@
  *
  * Run: node e2e/town-isolation.mjs (backend + vite are started here).
  */
-import { spawn, execSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -33,10 +33,7 @@ const check = (name, ok, detail = "") => {
   if (!ok) process.exitCode = 1;
 };
 
-for (const p of [BACKEND_PORT, VITE_PORT]) {
-  try { execSync(`fuser -k ${p}/tcp 2>/dev/null`); } catch {}
-}
-await sleep(500);
+
 const env = { ...process.env, WORKSHOP_PORT: String(BACKEND_PORT) };
 const backend = spawn("python3", ["backend/server.py"], { cwd: repo, env, stdio: "ignore" });
 const vite = spawn("npx", ["vite", "--port", String(VITE_PORT), "--strictPort", "--host", "127.0.0.1"], { cwd: frontend, env, stdio: "ignore" });
@@ -48,7 +45,6 @@ try {
   await waitFor(`http://127.0.0.1:${VITE_PORT}/`);
   const { chromium } = await import("playwright");
   const browser = await chromium.launch({
-    executablePath: "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
     args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
   });
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
@@ -60,6 +56,12 @@ try {
   check("iframe frame found", !!frame);
   const inFrame = (fn) => frame.evaluate(fn);
   const vizOpen = () => page.evaluate(() => !!document.querySelector(".viz-root"));
+
+  // Exact shape and source still require a deliberate user activation.
+  await inFrame(() => parent.postMessage(
+    { type: "openline:navigate", intent: "enter-workshop" }, "*"));
+  await sleep(1000);
+  check("scripted exact intent ignored without user action", !(await vizOpen()));
 
   // 1. child fetch() is blocked by CSP connect-src 'none'
   const fetchResult = await inFrame(async () => {
@@ -151,6 +153,26 @@ try {
       catch { return "blocked"; }
     });
     check("hostile cannot read parent DOM", hRead === "blocked", hRead);
+
+    // Replacement drops the child's CSP. Prove the backend itself rejects
+    // the resulting opaque Origin instead of mistaking a browser CORS error
+    // for evidence that the request never arrived.
+    const stepBefore = (await (await fetch(`http://127.0.0.1:${BACKEND_PORT}/api/state`)).json()).demo.step;
+    const hostileWrite = await hostile.evaluate(async (url) => {
+      try {
+        const r = await fetch(url, { method: "POST" });
+        return { status: r.status, body: await r.text() };
+      } catch (e) { return { status: 0, body: String(e) }; }
+    }, `http://127.0.0.1:${BACKEND_PORT}/api/demo/advance`);
+    const stepAfter = (await (await fetch(`http://127.0.0.1:${BACKEND_PORT}/api/state`)).json()).demo.step;
+    check("hostile backend write rejected server-side", hostileWrite.status === 403 && stepAfter === stepBefore,
+      `${hostileWrite.status} step ${stepBefore}->${stepAfter}`);
+
+    // Positive control: a non-opaque local client can reach the same route.
+    const positive = await fetch(`http://127.0.0.1:${BACKEND_PORT}/api/demo/advance`, { method: "POST" });
+    const positiveStep = (await (await fetch(`http://127.0.0.1:${BACKEND_PORT}/api/state`)).json()).demo.step;
+    check("backend-write positive control works", positive.ok && positiveStep === stepBefore + 1,
+      `${positive.status} step ${stepBefore}->${positiveStep}`);
   }
 
   // 8. POSITIVE CONTROL: the exact valid intent from the frame opens the viz
@@ -158,11 +180,12 @@ try {
   await page.reload({ waitUntil: "networkidle" });
   await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
   await sleep(6000);
-  const frame2 = page.frames().find((f) => f.url().endsWith("town.html"));
-  await frame2.evaluate(() => parent.postMessage(
-    { type: "openline:navigate", intent: "enter-workshop" }, "*"));
-  await page.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 15000 })
-    .catch(() => null);
+  // Use the actual hit target: evaluate(postMessage) is intentionally no
+  // longer a positive control because it has no human activation.
+  for (const [x, y] of [[690, 330], [660, 340], [720, 340], [690, 370], [690, 300]]) {
+    await page.mouse.click(x, y);
+    if (await page.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 3000 }).then(() => true).catch(() => false)) break;
+  }
   check("valid intent opens workshop", await vizOpen());
 
   await browser.close();
