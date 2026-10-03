@@ -11,70 +11,11 @@
  * Illustrative physical acting only. Not an OpenLine operation.
  */
 import { PAL, matte, BlobShadow, Limb, Hinge, Foot } from "../kit";
-import { loop, pulse, bump, tremor, gait, d } from "../acting";
+import { tremor, d } from "../acting";
 
-const D = 16; // loop seconds
+import { carrierPoseAt, CARRIER_LOOP } from "./motion";
 
-interface CarrierPose {
-  rootX: number;
-  rootY: number;
-  lean: number; // forward lean, radians
-  rock: number; // side rock while walking
-  turnY: number; // facing
-  armSwing: number; // shoulder rotation.x
-  armSide: number; // shoulder rotation.z (reach toward beam)
-  grip: number; // 0 open .. 1 closed
-  legL: number;
-  legR: number;
-  headTilt: number;
-  timberX: number;
-  timberY: number;
-  timberSway: number;
-}
-
-export function carrierPoseAt(t: number, sx: 1 | -1): CarrierPose {  const T = loop(t, D);
-  // travel: -1.15 <-> +1.15 (mirrored per cycle)
-  const travel = pulse(T, 5.4, 6.2, 8.4, 9.0, 1);
-  const rootX = (-1.15 + 2.3 * travel) * sx;
-  const walking = T > 5.4 && T < 9.0;
-  const gaitPh = gait(T, 5.4, 9.0, 3); // 3 steps
-
-  const crouch =
-    pulse(T, 1.0, 1.8, 2.4, 3.0, 1) * 0.0 + // (anticipate uses lean, not full crouch)
-    pulse(T, 1.0, 2.0, 4.2, 5.0, 0.26) + // anticipate crouch through lift
-    pulse(T, 9.0, 9.6, 10.2, 11.0, 0.3); // set-down crouch
-  const lifting = T > 3.0 && T < 4.8;
-
-  return {
-    rootX,
-    rootY: -crouch + (walking ? Math.abs(gaitPh) * 0.03 : 0),
-    lean:
-      pulse(T, 1.0, 2.0, 2.6, 3.2, d(16)) + // anticipate lean-in
-      pulse(T, 3.2, 4.0, 4.4, 5.2, d(-10)) + // strain lean-back
-      (walking ? d(4) : 0) + // heavy forward hunch while carrying
-      pulse(T, 9.0, 9.6, 10.2, 11.0, d(14)), // set-down lean
-    rock: walking ? gaitPh * d(4) : 0,
-    turnY: (Math.PI / 2) * sx, // faces travel direction; mirrored per cycle
-    armSwing:
-      pulse(T, 1.0, 2.2, 2.8, 3.4, d(-38)) + // reach forward-down
-      pulse(T, 3.4, 4.4, 8.6, 9.4, d(-52)) + // hold beam at carry
-      pulse(T, 9.4, 10.0, 10.6, 11.4, d(-30)) + // lower with beam
-      bump(T, 11.4, 13.0, d(18)), // follow-through swing up past neutral
-    armSide: d(24), // arms angled toward the beam at the carrier's side
-    grip: pulse(T, 2.4, 3.0, 10.6, 11.4, 1),
-    legL: walking ? gaitPh * d(22) : 0,
-    legR: walking ? -gaitPh * d(22) : 0,
-    headTilt:
-      pulse(T, 1.0, 2.0, 2.8, 3.4, d(10)) + // look down at beam
-      (lifting ? tremor(T, d(1.2)) : 0),
-    timberX: (-1.15 + 2.3 * travel) * sx,
-    timberY:
-      0.26 +
-      pulse(T, 3.2, 4.2, 8.8, 9.8, 0.54) + // lift to carry height, lower at set-down
-      (lifting ? tremor(T, 0.012) : 0),
-    timberSway: walking ? gait(T + 0.35, 5.4, 9.0, 3) * d(3) : 0,
-  };
-}
+const D = CARRIER_LOOP;
 
 function Gripper({ closed, color }: { closed: number; color: string }) {
   const a = d(8) + closed * d(38);
@@ -214,4 +155,4 @@ export function Carrier({
   );
 }
 
-export const CARRIER_LOOP = D;
+export { CARRIER_LOOP, carrierPoseAt } from "./motion";

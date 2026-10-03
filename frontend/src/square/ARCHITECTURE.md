@@ -41,6 +41,9 @@ The parent (`src/square/SquareHost.tsx`) enforces its side:
   adversarial unit test) AND by source frame
   (`ev.source === iframe.contentWindow`). Origin checks are meaningless
   against an opaque origin, so they are not relied upon.
+- It requires browser-reported transient user activation as well. Script
+  posting the otherwise-valid message cannot start the demo; the intent must
+  result from a deliberate click/tap in the town.
 - It passes no callbacks, objects, or providers into the frame — only the
   `src`, `sandbox`, and `title` attributes.
 
@@ -48,9 +51,34 @@ Containment is proven in REAL BROWSER TESTS (`frontend/e2e/town-isolation.mjs`),
 not by inspection: the child attempts fetch/XHR/EventSource (blocked),
 forged/extra-field messages are ignored, wrong-source messages are ignored,
 top-navigation attempts fail, and a fully replaced hostile child document
-still cannot move the parent except through the validated intent.
+still cannot move the parent without the validated, user-activated intent.
+Replacement also removes child CSP, so the backend rejects every
+`Origin: null` request before route handling. The test combines a visible
+403 response, before/after backend state, and a working non-opaque positive
+control; a browser CORS failure alone is not treated as evidence.
+
+This is defense in depth, not a claim that sandboxing prevents packets from
+reaching the server: a replaced document can issue a request. It cannot read
+workshop data or mutate workshop state because the server rejects its opaque
+origin. Local CLI requests without an `Origin` header remain supported.
 
 ## The two layers
+
+### Shared space, separate execution
+
+`src/spatial/workshopContract.ts` is frozen build-time data: dimensions,
+orientation, floor/threshold coordinates, entrance axis, identity, and matte
+palette. The town bundle and workshop bundle independently consume their own
+compiled copy. It contains no functions, mutable objects, providers,
+callbacks, backend imports, protocol objects, storage, or network access, so
+it creates spatial correspondence without a runtime trust bridge.
+
+The exterior camera approaches the contract door before sending the existing
+narrow navigation intent. The proven scene starts outside the matching
+interior portal and crosses inward; its workbench, receiver gate, and records
+remain event-driven. Exit focuses the same portal and returns the town iframe
+with a fixed decorative `?threshold=return` camera cue. That cue carries no
+authority or protocol state and cannot invoke the demo.
 
 **Speculative layer — `frontend/src/town/`** (the town)
 Handcrafted miniature: cream/terracotta/blue/sage, matte materials, four

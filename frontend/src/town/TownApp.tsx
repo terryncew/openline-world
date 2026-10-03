@@ -7,7 +7,7 @@
  * is the workshop door's navigation intent (see ./protocol.ts).
  * No backend clients, no protocol imports, no shared state.
  */
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { PAL } from "./kit";
@@ -18,6 +18,7 @@ import { Reader } from "./robots/Reader";
 import { Sweeper } from "./robots/Sweeper";
 import { Waiter, Passerby, Helper } from "./robots/Extras";
 import { Workshop, Exchange, Library, Depot, RepairShop, Ground, Lamp, Fountain, AlleyClutter, DistantRoof, DepotYard, Mailbox, FenceCorner, Hedge, CartWheel, PropTrail, CharacterTree, Plinth, ToolRack } from "./buildings";
+import { WORKSHOP_SPATIAL_CONTRACT as W } from "../spatial/workshopContract";
 
 function Sun() {
   return (
@@ -54,26 +55,26 @@ function Footprint({
 
 /** The workshop door: generous invisible hitbox + a soft wayfinding ring.
  *  Clicking/tapping sends the single navigation intent. */
-function WorkshopDoor() {
+function WorkshopDoor({ paused, onEnter }: { paused: boolean; onEnter: () => void }) {
   const ring = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => {
-    if (ring.current) {
+    if (ring.current && !paused) {
       const s = 1 + Math.sin(clock.elapsedTime * 1.6) * 0.05;
       ring.current.scale.set(s, s, 1);
     }
   });
   const enter = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
-    requestEnterWorkshop();
+    onEnter();
   };
   return (
     // off-axis: important, not city hall. The lane bends toward it.
-    <group position={[1.6, 0, -4.2]} rotation={[0, -0.12, 0]}>
+    <group position={[1.6, W.floorElevation, -4.2]} rotation={[0, W.orientationY, 0]}>
       <Plinth w={3.8} d={3.0} />
       <Workshop />
       {/* generous tap target over the door */}
       <mesh
-        position={[0, 1.0, 1.45]}
+        position={[W.door.centerX, W.door.height / 2, W.door.facadeZ]}
         onClick={enter}
         onPointerOver={(e) => {
           e.stopPropagation();
@@ -83,11 +84,11 @@ function WorkshopDoor() {
           document.body.style.cursor = "default";
         }}
       >
-        <boxGeometry args={[2.2, 2.4, 0.6]} />
+        <boxGeometry args={[W.door.width + 0.9, W.door.height + 0.35, 0.6]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
       {/* wayfinding ring on the doorstep */}
-      <mesh ref={ring} position={[0, 0.13, 1.75]} rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh ref={ring} position={[0, 0.13, W.door.facadeZ + W.thresholdDepth * 0.45]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.55, 0.68, 32]} />
         <meshBasicMaterial color={PAL.warm} transparent opacity={0.75} depthWrite={false} />
       </mesh>
@@ -95,7 +96,7 @@ function WorkshopDoor() {
   );
 }
 
-function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
+function Scene({ clockRef, paused, onEnter }: { clockRef: React.MutableRefObject<number>; paused: boolean; onEnter: () => void }) {
   const t = clockRef.current;
   return (
     <>
@@ -112,7 +113,7 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
       <group position={[-3.4, 0, 3.4]}>
         <Fountain />
       </group>
-      <WorkshopDoor />
+      <WorkshopDoor paused={paused} onEnter={onEnter} />
       {/* UNEVEN CLUSTERS: the workshop + library + repair frame a modest
           forecourt; depot + exchange form the quieter west cluster. No
           equal spacing, no ring. */}
@@ -213,6 +214,21 @@ export function TownApp() {
   const [, setTick] = useState(0); // re-render Scene each frame for t
   const reduced = usePrefersReducedMotion();
   const [paused, setPaused] = useState(reduced);
+  const [entering, setEntering] = useState(false);
+  const [returning] = useState(
+    () => new URLSearchParams(window.location.search).get("threshold") === "return"
+  );
+  const entryTimer = useRef<number | null>(null);
+  const enterWorkshop = () => {
+    if (entering) return;
+    setEntering(true);
+    // Let the camera physically reach the threshold before handing the
+    // validated intent to the parent. Transient activation remains active.
+    entryTimer.current = window.setTimeout(requestEnterWorkshop, reduced ? 80 : 850);
+  };
+  useEffect(() => () => {
+    if (entryTimer.current !== null) window.clearTimeout(entryTimer.current);
+  }, []);
 
   return (
     <div style={{ position: "fixed", inset: 0, background: PAL.cream }}>
@@ -222,8 +238,15 @@ export function TownApp() {
         gl={{ antialias: true, powerPreference: "low-power" }}
         onCreated={({ camera }) => camera.lookAt(0.7, 0.9, -1.2)}
       >
-        <SceneFrame clockRef={clockRef} paused={paused || reduced} onTick={() => setTick((x) => x + 1)} />
+        <SceneFrame clockRef={clockRef} paused={paused} entering={entering && !reduced} returning={returning && !reduced} onEnter={enterWorkshop} onTick={() => setTick((x) => x + 1)} />
       </Canvas>
+      {/* Semantic twin of the 3D hitbox: same action, no new channel. It
+          provides a reliable generous touch target and browser-test handle. */}
+      <button
+        className="town-workshop-entry"
+        aria-label="Enter the workshop"
+        onClick={enterWorkshop}
+      />
       {/* minimal chrome: brand mark + pause */}
       <div
         style={{
@@ -274,6 +297,12 @@ export function TownApp() {
         <span>Tap the workshop door to see how work gets approved</span>
       </div>
       <style>{`@media (max-aspect-ratio: 9/10) {
+        .town-workshop-entry {
+          left: 51% !important;
+          top: 29% !important;
+          width: 38% !important;
+          height: 28% !important;
+        }
         .town-hint {
           left: 16px !important;
           right: 78px !important;
@@ -287,6 +316,23 @@ export function TownApp() {
           font-size: 12px;
           white-space: nowrap;
         }
+      }
+      .town-workshop-entry {
+        position: absolute;
+        left: 45%;
+        top: 25%;
+        width: 22%;
+        height: 34%;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+      .town-workshop-entry:focus-visible {
+        outline: 3px solid ${PAL.warm};
+        outline-offset: 4px;
+        border-radius: 18px;
       }`}</style>
     </div>
   );
@@ -296,13 +342,20 @@ export function TownApp() {
 function SceneFrame({
   clockRef,
   paused,
+  entering,
+  returning,
+  onEnter,
   onTick,
 }: {
   clockRef: React.MutableRefObject<number>;
   paused: boolean;
+  entering: boolean;
+  returning: boolean;
+  onEnter: () => void;
   onTick: () => void;
 }) {
   const seen = useRef(0);
+  const entry = useRef(returning ? 1 : 0);
   useFrame((_, delta) => {
     if (!paused) {
       clockRef.current += delta;
@@ -314,33 +367,34 @@ function SceneFrame({
       }
     }
   });
-  // subtle camera sway for life (disabled when reduced motion: paused covers it)
-  // responsive: portrait viewports pull back + widen so the square stays in frame
+  // Composition is applied on every render-frame, including paused and
+  // reduced-motion startup. Resize/rotation must never retain the camera
+  // from the previous aspect ratio.
   useFrame(({ camera, clock, size }) => {
-    if (!paused) {
-      const portrait = size.width / size.height < 0.9;
-      const pc = camera as THREE.PerspectiveCamera;
+    const portrait = size.width / size.height < 0.9;
+    const pc = camera as THREE.PerspectiveCamera;
       // portrait: its own authored staging — a low diagonal from the
       // south-west, at human height, looking up the lane. The workshop
       // sits off-center left; library and repair frame the midground;
       // a tree and the fence/cart give foreground occlusion. This is not
       // the landscape camera narrowed.
-      const wantFov = portrait ? 58 : 38;
-      const wantX = portrait ? -6.0 : 2.4;
-      const wantY = portrait ? 3.0 : 5.8;
-      const wantZ = portrait ? 14.5 : 12.8;
-      if (pc.fov !== wantFov) {
-        pc.fov = wantFov;
-        pc.updateProjectionMatrix();
-      }
-      const sway = portrait ? 0.15 : 0.25;
-      camera.position.set(
-        wantX + Math.sin(clock.elapsedTime * 0.11) * sway,
-        wantY,
-        wantZ
-      );
-      camera.lookAt(portrait ? 3.4 : 0.7, portrait ? 0.5 : 0.9, portrait ? -3.4 : -1.2);
+    entry.current = THREE.MathUtils.damp(entry.current, entering ? 1 : 0, 5.2, 1 / 60);
+    const e = entry.current;
+    const wantFov = THREE.MathUtils.lerp(portrait ? 52 : 38, 45, e);
+    const wantX = THREE.MathUtils.lerp(portrait ? -4.7 : 2.4, 2.05, e);
+    const wantY = THREE.MathUtils.lerp(portrait ? 3.6 : 5.8, 1.65, e);
+    const wantZ = THREE.MathUtils.lerp(portrait ? 13.1 : 12.8, 0.1, e);
+    if (pc.fov !== wantFov) {
+      pc.fov = wantFov;
+      pc.updateProjectionMatrix();
     }
+    const sway = paused || entering ? 0 : portrait ? 0.12 : 0.25;
+    camera.position.set(wantX + Math.sin(clock.elapsedTime * 0.11) * sway, wantY, wantZ);
+    camera.lookAt(
+      THREE.MathUtils.lerp(portrait ? 2.7 : 0.7, 1.6, e),
+      THREE.MathUtils.lerp(portrait ? 0.65 : 0.9, 1.05, e),
+      THREE.MathUtils.lerp(portrait ? -2.9 : -1.2, -1.1, e)
+    );
   });
-  return <Scene clockRef={clockRef} />;
+  return <Scene clockRef={clockRef} paused={paused} onEnter={onEnter} />;
 }

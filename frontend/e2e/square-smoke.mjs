@@ -4,7 +4,7 @@
  * via the validated navigation intent, and exit returns to the Square.
  * Run: node e2e/square-smoke.mjs (backend + vite are started here).
  */
-import { spawn, execSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -25,10 +25,7 @@ async function waitFor(url, tries = 60) {
 }
 const fail = (m) => { console.error("SMOKE FAIL: " + m); process.exit(1); };
 
-for (const p of [BACKEND_PORT, VITE_PORT]) {
-  try { execSync(`fuser -k ${p}/tcp 2>/dev/null`); } catch {}
-}
-await sleep(500);
+
 const env = { ...process.env, WORKSHOP_PORT: String(BACKEND_PORT) };
 const backend = spawn("python3", ["backend/server.py"], { cwd: repo, env, stdio: "ignore" });
 const vite = spawn("npx", ["vite", "--port", String(VITE_PORT), "--strictPort", "--host", "127.0.0.1"], { cwd: frontend, env, stdio: "ignore" });
@@ -40,7 +37,6 @@ try {
   await waitFor(`http://127.0.0.1:${VITE_PORT}/`);
   const { chromium } = await import("playwright");
   const browser = await chromium.launch({
-    executablePath: "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
     args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
   });
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
@@ -57,22 +53,14 @@ try {
   await sleep(5000); // let the vignettes get moving
   await page.screenshot({ path: `${shots}/01-square-home.png` });
 
-  // 2. click the workshop door INSIDE the frame -> parent opens the viz
-  // (page.mouse: the iframe fills the viewport, so page coords == frame
-  // coords; retry a small grid since the camera sways gently)
-  let entered = false;
-  for (const [x, y] of [[690, 330], [660, 340], [720, 340], [690, 370], [690, 300]]) {
-    await page.mouse.click(x, y);
-    try {
-      await page.waitForFunction(
-        () => window.__vizDebug && window.__vizDebug.eventCount >= 4,
-        null, { timeout: 15000 }
-      );
-      entered = true;
-      break;
-    } catch {}
-  }
-  if (!entered) fail("workshop door click never opened the viz");
+  // 2. activate the semantic twin of the physical 3D door hitbox.
+  await page.frameLocator("iframe.square-frame")
+    .getByRole("button", { name: "Enter the workshop" })
+    .click();
+  await page.waitForFunction(
+    () => window.__vizDebug && window.__vizDebug.eventCount >= 4,
+    null, { timeout: 30000 }
+  );
   await sleep(2000);
   await page.screenshot({ path: `${shots}/02-workshop-entered.png` });
 

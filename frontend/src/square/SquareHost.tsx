@@ -28,6 +28,7 @@ import "./square.css";
 export function SquareHost() {
   const [place, setPlace] = useState<"square" | "workshop">("square");
   const [fading, setFading] = useState(false);
+  const [returning, setReturning] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const timer = useRef<number | null>(null);
 
@@ -39,9 +40,14 @@ export function SquareHost() {
       const frame = iframeRef.current;
       if (!frame || ev.source !== frame.contentWindow) return;
       if (!isNavigateMessage(ev.data)) return;
+      // Exact message shape is necessary but not sufficient: a replaced or
+      // compromised child could send it from script. Only honor the intent
+      // while the browser reports a transient user activation propagated
+      // from a deliberate click/tap in the child frame.
+      if (!navigator.userActivation?.isActive) return;
       setFading(true);
       if (timer.current !== null) window.clearTimeout(timer.current);
-      timer.current = window.setTimeout(() => setPlace("workshop"), 450);
+      timer.current = window.setTimeout(() => setPlace("workshop"), 650);
     };
     window.addEventListener("message", onMessage);
     return () => {
@@ -51,6 +57,7 @@ export function SquareHost() {
   }, []);
 
   const exit = () => {
+    setReturning(true);
     setPlace("square");
     setFading(false);
   };
@@ -70,13 +77,11 @@ export function SquareHost() {
         // allow-scripts ONLY: no same-origin (opaque origin), no top
         // navigation, no forms, no popups, no pointer lock.
         sandbox="allow-scripts"
-        src={`${import.meta.env.BASE_URL}town.html`}
+        src={`${import.meta.env.BASE_URL}town.html${returning ? "?threshold=return" : ""}`}
         title="OpenLine World Square"
         className="square-frame"
       />
-      <div className={`square-fade${fading ? " on" : ""}`}>
-        {fading && <span>The workshop — where every consequential action is approved, or stopped.</span>}
-      </div>
+      <div className={`square-fade${fading ? " on" : ""}`} aria-hidden="true" />
     </div>
   );
 }

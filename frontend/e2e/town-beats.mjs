@@ -9,7 +9,6 @@ const shots = [
   ["tinkerer-crank", 13500],
 ];
 const browser = await chromium.launch({
-  executablePath: "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
   args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
 });
 const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });

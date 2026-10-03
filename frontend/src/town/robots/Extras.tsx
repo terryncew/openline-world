@@ -292,8 +292,8 @@ export function Helper({
           <boxGeometry args={[0.16, 0.12, 0.04]} />
           {matte(PAL.creamDark)}
         </mesh>
-        <ChunkArm x={-0.26} color={PAL.creamDark} rx={d(-58)} rz={d(16)} />
-        <ChunkArm x={0.26} color={PAL.creamDark} rx={d(-58)} rz={d(-16)} />
+        <ChunkArm x={-0.26} sy={0.18} upper={0.2} fore={0.16} elbow={d(-28)} color={PAL.creamDark} rx={d(-42)} rz={d(16)} />
+        <ChunkArm x={0.26} sy={0.18} upper={0.2} fore={0.16} elbow={d(-28)} color={PAL.creamDark} rx={d(-42)} rz={d(-16)} />
         {/* the held book */}
         <group position={[0, -0.05 + bookLift, 0.34]} rotation={[d(-18), 0, 0]}>
           <mesh>

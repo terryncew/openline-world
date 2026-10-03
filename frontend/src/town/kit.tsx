@@ -7,22 +7,13 @@
  * handcrafted Henson-like warmth. No gloss, no neon, no emissive signage.
  */
 import type { ReactNode } from "react";
+import { WORKSHOP_SPATIAL_CONTRACT as W } from "../spatial/workshopContract";
 
 export const PAL = {
-  cream: "#f3ead9",
+  ...W.palette,
   creamDark: "#e2d5bd",
-  terracotta: "#c26d4b",
-  terracottaDark: "#9d5236",
-  blue: "#4a6f8a",
   blueDark: "#38536a",
-  sage: "#8ba888",
   sageDark: "#6d8a6b",
-  wood: "#a9805a",
-  woodDark: "#7d5f40",
-  stone: "#cfc4ae",
-  stoneDark: "#a89a80",
-  ink: "#3d3428",
-  warm: "#e8a34f", // small warm accents only (lamps, window glow)
   white: "#faf6ec",
   path: "#dcc9a3", // street ribbons: deeper than cream, softer than stone
 } as const;
