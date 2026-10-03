@@ -53,9 +53,13 @@ const RECORDS_TGT: [number, number, number] = [10.5, 0.5, 0];
  * at the gate mouth. The packet flies toward the viewer, halts at the
  * threshold, and the verdict flash ring faces the camera. FOV 42 at ~6.3
  * units gives ~4.8 vertical units — the gate (3.6 tall) dominates the
- * frame without cropping the flash. */
-const GATE_CLOSEUP_POS: [number, number, number] = [0.2, 2.5, 0.8];
-const GATE_CLOSEUP_TGT: [number, number, number] = [6.5, 1.4, 0];
+ * frame without cropping the flash.
+ * The sightline runs slightly BELOW the seal's hover height (2.35): during
+ * the STOP halt the worker recoils to the gate mouth with the seal
+ * overhead, and the seal must read above the frame's center, never
+ * swallowing the lens. */
+const GATE_CLOSEUP_POS: [number, number, number] = [0.2, 2.0, 0.8];
+const GATE_CLOSEUP_TGT: [number, number, number] = [6.5, 1.15, 0];
 
 /* Replacement payoff: medium shot spanning the workers (west) and the
  * records arc behind the gate (east). */

@@ -77,6 +77,7 @@ try {
   await page.screenshot({ path: `${shots}/02-workshop-entered.png` });
 
   // 3. back to the Square -> the iframe returns
+  await page.getByRole("button", { name: "Workshop menu" }).click();
   await page.click("text=Back to the Square");
   await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
   await sleep(2000);

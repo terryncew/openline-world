@@ -66,6 +66,10 @@ async function driveDemo(page) {
 async function toWorkerView(page) {
   await page.evaluate(() => window.__vizDebug.goLive());
   await sleep(1000);
+  const tagBtn = page.getByRole("button", { name: TAG_LABEL });
+  if (!(await tagBtn.isVisible().catch(() => false))) {
+    await page.getByRole("button", { name: "Workshop menu" }).click();
+  }
   await page.getByRole("button", { name: TAG_LABEL }).click();
   await sleep(3500); // camera damps to the workroom framing
 }

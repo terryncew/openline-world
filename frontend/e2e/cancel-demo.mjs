@@ -67,6 +67,7 @@ try {
   if (postsBeforeExit < 1) fail("demo never started posting advances");
 
   // exit the workshop -> VizView unmounts
+  await page.getByRole("button", { name: "Workshop menu" }).click();
   await page.click("text=Back to the Square");
   await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
   await sleep(8000); // longer than two advance intervals (9 x 1.2s holds)

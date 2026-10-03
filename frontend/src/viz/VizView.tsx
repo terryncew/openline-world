@@ -31,6 +31,7 @@ import { ReceiptTablets } from "./scene/ReceiptTablets";
 import { SpeechPuffs, UnrecognizedMarkers } from "./scene/SpeechPuffs";
 import { CameraRig, type VizCameraView, type VizCloseup } from "./scene/CameraRig";
 import { ControlBench, type ReplayState } from "./ControlBench";
+import { WorkshopMenu } from "./WorkshopMenu";
 import { Ledger, type VizSelection } from "./Ledger";
 import type { Snapshot } from "../api";
 import "./viz.css";
@@ -221,6 +222,15 @@ export function VizView({
 
   const maxSeq = events.length ? events[events.length - 1].seq : 0;
   const effectiveCursor = cursorSeq ?? maxSeq;
+  const seqs = events.map((e) => e.seq);
+  const scrubMin = seqs.length ? Math.min(...seqs) : 0;
+  const atLive = effectiveCursor >= maxSeq;
+  const live = replayState === "live" || atLive;
+  const statusText = live ? "live" : `event ${effectiveCursor} of ${maxSeq}`;
+  const handleScrub = useCallback((s: number) => {
+    setReplayState("paused");
+    setCursorSeq(s >= maxSeq ? null : s);
+  }, [maxSeq]);
 
   // The event log is authoritative for worker/authority standing. The
   // snapshot is read-only and only supplies the owner principal, which
@@ -402,19 +412,21 @@ export function VizView({
 
   return (
     <div className="viz-root">
-      <div className="workshop-plate">
-        <div className="workshop-plate-sign">
-          <strong>The Workshop</strong>
-          <span className="workshop-plate-fine">where consequential work is checked and recorded</span>
-        </div>
-        <div className="workshop-views" role="group" aria-label="Camera views">
-          <button className={`view-tag ${cameraView === "world" ? "set" : ""}`} onClick={() => setCameraView("world")}>Room</button>
-          <button className={`view-tag ${cameraView === "worker" ? "set" : ""}`} onClick={() => setCameraView("worker")}>Workroom</button>
-          <button className={`view-tag ${cameraView === "receiver" ? "set" : ""}`} onClick={() => setCameraView("receiver")}>Gate</button>
-          <button className={`view-tag ${cameraView === "records" ? "set" : ""}`} onClick={() => setCameraView("records")}>Records</button>
-          <button className="view-tag exit" onClick={handleExit}>{exitLabel}</button>
-        </div>
-      </div>
+      <WorkshopMenu
+        cameraView={cameraView}
+        onView={setCameraView}
+        onRunDemo={runDemo}
+        demoRunning={demoRunning}
+        speed={speed}
+        onSpeed={setSpeed}
+        statusText={statusText}
+        scrubMin={scrubMin}
+        scrubMax={maxSeq}
+        scrubValue={Math.min(effectiveCursor, maxSeq)}
+        onScrub={handleScrub}
+        exitLabel={exitLabel}
+        onExit={handleExit}
+      />
       {streamError && <div className="viz-err">{streamError}</div>}
       <main className="viz-stage">
         <VizCanvas>
@@ -482,21 +494,12 @@ export function VizView({
         />
       </main>
       <ControlBench
-        events={events}
-        cursorSeq={effectiveCursor}
-        onCursor={(s) => {
-          setReplayState("paused");
-          setCursorSeq(s >= maxSeq ? null : s);
-        }}
         replayState={cursorSeq == null ? "live" : replayState}
-        speed={speed}
-        onSpeed={setSpeed}
+        atLive={atLive}
         onReplay={doReplay}
         onPause={() => setReplayState("paused")}
         onResume={() => setReplayState("replaying")}
         onStep={doStep}
-        onRunDemo={runDemo}
-        demoRunning={demoRunning}
         caption={captionFor(events, effectiveCursor)}
       />
       {bench > 0 && <BenchMeter />}

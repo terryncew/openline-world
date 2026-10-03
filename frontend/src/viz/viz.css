@@ -12,53 +12,75 @@
   overflow: hidden;
 }
 
-/* ---- wall-mounted plate: the room's sign + view selector ---- */
-.workshop-plate {
+/* ---- the workshop menu: one brass knob, everything else on tap ---- */
+.workshop-menu {
   position: absolute;
   top: 10px;
   left: 10px;
-  z-index: 5;
+  z-index: 6;
+}
+.menu-knob {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid #8a6d1f;
+  background: radial-gradient(circle at 35% 30%, #e8c45e, #b08c26 70%, #8a6d1f);
+  color: #3a2c1c;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(40, 25, 10, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.menu-knob:hover { filter: brightness(1.08); }
+.menu-knob[aria-expanded="true"] {
+  box-shadow: 0 0 0 2px #c9a227, 0 2px 6px rgba(40, 25, 10, 0.4);
+}
+.menu-panel {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  width: 240px;
+  max-width: calc(100vw - 32px);
   background: linear-gradient(180deg, #7a5230, #5e3d22);
   border: 1px solid #4a2f1a;
   border-radius: 10px;
-  padding: 8px 10px;
-  box-shadow: 0 3px 10px rgba(40, 25, 10, 0.35);
-  max-width: min(92vw, 430px);
+  box-shadow: 0 6px 22px rgba(40, 25, 10, 0.45);
+  padding: 6px 10px 10px;
+  z-index: 7;
 }
-.workshop-plate-sign strong {
-  display: block;
-  color: #f4e9d2;
-  font-size: 14px;
-  letter-spacing: 0.02em;
-}
-.workshop-plate-fine {
+.menu-section { padding: 8px 0; border-bottom: 1px solid rgba(201, 162, 39, 0.25); }
+.menu-section:last-child { border-bottom: none; padding-bottom: 2px; }
+.menu-head {
   display: block;
   color: #d8c49a;
-  font-size: 11px;
-  margin-top: 1px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
-.workshop-views {
-  display: flex;
-  gap: 6px;
-  margin-top: 8px;
-  flex-wrap: wrap;
-}
-.view-tag {
+.menu-views { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.menu-key {
   border: 1px solid #c9a227;
   background: rgba(201, 162, 39, 0.12);
   color: #f4e9d2;
-  border-radius: 14px;
-  padding: 4px 10px;
-  font-size: 12px;
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 13px;
   cursor: pointer;
 }
-.view-tag:hover { background: rgba(201, 162, 39, 0.3); }
-.view-tag.set {
+.menu-key:hover { background: rgba(201, 162, 39, 0.3); }
+.menu-key.set {
   background: #c9a227;
   color: #3a2c1c;
   font-weight: 700;
 }
-.view-tag.exit { border-style: dashed; }
+.menu-wide { width: 100%; }
+.menu-rail { width: 100%; margin: 2px 0 6px; }
+.menu-exit { border-style: dashed; }
 
 .viz-err {
   position: absolute;
@@ -285,10 +307,9 @@
 
 /* ---- small screens: the ledger becomes a bottom sheet ---- */
 @media (max-width: 700px) {
-  .workshop-plate { padding: 6px 8px; }
-  .workshop-plate-sign strong { font-size: 13px; }
-  .workshop-plate-fine { display: none; }
-  .view-tag { padding: 3px 8px; font-size: 11px; }
+  .workshop-menu { top: 8px; left: 8px; }
+  .menu-knob { width: 34px; height: 34px; font-size: 18px; }
+  .menu-panel { top: 42px; width: 220px; }
   .ledger {
     top: auto;
     bottom: 0;
