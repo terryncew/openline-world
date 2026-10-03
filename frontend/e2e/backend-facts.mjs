@@ -141,17 +141,19 @@ try {
   const replaced = /replac|onboard|juniper/i.test(text);
   console.log(`ALLOWED=${allowed} STOPPED=${stopped} revoked=${revoked} replaced=${replaced}`);
 
-  if (facts.eventCount < 20) fail(`expected the full custody sequence, got ${facts.eventCount} events`);
-  if (allowed < 1) fail("no ALLOWED decision in the sequence");
-  if (stopped < 1) fail("no STOPPED decision in the sequence");
+  if (facts.eventCount !== 23) fail(`expected the full 23-event custody sequence, got ${facts.eventCount}`);
+  if (allowed !== 3) fail(`expected 3 ALLOWED decisions, got ${allowed}`);
+  if (stopped !== 2) fail(`expected 2 STOPPED decisions, got ${stopped}`);
   if (!revoked) fail("no revocation in the sequence");
+  if (!replaced) fail("no worker replacement in the sequence");
+  if (facts.receipts !== 5) fail(`expected 5 receipts, got ${facts.receipts}`);
   console.log("PHASE 2 PASS: genuine custody sequence derived from backend facts.");
 
   // ---- phase 3: exit returns; backend facts persist (records survive) ----
   await page.click("text=Back to the Square");
   await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
   const receiptsFinal = await get("/api/receipts");
-  if (receiptsFinal.receipts.length < 1) fail("receipts lost after return");
+  if (receiptsFinal.receipts.length !== 5) fail(`receipts not preserved after return: ${receiptsFinal.receipts.length}`);
   console.log(`PHASE 3 PASS: return to square; ${receiptsFinal.receipts.length} receipts preserved.`);
   await browser.close();
   console.log("FACTS PASS: town inert, workshop genuine, records survive.");

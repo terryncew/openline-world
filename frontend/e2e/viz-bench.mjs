@@ -65,7 +65,9 @@ async function main() {
     cwd: repo, env: { ...process.env, WORKSHOP_PORT: String(BACKEND_PORT) }, stdio: "ignore",
   });
   const vite = spawn("npx", ["vite", "--port", String(VITE_PORT), "--strictPort", "--host", "127.0.0.1"], {
-    cwd: frontend, env: { ...process.env, WORKSHOP_PORT: String(BACKEND_PORT) }, stdio: "ignore",
+    // the bench harness needs synthetic events: opt into the build flag
+    // (default builds ignore ?vizbench= — see VizView benchN).
+    cwd: frontend, env: { ...process.env, WORKSHOP_PORT: String(BACKEND_PORT), VITE_ENABLE_VIZBENCH: "1" }, stdio: "ignore",
   });
   const kill = () => { backend.kill(); vite.kill(); };
   process.on("exit", kill);
