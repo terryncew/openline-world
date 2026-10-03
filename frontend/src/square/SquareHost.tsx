@@ -39,6 +39,11 @@ export function SquareHost() {
       const frame = iframeRef.current;
       if (!frame || ev.source !== frame.contentWindow) return;
       if (!isNavigateMessage(ev.data)) return;
+      // Exact message shape is necessary but not sufficient: a replaced or
+      // compromised child could send it from script. Only honor the intent
+      // while the browser reports a transient user activation propagated
+      // from a deliberate click/tap in the child frame.
+      if (!navigator.userActivation?.isActive) return;
       setFading(true);
       if (timer.current !== null) window.clearTimeout(timer.current);
       timer.current = window.setTimeout(() => setPlace("workshop"), 450);

@@ -13,7 +13,7 @@
  *
  * Run: node e2e/backend-facts.mjs (backend + vite are started here).
  */
-import { spawn, execSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -60,10 +60,7 @@ async function eventCount() {
   return n;
 }
 
-for (const p of [BACKEND_PORT, VITE_PORT]) {
-  try { execSync(`fuser -k ${p}/tcp 2>/dev/null`); } catch {}
-}
-await sleep(500);
+
 const env = { ...process.env, WORKSHOP_PORT: String(BACKEND_PORT) };
 const backend = spawn("python3", ["backend/server.py"], { cwd: repo, env, stdio: "ignore" });
 const vite = spawn("npx", ["vite", "--port", String(VITE_PORT), "--strictPort", "--host", "127.0.0.1"], { cwd: frontend, env, stdio: "ignore" });
@@ -82,7 +79,6 @@ try {
 
   const { chromium } = await import("playwright");
   const browser = await chromium.launch({
-    executablePath: "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
     args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
   });
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });

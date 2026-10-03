@@ -54,10 +54,10 @@ function Footprint({
 
 /** The workshop door: generous invisible hitbox + a soft wayfinding ring.
  *  Clicking/tapping sends the single navigation intent. */
-function WorkshopDoor() {
+function WorkshopDoor({ paused }: { paused: boolean }) {
   const ring = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => {
-    if (ring.current) {
+    if (ring.current && !paused) {
       const s = 1 + Math.sin(clock.elapsedTime * 1.6) * 0.05;
       ring.current.scale.set(s, s, 1);
     }
@@ -95,7 +95,7 @@ function WorkshopDoor() {
   );
 }
 
-function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
+function Scene({ clockRef, paused }: { clockRef: React.MutableRefObject<number>; paused: boolean }) {
   const t = clockRef.current;
   return (
     <>
@@ -112,7 +112,7 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
       <group position={[-3.4, 0, 3.4]}>
         <Fountain />
       </group>
-      <WorkshopDoor />
+      <WorkshopDoor paused={paused} />
       {/* UNEVEN CLUSTERS: the workshop + library + repair frame a modest
           forecourt; depot + exchange form the quieter west cluster. No
           equal spacing, no ring. */}
@@ -222,7 +222,7 @@ export function TownApp() {
         gl={{ antialias: true, powerPreference: "low-power" }}
         onCreated={({ camera }) => camera.lookAt(0.7, 0.9, -1.2)}
       >
-        <SceneFrame clockRef={clockRef} paused={paused || reduced} onTick={() => setTick((x) => x + 1)} />
+        <SceneFrame clockRef={clockRef} paused={paused} onTick={() => setTick((x) => x + 1)} />
       </Canvas>
       {/* minimal chrome: brand mark + pause */}
       <div
@@ -314,33 +314,28 @@ function SceneFrame({
       }
     }
   });
-  // subtle camera sway for life (disabled when reduced motion: paused covers it)
-  // responsive: portrait viewports pull back + widen so the square stays in frame
+  // Composition is applied on every render-frame, including paused and
+  // reduced-motion startup. Resize/rotation must never retain the camera
+  // from the previous aspect ratio.
   useFrame(({ camera, clock, size }) => {
-    if (!paused) {
-      const portrait = size.width / size.height < 0.9;
-      const pc = camera as THREE.PerspectiveCamera;
+    const portrait = size.width / size.height < 0.9;
+    const pc = camera as THREE.PerspectiveCamera;
       // portrait: its own authored staging — a low diagonal from the
       // south-west, at human height, looking up the lane. The workshop
       // sits off-center left; library and repair frame the midground;
       // a tree and the fence/cart give foreground occlusion. This is not
       // the landscape camera narrowed.
-      const wantFov = portrait ? 58 : 38;
-      const wantX = portrait ? -6.0 : 2.4;
-      const wantY = portrait ? 3.0 : 5.8;
-      const wantZ = portrait ? 14.5 : 12.8;
-      if (pc.fov !== wantFov) {
-        pc.fov = wantFov;
-        pc.updateProjectionMatrix();
-      }
-      const sway = portrait ? 0.15 : 0.25;
-      camera.position.set(
-        wantX + Math.sin(clock.elapsedTime * 0.11) * sway,
-        wantY,
-        wantZ
-      );
-      camera.lookAt(portrait ? 3.4 : 0.7, portrait ? 0.5 : 0.9, portrait ? -3.4 : -1.2);
+    const wantFov = portrait ? 52 : 38;
+    const wantX = portrait ? -4.7 : 2.4;
+    const wantY = portrait ? 3.6 : 5.8;
+    const wantZ = portrait ? 13.1 : 12.8;
+    if (pc.fov !== wantFov) {
+      pc.fov = wantFov;
+      pc.updateProjectionMatrix();
     }
+    const sway = paused ? 0 : portrait ? 0.12 : 0.25;
+    camera.position.set(wantX + Math.sin(clock.elapsedTime * 0.11) * sway, wantY, wantZ);
+    camera.lookAt(portrait ? 2.7 : 0.7, portrait ? 0.65 : 0.9, portrait ? -2.9 : -1.2);
   });
-  return <Scene clockRef={clockRef} />;
+  return <Scene clockRef={clockRef} paused={paused} />;
 }

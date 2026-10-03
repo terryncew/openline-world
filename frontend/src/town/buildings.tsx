@@ -504,6 +504,16 @@ export function Ground() {
     [-0.5, -8.5, 4.0, false],
     [2.8, 10.8, 2.6, true],
   ];
+  // Fixed scenery owns fixed geometry for the lifetime of this component.
+  // R3F disposes these on unmount; repeated pose renders reuse them.
+  // The lane coordinates are authored constants even though they are kept
+  // next to the component for readability; the empty dependency list is
+  // intentional stable ownership.
+  // oxlint-disable-next-line react-hooks/exhaustive-deps
+  const laneGeometries = useMemo(
+    () => lanes.map((pts, i) => ribbonGeometry(pts, i === 0 ? 2.0 : 1.6)),
+    []
+  );
   return (
     <group>
       {/* the world floor: cream, far past the frame on every side */}
@@ -519,8 +529,8 @@ export function Ground() {
         </mesh>
       ))}
       {/* the street network */}
-      {lanes.map((pts, i) => (
-        <mesh key={i} geometry={ribbonGeometry(pts, i === 0 ? 2.0 : 1.6)} position={[0, 0.008, 0]}>
+      {laneGeometries.map((geometry, i) => (
+        <mesh key={i} geometry={geometry} position={[0, 0.008, 0]}>
           {matte(PAL.path)}
         </mesh>
       ))}
