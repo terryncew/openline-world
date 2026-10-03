@@ -28,28 +28,39 @@ function ChunkLeg({ x, color, swing = 0 }: { x: number; color: string; swing?: n
   );
 }
 
-/** Shared chunky arm: upper -> elbow hinge -> forearm -> hand. */
+/** Shared chunky arm: upper -> elbow hinge -> forearm -> hand.
+ *  sy: shoulder height; upper/fore: segment lengths; elbow: forearm
+ *  bend (rotation.x, negative bends forward). Defaults preserve the
+ *  original stubby arm. */
 function ChunkArm({
   x,
   color,
   rx = 0,
   rz = 0,
+  sy = 0.62,
+  upper = 0.14,
+  fore = 0.12,
+  elbow = 0,
 }: {
   x: number;
   color: string;
   rx?: number;
   rz?: number;
+  sy?: number;
+  upper?: number;
+  fore?: number;
+  elbow?: number;
 }) {
   return (
-    <group position={[x, 0.62, 0.06]} rotation={[rx, 0, rz]}>
+    <group position={[x, sy, 0.06]} rotation={[rx, 0, rz]}>
       <mesh position={[0, -0.02, 0]}>
         <Hinge r={0.065} color={PAL.ink} />
       </mesh>
-      <Limb length={0.14} radius={0.06} color={color} />
-      <group position={[0, -0.14, 0]}>
+      <Limb length={upper} radius={0.06} color={color} />
+      <group position={[0, -upper, 0]} rotation={[elbow, 0, 0]}>
         <Hinge r={0.06} color={PAL.ink} />
-        <Limb length={0.12} radius={0.05} color={color} />
-        <mesh position={[0, -0.15, 0]}>
+        <Limb length={fore} radius={0.05} color={color} />
+        <mesh position={[0, -fore - 0.03, 0]}>
           <sphereGeometry args={[0.085, 12, 10]} />
           {matte(PAL.cream)}
         </mesh>
@@ -93,8 +104,8 @@ export function Waiter({
             <boxGeometry args={[0.2, 0.12, 0.04]} />
             {matte(PAL.sageDark)}
           </mesh>
-          <ChunkArm x={-0.27} color={PAL.sageDark} rx={d(-8)} rz={d(8)} />
-          <ChunkArm x={0.27} color={PAL.sageDark} rx={d(-8)} rz={d(-8)} />
+          <ChunkArm x={-0.27} color={PAL.sageDark} rx={d(-8)} rz={d(8)} sy={0.30} />
+          <ChunkArm x={0.27} color={PAL.sageDark} rx={d(-8)} rz={d(-8)} sy={0.30} />
           {/* dome head on a hinge neck, tracking the door */}
           <group position={[0, 0.42, 0]} rotation={[d(-4), headYaw, 0]}>
             <mesh position={[0, -0.1, 0]}>
@@ -123,8 +134,16 @@ export function Waiter({
 
 const DP = 18;
 
-/** A passerby with a parcel: walks the lane with purpose, turns at the
- *  end, walks back. A delivery in progress, not a wander. */
+/** Smoothstep clamp 0..1. */
+function sstep(u: number): number {
+  u = Math.min(1, Math.max(0, u));
+  return u * u * (3 - 2 * u);
+}
+
+/** A passerby with a parcel: idles with the parcel grounded, picks it up,
+ *  walks the lane carrying, presents the parcel toward the workshop
+ *  (handoff), turns smoothly, walks back, sets it down. No snaps,
+ *  no moonwalking — the turn is a beat, not a pop. */
 export function Passerby({
   t,
   from = [0.2, 8.5] as [number, number],
@@ -135,20 +154,53 @@ export function Passerby({
   to?: [number, number];
 }) {
   const T = loop(t, DP);
-  const travel = pulse(T, 1.0, 2.0, 7.0, 8.0, 1); // out
-  const travelBack = pulse(T, 9.5, 10.5, 15.5, 16.5, 1); // back
-  const k = travel * (1 - travelBack) + (1 - travel) * travelBack;
-  const moving = (T > 1 && T < 8) || (T > 9.5 && T < 16.5);
-  const returning = T > 9.5 && T < 16.5;
+  // position: idle at from → walk out → hold at to (handoff + turn) → walk back → idle
+  const k = sstep((T - 2.0) / 5.0) * (1 - sstep((T - 10.6) / 5.8));
+  const moving = (T > 2.0 && T < 7.0) || (T > 10.6 && T < 16.4);
   const gx = from[0] + (to[0] - from[0]) * k;
   const gz = from[1] + (to[1] - from[1]) * k;
-  const face = Math.atan2(to[0] - from[0], to[1] - from[1]) + (returning ? Math.PI : 0);
-  const ph = moving ? gait(T, 0, DP, 14) : 0;
-  const lean = moving ? d(5) : 0;
+  // smooth turn in place at the far end, and back at the loop seam
+  const turnS = sstep((T - 8.8) / 1.8);
+  const turnBack = sstep((T - 16.6) / 1.4);
+  const baseFace = Math.atan2(to[0] - from[0], to[1] - from[1]);
+  const face = baseFace + (turnS - turnBack) * Math.PI;
+  const gaitOut = gait(T, 2.0, 7.0, 12);
+  const gaitBack = gait(T, 10.6, 16.4, 12);
+  const ph = gaitOut + gaitBack;
+  // the parcel: grounded at idle, lifted to the chest to carry, presented
+  // at handoff. It lives in the root frame so it stays put while the torso bends.
+  const liftK = sstep((T - 1.2) / 0.8) * (1 - sstep((T - 16.4) / 0.8));
+  const handoff = sstep((T - 7.8) / 0.6) * (1 - sstep((T - 8.8) / 0.6));
+  const bend =
+    sstep((T - 1.2) / 0.8) * (1 - sstep((T - 2.0) / 0.8)) +
+    sstep((T - 16.4) / 0.8) * (1 - sstep((T - 17.2) / 0.8));
+  // arms: rest (hang, slight bend) → reach during the bend → carry
+  // (elbows low, hands cup the parcel's lower sides) → handoff (extend)
+  const carryK = Math.max(
+    sstep((T - 1.8) / 0.4) * (1 - sstep((T - 7.4) / 0.8)),
+    sstep((T - 10.2) / 1.0) * (1 - sstep((T - 16.0) / 0.8))
+  );
+  const armRx = d(-6) + bend * d(-42) + carryK * d(-8) + handoff * d(-24);
+  const armElbow = d(-12) + bend * d(-6) + carryK * d(-40) + handoff * d(34);
+  const lean = (moving ? d(5) : 0) + handoff * d(6) + bend * d(30);
+  const parcelY =
+    0.13 + (0.8 - 0.13) * liftK + handoff * 0.04 + (moving ? Math.abs(ph) * 0.02 : 0);
+  const parcelZ = 0.48 + (0.34 - 0.48) * liftK + handoff * 0.1;
 
   return (
     <group position={[gx, 0, gz]} rotation={[0, face, 0]}>
       <BlobShadow r={0.42} />
+      {/* the parcel, in the root frame: grounded, lifted, presented */}
+      <group position={[0, parcelY, parcelZ]} rotation={[0, 0, moving ? ph * d(2) : 0]}>
+        <mesh>
+          <boxGeometry args={[0.34, 0.26, 0.26]} />
+          {matte(PAL.wood)}
+        </mesh>
+        <mesh position={[0, 0.0, 0.0]}>
+          <boxGeometry args={[0.35, 0.05, 0.27]} />
+          {matte(PAL.creamDark)}
+        </mesh>
+      </group>
       <group rotation={[0, 0, 0]}>
         <ChunkLeg x={-0.13} color={PAL.terracottaDark} swing={ph * d(20)} />
         <ChunkLeg x={0.13} color={PAL.terracottaDark} swing={-ph * d(20)} />
@@ -158,21 +210,28 @@ export function Passerby({
             <cylinderGeometry args={[0.2, 0.26, 0.52, 12]} />
             {matte(PAL.blue)}
           </mesh>
-          {/* the parcel, held in both hands */}
-          <group position={[0, 0.02, 0.34]}>
-            <mesh>
-              <boxGeometry args={[0.34, 0.26, 0.26]} />
-              {matte(PAL.wood)}
-            </mesh>
-            <mesh position={[0, 0.0, 0.0]}>
-              <boxGeometry args={[0.35, 0.05, 0.27]} />
-              {matte(PAL.creamDark)}
-            </mesh>
-          </group>
-          <ChunkArm x={-0.26} color={PAL.blueDark} rx={d(-52)} rz={d(14)} />
-          <ChunkArm x={0.26} color={PAL.blueDark} rx={d(-52)} rz={d(-14)} />
-          {/* bucket head with a brim */}
-          <group position={[0, 0.4, 0]}>
+          <ChunkArm
+            x={-0.26}
+            color={PAL.blueDark}
+            rx={armRx}
+            rz={d(8)}
+            sy={0.32}
+            upper={0.24}
+            fore={0.2}
+            elbow={armElbow}
+          />
+          <ChunkArm
+            x={0.26}
+            color={PAL.blueDark}
+            rx={armRx}
+            rz={d(-8)}
+            sy={0.32}
+            upper={0.24}
+            fore={0.2}
+            elbow={armElbow}
+          />
+          {/* bucket head with a brim — looks down at the parcel during the bend */}
+          <group position={[0, 0.4, 0]} rotation={[bend * d(18), 0, 0]}>
             <mesh position={[0, -0.09, 0]}>
               <Hinge r={0.085} color={PAL.ink} />
             </mesh>

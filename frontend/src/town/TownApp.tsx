@@ -320,23 +320,26 @@ function SceneFrame({
     if (!paused) {
       const portrait = size.width / size.height < 0.9;
       const pc = camera as THREE.PerspectiveCamera;
-      // portrait: its own framing — close on the workshop forecourt, the
-      // lane running down through the frame. Sky and foreground approach
-      // are cropped out; this is not the landscape camera narrowed.
-      const wantFov = portrait ? 46 : 38;
-      const wantX = portrait ? 1.0 : 2.4;
-      const wantY = portrait ? 4.4 : 5.8;
-      const wantZ = portrait ? 9.4 : 12.8;
+      // portrait: its own authored staging — a low diagonal from the
+      // south-west, at human height, looking up the lane. The workshop
+      // sits off-center left; library and repair frame the midground;
+      // a tree and the fence/cart give foreground occlusion. This is not
+      // the landscape camera narrowed.
+      const wantFov = portrait ? 58 : 38;
+      const wantX = portrait ? -6.0 : 2.4;
+      const wantY = portrait ? 3.0 : 5.8;
+      const wantZ = portrait ? 14.5 : 12.8;
       if (pc.fov !== wantFov) {
         pc.fov = wantFov;
         pc.updateProjectionMatrix();
       }
+      const sway = portrait ? 0.15 : 0.25;
       camera.position.set(
-        wantX + Math.sin(clock.elapsedTime * 0.11) * 0.25,
+        wantX + Math.sin(clock.elapsedTime * 0.11) * sway,
         wantY,
         wantZ
       );
-      camera.lookAt(portrait ? 1.2 : 0.7, portrait ? 1.0 : 0.9, portrait ? -2.6 : -1.2);
+      camera.lookAt(portrait ? 3.4 : 0.7, portrait ? 0.5 : 0.9, portrait ? -3.4 : -1.2);
     }
   });
   return <Scene clockRef={clockRef} />;
