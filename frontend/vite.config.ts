@@ -1,6 +1,5 @@
 import react from '@vitejs/plugin-react'
 import basicSsl from '@vitejs/plugin-basic-ssl'
-import { viteSingleFile } from 'vite-plugin-singlefile'
 import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
@@ -24,18 +23,13 @@ const useHttps = process.env.PREVIEW_HTTPS === '1'
 const backendPort = process.env.WORKSHOP_PORT ?? '8471'
 
 export default defineConfig({
-  // town.html must be a SINGLE self-contained file: the sandboxed iframe
-  // has an opaque origin, so module script fetches would be CORS-blocked.
-  // viteSingleFile inlines the town bundle (and index's) into the HTML.
-  plugins: [react(), viteSingleFile(), ...(useHttps ? [basicSsl()] : [])],
+  plugins: [react(), ...(useHttps ? [basicSsl()] : [])],
   build: {
-    // The Square ships as a separately bundled document (town.html) so it
-    // can run in an opaque-origin sandboxed iframe. No shared runtime
-    // state crosses the frame boundary; see src/square/ARCHITECTURE.md.
+    // index.html only. The town (town.html) is built separately by
+    // vite.town.config.ts as a single self-contained file (see below).
     rollupOptions: {
       input: {
         main: "index.html",
-        town: "town.html",
       },
     },
   },
