@@ -71,7 +71,7 @@ at 55751ef. Do not alter the protocol, backend event model, reducer semantics,
 receipt logic, or the existing nine-step custody visualization except where
 required to enter/exit it cleanly.
 
-Goal: restore the original Richard Scarry-style OpenLine World as the
+Goal: restore the original storybook-miniature OpenLine World as the
 explorable outer world, while keeping every consequential claim inside spaces
 backed by actual OpenLine evidence.
 

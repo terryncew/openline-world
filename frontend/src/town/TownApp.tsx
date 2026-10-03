@@ -2,7 +2,7 @@
  * TownApp: the Square's decorative world, separately bundled.
  * frontend/src/town/TownApp.tsx
  *
- * Fixed theatrical composition (Wes Anderson frontal staging), matte
+ * Fixed theatrical composition (symmetrical frontal staging), matte
  * miniature palette, four authored vignettes. The ONLY outbound channel
  * is the workshop door's navigation intent (see ./protocol.ts).
  * No backend clients, no protocol imports, no shared state.

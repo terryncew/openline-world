@@ -4,7 +4,7 @@
  *
  * Restrained miniature palette: cream, terracotta, blue, sage, with small
  * warm accents. Everything matte (roughness ~0.9, metalness 0) for the
- * handcrafted Henson-like warmth. No gloss, no neon, no emissive signage.
+ * handcrafted storybook warmth. No gloss, no neon, no emissive signage.
  */
 import type { ReactNode } from "react";
 

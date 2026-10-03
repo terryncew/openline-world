@@ -120,7 +120,7 @@ Backend tests: `cd backend && ~/workspace/.venvs/workshop/bin/python -m unittest
   (`Node.removeChild: The node to be removed is not a child of this node`),
   confirmed present on the base commit `24f664d` without this lane — not
   introduced here; all custody behavior checks pass.
-- Negative battery (Terrynce's bar — the deliverable that matters most),
+- Negative battery (the primary acceptance criterion),
   `~/workspace/qa/custody-browser/negative-battery.py`, real town UI, real
   receiver, **12/12 green (2026-09-26)**:
   - **N1 — silent identity recreation: refused loudly in the tested flow.**

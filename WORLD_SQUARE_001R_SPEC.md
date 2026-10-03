@@ -23,8 +23,8 @@ Create an original handcrafted 3D miniature robot town with theatrical
 composition, tactile warmth, matte materials, and a restrained palette:
 cream, terracotta, blue, sage, and small warm accents.
 
-Use Busytown’s interconnected everyday storytelling, Wes Anderson’s
-staging, Henson’s material warmth, and Pixar’s physical readability as
+Use interconnected everyday storytelling, symmetrical theatrical staging,
+handcrafted material warmth, and physically readable characters as
 references. Create original characters, buildings, and scenes.
 
 The Square imagines. The workshop proves.
