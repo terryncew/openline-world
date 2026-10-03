@@ -22,10 +22,33 @@ import { Workshop, Exchange, Library, Depot, RepairShop, Ground, Lamp, Fountain,
 function Sun() {
   return (
     <>
-      <hemisphereLight args={[PAL.cream, PAL.sageDark, 0.85]} />
-      <directionalLight position={[6, 10, 7]} intensity={1.6} color="#fff2dd" />
-      <directionalLight position={[-6, 4, -4]} intensity={0.35} color="#dfe8f0" />
+      <hemisphereLight args={["#fdf8ec", "#aeb89a", 0.65]} />
+      <directionalLight position={[5, 9, 6]} intensity={1.7} color="#fff1da" />
+      <directionalLight position={[-5, 3, 2]} intensity={0.3} color="#e8eef2" />
     </>
+  );
+}
+
+/** Soft contact shadow under a building footprint: grounds the building
+ *  without heavy ambient shading. */
+function Footprint({
+  x,
+  z,
+  sx,
+  sz,
+  opacity = 0.13,
+}: {
+  x: number;
+  z: number;
+  sx: number;
+  sz: number;
+  opacity?: number;
+}) {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[x, 0.012, z]} scale={[sx, sz, 1]}>
+      <circleGeometry args={[1, 28]} />
+      <meshBasicMaterial color="#3d3428" transparent opacity={opacity} depthWrite={false} />
+    </mesh>
   );
 }
 
@@ -76,68 +99,76 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
   return (
     <>
       <Sun />
-      <fog attach="fog" args={[PAL.cream, 24, 58]} />
+      <fog attach="fog" args={[PAL.cream, 26, 62]} />
       <Ground />
-      {/* fountain off-axis: a neighborhood detail, not a civic centerpiece */}
-      <group position={[-3.2, 0, 3.2]}>
+      {/* contact shadows under every building */}
+      <Footprint x={1.6} z={-4.2} sx={2.4} sz={2.0} />
+      <Footprint x={-4.8} z={-2.4} sx={2.2} sz={1.9} />
+      <Footprint x={4.6} z={-2.2} sx={2.0} sz={1.8} />
+      <Footprint x={-4.6} z={2.8} sx={1.9} sz={1.7} />
+      <Footprint x={7.2} z={-2.0} sx={2.1} sz={1.8} />
+      {/* fountain: the west cluster's gathering point */}
+      <group position={[-3.4, 0, 3.4]}>
         <Fountain />
       </group>
       <WorkshopDoor />
-      {/* staggered buildings along the street network, none centered */}
-      <group position={[-6.0, 0, -2.6]} rotation={[0, 0.9, 0]}>
+      {/* UNEVEN CLUSTERS: the workshop + library + repair frame a modest
+          forecourt; depot + exchange form the quieter west cluster. No
+          equal spacing, no ring. */}
+      <group position={[-4.8, 0, -2.4]} rotation={[0, 0.9, 0]}>
         <Exchange />
       </group>
-      <group position={[5.6, 0, -3.6]} rotation={[0, -0.65, 0]}>
+      <group position={[4.6, 0, -2.2]} rotation={[0, -0.55, 0]}>
         <Library />
       </group>
-      <group position={[-5.6, 0, 2.4]} rotation={[0, 1.05, 0]}>
+      <group position={[-4.6, 0, 2.8]} rotation={[0, 1.05, 0]}>
         <Depot />
       </group>
-      <group position={[6.2, 0, 5.0]} rotation={[0, -0.85, 0]}>
+      <group position={[7.2, 0, -2.0]} rotation={[0, -0.55, 0]}>
         <RepairShop />
       </group>
 
       {/* side alleys: crates and barrels where lanes slip behind buildings */}
       <AlleyClutter position={[-6.9, 0, 0.2]} rotationY={0.4} />
-      <AlleyClutter position={[6.9, 0, 1.4]} rotationY={-0.5} />
-      <AlleyClutter position={[8.6, 0, -5.4]} rotationY={-0.7} />
+      <AlleyClutter position={[7.8, 0, 0.6]} rotationY={-0.5} />
+      <AlleyClutter position={[9.2, 0, -5.2]} rotationY={-0.7} />
 
-      {/* more town implied beyond every frame edge */}
-      <DistantRoof position={[-9.5, 0, -5.0]} color={PAL.blue} />
-      <DistantRoof position={[9.8, 0, -2.0]} color={PAL.sage} />
-      <DistantRoof position={[-7.5, 0, 7.0]} color={PAL.terracotta} />
-      <DistantRoof position={[12.5, 0, 6.5]} color={PAL.terracotta} />
-      <DistantRoof position={[-12.5, 0, -3.0]} color={PAL.blue} />
+      {/* more town implied beyond every frame edge: small, low, distant */}
+      <DistantRoof position={[-12.5, 0, -7.0]} color={PAL.blue} s={0.7} />
+      <DistantRoof position={[11.0, 0, -3.0]} color={PAL.sage} />
+      <DistantRoof position={[-8.5, 0, 8.0]} color={PAL.terracotta} />
+      <DistantRoof position={[13.5, 0, 7.5]} color={PAL.blue} />
+      <DistantRoof position={[-13.5, 0, -4.0]} color={PAL.sage} />
 
       {/* STORY CLUSTERS: each zone tells its labor story */}
       {/* depot yard: the carrier LOADS lumber under the depot canopy */}
-      <group position={[-5.4, 0, 3.5]} rotation={[0, 0.35, 0]}>
+      <group position={[-4.4, 0, 3.9]} rotation={[0, 0.35, 0]}>
         <DepotYard />
       </group>
-      <Carrier t={t} position={[-3.3, 0, 2.3]} />
+      <Carrier t={t} position={[-3.2, 0, 3.4]} />
       {/* repair: the tinkerer retries the mechanism beside the parts bench */}
-      <Tinkerer t={t + 4.0} position={[4.3, 0, 2.7]} rotationY={0.62} />
-      {/* library: the reader, the helper, the cart */}
-      <Reader t={t + 8.0} position={[4.6, 0, -1.6]} rotationY={-0.9} />
-      <Helper t={t + 3.0} position={[5.6, 0, -0.6]} rotationY={-2.36} />
-      {/* street: the sweeper works the plaza */}
-      <Sweeper t={t + 2.0} position={[-0.9, 0, 4.6]} rotationY={0.25} />
+      <Tinkerer t={t + 4.0} position={[6.0, 0, -0.6]} rotationY={-0.5} />
+      {/* library nook: the reader, the helper, the cart */}
+      <Reader t={t + 8.0} position={[4.0, 0, -0.4]} rotationY={-0.9} />
+      <Helper t={t + 3.0} position={[5.0, 0, 0.4]} rotationY={-2.36} />
+      {/* street: the sweeper works the main lane */}
+      <Sweeper t={t + 2.0} position={[-0.2, 0, 5.4]} rotationY={0.25} />
 
       {/* workshop story: one waiting, attention on the door */}
-      <Waiter t={t + 1.0} position={[2.9, 0, -2.3]} rotationY={-1.96} />
+      <Waiter t={t + 1.0} position={[2.6, 0, -2.0]} rotationY={-1.96} />
       {/* a delivery in progress along the main lane */}
-      <Passerby t={t + 5.0} />
+      <Passerby t={t + 5.0} from={[0.4, 9.0]} to={[1.2, 3.0]} />
 
       {/* stepping-stone trail leads the eye to the workshop door */}
       <PropTrail />
 
       {/* street furniture: the street is lived on */}
-      <Mailbox position={[3.3, 0, 5.2]} rotationY={-0.4} />
-      <Lamp position={[2.9, 0, 8.1]} />
-      <Lamp position={[4.4, 0, 1.4]} />
-      <Lamp position={[-5.4, 0, -4.8]} />
-      <Lamp position={[6.6, 0, -2.0]} />
-      <Lamp position={[-7.0, 0, 1.6]} />
+      <Mailbox position={[3.4, 0, 4.6]} rotationY={-0.4} />
+      <Lamp position={[3.0, 0, 6.8]} />
+      <Lamp position={[0.4, 0, 4.4]} />
+      <Lamp position={[-2.8, 0, 3.0]} />
+      <Lamp position={[4.8, 0, -1.2]} />
+      <Lamp position={[-4.2, 0, -3.6]} />
 
       {/* foreground edge: fence corner + cart wheel + hedge imply more town */}
       <FenceCorner position={[-3.1, 0, 8.7]} rotationY={0.3} />
@@ -146,9 +177,9 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
       <Hedge position={[-6.2, 0, 9.0]} w={1.3} />
 
       {/* trees with character occlude the street ends: lanes vanish behind green */}
-      <CharacterTree position={[-9.2, 0, 0.8]} s={1.2} seed={1} />
-      <CharacterTree position={[8.6, 0, -4.6]} s={1.2} seed={2} />
-      <CharacterTree position={[8.4, 0, 5.2]} s={1.0} seed={3} />
+      <CharacterTree position={[-8.2, 0, 1.2]} s={1.2} seed={1} />
+      <CharacterTree position={[7.8, 0, -3.4]} s={1.2} seed={2} />
+      <CharacterTree position={[9.0, 0, 4.8]} s={1.0} seed={3} />
       <CharacterTree position={[-4.5, 0, 8.8]} s={1.1} seed={4} />
       <CharacterTree position={[5.5, 0, 9.2]} s={0.9} seed={5} />
       <CharacterTree position={[7.8, 0, -6.5]} s={1.0} seed={6} />
@@ -179,9 +210,9 @@ export function TownApp() {
     <div style={{ position: "fixed", inset: 0, background: PAL.cream }}>
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [0, 4.7, 12.0], fov: 41, near: 0.1, far: 60 }}
+        camera={{ position: [2.4, 5.8, 12.8], fov: 38, near: 0.1, far: 80 }}
         gl={{ antialias: true, powerPreference: "low-power" }}
-        onCreated={({ camera }) => camera.lookAt(0.4, 0.95, -1.0)}
+        onCreated={({ camera }) => camera.lookAt(0.7, 0.9, -1.2)}
       >
         <SceneFrame clockRef={clockRef} paused={paused || reduced} onTick={() => setTick((x) => x + 1)} />
       </Canvas>
@@ -265,19 +296,20 @@ function SceneFrame({
     if (!paused) {
       const portrait = size.width / size.height < 0.9;
       const pc = camera as THREE.PerspectiveCamera;
-      const wantFov = portrait ? 52 : 41;
-      const wantY = portrait ? 7.2 : 4.7;
-      const wantZ = portrait ? 17.5 : 12.0;
+      const wantFov = portrait ? 52 : 38;
+      const wantX = portrait ? 1.44 : 2.4;
+      const wantY = portrait ? 7.6 : 5.8;
+      const wantZ = portrait ? 18.0 : 12.8;
       if (pc.fov !== wantFov) {
         pc.fov = wantFov;
         pc.updateProjectionMatrix();
       }
       camera.position.set(
-        Math.sin(clock.elapsedTime * 0.11) * (portrait ? 0.25 : 0.25),
+        wantX + Math.sin(clock.elapsedTime * 0.11) * 0.25,
         wantY,
         wantZ
       );
-      camera.lookAt(0.4, 0.95, -1.0);
+      camera.lookAt(portrait ? 0.5 : 0.7, 0.9, -1.2);
     }
   });
   return <Scene clockRef={clockRef} />;

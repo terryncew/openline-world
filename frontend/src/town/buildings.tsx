@@ -468,125 +468,59 @@ export function RepairShop() {
 }
 
 /** Ground: NO enclosing border, NO circular stage. A cream world that
- *  extends past every frame edge, with irregular grass patches and a
- *  network of winding street ribbons that run offscreen and disappear
- *  behind buildings and trees. The plaza is the intersection of those
- *  streets, not a disc. */
+ *  extends past every frame edge. Three legible zones: pale paths, muted
+ *  green planted verges, cream floor — never one muddy field. The street
+ *  network is one bending main lane (foreground -> workshop door) with a
+ *  single branch toward the library; every lane runs offscreen or
+ *  disappears behind buildings and trees. */
 export function Ground() {
-  const patches = useMemo(
-    () => [
-      { g: blobGeometry(4.6, 0.4, 2.1), p: [-9.5, 0.004, -7.5] as [number, number, number] },
-      { g: blobGeometry(5.2, 0.35, 5.7), p: [10.5, 0.004, 4.0] as [number, number, number] },
-      { g: blobGeometry(3.8, 0.45, 8.9), p: [-6.0, 0.004, 10.5] as [number, number, number] },
-      { g: blobGeometry(4.4, 0.38, 3.3), p: [8.0, 0.004, -10.5] as [number, number, number] },
-      { g: blobGeometry(3.2, 0.5, 6.1), p: [-13.5, 0.004, 3.5] as [number, number, number] },
-    ],
-    []
-  );
-  const streets = useMemo(
-    () => [
-      // lane A: foreground edge -> winding up to the workshop door
-      ribbonGeometry(
-        [
-          [0.4, 11.5],
-          [1.0, 7.5],
-          [-0.6, 4.5],
-          [0.8, 2.0],
-          [1.6, -0.8],
-          [1.7, -2.6],
-        ],
-        2.0
-      ),
-      // lane B: plaza -> behind the library -> off the right edge
-      ribbonGeometry(
-        [
-          [0.8, 2.0],
-          [3.2, 0.5],
-          [5.4, -1.8],
-          [7.8, -3.6],
-          [11.5, -5.5],
-        ],
-        1.7
-      ),
-      // lane C: between depot and exchange -> off the left edge
-      ribbonGeometry(
-        [
-          [-0.6, 4.5],
-          [-3.2, 3.6],
-          [-5.8, 2.2],
-          [-8.8, 1.2],
-          [-12.5, 0.5],
-        ],
-        1.7
-      ),
-      // lane D: toward the repair shop -> off the right edge
-      ribbonGeometry(
-        [
-          [1.0, 7.5],
-          [4.0, 6.4],
-          [7.0, 5.6],
-          [10.5, 5.2],
-        ],
-        1.7
-      ),
-      // lane E: behind the workshop -> town continues off the back
-      ribbonGeometry(
-        [
-          [3.4, -1.5],
-          [5.8, -3.8],
-          [8.5, -6.5],
-          [11.5, -9.5],
-        ],
-        1.6
-      ),
-      // lane F: plaza -> exchange door
-      ribbonGeometry(
-        [
-          [-3.2, 3.6],
-          [-4.6, 1.6],
-          [-5.4, -0.6],
-        ],
-        1.5
-      ),
-    ],
-    []
-  );
+  const lanes: [number, number][][] = [
+    // main lane: foreground -> bending toward the workshop door
+    [[0.6, 11.5], [1.0, 7.5], [0.2, 5.0], [1.0, 2.6], [1.5, 0.2], [1.6, -2.4]],
+    // branch: toward the library -> off the right edge
+    [[1.5, 0.2], [3.4, -0.6], [5.4, -1.6], [8.5, -2.6]],
+    // west lane: between depot and exchange -> off the left edge
+    [[0.2, 5.0], [-2.6, 4.2], [-5.0, 3.0], [-9.0, 2.2]],
+    // to repair -> off the right edge
+    [[1.0, 7.5], [3.6, 6.8], [6.4, 6.0], [10.0, 5.6]],
+    // behind the workshop: town continues
+    [[3.4, -3.4], [6.0, -5.6], [9.5, -8.0]],
+    // to the exchange door
+    [[-2.6, 4.2], [-3.8, 2.0], [-4.4, -0.4]],
+  ];
+  const patches: [number, number, number, boolean][] = [
+    // x, z, radius, sageDark?
+    [-1.8, 7.8, 3.2, false],
+    [3.6, 4.8, 2.8, true],
+    [-3.6, -4.8, 3.0, false],
+    [7.0, -5.0, 3.2, true],
+    [-7.8, 6.8, 3.4, false],
+    [7.6, 8.6, 3.0, true],
+    [-0.5, -8.5, 4.0, false],
+    [2.8, 10.8, 2.6, true],
+  ];
   return (
     <group>
       {/* the world floor: cream, far past the frame on every side */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]}>
-        <planeGeometry args={[80, 80]} />
+        <planeGeometry args={[90, 90]} />
         {matte(PAL.cream)}
       </mesh>
-      {/* irregular grass patches, deliberately asymmetric */}
-      {patches.map((p, i) => (
-        <mesh key={i} geometry={p.g} rotation={[-Math.PI / 2, 0, 0]} position={p.p}>
-          {matte(PAL.sage)}
+      {/* planted verges: muted green, deliberately asymmetric */}
+      {patches.map(([x, z, r, dark], i) => (
+        <mesh key={i} rotation={[-Math.PI / 2, 0, 0]} position={[x, 0.004, z]}>
+          <circleGeometry args={[r, 26]} />
+          {matte(dark ? PAL.sageDark : PAL.sage)}
         </mesh>
       ))}
       {/* the street network */}
-      {streets.map((g, i) => (
-        <mesh key={i} geometry={g} position={[0, 0.008, 0]}>
+      {lanes.map((pts, i) => (
+        <mesh key={i} geometry={ribbonGeometry(pts, i === 0 ? 2.0 : 1.6)} position={[0, 0.008, 0]}>
           {matte(PAL.path)}
         </mesh>
       ))}
     </group>
   );
-}
-
-/** Organic blob geometry: a disc with a wobbly radius. Deterministic. */
-function blobGeometry(r: number, wobble: number, seed: number): THREE.BufferGeometry {
-  const shape = new THREE.Shape();
-  const N = 48;
-  for (let i = 0; i <= N; i++) {
-    const a = (i / N) * Math.PI * 2;
-    const rr = r * (1 + wobble * Math.sin(a * 3 + seed) * Math.sin(a * 2 + seed * 1.3));
-    const x = Math.cos(a) * rr;
-    const y = Math.sin(a) * rr;
-    if (i === 0) shape.moveTo(x, y);
-    else shape.lineTo(x, y);
-  }
-  return new THREE.ShapeGeometry(shape, 24);
 }
 
 /** Flat ribbon along a winding 2D path. Deterministic. */
@@ -640,10 +574,11 @@ export function AlleyClutter({ position, rotationY = 0 }: { position: [number, n
   );
 }
 
-/** A distant rooftop at the frame edge: more town implied offscreen. */
-export function DistantRoof({ position, color }: { position: [number, number, number]; color: string }) {
+/** A distant rooftop at the frame edge: more town implied offscreen.
+ *  Kept small and low — a hint, not a building. */
+export function DistantRoof({ position, color, s = 0.8 }: { position: [number, number, number]; color: string; s?: number }) {
   return (
-    <group position={position}>
+    <group position={position} scale={s}>
       <mesh position={[0, 1.4, 0]}>
         <boxGeometry args={[3.2, 2.8, 2.6]} />
         {matte(color)}
@@ -1011,14 +946,14 @@ export function CartWheel({ position, rotationY = 0 }: { position: [number, numb
  *  workshop door: the path itself leads the eye there. */
 export function PropTrail() {
   const stones: [number, number, number][] = [
-    [0.3, 10.6, 0.3],
-    [0.9, 8.6, -0.2],
-    [0.2, 6.6, 0.4],
-    [-0.3, 5.0, -0.3],
-    [0.6, 3.4, 0.2],
-    [1.1, 1.8, -0.25],
-    [1.55, 0.2, 0.2],
-    [1.6, -1.4, -0.15],
+    [0.6, 10.8, 0.3],
+    [1.0, 8.8, -0.2],
+    [0.4, 6.8, 0.4],
+    [0.0, 5.2, -0.3],
+    [0.8, 3.6, 0.2],
+    [1.3, 1.8, -0.25],
+    [1.55, 0.0, 0.2],
+    [1.6, -1.6, -0.15],
   ];
   return (
     <group>
