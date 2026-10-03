@@ -13,7 +13,12 @@ The decorative town is a **separately bundled document** (`frontend/town.html`
 <iframe sandbox="allow-scripts" src="town.html" />
 ```
 
-No `allow-same-origin`: the child gets an **opaque origin**. Consequences,
+No `allow-same-origin`: the child gets an **opaque origin**. The town is
+built as a SINGLE self-contained file (`vite.town.config.ts` +
+`vite-plugin-singlefile` inlines all JS/CSS into `dist/town.html`):
+an opaque origin cannot CORS-fetch module scripts, so inlining is what
+makes the production iframe work at all. Dev uses a loopback-only
+`Access-Control-Allow-Origin: *` header for the same reason. Consequences,
 each enforced and tested:
 
 - The child cannot read the parent's DOM, cookies, or storage (SOP).
