@@ -496,7 +496,7 @@ export function Ground() {
   const patches: [number, number, number, boolean][] = [
     // x, z, radius, sageDark?
     [-1.8, 7.8, 3.2, false],
-    [3.6, 4.8, 2.8, true],
+    [3.6, 4.8, 2.2, true],
     [-3.6, -4.8, 3.0, false],
     [7.0, -5.0, 3.2, true],
     [-7.8, 6.8, 3.4, false],

@@ -258,6 +258,7 @@ export function TownApp() {
         {paused ? "▶" : "⏸"}
       </button>
       <div
+        className="town-hint"
         style={{
           position: "absolute",
           bottom: "max(20px, env(safe-area-inset-bottom))",
@@ -270,8 +271,23 @@ export function TownApp() {
           color: PAL.ink,
         }}
       >
-        Tap the workshop door to see how work gets approved
+        <span>Tap the workshop door to see how work gets approved</span>
       </div>
+      <style>{`@media (max-aspect-ratio: 9/10) {
+        .town-hint {
+          left: 16px !important;
+          right: 78px !important;
+          bottom: max(18px, env(safe-area-inset-bottom)) !important;
+        }
+        .town-hint span {
+          background: rgba(250, 246, 236, 0.94);
+          border-radius: 999px;
+          padding: 8px 14px;
+          box-shadow: 0 1px 8px rgba(61, 52, 40, 0.22);
+          font-size: 12px;
+          white-space: nowrap;
+        }
+      }`}</style>
     </div>
   );
 }
@@ -304,10 +320,13 @@ function SceneFrame({
     if (!paused) {
       const portrait = size.width / size.height < 0.9;
       const pc = camera as THREE.PerspectiveCamera;
-      const wantFov = portrait ? 52 : 38;
-      const wantX = portrait ? 1.44 : 2.4;
-      const wantY = portrait ? 7.6 : 5.8;
-      const wantZ = portrait ? 18.0 : 12.8;
+      // portrait: its own framing — close on the workshop forecourt, the
+      // lane running down through the frame. Sky and foreground approach
+      // are cropped out; this is not the landscape camera narrowed.
+      const wantFov = portrait ? 46 : 38;
+      const wantX = portrait ? 1.0 : 2.4;
+      const wantY = portrait ? 4.4 : 5.8;
+      const wantZ = portrait ? 9.4 : 12.8;
       if (pc.fov !== wantFov) {
         pc.fov = wantFov;
         pc.updateProjectionMatrix();
@@ -317,7 +336,7 @@ function SceneFrame({
         wantY,
         wantZ
       );
-      camera.lookAt(portrait ? 0.5 : 0.7, 0.9, -1.2);
+      camera.lookAt(portrait ? 1.2 : 0.7, portrait ? 1.0 : 0.9, portrait ? -2.6 : -1.2);
     }
   });
   return <Scene clockRef={clockRef} />;
