@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<!--
+  OpenLine World — the Square (decorative town, separately bundled).
+
+  This document runs in an opaque-origin sandboxed iframe
+  (<iframe sandbox="allow-scripts">, no allow-same-origin). Its only
+  channel to the parent page is a single validated postMessage intent.
+  It makes no network requests: the CSP below forbids them, and the
+  parent validates every message by shape AND by source frame.
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none';" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<title>OpenLine World — Square</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #f3ead9; }
+  #town-root { position: fixed; inset: 0; }
+  #town-root canvas { display: block; width: 100%; height: 100%; touch-action: manipulation; }
+</style>
+</head>
+<body>
+<div id="town-root"></div>
+<script type="module" src="/src/town/main.tsx"></script>
+</body>
+</html>

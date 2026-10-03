@@ -43,7 +43,9 @@ performance.
 - Seal tethers and tablet seal-dots render only for <=64 / <=200
   entities respectively.
 - No postprocessing, no shadows, fog for depth instead of effects.
-- `?vizbench=N` stays available for regression checks.
+- `?vizbench=N` stays available for regression checks, but ONLY in builds
+  compiled with `VITE_ENABLE_VIZBENCH=1`. Default builds ignore the query
+  param entirely: synthetic events must never be reachable by URL alone.
 
 ## Not tested
 

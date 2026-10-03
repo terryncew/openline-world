@@ -1,156 +1,54 @@
-/* OpenLine World — square styles. frontend/src/square/square.css */
+/* OpenLine World — square host styles. frontend/src/square/square.css */
 
-.square-view {
+.square-host {
   position: relative;
   width: 100%;
   height: 100dvh;
   overflow: hidden;
-  background: #f7f0dd;
-  font-family: system-ui, -apple-system, sans-serif;
+  background: #f3ead9;
 }
 
-.square-view canvas {
+/* The decorative town frame: fills the viewport, no chrome of its own. */
+.square-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
   display: block;
 }
 
-.square-hud {
-  position: absolute;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 18px;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.square-hud-top {
-  top: 0;
-}
-
-.square-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  background: rgba(250, 245, 230, 0.88);
-  border: 1px solid #d8c9a3;
-  border-radius: 12px;
-  padding: 8px 14px;
-  pointer-events: auto;
-}
-
-.square-brand strong {
-  font-size: 17px;
-  color: #3d3226;
-  letter-spacing: 0.2px;
-}
-
-.square-brand span {
-  font-size: 12px;
-  color: #7a6a52;
-}
-
-.square-nav {
-  display: flex;
-  gap: 8px;
-  pointer-events: auto;
-}
-
-.square-nav button {
-  background: rgba(250, 245, 230, 0.88);
-  border: 1px solid #d8c9a3;
-  border-radius: 999px;
-  padding: 7px 14px;
-  font-size: 13px;
-  color: #5a4c38;
-  cursor: pointer;
-}
-
-.square-nav button:hover {
-  background: #fffdf6;
-}
-
-.square-hud-bottom {
-  bottom: 0;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  padding-bottom: 22px;
-}
-
-.square-hint {
-  margin: 0;
-  font-size: 13px;
-  color: #6a5c46;
-  background: rgba(250, 245, 230, 0.85);
-  border: 1px solid #d8c9a3;
-  border-radius: 999px;
-  padding: 7px 16px;
-  pointer-events: auto;
-}
-
-.square-enter {
-  pointer-events: auto;
-  background: #b7791f;
-  border: none;
-  border-radius: 999px;
-  padding: 12px 30px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff8e8;
-  cursor: pointer;
-  box-shadow: 0 3px 14px rgba(183, 121, 31, 0.4);
-}
-
-.square-enter:hover {
-  background: #a56d1b;
-}
-
-/* warm fade for the workshop transition */
+/* Fade veil for the workshop transition. */
 .square-fade {
   position: absolute;
   inset: 0;
-  background: #2e2620;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.55s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #f3ead9;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
   z-index: 10;
+  padding: 24px;
+  text-align: center;
 }
 
 .square-fade.on {
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: all;
 }
 
 .square-fade span {
-  color: #f2e8d0;
+  font-family: Georgia, serif;
   font-size: 17px;
-  max-width: 420px;
-  text-align: center;
-  padding: 0 24px;
   line-height: 1.5;
+  color: #3d3428;
+  max-width: 34ch;
 }
 
-@media (max-width: 700px) {
-  .square-hud {
-    padding: 10px 12px;
-  }
-  .square-brand strong {
-    font-size: 15px;
-  }
-  .square-brand span {
-    font-size: 11px;
-  }
-  .square-nav button {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-  .square-enter {
-    padding: 11px 24px;
-    font-size: 15px;
+@media (prefers-reduced-motion: reduce) {
+  .square-fade {
+    transition: none;
   }
 }

@@ -1,73 +1,78 @@
-# WORLD-SQUARE-001 — architecture note
+# WORLD-SQUARE-001R — architecture note
 
-Branch: `world/world-square-001` (from 55751ef). The Square is the home screen;
-the workshop door opens the proven custody visualization. Nothing merges.
+Branch: `world/world-square-001-state-of-art` (from 03b12a8). The Square is
+the home screen; the workshop door opens the proven custody visualization.
+Nothing merges.
+
+## The boundary: an opaque-origin sandboxed iframe
+
+The decorative town is a **separately bundled document** (`frontend/town.html`
+→ `dist/town.html`, its own rollup entry) loaded as:
+
+```html
+<iframe sandbox="allow-scripts" src="town.html" />
+```
+
+No `allow-same-origin`: the child gets an **opaque origin**. Consequences,
+each enforced and tested:
+
+- The child cannot read the parent's DOM, cookies, or storage (SOP).
+- The child cannot navigate the top frame or open popups (sandbox).
+- The child makes no network requests: `town.html` sets
+  `Content-Security-Policy: connect-src 'none'` (defense in depth;
+  statically asserted in `square.boundary.test.ts`).
+- The child's ONLY outbound channel is one postMessage intent
+  (`src/town/protocol.ts`):
+  `{ type: "openline:navigate", intent: "enter-workshop" }`.
+  Static tests assert exactly one `postMessage` call exists in `town/`.
+
+The parent (`src/square/SquareHost.tsx`) enforces its side:
+
+- It never writes into the frame: no `postMessage` to the child, no
+  `contentDocument`/`srcdoc` access (statically asserted).
+- It validates every inbound message by EXACT shape
+  (`src/square/navigate.ts`: exactly two keys, exact string values —
+  extra fields, wrong case, trailing whitespace all rejected; 16-case
+  adversarial unit test) AND by source frame
+  (`ev.source === iframe.contentWindow`). Origin checks are meaningless
+  against an opaque origin, so they are not relied upon.
+- It passes no callbacks, objects, or providers into the frame — only the
+  `src`, `sandbox`, and `title` attributes.
+
+Containment is proven in REAL BROWSER TESTS (`frontend/e2e/town-isolation.mjs`),
+not by inspection: the child attempts fetch/XHR/EventSource (blocked),
+forged/extra-field messages are ignored, wrong-source messages are ignored,
+top-navigation attempts fail, and a fully replaced hostile child document
+still cannot move the parent except through the validated intent.
 
 ## The two layers
 
-**Speculative layer — `frontend/src/square/`** (the town)
-- Ambient robots, buildings, streets, lamps, fountain. All motion is local
-  animation state: `worldState.ts` is a seeded, deterministic pose function
-  (`poseAt(wanderer, t)`), no clocks besides the render clock, no network,
-  no protocol knowledge. Robots stroll, carry crates, sweep, chat. Pure
-  decoration.
+**Speculative layer — `frontend/src/town/`** (the town)
+Handcrafted miniature: cream/terracotta/blue/sage, matte materials, four
+authored vignettes (Carrier, Tinkerer, Reader, Sweeper) as deterministic
+pose functions of loop time (`pose = f(t)`, seamless by construction).
+No backend clients, no protocol imports, no shared state. Pure decoration.
 
 **Proven layer — `frontend/src/viz/`** (the workshop interior)
-- Unchanged custody choreography: the nine-step demo replays from the
-  backend EventLog through the canonical `source → reducer → scene` path.
-  The only viz change is `VizView` gaining two props — `autoRunDemo`
-  (square entry runs the demo once through the same code path as the
-  "Run the live demo" button) and `exitLabel` ("Back to the Square").
-  The viz's director still owns every POST; the square never calls it.
+Unchanged custody choreography: owner authority, worker proposal, receiver
+decision (ALLOWED/STOPPED), receipts, revocation, replacement. Every visible
+event derives from the backend's authoritative event log through the pure
+reducer. The Square never touches this path.
 
-## The boundary (enforced, not asserted)
+## Fixed defects (verified at 03b12a8, fixed here)
 
-`src/square/square.boundary.test.ts` statically scans every square source
-file on every `npm test` run:
+- **Boot gate**: `App.tsx` no longer calls `useWorkshop()` for the Square.
+  The Square mounts with zero backend contact; backend-dependent views keep
+  their own loading states behind `BackendApp`.
+- **Demo cancellation**: `VizView` sets `stopDemoRef` on unmount and on exit.
+  No new `/api/demo/advance` POST is issued after cancel; an already-issued
+  request may still complete (documented, e2e-covered).
+- **vizbench**: synthetic events are compiled in ONLY with
+  `VITE_ENABLE_VIZBENCH=1`. Default builds ignore `?vizbench=` entirely.
 
-1. No mutating calls: no POST/PUT/DELETE/PATCH, no `/api/demo/`,
-   `/api/owner/`, `/api/mode`, no `advanceDemo`/`resetDemo`, no `EventLog`,
-   no `mintReceipt`, no synthesized receipts.
-2. No runtime imports of the write surface or replay path. Imports are
-   resolved against the importing file's directory and checked against
-   absolute forbidden prefixes (`viz/director`, `viz/source`,
-   `viz/reducer`, `viz/protocol`, `api`, `world/api`) — catches any
-   relative depth, e.g. `../../viz/director` from `scene/`.
-3. The square's single allowed viz import is the `VizView` component
-   (screen composition). Nothing else under `viz/` is reachable.
-4. `worldState.ts` imports nothing at all — pure decoration.
+## What the town is and isn't
 
-A negative control was run: a planted `../../viz/director` import in
-`scene/` fails two boundary tests. The boundary is a real enforced
-separation, not a promise.
-
-## Honesty rules for the scenery
-
-The town imagines; the workshop proves. Buildings that suggest economic
-activity OpenLine has not demonstrated are labeled honestly in-world:
-EXCHANGE — "opening soon, no trading yet"; REPAIR SHOP — "under
-construction"; LIBRARY — "quiet, please"; COURIER DEPOT — parked couriers
-only, static decoration. The workshop sign reads "see how work gets
-approved". No transactions, markets, payments, reputation systems, or
-autonomous commerce are simulated anywhere.
-
-## Routing
-
-`?view=square` is now the default home screen. All existing views
-(`watch`, `explore`, `changed`, `world`, `viz`) stay reachable by their
-explicit `?view=` param. The square nav links Tour / Visualize / World.
-
-## Stop conditions — none triggered
-
-No stop condition fired: the town needed no unsupported economic
-mechanics, no fake protocol events, and no changes to OpenLine semantics.
-The custody choreography is byte-identical except the enter/exit props.
-
-## Gaps
-
-- No physical iPhone run yet (SwiftShader only); the merge gate for the
-  viz layer still requires it.
-- The town is small by design (Square + workshop only). More destinations
-  need the same honesty treatment per building.
-- Decorative animation state lives on the render clock, not the seeded
-  world clock — fine for scenery, never to be mistaken for replay state.
+The Square IMAGINES what an agent town could feel like. The workshop PROVES
+how consequential work is governed. The exchange is shuttered and barred;
+the depot hatch is shut; the repair bench's work sits under a tarp. That
+distinction is legible from place and staging — no prose does the job.

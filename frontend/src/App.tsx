@@ -10,7 +10,7 @@ import { TourOverlay } from "./tour/TourOverlay";
 import { WhatChanged } from "./changed/WhatChanged";
 import { SharedWorld } from "./world/SharedWorld";
 import { VizView } from "./viz/VizView";
-import { SquareView } from "./square/SquareView";
+import { SquareHost } from "./square/SquareHost";
 import "./styles.css";
 
 const HELPER_FOCUS: Record<string, Focus> = {
@@ -38,9 +38,10 @@ function focusFor(step: number, fallback: Focus): Focus {
   return f;
 }
 
+type View = "watch" | "explore" | "changed" | "world" | "viz" | "square";
+
 export default function App() {
-  const w = useWorkshop();
-  const [view, setView] = useState<"watch" | "explore" | "changed" | "world" | "viz" | "square">(() => {
+  const [view, setView] = useState<View>(() => {
     const v = new URLSearchParams(window.location.search).get("view");
     // The Square is the home screen of the world layer; every existing
     // view stays reachable by its explicit ?view= param.
@@ -48,6 +49,23 @@ export default function App() {
       ? v
       : "square";
   });
+
+  // The Square mounts with zero backend contact: no subscriptions, no
+  // snapshot gate. It lives in an opaque-origin sandboxed iframe whose
+  // only channel to this page is a validated navigation intent.
+  if (view === "square") {
+    return (
+      <div className="app">
+        <SquareHost />
+      </div>
+    );
+  }
+
+  return <BackendApp view={view} setView={setView} />;
+}
+
+function BackendApp({ view, setView }: { view: View; setView: (v: View) => void }) {
+  const w = useWorkshop();
   const [walk, setWalk] = useState(false);
   const [listView, setListView] = useState(false);
   const [showRecords, setShowRecords] = useState(false);
@@ -156,14 +174,6 @@ export default function App() {
             refresh();
           }}
         />
-      </div>
-    );
-  }
-
-  if (view === "square") {
-    return (
-      <div className="app">
-        <SquareView />
       </div>
     );
   }

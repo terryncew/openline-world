@@ -75,6 +75,11 @@ function benchEvents(n: number): WEvent[] {
 }
 
 function benchN(): number {
+  // Synthetic benchmark events carry real provenance labels through the
+  // real scene — a speculation/proof contamination vector if reachable by
+  // URL alone. The bench path is compiled in ONLY with the non-default
+  // build flag VITE_ENABLE_VIZBENCH=1; default builds ignore ?vizbench=.
+  if (import.meta.env.VITE_ENABLE_VIZBENCH !== "1") return 0;
   const v = new URLSearchParams(window.location.search).get("vizbench");
   const n = v == null ? 0 : parseInt(v, 10);
   return Number.isFinite(n) && n > 0 ? n : 0;
@@ -248,6 +253,23 @@ export function VizView({
     });
   }, [revealed, cursorSeq]);
 
+  // Cancellation: leaving the workshop (or unmounting for any reason)
+  // must stop FUTURE demo advances immediately. An advance request that
+  // is already in flight when cancellation lands may still complete and
+  // append its events — the backend cannot un-send a request it has
+  // received. Documented limitation, covered by e2e/cancel-demo.mjs:
+  // after cancel, no NEW /api/demo/advance POST may be issued.
+  useEffect(() => {
+    return () => {
+      stopDemoRef.current = true;
+    };
+  }, []);
+
+  const handleExit = useCallback(() => {
+    stopDemoRef.current = true;
+    onExit();
+  }, [onExit]);
+
   const runDemo = useCallback(async () => {
     if (demoRunning) return;
     setDemoRunning(true);
@@ -368,7 +390,7 @@ export function VizView({
           <button className="viz-btn" onClick={() => setCameraView("worker")}>Follow worker</button>
           <button className="viz-btn" onClick={() => setCameraView("receiver")}>Receiver</button>
           <button className="viz-btn" onClick={() => setCameraView("records")}>Records</button>
-          <button className="viz-btn" onClick={onExit}>{exitLabel}</button>
+          <button className="viz-btn" onClick={handleExit}>{exitLabel}</button>
         </div>
       </header>
       {streamError && <div className="viz-err">{streamError}</div>}

@@ -24,6 +24,17 @@ const backendPort = process.env.WORKSHOP_PORT ?? '8471'
 
 export default defineConfig({
   plugins: [react(), ...(useHttps ? [basicSsl()] : [])],
+  build: {
+    // The Square ships as a separately bundled document (town.html) so it
+    // can run in an opaque-origin sandboxed iframe. No shared runtime
+    // state crosses the frame boundary; see src/square/ARCHITECTURE.md.
+    rollupOptions: {
+      input: {
+        main: "index.html",
+        town: "town.html",
+      },
+    },
+  },
   server: {
     // Dev-only: the phone reaches this server via the machine's LAN IP or
     // hostname, which varies per network — so host checking is off here.
