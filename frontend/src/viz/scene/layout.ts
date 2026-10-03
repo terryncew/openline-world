@@ -7,7 +7,7 @@
  * obelisk southwest, workers gather center-west, receipts arc behind the
  * gate.
  */
-import { hashStr } from "../protocol";
+import { hashStr } from "../protocol.ts";
 
 export const GATE_X = 6.5;
 export const GATE_Z = 0;

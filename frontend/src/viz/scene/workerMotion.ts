@@ -28,7 +28,7 @@
  * verdicts and standings are data.
  */
 import type { VizProposal, VizReceipt, VizWorker } from "../protocol";
-import { workerHome } from "./layout";
+import { workerHome } from "./layout.ts";
 
 export type ArmPose =
   | "hang"
@@ -78,7 +78,11 @@ export const RELEASE_S = 1.8;
 export const FILE_S = 2.2;
 const ENTER_S = 1.1;
 
-/** Small casts get the full workroom staging; crowds keep the swarm. */
+/** Small casts get the full workroom staging; crowds keep the swarm.
+ * KNOWN LIMITATION — WORKER-FAMILY-OVERFLOW: above 8 the viz falls back
+ * to generic capsules, not the town families. Guarded by
+ * src/viz/worker-family-guard.test.ts; see
+ * src/viz/screenshots/characters/KNOWN_LIMITATIONS.md. */
 export function useFigures(workerCount: number): boolean {
   return workerCount <= 8;
 }
