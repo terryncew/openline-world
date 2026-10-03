@@ -182,10 +182,7 @@ try {
   await sleep(6000);
   // Use the actual hit target: evaluate(postMessage) is intentionally no
   // longer a positive control because it has no human activation.
-  for (const [x, y] of [[690, 330], [660, 340], [720, 340], [690, 370], [690, 300]]) {
-    await page.mouse.click(x, y);
-    if (await page.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 3000 }).then(() => true).catch(() => false)) break;
-  }
+  await page.frameLocator("iframe.square-frame").getByRole("button", { name: "Enter the workshop" }).click();
   check("valid intent opens workshop", await vizOpen());
 
   await browser.close();

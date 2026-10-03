@@ -106,7 +106,7 @@ try {
   console.log("PHASE 1 PASS: town animation, clicks, reload changed zero backend facts.");
 
   // ---- phase 2: the genuine custody sequence, derived from the backend ----
-  await page.mouse.click(640, 350); // workshop door
+  await page.frameLocator("iframe.square-frame").getByRole("button", { name: "Enter the workshop" }).click();
   await page.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 30000 });
   // wait for the demo to finish (9 steps x ~1.2s + margin)
   await page.waitForFunction(() => {

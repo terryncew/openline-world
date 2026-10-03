@@ -11,6 +11,7 @@
 import { useMemo } from "react";
 import * as THREE from "three";
 import { PAL, matte } from "./kit";
+import { WORKSHOP_SPATIAL_CONTRACT as W } from "../spatial/workshopContract";
 
 /** Painted wooden nameplate. Text is place-making (a building's name),
  *  never an explanation of OpenLine. */
@@ -120,22 +121,24 @@ function PitchedRoof({ w, d, h, color }: { w: number; d: number; h: number; colo
  *  illustrative town into consequential space — the threshold is the
  *  clearest in town. */
 export function Workshop() {
+  const doorArchRadius = W.door.width / 2;
+  const doorRectHeight = W.door.height - doorArchRadius;
   return (
     <group>
-      <mesh position={[0, 1.1, 0]}>
-        <boxGeometry args={[3.4, 2.2, 2.6]} />
+      <mesh position={[0, W.exterior.wallHeight / 2, 0]}>
+        <boxGeometry args={[W.exterior.width, W.exterior.wallHeight, W.exterior.depth]} />
         {matte(PAL.terracotta)}
       </mesh>
       {/* painted base trim: a hand-painted darker band, slightly uneven */}
       <mesh position={[0, 0.14, 0]}>
-        <boxGeometry args={[3.46, 0.28, 2.66]} />
+        <boxGeometry args={[W.exterior.width + 0.06, 0.28, W.exterior.depth + 0.06]} />
         {matte(PAL.terracottaDark)}
       </mesh>
       <group position={[0, 2.2, 0]}>
-        <PitchedRoof w={3.8} d={3.0} h={1.2} color={PAL.terracottaDark} />
+        <PitchedRoof w={W.exterior.width + 0.4} d={W.exterior.depth + 0.4} h={W.exterior.totalHeight - W.exterior.wallHeight} color={PAL.terracottaDark} />
       </group>
       <mesh position={[0, 2.2, 0]}>
-        <boxGeometry args={[3.7, 0.12, 2.9]} />
+        <boxGeometry args={[W.exterior.width + 0.3, 0.12, W.exterior.depth + 0.3]} />
         {matte(PAL.cream)}
       </mesh>
       {/* chimney: interrupts the skyline */}
@@ -149,35 +152,35 @@ export function Workshop() {
       </mesh>
       {/* stone portal arch: the strongest threshold in town */}
       {[-1.05, 1.05].map((x) => (
-        <mesh key={x} position={[x, 0.85, 1.42]}>
-          <boxGeometry args={[0.42, 1.7, 0.5]} />
+        <mesh key={x} position={[x, W.door.height / 2, W.door.facadeZ + 0.11]}>
+          <boxGeometry args={[0.42, W.door.height, 0.5]} />
           {matte(PAL.stone)}
         </mesh>
       ))}
-      <mesh position={[0, 1.85, 1.42]}>
+      <mesh position={[0, W.door.height + 0.21, W.door.facadeZ + 0.11]}>
         <boxGeometry args={[2.52, 0.42, 0.5]} />
         {matte(PAL.stone)}
       </mesh>
-      <mesh position={[0, 1.62, 1.44]}>
+      <mesh position={[0, W.door.height + 0.02, W.door.facadeZ + 0.13]}>
         <boxGeometry args={[1.72, 0.1, 0.52]} />
         {matte(PAL.stoneDark)}
       </mesh>
       {/* arched double door */}
-      <group position={[0, 0, 1.31]}>
-        <mesh position={[0, 0.75, 0]}>
-          <boxGeometry args={[1.3, 1.5, 0.1]} />
+      <group name={W.id} position={[W.door.centerX, W.door.floorY, W.door.facadeZ]}>
+        <mesh position={[0, doorRectHeight / 2, 0]}>
+          <boxGeometry args={[W.door.width, doorRectHeight, 0.1]} />
           {matte(PAL.woodDark)}
         </mesh>
-        <mesh position={[0, 1.5, 0]}>
-          <cylinderGeometry args={[0.65, 0.65, 0.1, 20, 1, false, 0, Math.PI]} />
+        <mesh position={[0, doorRectHeight, 0]}>
+          <cylinderGeometry args={[doorArchRadius, doorArchRadius, 0.1, 20, 1, false, 0, Math.PI]} />
           {matte(PAL.woodDark)}
         </mesh>
-        <mesh position={[0, 0.75, 0.06]}>
-          <boxGeometry args={[0.05, 1.4, 0.04]} />
+        <mesh position={[0, doorRectHeight / 2, 0.06]}>
+          <boxGeometry args={[0.05, doorRectHeight - 0.1, 0.04]} />
           {matte(PAL.ink)}
         </mesh>
         {[-0.4, 0.4].map((x) => (
-          <mesh key={x} position={[x, 0.75, 0.06]}>
+          <mesh key={x} position={[x, doorRectHeight / 2, 0.06]}>
             <sphereGeometry args={[0.06, 10, 8]} />
             {matte(PAL.warm)}
           </mesh>
@@ -185,7 +188,7 @@ export function Workshop() {
       </group>
       {/* door lanterns: warm pools of light flanking the entrance */}
       {[-1.5, 1.5].map((x) => (
-        <group key={x} position={[x, 0, 1.7]}>
+        <group key={x} position={[x, 0, W.door.facadeZ + 0.39]}>
           <mesh position={[0, 1.0, 0]}>
             <cylinderGeometry args={[0.05, 0.07, 2.0, 8]} />
             {matte(PAL.ink)}
@@ -204,16 +207,16 @@ export function Workshop() {
           </mesh>
         </group>
       ))}
-      <Windows color={PAL.blueDark} lit positions={[[-1.15, 1.25, 1.31], [1.15, 1.25, 1.31]]} />
-      <group position={[0, 2.62, 1.42]}>
+      <Windows color={PAL.blueDark} lit positions={[[-1.15, 1.25, W.door.facadeZ], [1.15, 1.25, W.door.facadeZ]]} />
+      <group position={[0, 2.62, W.door.facadeZ + 0.11]}>
         <Sign text="Workshop" width={1.7} />
       </group>
       {/* doorstep: two worn stone steps */}
-      <mesh position={[0, 0.06, 1.95]}>
-        <boxGeometry args={[2.4, 0.12, 1.3]} />
+      <mesh position={[0, 0.06, W.door.facadeZ + W.thresholdDepth / 2]}>
+        <boxGeometry args={[2.4, 0.12, W.thresholdDepth]} />
         {matte(PAL.stone)}
       </mesh>
-      <mesh position={[0, 0.16, 1.65]}>
+      <mesh position={[0, 0.16, W.door.facadeZ + 0.34]}>
         <boxGeometry args={[2.0, 0.12, 0.7]} />
         {matte(PAL.stoneDark)}
       </mesh>

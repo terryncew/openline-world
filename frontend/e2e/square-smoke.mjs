@@ -53,22 +53,14 @@ try {
   await sleep(5000); // let the vignettes get moving
   await page.screenshot({ path: `${shots}/01-square-home.png` });
 
-  // 2. click the workshop door INSIDE the frame -> parent opens the viz
-  // (page.mouse: the iframe fills the viewport, so page coords == frame
-  // coords; retry a small grid since the camera sways gently)
-  let entered = false;
-  for (const [x, y] of [[690, 330], [660, 340], [720, 340], [690, 370], [690, 300]]) {
-    await page.mouse.click(x, y);
-    try {
-      await page.waitForFunction(
-        () => window.__vizDebug && window.__vizDebug.eventCount >= 4,
-        null, { timeout: 15000 }
-      );
-      entered = true;
-      break;
-    } catch {}
-  }
-  if (!entered) fail("workshop door click never opened the viz");
+  // 2. activate the semantic twin of the physical 3D door hitbox.
+  await page.frameLocator("iframe.square-frame")
+    .getByRole("button", { name: "Enter the workshop" })
+    .click();
+  await page.waitForFunction(
+    () => window.__vizDebug && window.__vizDebug.eventCount >= 4,
+    null, { timeout: 30000 }
+  );
   await sleep(2000);
   await page.screenshot({ path: `${shots}/02-workshop-entered.png` });
 

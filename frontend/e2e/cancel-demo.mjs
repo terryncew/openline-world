@@ -55,7 +55,7 @@ try {
   await sleep(6000);
 
   // enter the workshop via the door; the demo auto-runs
-  await page.mouse.click(640, 350);
+  await page.frameLocator("iframe.square-frame").getByRole("button", { name: "Enter the workshop" }).click();
   await page.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 30000 });
   await sleep(4000); // let a few advances fire
   const postsBeforeExit = advancePosts;

@@ -167,6 +167,17 @@ test("town.html carries a network-denying CSP and no inline event handlers", () 
   assert.doesNotMatch(html, /\son\w+\s*=/, "town.html must have no inline event handlers");
 });
 
+test("shared workshop contract is frozen data, not an execution bridge", () => {
+  const file = join(frontendDir, "spatial", "workshopContract.ts");
+  const src = stripComments(readFileSync(file, "utf8"));
+  assert.equal(runtimeImports(src).length, 0, "spatial contract must not import runtime capabilities");
+  for (const re of TOWN_FORBIDDEN_TOKENS) {
+    assert.doesNotMatch(src, re, `spatial contract contains forbidden capability ${re}`);
+  }
+  assert.match(src, /Object\.freeze/, "spatial contract must be frozen authored data");
+  assert.doesNotMatch(src, /\bfunction\b|=>/, "spatial contract must expose no executable callbacks");
+});
+
 // --- the validator itself, against adversarial inputs ---
 import { isNavigateMessage } from "./navigate.ts";
 

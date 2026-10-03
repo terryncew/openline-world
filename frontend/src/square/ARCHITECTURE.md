@@ -64,6 +64,22 @@ origin. Local CLI requests without an `Origin` header remain supported.
 
 ## The two layers
 
+### Shared space, separate execution
+
+`src/spatial/workshopContract.ts` is frozen build-time data: dimensions,
+orientation, floor/threshold coordinates, entrance axis, identity, and matte
+palette. The town bundle and workshop bundle independently consume their own
+compiled copy. It contains no functions, mutable objects, providers,
+callbacks, backend imports, protocol objects, storage, or network access, so
+it creates spatial correspondence without a runtime trust bridge.
+
+The exterior camera approaches the contract door before sending the existing
+narrow navigation intent. The proven scene starts outside the matching
+interior portal and crosses inward; its workbench, receiver gate, and records
+remain event-driven. Exit focuses the same portal and returns the town iframe
+with a fixed decorative `?threshold=return` camera cue. That cue carries no
+authority or protocol state and cannot invoke the demo.
+
 **Speculative layer — `frontend/src/town/`** (the town)
 Handcrafted miniature: cream/terracotta/blue/sage, matte materials, four
 authored vignettes (Carrier, Tinkerer, Reader, Sweeper) as deterministic

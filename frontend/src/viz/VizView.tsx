@@ -26,7 +26,8 @@ import { ReceiverGate } from "./scene/ReceiverGate";
 import { ProposalPackets } from "./scene/ProposalPackets";
 import { ReceiptTablets } from "./scene/ReceiptTablets";
 import { SpeechPuffs, UnrecognizedMarkers } from "./scene/SpeechPuffs";
-import { CameraRig, type VizCameraView, type VizCloseup } from "./scene/CameraRig";
+import { CameraRig, type VizCameraView, type VizCloseup, type ThresholdPhase } from "./scene/CameraRig";
+import { WorkshopInterior } from "./scene/WorkshopInterior";
 import { Timeline, type ReplayState } from "./Timeline";
 import { Inspector, type VizSelection } from "./Inspector";
 import type { Snapshot } from "../api";
@@ -143,6 +144,7 @@ export function VizView({
   const [speed, setSpeed] = useState(1);
   const [selection, setSelection] = useState<VizSelection>(null);
   const [cameraView, setCameraView] = useState<VizCameraView>("world");
+  const [thresholdPhase, setThresholdPhase] = useState<ThresholdPhase>("arriving");
   const [demoRunning, setDemoRunning] = useState(false);
   const [snap, setSnap] = useState<Snapshot | null>(null);
   const [streamError, setStreamError] = useState<string | null>(null);
@@ -152,6 +154,12 @@ export function VizView({
   const seenRef = useRef(new Set<string>());
   const stopDemoRef = useRef(false);
   const [streamEpoch, setStreamEpoch] = useState(0);
+
+  useEffect(() => {
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const timer = window.setTimeout(() => setThresholdPhase("inside"), reduced ? 80 : 1050);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const events = useMemo(
     () => (bench > 0 ? benchEvents(bench) : revealed),
@@ -267,7 +275,10 @@ export function VizView({
 
   const handleExit = useCallback(() => {
     stopDemoRef.current = true;
-    onExit();
+    setCameraView("entrance");
+    setThresholdPhase("leaving");
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    window.setTimeout(onExit, reduced ? 80 : 850);
   }, [onExit]);
 
   const runDemo = useCallback(async () => {
@@ -408,25 +419,28 @@ export function VizView({
     <div className="viz-root">
       <header className="viz-topbar">
         <div className="viz-brand">
-          <strong>OpenLine World — visualization</strong>
-          <span className="viz-fine">read-only: every object traces to a real event</span>
+          <strong>The Workshop</strong>
+          <span className="viz-fine">workroom → gate room → records</span>
         </div>
         <div className="viz-controls">
           <button className="viz-btn" onClick={() => setCameraView("world")}>World</button>
           <button className="viz-btn" onClick={() => setCameraView("worker")}>Follow worker</button>
           <button className="viz-btn" onClick={() => setCameraView("receiver")}>Receiver</button>
           <button className="viz-btn" onClick={() => setCameraView("records")}>Records</button>
+          <button className="viz-btn" onClick={() => setCameraView("entrance")}>Entrance</button>
           <button className="viz-btn" onClick={handleExit}>{exitLabel}</button>
         </div>
       </header>
       {streamError && <div className="viz-err">{streamError}</div>}
       <main className="viz-stage">
         <VizCanvas>
+          <WorkshopInterior />
           <CameraRig
             view={cameraView}
             workers={scene.workers}
             followWorkerId={followWorkerId}
             closeup={closeup}
+            thresholdPhase={thresholdPhase}
           />
           <OwnerObelisk onSelect={() => setSelection({ kind: "owner" })} />
           <WorkerSwarm
