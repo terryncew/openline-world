@@ -208,9 +208,23 @@ function SceneFrame({
     }
   });
   // subtle camera sway for life (disabled when reduced motion: paused covers it)
-  useFrame(({ camera, clock }) => {
+  // responsive: portrait viewports pull back + widen so the square stays in frame
+  useFrame(({ camera, clock, size }) => {
     if (!paused) {
-      camera.position.x = Math.sin(clock.elapsedTime * 0.11) * 0.35;
+      const portrait = size.width / size.height < 0.9;
+      const pc = camera as THREE.PerspectiveCamera;
+      const wantFov = portrait ? 52 : 40;
+      const wantY = portrait ? 7.2 : 5.0;
+      const wantZ = portrait ? 17.5 : 11.6;
+      if (pc.fov !== wantFov) {
+        pc.fov = wantFov;
+        pc.updateProjectionMatrix();
+      }
+      camera.position.set(
+        Math.sin(clock.elapsedTime * 0.11) * (portrait ? 0.25 : 0.35),
+        wantY,
+        wantZ
+      );
       camera.lookAt(0, 1.25, -1);
     }
   });
