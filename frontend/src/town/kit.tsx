@@ -64,4 +64,28 @@ export function Limb({
   );
 }
 
+/**
+ * Soft barrel hinge: a visible joint with mechanical logic, kept matte
+ * and warm — built, not hard sci-fi. Place at a limb's pivot; the barrel
+ * axis lies along the bend axis (X for limbs that swing in the XY plane).
+ */
+export function Hinge({ r = 0.085, color, axis = "x" }: { r?: number; color: string; axis?: "x" | "z" }) {
+  return (
+    <mesh rotation={axis === "x" ? [0, 0, Math.PI / 2] : [Math.PI / 2, 0, 0]}>
+      <cylinderGeometry args={[r * 0.82, r * 0.82, r * 1.15, 12]} />
+      {matte(color)}
+    </mesh>
+  );
+}
+
+/** Chunky rounded foot: oversized slightly, reads as built. */
+export function Foot({ w = 0.24, h = 0.11, l = 0.32, color }: { w?: number; h?: number; l?: number; color: string }) {
+  return (
+    <mesh position={[0, -h / 2 + 0.02, 0.05]}>
+      <boxGeometry args={[w, h, l]} />
+      {matte(color)}
+    </mesh>
+  );
+}
+
 export { PAL as default };

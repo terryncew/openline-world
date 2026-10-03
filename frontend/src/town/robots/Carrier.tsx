@@ -10,7 +10,7 @@
  *
  * Illustrative physical acting only. Not an OpenLine operation.
  */
-import { PAL, matte, BlobShadow, Limb } from "../kit";
+import { PAL, matte, BlobShadow, Limb, Hinge, Foot } from "../kit";
 import { loop, pulse, bump, tremor, gait, d } from "../acting";
 
 const D = 16; // loop seconds
@@ -69,8 +69,8 @@ export function carrierPoseAt(t: number, sx: 1 | -1): CarrierPose {  const T = l
       (lifting ? tremor(T, d(1.2)) : 0),
     timberX: (-1.15 + 2.3 * travel) * sx,
     timberY:
-      0.32 +
-      pulse(T, 3.2, 4.2, 8.8, 9.8, 0.62) + // lift to carry height, lower at set-down
+      0.26 +
+      pulse(T, 3.2, 4.2, 8.8, 9.8, 0.54) + // lift to carry height, lower at set-down
       (lifting ? tremor(T, 0.012) : 0),
     timberSway: walking ? gait(T + 0.35, 5.4, 9.0, 3) * d(3) : 0,
   };
@@ -80,16 +80,18 @@ function Gripper({ closed, color }: { closed: number; color: string }) {
   const a = d(8) + closed * d(38);
   return (
     <group>
-      <mesh position={[0, -0.06, 0]}>{matte(color)}</mesh>
-      <mesh position={[0, -0.06, 0]}>
-        <sphereGeometry args={[0.075, 12, 10]} />
+      <mesh position={[0, -0.05, 0]}>
+        <sphereGeometry args={[0.085, 12, 10]} />
         {matte(color)}
       </mesh>
       {[-1, 1].map((s) => (
         <group key={s} rotation={[0, 0, s * a]}>
-          <mesh position={[s * 0.05, -0.12, 0]}>
-            <boxGeometry args={[0.045, 0.14, 0.06]} />
+          <mesh position={[s * 0.055, -0.13, 0]}>
+            <boxGeometry args={[0.055, 0.15, 0.07]} />
             {matte(color)}
+          </mesh>
+          <mesh position={[0, -0.05, 0]}>
+            <Hinge r={0.05} color={PAL.ink} />
           </mesh>
         </group>
       ))}
@@ -110,9 +112,13 @@ export function Carrier({
   const strainShake = p.lean < -0.05 ? tremor(t, 0.008) : 0;
 
   const arm = (side: 1 | -1) => (
-    <group position={[side * 0.42, 1.32, 0]} rotation={[p.armSwing, 0, side * -p.armSide]}>
-      <Limb length={0.42} radius={0.1} color={PAL.terracottaDark} />
-      <group position={[0, -0.46, 0]}>
+    <group position={[side * 0.44, 1.14, 0]} rotation={[p.armSwing, 0, side * -p.armSide]}>
+      <group position={[0, -0.02, 0]}>
+        <Hinge r={0.1} color={PAL.terracottaDark} />
+      </group>
+      <Limb length={0.3} radius={0.12} color={PAL.terracottaDark} />
+      <group position={[0, -0.32, 0]}>
+        <Hinge r={0.085} color={PAL.woodDark} />
         <Gripper closed={p.grip} color={PAL.woodDark} />
       </group>
     </group>
@@ -122,7 +128,7 @@ export function Carrier({
     <group position={position}>
       {/* timber pile */}
       {[-1.15, -1.15, -1.15].map((x, i) => (
-        <mesh key={i} position={[x, 0.18 + i * 0.16, -0.55 + (i % 2) * 0.12]} rotation={[0, 0, Math.PI / 2]}>
+        <mesh key={i} position={[x, 0.15 + i * 0.15, -0.55 + (i % 2) * 0.12]} rotation={[0, 0, Math.PI / 2]}>
           <cylinderGeometry args={[0.07, 0.07, 1.6, 10]} />
           {matte(PAL.wood)}
         </mesh>
@@ -155,48 +161,50 @@ export function Carrier({
         </mesh>
       </group>
 
-      {/* carrier body */}
+      {/* carrier body: broad low barrel */}
       <group position={[p.rootX, p.rootY + strainShake, 0.42]} rotation={[p.lean, p.turnY, p.rock]}>
         <BlobShadow r={0.62} />
-        {/* legs */}
+        {/* short chunky legs with knee hinges */}
         {[-1, 1].map((s) => (
-          <group key={s} position={[s * 0.2, 0.52, 0]} rotation={[(s < 0 ? p.legL : p.legR), 0, 0]}>
-            <Limb length={0.4} radius={0.11} color={PAL.blueDark} />
-            <mesh position={[0, -0.48, 0.04]}>
-              <boxGeometry args={[0.2, 0.12, 0.3]} />
-              {matte(PAL.ink)}
-            </mesh>
+          <group key={s} position={[s * 0.22, 0.4, 0]} rotation={[(s < 0 ? p.legL : p.legR), 0, 0]}>
+            <Limb length={0.26} radius={0.13} color={PAL.blueDark} />
+            <group position={[0, -0.15, 0]}>
+              <Hinge r={0.1} color={PAL.ink} />
+            </group>
+            <group position={[0, -0.3, 0.04]}>
+              <Foot w={0.26} h={0.12} l={0.34} color={PAL.ink} />
+            </group>
           </group>
         ))}
-        {/* broad torso */}
-        <mesh position={[0, 1.05, 0]}>
-          <capsuleGeometry args={[0.34, 0.42, 8, 16]} />
+        {/* broad barrel torso */}
+        <mesh position={[0, 0.92, 0]}>
+          <capsuleGeometry args={[0.36, 0.34, 8, 16]} />
           {matte(PAL.blue)}
         </mesh>
-        <mesh position={[0, 1.05, 0]} scale={[1.18, 0.72, 0.9]}>
-          <capsuleGeometry args={[0.3, 0.3, 8, 16]} />
+        <mesh position={[0, 0.92, 0]} scale={[1.16, 0.7, 0.9]}>
+          <capsuleGeometry args={[0.32, 0.28, 8, 16]} />
           {matte(PAL.terracotta)}
         </mesh>
         {/* belt */}
-        <mesh position={[0, 0.78, 0]} rotation={[0, 0, 0]}>
-          <cylinderGeometry args={[0.36, 0.36, 0.1, 16]} />
+        <mesh position={[0, 0.66, 0]} rotation={[0, 0, 0]}>
+          <cylinderGeometry args={[0.38, 0.38, 0.1, 16]} />
           {matte(PAL.woodDark)}
         </mesh>
         {arm(-1)}
         {arm(1)}
         {/* head with brow */}
-        <group position={[0, 1.72, 0]} rotation={[p.headTilt, 0, 0]}>
+        <group position={[0, 1.5, 0]} rotation={[p.headTilt, 0, 0]}>
           <mesh>
-            <sphereGeometry args={[0.21, 18, 14]} />
+            <sphereGeometry args={[0.22, 18, 14]} />
             {matte(PAL.cream)}
           </mesh>
-          <mesh position={[0, 0.1, 0.14]}>
+          <mesh position={[0, 0.11, 0.14]}>
             <boxGeometry args={[0.3, 0.07, 0.1]} />
             {matte(PAL.terracottaDark)}
           </mesh>
           {[-1, 1].map((s) => (
-            <mesh key={s} position={[s * 0.08, 0.0, 0.18]}>
-              <sphereGeometry args={[0.035, 10, 8]} />
+            <mesh key={s} position={[s * 0.085, 0.0, 0.185]}>
+              <sphereGeometry args={[0.038, 10, 8]} />
               <meshBasicMaterial color={PAL.ink} />
             </mesh>
           ))}

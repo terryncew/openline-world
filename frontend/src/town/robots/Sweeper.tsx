@@ -9,7 +9,7 @@
  *
  * Illustrative physical acting only. Not an OpenLine operation.
  */
-import { PAL, matte, BlobShadow, Limb } from "../kit";
+import { PAL, matte, BlobShadow, Limb, Hinge, Foot } from "../kit";
 import { loop, pulse, bump, d } from "../acting";
 
 const D = 14;
@@ -53,45 +53,50 @@ export function Sweeper({
       <BlobShadow r={0.5} />
 
       <group position={[sideStep, 0, 0]}>
-        {/* legs */}
+        {/* short chunky legs with knee hinges */}
         {[-1, 1].map((s) => (
-          <group key={s} position={[s * 0.12, 0.5, 0]} rotation={[reposition * s * d(14), 0, 0]}>
-            <Limb length={0.42} radius={0.07} color={PAL.terracottaDark} />
-            <mesh position={[0, -0.5, 0.05]}>
-              <boxGeometry args={[0.16, 0.1, 0.26]} />
-              {matte(PAL.ink)}
-            </mesh>
+          <group key={s} position={[s * 0.13, 0.36, 0]} rotation={[reposition * s * d(14), 0, 0]}>
+            <Limb length={0.28} radius={0.09} color={PAL.terracottaDark} />
+            <group position={[0, -0.16, 0]}>
+              <Hinge r={0.075} color={PAL.ink} />
+            </group>
+            <group position={[0, -0.32, 0.05]}>
+              <Foot w={0.2} h={0.1} l={0.3} color={PAL.ink} />
+            </group>
           </group>
         ))}
         {/* torso */}
-        <group position={[0, 1.02, 0]} rotation={[lean, 0, sweeping * d(3)]}>
+        <group position={[0, 0.92, 0]} rotation={[lean, 0, sweeping * d(3)]}>
           <mesh>
-            <capsuleGeometry args={[0.2, 0.4, 8, 14]} />
+            <capsuleGeometry args={[0.22, 0.34, 8, 14]} />
             {matte(PAL.cream)}
           </mesh>
           {/* sash */}
           <mesh position={[0, 0.05, 0]} rotation={[0, 0, d(12)]}>
-            <boxGeometry args={[0.44, 0.09, 0.44]} />
+            <boxGeometry args={[0.46, 0.09, 0.46]} />
             {matte(PAL.blue)}
           </mesh>
-          {/* arms to the broom */}
+          {/* chunky arms to the broom */}
           {[-1, 1].map((s) => (
             <group
               key={s}
-              position={[s * 0.26, 0.28, 0.08]}
+              position={[s * 0.27, 0.26, 0.08]}
               rotation={[d(-40) + sweeping * d(-14) - resting * d(22), 0, s * d(-12)]}
             >
-              <Limb length={0.34} radius={0.06} color={PAL.cream} />
-              <mesh position={[0, -0.4, 0]}>
-                <sphereGeometry args={[0.06, 10, 8]} />
+              <mesh position={[0, -0.02, 0]}>
+                <Hinge r={0.065} color={PAL.ink} />
+              </mesh>
+              <Limb length={0.26} radius={0.07} color={PAL.cream} />
+              <mesh position={[0, -0.32, 0]}>
+                <sphereGeometry args={[0.07, 10, 8]} />
                 {matte(PAL.woodDark)}
               </mesh>
             </group>
           ))}
           {/* head with cap */}
-          <group position={[0, 0.52, 0]} rotation={[headDown - straighten * d(8), 0, 0]}>
+          <group position={[0, 0.5, 0]} rotation={[headDown - straighten * d(8), 0, 0]}>
             <mesh>
-              <sphereGeometry args={[0.17, 18, 14]} />
+              <sphereGeometry args={[0.18, 18, 14]} />
               {matte(PAL.terracotta)}
             </mesh>
             <mesh position={[0, 0.14, 0]}>
@@ -112,7 +117,7 @@ export function Sweeper({
         </group>
 
         {/* the broom */}
-        <group position={[0.3, 0, 0.42]} rotation={[broomSwing + broomDrag - broomPlant, 0, d(-6)]}>
+        <group position={[0.28, 0, 0.3]} rotation={[broomSwing + broomDrag - broomPlant, 0, d(-6)]}>
           <mesh position={[0, 0.75, 0]}>
             <cylinderGeometry args={[0.03, 0.03, 1.5, 8]} />
             {matte(PAL.wood)}

@@ -9,7 +9,7 @@
  *
  * Illustrative physical acting only. Not an OpenLine operation.
  */
-import { PAL, matte, BlobShadow } from "../kit";
+import { PAL, matte, BlobShadow, Hinge } from "../kit";
 import { loop, pulse, bump, d } from "../acting";
 import * as THREE from "three";
 
@@ -99,8 +99,8 @@ export function Tinkerer({
   const hx = CRANK_C[0];
   const hy = CRANK_C[1] + Math.sin(theta) * CRANK_R;
   const hz = CRANK_C[2] + Math.cos(theta) * CRANK_R;
-  const shoulder: [number, number, number] = [0.18, 1.5, 0.3];
-  const hand: [number, number, number] = reach > 0.02 ? [hx, hy, hz] : [0.3, 0.9, 0.35];
+  const shoulder: [number, number, number] = [0.18, 1.3, 0.3];
+  const hand: [number, number, number] = reach > 0.02 ? [hx, hy, hz] : [0.3, 0.72, 0.35];
 
   // spinner: geared 3x off the crank, wobbles while sputtering
   const spinnerAngle = theta * 3;
@@ -146,29 +146,46 @@ export function Tinkerer({
         </group>
       </group>
 
-      {/* tinkerer body: tall and thin */}
+      {/* tinkerer body: tall and narrow, chunky short legs */}
       <group position={[0, 0, 0]} rotation={[lean, 0, 0]}>
-        {/* legs */}
+        {/* legs with knee hinges */}
         {[-1, 1].map((s) => (
-          <mesh key={s} position={[s * 0.11, 0.35, 0]}>
-            <capsuleGeometry args={[0.055, 0.6, 6, 10]} />
-            {matte(PAL.sageDark)}
-          </mesh>
+          <group key={s} position={[s * 0.12, 0.05, 0]}>
+            <mesh position={[0, 0.2, 0]}>
+              <capsuleGeometry args={[0.075, 0.3, 6, 10]} />
+              {matte(PAL.sageDark)}
+            </mesh>
+            <mesh position={[0, 0.22, 0]}>
+              <Hinge r={0.075} color={PAL.ink} />
+            </mesh>
+            <mesh position={[0, 0.03, 0.04]}>
+              <boxGeometry args={[0.17, 0.09, 0.26]} />
+              {matte(PAL.ink)}
+            </mesh>
+          </group>
         ))}
-        {/* torso */}
-        <mesh position={[0, 1.05, 0]}>
-          <capsuleGeometry args={[0.16, 0.55, 8, 14]} />
+        {/* tapered torso: wide shoulders, narrow waist */}
+        <mesh position={[0, 0.86, 0]}>
+          <cylinderGeometry args={[0.21, 0.13, 0.62, 14]} />
           {matte(PAL.sage)}
         </mesh>
+        {/* collar ring */}
+        <mesh position={[0, 1.16, 0]}>
+          <cylinderGeometry args={[0.22, 0.22, 0.07, 14]} />
+          {matte(PAL.sageDark)}
+        </mesh>
         {/* idle arm */}
-        <group position={[-0.2, 1.32, 0]} rotation={[bump(T, 4, 6, d(-8)), 0, d(10)]}>
-          <mesh position={[0, -0.3, 0]}>
-            <capsuleGeometry args={[0.05, 0.5, 6, 10]} />
+        <group position={[-0.24, 1.1, 0]} rotation={[bump(T, 4, 6, d(-8)), 0, d(10)]}>
+          <mesh position={[0, -0.02, 0]}>
+            <Hinge r={0.06} color={PAL.ink} />
+          </mesh>
+          <mesh position={[0, -0.2, 0]}>
+            <capsuleGeometry args={[0.06, 0.32, 6, 10]} />
             {matte(PAL.sageDark)}
           </mesh>
         </group>
         {/* head with one big eye */}
-        <group position={[0, 1.62, 0]} rotation={[headTilt + nod, d(18), 0]}>
+        <group position={[0, 1.42, 0]} rotation={[headTilt + nod, d(18), 0]}>
           <mesh>
             <sphereGeometry args={[0.17, 18, 14]} />
             {matte(PAL.cream)}

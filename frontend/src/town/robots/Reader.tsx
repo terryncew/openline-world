@@ -10,7 +10,7 @@
  *
  * Illustrative physical acting only. Not an OpenLine operation.
  */
-import { PAL, matte, BlobShadow, Limb } from "../kit";
+import { PAL, matte, BlobShadow, Limb, Hinge } from "../kit";
 import { loop, pulse, bump, d } from "../acting";
 
 const D = 14;
@@ -68,29 +68,36 @@ export function Reader({
         </mesh>
       </group>
 
-      {/* reader body: small and round, seated */}
+      {/* reader body: small and round, seated, chunky */}
       <group position={[0, 0.5, 0.05]} rotation={[lean * 0.4, 0, 0]}>
-        {/* dangling legs */}
+        {/* short dangling legs with rounded feet */}
         {[-1, 1].map((s) => (
-          <group key={s} position={[s * 0.13, 0.08, 0.12]} rotation={[d(24) + Math.sin(T * 1.7 + s) * d(3), 0, 0]}>
-            <Limb length={0.26} radius={0.06} color={PAL.blueDark} />
+          <group key={s} position={[s * 0.14, 0.1, 0.12]} rotation={[d(24) + Math.sin(T * 1.7 + s) * d(3), 0, 0]}>
+            <Limb length={0.18} radius={0.07} color={PAL.blueDark} />
+            <mesh position={[0, -0.22, 0.03]}>
+              <sphereGeometry args={[0.075, 10, 8]} />
+              {matte(PAL.ink)}
+            </mesh>
           </group>
         ))}
         {/* round torso */}
         <mesh position={[0, 0.32, 0]}>
-          <sphereGeometry args={[0.26, 20, 16]} />
+          <sphereGeometry args={[0.27, 20, 16]} />
           {matte(PAL.blue)}
         </mesh>
-        {/* arms cradling the book */}
+        {/* chunky arms cradling the book */}
         {[-1, 1].map((s) => (
           <group
             key={s}
-            position={[s * 0.24, 0.42, 0.1]}
+            position={[s * 0.25, 0.42, 0.1]}
             rotation={[d(-52) + (s > 0 ? reach * d(-30) : 0), 0, s * d(-18)]}
           >
-            <Limb length={0.24} radius={0.055} color={PAL.blueDark} />
-            <mesh position={[0, -0.3, 0]}>
-              <sphereGeometry args={[0.06, 10, 8]} />
+            <mesh position={[0, -0.02, 0]}>
+              <Hinge r={0.06} color={PAL.ink} />
+            </mesh>
+            <Limb length={0.2} radius={0.065} color={PAL.blueDark} />
+            <mesh position={[0, -0.26, 0]}>
+              <sphereGeometry args={[0.07, 10, 8]} />
               {matte(PAL.cream)}
             </mesh>
           </group>

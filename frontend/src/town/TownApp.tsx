@@ -16,7 +16,7 @@ import { Carrier } from "./robots/Carrier";
 import { Tinkerer } from "./robots/Tinkerer";
 import { Reader } from "./robots/Reader";
 import { Sweeper } from "./robots/Sweeper";
-import { Workshop, Exchange, Library, Depot, RepairShop, Ground, Tree, Lamp, Fountain } from "./buildings";
+import { Workshop, Exchange, Library, Depot, RepairShop, Ground, Tree, Lamp, Fountain, AlleyClutter, DistantRoof } from "./buildings";
 
 function Sun() {
   return (
@@ -75,35 +75,50 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
     <>
       <Sun />
       <Ground />
-      <Fountain />
+      <group position={[1.1, 0, 0.2]}>
+        <Fountain />
+      </group>
       <WorkshopDoor />
-      <group position={[-5.6, 0, -2.2]} rotation={[0, 0.55, 0]}>
+      {/* staggered, asymmetric placement: a village, not a carousel */}
+      <group position={[-6.0, 0, -2.6]} rotation={[0, 0.9, 0]}>
         <Exchange />
       </group>
-      <group position={[5.6, 0, -2.2]} rotation={[0, -0.55, 0]}>
+      <group position={[5.6, 0, -3.6]} rotation={[0, -0.65, 0]}>
         <Library />
       </group>
-      <group position={[-4.1, 0, 2.6]} rotation={[0, 0.75, 0]}>
+      <group position={[-5.6, 0, 2.4]} rotation={[0, 1.05, 0]}>
         <Depot />
       </group>
-      <group position={[4.1, 0, 2.6]} rotation={[0, -0.75, 0]}>
+      <group position={[4.2, 0, 4.2]} rotation={[0, -0.85, 0]}>
         <RepairShop />
       </group>
 
-      {/* the four vignettes, each on its own deterministic clock offset */}
-      <Carrier t={t} position={[-1.7, 0, -2.5]} />
-      <Tinkerer t={t + 4.0} position={[3.3, 0, -3.3]} />
-      <Reader t={t + 8.0} position={[2.0, 0, 0.9]} rotationY={-0.35} />
-      <Sweeper t={t + 2.0} position={[-1.1, 0, 3.2]} rotationY={0.3} />
+      {/* side alley between depot and exchange: crates, a barrel,
+          a partial sightline into a little work area */}
+      <AlleyClutter position={[-6.9, 0, 0.2]} rotationY={0.4} />
+      <AlleyClutter position={[6.9, 0, 1.4]} rotationY={-0.5} />
 
-      <Tree position={[-4.6, 0, 0.1]} s={1.1} />
-      <Tree position={[3.6, 0, 1.6]} s={0.9} />
-      <Tree position={[-6.8, 0, 1.8]} s={1.25} />
-      <Tree position={[6.9, 0, 1.4]} s={1.05} />
-      <Tree position={[0.5, 0, -6.8]} s={1.0} />
-      <Lamp position={[-2.6, 0, 2.2]} />
-      <Lamp position={[2.6, 0, 2.2]} />
-      <Lamp position={[-2.1, 0, -3.9]} />
+      {/* more town implied offscreen */}
+      <DistantRoof position={[-9.5, 0, -5.0]} color={PAL.blue} />
+      <DistantRoof position={[9.8, 0, -2.0]} color={PAL.sage} />
+      <DistantRoof position={[-7.5, 0, 7.0]} color={PAL.terracotta} />
+
+      {/* the four vignettes, each on its own deterministic clock offset */}
+      <Carrier t={t} position={[-3.0, 0, 2.0]} />
+      <Tinkerer t={t + 4.0} position={[2.4, 0, -2.6]} />
+      <Reader t={t + 8.0} position={[3.4, 0, -0.6]} rotationY={-0.5} />
+      <Sweeper t={t + 2.0} position={[0.2, 0, 4.2]} rotationY={0.25} />
+
+      <Tree position={[-5.2, 0, 4.2]} s={1.1} />
+      <Tree position={[2.6, 0, 6.0]} s={0.9} />
+      <Tree position={[-7.8, 0, -1.0]} s={1.25} />
+      <Tree position={[7.6, 0, -4.2]} s={1.05} />
+      <Tree position={[-2.0, 0, -6.0]} s={1.0} />
+      <Tree position={[7.2, 0, 3.0]} s={0.85} />
+      <Lamp position={[-0.4, 0, 6.6]} />
+      <Lamp position={[2.2, 0, 3.0]} />
+      <Lamp position={[-4.2, 0, -0.4]} />
+      <Lamp position={[2.8, 0, -3.6]} />
     </>
   );
 }
@@ -127,9 +142,9 @@ export function TownApp() {
     <div style={{ position: "fixed", inset: 0, background: PAL.cream }}>
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [0, 5.0, 11.6], fov: 40, near: 0.1, far: 60 }}
+        camera={{ position: [0, 5.6, 13.2], fov: 40, near: 0.1, far: 60 }}
         gl={{ antialias: true, powerPreference: "low-power" }}
-        onCreated={({ camera }) => camera.lookAt(0, 1.25, -1)}
+        onCreated={({ camera }) => camera.lookAt(0, 1.2, -1)}
       >
         <SceneFrame clockRef={clockRef} paused={paused || reduced} onTick={() => setTick((x) => x + 1)} />
       </Canvas>
@@ -214,18 +229,18 @@ function SceneFrame({
       const portrait = size.width / size.height < 0.9;
       const pc = camera as THREE.PerspectiveCamera;
       const wantFov = portrait ? 52 : 40;
-      const wantY = portrait ? 7.2 : 5.0;
-      const wantZ = portrait ? 17.5 : 11.6;
+      const wantY = portrait ? 7.2 : 5.6;
+      const wantZ = portrait ? 17.5 : 13.2;
       if (pc.fov !== wantFov) {
         pc.fov = wantFov;
         pc.updateProjectionMatrix();
       }
       camera.position.set(
-        Math.sin(clock.elapsedTime * 0.11) * (portrait ? 0.25 : 0.35),
+        Math.sin(clock.elapsedTime * 0.11) * (portrait ? 0.25 : 0.25),
         wantY,
         wantZ
       );
-      camera.lookAt(0, 1.25, -1);
+      camera.lookAt(0, 1.2, -1);
     }
   });
   return <Scene clockRef={clockRef} />;

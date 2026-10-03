@@ -363,33 +363,160 @@ export function RepairShop() {
   );
 }
 
-/** Ground: cream plaza disc, sage surround, terracotta paths. */
+/** Ground: sage surround, an ORGANIC (non-circular) cream plaza blob with a
+ *  terracotta edge, and winding path ribbons that bend and fork. The town
+ *  reads as a place you could keep wandering through, not a display base. */
 export function Ground() {
+  const plaza = useMemo(() => blobGeometry(6.6, 0.13, 1.7), []);
+  const plazaEdge = useMemo(() => blobGeometry(7.0, 0.13, 1.7), []);
+  const paths = useMemo(
+    () => [
+      // main winding: front gate -> plaza -> workshop door
+      ribbonGeometry(
+        [
+          [0.6, 9.5],
+          [1.4, 6.0],
+          [-0.7, 3.4],
+          [0.5, 0.8],
+          [0.1, -2.6],
+        ],
+        2.1
+      ),
+      // west fork: plaza -> exchange
+      ribbonGeometry(
+        [
+          [-0.7, 3.4],
+          [-3.4, 2.4],
+          [-5.4, 0.6],
+          [-6.3, -2.0],
+        ],
+        1.7
+      ),
+      // east fork: main -> repair shop
+      ribbonGeometry(
+        [
+          [1.4, 6.0],
+          [3.4, 5.0],
+          [4.5, 4.4],
+        ],
+        1.7
+      ),
+      // library lane: plaza -> library
+      ribbonGeometry(
+        [
+          [0.5, 0.8],
+          [2.9, -0.9],
+          [4.9, -2.7],
+          [5.9, -3.6],
+        ],
+        1.6
+      ),
+    ],
+    []
+  );
   return (
     <group>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]}>
-        <circleGeometry args={[16, 48]} />
+        <circleGeometry args={[17, 48]} />
         {matte(PAL.sage)}
       </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <circleGeometry args={[7.5, 48]} />
-        {matte(PAL.cream)}
-      </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.005, 0]}>
-        <ringGeometry args={[7.5, 8.1, 48]} />
+      <mesh geometry={plazaEdge} rotation={[-Math.PI / 2, 0, 0]} position={[0.3, 0.002, 0.8]}>
         {matte(PAL.terracotta)}
       </mesh>
-      {/* paths */}
-      {[
-        { p: [0, 0.008, 5.2] as [number, number, number], w: 2.2, l: 6 },
-        { p: [-4.6, 0.008, -1.5] as [number, number, number], w: 2.0, l: 5, r: 0.5 },
-        { p: [4.6, 0.008, -1.5] as [number, number, number], w: 2.0, l: 5, r: -0.5 },
-      ].map((pa, i) => (
-        <mesh key={i} rotation={[-Math.PI / 2, 0, pa.r ?? 0]} position={pa.p}>
-          <planeGeometry args={[pa.w, pa.l]} />
+      <mesh geometry={plaza} rotation={[-Math.PI / 2, 0, 0]} position={[0.3, 0.006, 0.8]}>
+        {matte(PAL.cream)}
+      </mesh>
+      {paths.map((g, i) => (
+        <mesh key={i} geometry={g} position={[0, 0.009, 0]}>
           {matte(PAL.creamDark)}
         </mesh>
       ))}
+    </group>
+  );
+}
+
+/** Organic blob geometry: a disc with a wobbly radius. Deterministic. */
+function blobGeometry(r: number, wobble: number, seed: number): THREE.BufferGeometry {
+  const shape = new THREE.Shape();
+  const N = 48;
+  for (let i = 0; i <= N; i++) {
+    const a = (i / N) * Math.PI * 2;
+    const rr = r * (1 + wobble * Math.sin(a * 3 + seed) * Math.sin(a * 2 + seed * 1.3));
+    const x = Math.cos(a) * rr;
+    const y = Math.sin(a) * rr;
+    if (i === 0) shape.moveTo(x, y);
+    else shape.lineTo(x, y);
+  }
+  return new THREE.ShapeGeometry(shape, 24);
+}
+
+/** Flat ribbon along a winding 2D path. Deterministic. */
+function ribbonGeometry(pts: [number, number][], width: number): THREE.BufferGeometry {
+  const curve = new THREE.CatmullRomCurve3(pts.map(([x, z]) => new THREE.Vector3(x, 0, z)));
+  const N = 42;
+  const positions: number[] = [];
+  const indices: number[] = [];
+  for (let i = 0; i <= N; i++) {
+    const u = i / N;
+    const p = curve.getPoint(u);
+    const tan = curve.getTangent(u);
+    const nx = -tan.z;
+    const nz = tan.x;
+    positions.push(p.x + (nx * width) / 2, 0, p.z + (nz * width) / 2);
+    positions.push(p.x - (nx * width) / 2, 0, p.z - (nz * width) / 2);
+    if (i < N) {
+      const a = i * 2;
+      indices.push(a, a + 2, a + 1, a + 1, a + 2, a + 3);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  g.setIndex(indices);
+  g.computeVertexNormals();
+  return g;
+}
+
+/** Crates and a barrel cluttering a side alley: a partial sightline into
+ *  a little work area, implying the town continues. */
+export function AlleyClutter({ position, rotationY = 0 }: { position: [number, number, number]; rotationY?: number }) {
+  return (
+    <group position={position} rotation={[0, rotationY, 0]}>
+      <mesh position={[0, 0.22, 0]} rotation={[0, 0.3, 0]}>
+        <boxGeometry args={[0.44, 0.44, 0.44]} />
+        {matte(PAL.wood)}
+      </mesh>
+      <mesh position={[0.42, 0.18, 0.2]} rotation={[0, -0.2, 0]}>
+        <boxGeometry args={[0.36, 0.36, 0.36]} />
+        {matte(PAL.woodDark)}
+      </mesh>
+      <mesh position={[0.1, 0.62, -0.1]} rotation={[0, 0.5, 0]}>
+        <boxGeometry args={[0.34, 0.34, 0.34]} />
+        {matte(PAL.creamDark)}
+      </mesh>
+      <mesh position={[-0.5, 0.26, 0.25]}>
+        <cylinderGeometry args={[0.2, 0.23, 0.52, 12]} />
+        {matte(PAL.terracottaDark)}
+      </mesh>
+    </group>
+  );
+}
+
+/** A distant rooftop at the frame edge: more town implied offscreen. */
+export function DistantRoof({ position, color }: { position: [number, number, number]; color: string }) {
+  return (
+    <group position={position}>
+      <mesh position={[0, 1.4, 0]}>
+        <boxGeometry args={[3.2, 2.8, 2.6]} />
+        {matte(color)}
+      </mesh>
+      <mesh position={[0, 3.4, 0]} rotation={[0, Math.PI / 4, 0]}>
+        <coneGeometry args={[2.5, 1.4, 4]} />
+        {matte(PAL.woodDark)}
+      </mesh>
+      <mesh position={[0.9, 4.0, 0]}>
+        <boxGeometry args={[0.35, 1.2, 0.35]} />
+        {matte(PAL.stoneDark)}
+      </mesh>
     </group>
   );
 }
