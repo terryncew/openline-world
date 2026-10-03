@@ -91,12 +91,12 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
       </group>
 
       {/* the four vignettes, each on its own deterministic clock offset */}
-      <Carrier t={t} position={[-2.6, 0, -3.1]} />
+      <Carrier t={t} position={[-1.7, 0, -2.5]} />
       <Tinkerer t={t + 4.0} position={[3.3, 0, -3.3]} />
       <Reader t={t + 8.0} position={[2.0, 0, 0.9]} rotationY={-0.35} />
       <Sweeper t={t + 2.0} position={[-1.1, 0, 3.2]} rotationY={0.3} />
 
-      <Tree position={[-3.4, 0, 1.2]} s={1.1} />
+      <Tree position={[-4.6, 0, 0.1]} s={1.1} />
       <Tree position={[3.6, 0, 1.6]} s={0.9} />
       <Tree position={[-6.8, 0, 1.8]} s={1.25} />
       <Tree position={[6.9, 0, 1.4]} s={1.05} />

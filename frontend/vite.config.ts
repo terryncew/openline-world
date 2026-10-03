@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react'
 import basicSsl from '@vitejs/plugin-basic-ssl'
+import { viteSingleFile } from 'vite-plugin-singlefile'
 import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
@@ -23,7 +24,10 @@ const useHttps = process.env.PREVIEW_HTTPS === '1'
 const backendPort = process.env.WORKSHOP_PORT ?? '8471'
 
 export default defineConfig({
-  plugins: [react(), ...(useHttps ? [basicSsl()] : [])],
+  // town.html must be a SINGLE self-contained file: the sandboxed iframe
+  // has an opaque origin, so module script fetches would be CORS-blocked.
+  // viteSingleFile inlines the town bundle (and index's) into the HTML.
+  plugins: [react(), viteSingleFile(), ...(useHttps ? [basicSsl()] : [])],
   build: {
     // The Square ships as a separately bundled document (town.html) so it
     // can run in an opaque-origin sandboxed iframe. No shared runtime
@@ -36,6 +40,11 @@ export default defineConfig({
     },
   },
   server: {
+    // Dev-only: the sandboxed town iframe has an opaque origin, so its
+    // module scripts need CORS headers from this loopback dev server.
+    // Production town.html is fully inlined (viteSingleFile) and fetches
+    // nothing, so this header never ships.
+    headers: { "Access-Control-Allow-Origin": "*" },
     // Dev-only: the phone reaches this server via the machine's LAN IP or
     // hostname, which varies per network — so host checking is off here.
     // The backend behind the proxy stays loopback-only regardless.

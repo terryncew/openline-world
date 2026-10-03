@@ -294,16 +294,36 @@ export function VizView({
     }
   }, [demoRunning]);
 
-  // square entry: run the demo once on mount through the same path as
-  // the "Run the live demo" button. The viz's own director still owns the
-  // POSTs; the square never calls it directly.
-  const autoStarted = useRef(false);
+  // square entry: run the demo on mount through the director (the same
+  // path as the "Run the live demo" button). StrictMode-safe: every
+  // (re)mount starts the demo; the cleanup stops it. The unmount cleanup
+  // above sets stopDemoRef, so a StrictMode double-mount stops the first
+  // run and this effect starts the second — no stale autoStarted guard.
   useEffect(() => {
-    if (autoRunDemo && !autoStarted.current) {
-      autoStarted.current = true;
-      runDemo();
-    }
-    // runDemo is stable; run once
+    if (!autoRunDemo) return;
+    stopDemoRef.current = false;
+    setDemoRunning(true);
+    setCursorSeq(null);
+    setReplayState("live");
+    runDemoScript({
+      shouldStop: () => stopDemoRef.current,
+      onReset: () => {
+        setCursorSeq(null);
+        setReplayState("live");
+        setStreamEpoch((e) => e + 1);
+      },
+    })
+      .catch(() => {
+        /* demo errors surface in the main app; the viz stays read-only */
+      })
+      .finally(() => {
+        setDemoRunning(false);
+        fetchSnapshot().then(setSnap).catch(() => {});
+      });
+    return () => {
+      stopDemoRef.current = true;
+    };
+    // run once per mount; the director owns the POST loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoRunDemo]);
 
