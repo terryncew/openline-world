@@ -106,7 +106,7 @@ export function VizCanvas({ children }: { children: ReactNode }) {
         </mesh>
       </group>
       {/* contact grounding */}
-      <Blob position={[GATE_X, 0.015, 0]} radius={2.6} />
+      <Blob position={[GATE_X, 0.015, 0]} radius={3.0} />
       <Blob position={[-7.5, 0.015, -3.5]} radius={1.4} />
       <Blob position={[-2.2, 0.015, 1.2]} radius={4.2} opacity={0.14} />
       <Blob position={[10.6, 0.015, 0]} radius={4.6} opacity={0.14} />
