@@ -22,12 +22,12 @@ verdict, or proof that any real system is safe.
 
 ## Download
 
-**Latest prerelease: [v0.1.2](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2).**
-Verified distribution ZIP: `openline-world-v0.1.2-prerelease.zip`
-(SHA-256 `09667bcf2c9ac195bfa62900f489802f29bf94370d8de96d024d55beae8f7270`).
-v0.1.2 supersedes v0.1.1, whose tag and published asset did not match — the
-[v0.1.2 release notes](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2)
-record the recovery.
+**Latest prerelease: [v0.1.3](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.3).**
+Verified distribution ZIP: `openline-world-v0.1.3-prerelease.zip`
+(SHA-256 `6c04f7d510882ef39f07643fe13a3438a12c4c30037524c8ee180b1726b32bbb`).
+v0.1.3 publishes the research/discovery milestone; earlier prereleases are untouched —
+see the [v0.1.3 release notes](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.3)
+for the full record.
 
 ![OpenLine World demo](assets/openline-world-demo.gif)
 
@@ -37,10 +37,10 @@ Prerequisites: Python 3.10+, Node ^20.19.0 or >=22.12.0, npm. Nothing is
 billed. No model calls.
 
 ```bash
-# 1. Download openline-world-v0.1.2-prerelease.zip from the link above
+# 1. Download openline-world-v0.1.3-prerelease.zip from the link above
 # 2. Unzip it (the ZIP has no enclosing directory, so extract into one):
-unzip openline-world-v0.1.2-prerelease.zip -d openline-world-v0.1.2
-cd openline-world-v0.1.2
+unzip openline-world-v0.1.3-prerelease.zip -d openline-world-v0.1.3
+cd openline-world-v0.1.3
 # 3. Launch:
 ./launch-preview.sh
 ```
@@ -240,7 +240,7 @@ trademark rights and does not imply endorsement by OpenLine.
 
 ## Release provenance
 
-- **Current public prerelease:** [`openline-world-v0.1.2`](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2)
+- **Previous prerelease:** [`openline-world-v0.1.2`](https://github.com/terryncew/openline-world/releases/tag/openline-world-v0.1.2)
 - **Release commit:** `5345719d68e88043ea9d06213c5a2269c21786bf` (branch `release/v0.1.2`)
 - **Release archive SHA-256:** `09667bcf2c9ac195bfa62900f489802f29bf94370d8de96d024d55beae8f7270`
 - v0.1.2 was recovered from the preserved v0.1.1 archive (SHA-256 `3270248a…`)
