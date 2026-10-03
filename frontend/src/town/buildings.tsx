@@ -418,13 +418,18 @@ export function Depot() {
 }
 
 /** THE REPAIR SHOP — striped awning, workbench, the work itself under
- *  a tarp. Still. Waiting. */
+ *  a tarp. Still. Waiting. Walls are cream: terracotta belongs to the
+ *  workshop alone. */
 export function RepairShop() {
   return (
     <group>
       <mesh position={[0, 0.95, 0]}>
         <boxGeometry args={[2.8, 1.9, 2.2]} />
-        {matte(PAL.terracotta)}
+        {matte(PAL.cream)}
+      </mesh>
+      <mesh position={[0, 0.13, 0]}>
+        <boxGeometry args={[2.86, 0.26, 2.26]} />
+        {matte(PAL.creamDark)}
       </mesh>
       <group position={[0, 1.9, 0]}>
         <PitchedRoof w={3.2} d={2.6} h={1.0} color={PAL.woodDark} />
@@ -831,6 +836,64 @@ export function LibraryStoop() {
           {matte(PAL.terracottaDark)}
         </mesh>
       </group>
+    </group>
+  );
+}
+
+/** A beveled stone plinth under a building: shared construction detail.
+ *  Slight batter (wider at the base) softens the sharp box footprints and
+ *  gives every building the same finished footing. */
+export function Plinth({ w, d, h = 0.16 }: { w: number; d: number; h?: number }) {
+  return (
+    <mesh position={[0, h / 2 - 0.02, 0]} scale={[w / 2, 1, d / 2]}>
+      <cylinderGeometry args={[1, 1.14, h, 4, 1]} />
+      {matte(PAL.stoneDark)}
+    </mesh>
+  );
+}
+
+/** A tool rack beside the workshop door: hanging wrench and hammer
+ *  silhouettes. Tools belong to the workshop. */
+export function ToolRack({ position, rotationY = 0 }: { position: [number, number, number]; rotationY?: number }) {
+  return (
+    <group position={position} rotation={[0, rotationY, 0]}>
+      {[-0.3, 0.3].map((x) => (
+        <mesh key={x} position={[x, 0.45, 0]}>
+          <boxGeometry args={[0.08, 0.9, 0.08]} />
+          {matte(PAL.woodDark)}
+        </mesh>
+      ))}
+      <mesh position={[0, 0.86, 0]}>
+        <boxGeometry args={[0.76, 0.07, 0.07]} />
+        {matte(PAL.woodDark)}
+      </mesh>
+      {/* hanging wrench */}
+      <group position={[-0.18, 0.62, 0.02]}>
+        <mesh position={[0, -0.08, 0]}>
+          <boxGeometry args={[0.05, 0.22, 0.04]} />
+          {matte(PAL.ink)}
+        </mesh>
+        <mesh position={[0, 0.06, 0]}>
+          <torusGeometry args={[0.055, 0.025, 8, 12, Math.PI * 1.5]} />
+          {matte(PAL.ink)}
+        </mesh>
+      </group>
+      {/* hanging hammer */}
+      <group position={[0.16, 0.62, 0.02]}>
+        <mesh position={[0, -0.06, 0]}>
+          <boxGeometry args={[0.045, 0.24, 0.045]} />
+          {matte(PAL.wood)}
+        </mesh>
+        <mesh position={[0, 0.08, 0]}>
+          <boxGeometry args={[0.16, 0.07, 0.06]} />
+          {matte(PAL.stoneDark)}
+        </mesh>
+      </group>
+      {/* a small parts crate below */}
+      <mesh position={[0, 0.1, 0.1]} rotation={[0, 0.3, 0]}>
+        <boxGeometry args={[0.3, 0.2, 0.26]} />
+        {matte(PAL.wood)}
+      </mesh>
     </group>
   );
 }

@@ -17,7 +17,7 @@ import { Tinkerer } from "./robots/Tinkerer";
 import { Reader } from "./robots/Reader";
 import { Sweeper } from "./robots/Sweeper";
 import { Waiter, Passerby, Helper } from "./robots/Extras";
-import { Workshop, Exchange, Library, Depot, RepairShop, Ground, Lamp, Fountain, AlleyClutter, DistantRoof, DepotYard, Mailbox, FenceCorner, Hedge, CartWheel, PropTrail, CharacterTree } from "./buildings";
+import { Workshop, Exchange, Library, Depot, RepairShop, Ground, Lamp, Fountain, AlleyClutter, DistantRoof, DepotYard, Mailbox, FenceCorner, Hedge, CartWheel, PropTrail, CharacterTree, Plinth, ToolRack } from "./buildings";
 
 function Sun() {
   return (
@@ -69,6 +69,7 @@ function WorkshopDoor() {
   return (
     // off-axis: important, not city hall. The lane bends toward it.
     <group position={[1.6, 0, -4.2]} rotation={[0, -0.12, 0]}>
+      <Plinth w={3.8} d={3.0} />
       <Workshop />
       {/* generous tap target over the door */}
       <mesh
@@ -116,15 +117,19 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
           forecourt; depot + exchange form the quieter west cluster. No
           equal spacing, no ring. */}
       <group position={[-4.8, 0, -2.4]} rotation={[0, 0.9, 0]}>
+        <Plinth w={3.4} d={2.8} />
         <Exchange />
       </group>
       <group position={[4.6, 0, -2.2]} rotation={[0, -0.55, 0]}>
+        <Plinth w={3.0} d={2.6} />
         <Library />
       </group>
       <group position={[-4.6, 0, 2.8]} rotation={[0, 1.05, 0]}>
+        <Plinth w={2.8} d={2.4} />
         <Depot />
       </group>
       <group position={[7.2, 0, -2.0]} rotation={[0, -0.55, 0]}>
+        <Plinth w={3.2} d={2.6} />
         <RepairShop />
       </group>
 
@@ -154,8 +159,11 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
       {/* street: the sweeper works the main lane */}
       <Sweeper t={t + 2.0} position={[-0.2, 0, 5.4]} rotationY={0.25} />
 
-      {/* workshop story: one waiting, attention on the door */}
-      <Waiter t={t + 1.0} position={[2.6, 0, -2.0]} rotationY={-1.96} />
+      {/* workshop story: one waiting, attention on the door.
+          Clear of the door lantern: silhouette must not merge. */}
+      <Waiter t={t + 1.0} position={[2.3, 0, -1.8]} rotationY={-1.96} />
+      {/* tools belong to the workshop: a rack beside the door */}
+      <ToolRack position={[-0.4, 0, -2.8]} rotationY={0.35} />
       {/* a delivery in progress along the main lane */}
       <Passerby t={t + 5.0} from={[0.4, 9.0]} to={[1.2, 3.0]} />
 
