@@ -267,7 +267,7 @@ export function TownApp() {
           pointerEvents: "none",
           fontFamily: "Georgia, serif",
           fontSize: 13,
-          color: "#6d6252",
+          color: PAL.ink,
         }}
       >
         Tap the workshop door to see how work gets approved
