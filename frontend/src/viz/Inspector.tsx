@@ -135,7 +135,7 @@ export function Inspector({
         <Row k="event" v={String(r.seq)} />
         {r.reasonCodes.length > 0 && <Row k="reasons" v={r.reasonCodes.join(", ")} />}
         <details className="viz-receipt-json">
-          <summary>Signed record (verbatim)</summary>
+          <summary>Public receipt projection (signed fields shown; not the full record)</summary>
           <pre>{JSON.stringify(r.receipt, null, 2)}</pre>
         </details>
       </>

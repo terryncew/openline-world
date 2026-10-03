@@ -116,7 +116,7 @@ export interface VizReceipt {
   action: string;
   decision: "ALLOWED" | "STOPPED";
   reasonCodes: string[];
-  /** The full signed record, exactly as the backend sent it. */
+  /** The backend's public receipt projection, exactly as sent (a subset of the full signed record). */
   receipt: Record<string, unknown>;
   provenance: Provenance;
 }
