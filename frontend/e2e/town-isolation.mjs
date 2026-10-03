@@ -200,17 +200,28 @@ try {
   }
 
   // 8. POSITIVE CONTROL: the exact valid intent from the frame opens the viz
-  // (reload the genuine town first, since the frame now holds hostile content)
-  await page.reload({ waitUntil: "networkidle" });
-  await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
+  // (load the genuine town in a fresh page, since the frame now holds
+  // hostile content). A fresh page is used rather than page.reload():
+  // in this automation environment a same-page reload/re-navigation
+  // leaves the Vite dev bundle blank (verified with and without the
+  // hostile step — a harness/environment quirk, not the product, whose
+  // real exit flow remounts via React state and is covered by
+  // square-smoke). The property under test is unchanged: a real click
+  // on the door opens the workshop.
+  const page2 = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await page2.goto(`http://127.0.0.1:${VITE_PORT}/`, { waitUntil: "networkidle" });
+  await page2.waitForSelector("iframe.square-frame", { timeout: 30000 });
   await sleep(6000);
   // Use the actual hit target: evaluate(postMessage) is intentionally no
   // longer a positive control because it has no human activation.
   for (const [x, y] of [[690, 330], [660, 340], [720, 340], [690, 370], [690, 300]]) {
-    await page.mouse.click(x, y);
-    if (await page.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 3000 }).then(() => true).catch(() => false)) break;
+    await page2.mouse.click(x, y);
+    if (await page2.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 3000 }).then(() => true).catch(() => false)) break;
   }
-  check("valid intent opens workshop", await vizOpen());
+  check("valid intent opens workshop", await page2.evaluate(() => !!document.querySelector(".viz-root")));
+  await page2.close();
+
+  await browser.close();
 
   await browser.close();
   const failed = results.filter((r) => !r.ok).length;

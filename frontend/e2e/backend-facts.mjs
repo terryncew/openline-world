@@ -81,7 +81,8 @@ try {
   const browser = await chromium.launch({
     args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
   });
-  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  let page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  // NOTE: phase 2 reassigns `page` to a fresh page (see below).
   await page.goto(`http://127.0.0.1:${VITE_PORT}/`, { waitUntil: "networkidle" });
   await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
   await sleep(10000); // vignettes run; the town makes no requests
@@ -106,6 +107,17 @@ try {
   console.log("PHASE 1 PASS: town animation, clicks, reload changed zero backend facts.");
 
   // ---- phase 2: the genuine custody sequence, derived from the backend ----
+  // Fresh page: the phase-1 reload leaves the Vite-dev-served town blank
+  // (the sandboxed iframe's module fetches are CORS-blocked from its
+  // opaque origin on re-navigation; production serves town.html as a
+  // single self-contained file precisely to avoid this). A fresh page
+  // tests the same property: the door opens the backend-driven sequence.
+  await page.close();
+  const page2 = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await page2.goto(`http://127.0.0.1:${VITE_PORT}/`, { waitUntil: "networkidle" });
+  await page2.waitForSelector("iframe.square-frame", { timeout: 30000 });
+  await sleep(6000);
+  page = page2; // phase 2 runs on a fresh page (see comment above)
   await page.mouse.click(640, 350); // workshop door
   await page.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 30000 });
   // wait for the demo to finish (9 steps x ~1.2s + margin)

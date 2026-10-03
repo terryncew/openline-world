@@ -33,9 +33,10 @@ const WORLD_TGT: [number, number, number] = [1.2, 0.8, 0];
 /* Portrait: its own authored framing, not a narrowed desktop shot —
  * a medium shot of the consequential core: gate mouth, cream lane,
  * archive rack. Same world state, different composition. */
-const WORLD_POS_PORTRAIT: [number, number, number] = [-1.5, 5.5, 8.5];
-const WORLD_TGT_PORTRAIT: [number, number, number] = [7.5, 0.8, -0.5];
+const WORLD_POS_PORTRAIT: [number, number, number] = [-4, 7, 13];
+const WORLD_TGT_PORTRAIT: [number, number, number] = [2, 1, 0];
 const RECEIVER_POS: [number, number, number] = [11.5, 4.5, 7.5];
+const RECEIVER_POS_PORTRAIT: [number, number, number] = [0, 3.5, 0.5];
 /* The workroom: an authored room framing, not a follow-shot. The sight
  * line runs from the southwest down the lane axis, through the arched
  * passage, to the gate — benches, arch, and gate room in one frame, so
@@ -87,7 +88,7 @@ export function CameraRig({
     let g: [number, number, number] = worldTgt;
 
     if (view === "receiver") {
-      p = RECEIVER_POS;
+      p = VIZ_SMALL_SCREEN ? RECEIVER_POS_PORTRAIT : RECEIVER_POS;
       g = GATE_FOCUS;
     } else if (view === "records") {
       p = RECORDS_POS;
