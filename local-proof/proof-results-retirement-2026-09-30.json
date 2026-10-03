@@ -1,0 +1,12 @@
+{
+  "repair": "participant-owned retirement (POST /api/world/retire)",
+  "commit": "68dc9871011a007934575e2693574b98a08aeee8",
+  "date": "2026-10-01T01:40:43Z",
+  "scope": "local backend only; never production",
+  "matrix": "backend/tests/test_retirement.py",
+  "matrix_result": "10/10 PASS",
+  "http_route": "backend/tests/test_retirement_http.py (local server.py, temp data dir)",
+  "http_route_result": "ALL PASS",
+  "regressions": "tests/test_persistence_race_repair.py + tests/test_standing_refresh.py (17 passed), tests/test_world.py (72 passed)",
+  "failed": false
+}

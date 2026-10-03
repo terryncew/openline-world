@@ -1,0 +1,55 @@
+{
+  "created_at": "2026-09-29T05:28:31.575135Z",
+  "decision_authority": "RECEIVER_GATE",
+  "epoch_certificate": {
+    "authority": "ISSUE_AND_NARROW_MANDATES",
+    "epoch_id": "epoch_9af157e50ff5a721",
+    "epoch_public_key": "bf8a980944eacab4c4a0b8aa7a64a3f19d7c76c08db1348c638c789831d9792d",
+    "expires_at": "2027-09-30T05:28:31.575135Z",
+    "issued_at": "2026-09-29T05:28:31.575135Z",
+    "payload_hash": "ce5b1e79af96bf7203ca1090654cc9479fbea75743d9cffe5be6eb1f6badae16",
+    "principal_id": "openline:principal:74db27615c7bcebe80cb2edcd4b84a19b735a034e8fe4b11d396106d33659202",
+    "schema": "openline.wallet.epoch_certificate.v1",
+    "sequence": 1,
+    "signature": {
+      "algorithm": "Ed25519",
+      "public_key": "40bed0b04ec9e0e5def8cabc689db3d9939ee2cda64b4dbdbff3dcb78b89e444",
+      "value": "47a67e11bb528b083a2e4941fb90b657220a2c0282f77d6a93e1a666cc3739cbb71e5f6e1bf22a1c78c279e303886a71d081d27b001c9ba02be171b616634b04"
+    }
+  },
+  "events": [
+    {
+      "data": {
+        "expires_at": "2026-09-30T05:28:31.606235Z",
+        "mandate_id": "mandate_32bdabe5dba6afa5",
+        "predecessor_mandate_id": null,
+        "scopes": [
+          "challenge.admin",
+          "challenge.contribute",
+          "claimgraph.correct"
+        ],
+        "subject_id": "owner-agent",
+        "subject_public_key": "9841b08289c4b463b7f54b5f383e5d599648502c22f4c0de2dc1422b598dd43c"
+      },
+      "event_type": "MANDATE_ISSUED",
+      "issued_at": "2026-09-29T05:28:31.606249Z",
+      "payload_hash": "7915d076381b978773c98deed94b148ef57c41d62fe41d7fb578dfaef3e8a195",
+      "previous_event_hash": null,
+      "principal_id": "openline:principal:74db27615c7bcebe80cb2edcd4b84a19b735a034e8fe4b11d396106d33659202",
+      "schema": "openline.wallet.timeline_event.v1",
+      "sequence": 1,
+      "signature": {
+        "algorithm": "Ed25519",
+        "public_key": "bf8a980944eacab4c4a0b8aa7a64a3f19d7c76c08db1348c638c789831d9792d",
+        "value": "a52ca3ee204c207f909f1c8df259d408a2b9631182c731b934268f9ffefffb1fecdfd1d3ed93330559cd6207804b6f2897bd3d0197fc25ae15abf08d61625a01"
+      }
+    }
+  ],
+  "label": "Owner wallet for challenge-owner",
+  "principal_id": "openline:principal:74db27615c7bcebe80cb2edcd4b84a19b735a034e8fe4b11d396106d33659202",
+  "receipts": [],
+  "root_public_key": "40bed0b04ec9e0e5def8cabc689db3d9939ee2cda64b4dbdbff3dcb78b89e444",
+  "schema": "openline.wallet.local_state.v1",
+  "version": 1,
+  "wallet_policy_authority": "NONE"
+}

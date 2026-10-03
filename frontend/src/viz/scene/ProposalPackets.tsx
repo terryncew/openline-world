@@ -18,8 +18,9 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { hashStr, type VizProposal, type VizWorker } from "../protocol";
+import { hashStr, type VizProposal, type VizReceipt, type VizWorker } from "../protocol";
 import { GATE_X, GATE_Z, proposalArc, workerHome } from "./layout";
+import { GATE_MOUTH, getMotion, useFigures } from "./workerMotion";
 
 /** Claim color: agent-reported. Cool slate — visibly not authority. */
 export const CLAIM_COLOR = new THREE.Color("#7fa8c9");
@@ -95,13 +96,18 @@ function DecidedPacket({
 export function ProposalPackets({
   proposals,
   workers,
+  receipts,
   onSelect,
 }: {
   proposals: VizProposal[];
   workers: VizWorker[];
+  receipts: VizReceipt[];
   onSelect: (id: string | null) => void;
 }) {
   const ref = useRef<THREE.InstancedMesh>(null);
+  // Small casts are staged: the packet rides in the worker's hands.
+  // Crowds keep the classic worker -> gate arc.
+  const figured = useFigures(workers.length);
 
   const workerIndex = useMemo(() => {
     const m = new Map<string, number>();
@@ -129,10 +135,14 @@ export function ProposalPackets({
   const decidedHomes = useMemo(
     () =>
       decided.map((p) => {
+        // Staged casts present the packet at the gate mouth, so the
+        // verdict animation starts where the carry ended.
+        if (figured)
+          return [GATE_MOUTH[0] + 0.85, 1.35, GATE_MOUTH[2]] as [number, number, number];
         const wi = workerIndex.get(p.workerId);
         return wi == null ? ([0, 0, 0] as [number, number, number]) : workerHome(wi, p.workerId);
       }),
-    [decided, workerIndex]
+    [decided, workerIndex, figured]
   );
   const phases = useMemo(
     () => inFlight.map((p) => (hashStr(p.id) % 1000) / 1000),
@@ -159,14 +169,32 @@ export function ProposalPackets({
     const mesh = ref.current;
     if (!mesh || n === 0) return;
     const t = clock.elapsedTime;
+    const nowMs = performance.now();
     for (let i = 0; i < n; i++) {
-      const from = homes[i];
-      // waiting on the receiver: loop the arc, pulsing
-      const tt = (t * 0.28 + phases[i]) % 1;
-      const pos = proposalArc(from, tt);
-      dummy.position.set(...pos);
-      dummy.scale.setScalar(0.85 + Math.sin(t * 5 + phases[i] * 9) * 0.18);
-      dummy.rotation.set(t * 1.4 + i, t * 1.1, 0);
+      const p = inFlight[i];
+      if (figured) {
+        // the packet rides in the worker's hands: bench -> lane -> gate
+        const wi = workerIndex.get(p.workerId) ?? 0;
+        const w = workers[wi];
+        const anchor = w ? getMotion(w, wi, proposals, receipts, nowMs).packet : null;
+        if (anchor && anchor.proposalId === p.id) {
+          dummy.position.set(...anchor.pos);
+          dummy.scale.setScalar(Math.max(0.0001, anchor.scale));
+        } else {
+          // not theirs to carry (edge): park it invisibly
+          dummy.position.set(0, -5, 0);
+          dummy.scale.setScalar(0.0001);
+        }
+        dummy.rotation.set(t * 1.4 + i, t * 1.1, 0);
+      } else {
+        // crowd mode: loop the worker -> gate arc, pulsing
+        const from = homes[i];
+        const tt = (t * 0.28 + phases[i]) % 1;
+        const pos = proposalArc(from, tt);
+        dummy.position.set(...pos);
+        dummy.scale.setScalar(0.85 + Math.sin(t * 5 + phases[i] * 9) * 0.18);
+        dummy.rotation.set(t * 1.4 + i, t * 1.1, 0);
+      }
       dummy.updateMatrix();
       mesh.setMatrixAt(i, dummy.matrix);
     }

@@ -13,6 +13,7 @@ import { useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import type { VizReceipt } from "../protocol";
 import { receiptSlot } from "./layout";
+import { PAL } from "./VizCanvas";
 
 const ALLOW_TABLET = new THREE.Color("#4d7d5f");
 const STOP_TABLET = new THREE.Color("#a0503c");
@@ -50,13 +51,31 @@ export function ReceiptTablets({
   }, [n, receipts, slots, selectedId]);
 
   if (n === 0) return null;
+  const maxRow = Math.max(0, ...receipts.map((_, i) => Math.floor(i / 14)));
+  const rackX = 8.6 + maxRow * 0.85 + 0.85;
+  const shelfRows = Array.from({ length: maxRow + 1 }, (_, r) => r);
   return (
     <group>
-      {/* plinth under the records arc */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[10.6, 0.02, 0]}>
-        <planeGeometry args={[7.5, 11.5]} />
-        <meshStandardMaterial color="#dccfae" roughness={1} />
-      </mesh>
+      {/* archive rack: wooden back wall + a shelf ledge per row.
+          The tablets slot into the rack like records on shelves. */}
+      <group position={[rackX, 0, 0]}>
+        {Array.from({ length: 24 }, (_, i) => (
+          <mesh key={i} position={[0, 0.8, -5.75 + i * 0.5]}>
+            <boxGeometry args={[0.12, 1.6, 0.32]} />
+            <meshStandardMaterial color={PAL.wood} roughness={0.9} />
+          </mesh>
+        ))}
+        <mesh position={[0, 1.68, 0]}>
+          <boxGeometry args={[0.16, 0.18, 12.2]} />
+          <meshStandardMaterial color={PAL.woodDark} roughness={0.85} />
+        </mesh>
+      </group>
+      {shelfRows.map((r) => (
+        <mesh key={r} rotation={[-Math.PI / 2, 0, 0]} position={[8.6 + r * 0.85, 0.06, 0]}>
+          <planeGeometry args={[0.9, 11.4]} />
+          <meshStandardMaterial color={PAL.woodDark} roughness={0.9} />
+        </mesh>
+      ))}
       <instancedMesh frustumCulled={false}
         ref={ref}
         args={[undefined, undefined, Math.max(n, 1)]}

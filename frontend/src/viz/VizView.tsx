@@ -21,14 +21,18 @@ import { revealDelay, isReplacementOnboard } from "./pacing";
 import { VizCanvas } from "./scene/VizCanvas";
 import { OwnerObelisk } from "./scene/OwnerObelisk";
 import { WorkerSwarm } from "./scene/WorkerSwarm";
+import { WorkerFigures } from "./scene/WorkerFigures";
+import { Workroom } from "./scene/Workroom";
+import { useFigures } from "./scene/workerMotion";
 import { AuthoritySeals } from "./scene/AuthoritySeals";
 import { ReceiverGate } from "./scene/ReceiverGate";
 import { ProposalPackets } from "./scene/ProposalPackets";
 import { ReceiptTablets } from "./scene/ReceiptTablets";
 import { SpeechPuffs, UnrecognizedMarkers } from "./scene/SpeechPuffs";
 import { CameraRig, type VizCameraView, type VizCloseup } from "./scene/CameraRig";
-import { Timeline, type ReplayState } from "./Timeline";
-import { Inspector, type VizSelection } from "./Inspector";
+import { ControlBench, type ReplayState } from "./ControlBench";
+import { WorkshopMenu } from "./WorkshopMenu";
+import { Ledger, type VizSelection } from "./Ledger";
 import type { Snapshot } from "../api";
 import "./viz.css";
 
@@ -218,6 +222,15 @@ export function VizView({
 
   const maxSeq = events.length ? events[events.length - 1].seq : 0;
   const effectiveCursor = cursorSeq ?? maxSeq;
+  const seqs = events.map((e) => e.seq);
+  const scrubMin = seqs.length ? Math.min(...seqs) : 0;
+  const atLive = effectiveCursor >= maxSeq;
+  const live = replayState === "live" || atLive;
+  const statusText = live ? "live" : `event ${effectiveCursor} of ${maxSeq}`;
+  const handleScrub = useCallback((s: number) => {
+    setReplayState("paused");
+    setCursorSeq(s >= maxSeq ? null : s);
+  }, [maxSeq]);
 
   // The event log is authoritative for worker/authority standing. The
   // snapshot is read-only and only supplies the owner principal, which
@@ -355,13 +368,6 @@ export function VizView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events, effectiveCursor, cameraView, receiptAt, graceTick]);
 
-  const followWorkerId =
-    selection?.kind === "worker"
-      ? selection.id
-      : scene.workers.length
-        ? scene.workers[scene.workers.length - 1].workerId
-        : null;
-
   // debug hook for automated tests: logical state only, no DOM internals
   useEffect(() => {
     (window as unknown as { __vizDebug?: unknown }).__vizDebug = {
@@ -406,37 +412,51 @@ export function VizView({
 
   return (
     <div className="viz-root">
-      <header className="viz-topbar">
-        <div className="viz-brand">
-          <strong>OpenLine World — visualization</strong>
-          <span className="viz-fine">read-only: every object traces to a real event</span>
-        </div>
-        <div className="viz-controls">
-          <button className="viz-btn" onClick={() => setCameraView("world")}>World</button>
-          <button className="viz-btn" onClick={() => setCameraView("worker")}>Follow worker</button>
-          <button className="viz-btn" onClick={() => setCameraView("receiver")}>Receiver</button>
-          <button className="viz-btn" onClick={() => setCameraView("records")}>Records</button>
-          <button className="viz-btn" onClick={handleExit}>{exitLabel}</button>
-        </div>
-      </header>
+      <WorkshopMenu
+        cameraView={cameraView}
+        onView={setCameraView}
+        onRunDemo={runDemo}
+        demoRunning={demoRunning}
+        speed={speed}
+        onSpeed={setSpeed}
+        statusText={statusText}
+        scrubMin={scrubMin}
+        scrubMax={maxSeq}
+        scrubValue={Math.min(effectiveCursor, maxSeq)}
+        onScrub={handleScrub}
+        exitLabel={exitLabel}
+        onExit={handleExit}
+      />
       {streamError && <div className="viz-err">{streamError}</div>}
       <main className="viz-stage">
         <VizCanvas>
           <CameraRig
             view={cameraView}
-            workers={scene.workers}
-            followWorkerId={followWorkerId}
             closeup={closeup}
           />
+          <Workroom workerCount={scene.workers.length} />
           <OwnerObelisk onSelect={() => setSelection({ kind: "owner" })} />
-          <WorkerSwarm
-            workers={scene.workers}
-            selectedId={selection?.kind === "worker" ? selection.id : null}
-            onSelect={(id) => setSelection(id ? { kind: "worker", id } : null)}
-          />
+          {useFigures(scene.workers.length) ? (
+            <WorkerFigures
+              workers={scene.workers}
+              proposals={scene.proposals}
+              receipts={scene.receipts}
+              speeches={scene.speeches}
+              selectedId={selection?.kind === "worker" ? selection.id : null}
+              onSelect={(id) => setSelection(id ? { kind: "worker", id } : null)}
+            />
+          ) : (
+            <WorkerSwarm
+              workers={scene.workers}
+              selectedId={selection?.kind === "worker" ? selection.id : null}
+              onSelect={(id) => setSelection(id ? { kind: "worker", id } : null)}
+            />
+          )}
           <AuthoritySeals
             authorities={scene.authorities}
             workers={scene.workers}
+            proposals={scene.proposals}
+            receipts={scene.receipts}
             selectedMandate={selection?.kind === "seal" ? selection.id : null}
             onSelect={(id) => setSelection(id ? { kind: "seal", id } : null)}
           />
@@ -447,6 +467,7 @@ export function VizView({
           <ProposalPackets
             proposals={scene.proposals}
             workers={scene.workers}
+            receipts={scene.receipts}
             onSelect={(id) => setSelection(id ? { kind: "packet", id } : null)}
           />
           <ReceiptTablets
@@ -454,10 +475,15 @@ export function VizView({
             selectedId={selection?.kind === "receipt" ? selection.id : null}
             onSelect={(id) => setSelection(id ? { kind: "receipt", id } : null)}
           />
-          <SpeechPuffs speeches={scene.speeches} workers={scene.workers} />
+          <SpeechPuffs
+            speeches={scene.speeches}
+            workers={scene.workers}
+            proposals={scene.proposals}
+            receipts={scene.receipts}
+          />
           <UnrecognizedMarkers items={scene.unrecognized} />
         </VizCanvas>
-        <Inspector
+        <Ledger
           selection={selection}
           workers={scene.workers}
           authorities={scene.authorities}
@@ -467,22 +493,13 @@ export function VizView({
           onClose={() => setSelection(null)}
         />
       </main>
-      <Timeline
-        events={events}
-        cursorSeq={effectiveCursor}
-        onCursor={(s) => {
-          setReplayState("paused");
-          setCursorSeq(s >= maxSeq ? null : s);
-        }}
+      <ControlBench
         replayState={cursorSeq == null ? "live" : replayState}
-        speed={speed}
-        onSpeed={setSpeed}
+        atLive={atLive}
         onReplay={doReplay}
         onPause={() => setReplayState("paused")}
         onResume={() => setReplayState("replaying")}
         onStep={doStep}
-        onRunDemo={runDemo}
-        demoRunning={demoRunning}
         caption={captionFor(events, effectiveCursor)}
       />
       {bench > 0 && <BenchMeter />}

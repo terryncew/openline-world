@@ -17,21 +17,35 @@
  *
  * Motion stays slow and damped; nothing here can nauseate.
  */
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import type { VizWorker } from "../protocol";
-import { workerHome } from "./layout";
 import { GATE_FOCUS } from "./ProposalPackets";
+import { VIZ_SMALL_SCREEN } from "./VizCanvas";
 
 export type VizCameraView = "world" | "worker" | "receiver" | "records";
 
-/** Timeline-driven close-ups. Null = rest at the view framing. */
+/** Bench-driven close-ups. Null = rest at the view framing. */
 export type VizCloseup = "gate" | "replacement" | null;
 
 const WORLD_POS: [number, number, number] = [0, 9.5, 15];
 const WORLD_TGT: [number, number, number] = [1.2, 0.8, 0];
+/* Portrait: its own authored framing, not a narrowed desktop shot —
+ * a medium shot of the consequential core: gate mouth, cream lane,
+ * archive rack. Same world state, different composition. */
+const WORLD_POS_PORTRAIT: [number, number, number] = [-1.5, 5.5, 8.5];
+const WORLD_TGT_PORTRAIT: [number, number, number] = [7.5, 0.8, -0.5];
 const RECEIVER_POS: [number, number, number] = [11.5, 4.5, 7.5];
+/* The workroom: an authored room framing, not a follow-shot. The sight
+ * line runs from the southwest down the lane axis, through the arched
+ * passage, to the gate — benches, arch, and gate room in one frame, so
+ * the viewer watches the whole bench -> threshold sequence. */
+const WORKROOM_POS: [number, number, number] = [-16.5, 5.5, 1.5];
+const WORKROOM_TGT: [number, number, number] = [2.0, 0.9, 0.5];
+/* Portrait: its own authored framing on the same axis — bench, arch,
+ * gate all inside the narrow frame. */
+const WORKROOM_POS_PORTRAIT: [number, number, number] = [-10.8, 3.4, 2.4];
+const WORKROOM_TGT_PORTRAIT: [number, number, number] = [2.0, 0.9, 0.6];
 const RECORDS_POS: [number, number, number] = [14.5, 6, -6];
 const RECORDS_TGT: [number, number, number] = [10.5, 0.5, 0];
 
@@ -39,9 +53,13 @@ const RECORDS_TGT: [number, number, number] = [10.5, 0.5, 0];
  * at the gate mouth. The packet flies toward the viewer, halts at the
  * threshold, and the verdict flash ring faces the camera. FOV 42 at ~6.3
  * units gives ~4.8 vertical units — the gate (3.6 tall) dominates the
- * frame without cropping the flash. */
-const GATE_CLOSEUP_POS: [number, number, number] = [0.2, 2.5, 0.8];
-const GATE_CLOSEUP_TGT: [number, number, number] = [6.5, 1.4, 0];
+ * frame without cropping the flash.
+ * The sightline runs slightly BELOW the seal's hover height (2.35): during
+ * the STOP halt the worker recoils to the gate mouth with the seal
+ * overhead, and the seal must read above the frame's center, never
+ * swallowing the lens. */
+const GATE_CLOSEUP_POS: [number, number, number] = [0.2, 2.0, 0.8];
+const GATE_CLOSEUP_TGT: [number, number, number] = [6.5, 1.15, 0];
 
 /* Replacement payoff: medium shot spanning the workers (west) and the
  * records arc behind the gate (east). */
@@ -50,14 +68,10 @@ const REPLACEMENT_TGT: [number, number, number] = [2.6, 0.9, 1.0];
 
 export function CameraRig({
   view,
-  workers,
-  followWorkerId,
   closeup,
 }: {
   view: VizCameraView;
-  workers: VizWorker[];
-  followWorkerId: string | null;
-  /** Timeline-driven close-up; only applies when view === "world". */
+  /** Bench-driven close-up; only applies when view === "world". */
   closeup: VizCloseup;
 }) {
   const { camera } = useThree();
@@ -65,16 +79,12 @@ export function CameraRig({
   const posGoal = useRef(new THREE.Vector3(...WORLD_POS));
   const tgtGoal = useRef(new THREE.Vector3(...WORLD_TGT));
 
-  const workerIndex = useMemo(() => {
-    const m = new Map<string, number>();
-    workers.forEach((w, i) => m.set(w.workerId, i));
-    return m;
-  }, [workers]);
-
   useFrame((_, dt) => {
     const dtc = Math.min(dt, 0.05);
-    let p: [number, number, number] = WORLD_POS;
-    let g: [number, number, number] = WORLD_TGT;
+    const worldPos = VIZ_SMALL_SCREEN ? WORLD_POS_PORTRAIT : WORLD_POS;
+    const worldTgt = VIZ_SMALL_SCREEN ? WORLD_TGT_PORTRAIT : WORLD_TGT;
+    let p: [number, number, number] = worldPos;
+    let g: [number, number, number] = worldTgt;
 
     if (view === "receiver") {
       p = RECEIVER_POS;
@@ -82,11 +92,12 @@ export function CameraRig({
     } else if (view === "records") {
       p = RECORDS_POS;
       g = RECORDS_TGT;
-    } else if (view === "worker" && followWorkerId) {
-      const wi = workerIndex.get(followWorkerId) ?? 0;
-      const home = workerHome(wi, followWorkerId);
-      p = [home[0] + 3.5, 3.2, home[2] + 5.5];
-      g = [home[0], 1.1, home[2]];
+    } else if (view === "worker") {
+      // The workroom: fixed authored room framing. The followed worker
+      // moves through the frame along the bench -> threshold path; the
+      // camera does not chase it.
+      p = VIZ_SMALL_SCREEN ? WORKROOM_POS_PORTRAIT : WORKROOM_POS;
+      g = VIZ_SMALL_SCREEN ? WORKROOM_TGT_PORTRAIT : WORKROOM_TGT;
     } else if (view === "world" && closeup === "gate") {
       p = GATE_CLOSEUP_POS;
       g = GATE_CLOSEUP_TGT;

@@ -146,6 +146,7 @@ try {
   console.log("PHASE 2 PASS: genuine custody sequence derived from backend facts.");
 
   // ---- phase 3: exit returns; backend facts persist (records survive) ----
+  await page.getByRole("button", { name: "Workshop menu" }).click();
   await page.click("text=Back to the Square");
   await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
   const receiptsFinal = await get("/api/receipts");
