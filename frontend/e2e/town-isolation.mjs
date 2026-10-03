@@ -72,7 +72,20 @@ try {
   });
   check("child fetch blocked", fetchResult.startsWith("blocked"), fetchResult);
 
-  // 2. child XHR is blocked
+  // 2b. child EventSource is blocked
+  const esResult = await inFrame(() => {
+    try {
+      const es = new EventSource("/api/events");
+      return new Promise((resolve) => {
+        es.onerror = () => { es.close(); resolve("blocked"); };
+        es.onmessage = () => { es.close(); resolve("succeeded"); };
+        setTimeout(() => { es.close(); resolve("timeout"); }, 3000);
+      });
+    } catch (e) { return Promise.resolve("blocked:" + String(e).slice(0, 40)); }
+  });
+  check("child EventSource blocked", esResult === "blocked" || esResult === "timeout", esResult);
+
+  // 3. child XHR is blocked
   const xhrResult = await inFrame(() => new Promise((resolve) => {
     try {
       const x = new XMLHttpRequest();
@@ -120,8 +133,33 @@ try {
   const stillSquare = await page.evaluate(() => !!document.querySelector("iframe.square-frame"));
   check("child top-navigation blocked", topNav === "blocked" && stillSquare, topNav);
 
-  // 7. POSITIVE CONTROL: the exact valid intent from the frame opens the viz
-  await inFrame(() => parent.postMessage(
+  // 7. HOSTILE DOCUMENT: replace the frame content with an attacker's page.
+  // It can only speak through the validated intent channel — a forged
+  // intent is ignored; the exact valid intent is (correctly) honored.
+  await frame.goto("data:text/html,<body>hostile</body>");
+  await sleep(1000);
+  const hostile = page.frames().find((f) => f.url().startsWith("data:text/html"));
+  check("hostile frame loaded", !!hostile);
+  if (hostile) {
+    await hostile.evaluate(() => parent.postMessage(
+      { type: "openline:navigate", intent: "enter-workshop", evil: true }, "*"));
+    await sleep(1500);
+    check("hostile forgery ignored", !(await vizOpen()));
+    // the hostile doc cannot read the parent either
+    const hRead = await hostile.evaluate(() => {
+      try { return "read:" + parent.document.title.slice(0, 10); }
+      catch { return "blocked"; }
+    });
+    check("hostile cannot read parent DOM", hRead === "blocked", hRead);
+  }
+
+  // 8. POSITIVE CONTROL: the exact valid intent from the frame opens the viz
+  // (reload the genuine town first, since the frame now holds hostile content)
+  await page.reload({ waitUntil: "networkidle" });
+  await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
+  await sleep(6000);
+  const frame2 = page.frames().find((f) => f.url().endsWith("town.html"));
+  await frame2.evaluate(() => parent.postMessage(
     { type: "openline:navigate", intent: "enter-workshop" }, "*"));
   await page.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 15000 })
     .catch(() => null);

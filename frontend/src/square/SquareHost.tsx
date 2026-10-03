@@ -40,6 +40,7 @@ export function SquareHost() {
       if (!frame || ev.source !== frame.contentWindow) return;
       if (!isNavigateMessage(ev.data)) return;
       setFading(true);
+      if (timer.current !== null) window.clearTimeout(timer.current);
       timer.current = window.setTimeout(() => setPlace("workshop"), 450);
     };
     window.addEventListener("message", onMessage);

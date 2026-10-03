@@ -299,14 +299,18 @@ export function VizView({
   // (re)mount starts the demo; the cleanup stops it. The unmount cleanup
   // above sets stopDemoRef, so a StrictMode double-mount stops the first
   // run and this effect starts the second — no stale autoStarted guard.
+  // Generation counter: only the latest run's finally() may clear
+  // demoRunning, so a stale first run cannot re-enable the button mid-run.
+  const autoGen = useRef(0);
   useEffect(() => {
     if (!autoRunDemo) return;
+    const gen = ++autoGen.current;
     stopDemoRef.current = false;
     setDemoRunning(true);
     setCursorSeq(null);
     setReplayState("live");
     runDemoScript({
-      shouldStop: () => stopDemoRef.current,
+      shouldStop: () => stopDemoRef.current || autoGen.current !== gen,
       onReset: () => {
         setCursorSeq(null);
         setReplayState("live");
@@ -317,8 +321,10 @@ export function VizView({
         /* demo errors surface in the main app; the viz stays read-only */
       })
       .finally(() => {
-        setDemoRunning(false);
-        fetchSnapshot().then(setSnap).catch(() => {});
+        if (autoGen.current === gen) {
+          setDemoRunning(false);
+          fetchSnapshot().then(setSnap).catch(() => {});
+        }
       });
     return () => {
       stopDemoRef.current = true;
