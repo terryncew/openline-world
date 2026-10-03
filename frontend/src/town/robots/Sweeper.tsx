@@ -56,7 +56,7 @@ export function Sweeper({
         <Hinge r={0.08} color={PAL.ink} />
         <Limb length={0.13} radius={0.07} color={PAL.terracottaDark} />
         <group position={[0, -0.13, 0.04]}>
-          <Foot w={0.24} h={0.12} l={0.36} color={PAL.ink} />
+          <Foot w={0.28} h={0.13} l={0.4} color={PAL.ink} />
         </group>
       </group>
     </group>
@@ -94,9 +94,16 @@ export function Sweeper({
         {/* torso */}
         <group position={[0, 0.78, 0]} rotation={[lean, 0, sweeping * d(3)]}>
           <mesh>
-            <capsuleGeometry args={[0.22, 0.3, 8, 14]} />
+            <capsuleGeometry args={[0.25, 0.3, 8, 14]} />
             {matte(PAL.cream)}
           </mesh>
+          {/* shoulder pads: manufactured bulk */}
+          {[-1, 1].map((q) => (
+            <mesh key={q} position={[q * 0.27, 0.22, 0.02]}>
+              <sphereGeometry args={[0.1, 12, 10]} />
+              {matte(PAL.terracottaDark)}
+            </mesh>
+          ))}
           {/* sash */}
           <mesh position={[0, 0.02, 0]} rotation={[0, 0, d(12)]}>
             <boxGeometry args={[0.46, 0.09, 0.46]} />

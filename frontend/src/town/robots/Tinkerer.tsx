@@ -80,9 +80,11 @@ const CRANK_R = 0.2;
 export function Tinkerer({
   t,
   position = [0, 0, 0] as [number, number, number],
+  rotationY = 0,
 }: {
   t: number;
   position?: [number, number, number];
+  rotationY?: number;
 }) {
   const T = loop(t, D);
   const turns = crankTurns(T);
@@ -108,7 +110,7 @@ export function Tinkerer({
 
   // two-segment leg: thigh -> exposed knee hinge -> shin -> block foot
   const leg = (s: 1 | -1) => (
-    <group key={s} position={[s * 0.12, 0.42, 0]}>
+    <group key={s} position={[s * 0.15, 0.42, 0]}>
       <Limb length={0.2} radius={0.075} color={PAL.sageDark} />
       <group position={[0, -0.2, 0]}>
         <Hinge r={0.075} color={PAL.ink} />
@@ -122,7 +124,7 @@ export function Tinkerer({
   );
 
   return (
-    <group position={position}>
+    <group position={position} rotation={[0, rotationY, 0]}>
       <BlobShadow r={0.5} />
 
       {/* the pump mechanism (scenery) */}
@@ -207,7 +209,7 @@ export function Tinkerer({
           </mesh>
           {/* lens housing: a manufactured bezel, not a face */}
           <mesh position={[0.1, 0.03, 0.1]} rotation={[0, d(24), 0]}>
-            <boxGeometry args={[0.17, 0.17, 0.07]} />
+            <boxGeometry args={[0.21, 0.21, 0.08]} />
             {matte(PAL.ink)}
           </mesh>
           <mesh position={[0.1, 0.03, 0.14]} scale={[eyeWide, eyeWide, 1]}>

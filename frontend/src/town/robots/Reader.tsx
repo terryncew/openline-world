@@ -64,7 +64,7 @@ export function Reader({
       <mesh position={[0, -0.02, 0]}>
         <Hinge r={0.06} color={PAL.ink} />
       </mesh>
-      <Limb length={0.12} radius={0.06} color={PAL.blueDark} />
+      <Limb length={0.11} radius={0.07} color={PAL.blueDark} />
       <group position={[0, -0.12, 0]}>
         <Hinge r={0.06} color={PAL.ink} />
         <Limb length={0.1} radius={0.05} color={PAL.blueDark} />
@@ -134,7 +134,7 @@ export function Reader({
           </mesh>
           {/* visor band: the eyes sit in manufactured glass, not a face */}
           <mesh position={[0, 0.03, 0.1]}>
-            <boxGeometry args={[0.3, 0.11, 0.12]} />
+            <boxGeometry args={[0.34, 0.13, 0.13]} />
             {matte(PAL.blueDark)}
           </mesh>
           {[-1, 1].map((s) => (

@@ -16,7 +16,8 @@ import { Carrier } from "./robots/Carrier";
 import { Tinkerer } from "./robots/Tinkerer";
 import { Reader } from "./robots/Reader";
 import { Sweeper } from "./robots/Sweeper";
-import { Workshop, Exchange, Library, Depot, RepairShop, Ground, Tree, Lamp, Fountain, AlleyClutter, DistantRoof } from "./buildings";
+import { Waiter, Passerby, Helper } from "./robots/Extras";
+import { Workshop, Exchange, Library, Depot, RepairShop, Ground, Lamp, Fountain, AlleyClutter, DistantRoof, DepotYard, Mailbox, FenceCorner, Hedge, CartWheel, PropTrail, CharacterTree } from "./buildings";
 
 function Sun() {
   return (
@@ -108,26 +109,53 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
       <DistantRoof position={[12.5, 0, 6.5]} color={PAL.terracotta} />
       <DistantRoof position={[-12.5, 0, -3.0]} color={PAL.blue} />
 
-      {/* the four vignettes, set beside the lanes, each on its own clock */}
-      <Carrier t={t} position={[-3.0, 0, 2.0]} />
-      <Tinkerer t={t + 4.0} position={[3.0, 0, -0.2]} />
+      {/* STORY CLUSTERS: each zone tells its labor story */}
+      {/* depot yard: the carrier LOADS lumber under the depot canopy */}
+      <group position={[-5.4, 0, 3.5]} rotation={[0, 0.35, 0]}>
+        <DepotYard />
+      </group>
+      <Carrier t={t} position={[-3.3, 0, 2.3]} />
+      {/* repair: the tinkerer retries the mechanism beside the parts bench */}
+      <Tinkerer t={t + 4.0} position={[4.3, 0, 2.7]} rotationY={0.62} />
+      {/* library: the reader, the helper, the cart */}
       <Reader t={t + 8.0} position={[4.6, 0, -1.6]} rotationY={-0.9} />
+      <Helper t={t + 3.0} position={[5.6, 0, -0.6]} rotationY={-2.36} />
+      {/* street: the sweeper works the plaza */}
       <Sweeper t={t + 2.0} position={[-0.9, 0, 4.6]} rotationY={0.25} />
 
-      {/* trees occlude the street ends: lanes vanish behind green */}
-      <Tree position={[-9.2, 0, 0.8]} s={1.2} />
-      <Tree position={[8.6, 0, -4.6]} s={1.2} />
-      <Tree position={[8.4, 0, 5.2]} s={1.0} />
-      <Tree position={[-4.5, 0, 8.8]} s={1.1} />
-      <Tree position={[5.5, 0, 9.2]} s={0.9} />
-      <Tree position={[7.8, 0, -6.5]} s={1.0} />
-      <Tree position={[-2.0, 0, -6.0]} s={1.0} />
-      <Tree position={[-3.4, 0, 6.4]} s={0.85} />
-      <Lamp position={[0.8, 0, 6.2]} />
+      {/* workshop story: one waiting, attention on the door */}
+      <Waiter t={t + 1.0} position={[2.9, 0, -2.3]} rotationY={-1.96} />
+      {/* a delivery in progress along the main lane */}
+      <Passerby t={t + 5.0} />
+
+      {/* stepping-stone trail leads the eye to the workshop door */}
+      <PropTrail />
+
+      {/* street furniture: the street is lived on */}
+      <Mailbox position={[3.3, 0, 5.2]} rotationY={-0.4} />
+      <Lamp position={[2.9, 0, 8.1]} />
       <Lamp position={[4.4, 0, 1.4]} />
-      <Lamp position={[-4.2, 0, -0.4]} />
+      <Lamp position={[-5.4, 0, -4.8]} />
       <Lamp position={[6.6, 0, -2.0]} />
       <Lamp position={[-7.0, 0, 1.6]} />
+
+      {/* foreground edge: fence corner + cart wheel + hedge imply more town */}
+      <FenceCorner position={[-3.1, 0, 8.7]} rotationY={0.3} />
+      <CartWheel position={[-2.2, 0, 8.9]} rotationY={0.5} />
+      <Hedge position={[4.8, 0, 10.4]} w={1.8} />
+      <Hedge position={[-6.2, 0, 9.0]} w={1.3} />
+
+      {/* trees with character occlude the street ends: lanes vanish behind green */}
+      <CharacterTree position={[-9.2, 0, 0.8]} s={1.2} seed={1} />
+      <CharacterTree position={[8.6, 0, -4.6]} s={1.2} seed={2} />
+      <CharacterTree position={[8.4, 0, 5.2]} s={1.0} seed={3} />
+      <CharacterTree position={[-4.5, 0, 8.8]} s={1.1} seed={4} />
+      <CharacterTree position={[5.5, 0, 9.2]} s={0.9} seed={5} />
+      <CharacterTree position={[7.8, 0, -6.5]} s={1.0} seed={6} />
+      <CharacterTree position={[-2.0, 0, -6.0]} s={1.0} seed={7} />
+      <CharacterTree position={[-3.4, 0, 6.4]} s={0.85} seed={8} />
+      <CharacterTree position={[-7.8, 0, -4.2]} s={1.15} seed={9} />
+      <CharacterTree position={[10.6, 0, 0.6]} s={1.05} seed={10} />
     </>
   );
 }
@@ -151,9 +179,9 @@ export function TownApp() {
     <div style={{ position: "fixed", inset: 0, background: PAL.cream }}>
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [0, 5.6, 13.2], fov: 40, near: 0.1, far: 60 }}
+        camera={{ position: [0, 4.7, 12.0], fov: 41, near: 0.1, far: 60 }}
         gl={{ antialias: true, powerPreference: "low-power" }}
-        onCreated={({ camera }) => camera.lookAt(0.5, 1.1, -0.8)}
+        onCreated={({ camera }) => camera.lookAt(0.4, 0.95, -1.0)}
       >
         <SceneFrame clockRef={clockRef} paused={paused || reduced} onTick={() => setTick((x) => x + 1)} />
       </Canvas>
@@ -237,9 +265,9 @@ function SceneFrame({
     if (!paused) {
       const portrait = size.width / size.height < 0.9;
       const pc = camera as THREE.PerspectiveCamera;
-      const wantFov = portrait ? 52 : 40;
-      const wantY = portrait ? 7.2 : 5.6;
-      const wantZ = portrait ? 17.5 : 13.2;
+      const wantFov = portrait ? 52 : 41;
+      const wantY = portrait ? 7.2 : 4.7;
+      const wantZ = portrait ? 17.5 : 12.0;
       if (pc.fov !== wantFov) {
         pc.fov = wantFov;
         pc.updateProjectionMatrix();
@@ -249,7 +277,7 @@ function SceneFrame({
         wantY,
         wantZ
       );
-      camera.lookAt(0.5, 1.1, -0.8);
+      camera.lookAt(0.4, 0.95, -1.0);
     }
   });
   return <Scene clockRef={clockRef} />;
