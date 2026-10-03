@@ -363,72 +363,107 @@ export function RepairShop() {
   );
 }
 
-/** Ground: sage surround, an ORGANIC (non-circular) cream plaza blob with a
- *  terracotta edge, and winding path ribbons that bend and fork. The town
- *  reads as a place you could keep wandering through, not a display base. */
+/** Ground: NO enclosing border, NO circular stage. A cream world that
+ *  extends past every frame edge, with irregular grass patches and a
+ *  network of winding street ribbons that run offscreen and disappear
+ *  behind buildings and trees. The plaza is the intersection of those
+ *  streets, not a disc. */
 export function Ground() {
-  const plaza = useMemo(() => blobGeometry(6.6, 0.13, 1.7), []);
-  const plazaEdge = useMemo(() => blobGeometry(7.0, 0.13, 1.7), []);
-  const paths = useMemo(
+  const patches = useMemo(
     () => [
-      // main winding: front gate -> plaza -> workshop door
+      { g: blobGeometry(4.6, 0.4, 2.1), p: [-9.5, 0.004, -7.5] as [number, number, number] },
+      { g: blobGeometry(5.2, 0.35, 5.7), p: [10.5, 0.004, 4.0] as [number, number, number] },
+      { g: blobGeometry(3.8, 0.45, 8.9), p: [-6.0, 0.004, 10.5] as [number, number, number] },
+      { g: blobGeometry(4.4, 0.38, 3.3), p: [8.0, 0.004, -10.5] as [number, number, number] },
+      { g: blobGeometry(3.2, 0.5, 6.1), p: [-13.5, 0.004, 3.5] as [number, number, number] },
+    ],
+    []
+  );
+  const streets = useMemo(
+    () => [
+      // lane A: foreground edge -> winding up to the workshop door
       ribbonGeometry(
         [
-          [0.6, 9.5],
-          [1.4, 6.0],
-          [-0.7, 3.4],
-          [0.5, 0.8],
-          [0.1, -2.6],
+          [0.4, 11.5],
+          [1.0, 7.5],
+          [-0.6, 4.5],
+          [0.8, 2.0],
+          [1.6, -0.8],
+          [1.7, -2.6],
         ],
-        2.1
+        2.0
       ),
-      // west fork: plaza -> exchange
+      // lane B: plaza -> behind the library -> off the right edge
       ribbonGeometry(
         [
-          [-0.7, 3.4],
-          [-3.4, 2.4],
-          [-5.4, 0.6],
-          [-6.3, -2.0],
+          [0.8, 2.0],
+          [3.2, 0.5],
+          [5.4, -1.8],
+          [7.8, -3.6],
+          [11.5, -5.5],
         ],
         1.7
       ),
-      // east fork: main -> repair shop
+      // lane C: between depot and exchange -> off the left edge
       ribbonGeometry(
         [
-          [1.4, 6.0],
-          [3.4, 5.0],
-          [4.5, 4.4],
+          [-0.6, 4.5],
+          [-3.2, 3.6],
+          [-5.8, 2.2],
+          [-8.8, 1.2],
+          [-12.5, 0.5],
         ],
         1.7
       ),
-      // library lane: plaza -> library
+      // lane D: toward the repair shop -> off the right edge
       ribbonGeometry(
         [
-          [0.5, 0.8],
-          [2.9, -0.9],
-          [4.9, -2.7],
-          [5.9, -3.6],
+          [1.0, 7.5],
+          [4.0, 6.4],
+          [7.0, 5.6],
+          [10.5, 5.2],
+        ],
+        1.7
+      ),
+      // lane E: behind the workshop -> town continues off the back
+      ribbonGeometry(
+        [
+          [3.4, -1.5],
+          [5.8, -3.8],
+          [8.5, -6.5],
+          [11.5, -9.5],
         ],
         1.6
+      ),
+      // lane F: plaza -> exchange door
+      ribbonGeometry(
+        [
+          [-3.2, 3.6],
+          [-4.6, 1.6],
+          [-5.4, -0.6],
+        ],
+        1.5
       ),
     ],
     []
   );
   return (
     <group>
+      {/* the world floor: cream, far past the frame on every side */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]}>
-        <circleGeometry args={[17, 48]} />
-        {matte(PAL.sage)}
-      </mesh>
-      <mesh geometry={plazaEdge} rotation={[-Math.PI / 2, 0, 0]} position={[0.3, 0.002, 0.8]}>
-        {matte(PAL.terracotta)}
-      </mesh>
-      <mesh geometry={plaza} rotation={[-Math.PI / 2, 0, 0]} position={[0.3, 0.006, 0.8]}>
+        <planeGeometry args={[80, 80]} />
         {matte(PAL.cream)}
       </mesh>
-      {paths.map((g, i) => (
-        <mesh key={i} geometry={g} position={[0, 0.009, 0]}>
-          {matte(PAL.creamDark)}
+      {/* irregular grass patches, deliberately asymmetric */}
+      {patches.map((p, i) => (
+        <mesh key={i} geometry={p.g} rotation={[-Math.PI / 2, 0, 0]} position={p.p}>
+          {matte(PAL.sage)}
+        </mesh>
+      ))}
+      {/* the street network */}
+      {streets.map((g, i) => (
+        <mesh key={i} geometry={g} position={[0, 0.008, 0]}>
+          {matte(PAL.path)}
         </mesh>
       ))}
     </group>

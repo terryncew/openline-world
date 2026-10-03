@@ -43,7 +43,8 @@ function WorkshopDoor() {
     requestEnterWorkshop();
   };
   return (
-    <group position={[0, 0, -4.5]}>
+    // off-axis: important, not city hall. The lane bends toward it.
+    <group position={[1.6, 0, -4.2]} rotation={[0, -0.12, 0]}>
       <Workshop />
       {/* generous tap target over the door */}
       <mesh
@@ -74,12 +75,14 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
   return (
     <>
       <Sun />
+      <fog attach="fog" args={[PAL.cream, 24, 58]} />
       <Ground />
-      <group position={[1.1, 0, 0.2]}>
+      {/* fountain off-axis: a neighborhood detail, not a civic centerpiece */}
+      <group position={[-3.2, 0, 3.2]}>
         <Fountain />
       </group>
       <WorkshopDoor />
-      {/* staggered, asymmetric placement: a village, not a carousel */}
+      {/* staggered buildings along the street network, none centered */}
       <group position={[-6.0, 0, -2.6]} rotation={[0, 0.9, 0]}>
         <Exchange />
       </group>
@@ -89,36 +92,42 @@ function Scene({ clockRef }: { clockRef: React.MutableRefObject<number> }) {
       <group position={[-5.6, 0, 2.4]} rotation={[0, 1.05, 0]}>
         <Depot />
       </group>
-      <group position={[4.2, 0, 4.2]} rotation={[0, -0.85, 0]}>
+      <group position={[6.2, 0, 5.0]} rotation={[0, -0.85, 0]}>
         <RepairShop />
       </group>
 
-      {/* side alley between depot and exchange: crates, a barrel,
-          a partial sightline into a little work area */}
+      {/* side alleys: crates and barrels where lanes slip behind buildings */}
       <AlleyClutter position={[-6.9, 0, 0.2]} rotationY={0.4} />
       <AlleyClutter position={[6.9, 0, 1.4]} rotationY={-0.5} />
+      <AlleyClutter position={[8.6, 0, -5.4]} rotationY={-0.7} />
 
-      {/* more town implied offscreen */}
+      {/* more town implied beyond every frame edge */}
       <DistantRoof position={[-9.5, 0, -5.0]} color={PAL.blue} />
       <DistantRoof position={[9.8, 0, -2.0]} color={PAL.sage} />
       <DistantRoof position={[-7.5, 0, 7.0]} color={PAL.terracotta} />
+      <DistantRoof position={[12.5, 0, 6.5]} color={PAL.terracotta} />
+      <DistantRoof position={[-12.5, 0, -3.0]} color={PAL.blue} />
 
-      {/* the four vignettes, each on its own deterministic clock offset */}
+      {/* the four vignettes, set beside the lanes, each on its own clock */}
       <Carrier t={t} position={[-3.0, 0, 2.0]} />
-      <Tinkerer t={t + 4.0} position={[2.4, 0, -2.6]} />
-      <Reader t={t + 8.0} position={[3.4, 0, -0.6]} rotationY={-0.5} />
-      <Sweeper t={t + 2.0} position={[0.2, 0, 4.2]} rotationY={0.25} />
+      <Tinkerer t={t + 4.0} position={[3.0, 0, -0.2]} />
+      <Reader t={t + 8.0} position={[4.6, 0, -1.6]} rotationY={-0.9} />
+      <Sweeper t={t + 2.0} position={[-0.9, 0, 4.6]} rotationY={0.25} />
 
-      <Tree position={[-5.2, 0, 4.2]} s={1.1} />
-      <Tree position={[2.6, 0, 6.0]} s={0.9} />
-      <Tree position={[-7.8, 0, -1.0]} s={1.25} />
-      <Tree position={[7.6, 0, -4.2]} s={1.05} />
+      {/* trees occlude the street ends: lanes vanish behind green */}
+      <Tree position={[-9.2, 0, 0.8]} s={1.2} />
+      <Tree position={[8.6, 0, -4.6]} s={1.2} />
+      <Tree position={[8.4, 0, 5.2]} s={1.0} />
+      <Tree position={[-4.5, 0, 8.8]} s={1.1} />
+      <Tree position={[5.5, 0, 9.2]} s={0.9} />
+      <Tree position={[7.8, 0, -6.5]} s={1.0} />
       <Tree position={[-2.0, 0, -6.0]} s={1.0} />
-      <Tree position={[7.2, 0, 3.0]} s={0.85} />
-      <Lamp position={[-0.4, 0, 6.6]} />
-      <Lamp position={[2.2, 0, 3.0]} />
+      <Tree position={[-3.4, 0, 6.4]} s={0.85} />
+      <Lamp position={[0.8, 0, 6.2]} />
+      <Lamp position={[4.4, 0, 1.4]} />
       <Lamp position={[-4.2, 0, -0.4]} />
-      <Lamp position={[2.8, 0, -3.6]} />
+      <Lamp position={[6.6, 0, -2.0]} />
+      <Lamp position={[-7.0, 0, 1.6]} />
     </>
   );
 }
@@ -144,7 +153,7 @@ export function TownApp() {
         dpr={[1, 2]}
         camera={{ position: [0, 5.6, 13.2], fov: 40, near: 0.1, far: 60 }}
         gl={{ antialias: true, powerPreference: "low-power" }}
-        onCreated={({ camera }) => camera.lookAt(0, 1.2, -1)}
+        onCreated={({ camera }) => camera.lookAt(0.5, 1.1, -0.8)}
       >
         <SceneFrame clockRef={clockRef} paused={paused || reduced} onTick={() => setTick((x) => x + 1)} />
       </Canvas>
@@ -240,7 +249,7 @@ function SceneFrame({
         wantY,
         wantZ
       );
-      camera.lookAt(0, 1.2, -1);
+      camera.lookAt(0.5, 1.1, -0.8);
     }
   });
   return <Scene clockRef={clockRef} />;

@@ -61,7 +61,7 @@ try {
   // (page.mouse: the iframe fills the viewport, so page coords == frame
   // coords; retry a small grid since the camera sways gently)
   let entered = false;
-  for (const [x, y] of [[640, 350], [620, 360], [660, 360], [640, 390], [640, 320]]) {
+  for (const [x, y] of [[690, 330], [660, 340], [720, 340], [690, 370], [690, 300]]) {
     await page.mouse.click(x, y);
     try {
       await page.waitForFunction(

@@ -24,6 +24,7 @@ export const PAL = {
   ink: "#3d3428",
   warm: "#e8a34f", // small warm accents only (lamps, window glow)
   white: "#faf6ec",
+  path: "#d9c8a6", // street ribbons: deeper than cream, softer than stone
 } as const;
 
 /** Matte standard material shorthand. */

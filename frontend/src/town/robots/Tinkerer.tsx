@@ -1,7 +1,7 @@
 /**
- * Tinkerer vignette: a lanky one-eyed robot fussing over a small pump
- * mechanism. Inspects, adjusts the crank, watches the response, pauses
- * to think, retries with a steadier hand.
+ * Tinkerer vignette: a compact manufactured robot fussing over a small pump
+ * mechanism. Tapered torso with panel bands, square lens housing, exposed
+ * joints — the one-eyed charm kept, the lanky human read removed.
  *
  * Beats: inspect (lean in) → reach → turn crank (spinner spins up) →
  * sputter (wobble, slow) → pause (head tilt, thinking) → retry (steady) →
@@ -9,7 +9,7 @@
  *
  * Illustrative physical acting only. Not an OpenLine operation.
  */
-import { PAL, matte, BlobShadow, Hinge } from "../kit";
+import { PAL, matte, BlobShadow, Hinge, Limb } from "../kit";
 import { loop, pulse, bump, d } from "../acting";
 import * as THREE from "three";
 
@@ -99,12 +99,27 @@ export function Tinkerer({
   const hx = CRANK_C[0];
   const hy = CRANK_C[1] + Math.sin(theta) * CRANK_R;
   const hz = CRANK_C[2] + Math.cos(theta) * CRANK_R;
-  const shoulder: [number, number, number] = [0.18, 1.3, 0.3];
-  const hand: [number, number, number] = reach > 0.02 ? [hx, hy, hz] : [0.3, 0.72, 0.35];
+  const shoulder: [number, number, number] = [0.18, 1.22, 0.3];
+  const hand: [number, number, number] = reach > 0.02 ? [hx, hy, hz] : [0.3, 0.66, 0.35];
 
   // spinner: geared 3x off the crank, wobbles while sputtering
   const spinnerAngle = theta * 3;
   const wobble = sputtering ? Math.sin(T * 25) * d(6) : 0;
+
+  // two-segment leg: thigh -> exposed knee hinge -> shin -> block foot
+  const leg = (s: 1 | -1) => (
+    <group key={s} position={[s * 0.12, 0.42, 0]}>
+      <Limb length={0.2} radius={0.075} color={PAL.sageDark} />
+      <group position={[0, -0.2, 0]}>
+        <Hinge r={0.075} color={PAL.ink} />
+        <Limb length={0.16} radius={0.06} color={PAL.sageDark} />
+        <mesh position={[0, -0.18, 0.04]}>
+          <boxGeometry args={[0.19, 0.1, 0.28]} />
+          {matte(PAL.ink)}
+        </mesh>
+      </group>
+    </group>
+  );
 
   return (
     <group position={position}>
@@ -146,55 +161,60 @@ export function Tinkerer({
         </group>
       </group>
 
-      {/* tinkerer body: tall and narrow, chunky short legs */}
+      {/* tinkerer body: compact, manufactured */}
       <group position={[0, 0, 0]} rotation={[lean, 0, 0]}>
-        {/* legs with knee hinges */}
-        {[-1, 1].map((s) => (
-          <group key={s} position={[s * 0.12, 0.05, 0]}>
-            <mesh position={[0, 0.2, 0]}>
-              <capsuleGeometry args={[0.075, 0.3, 6, 10]} />
-              {matte(PAL.sageDark)}
-            </mesh>
-            <mesh position={[0, 0.22, 0]}>
-              <Hinge r={0.075} color={PAL.ink} />
-            </mesh>
-            <mesh position={[0, 0.03, 0.04]}>
-              <boxGeometry args={[0.17, 0.09, 0.26]} />
-              {matte(PAL.ink)}
-            </mesh>
-          </group>
-        ))}
-        {/* tapered torso: wide shoulders, narrow waist */}
-        <mesh position={[0, 0.86, 0]}>
-          <cylinderGeometry args={[0.21, 0.13, 0.62, 14]} />
+        {leg(-1)}
+        {leg(1)}
+        {/* tapered torso: wide shoulders, narrow waist, panel bands */}
+        <mesh position={[0, 0.8, 0]}>
+          <cylinderGeometry args={[0.21, 0.13, 0.58, 14]} />
           {matte(PAL.sage)}
         </mesh>
+        {[0.62, 0.98].map((y) => (
+          <mesh key={y} position={[0, y, 0]}>
+            <cylinderGeometry args={[0.185, 0.185, 0.05, 14]} />
+            {matte(PAL.sageDark)}
+          </mesh>
+        ))}
         {/* collar ring */}
-        <mesh position={[0, 1.16, 0]}>
+        <mesh position={[0, 1.1, 0]}>
           <cylinderGeometry args={[0.22, 0.22, 0.07, 14]} />
           {matte(PAL.sageDark)}
         </mesh>
-        {/* idle arm */}
-        <group position={[-0.24, 1.1, 0]} rotation={[bump(T, 4, 6, d(-8)), 0, d(10)]}>
+        {/* idle arm: upper -> exposed elbow -> forearm -> hand */}
+        <group position={[-0.24, 1.04, 0]} rotation={[bump(T, 4, 6, d(-8)), 0, d(10)]}>
           <mesh position={[0, -0.02, 0]}>
             <Hinge r={0.06} color={PAL.ink} />
           </mesh>
-          <mesh position={[0, -0.2, 0]}>
-            <capsuleGeometry args={[0.06, 0.32, 6, 10]} />
-            {matte(PAL.sageDark)}
-          </mesh>
+          <Limb length={0.14} radius={0.06} color={PAL.sageDark} />
+          <group position={[0, -0.14, 0]}>
+            <Hinge r={0.06} color={PAL.ink} />
+            <Limb length={0.12} radius={0.05} color={PAL.sageDark} />
+            <mesh position={[0, -0.14, 0]}>
+              <sphereGeometry args={[0.07, 10, 8]} />
+              {matte(PAL.cream)}
+            </mesh>
+          </group>
         </group>
-        {/* head with one big eye */}
-        <group position={[0, 1.42, 0]} rotation={[headTilt + nod, d(18), 0]}>
+        {/* head: square lens housing on a hinge neck */}
+        <group position={[0, 1.32, 0]} rotation={[headTilt + nod, d(18), 0]}>
+          <mesh position={[0, -0.08, 0]}>
+            <Hinge r={0.09} color={PAL.ink} />
+          </mesh>
           <mesh>
             <sphereGeometry args={[0.17, 18, 14]} />
             {matte(PAL.cream)}
           </mesh>
-          <mesh position={[0.1, 0.03, 0.1]} scale={[eyeWide, eyeWide, 1]}>
+          {/* lens housing: a manufactured bezel, not a face */}
+          <mesh position={[0.1, 0.03, 0.1]} rotation={[0, d(24), 0]}>
+            <boxGeometry args={[0.17, 0.17, 0.07]} />
+            {matte(PAL.ink)}
+          </mesh>
+          <mesh position={[0.1, 0.03, 0.14]} scale={[eyeWide, eyeWide, 1]}>
             <sphereGeometry args={[0.075, 14, 12]} />
             <meshBasicMaterial color="#faf6ec" />
           </mesh>
-          <mesh position={[0.15, 0.03, 0.14]}>
+          <mesh position={[0.15, 0.03, 0.17]}>
             <sphereGeometry args={[0.032, 10, 8]} />
             <meshBasicMaterial color={PAL.ink} />
           </mesh>
@@ -212,7 +232,7 @@ export function Tinkerer({
       {/* working arm: stretches to the crank */}
       <StretchLimb from={shoulder} to={hand} radius={0.05} color={PAL.sageDark} />
       <mesh position={hand}>
-        <sphereGeometry args={[0.07, 12, 10]} />
+        <sphereGeometry args={[0.08, 12, 10]} />
         {matte(PAL.cream)}
       </mesh>
     </group>

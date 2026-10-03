@@ -1,8 +1,7 @@
 /**
- * Reader vignette: a small round robot on a bench, absorbed in a book.
- * Handles the book, follows the page, reaches, turns it physically,
- * pauses with attention — then closes the book as the loop's natural
- * seam and opens it fresh.
+ * Reader vignette: a small round manufactured robot on a bench, absorbed in
+ * a book. Ball torso with a chest panel, visor-banded head, short jointed
+ * limbs — built, not dressed.
  *
  * Beats: open → read (lean in, gaze follows lines) → reach → page turn
  * (follow-through overshoot, settle) → read → look up (attention) →
@@ -40,6 +39,43 @@ export function Reader({
 
   const pageAngle = -turn * Math.PI;
 
+  // dangling leg: short thigh -> exposed knee hinge -> shin -> rounded foot
+  const leg = (s: 1 | -1) => (
+    <group key={s} position={[s * 0.13, 0.08, 0.12]} rotation={[d(24) + Math.sin(T * 1.7 + s) * d(3), 0, 0]}>
+      <Limb length={0.12} radius={0.065} color={PAL.blueDark} />
+      <group position={[0, -0.12, 0]}>
+        <Hinge r={0.055} color={PAL.ink} />
+        <Limb length={0.1} radius={0.055} color={PAL.blueDark} />
+        <mesh position={[0, -0.13, 0.03]}>
+          <sphereGeometry args={[0.085, 10, 8]} />
+          {matte(PAL.ink)}
+        </mesh>
+      </group>
+    </group>
+  );
+
+  // cradling arm: upper -> exposed elbow hinge -> forearm -> big hand
+  const arm = (s: 1 | -1) => (
+    <group
+      key={s}
+      position={[s * 0.24, 0.4, 0.1]}
+      rotation={[d(-52) + (s > 0 ? reach * d(-30) : 0), 0, s * d(-18)]}
+    >
+      <mesh position={[0, -0.02, 0]}>
+        <Hinge r={0.06} color={PAL.ink} />
+      </mesh>
+      <Limb length={0.12} radius={0.06} color={PAL.blueDark} />
+      <group position={[0, -0.12, 0]}>
+        <Hinge r={0.06} color={PAL.ink} />
+        <Limb length={0.1} radius={0.05} color={PAL.blueDark} />
+        <mesh position={[0, -0.13, 0]}>
+          <sphereGeometry args={[0.085, 10, 8]} />
+          {matte(PAL.cream)}
+        </mesh>
+      </group>
+    </group>
+  );
+
   return (
     <group position={position} rotation={[0, rotationY, 0]}>
       <BlobShadow r={0.5} />
@@ -68,45 +104,38 @@ export function Reader({
         </mesh>
       </group>
 
-      {/* reader body: small and round, seated, chunky */}
+      {/* reader body: small and round, seated, manufactured */}
       <group position={[0, 0.5, 0.05]} rotation={[lean * 0.4, 0, 0]}>
-        {/* short dangling legs with rounded feet */}
-        {[-1, 1].map((s) => (
-          <group key={s} position={[s * 0.14, 0.1, 0.12]} rotation={[d(24) + Math.sin(T * 1.7 + s) * d(3), 0, 0]}>
-            <Limb length={0.18} radius={0.07} color={PAL.blueDark} />
-            <mesh position={[0, -0.22, 0.03]}>
-              <sphereGeometry args={[0.075, 10, 8]} />
-              {matte(PAL.ink)}
-            </mesh>
-          </group>
-        ))}
-        {/* round torso */}
-        <mesh position={[0, 0.32, 0]}>
+        {leg(-1)}
+        {leg(1)}
+        {/* round torso with a chest access panel */}
+        <mesh position={[0, 0.3, 0]}>
           <sphereGeometry args={[0.27, 20, 16]} />
           {matte(PAL.blue)}
         </mesh>
-        {/* chunky arms cradling the book */}
-        {[-1, 1].map((s) => (
-          <group
-            key={s}
-            position={[s * 0.25, 0.42, 0.1]}
-            rotation={[d(-52) + (s > 0 ? reach * d(-30) : 0), 0, s * d(-18)]}
-          >
-            <mesh position={[0, -0.02, 0]}>
-              <Hinge r={0.06} color={PAL.ink} />
-            </mesh>
-            <Limb length={0.2} radius={0.065} color={PAL.blueDark} />
-            <mesh position={[0, -0.26, 0]}>
-              <sphereGeometry args={[0.07, 10, 8]} />
-              {matte(PAL.cream)}
-            </mesh>
-          </group>
-        ))}
-        {/* head */}
-        <group position={[0, 0.66, 0.02]} rotation={[lean * 0.7 - lookUp * d(22) + settle * d(4), gazeSway, 0]}>
+        <mesh position={[0, 0.3, 0.24]}>
+          <boxGeometry args={[0.18, 0.14, 0.05]} />
+          {matte(PAL.blueDark)}
+        </mesh>
+        <mesh position={[0, 0.3, 0.27]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.03, 0.03, 0.02, 10]} />
+          {matte(PAL.warm)}
+        </mesh>
+        {arm(-1)}
+        {arm(1)}
+        {/* head: visor band on a hinge neck */}
+        <group position={[0, 0.62, 0.02]} rotation={[lean * 0.7 - lookUp * d(22) + settle * d(4), gazeSway, 0]}>
+          <mesh position={[0, -0.12, 0]}>
+            <Hinge r={0.08} color={PAL.ink} />
+          </mesh>
           <mesh>
             <sphereGeometry args={[0.19, 20, 16]} />
             {matte(PAL.cream)}
+          </mesh>
+          {/* visor band: the eyes sit in manufactured glass, not a face */}
+          <mesh position={[0, 0.03, 0.1]}>
+            <boxGeometry args={[0.3, 0.11, 0.12]} />
+            {matte(PAL.blueDark)}
           </mesh>
           {[-1, 1].map((s) => (
             <group key={s}>
@@ -123,7 +152,7 @@ export function Reader({
         </group>
 
         {/* the book, held up */}
-        <group position={[0, 0.42, 0.3]} rotation={[d(-24) - lean * 0.3, 0, 0]}>
+        <group position={[0, 0.4, 0.3]} rotation={[d(-24) - lean * 0.3, 0, 0]}>
           {/* spine */}
           <mesh position={[0, 0, -0.02]}>
             <boxGeometry args={[0.05, 0.3, 0.06]} />
