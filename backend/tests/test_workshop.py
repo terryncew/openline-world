@@ -371,25 +371,69 @@ class TestWhatChangedContract(unittest.TestCase):
             snap = w.snapshot()
             self.assertEqual(len(snap["job_state"]["checkpoints"]), 2)
 
-    def test_pre_grant_attempt_no_receipt_no_progress(self):
-        # Defect 2: Juniper's pre-grant continuation attempt exercises the
-        # real gate path -> HELPER_UNKNOWN. Honestly recorded; no receipt
-        # minted, no decision event, no job effect.
+    def test_job_effect_scope(self):
+        # Defect 1 (pass 2): JOB_EFFECT_SCOPE. Only the two exact
+        # WORLD-AUTHORITY-001 work steps create checkpoints.
+        with tempfile.TemporaryDirectory() as d:
+            # full classic demo produces ZERO job checkpoints
+            w = Workshop(Path(d))
+            while not w.advance_demo()["finished"]:
+                pass
+            self.assertEqual(w.job_effects, [])
+            # classic notes.read produces ZERO checkpoints
+            w2 = Workshop(Path(d))
+            w2._propose("wren", "notes.read")
+            self.assertEqual(w2.job_effects, [])
+            # generic owner propose produces ZERO checkpoints
+            w2.owner_propose("wren", "notes.read")
+            self.assertEqual(w2.job_effects, [])
+            # unrelated allowed action produces ZERO checkpoints
+            w2._propose("wren", "config.write")
+            self.assertEqual(w2.job_effects, [])
+            # apply_job_effect refuses unsupported actions
+            with self.assertRaises(ValueError):
+                w2.apply_job_effect("wren", "notes.read", seq=1)
+            with self.assertRaises(ValueError):
+                w2.apply_job_effect("wren", "config.write", seq=1)
+            # direct gate remains effect-free
+            w2.gate.request_decision("wren", "notes.write")
+            self.assertEqual(w2.job_effects, [])
+        # WORLD-AUTHORITY: wren notes.write -> 1, juniper notes.write -> 2
+        with tempfile.TemporaryDirectory() as d:
+            w3 = Workshop(Path(d), boot_mandate=False)
+            while not w3.advance_authority_demo()["finished"]:
+                pass
+            self.assertEqual(
+                [(c["checkpoint"], c["helper"]) for c in w3.job_effects],
+                [(1, "wren"), (2, "juniper")])
+
+    def test_pre_grant_no_receiver_signed_artifact(self):
+        # Defect 2 (pass 2): PRE_GRANT_PROVENANCE. The pre-grant attempt
+        # creates NO receiver-signed decision, receipt, or note. The
+        # backend really invoked the gate path (spy proves the call and
+        # the HELPER_UNKNOWN raise).
         with tempfile.TemporaryDirectory() as d:
             w = Workshop(Path(d), boot_mandate=False)
+            calls = []
+            orig = w.gate.request_decision
+            def spy(helper_id, action):
+                calls.append((helper_id, action))
+                return orig(helper_id, action)
+            w.gate.request_decision = spy
             for _ in range(8):  # through "Juniper reaches for the job"
                 w.advance_authority_demo()
+            # the real gate path was invoked with the attempted action
+            juniper_calls = [c for c in calls if c[0] == "juniper"]
+            self.assertEqual(juniper_calls, [("juniper", "notes.write")])
             evs = w.log.replay(0)
-            honest = [e for e in evs if e["detail"].get("outcome") == "HELPER_UNKNOWN"]
-            self.assertEqual(len(honest), 1)
-            juniper_receipts = [
-                e for e in evs if e["kind"] == "receipt"
-                and e["detail"]["receipt"]["subject_id"] == "juniper"]
-            self.assertEqual(juniper_receipts, [])
-            juniper_decisions = [
-                e for e in evs if e["kind"] == "decision"
-                and e["detail"].get("helper") == "juniper"]
-            self.assertEqual(juniper_decisions, [])
-            # no job effect from Juniper's attempt (wren's checkpoint 1
-            # from step 3 legitimately exists)
+            signed = [e for e in evs
+                      if e["provenance"] == "receiver-signed"
+                      and e["detail"].get("helper") == "juniper"]
+            self.assertEqual(signed, [])
+            # the attempt itself is agent-reported with the structural detail
+            acts = [e for e in evs if e["kind"] == "activity"
+                    and e["detail"].get("helper") == "juniper"
+                    and "attempted_action" in e["detail"]]
+            self.assertEqual(len(acts), 1)
+            self.assertEqual(acts[0]["detail"]["attempted_action"], "notes.write")
             self.assertFalse(any(c["helper"] == "juniper" for c in w.job_effects))

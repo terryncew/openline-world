@@ -124,11 +124,14 @@ export function JobCrate({
           </mesh>
         );
       })}
-      {/* checkpoint pieces: physical work product. Each applied checkpoint
-          adds one brass piece to the crate — Wren's change stays after
-          Wren stops; Juniper's adds to the SAME job. Not receipt seals. */}
+      {/* checkpoint pieces: physical work product, BESIDE the crate —
+          never on the receipt ticket. Each applied checkpoint adds one
+          brass piece: Wren's change stays after Wren stops; Juniper's
+          adds to the SAME job. Receipt history (what the receiver
+          decided) and work checkpoints (what was executed) stay
+          simultaneously visible and visually distinct. */}
       {checkpoints.map((c, i) => (
-        <group key={`${c.checkpoint}`} position={[-0.45 + i * 0.5, 1.32, -0.32]}>
+        <group key={`${c.checkpoint}`} position={[1.05 + i * 0.55, 0.11, 0.75]}>
           <mesh>
             <boxGeometry args={[0.32, 0.22, 0.32]} />
             <meshStandardMaterial color={CHECKPOINT_COLOR} roughness={0.45} metalness={0.5} />

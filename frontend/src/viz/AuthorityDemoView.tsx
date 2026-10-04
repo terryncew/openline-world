@@ -18,7 +18,12 @@ import type { VizCheckpoint, VizSceneState, WEvent } from "./protocol";
 import { reduceEvents } from "./reducer";
 import { fetchSnapshot, subscribeLive } from "./source";
 import { launchAuthorityDemo } from "./director";
-import { revealDelay, isReplacementOnboard } from "./pacing";
+import {
+  shouldCommitSnapshot,
+  visibleCheckpoints as filterVisibleCheckpoints,
+  type SnapshotCommitState,
+} from "./snapshotGuard.ts";
+import { revealDelay } from "./pacing";
 import { VizCanvas, VIZ_SMALL_SCREEN } from "./scene/VizCanvas";
 import { OwnerObelisk } from "./scene/OwnerObelisk";
 import { WorkerSwarm } from "./scene/WorkerSwarm";
@@ -27,6 +32,7 @@ import { ReceiverGate } from "./scene/ReceiverGate";
 import { ProposalPackets } from "./scene/ProposalPackets";
 import { JobCrate, SideTable } from "./scene/JobCrate";
 import { CameraRig, type VizCloseup } from "./scene/CameraRig";
+import { closeupFor } from "./closeup.ts";
 import { authorityWorkerHome } from "./scene/layout";
 import type { Snapshot } from "../api";
 import "./viz.css";
@@ -45,6 +51,36 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
   const [streamError, setStreamError] = useState<string | null>(null);
   const [streamEpoch, setStreamEpoch] = useState(0);
   const [snap, setSnap] = useState<Snapshot | null>(null);
+  // the currently rendered job id, for the snapshot task_id match check
+  const sceneJobIdRef = useRef<string | null>(null);
+  // Snapshot commit guard (defect 3, pass 2): generation increments on
+  // every reset/epoch change; a response commits only if its generation,
+  // session, and checkpoint monotonicity all hold.
+  const snapGuard = useRef<SnapshotCommitState>({
+    generation: 0, session: null, checkpointCount: 0,
+  });
+  const guardedFetchSnapshot = () => {
+    const gen = snapGuard.current.generation;
+    fetchSnapshot()
+      .then((s) => {
+        const cps = s.job_state?.checkpoints ?? [];
+        const ok = shouldCommitSnapshot(
+          snapGuard.current,
+          {
+            generation: gen,
+            session: s.session,
+            checkpointCount: cps.length,
+            taskId: s.job_state?.task_id ?? s.task.task_id,
+          },
+          sceneJobIdRef.current
+        );
+        if (!ok) return;
+        snapGuard.current.session = s.session;
+        snapGuard.current.checkpointCount = cps.length;
+        setSnap(s);
+      })
+      .catch(() => {});
+  };
   const stopRef = useRef(false);
   const seenRef = useRef(new Set<string>());
 
@@ -97,8 +133,13 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
     const cancel = launchAuthorityDemo({
       shouldStop: () => stopRef.current || autoGen.current !== gen,
       onReset: () => {
+        // Defect 3: on epoch change, clear snapshot state immediately and
+        // increment the generation so delayed pre-reset responses cannot
+        // commit.
+        setSnap(null);
+        snapGuard.current = { generation: snapGuard.current.generation + 1, session: null, checkpointCount: 0 };
         setStreamEpoch((e) => e + 1);
-        fetchSnapshot().then(setSnap).catch(() => {});
+        guardedFetchSnapshot();
       },
     });
     return () => {
@@ -117,45 +158,108 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
   // filter to the revealed seq so the paced view never shows future work.
   const receiptCount = scene.receipts.length;
   useEffect(() => {
-    fetchSnapshot().then(setSnap).catch(() => {});
+    sceneJobIdRef.current = scene.job?.jobId ?? null;
+  }, [scene.job?.jobId]);
+  useEffect(() => {
+    guardedFetchSnapshot();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [receiptCount]);
   const visibleCheckpoints: VizCheckpoint[] = useMemo(() => {
-    const all = snap?.job_state?.checkpoints ?? [];
-    return all
-      .filter((c) => c.seq <= maxSeq)
-      .map((c) => ({ seq: c.seq, helper: c.helper, action: c.action, checkpoint: c.checkpoint }));
+    const all = (snap?.job_state?.checkpoints ?? []).map((c) => ({
+      seq: c.seq, helper: c.helper, action: c.action, checkpoint: c.checkpoint,
+    }));
+    return filterVisibleCheckpoints(all, maxSeq);
   }, [snap, maxSeq]);
 
-  // Beat 7 visibly complete: Juniper authorized in the revealed view AND
-  // checkpoint 2 applied to the same job with prior history visible.
+  // Beat 7 VISUAL completion (defect 7): not logical state arrival, but
+  // the visible scene having settled. All must hold:
+  // - Juniper authority visibly active
+  // - checkpoint 2 visibly present (and checkpoint 1 remains visible)
+  // - all three receipt marks visibly present
+  // - persistent crate/ticket visible
+  // - no required final animation still in progress (1.2s settle)
   const juniperAuthorized = scene.authorities.some(
     (a) => a.workerId === "juniper" && a.active
   );
   const storyComplete =
     juniperAuthorized &&
     visibleCheckpoints.length >= 2 &&
-    scene.receipts.length >= 3;
+    scene.receipts.length >= 3 &&
+    scene.job != null;
+  const [visualComplete, setVisualComplete] = useState(false);
+  const settleTimer = useRef<number | null>(null);
+  useEffect(() => {
+    if (storyComplete && !visualComplete) {
+      // let the final receipt/checkpoint appear-animations settle
+      if (settleTimer.current !== null) window.clearTimeout(settleTimer.current);
+      settleTimer.current = window.setTimeout(() => setVisualComplete(true), 1200);
+    } else if (!storyComplete && visualComplete) {
+      setVisualComplete(false);
+    }
+    return () => {
+      if (settleTimer.current !== null) {
+        window.clearTimeout(settleTimer.current);
+        settleTimer.current = null;
+      }
+    };
+  }, [storyComplete, visualComplete]);
 
-  // Failed-reach trigger (defect 3): the reach plays only while the real
-  // pre-grant attempt event is the last revealed one.
+  // In-page visible-frame timing (defect 8): performance.now() on the
+  // first rendered frame where Beat 1 is visibly present (T0) and on the
+  // first rendered frame where the VISUAL completion predicate holds (T1).
+  const visualT0Ref = useRef<number | null>(null);
+  const visualT1Ref = useRef<number | null>(null);
+  useEffect(() => {
+    if (scene.job && visualT0Ref.current === null) {
+      visualT0Ref.current = performance.now();
+    }
+    if (visualComplete && visualT1Ref.current === null) {
+      visualT1Ref.current = performance.now();
+    }
+  });
+
+  // Failed-reach trigger (defect 3, latched per defect 5): when the real
+  // pre-grant attempt event is revealed, latch the reach for its full
+  // ~1.5s choreography. Later event arrival must not truncate it.
   const lastRevealed = revealed[revealed.length - 1] as
     | (WEvent & { detail?: Record<string, unknown>; summary?: string })
     | undefined;
-  const reachingWorkerId =
+  const reachTriggered =
     lastRevealed?.kind === "activity" &&
     (lastRevealed.detail?.helper === "juniper") &&
-    /reaches for the job/i.test(lastRevealed.summary ?? "")
-      ? "juniper"
-      : null;
+    typeof lastRevealed.detail?.attempted_action === "string" &&
+    /reaches for the job/i.test(lastRevealed.summary ?? "");
+  const [reachLatched, setReachLatched] = useState(false);
+  const reachTimer = useRef<number | null>(null);
+  useEffect(() => {
+    if (reachTriggered && !reachLatched) {
+      setReachLatched(true);
+      if (reachTimer.current !== null) window.clearTimeout(reachTimer.current);
+      // full choreography outlives any subsequently revealed event
+      reachTimer.current = window.setTimeout(() => setReachLatched(false), 1700);
+    }
+    return () => {
+      if (reachTimer.current !== null) {
+        window.clearTimeout(reachTimer.current);
+        reachTimer.current = null;
+      }
+    };
+  }, [reachTriggered, reachLatched]);
 
   // debug hook for capture scripts: logical state only, no DOM internals.
-  // T0 = first visible Beat 1 job state; T1 = Beat 7 visibly complete.
+  // visualT0Ms/visualT1Ms are performance.now() on actual rendered frames.
   useEffect(() => {
+    const t0 = visualT0Ref.current;
+    const t1 = visualT1Ref.current;
     (window as unknown as { __authorityDebug?: unknown }).__authorityDebug = {
       seq: maxSeq,
       eventCount: scene.eventCount,
       jobVisible: scene.job != null,
       storyComplete,
+      visualComplete,
+      visualT0Ms: t0,
+      visualT1Ms: t1,
+      visualDurationMs: t0 !== null && t1 !== null ? t1 - t0 : null,
       job: scene.job ? { id: scene.job.jobId, title: scene.job.title } : null,
       workers: scene.workers.map((w) => ({
         id: w.workerId, active: w.active, admitted: w.admitted,
@@ -170,20 +274,14 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
     };
   });
 
-  // beat-driven close-ups: the refusal and the replacement must be legible
+  // beat-driven close-ups: the refusal and the replacement must be legible.
+  // Defect 6: an explicitly unadmitted proposal (decision_requested=false)
+  // is ambient — it never takes the camera.
   const closeup: VizCloseup = useMemo(() => {
     const last = revealed[revealed.length - 1] as
       | (WEvent & { detail?: Record<string, unknown> })
       | undefined;
-    if (!last) return null;
-    if (last.kind === "mandate") {
-      const st = last.detail?.status;
-      if (st !== "REVOKED" && isReplacementOnboard(last, revealed))
-        return "replacement";
-      return null;
-    }
-    if (last.kind === "proposal" || last.kind === "decision") return "gate";
-    return null;
+    return closeupFor(revealed, last);
   }, [revealed]);
 
   return (
@@ -215,7 +313,7 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
             selectedId={null}
             onSelect={() => {}}
             homeFn={authorityWorkerHome}
-            reachingWorkerId={reachingWorkerId}
+            reachingWorkerId={reachLatched ? "juniper" : null}
           />
           <AuthoritySeals
             authorities={scene.authorities}
@@ -234,8 +332,9 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
         </VizCanvas>
       </main>
       {/* Defect 7: no running beat captions. The end card appears only
-          after Beat 7 is visibly complete — outside the timed sequence. */}
-      {storyComplete && (
+          after the VISUAL completion predicate holds — outside the timed
+          sequence. */}
+      {visualComplete && (
         <footer className="viz-caption viz-endcard">{END_CARD}</footer>
       )}
     </div>

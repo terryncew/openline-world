@@ -92,27 +92,28 @@ async function main() {
     page.on("pageerror", (e) => errors.push(String(e)));
     await page.goto(`http://127.0.0.1:${VITE_PORT}/?view=authority`, { waitUntil: "networkidle" });
 
-    // wait for the demo to complete AND the paced reveal to drain,
-    // measuring browser-visible story timing (defect 8).
-    let T0 = null, T1 = null;
-    const storyStart = Date.now();
-    for (;;) {
-      const dbg = await page.evaluate(() => window.__authorityDebug);
-      if (dbg) {
-        if (dbg.jobVisible && T0 === null) T0 = Date.now();
-        if (dbg.storyComplete && T1 === null) { T1 = Date.now(); break; }
-      }
-      if (Date.now() - storyStart > 120000)
-        throw new Error("timeout waiting for storyComplete");
-      await sleep(250);
-    }
-    const storySecs = (T1 - T0) / 1000;
-    console.log(`story T0=${new Date(T0).toISOString()} T1=${new Date(T1).toISOString()} duration=${storySecs.toFixed(1)}s`);
-    assert.ok(
-      storySecs >= 27 && storySecs <= 33,
-      `story duration ${storySecs.toFixed(1)}s outside frozen 27-33s band`
+    // wait for VISUAL completion (defect 7 predicate), then read the
+    // in-page performance.now() timestamps (defect 8). The page itself
+    // sets visualT0Ms on the first rendered Beat-1 frame and visualT1Ms
+    // on the first rendered frame where the visual-completion predicate
+    // holds — actual rendered-state timing, not polling time.
+    await page.waitForFunction(
+      () => window.__authorityDebug && window.__authorityDebug.visualComplete === true,
+      null, { timeout: 120000 }
     );
-    // let the end card settle
+    const timing = await page.evaluate(() => ({
+      t0: window.__authorityDebug.visualT0Ms,
+      t1: window.__authorityDebug.visualT1Ms,
+      dur: window.__authorityDebug.visualDurationMs,
+    }));
+    assert.ok(timing.t0 !== null && timing.t1 !== null, "in-page T0/T1 set");
+    const storySecs = timing.dur / 1000;
+    console.log(`visual T0=${timing.t0.toFixed(0)}ms T1=${timing.t1.toFixed(0)}ms duration=${storySecs.toFixed(1)}s`);
+    assert.ok(
+      timing.dur >= 27000 && timing.dur <= 33000,
+      `visual story duration ${storySecs.toFixed(1)}s outside 27.0-33.0s band`
+    );
+    // end-card hold (outside the timed sequence)
     await sleep(2500);
 
     const dbg = await page.evaluate(() => window.__authorityDebug);
@@ -153,8 +154,7 @@ async function main() {
     await mpage.goto(`http://127.0.0.1:${VITE_PORT}/?view=authority`, { waitUntil: "networkidle" });
     await mpage.waitForFunction(
       () => window.__authorityDebug
-        && window.__authorityDebug.storyComplete === true
-        && window.__authorityDebug.eventCount >= 18,
+        && window.__authorityDebug.visualComplete === true,
       null, { timeout: 120000 }
     );
     await sleep(2500);

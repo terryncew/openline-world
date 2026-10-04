@@ -150,7 +150,11 @@ class Workshop:
         # so the receiver signs an ALLOWED receipt for it.
         self._propose("wren", "notes.read")
 
-    def _propose(self, helper: str, action: str) -> None:
+    def _propose(self, helper: str, action: str) -> dict[str, Any]:
+        """Proposal -> gate evaluation -> decision -> receipt. ONLY.
+        Evaluation-only: executes no job effect. Returns the real receipt
+        so callers may decide (in their own explicit step) whether an
+        ALLOWED decision warrants applying a job effect."""
         self.log.emit(source="agent", kind="proposal", provenance="agent-reported",
                       task_id=TASK_ID,
                       summary=f"{helper.title()} proposes: {action}.",
@@ -174,17 +178,17 @@ class Workshop:
                       task_id=TASK_ID,
                       summary=f"Signed receipt recorded: {decision} for {action}.",
                       detail={"receipt": _public_receipt(receipt)})
-        # The gate evaluated; it executed nothing. If the receiver ALLOWED,
-        # the SEPARATE workshop executor now applies the synthetic job
-        # effect. Authorization and execution stay apart.
-        if decision == "ALLOWED":
-            self.apply_job_effect(helper, action, seq=receipt_event["seq"])
+        return {"receipt": receipt, "seq": receipt_event["seq"], "decision": decision}
 
     def apply_job_effect(self, helper: str, action: str, seq: int) -> dict[str, Any]:
         """Workshop executor: apply the synthetic job effect to the persistent
-        task state. Called only after the receiver ALLOWED the action.
+        task state. Called only from explicit WORLD-AUTHORITY-001 work steps,
+        only after the receiver ALLOWED the action. Refuses unsupported
+        actions rather than treating arbitrary strings as job progress.
         This is actual backend state mutation, tested directly. The gate
         (WorkshopGate.request_decision) remains evaluation-only."""
+        if action != "notes.write":
+            raise ValueError(f"unsupported job effect action: {action}")
         checkpoint = len(self.job_effects) + 1
         effect = {"seq": seq, "helper": helper, "action": action,
                   "checkpoint": checkpoint, "task_id": TASK_ID}
@@ -307,8 +311,12 @@ class Workshop:
         )
 
     def _a_wren_works(self) -> None:
-        # One unmistakable work action on the job.
-        self._propose("wren", "notes.write")
+        # One unmistakable work action on the job. The gate evaluates;
+        # this explicit step applies the job effect only because the
+        # receiver ALLOWED it.
+        result = self._propose("wren", "notes.write")
+        if result["decision"] == "ALLOWED":
+            self.apply_job_effect("wren", "notes.write", seq=result["seq"])
 
     def _a_unadmitted(self) -> None:
         # A newer proposal that exists but is never admitted: the claim is
@@ -352,26 +360,22 @@ class Workshop:
     def _a_juniper_reaches(self) -> None:
         # Juniper's pre-grant attempt: actually exercise the existing
         # WorkshopGate path. Juniper has no mandate, so the real outcome is
-        # HELPER_UNKNOWN raised before any evaluation. Recorded honestly:
-        # no decision event, no receipt minted, no job effect applied.
-        # The gate is not modified to manufacture a prettier refusal.
+        # HELPER_UNKNOWN raised before any evaluation. No receiver-signed
+        # artifact is minted — no decision exists, no receipt exists, no
+        # effect exists. The attempt is an agent-reported claim; the fact
+        # that the backend invoked the canonical gate path is proved by
+        # backend tests, not by inventing signed evidence.
         self.log.emit(
             source="agent", kind="activity", provenance="agent-reported",
             task_id=TASK_ID,
             summary="Juniper reaches for the job.",
-            detail={"helper": "juniper"},
+            detail={"helper": "juniper", "attempted_action": "notes.write"},
         )
         try:
             self.gate.request_decision("juniper", "notes.write")
-        except WalletError as e:
-            code = e.code if isinstance(e.code, str) else "UNKNOWN"
-            self.log.emit(
-                source="receiver", kind="note", provenance="receiver-signed",
-                task_id=TASK_ID,
-                summary=f"No decision for Juniper: {code}. No receipt, no job effect.",
-                detail={"helper": "juniper", "action": "notes.write",
-                        "outcome": code},
-            )
+        except WalletError:
+            # HELPER_UNKNOWN before evaluation. Nothing to record as a
+            # decision; the activity event above is the whole truth.
             return
         # Unreachable in this demo (the gate raises HELPER_UNKNOWN), but if
         # the gate ever did evaluate, its real outcome would stand.
@@ -388,7 +392,11 @@ class Workshop:
 
     def _a_juniper_works(self) -> None:
         # The same action Wren performed: continuity, not a new job.
-        self._propose("juniper", "notes.write")
+        # The gate evaluates; this explicit step applies checkpoint 2 only
+        # because the receiver ALLOWED it.
+        result = self._propose("juniper", "notes.write")
+        if result["decision"] == "ALLOWED":
+            self.apply_job_effect("juniper", "notes.write", seq=result["seq"])
 
     # -- owner actions ------------------------------------------------------
     def owner_propose(self, helper: str, action: str) -> dict[str, Any]:
