@@ -31,6 +31,12 @@ export type VizCloseup = "gate" | "replacement" | null;
 
 const WORLD_POS: [number, number, number] = [0, 9.5, 15];
 const WORLD_TGT: [number, number, number] = [1.2, 0.8, 0];
+/** Authored portrait framing: pulled back and raised so the east-west
+ *  spread (obelisk → gate) stays readable on narrow screens. Not a
+ *  narrowed desktop camera — a different authored position. */
+const PORTRAIT_POS: [number, number, number] = [0.5, 17, 28];
+const PORTRAIT_TGT: [number, number, number] = [0.8, 0.6, 0.4];
+const PORTRAIT_FOV = 60;
 const RECEIVER_POS: [number, number, number] = [11.5, 4.5, 7.5];
 const RECORDS_POS: [number, number, number] = [14.5, 6, -6];
 const RECORDS_TGT: [number, number, number] = [10.5, 0.5, 0];
@@ -53,17 +59,22 @@ export function CameraRig({
   workers,
   followWorkerId,
   closeup,
+  portrait = false,
 }: {
   view: VizCameraView;
   workers: VizWorker[];
   followWorkerId: string | null;
   /** Timeline-driven close-up; only applies when view === "world". */
   closeup: VizCloseup;
+  /** Authored portrait framing for narrow screens. */
+  portrait?: boolean;
 }) {
   const { camera } = useThree();
-  const target = useRef(new THREE.Vector3(...WORLD_TGT));
-  const posGoal = useRef(new THREE.Vector3(...WORLD_POS));
-  const tgtGoal = useRef(new THREE.Vector3(...WORLD_TGT));
+  const basePos = portrait ? PORTRAIT_POS : WORLD_POS;
+  const baseTgt = portrait ? PORTRAIT_TGT : WORLD_TGT;
+  const target = useRef(new THREE.Vector3(...baseTgt));
+  const posGoal = useRef(new THREE.Vector3(...basePos));
+  const tgtGoal = useRef(new THREE.Vector3(...baseTgt));
 
   const workerIndex = useMemo(() => {
     const m = new Map<string, number>();
@@ -73,8 +84,16 @@ export function CameraRig({
 
   useFrame((_, dt) => {
     const dtc = Math.min(dt, 0.05);
-    let p: [number, number, number] = WORLD_POS;
-    let g: [number, number, number] = WORLD_TGT;
+    // Authored portrait framing includes a wider fov; the desktop camera
+    // keeps the canvas default.
+    const cam = camera as THREE.PerspectiveCamera;
+    const wantFov = portrait ? PORTRAIT_FOV : 42;
+    if (Math.abs(cam.fov - wantFov) > 0.01) {
+      cam.fov = wantFov;
+      cam.updateProjectionMatrix();
+    }
+    let p: [number, number, number] = basePos;
+    let g: [number, number, number] = baseTgt;
 
     if (view === "receiver") {
       p = RECEIVER_POS;

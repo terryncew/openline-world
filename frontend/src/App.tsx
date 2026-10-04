@@ -10,6 +10,7 @@ import { TourOverlay } from "./tour/TourOverlay";
 import { WhatChanged } from "./changed/WhatChanged";
 import { SharedWorld } from "./world/SharedWorld";
 import { VizView } from "./viz/VizView";
+import { AuthorityDemoView } from "./viz/AuthorityDemoView";
 import { SquareHost } from "./square/SquareHost";
 import "./styles.css";
 
@@ -38,14 +39,14 @@ function focusFor(step: number, fallback: Focus): Focus {
   return f;
 }
 
-type View = "watch" | "explore" | "changed" | "world" | "viz" | "square";
+type View = "watch" | "explore" | "changed" | "world" | "viz" | "authority" | "square";
 
 export default function App() {
   const [view, setView] = useState<View>(() => {
     const v = new URLSearchParams(window.location.search).get("view");
     // The Square is the home screen of the world layer; every existing
     // view stays reachable by its explicit ?view= param.
-    return v === "viz" || v === "watch" || v === "explore" || v === "changed" || v === "world"
+    return v === "viz" || v === "watch" || v === "explore" || v === "changed" || v === "world" || v === "authority"
       ? v
       : "square";
   });
@@ -182,6 +183,19 @@ function BackendApp({ view, setView }: { view: View; setView: (v: View) => void 
     return (
       <div className="app">
         <VizView
+          onExit={() => {
+            setView("explore");
+            refresh();
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (view === "authority") {
+    return (
+      <div className="app">
+        <AuthorityDemoView
           onExit={() => {
             setView("explore");
             refresh();

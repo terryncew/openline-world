@@ -201,3 +201,104 @@ test("9: provenance is kept on every visual element", () => {
   assert.equal(s.receipts[0].provenance, "receiver-signed");
   assert.equal(s.speeches[0].provenance, "agent-reported");
 });
+
+/* ---- WORLD-AUTHORITY-001 mapping tests ---- */
+
+function jobNote() {
+  return ev("note", "owner-signed",
+    { job_id: "task-workshop-1", title: "project notes" }, "Job opened");
+}
+function plainNote() {
+  return ev("note", "owner-signed", {}, "Demo complete");
+}
+
+test("10: job anchor renders only from owner-signed note with job_id", () => {
+  reset();
+  const s = reduceEvents([plainNote(), jobNote()]);
+  assert.ok(s.job);
+  assert.equal(s.job.jobId, "task-workshop-1");
+  assert.equal(s.job.title, "project notes");
+  // a non-owner note with job_id must not anchor the job
+  reset();
+  const s2 = reduceEvents([
+    ev("note", "agent-reported", { job_id: "x" }, "fake"),
+  ]);
+  assert.equal(s2.job, null);
+});
+
+test("11: activity-only helper figures unadmitted; mandate upgrades in place", () => {
+  reset();
+  const s = reduceEvents([activity("juniper", "Juniper arrives")]);
+  assert.equal(s.workers.length, 1);
+  assert.equal(s.workers[0].workerId, "juniper");
+  assert.equal(s.workers[0].admitted, false);
+  assert.equal(s.workers[0].active, false);
+  assert.equal(s.authorities.length, 0); // no seal without a mandate
+  const s2 = reduceEvents([
+    activity("juniper", "Juniper arrives"),
+    mandateCreate("juniper"),
+  ]);
+  assert.equal(s2.workers.length, 1); // upgraded in place, never duplicated
+  assert.equal(s2.workers[0].admitted, true);
+  assert.equal(s2.workers[0].active, true);
+  assert.equal(s2.workers[0].provenance, "owner-signed");
+  assert.equal(s2.authorities.length, 1);
+});
+
+test("12: in-flight proposal past its moment is unadmitted; latest is not", () => {
+  reset();
+  const p = proposal("wren", "notes.rewrite");
+  const s = reduceEvents([p]);
+  assert.equal(s.proposals[0].status, "in-flight");
+  assert.equal(s.proposals[0].unadmitted, false); // nothing moved past it yet
+  reset();
+  const s2 = reduceEvents([
+    proposal("wren", "notes.rewrite"),
+    mandateRevoke("wren"),
+  ]);
+  assert.equal(s2.proposals[0].unadmitted, true); // world moved on, no decision
+  // a decided proposal is never unadmitted
+  reset();
+  const s3 = reduceEvents([
+    proposal("wren", "notes.read"),
+    decision("wren", "notes.read", "STOPPED"),
+    receipt("wren", "notes.read", "STOPPED", 1),
+  ]);
+  assert.equal(s3.proposals[0].status, "stopped");
+  assert.equal(s3.proposals[0].unadmitted, false);
+});
+
+test("13: full authority-demo beat sequence maps to state", () => {
+  reset();
+  const s = reduceEvents([
+    jobNote(),                                   // beat 1
+    mandateCreate("wren"),                       // beat 2
+    proposal("wren", "notes.write"),             // beat 3
+    decision("wren", "notes.write", "ALLOWED"),
+    receipt("wren", "notes.write", "ALLOWED", 1),
+    proposal("wren", "notes.rewrite"),           // beat 8 (ambient)
+    mandateRevoke("wren"),                       // beat 4a
+    proposal("wren", "notes.read"),              // beat 4b
+    decision("wren", "notes.read", "STOPPED"),
+    receipt("wren", "notes.read", "STOPPED", 2),
+    activity("juniper", "Juniper arrives"),       // beat 5a
+    activity("juniper", "Juniper reaches"),       // beat 5b
+    mandateCreate("juniper"),                    // beat 6
+    proposal("juniper", "notes.write"),          // beat 7
+    decision("juniper", "notes.write", "ALLOWED"),
+    receipt("juniper", "notes.write", "ALLOWED", 3),
+  ]);
+  assert.ok(s.job);
+  const wren = s.workers.find((w) => w.workerId === "wren");
+  const juniper = s.workers.find((w) => w.workerId === "juniper");
+  assert.ok(wren && juniper);
+  assert.equal(wren.active, false);              // revoked, dimmed in place
+  assert.equal(juniper.admitted, true);          // granted by the owner
+  assert.equal(juniper.active, true);
+  assert.equal(s.workers.length, 2);            // no duplicates
+  const unadmitted = s.proposals.find((p) => p.action === "notes.rewrite");
+  assert.ok(unadmitted);
+  assert.equal(unadmitted.unadmitted, true);     // never decided, at rest
+  assert.equal(s.receipts.length, 3);           // history survives replacement
+  assert.equal(s.receipts.filter((r) => r.decision === "STOPPED").length, 1);
+});

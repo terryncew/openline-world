@@ -12,6 +12,18 @@ import { hashStr } from "../protocol";
 export const GATE_X = 6.5;
 export const GATE_Z = 0;
 
+/** WORLD-AUTHORITY-001: the persistent job crate + ticket. Fixed, central —
+ *  the thing the workers gather around and the history hangs from. */
+export const CRATE_POS: [number, number, number] = [-1.2, 0, 3.4];
+
+/** WORLD-AUTHORITY-001: the side table. A secondary surface for the
+ *  unadmitted proposal — visible, but off the worker→gate work path. */
+export const SIDE_TABLE_POS: [number, number, number] = [4.6, 0, 4.8];
+
+/** WORLD-AUTHORITY-001: where a claimed-but-unadmitted worker stands.
+ *  At the scene's edge, away from worker homes — present, no standing. */
+export const VISITOR_POS: [number, number, number] = [3.2, 0, -3.4];
+
 /** Worker home position: ring slots for the first few, then a deterministic
  *  spiral so 1000 workers still get unique, stable spots. */
 export function workerHome(index: number, workerId: string): [number, number, number] {

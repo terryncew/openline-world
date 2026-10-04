@@ -281,3 +281,56 @@ class TestWhatChangedContract(unittest.TestCase):
                 valid, _ = verify_record(r, expected_public_key=gate.gate.public_key)
                 self.assertTrue(valid is True)
                 self.assertTrue(r["signature"]["value"])
+
+    def test_authority_demo_beat_sequence(self):
+        # WORLD-AUTHORITY-001: the 10-step authority demo tells the worker-
+        # replacement story through real gate decisions. No boot mandate:
+        # the job exists before any worker is authorized.
+        with tempfile.TemporaryDirectory() as d:
+            w = Workshop(Path(d), boot_mandate=False)
+            boot_kinds = [e["kind"] for e in w.log.replay(0)]
+            self.assertNotIn("mandate", boot_kinds)
+            labels = []
+            while True:
+                r = w.advance_authority_demo()
+                labels.append(r.get("label"))
+                if r["finished"]:
+                    break
+            self.assertEqual(len(labels), 10)
+            evs = w.log.replay(0)
+            # beat 1: owner-signed job note anchors the job
+            job_notes = [e for e in evs if e["kind"] == "note"
+                         and e["detail"].get("job_id")]
+            self.assertEqual(len(job_notes), 1)
+            self.assertEqual(job_notes[0]["provenance"], "owner-signed")
+            # beats 2/6: two owner-signed mandates, one revoked
+            mandates = [e for e in evs if e["kind"] == "mandate"]
+            self.assertEqual(len(mandates), 3)
+            revoked = [e for e in mandates
+                       if e["detail"].get("status") == "REVOKED"]
+            self.assertEqual(len(revoked), 1)
+            # beat 3/7: real ALLOWED decisions for wren then juniper
+            allowed = [e for e in evs if e["kind"] == "decision"
+                       and e["detail"]["decision"] == "ALLOWED"]
+            self.assertEqual(
+                [(e["detail"]["helper"], e["detail"]["action"]) for e in allowed],
+                [("wren", "notes.write"), ("juniper", "notes.write")])
+            # beat 4b: the real gate stops wren's post-revoke attempt
+            stopped = [e for e in evs if e["kind"] == "decision"
+                       and e["detail"]["decision"] == "STOPPED"]
+            self.assertEqual(len(stopped), 1)
+            self.assertEqual(stopped[0]["detail"]["helper"], "wren")
+            # beat 8: the newer proposal is never decided
+            props = [(e["detail"]["helper"], e["detail"]["action"])
+                     for e in evs if e["kind"] == "proposal"]
+            decs = [(e["detail"]["helper"], e["detail"]["action"])
+                    for e in evs if e["kind"] == "decision"]
+            self.assertIn(("wren", "notes.rewrite"), props)
+            self.assertNotIn(("wren", "notes.rewrite"), decs)
+            # beat 5: juniper's arrival/reach are activity claims only —
+            # no proposal, no decision for juniper before grant
+            juniper_acts = {(e["detail"]["helper"], e["detail"]["action"])
+                            for e in evs
+                            if e["detail"].get("helper") == "juniper"
+                            and e["kind"] in ("proposal", "decision")}
+            self.assertEqual(juniper_acts, {("juniper", "notes.write")})

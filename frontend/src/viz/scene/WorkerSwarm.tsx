@@ -18,9 +18,12 @@ import { useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { hashStr, workerHue, type VizWorker } from "../protocol";
-import { workerHome } from "./layout";
+import { workerHome, VISITOR_POS } from "./layout";
 
 const CLAIM_DIM = new THREE.Color("#5a6a7a");
+/** Unadmitted figure: claimed presence, no authority. Cool gray — visibly
+ *  not a worker hue, never gold (gold is the owner's seal alone). */
+const VISITOR_TINT = new THREE.Color("#8b98a8");
 
 export function WorkerSwarm({
   workers,
@@ -42,7 +45,12 @@ export function WorkerSwarm({
   const easeOutCubic = (k: number) => 1 - Math.pow(1 - k, 3);
 
   const homes = useMemo(
-    () => workers.map((w, i) => workerHome(i, w.workerId)),
+    () =>
+      workers.map((w, i) =>
+        // Unadmitted figures stand at the visitor spot — present, no
+        // standing — never in a worker home slot.
+        w.admitted ? workerHome(i, w.workerId) : VISITOR_POS
+      ),
     [workers]
   );
   const phases = useMemo(
@@ -53,6 +61,7 @@ export function WorkerSwarm({
   const colors = useMemo(() => {
     const c = new THREE.Color();
     return workers.map((w) => {
+      if (!w.admitted) return VISITOR_TINT.clone(); // claimed, not admitted
       c.setHSL(workerHue(w.workerId), 0.42, w.active ? 0.52 : 0.3);
       if (!w.active) c.lerp(CLAIM_DIM, 0.55);
       return c.clone();

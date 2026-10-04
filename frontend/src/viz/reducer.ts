@@ -21,6 +21,15 @@
  *  6. Malformed or unplaceable events land in `unrecognized` and are shown
  *     as unreadable markers. Nothing is invented around them.
  *  7. Provenance is kept on every visual element.
+ *  8. The job anchor renders ONLY from an owner-signed note carrying a
+ *     job_id. It belongs to no worker.
+ *  9. A figure derived from activity alone (no mandate) is marked
+ *     admitted=false: it carries no authority, never originates a
+ *     proposal visual, never receives a receipt. The mandate-create
+ *     upgrades it in place — never a second figure.
+ * 10. A proposal renders "unadmitted" ONLY when it is still in-flight and
+ *     a later event exists in the stream: the world moved past it without
+ *     a decision. It is never stamped, never acted on.
  */
 
 import {
@@ -60,6 +69,7 @@ export function reduceEvents(input: WEvent[]): VizSceneState {
   );
   const seen = new Set<string>();
   const state: VizSceneState = {
+    job: null,
     workers: [],
     authorities: [],
     proposals: [],
@@ -141,11 +151,23 @@ export function reduceEvents(input: WEvent[]): VizSceneState {
           revokedSeq: null,
           provenance, // owner-signed: this is the rule
         });
+        // Invariant 9: if the worker already figures from an activity
+        // claim, the mandate upgrades it in place — never a second figure.
+        const claimed = state.workers.find((w) => w.workerId === workerId);
+        if (claimed) {
+          claimed.mandateId = mandateId;
+          claimed.scopes = scopes;
+          claimed.active = true;
+          claimed.admitted = true;
+          claimed.provenance = provenance; // owner-signed: the owner's admission
+          break;
+        }
         state.workers.push({
           workerId,
           mandateId,
           scopes,
           active: true,
+          admitted: true,
           enteredSeq: ev.seq, // INFERRED from mandate create; see protocol.ts
           revokedSeq: null,
           provenance, // owner-signed: the owner's admission
@@ -166,6 +188,7 @@ export function reduceEvents(input: WEvent[]): VizSceneState {
           action,
           seq: ev.seq,
           status: "in-flight",
+          unadmitted: false, // resolved in the post-pass below (invariant 10)
           decisionSeq: null,
           reasonCodes: [],
           provenance, // agent-reported: a claim, not yet a decision
@@ -235,10 +258,39 @@ export function reduceEvents(input: WEvent[]): VizSceneState {
           seq: ev.seq,
           provenance, // agent-reported: a claim, never a receipt
         });
+        // Invariant 9: claimed presence. A helper with no mandate figures
+        // from its activity alone — admitted=false, no authority, never
+        // acts. The mandate-create upgrades it in place.
+        if (!state.workers.some((w) => w.workerId === helper)) {
+          state.workers.push({
+            workerId: helper,
+            mandateId: "",
+            scopes: [],
+            active: false,
+            admitted: false,
+            enteredSeq: ev.seq,
+            revokedSeq: null,
+            provenance, // agent-reported: the claim of presence
+          });
+        }
         break;
       }
 
-      case "note":
+      case "note": {
+        // Invariant 8: the job anchor comes ONLY from an owner-signed note
+        // carrying a job_id. All other notes stay unrendered.
+        const jobId = str(detail.job_id);
+        if (jobId && provenance === "owner-signed" && !state.job) {
+          state.job = {
+            jobId,
+            title: str(detail.title) ?? jobId,
+            openedSeq: ev.seq,
+          };
+          break;
+        }
+        // Legitimate non-visual note: recorded in the log, not the scene.
+        break;
+      }
       case "connection":
         // Legitimate non-visual events: recorded in the log, not the scene.
         break;
@@ -246,6 +298,15 @@ export function reduceEvents(input: WEvent[]): VizSceneState {
       default:
         unrec(ev, kind || "(missing kind)", `no visual mapping for kind "${kind}"`);
         break;
+    }
+  }
+
+  // Invariant 10: a proposal that is still in-flight after the stream moved
+  // past it (any later event exists) was never decided — it is unadmitted.
+  // It renders at rest, never stamped, never acted on.
+  for (const p of state.proposals) {
+    if (p.status === "in-flight" && state.maxSeq > p.seq) {
+      p.unadmitted = true;
     }
   }
 

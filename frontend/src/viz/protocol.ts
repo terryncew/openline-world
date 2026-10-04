@@ -65,12 +65,16 @@ export function provenanceExplain(p: Provenance, who?: string): string {
 
 /** A worker in the scene. Entry is INFERRED from the owner's mandate-create
  *  event — the backend emits no explicit "worker entered" event, so
- *  enteredSeq is documented as an inference, never as a protocol fact. */
+ *  enteredSeq is documented as an inference, never as a protocol fact.
+ *  `admitted` is false when the figure comes from an agent-reported
+ *  activity claim alone (no mandate): such a figure carries no authority,
+ *  never acts, and never receives receipts. */
 export interface VizWorker {
   workerId: string;
   mandateId: string;
   scopes: string[];
   active: boolean;
+  admitted: boolean;
   enteredSeq: number;
   revokedSeq: number | null;
   /** Standing of the mandate event that admitted this worker. */
@@ -90,7 +94,11 @@ export interface VizAuthority {
   provenance: Provenance;
 }
 
-/** A proposed action traveling toward the receiver gate. */
+/** A proposed action traveling toward the receiver gate.
+ *  `unadmitted` is true only when the proposal is still in-flight and the
+ *  event stream has moved past it without any decision: the claim exists,
+ *  was never decided, and renders at rest (side table), never stamped,
+ *  never acted on. */
 export interface VizProposal {
   /** event_id of the proposal event. */
   id: string;
@@ -98,6 +106,7 @@ export interface VizProposal {
   action: string;
   seq: number;
   status: "in-flight" | "allowed" | "stopped";
+  unadmitted: boolean;
   decisionSeq: number | null;
   reasonCodes: string[];
   /** The proposal is a claim: agent-reported. */
@@ -143,7 +152,16 @@ export interface VizUnrecognized {
   provenance: Provenance;
 }
 
+/** The job: declared by the owner, belonging to no worker. Rendered ONLY
+ *  from an owner-signed note carrying a job_id — the crate's anchor. */
+export interface VizJob {
+  jobId: string;
+  title: string;
+  openedSeq: number;
+}
+
 export interface VizSceneState {
+  job: VizJob | null;
   workers: VizWorker[];
   authorities: VizAuthority[];
   proposals: VizProposal[];
@@ -155,6 +173,7 @@ export interface VizSceneState {
 }
 
 export const EMPTY_SCENE: VizSceneState = {
+  job: null,
   workers: [],
   authorities: [],
   proposals: [],

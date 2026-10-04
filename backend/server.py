@@ -73,26 +73,32 @@ def new_session_dir() -> Path:
 
 
 class Workshop:
-    def __init__(self, data_dir: Path) -> None:
+    def __init__(self, data_dir: Path, boot_mandate: bool = True) -> None:
         self.log = EventLog()
         self.gate = WorkshopGate(data_dir)
         self.mode = "demo"  # demo | connected
         self.last_adapter_ts = 0.0
         self.demo_step = 0
         self.demo_finished = False
+        self.authority_step = 0
+        self.authority_finished = False
         self.review: dict[str, Any] | None = None
-        self._boot()
+        self._boot(boot_mandate=boot_mandate)
 
     # -- boot -----------------------------------------------------------
-    def _boot(self) -> None:
-        info = self.gate.onboard_helper("wren", WREN_SCOPES)
-        self.log.emit(
-            source="owner", kind="mandate", provenance="owner-signed",
-            task_id=TASK_ID,
-            summary="You gave Wren a bounded mandate: read and write project notes, nothing else.",
-            detail={"mandate_id": info["mandate_id"], "scopes": info["scopes"],
-                    "admission": info["admission"]},
-        )
+    def _boot(self, boot_mandate: bool = True) -> None:
+        # The authority demo (WORLD-AUTHORITY-001) needs the job to exist
+        # before any worker is authorized, so its reset skips the boot
+        # mandate and the script onboards Wren as an explicit step.
+        if boot_mandate:
+            info = self.gate.onboard_helper("wren", WREN_SCOPES)
+            self.log.emit(
+                source="owner", kind="mandate", provenance="owner-signed",
+                task_id=TASK_ID,
+                summary="You gave Wren a bounded mandate: read and write project notes, nothing else.",
+                detail={"mandate_id": info["mandate_id"], "scopes": info["scopes"],
+                        "admission": info["admission"]},
+            )
         self.log.emit(
             source="workshop", kind="connection", provenance="owner-signed",
             task_id=TASK_ID,
@@ -203,6 +209,143 @@ class Workshop:
                               "admission": info["admission"]})
 
     def _s_juniper_write(self) -> None:
+        self._propose("juniper", "notes.write")
+
+    # -- WORLD-AUTHORITY-001 demo script ------------------------------------
+    # A second, separate demo script telling the worker-replacement story
+    # as one ~30s sequence. Every decision still comes from the real
+    # EffectGate; this only orders the canonical events. The classic
+    # 9-step demo above is untouched.
+    #
+    # Beat map (frozen storyboard WORLD-AUTHORITY-001):
+    #   1 job exists ......... owner-signed job note (the crate's anchor)
+    #   2 A authorized ....... owner-signed mandate for wren
+    #   3 A progresses ....... wren proposes notes.write -> ALLOWED -> receipt
+    #   8 unadmitted ......... wren proposes notes.rewrite, never decided
+    #   4a A revoked ......... owner-signed mandate REVOKED for wren
+    #   4b A refused ......... wren proposes notes.read -> STOPPED -> receipt
+    #   5a B arrives ......... agent-reported activity (claim only, no mandate)
+    #   5b B cannot act ...... agent-reported activity; no proposal, no decision
+    #   6 B granted .......... owner-signed mandate for juniper
+    #   7 B continues ........ juniper proposes notes.write -> ALLOWED -> receipt
+    def authority_demo_steps(self) -> list[tuple[str, Any]]:
+        return [
+            ("Job opened: project notes", self._a_job_opened),
+            ("You authorize Wren", self._a_onboard_wren),
+            ("Wren does the work", self._a_wren_works),
+            ("A newer proposal sits unadmitted", self._a_unadmitted),
+            ("You revoke Wren's mandate", self._a_revoke_wren),
+            ("Wren tries anyway", self._a_wren_after_revoke),
+            ("Juniper arrives", self._a_juniper_arrives),
+            ("Juniper reaches for the job", self._a_juniper_reaches),
+            ("You authorize Juniper", self._a_onboard_juniper),
+            ("Juniper continues the same job", self._a_juniper_works),
+        ]
+
+    def advance_authority_demo(self) -> dict[str, Any]:
+        steps = self.authority_demo_steps()
+        if self.authority_step >= len(steps):
+            self.authority_finished = True
+            return {"finished": True, "step": self.authority_step,
+                    "total": len(steps)}
+        label, fn = steps[self.authority_step]
+        fn()
+        self.authority_step += 1
+        if self.authority_step >= len(steps):
+            self.authority_finished = True
+            self.log.emit(
+                source="workshop", kind="note", provenance="owner-signed",
+                task_id=TASK_ID,
+                summary="Authority demo complete. The worker changed; the job did not reset; the records stayed.",
+                detail={},
+            )
+        return {"finished": self.authority_finished, "step": self.authority_step,
+                "total": len(steps), "label": label}
+
+    def _a_job_opened(self) -> None:
+        # The job's existence, declared by the owner. The visualization
+        # anchors the persistent crate + ticket to this event. It belongs
+        # to no worker.
+        self.log.emit(
+            source="owner", kind="note", provenance="owner-signed",
+            task_id=TASK_ID,
+            summary="Job opened: project notes. It belongs to no worker.",
+            detail={"job_id": TASK_ID, "title": "project notes"},
+        )
+
+    def _a_onboard_wren(self) -> None:
+        info = self.gate.onboard_helper("wren", WREN_SCOPES)
+        self.log.emit(
+            source="owner", kind="mandate", provenance="owner-signed",
+            task_id=TASK_ID,
+            summary="You gave Wren a bounded mandate: read and write project notes, nothing else.",
+            detail={"mandate_id": info["mandate_id"], "scopes": info["scopes"],
+                    "admission": info["admission"]},
+        )
+
+    def _a_wren_works(self) -> None:
+        # One unmistakable work action on the job.
+        self._propose("wren", "notes.write")
+
+    def _a_unadmitted(self) -> None:
+        # A newer proposal that exists but is never admitted: the claim is
+        # recorded (agent-reported), but no decision is ever requested from
+        # the gate, so it stays in-flight forever. The visualization rests
+        # it on the side table — never stamped, never acted on.
+        self.log.emit(
+            source="agent", kind="proposal", provenance="agent-reported",
+            task_id=TASK_ID,
+            summary="Wren proposes: notes.rewrite. No decision requested.",
+            detail={"helper": "wren", "action": "notes.rewrite"},
+        )
+
+    def _a_revoke_wren(self) -> None:
+        info = self.gate.revoke_helper("wren", reason="USER_REVOKED")
+        self.log.emit(
+            source="owner", kind="mandate", provenance="owner-signed",
+            task_id=TASK_ID,
+            summary="You revoked Wren\u2019s mandate. The receiver admitted the revocation.",
+            detail={"mandate_id": info["mandate_id"], "status": info["status"],
+                    "admission": info["admission"]},
+        )
+
+    def _a_wren_after_revoke(self) -> None:
+        # The real gate stops this: the mandate is revoked.
+        self._propose("wren", "notes.read")
+
+    def _a_juniper_arrives(self) -> None:
+        # Claimed presence only (agent-reported). No mandate exists for
+        # Juniper, so the visualization shows the figure with no seal and
+        # no standing to act.
+        self.log.emit(
+            source="agent", kind="activity", provenance="agent-reported",
+            task_id=TASK_ID,
+            summary="Juniper arrives at the workshop.",
+            detail={"helper": "juniper"},
+        )
+
+    def _a_juniper_reaches(self) -> None:
+        # An attempt that never becomes a proposal: nothing travels to the
+        # gate, nothing is decided, no receipt is minted.
+        self.log.emit(
+            source="agent", kind="activity", provenance="agent-reported",
+            task_id=TASK_ID,
+            summary="Juniper reaches for the job \u2014 nothing happens.",
+            detail={"helper": "juniper"},
+        )
+
+    def _a_onboard_juniper(self) -> None:
+        info = self.gate.onboard_helper("juniper", WREN_SCOPES)
+        self.log.emit(
+            source="owner", kind="mandate", provenance="owner-signed",
+            task_id=TASK_ID,
+            summary="You gave Juniper its own mandate with the same bounds. The rules and the records stayed; only the helper changed.",
+            detail={"mandate_id": info["mandate_id"], "scopes": info["scopes"],
+                    "admission": info["admission"]},
+        )
+
+    def _a_juniper_works(self) -> None:
+        # The same action Wren performed: continuity, not a new job.
         self._propose("juniper", "notes.write")
 
     # -- owner actions ------------------------------------------------------
@@ -419,6 +562,7 @@ class Handler(BaseHTTPRequestHandler):
                 return
             body = self._body() if path not in (
                 "/api/demo/advance", "/api/demo/reset",
+                "/api/demo/authority/advance", "/api/demo/authority/reset",
                 "/api/world/challenge", "/api/world/reset") else {}
             if not isinstance(body, dict):
                 raise WalletError("HTTP_JSON_OBJECT_REQUIRED")
@@ -428,6 +572,14 @@ class Handler(BaseHTTPRequestHandler):
                 # Fresh isolated session: the old session (and its revocation
                 # history) is left untouched on disk, never reversed or erased.
                 self.server.workshop = Workshop(new_session_dir())  # type: ignore[attr-defined]
+                self._send(200, {"reset": True})
+            elif path == "/api/demo/authority/advance":
+                self._send(200, self.workshop.advance_authority_demo())
+            elif path == "/api/demo/authority/reset":
+                # WORLD-AUTHORITY-001: fresh session with NO boot mandate —
+                # the job must exist before any worker is authorized, so the
+                # script onboards Wren as an explicit step.
+                self.server.workshop = Workshop(new_session_dir(), boot_mandate=False)  # type: ignore[attr-defined]
                 self._send(200, {"reset": True})
             elif path == "/api/mode":
                 mode = body.get("mode")

@@ -51,3 +51,26 @@ export async function runDemoScript(opts: DirectorOpts = {}): Promise<void> {
     }
   }
 }
+
+/**
+ * WORLD-AUTHORITY-001: drive the 10-step authority demo (fresh session,
+ * no boot mandate — the job exists before any worker is authorized).
+ * Same contract as runDemoScript: the renderer never calls this.
+ */
+export async function runAuthorityDemoScript(opts: DirectorOpts = {}): Promise<void> {
+  const { holdMs = 1400, onStep, onReset, shouldStop } = opts;
+  await api.resetAuthorityDemo();
+  onReset?.();
+  for (;;) {
+    if (shouldStop?.()) return;
+    const res = await api.advanceAuthorityDemo();
+    onStep?.(res.step, res.total);
+    if (res.finished) break;
+    let waited = 0;
+    while (waited < holdMs) {
+      if (shouldStop?.()) return;
+      await sleep(200);
+      waited += 200;
+    }
+  }
+}
