@@ -97,8 +97,12 @@ async function main() {
     // sets visualT0Ms on the first rendered Beat-1 frame and visualT1Ms
     // on the first rendered frame where the visual-completion predicate
     // holds — actual rendered-state timing, not polling time.
+    // CP3 §5: wait for T1 to be set (FrameTimer runs in the Canvas;
+    // the debug flag may flip a frame before T1 is captured).
     await page.waitForFunction(
-      () => window.__authorityDebug && window.__authorityDebug.visualComplete === true,
+      () => window.__authorityDebug
+        && window.__authorityDebug.visualComplete === true
+        && window.__authorityDebug.visualT1Ms !== null,
       null, { timeout: 120000 }
     );
     const timing = await page.evaluate(() => ({
@@ -113,6 +117,13 @@ async function main() {
       timing.dur >= 27000 && timing.dur <= 33000,
       `visual story duration ${storySecs.toFixed(1)}s outside 27.0-33.0s band`
     );
+    // CP3 §7: pre-endcard still — captured immediately at visual
+    // completion, before the end-card hold. No explanatory captions;
+    // the scene must communicate: Wren, Juniper, external owner source,
+    // same persistent crate/job + ticket, 3 countable receipt marks,
+    // checkpoint 1, checkpoint 2, inert unadmitted side-table proposal.
+    await page.screenshot({ path: resolve(SHOTS, "authority-desktop-pre-endcard.png") });
+    console.log("desktop pre-endcard still captured");
     // end-card hold (outside the timed sequence)
     await sleep(2500);
 
@@ -154,9 +165,13 @@ async function main() {
     await mpage.goto(`http://127.0.0.1:${VITE_PORT}/?view=authority`, { waitUntil: "networkidle" });
     await mpage.waitForFunction(
       () => window.__authorityDebug
-        && window.__authorityDebug.visualComplete === true,
+        && window.__authorityDebug.visualComplete === true
+        && window.__authorityDebug.visualT1Ms !== null,
       null, { timeout: 120000 }
     );
+    // CP3 §7: portrait pre-endcard still, before the end-card hold
+    await mpage.screenshot({ path: resolve(SHOTS, "authority-portrait-pre-endcard.png") });
+    console.log("portrait pre-endcard still captured");
     await sleep(2500);
     const mdbg = await mpage.evaluate(() => window.__authorityDebug);
     assert.equal(mdbg.receipts.length, 3);

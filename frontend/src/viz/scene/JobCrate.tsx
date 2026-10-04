@@ -39,15 +39,58 @@ function sealSlot(i: number): [number, number, number] {
   return [-0.33 + col * 0.22, 1.29, -0.30 + row * 0.24];
 }
 
+/** A checkpoint piece with scale-in; reports when its appear-animation
+ *  settles (CP3 §4: scene-owned settle acknowledgment). */
+function CheckpointPiece({
+  position,
+  onSettled,
+}: {
+  position: [number, number, number];
+  onSettled: () => void;
+}) {
+  const ref = useRef<THREE.Group>(null);
+  const t0 = useRef<number | null>(null);
+  const done = useRef(false);
+  useFrame(() => {
+    const g = ref.current;
+    if (!g) return;
+    if (t0.current === null) t0.current = performance.now() / 1000;
+    const k = Math.min(1, (performance.now() / 1000 - t0.current) / 0.4);
+    const s = 1 - Math.pow(1 - k, 3);
+    g.scale.setScalar(Math.max(0.001, s));
+    if (k >= 1 && !done.current) {
+      done.current = true;
+      onSettled();
+    }
+  });
+  return (
+    <group ref={ref} position={position} scale={0.001}>
+      <mesh>
+        <boxGeometry args={[0.32, 0.22, 0.32]} />
+        <meshStandardMaterial color={CHECKPOINT_COLOR} roughness={0.45} metalness={0.5} />
+      </mesh>
+      <mesh position={[0, 0.16, 0]}>
+        <cylinderGeometry args={[0.07, 0.07, 0.1, 12]} />
+        <meshStandardMaterial color={CHECKPOINT_COLOR} roughness={0.4} metalness={0.55} />
+      </mesh>
+    </group>
+  );
+}
+
 export function JobCrate({
   job,
   receipts,
   checkpoints,
+  onSettled,
 }: {
   job: VizJob | null;
   receipts: VizReceipt[];
   /** Visible checkpoints, already filtered to the revealed seq. */
   checkpoints: VizCheckpoint[];
+  /** Scene-owned (CP3 §4): called when the persistent job/ticket, all
+   *  receipt marks (with the final stamp animation settled), and all
+   *  checkpoint visuals are rendered and settled. */
+  onSettled?: () => void;
 }) {
   const sealRefs = useRef<(THREE.Mesh | null)[]>([]);
   // scale-in choreography per seal: first-appearance wall-clock
@@ -58,6 +101,28 @@ export function JobCrate({
     () => [...receipts].sort((a, b) => a.seq - b.seq),
     [receipts]
   );
+
+  // CP3 §4: scene-owned settle; re-arms when the visual inputs change.
+  // Checkpoint settle is tracked by ID and survives receipt additions —
+  // a new seal stamping must not invalidate an already-settled checkpoint.
+  const settledRef = useRef(false);
+  const checkpointsSettledRef = useRef(new Set<string>());
+  const jobId = job?.jobId ?? "";
+  const jobIdRef = useRef(jobId);
+  if (jobIdRef.current !== jobId) {
+    jobIdRef.current = jobId;
+    settledRef.current = false;
+    checkpointsSettledRef.current = new Set();
+  }
+  const sealsInputs = `${jobId}:${ordered.length}`;
+  const sealsInputsRef = useRef(sealsInputs);
+  if (sealsInputsRef.current !== sealsInputs) {
+    sealsInputsRef.current = sealsInputs;
+    // new receipts → seals must re-stamp; checkpoints stay settled
+    settledRef.current = false;
+  }
+  const onSettledRef = useRef(onSettled);
+  onSettledRef.current = onSettled;
 
   useLayoutEffect(() => {
     const t = nowS();
@@ -71,14 +136,28 @@ export function JobCrate({
 
   useFrame(() => {
     const t = nowS();
+    let sealsSettled = true;
     for (let i = 0; i < ordered.length; i++) {
       const m = sealRefs.current[i];
-      if (!m) continue;
+      if (!m) {
+        sealsSettled = false;
+        continue;
+      }
       const t0 = stampedAt.current.get(ordered[i].id) ?? t;
       const k = Math.min(1, (t - t0) / 0.45);
+      if (k < 1) sealsSettled = false;
       // stamp: quick grow with a slight overshoot, then settle
       const s = k < 1 ? 0.3 + 0.9 * (1 - Math.pow(1 - k, 3)) : 1;
       m.scale.setScalar(Math.max(0.001, s));
+    }
+    // CP3 §4: settled when the job/ticket exists, all receipt seals have
+    // finished stamping, and all checkpoint pieces report settled
+    const allCheckpointsSettled = checkpoints.every((c) =>
+      checkpointsSettledRef.current.has(`${c.checkpoint}`)
+    );
+    if (!settledRef.current && sealsSettled && allCheckpointsSettled) {
+      settledRef.current = true;
+      queueMicrotask(() => onSettledRef.current?.());
     }
   });
 
@@ -131,16 +210,13 @@ export function JobCrate({
           decided) and work checkpoints (what was executed) stay
           simultaneously visible and visually distinct. */}
       {checkpoints.map((c, i) => (
-        <group key={`${c.checkpoint}`} position={[1.05 + i * 0.55, 0.11, 0.75]}>
-          <mesh>
-            <boxGeometry args={[0.32, 0.22, 0.32]} />
-            <meshStandardMaterial color={CHECKPOINT_COLOR} roughness={0.45} metalness={0.5} />
-          </mesh>
-          <mesh position={[0, 0.16, 0]}>
-            <cylinderGeometry args={[0.07, 0.07, 0.1, 12]} />
-            <meshStandardMaterial color={CHECKPOINT_COLOR} roughness={0.4} metalness={0.55} />
-          </mesh>
-        </group>
+        <CheckpointPiece
+          key={`${c.checkpoint}`}
+          position={[1.05 + i * 0.55, 0.11, 0.75]}
+          onSettled={() => {
+            checkpointsSettledRef.current.add(`${c.checkpoint}`);
+          }}
+        />
       ))}
     </group>
   );

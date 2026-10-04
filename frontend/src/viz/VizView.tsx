@@ -24,6 +24,7 @@ import { WorkerSwarm } from "./scene/WorkerSwarm";
 import { AuthoritySeals } from "./scene/AuthoritySeals";
 import { ReceiverGate } from "./scene/ReceiverGate";
 import { ProposalPackets } from "./scene/ProposalPackets";
+import { proposalVisibility } from "./proposalVisibility.ts";
 import { ReceiptTablets } from "./scene/ReceiptTablets";
 import { SpeechPuffs, UnrecognizedMarkers } from "./scene/SpeechPuffs";
 import { CameraRig, type VizCameraView, type VizCloseup } from "./scene/CameraRig";
@@ -441,11 +442,11 @@ export function VizView({
             onSelect={(id) => setSelection(id ? { kind: "seal", id } : null)}
           />
           <ReceiverGate
-            proposals={scene.proposals}
+            proposals={scene.proposals.filter((p) => proposalVisibility(p).gateDecision)}
             onSelectGate={() => setSelection({ kind: "gate" })}
           />
           <ProposalPackets
-            proposals={scene.proposals}
+            proposals={scene.proposals.filter((p) => proposalVisibility(p).gateTravel)}
             workers={scene.workers}
             onSelect={(id) => setSelection(id ? { kind: "packet", id } : null)}
           />

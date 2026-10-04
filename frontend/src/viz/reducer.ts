@@ -196,6 +196,7 @@ export function reduceEvents(input: WEvent[]): VizSceneState {
           seq: ev.seq,
           status: "in-flight",
           unadmitted: noDecision,
+          decisionRequested: detail.decision_requested !== false,
           decisionSeq: null,
           reasonCodes: [],
           provenance, // agent-reported: a claim, not yet a decision

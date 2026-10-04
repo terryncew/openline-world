@@ -33,6 +33,44 @@ import { ProposalPackets } from "./scene/ProposalPackets";
 import { JobCrate, SideTable } from "./scene/JobCrate";
 import { CameraRig, type VizCloseup } from "./scene/CameraRig";
 import { closeupFor } from "./closeup.ts";
+import { proposalVisibility } from "./proposalVisibility.ts";
+import {
+  nextReachState,
+  REACH_IDLE,
+  type ReachLifecycleState,
+} from "./reachLifecycle.ts";
+import { useFrame } from "@react-three/fiber";
+
+/**
+ * CP3 §5: captures performance.now() on actual rendered R3F frames.
+ * T0: first frame where the Beat 1 persistent job is visibly present.
+ * T1: first frame where final visual readiness holds.
+ */
+function FrameTimer({
+  jobVisible,
+  complete,
+  onT0,
+  onT1,
+}: {
+  jobVisible: boolean;
+  complete: boolean;
+  onT0: () => void;
+  onT1: () => void;
+}) {
+  const t0Done = useRef(false);
+  const t1Done = useRef(false);
+  useFrame(() => {
+    if (jobVisible && !t0Done.current) {
+      t0Done.current = true;
+      onT0();
+    }
+    if (complete && !t1Done.current) {
+      t1Done.current = true;
+      onT1();
+    }
+  });
+  return null;
+}
 import { authorityWorkerHome } from "./scene/layout";
 import type { Snapshot } from "../api";
 import "./viz.css";
@@ -186,80 +224,76 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
     visibleCheckpoints.length >= 2 &&
     scene.receipts.length >= 3 &&
     scene.job != null;
-  const [visualComplete, setVisualComplete] = useState(false);
-  const settleTimer = useRef<number | null>(null);
+  // CP3 §4: scene-owned settle — the final visual completion may not rely
+  // on a guessed parent timer. Each signal re-arms only when its own visual
+  // inputs change (crate: job/receipts/checkpoints; seals: authorities;
+  // camera: closeup/view goal).
+  const [crateSettled, setCrateSettled] = useState(false);
+  const [sealsSettled, setSealsSettled] = useState(false);
+  const [cameraSettled, setCameraSettled] = useState(false);
+  const crateInputs = `${scene.job?.jobId ?? ""}:${scene.receipts.length}:${visibleCheckpoints.map((c) => c.checkpoint).join(",")}`;
+  const sealsInputs = scene.authorities
+    .map((a) => `${a.mandateId}:${a.active}`)
+    .join("|");
+  // cameraInputs is defined after closeup (below); the re-arm effect for
+  // the camera lives there too.
   useEffect(() => {
-    if (storyComplete && !visualComplete) {
-      // let the final receipt/checkpoint appear-animations settle
-      if (settleTimer.current !== null) window.clearTimeout(settleTimer.current);
-      settleTimer.current = window.setTimeout(() => setVisualComplete(true), 1200);
-    } else if (!storyComplete && visualComplete) {
-      setVisualComplete(false);
-    }
-    return () => {
-      if (settleTimer.current !== null) {
-        window.clearTimeout(settleTimer.current);
-        settleTimer.current = null;
-      }
-    };
-  }, [storyComplete, visualComplete]);
+    setCrateSettled(false);
+  }, [crateInputs]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    setSealsSettled(false);
+  }, [sealsInputs]); // eslint-disable-line react-hooks/exhaustive-deps
+  const visualComplete =
+    storyComplete && crateSettled && sealsSettled && cameraSettled;
 
-  // In-page visible-frame timing (defect 8): performance.now() on the
-  // first rendered frame where Beat 1 is visibly present (T0) and on the
-  // first rendered frame where the VISUAL completion predicate holds (T1).
-  const visualT0Ref = useRef<number | null>(null);
-  const visualT1Ref = useRef<number | null>(null);
-  useEffect(() => {
-    if (scene.job && visualT0Ref.current === null) {
-      visualT0Ref.current = performance.now();
-    }
-    if (visualComplete && visualT1Ref.current === null) {
-      visualT1Ref.current = performance.now();
-    }
-  });
+  // CP3 §5: actual R3F-frame timing. FrameTimer sits inside the Canvas and
+  // captures performance.now() on the first R3F frame where the Beat 1
+  // persistent job is visible (T0) and on the first R3F frame where final
+  // visual readiness holds (T1).
+  const [visualT0Ms, setVisualT0Ms] = useState<number | null>(null);
+  const [visualT1Ms, setVisualT1Ms] = useState<number | null>(null);
+  const visualDurationMs =
+    visualT0Ms != null && visualT1Ms != null
+      ? visualT1Ms - visualT0Ms
+      : null;
 
   // Failed-reach trigger (defect 3, latched per defect 5): when the real
-  // pre-grant attempt event is revealed, latch the reach for its full
-  // ~1.5s choreography. Later event arrival must not truncate it.
+  // Failed-reach lifecycle (CP3 §2): deterministic state machine.
+  // false → true on the attempt event (stable identity) → full
+  // choreography → false on scene-reported completion.
+  const [reach, setReach] = useState<ReachLifecycleState>(REACH_IDLE);
   const lastRevealed = revealed[revealed.length - 1] as
-    | (WEvent & { detail?: Record<string, unknown>; summary?: string })
+    | (WEvent & { event_id?: string; detail?: Record<string, unknown>; summary?: string })
     | undefined;
-  const reachTriggered =
+  const attemptEventId =
     lastRevealed?.kind === "activity" &&
-    (lastRevealed.detail?.helper === "juniper") &&
+    lastRevealed.detail?.helper === "juniper" &&
     typeof lastRevealed.detail?.attempted_action === "string" &&
-    /reaches for the job/i.test(lastRevealed.summary ?? "");
-  const [reachLatched, setReachLatched] = useState(false);
-  const reachTimer = useRef<number | null>(null);
+    /reaches for the job/i.test(lastRevealed.summary ?? "")
+      ? lastRevealed.event_id ?? `seq-${lastRevealed.seq}`
+      : null;
   useEffect(() => {
-    if (reachTriggered && !reachLatched) {
-      setReachLatched(true);
-      if (reachTimer.current !== null) window.clearTimeout(reachTimer.current);
-      // full choreography outlives any subsequently revealed event
-      reachTimer.current = window.setTimeout(() => setReachLatched(false), 1700);
+    if (attemptEventId) {
+      setReach((r) => nextReachState(r, { type: "attempt_revealed", eventId: attemptEventId }));
     }
-    return () => {
-      if (reachTimer.current !== null) {
-        window.clearTimeout(reachTimer.current);
-        reachTimer.current = null;
-      }
-    };
-  }, [reachTriggered, reachLatched]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attemptEventId]);
 
   // debug hook for capture scripts: logical state only, no DOM internals.
-  // visualT0Ms/visualT1Ms are performance.now() on actual rendered frames.
+  // visualT0Ms/visualT1Ms are performance.now() on actual R3F frames.
   useEffect(() => {
-    const t0 = visualT0Ref.current;
-    const t1 = visualT1Ref.current;
     (window as unknown as { __authorityDebug?: unknown }).__authorityDebug = {
       seq: maxSeq,
       eventCount: scene.eventCount,
       jobVisible: scene.job != null,
       storyComplete,
       visualComplete,
-      visualT0Ms: t0,
-      visualT1Ms: t1,
-      visualDurationMs: t0 !== null && t1 !== null ? t1 - t0 : null,
+      crateSettled,
+      sealsSettled,
+      cameraSettled,
+      visualT0Ms,
+      visualT1Ms,
+      visualDurationMs,
       job: scene.job ? { id: scene.job.jobId, title: scene.job.title } : null,
       workers: scene.workers.map((w) => ({
         id: w.workerId, active: w.active, admitted: w.admitted,
@@ -284,6 +318,15 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
     return closeupFor(revealed, last);
   }, [revealed]);
 
+  // CP3 §4: once the story is complete, the camera returns to the wide
+  // view (no closeup required) so the settle can engage.
+  const effectiveCloseup = storyComplete ? null : closeup;
+  // re-arm the camera settle when its visual inputs change
+  const cameraInputs = `${effectiveCloseup}:${VIZ_SMALL_SCREEN ? "p" : "d"}`;
+  useEffect(() => {
+    setCameraSettled(false);
+  }, [cameraInputs]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div className="viz-root">
       <header className="viz-topbar">
@@ -298,22 +341,37 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
       {streamError && <div className="viz-err">{streamError}</div>}
       <main className="viz-stage">
         <VizCanvas>
+          <FrameTimer
+            jobVisible={scene.job != null}
+            complete={visualComplete}
+            onT0={() => setVisualT0Ms((v) => (v === null ? performance.now() : v))}
+            onT1={() => setVisualT1Ms((v) => (v === null ? performance.now() : v))}
+          />
           <CameraRig
             view="world"
             workers={scene.workers}
             followWorkerId={null}
-            closeup={closeup}
+            closeup={effectiveCloseup}
             portrait={VIZ_SMALL_SCREEN}
+            onCameraSettled={() => setCameraSettled(true)}
           />
           <OwnerObelisk />
-          <JobCrate job={scene.job} receipts={scene.receipts} checkpoints={visibleCheckpoints} />
+          <JobCrate
+            job={scene.job}
+            receipts={scene.receipts}
+            checkpoints={visibleCheckpoints}
+            onSettled={() => setCrateSettled(true)}
+          />
           <SideTable proposals={scene.proposals} />
           <WorkerSwarm
             workers={scene.workers}
             selectedId={null}
             onSelect={() => {}}
             homeFn={authorityWorkerHome}
-            reachingWorkerId={reachLatched ? "juniper" : null}
+            reachingWorkerId={reach.active ? "juniper" : null}
+            onReachComplete={() =>
+              setReach((r) => nextReachState(r, { type: "choreography_complete" }))
+            }
           />
           <AuthoritySeals
             authorities={scene.authorities}
@@ -321,10 +379,14 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
             selectedMandate={null}
             onSelect={() => {}}
             homeFn={authorityWorkerHome}
+            onSealsSettled={() => setSealsSettled(true)}
           />
-          <ReceiverGate proposals={scene.proposals} onSelectGate={() => {}} />
+          <ReceiverGate
+            proposals={scene.proposals.filter((p) => proposalVisibility(p).gateDecision)}
+            onSelectGate={() => {}}
+          />
           <ProposalPackets
-            proposals={scene.proposals.filter((p) => !p.unadmitted)}
+            proposals={scene.proposals.filter((p) => proposalVisibility(p).gateTravel)}
             workers={scene.workers}
             onSelect={() => {}}
             homeFn={authorityWorkerHome}

@@ -33,6 +33,7 @@ export function WorkerSwarm({
   onSelect,
   homeFn = workerHome,
   reachingWorkerId = null,
+  onReachComplete,
 }: {
   workers: VizWorker[];
   selectedId: string | null;
@@ -43,15 +44,22 @@ export function WorkerSwarm({
    *  crate and returns to neutral. Used only for the failed pre-grant
    *  attempt — the crate never moves, no receipt appears. */
   reachingWorkerId?: string | null;
+  /** Scene-owned lifecycle: called exactly once when the reach
+   *  choreography completes. */
+  onReachComplete?: (workerId: string) => void;
 }) {
   const bodyRef = useRef<THREE.InstancedMesh>(null);
   const eyeRef = useRef<THREE.InstancedMesh>(null);
   const n = workers.length;
   // entrance choreography: first-appearance wall-clock per worker
   const enteredAtRef = useRef(new Map<string, number>());
+  // CP3 §3: inactive visitors get their own entrance clock; they slide in
+  // and complete the entrance while still inactive (no authority implied)
+  const visitorEnteredAtRef = useRef(new Map<string, number>());
   const nowS = () => performance.now() / 1000;
   const ENTER_SECS = 1.1;
   const ENTER_FROM_X = -8.5;
+  const VISITOR_ENTER_SECS = 1.0;
   const easeOutCubic = (k: number) => 1 - Math.pow(1 - k, 3);
 
   const homes = useMemo(
@@ -83,13 +91,18 @@ export function WorkerSwarm({
   // failed-reach choreography: wall-clock start per trigger
   const reachT0Ref = useRef<number | null>(null);
   const reachForRef = useRef<string | null>(null);
+  const reachDoneRef = useRef(false);
+  const onReachCompleteRef = useRef(onReachComplete);
+  onReachCompleteRef.current = onReachComplete;
   useLayoutEffect(() => {
     if (reachingWorkerId && reachForRef.current !== reachingWorkerId) {
       reachForRef.current = reachingWorkerId;
       reachT0Ref.current = nowS();
+      reachDoneRef.current = false;
     } else if (!reachingWorkerId) {
       reachForRef.current = null;
       reachT0Ref.current = null;
+      reachDoneRef.current = false;
     }
   }, [reachingWorkerId]);
 
@@ -97,11 +110,16 @@ export function WorkerSwarm({
   useLayoutEffect(() => {
     const t = nowS();
     const m = enteredAtRef.current;
+    const vm = visitorEnteredAtRef.current;
     for (const w of workers) {
       if (!m.has(w.workerId)) m.set(w.workerId, t);
+      if (!w.admitted && !vm.has(w.workerId)) vm.set(w.workerId, t);
     }
     for (const id of [...m.keys()]) {
       if (!workers.some((w) => w.workerId === id)) m.delete(id);
+    }
+    for (const id of [...vm.keys()]) {
+      if (!workers.some((w) => w.workerId === id && !w.admitted)) vm.delete(id);
     }
   }, [workers]);
 
@@ -111,9 +129,21 @@ export function WorkerSwarm({
     if (t0 == null) return 1;
     return Math.min(1, (nowS() - t0) / ENTER_SECS);
   };
+  /** CP3 §3: visitor entrance progress 0..1. Unadmitted figures slide in
+   *  to the visitor spot and complete the entrance while still inactive. */
+  const visitorEnterK = (workerId: string): number => {
+    const t0 = visitorEnteredAtRef.current.get(workerId);
+    if (t0 == null) return 1;
+    return Math.min(1, (nowS() - t0) / VISITOR_ENTER_SECS);
+  };
   const enterX = (workerId: string, homeX: number): number => {
     const k = easeOutCubic(Math.max(0, enterK(workerId)));
     return ENTER_FROM_X + (homeX - ENTER_FROM_X) * k;
+  };
+  /** Visitor entrance: x lerps from the west edge to VISITOR_POS. */
+  const visitorEnterX = (workerId: string): number => {
+    const k = easeOutCubic(Math.max(0, visitorEnterK(workerId)));
+    return ENTER_FROM_X + (VISITOR_POS[0] - ENTER_FROM_X) * k;
   };
 
   useLayoutEffect(() => {
@@ -153,15 +183,33 @@ export function WorkerSwarm({
     let reachK = -1;
     if (reachT0Ref.current != null && reachingWorkerId) {
       const age = nowS() - reachT0Ref.current;
-      if (age < REACH_SECS) reachK = age / REACH_SECS;
+      if (age < REACH_SECS) {
+        reachK = age / REACH_SECS;
+      } else if (!reachDoneRef.current) {
+        // CP3 §2: full choreography complete — report once so the
+        // lifecycle returns to false from the scene itself
+        reachDoneRef.current = true;
+        const doneId = reachingWorkerId;
+        queueMicrotask(() => onReachCompleteRef.current?.(doneId));
+      }
     }
     for (let i = 0; i < n; i++) {
       const isReaching =
         reachK >= 0 && workers[i].workerId === reachingWorkerId;
       if (!workers[i].active && !isReaching) continue;
-      const bob = Math.sin(t * 1.6 + phases[i]) * 0.05;
-      let x = enterX(workers[i].workerId, homes[i][0]);
-      let z = homes[i][2];
+      // CP3 §3: inactive visitors complete a visible entrance; the idle
+      // bob stays gated on entrance completion so motion means arrival
+      const vK = workers[i].admitted ? 1 : visitorEnterK(workers[i].workerId);
+      const bob = vK >= 1 ? Math.sin(t * 1.6 + phases[i]) * 0.05 : 0;
+      let x: number;
+      let z: number;
+      if (workers[i].admitted) {
+        x = enterX(workers[i].workerId, homes[i][0]);
+        z = homes[i][2];
+      } else {
+        x = visitorEnterX(workers[i].workerId);
+        z = VISITOR_POS[2];
+      }
       let lean = 0;
       if (reachK >= 0 && workers[i].workerId === reachingWorkerId) {
         // mechanical reach toward the crate: out, hold, back. The crate

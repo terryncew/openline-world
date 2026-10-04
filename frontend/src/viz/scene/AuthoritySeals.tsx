@@ -39,6 +39,7 @@ export function AuthoritySeals({
   selectedMandate,
   onSelect,
   homeFn = workerHome,
+  onSealsSettled,
 }: {
   authorities: VizAuthority[];
   workers: VizWorker[];
@@ -47,6 +48,9 @@ export function AuthoritySeals({
   /** Override worker positioning (authority-view staging). Defaults to
    *  the shared workerHome layout. */
   homeFn?: (index: number, workerId: string) => [number, number, number];
+  /** Scene-owned (CP3 §4): called when all active seals (incl. Juniper's)
+   *  have finished their descent animation. */
+  onSealsSettled?: () => void;
 }) {
   const activeRef = useRef<THREE.InstancedMesh>(null);
   const revokedRef = useRef<THREE.InstancedMesh>(null);
@@ -59,6 +63,20 @@ export function AuthoritySeals({
   // wall-clock first-appearance, for descent/sink choreography only
   const bornAtRef = useRef(new Map<string, number>());
   const revokedAtRef = useRef(new Map<string, number>());
+  // CP3 §4: report once when all active seals have descended
+  const sealsSettledRef = useRef(false);
+  const onSealsSettledRef = useRef(onSealsSettled);
+  onSealsSettledRef.current = onSealsSettled;
+  // stable key: re-arm only when the seal set actually changes, not on
+  // every parent render (array identity is not stable)
+  const sealsKey = authorities
+    .map((a) => `${a.mandateId}:${a.active}`)
+    .join("|");
+  const sealsKeyRef = useRef(sealsKey);
+  if (sealsKeyRef.current !== sealsKey) {
+    sealsKeyRef.current = sealsKey;
+    sealsSettledRef.current = false;
+  }
 
   const workerIndex = useMemo(() => {
     const m = new Map<string, number>();
@@ -143,6 +161,7 @@ export function AuthoritySeals({
     const t = nowS();
     const aMesh = activeRef.current;
     const rMesh = revokedRef.current;
+    let allSettled = true;
     if (aMesh && active.length <= 128) {
       for (let i = 0; i < active.length; i++) {
         const a = active[i];
@@ -151,6 +170,7 @@ export function AuthoritySeals({
         animatedPos(a.mandateId, target, true, t, tmpV);
         const b0 = bornAtRef.current.get(a.mandateId);
         const bornK = b0 == null ? 1 : Math.min(1, (t - b0) / DESCENT_SECS);
+        if (bornK < 1) allSettled = false;
         dummy.position.copy(tmpV);
         dummy.rotation.set(Math.PI / 2.4, t * 0.5 + i, 0);
         dummy.scale.setScalar(
@@ -183,6 +203,11 @@ export function AuthoritySeals({
         rMesh.setMatrixAt(i, dummy.matrix);
       }
       rMesh.instanceMatrix.needsUpdate = true;
+    }
+    // CP3 §4: all active seals descended
+    if (!sealsSettledRef.current && allSettled && active.length >= 0) {
+      sealsSettledRef.current = true;
+      queueMicrotask(() => onSealsSettledRef.current?.());
     }
   });
 

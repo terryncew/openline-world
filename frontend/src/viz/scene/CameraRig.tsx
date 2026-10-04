@@ -60,6 +60,7 @@ export function CameraRig({
   followWorkerId,
   closeup,
   portrait = false,
+  onCameraSettled,
 }: {
   view: VizCameraView;
   workers: VizWorker[];
@@ -68,6 +69,9 @@ export function CameraRig({
   closeup: VizCloseup;
   /** Authored portrait framing for narrow screens. */
   portrait?: boolean;
+  /** Scene-owned (CP3 §4): called when no required closeup is active and
+   *  camera position + look target are within authored framing tolerance. */
+  onCameraSettled?: () => void;
 }) {
   const { camera } = useThree();
   const basePos = portrait ? PORTRAIT_POS : WORLD_POS;
@@ -75,6 +79,10 @@ export function CameraRig({
   const target = useRef(new THREE.Vector3(...baseTgt));
   const posGoal = useRef(new THREE.Vector3(...basePos));
   const tgtGoal = useRef(new THREE.Vector3(...baseTgt));
+  // CP3 §4: scene-owned camera settle state
+  const camSettledRef = useRef(false);
+  const onCameraSettledRef = useRef(onCameraSettled);
+  onCameraSettledRef.current = onCameraSettled;
 
   const workerIndex = useMemo(() => {
     const m = new Map<string, number>();
@@ -115,13 +123,27 @@ export function CameraRig({
     }
     posGoal.current.set(...p);
     tgtGoal.current.set(...g);
-    camera.position.x = THREE.MathUtils.damp(camera.position.x, posGoal.current.x, 2.2, dtc);
-    camera.position.y = THREE.MathUtils.damp(camera.position.y, posGoal.current.y, 2.2, dtc);
-    camera.position.z = THREE.MathUtils.damp(camera.position.z, posGoal.current.z, 2.2, dtc);
-    target.current.x = THREE.MathUtils.damp(target.current.x, tgtGoal.current.x, 2.2, dtc);
-    target.current.y = THREE.MathUtils.damp(target.current.y, tgtGoal.current.y, 2.2, dtc);
-    target.current.z = THREE.MathUtils.damp(target.current.z, tgtGoal.current.z, 2.2, dtc);
+    camera.position.x = THREE.MathUtils.damp(camera.position.x, posGoal.current.x, 8.0, dtc);
+    camera.position.y = THREE.MathUtils.damp(camera.position.y, posGoal.current.y, 8.0, dtc);
+    camera.position.z = THREE.MathUtils.damp(camera.position.z, posGoal.current.z, 8.0, dtc);
+    target.current.x = THREE.MathUtils.damp(target.current.x, tgtGoal.current.x, 8.0, dtc);
+    target.current.y = THREE.MathUtils.damp(target.current.y, tgtGoal.current.y, 8.0, dtc);
+    target.current.z = THREE.MathUtils.damp(target.current.z, tgtGoal.current.z, 8.0, dtc);
     camera.lookAt(target.current);
+    // CP3 §4: settled when no required closeup is active and the camera is
+    // within authored framing tolerance. Damp never exactly reaches the
+    // goal; 0.02 world-units is well inside the legible band.
+    const noCloseup = !(view === "world" && closeup !== null);
+    const settled =
+      noCloseup &&
+      camera.position.distanceTo(posGoal.current) < 0.02 &&
+      target.current.distanceTo(tgtGoal.current) < 0.02;
+    if (settled && !camSettledRef.current) {
+      camSettledRef.current = true;
+      queueMicrotask(() => onCameraSettledRef.current?.());
+    } else if (!settled && camSettledRef.current) {
+      camSettledRef.current = false;
+    }
   });
 
   return null;

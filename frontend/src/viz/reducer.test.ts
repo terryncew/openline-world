@@ -312,6 +312,7 @@ test("14: decision_requested=false is unadmitted from first appearance", () => {
   assert.equal(s.proposals.length, 1);
   assert.equal(s.proposals[0].status, "in-flight");
   assert.equal(s.proposals[0].unadmitted, true); // immediately, no later event needed
+  assert.equal(s.proposals[0].decisionRequested, false); // structural flag preserved
   // and it never receives a verdict: a later decision for ANOTHER proposal
   // does not touch it
   reset();
@@ -326,6 +327,7 @@ test("14: decision_requested=false is unadmitted from first appearance", () => {
   assert.equal(unad.status, "in-flight");
   assert.equal(unad.unadmitted, true);
   const decided = s2.proposals.find((x) => x.action === "notes.read");
+  assert.ok(decided);
   assert.equal(decided.status, "allowed");
   assert.equal(decided.unadmitted, false);
 });

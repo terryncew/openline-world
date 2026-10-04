@@ -107,6 +107,8 @@ export interface VizProposal {
   seq: number;
   status: "in-flight" | "allowed" | "stopped";
   unadmitted: boolean;
+  /** Structural flag from the event: decision_requested=false. */
+  decisionRequested: boolean;
   decisionSeq: number | null;
   reasonCodes: string[];
   /** The proposal is a claim: agent-reported. */
