@@ -302,3 +302,43 @@ test("13: full authority-demo beat sequence maps to state", () => {
   assert.equal(s.receipts.length, 3);           // history survives replacement
   assert.equal(s.receipts.filter((r) => r.decision === "STOPPED").length, 1);
 });
+
+test("14: decision_requested=false is unadmitted from first appearance", () => {
+  reset();
+  const p = ev("proposal", "agent-reported",
+    { helper: "wren", action: "notes.rewrite", decision_requested: false },
+    "wren proposes notes.rewrite");
+  const s = reduceEvents([p]);
+  assert.equal(s.proposals.length, 1);
+  assert.equal(s.proposals[0].status, "in-flight");
+  assert.equal(s.proposals[0].unadmitted, true); // immediately, no later event needed
+  // and it never receives a verdict: a later decision for ANOTHER proposal
+  // does not touch it
+  reset();
+  const s2 = reduceEvents([
+    ev("proposal", "agent-reported",
+      { helper: "wren", action: "notes.rewrite", decision_requested: false }),
+    proposal("wren", "notes.read"),
+    decision("wren", "notes.read", "ALLOWED"),
+  ]);
+  const unad = s2.proposals.find((x) => x.action === "notes.rewrite");
+  assert.ok(unad);
+  assert.equal(unad.status, "in-flight");
+  assert.equal(unad.unadmitted, true);
+  const decided = s2.proposals.find((x) => x.action === "notes.read");
+  assert.equal(decided.status, "allowed");
+  assert.equal(decided.unadmitted, false);
+});
+
+test("15: ordinary proposals keep existing behavior (no flag)", () => {
+  reset();
+  const s = reduceEvents([proposal("wren", "notes.read")]);
+  assert.equal(s.proposals[0].unadmitted, false); // awaiting decision, travels
+  reset();
+  const s2 = reduceEvents([
+    proposal("wren", "notes.read"),
+    decision("wren", "notes.read", "ALLOWED"),
+  ]);
+  assert.equal(s2.proposals[0].status, "allowed");
+  assert.equal(s2.proposals[0].unadmitted, false);
+});

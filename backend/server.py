@@ -83,6 +83,13 @@ class Workshop:
         self.authority_step = 0
         self.authority_finished = False
         self.review: dict[str, Any] | None = None
+        # Deterministic workshop job effect state (WORLD-AUTHORITY-001,
+        # defect 1 repair). SEPARATE from authorization: the gate evaluates
+        # and returns a signed receipt; it executes nothing. When the
+        # receiver ALLOWED an action, this separate executor applies the
+        # synthetic job effect. An ALLOWED receipt is authorization, not
+        # proof of execution.
+        self.job_effects: list[dict[str, Any]] = []
         self._boot(boot_mandate=boot_mandate)
 
     # -- boot -----------------------------------------------------------
@@ -163,10 +170,26 @@ class Workshop:
                       task_id=TASK_ID, summary=plain,
                       detail={"helper": helper, "action": action, "decision": decision,
                               "reason_codes": list(receipt.get("reason_codes", []))})
-        self.log.emit(source="receiver", kind="receipt", provenance="receiver-signed",
+        receipt_event = self.log.emit(source="receiver", kind="receipt", provenance="receiver-signed",
                       task_id=TASK_ID,
                       summary=f"Signed receipt recorded: {decision} for {action}.",
                       detail={"receipt": _public_receipt(receipt)})
+        # The gate evaluated; it executed nothing. If the receiver ALLOWED,
+        # the SEPARATE workshop executor now applies the synthetic job
+        # effect. Authorization and execution stay apart.
+        if decision == "ALLOWED":
+            self.apply_job_effect(helper, action, seq=receipt_event["seq"])
+
+    def apply_job_effect(self, helper: str, action: str, seq: int) -> dict[str, Any]:
+        """Workshop executor: apply the synthetic job effect to the persistent
+        task state. Called only after the receiver ALLOWED the action.
+        This is actual backend state mutation, tested directly. The gate
+        (WorkshopGate.request_decision) remains evaluation-only."""
+        checkpoint = len(self.job_effects) + 1
+        effect = {"seq": seq, "helper": helper, "action": action,
+                  "checkpoint": checkpoint, "task_id": TASK_ID}
+        self.job_effects.append(effect)
+        return effect
 
     def _s_propose_write(self) -> None:
         self._propose("wren", "notes.write")
@@ -289,14 +312,16 @@ class Workshop:
 
     def _a_unadmitted(self) -> None:
         # A newer proposal that exists but is never admitted: the claim is
-        # recorded (agent-reported), but no decision is ever requested from
-        # the gate, so it stays in-flight forever. The visualization rests
-        # it on the side table — never stamped, never acted on.
+        # recorded (agent-reported) with decision_requested=false encoded
+        # structurally on the event — the backend knows no decision will
+        # ever be requested. The visualization rests it on the side table
+        # from its first appearance: never stamped, never acted on.
         self.log.emit(
             source="agent", kind="proposal", provenance="agent-reported",
             task_id=TASK_ID,
             summary="Wren proposes: notes.rewrite. No decision requested.",
-            detail={"helper": "wren", "action": "notes.rewrite"},
+            detail={"helper": "wren", "action": "notes.rewrite",
+                    "decision_requested": False},
         )
 
     def _a_revoke_wren(self) -> None:
@@ -325,14 +350,31 @@ class Workshop:
         )
 
     def _a_juniper_reaches(self) -> None:
-        # An attempt that never becomes a proposal: nothing travels to the
-        # gate, nothing is decided, no receipt is minted.
+        # Juniper's pre-grant attempt: actually exercise the existing
+        # WorkshopGate path. Juniper has no mandate, so the real outcome is
+        # HELPER_UNKNOWN raised before any evaluation. Recorded honestly:
+        # no decision event, no receipt minted, no job effect applied.
+        # The gate is not modified to manufacture a prettier refusal.
         self.log.emit(
             source="agent", kind="activity", provenance="agent-reported",
             task_id=TASK_ID,
-            summary="Juniper reaches for the job \u2014 nothing happens.",
+            summary="Juniper reaches for the job.",
             detail={"helper": "juniper"},
         )
+        try:
+            self.gate.request_decision("juniper", "notes.write")
+        except WalletError as e:
+            code = e.code if isinstance(e.code, str) else "UNKNOWN"
+            self.log.emit(
+                source="receiver", kind="note", provenance="receiver-signed",
+                task_id=TASK_ID,
+                summary=f"No decision for Juniper: {code}. No receipt, no job effect.",
+                detail={"helper": "juniper", "action": "notes.write",
+                        "outcome": code},
+            )
+            return
+        # Unreachable in this demo (the gate raises HELPER_UNKNOWN), but if
+        # the gate ever did evaluate, its real outcome would stand.
 
     def _a_onboard_juniper(self) -> None:
         info = self.gate.onboard_helper("juniper", WREN_SCOPES)
@@ -430,6 +472,10 @@ class Workshop:
             "gate": {"gate_id": self.gate.gate_id,
                      "gate_public_key": self.gate.gate.public_key,
                      "principal_id": self.gate.wallet.principal_id},
+            "job_state": {
+                "task_id": TASK_ID,
+                "checkpoints": [dict(c) for c in self.job_effects],
+            },
             "session": self.gate.data_dir.name,
             "notice": ("Trusted-operator local preview: this interface does not "
                        "authenticate separate people."),

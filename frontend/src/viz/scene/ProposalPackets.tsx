@@ -96,10 +96,13 @@ export function ProposalPackets({
   proposals,
   workers,
   onSelect,
+  homeFn = workerHome,
 }: {
   proposals: VizProposal[];
   workers: VizWorker[];
   onSelect: (id: string | null) => void;
+  /** Override worker positioning (authority-view staging). */
+  homeFn?: (index: number, workerId: string) => [number, number, number];
 }) {
   const ref = useRef<THREE.InstancedMesh>(null);
 
@@ -122,17 +125,17 @@ export function ProposalPackets({
     () =>
       inFlight.map((p) => {
         const wi = workerIndex.get(p.workerId);
-        return wi == null ? ([0, 0, 0] as [number, number, number]) : workerHome(wi, p.workerId);
+        return wi == null ? ([0, 0, 0] as [number, number, number]) : homeFn(wi, p.workerId);
       }),
-    [inFlight, workerIndex]
+    [inFlight, workerIndex, homeFn]
   );
   const decidedHomes = useMemo(
     () =>
       decided.map((p) => {
         const wi = workerIndex.get(p.workerId);
-        return wi == null ? ([0, 0, 0] as [number, number, number]) : workerHome(wi, p.workerId);
+        return wi == null ? ([0, 0, 0] as [number, number, number]) : homeFn(wi, p.workerId);
       }),
-    [decided, workerIndex]
+    [decided, workerIndex, homeFn]
   );
   const phases = useMemo(
     () => inFlight.map((p) => (hashStr(p.id) % 1000) / 1000),

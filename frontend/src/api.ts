@@ -59,6 +59,16 @@ export interface Snapshot {
   gate: { gate_id: string; gate_public_key: string; principal_id: string };
   session: string;
   notice: string;
+  /** Deterministic workshop job effect state (WORLD-AUTHORITY-001):
+   *  checkpoints applied by the separate executor after ALLOWED decisions.
+   *  Read-only; the gate never writes it. */
+  job_state?: {
+    task_id: string;
+    checkpoints: Array<{
+      seq: number; helper: string; action: string;
+      checkpoint: number; task_id: string;
+    }>;
+  };
 }
 
 async function req(path: string, method: "GET" | "POST" = "GET", body?: unknown): Promise<unknown> {

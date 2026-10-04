@@ -27,9 +27,11 @@
  *     admitted=false: it carries no authority, never originates a
  *     proposal visual, never receives a receipt. The mandate-create
  *     upgrades it in place — never a second figure.
- * 10. A proposal renders "unadmitted" ONLY when it is still in-flight and
- *     a later event exists in the stream: the world moved past it without
- *     a decision. It is never stamped, never acted on.
+ * 10. A proposal renders "unadmitted" ONLY when (a) it explicitly
+ *     carries decision_requested=false on the event — unadmitted from its
+ *     first appearance — or (b) it is still in-flight and a later event
+ *     exists in the stream: the world moved past it without a decision.
+ *     It is never stamped, never acted on.
  */
 
 import {
@@ -182,13 +184,18 @@ export function reduceEvents(input: WEvent[]): VizSceneState {
           unrec(ev, kind, "proposal event without helper/action");
           break;
         }
+        // Invariant 10b: a proposal explicitly carrying
+        // decision_requested=false is unadmitted from its first
+        // appearance — the backend knows no decision will ever be
+        // requested. It never travels, never receives a verdict.
+        const noDecision = detail.decision_requested === false;
         state.proposals.push({
           id: ev.event_id,
           workerId: helper,
           action,
           seq: ev.seq,
           status: "in-flight",
-          unadmitted: false, // resolved in the post-pass below (invariant 10)
+          unadmitted: noDecision,
           decisionSeq: null,
           reasonCodes: [],
           provenance, // agent-reported: a claim, not yet a decision

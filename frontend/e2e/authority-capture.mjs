@@ -14,7 +14,14 @@
  *
  * Asserts the logical beat sequence via window.__authorityDebug before
  * capturing: job anchored, wren revoked, juniper admitted, 3 receipts,
- * 1 unadmitted proposal resting.
+ * 2 checkpoints on the same job, 1 unadmitted proposal resting.
+ *
+ * Defect 8: measures browser-visible story timing —
+ *   T0 = first visible Beat 1 job state (__authorityDebug.jobVisible)
+ *   T1 = Beat 7 visibly complete (__authorityDebug.storyComplete:
+ *        Juniper authorized + checkpoint 2 applied + history visible)
+ * Fails unless 27s <= T1-T0 <= 33s. Total video duration reported
+ * separately; the end-card hold and capture startup are not story time.
  */
 import { spawn, execSync } from "node:child_process";
 import { mkdirSync } from "node:fs";
@@ -85,15 +92,27 @@ async function main() {
     page.on("pageerror", (e) => errors.push(String(e)));
     await page.goto(`http://127.0.0.1:${VITE_PORT}/?view=authority`, { waitUntil: "networkidle" });
 
-    // wait for the demo to complete AND the paced reveal to drain.
-    // (the director finishes posting before the reveal holds elapse)
-    await page.waitForFunction(
-      () => window.__authorityDebug
-        && window.__authorityDebug.demoDone === true
-        && window.__authorityDebug.eventCount >= 18,
-      null, { timeout: 120000 }
+    // wait for the demo to complete AND the paced reveal to drain,
+    // measuring browser-visible story timing (defect 8).
+    let T0 = null, T1 = null;
+    const storyStart = Date.now();
+    for (;;) {
+      const dbg = await page.evaluate(() => window.__authorityDebug);
+      if (dbg) {
+        if (dbg.jobVisible && T0 === null) T0 = Date.now();
+        if (dbg.storyComplete && T1 === null) { T1 = Date.now(); break; }
+      }
+      if (Date.now() - storyStart > 120000)
+        throw new Error("timeout waiting for storyComplete");
+      await sleep(250);
+    }
+    const storySecs = (T1 - T0) / 1000;
+    console.log(`story T0=${new Date(T0).toISOString()} T1=${new Date(T1).toISOString()} duration=${storySecs.toFixed(1)}s`);
+    assert.ok(
+      storySecs >= 27 && storySecs <= 33,
+      `story duration ${storySecs.toFixed(1)}s outside frozen 27-33s band`
     );
-    // let the ending frame settle
+    // let the end card settle
     await sleep(2500);
 
     const dbg = await page.evaluate(() => window.__authorityDebug);
@@ -103,6 +122,11 @@ async function main() {
       ["juniper:admitted:active", "wren:admitted:inactive"]
     );
     assert.equal(dbg.receipts.length, 3, "three receipts survive");
+    assert.equal(dbg.checkpoints.length, 2, "two checkpoints applied");
+    assert.deepEqual(
+      dbg.checkpoints.map((c) => `${c.checkpoint}:${c.helper}`),
+      ["1:wren", "2:juniper"]
+    );
     assert.equal(dbg.unadmitted.length, 1, "one unadmitted proposal rests");
     assert.equal(dbg.unadmitted[0].action, "notes.rewrite");
     assert.equal(errors.length, 0, `page errors: ${errors.join("; ")}`);
@@ -110,9 +134,12 @@ async function main() {
     await page.screenshot({ path: resolve(SHOTS, "authority-desktop.png") });
     const videoPath = await page.video().path();
     await ctx.close();
-    // move the video to its canonical name
+    // move the video to its canonical name; report total duration separately
     execSync(`mv "${videoPath}" "${resolve(SHOTS, "authority-demo.webm")}"`);
-    console.log("desktop still + video captured; beats verified");
+    const totalSecs = Number(execSync(
+      `ffprobe -v error -show_entries format=duration -of csv=p=0 "${resolve(SHOTS, "authority-demo.webm")}"`
+    ).toString().trim());
+    console.log(`desktop still + video captured; beats verified; total video=${totalSecs.toFixed(1)}s (story=${storySecs.toFixed(1)}s)`);
 
     // ---- portrait: still ----
     const mctx = await browser.newContext({
@@ -126,13 +153,14 @@ async function main() {
     await mpage.goto(`http://127.0.0.1:${VITE_PORT}/?view=authority`, { waitUntil: "networkidle" });
     await mpage.waitForFunction(
       () => window.__authorityDebug
-        && window.__authorityDebug.demoDone === true
+        && window.__authorityDebug.storyComplete === true
         && window.__authorityDebug.eventCount >= 18,
       null, { timeout: 120000 }
     );
     await sleep(2500);
     const mdbg = await mpage.evaluate(() => window.__authorityDebug);
     assert.equal(mdbg.receipts.length, 3);
+    assert.equal(mdbg.checkpoints.length, 2, "two checkpoints visible in portrait");
     assert.equal(merrors.length, 0, `mobile page errors: ${merrors.join("; ")}`);
     await mpage.screenshot({ path: resolve(SHOTS, "authority-portrait.png") });
     await mctx.close();

@@ -334,3 +334,62 @@ class TestWhatChangedContract(unittest.TestCase):
                             if e["detail"].get("helper") == "juniper"
                             and e["kind"] in ("proposal", "decision")}
             self.assertEqual(juniper_acts, {("juniper", "notes.write")})
+
+    def test_gate_evaluation_is_effect_free(self):
+        # Defect 1: an ALLOWED receipt from the gate alone must NOT mutate
+        # job progress. Only the separate workshop executor does.
+        with tempfile.TemporaryDirectory() as d:
+            w = Workshop(Path(d))
+            receipt = w.gate.request_decision("wren", "notes.write")
+            self.assertEqual(receipt["decision"], "ALLOWED")
+            self.assertEqual(w.job_effects, [])
+
+    def test_authority_demo_job_checkpoints(self):
+        # Defect 1: Wren's ALLOWED notes.write -> checkpoint 1; revocation
+        # leaves it intact; Juniper's ALLOWED notes.write -> checkpoint 2
+        # on the SAME job. Ordered history survives worker replacement.
+        with tempfile.TemporaryDirectory() as d:
+            w = Workshop(Path(d), boot_mandate=False)
+            while not w.advance_authority_demo()["finished"]:
+                pass
+            cps = w.job_effects
+            self.assertEqual(len(cps), 2)
+            self.assertEqual(
+                [(c["checkpoint"], c["helper"], c["action"]) for c in cps],
+                [(1, "wren", "notes.write"), (2, "juniper", "notes.write")])
+            self.assertEqual(cps[0]["task_id"], cps[1]["task_id"])
+            # checkpoint seqs are ordered and match their receipt events
+            self.assertLess(cps[0]["seq"], cps[1]["seq"])
+            evs = w.log.replay(0)
+            # stopped post-revocation attempt created no checkpoint
+            stopped = [e for e in evs if e["kind"] == "decision"
+                       and e["detail"]["decision"] == "STOPPED"]
+            self.assertEqual(len(stopped), 1)
+            self.assertFalse(any(c["helper"] == "wren" and c["checkpoint"] > 1
+                                 for c in cps))
+            # snapshot exposes the checkpoints read-only
+            snap = w.snapshot()
+            self.assertEqual(len(snap["job_state"]["checkpoints"]), 2)
+
+    def test_pre_grant_attempt_no_receipt_no_progress(self):
+        # Defect 2: Juniper's pre-grant continuation attempt exercises the
+        # real gate path -> HELPER_UNKNOWN. Honestly recorded; no receipt
+        # minted, no decision event, no job effect.
+        with tempfile.TemporaryDirectory() as d:
+            w = Workshop(Path(d), boot_mandate=False)
+            for _ in range(8):  # through "Juniper reaches for the job"
+                w.advance_authority_demo()
+            evs = w.log.replay(0)
+            honest = [e for e in evs if e["detail"].get("outcome") == "HELPER_UNKNOWN"]
+            self.assertEqual(len(honest), 1)
+            juniper_receipts = [
+                e for e in evs if e["kind"] == "receipt"
+                and e["detail"]["receipt"]["subject_id"] == "juniper"]
+            self.assertEqual(juniper_receipts, [])
+            juniper_decisions = [
+                e for e in evs if e["kind"] == "decision"
+                and e["detail"].get("helper") == "juniper"]
+            self.assertEqual(juniper_decisions, [])
+            # no job effect from Juniper's attempt (wren's checkpoint 1
+            # from step 3 legitimately exists)
+            self.assertFalse(any(c["helper"] == "juniper" for c in w.job_effects))

@@ -38,11 +38,15 @@ export function AuthoritySeals({
   workers,
   selectedMandate,
   onSelect,
+  homeFn = workerHome,
 }: {
   authorities: VizAuthority[];
   workers: VizWorker[];
   selectedMandate: string | null;
   onSelect: (mandateId: string | null) => void;
+  /** Override worker positioning (authority-view staging). Defaults to
+   *  the shared workerHome layout. */
+  homeFn?: (index: number, workerId: string) => [number, number, number];
 }) {
   const activeRef = useRef<THREE.InstancedMesh>(null);
   const revokedRef = useRef<THREE.InstancedMesh>(null);
@@ -70,10 +74,10 @@ export function AuthoritySeals({
     for (const a of authorities) {
       const wi = workerIndex.get(a.workerId) ?? 0;
       const w = workers[wi];
-      m.set(a.mandateId, w ? workerHome(wi, w.workerId) : ([0, 0, 0] as [number, number, number]));
+      m.set(a.mandateId, w ? homeFn(wi, w.workerId) : ([0, 0, 0] as [number, number, number]));
     }
     return m;
-  }, [authorities, workers, workerIndex]);
+  }, [authorities, workers, workerIndex, homeFn]);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const nowS = () => performance.now() / 1000;

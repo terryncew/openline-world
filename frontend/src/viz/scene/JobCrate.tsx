@@ -14,7 +14,7 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import type { VizJob, VizReceipt, VizProposal } from "../protocol";
+import type { VizJob, VizReceipt, VizProposal, VizCheckpoint } from "../protocol";
 import { CRATE_POS, SIDE_TABLE_POS } from "./layout";
 import { CLAIM_COLOR } from "./ProposalPackets";
 
@@ -23,6 +23,10 @@ const TICKET_COLOR = new THREE.Color("#f5eeda");
 const SEAL_ALLOW = new THREE.Color("#2f6b45");
 const SEAL_STOP = new THREE.Color("#7d2f22");
 const TABLE_COLOR = new THREE.Color("#8d7a5f");
+/** Checkpoint pieces: physical work product, warm brass — visibly not
+ *  receipt seals (flat discs on the ticket). Each applied checkpoint adds
+ *  one piece to the crate. */
+const CHECKPOINT_COLOR = new THREE.Color("#b08d3e");
 
 /** Seal slot on the ticket face, chronological left→right, top→bottom.
  *  The ticket lies on top of the crate (the camera looks down); seals
@@ -38,9 +42,12 @@ function sealSlot(i: number): [number, number, number] {
 export function JobCrate({
   job,
   receipts,
+  checkpoints,
 }: {
   job: VizJob | null;
   receipts: VizReceipt[];
+  /** Visible checkpoints, already filtered to the revealed seq. */
+  checkpoints: VizCheckpoint[];
 }) {
   const sealRefs = useRef<(THREE.Mesh | null)[]>([]);
   // scale-in choreography per seal: first-appearance wall-clock
@@ -117,6 +124,21 @@ export function JobCrate({
           </mesh>
         );
       })}
+      {/* checkpoint pieces: physical work product. Each applied checkpoint
+          adds one brass piece to the crate — Wren's change stays after
+          Wren stops; Juniper's adds to the SAME job. Not receipt seals. */}
+      {checkpoints.map((c, i) => (
+        <group key={`${c.checkpoint}`} position={[-0.45 + i * 0.5, 1.32, -0.32]}>
+          <mesh>
+            <boxGeometry args={[0.32, 0.22, 0.32]} />
+            <meshStandardMaterial color={CHECKPOINT_COLOR} roughness={0.45} metalness={0.5} />
+          </mesh>
+          <mesh position={[0, 0.16, 0]}>
+            <cylinderGeometry args={[0.07, 0.07, 0.1, 12]} />
+            <meshStandardMaterial color={CHECKPOINT_COLOR} roughness={0.4} metalness={0.55} />
+          </mesh>
+        </group>
+      ))}
     </group>
   );
 }

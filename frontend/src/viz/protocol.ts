@@ -160,6 +160,17 @@ export interface VizJob {
   openedSeq: number;
 }
 
+/** A job checkpoint: the workshop executor applied an ALLOWED action to
+ *  the persistent job state. Distinct from the receipt (authorization).
+ *  Carried on the read-only snapshot, filtered by revealed seq in the view
+ *  so the paced reveal never shows future work. */
+export interface VizCheckpoint {
+  seq: number;
+  helper: string;
+  action: string;
+  checkpoint: number;
+}
+
 export interface VizSceneState {
   job: VizJob | null;
   workers: VizWorker[];

@@ -14,10 +14,10 @@
  * is the only thing that POSTs, exactly like the existing demo button.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { VizSceneState, WEvent } from "./protocol";
+import type { VizCheckpoint, VizSceneState, WEvent } from "./protocol";
 import { reduceEvents } from "./reducer";
-import { subscribeLive } from "./source";
-import { runAuthorityDemoScript } from "./director";
+import { fetchSnapshot, subscribeLive } from "./source";
+import { launchAuthorityDemo } from "./director";
 import { revealDelay, isReplacementOnboard } from "./pacing";
 import { VizCanvas, VIZ_SMALL_SCREEN } from "./scene/VizCanvas";
 import { OwnerObelisk } from "./scene/OwnerObelisk";
@@ -27,44 +27,13 @@ import { ReceiverGate } from "./scene/ReceiverGate";
 import { ProposalPackets } from "./scene/ProposalPackets";
 import { JobCrate, SideTable } from "./scene/JobCrate";
 import { CameraRig, type VizCloseup } from "./scene/CameraRig";
+import { authorityWorkerHome } from "./scene/layout";
+import type { Snapshot } from "../api";
 import "./viz.css";
 
-/** Minimal beat captions: the scene works through action, not prose. */
-function beatCaption(events: WEvent[], cursorSeq: number): string {
-  const vis = events.filter((e) => e.seq <= cursorSeq);
-  const last = vis[vis.length - 1];
-  if (!last) return "WORLD-AUTHORITY-001 — the worker can change; the job must not reset.";
-  const d = (last as { detail?: Record<string, unknown> }).detail ?? {};
-  const s = (v: unknown) => (typeof v === "string" ? v : "");
-  switch (last.kind) {
-    case "note":
-      return s(d.job_id)
-        ? "A job exists. It belongs to no worker."
-        : "The worker changed. The job did not reset. The records stayed.";
-    case "mandate":
-      if (d.status === "REVOKED")
-        return "The owner revoked Wren. The seal dies — the records stay.";
-      return s(d.mandate_id).includes("juniper")
-        ? "The owner authorizes Juniper — explicitly, not by inheritance."
-        : "The owner authorizes Wren. Only then does Wren begin.";
-    case "proposal":
-      return s(d.action) === "notes.rewrite"
-        ? "A newer proposal exists. It was never admitted — it stays on the side table."
-        : `${s(d.helper) === "juniper" ? "Juniper" : "Wren"} proposes ${s(d.action)}. A claim — nothing decided yet.`;
-    case "decision":
-      return d.decision === "ALLOWED"
-        ? "The receiver allowed it. The receipt belongs to the job."
-        : "The receiver stopped it. Revoked authority cannot act.";
-    case "receipt":
-      return "Receipt stamped onto the job's ticket. It survives the worker.";
-    case "activity":
-      return /arrives/i.test(last.summary)
-        ? "Juniper arrives — with no authority."
-        : "Juniper reaches for the job. Nothing happens.";
-    default:
-      return last.summary || "…";
-  }
-}
+/** The end card: outside the timed comprehension sequence. The animation
+ *  before this line must carry the meaning itself (defect 7). */
+const END_CARD = "The worker changed. The job did not reset. The records stayed.";
 
 export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
   const [liveEvents, setLiveEvents] = useState<WEvent[]>([]);
@@ -75,7 +44,7 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
   const [replayState, setReplayState] = useState<"live" | "done">("live");
   const [streamError, setStreamError] = useState<string | null>(null);
   const [streamEpoch, setStreamEpoch] = useState(0);
-  const [demoDone, setDemoDone] = useState(false);
+  const [snap, setSnap] = useState<Snapshot | null>(null);
   const stopRef = useRef(false);
   const seenRef = useRef(new Set<string>());
 
@@ -117,26 +86,24 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
   }, [replayState, liveEvents, revealed]);
 
   // auto-run the authority demo on mount (the director owns all POSTs).
-  // StrictMode-safe: the generation counter ensures only the latest mount's
-  // director survives; a stale first run cannot advance after the second
-  // mount resets stopRef.
+  // Defect 6 repair: the launch is deferred by one event-loop turn so a
+  // StrictMode throwaway effect cleans up before any reset POST is issued;
+  // cleanup cancels the pending launch. The generation counter still
+  // guards later advances.
   const autoGen = useRef(0);
   useEffect(() => {
     const gen = ++autoGen.current;
     stopRef.current = false;
-    setDemoDone(false);
-    runAuthorityDemoScript({
+    const cancel = launchAuthorityDemo({
       shouldStop: () => stopRef.current || autoGen.current !== gen,
-      onReset: () => setStreamEpoch((e) => e + 1),
-    })
-      .catch(() => {
-        /* demo errors surface in the main app; the viz stays read-only */
-      })
-      .finally(() => {
-        if (autoGen.current === gen && !stopRef.current) setDemoDone(true);
-      });
+      onReset: () => {
+        setStreamEpoch((e) => e + 1);
+        fetchSnapshot().then(setSnap).catch(() => {});
+      },
+    });
     return () => {
       stopRef.current = true;
+      cancel();
     };
     // run once per mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -145,12 +112,50 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
   const maxSeq = revealed.length ? revealed[revealed.length - 1].seq : 0;
   const scene: VizSceneState = useMemo(() => reduceEvents(revealed), [revealed]);
 
-  // debug hook for capture scripts: logical state only, no DOM internals
+  // Job checkpoints come from the read-only snapshot (the gate never
+  // writes them). Re-fetch when the revealed receipt count changes, then
+  // filter to the revealed seq so the paced view never shows future work.
+  const receiptCount = scene.receipts.length;
+  useEffect(() => {
+    fetchSnapshot().then(setSnap).catch(() => {});
+  }, [receiptCount]);
+  const visibleCheckpoints: VizCheckpoint[] = useMemo(() => {
+    const all = snap?.job_state?.checkpoints ?? [];
+    return all
+      .filter((c) => c.seq <= maxSeq)
+      .map((c) => ({ seq: c.seq, helper: c.helper, action: c.action, checkpoint: c.checkpoint }));
+  }, [snap, maxSeq]);
+
+  // Beat 7 visibly complete: Juniper authorized in the revealed view AND
+  // checkpoint 2 applied to the same job with prior history visible.
+  const juniperAuthorized = scene.authorities.some(
+    (a) => a.workerId === "juniper" && a.active
+  );
+  const storyComplete =
+    juniperAuthorized &&
+    visibleCheckpoints.length >= 2 &&
+    scene.receipts.length >= 3;
+
+  // Failed-reach trigger (defect 3): the reach plays only while the real
+  // pre-grant attempt event is the last revealed one.
+  const lastRevealed = revealed[revealed.length - 1] as
+    | (WEvent & { detail?: Record<string, unknown>; summary?: string })
+    | undefined;
+  const reachingWorkerId =
+    lastRevealed?.kind === "activity" &&
+    (lastRevealed.detail?.helper === "juniper") &&
+    /reaches for the job/i.test(lastRevealed.summary ?? "")
+      ? "juniper"
+      : null;
+
+  // debug hook for capture scripts: logical state only, no DOM internals.
+  // T0 = first visible Beat 1 job state; T1 = Beat 7 visibly complete.
   useEffect(() => {
     (window as unknown as { __authorityDebug?: unknown }).__authorityDebug = {
       seq: maxSeq,
       eventCount: scene.eventCount,
-      demoDone,
+      jobVisible: scene.job != null,
+      storyComplete,
       job: scene.job ? { id: scene.job.jobId, title: scene.job.title } : null,
       workers: scene.workers.map((w) => ({
         id: w.workerId, active: w.active, admitted: w.admitted,
@@ -158,6 +163,7 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
       receipts: scene.receipts.map((r) => ({
         action: r.action, decision: r.decision, helper: r.helper,
       })),
+      checkpoints: visibleCheckpoints,
       unadmitted: scene.proposals
         .filter((p) => p.unadmitted)
         .map((p) => ({ worker: p.workerId, action: p.action })),
@@ -202,27 +208,36 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
             portrait={VIZ_SMALL_SCREEN}
           />
           <OwnerObelisk />
-          <JobCrate job={scene.job} receipts={scene.receipts} />
+          <JobCrate job={scene.job} receipts={scene.receipts} checkpoints={visibleCheckpoints} />
           <SideTable proposals={scene.proposals} />
-          <WorkerSwarm workers={scene.workers} selectedId={null} onSelect={() => {}} />
+          <WorkerSwarm
+            workers={scene.workers}
+            selectedId={null}
+            onSelect={() => {}}
+            homeFn={authorityWorkerHome}
+            reachingWorkerId={reachingWorkerId}
+          />
           <AuthoritySeals
             authorities={scene.authorities}
             workers={scene.workers}
             selectedMandate={null}
             onSelect={() => {}}
+            homeFn={authorityWorkerHome}
           />
           <ReceiverGate proposals={scene.proposals} onSelectGate={() => {}} />
           <ProposalPackets
             proposals={scene.proposals.filter((p) => !p.unadmitted)}
             workers={scene.workers}
             onSelect={() => {}}
+            homeFn={authorityWorkerHome}
           />
         </VizCanvas>
       </main>
-      <footer className="viz-caption">
-        {beatCaption(revealed, maxSeq)}
-        {demoDone && <span className="viz-fine"> — complete</span>}
-      </footer>
+      {/* Defect 7: no running beat captions. The end card appears only
+          after Beat 7 is visibly complete — outside the timed sequence. */}
+      {storyComplete && (
+        <footer className="viz-caption viz-endcard">{END_CARD}</footer>
+      )}
     </div>
   );
 }

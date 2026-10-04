@@ -24,6 +24,20 @@ export const SIDE_TABLE_POS: [number, number, number] = [4.6, 0, 4.8];
  *  At the scene's edge, away from worker homes — present, no standing. */
 export const VISITOR_POS: [number, number, number] = [3.2, 0, -3.4];
 
+/** WORLD-AUTHORITY-001 staging: Wren and Juniper get fixed, distinct
+ *  positions — neither intersects the crate volume (crate at CRATE_POS
+ *  spans x -2.0..-0.4, z 2.6..4.2), both stay near enough to visibly work
+ *  it, and the ticket on top stays readable. Authority-view only; the
+ *  default workerHome layout is untouched. */
+export function authorityWorkerHome(
+  index: number,
+  workerId: string
+): [number, number, number] {
+  if (workerId === "wren") return [-3.1, 0, 1.4];
+  if (workerId === "juniper") return [0.9, 0, 1.6];
+  return workerHome(index, workerId);
+}
+
 /** Worker home position: ring slots for the first few, then a deterministic
  *  spiral so 1000 workers still get unique, stable spots. */
 export function workerHome(index: number, workerId: string): [number, number, number] {

@@ -9,7 +9,7 @@
  * The UI labels the entry point "Run the live demo" so nobody mistakes a
  * driven demo for a passive replay.
  */
-import { api } from "../api";
+import { api } from "../api.ts";
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
@@ -56,10 +56,17 @@ export async function runDemoScript(opts: DirectorOpts = {}): Promise<void> {
  * WORLD-AUTHORITY-001: drive the 10-step authority demo (fresh session,
  * no boot mandate — the job exists before any worker is authorized).
  * Same contract as runDemoScript: the renderer never calls this.
+ *
+ * StrictMode/reset-race discipline (defect 6 repair): shouldStop is
+ * checked BEFORE the reset POST (a cancelled launch never resets) and
+ * again immediately after the reset resolves (a stale reset never fires
+ * onReset or advances).
  */
 export async function runAuthorityDemoScript(opts: DirectorOpts = {}): Promise<void> {
   const { holdMs = 1400, onStep, onReset, shouldStop } = opts;
+  if (shouldStop?.()) return;
   await api.resetAuthorityDemo();
+  if (shouldStop?.()) return;
   onReset?.();
   for (;;) {
     if (shouldStop?.()) return;
@@ -73,4 +80,31 @@ export async function runAuthorityDemoScript(opts: DirectorOpts = {}): Promise<v
       waited += 200;
     }
   }
+}
+
+export interface LaunchOpts extends DirectorOpts {
+  /** Defer the first POST by this many ms (default 0 = next tick). Lets a
+   *  StrictMode throwaway effect clean up before any reset is issued. */
+  deferMs?: number;
+}
+
+/**
+ * Deferred, cancellable authority-demo launch (defect 6 repair).
+ * Returns a cancel function; cleanup cancels the pending launch so a
+ * stale reset can never land after the current one. The generation
+ * counter in the caller (or shouldStop) still guards later advances.
+ */
+export function launchAuthorityDemo(opts: LaunchOpts = {}): () => void {
+  let cancelled = false;
+  const { deferMs = 0, ...rest } = opts;
+  const timer = setTimeout(() => {
+    if (cancelled) return;
+    runAuthorityDemoScript(rest).catch(() => {
+      /* demo errors surface in the main app; the viz stays read-only */
+    });
+  }, deferMs);
+  return () => {
+    cancelled = true;
+    clearTimeout(timer);
+  };
 }
