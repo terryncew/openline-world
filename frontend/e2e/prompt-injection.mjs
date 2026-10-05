@@ -57,6 +57,9 @@ try {
     await page.screenshot({ path: resolve(out, `${name}-proposal.png`) });
     await page.waitForFunction(() => window.__promptInjectionDebug?.scene?.receipts.length === 1);
     await pause(900);
+    const refusalBox = await page.getByTestId("refund-proposal").boundingBox();
+    assert.ok(refusalBox && refusalBox.x >= 0 && refusalBox.x + refusalBox.width <= viewport.width,
+      `refusal card fits ${name} viewport: ${JSON.stringify(refusalBox)}`);
     await page.screenshot({ path: resolve(out, `${name}-stop.png`) });
     await page.waitForFunction(() => window.__promptInjectionDebug?.complete === true, null, { timeout: 45000 });
     await page.screenshot({ path: resolve(out, `${name}-history.png`) });
