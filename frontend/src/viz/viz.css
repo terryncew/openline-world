@@ -5,9 +5,9 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #f4ead6;
-  color: #2b2b26;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #718596;
+  color: #3d3428;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 .viz-topbar {
@@ -15,21 +15,21 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 16px;
-  border-bottom: 1px solid #d9cba6;
-  background: #faf3e3;
+  border-bottom: 3px solid #6f5036;
+  background: #f3ead9;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.viz-brand strong { font-size: 15px; }
+.viz-brand strong { font-size: 17px; letter-spacing: .01em; }
 .viz-fine { font-size: 12px; color: #7a6f56; margin-left: 10px; }
 
 .viz-controls { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .viz-btn {
   border: 1px solid #c9b98f;
-  background: #fffdf6;
-  border-radius: 8px;
+  background: #e2d5bd;
+  border-radius: 20px;
   padding: 7px 12px;
   font-size: 13px;
   cursor: pointer;

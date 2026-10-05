@@ -144,6 +144,13 @@ export function VizView({
   const [speed, setSpeed] = useState(1);
   const [selection, setSelection] = useState<VizSelection>(null);
   const [cameraView, setCameraView] = useState<VizCameraView>("world");
+  // Inspector is secondary: the world opens unobstructed. Users open it
+  // explicitly, or it opens when they select something in the scene.
+  const [inspectorOpen, setInspectorOpen] = useState(false);
+  const select = (s: VizSelection) => {
+    setSelection(s);
+    if (s) setInspectorOpen(true);
+  };
   const [demoRunning, setDemoRunning] = useState(false);
   const [snap, setSnap] = useState<Snapshot | null>(null);
   const [streamError, setStreamError] = useState<string | null>(null);
@@ -335,7 +342,9 @@ export function VizView({
   }, [autoRunDemo]);
 
   // timeline-driven camera close-ups. Only when the user hasn't taken
-  // the camera themselves (view === "world").
+  // the camera themselves (view === "world"). Rhythm: proposals fly at
+  // the gate; allowed work shows the worker at the bench; STOPPED holds
+  // the gate unmissable; replacement frames the handoff.
   const closeup: VizCloseup = useMemo(() => {
     if (cameraView !== "world") return null;
     const vis = events.filter((e) => e.seq <= effectiveCursor);
@@ -343,13 +352,20 @@ export function VizView({
     if (!last) return null;
     if (last.kind === "mandate") {
       const st = last.detail?.status;
-      if (st !== "REVOKED" && isReplacementOnboard(last, vis)) return "replacement";
-      return null;
+      if (st === "REVOKED") return null;
+      if (isReplacementOnboard(last, vis)) return "replacement";
+      return "work";
     }
-    if (last.kind === "proposal" || last.kind === "decision") return "gate";
+    if (last.kind === "proposal") return "gate";
+    if (last.kind === "decision") {
+      // STOPPED must be impossible to miss; ALLOWED hands focus back to
+      // the worker doing the work.
+      return last.detail?.decision === "STOPPED" ? "gate" : "work";
+    }
     if (last.kind === "receipt") {
       // the landing render (receiptAt not yet set) or the grace window
-      return receiptAt === 0 || performance.now() - receiptAt < 1500 ? "gate" : null;
+      // keeps the gate; afterwards the worker continues in focus.
+      return receiptAt === 0 || performance.now() - receiptAt < 1500 ? "gate" : "work";
     }
     return null;
     // graceTick re-runs this after the window lapses
@@ -409,14 +425,15 @@ export function VizView({
     <div className="viz-root">
       <header className="viz-topbar">
         <div className="viz-brand">
-          <strong>OpenLine World — visualization</strong>
-          <span className="viz-fine">read-only: every object traces to a real event</span>
+          <strong>OpenLine Workshop</strong>
+          <span className="viz-fine">live miniature · every action traces to the work</span>
         </div>
         <div className="viz-controls">
           <button className="viz-btn" onClick={() => setCameraView("world")}>World</button>
           <button className="viz-btn" onClick={() => setCameraView("worker")}>Follow worker</button>
           <button className="viz-btn" onClick={() => setCameraView("receiver")}>Receiver</button>
           <button className="viz-btn" onClick={() => setCameraView("records")}>Records</button>
+          <button className="viz-btn" onClick={() => setInspectorOpen(v => !v)} aria-pressed={inspectorOpen}>Details</button>
           <button className="viz-btn" onClick={handleExit}>{exitLabel}</button>
         </div>
       </header>
@@ -429,44 +446,46 @@ export function VizView({
             followWorkerId={followWorkerId}
             closeup={closeup}
           />
-          <OwnerObelisk onSelect={() => setSelection({ kind: "owner" })} />
+          <OwnerObelisk onSelect={() => select({ kind: "owner" })} />
           <WorkerSwarm
             workers={scene.workers}
             selectedId={selection?.kind === "worker" ? selection.id : null}
-            onSelect={(id) => setSelection(id ? { kind: "worker", id } : null)}
+            onSelect={(id) => select(id ? { kind: "worker", id } : null)}
           />
           <AuthoritySeals
             authorities={scene.authorities}
             workers={scene.workers}
             selectedMandate={selection?.kind === "seal" ? selection.id : null}
-            onSelect={(id) => setSelection(id ? { kind: "seal", id } : null)}
+            onSelect={(id) => select(id ? { kind: "seal", id } : null)}
           />
           <ReceiverGate
             proposals={scene.proposals.filter((p) => proposalVisibility(p).gateDecision)}
-            onSelectGate={() => setSelection({ kind: "gate" })}
+            onSelectGate={() => select({ kind: "gate" })}
           />
           <ProposalPackets
             proposals={scene.proposals.filter((p) => proposalVisibility(p).gateTravel)}
             workers={scene.workers}
-            onSelect={(id) => setSelection(id ? { kind: "packet", id } : null)}
+            onSelect={(id) => select(id ? { kind: "packet", id } : null)}
           />
           <ReceiptTablets
             receipts={scene.receipts}
             selectedId={selection?.kind === "receipt" ? selection.id : null}
-            onSelect={(id) => setSelection(id ? { kind: "receipt", id } : null)}
+            onSelect={(id) => select(id ? { kind: "receipt", id } : null)}
           />
           <SpeechPuffs speeches={scene.speeches} workers={scene.workers} />
           <UnrecognizedMarkers items={scene.unrecognized} />
         </VizCanvas>
-        <Inspector
-          selection={selection}
-          workers={scene.workers}
-          authorities={scene.authorities}
-          proposals={scene.proposals}
-          receipts={scene.receipts}
-          ownerPrincipal={ownerPrincipal}
-          onClose={() => setSelection(null)}
-        />
+        {(inspectorOpen || selection) && (
+          <Inspector
+            selection={selection}
+            workers={scene.workers}
+            authorities={scene.authorities}
+            proposals={scene.proposals}
+            receipts={scene.receipts}
+            ownerPrincipal={ownerPrincipal}
+            onClose={() => { setSelection(null); setInspectorOpen(false); }}
+          />
+        )}
       </main>
       <Timeline
         events={events}

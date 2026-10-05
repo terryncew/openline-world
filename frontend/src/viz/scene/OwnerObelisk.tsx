@@ -14,12 +14,22 @@ export const OBELISK_ANCHOR: [number, number, number] = [-7.5, 2.6, -3.5];
 export function OwnerObelisk({ onSelect }: { onSelect?: () => void }) {
   return (
     <group position={OBELISK_POS}>
+      {/* fixed painted-metal authority cabinet: external to every worker */}
+      <mesh position={[0, 1.35, -0.35]}>
+        <boxGeometry args={[2.15, 3.1, 1.1]} />
+        <meshStandardMaterial color="#38536a" roughness={0.94} />
+      </mesh>
+      <mesh position={[0, 1.5, 0.23]}>
+        <boxGeometry args={[1.55, 1.5, 0.12]} />
+        <meshStandardMaterial color="#f3ead9" roughness={0.95} />
+      </mesh>
+      {[-0.45, 0, 0.45].map((x) => <mesh key={x} position={[x,1.68,.31]}><cylinderGeometry args={[.09,.09,.05,12]}/><meshStandardMaterial color={x===0?"#e8a34f":"#8ba888"} roughness={.8}/></mesh>)}
       {/* plinth */}
       <mesh position={[0, 0.15, 0]} onClick={(e) => { e.stopPropagation(); onSelect?.(); }}>
         <boxGeometry args={[1.5, 0.3, 1.5]} />
         <meshStandardMaterial color="#b8a67e" roughness={0.9} />
       </mesh>
-      {/* marker stone */}
+      {/* owner seal press */}
       <mesh position={[0, 1.35, 0]} onClick={(e) => { e.stopPropagation(); onSelect?.(); }}>
         <boxGeometry args={[0.85, 2.1, 0.85]} />
         <meshStandardMaterial color="#d8c9a3" roughness={0.85} />

@@ -25,7 +25,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f3ead9;
+  background: #3d3428;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.45s ease;
@@ -43,9 +43,10 @@
   font-family: Georgia, serif;
   font-size: 17px;
   line-height: 1.5;
-  color: #3d3428;
+  color: #f3ead9;
   max-width: 34ch;
 }
+.doorway-transition{width:min(280px,70vw);height:65vh;border:18px solid #6f5036;border-bottom-width:8px;background:linear-gradient(#718596,#d8c9ad);box-shadow:0 0 0 5px #c26d4b,0 20px 50px #1d1814;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden}.doorway-transition:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#6f5036 0 48%,transparent 48% 52%,#6f5036 52%);animation:doors .55s ease forwards}.doorway-transition i{width:42px;height:42px;background:#e8a34f;border-radius:50%;box-shadow:0 0 25px #e8a34f}.doorway-transition span{z-index:1;margin-top:18px;text-transform:uppercase;letter-spacing:.08em;font-weight:bold}.doorway-transition small{z-index:1;color:#f3ead9;font:10px system-ui,sans-serif;margin-top:6px}@keyframes doors{to{transform:scaleX(.08);opacity:.2}}
 
 @media (prefers-reduced-motion: reduce) {
   .square-fade {
