@@ -18,6 +18,14 @@ try{
  await wait(`http://127.0.0.1:${BP}/api/health`); await wait(`http://127.0.0.1:${VP}`);
  const browser=await chromium.launch(browserLaunchOptions());
  const context=await browser.newContext({viewport:{width:1440,height:900},recordVideo:{dir:raw,size:{width:1440,height:900}}});
+ // Warmup (Muse presentation correction): a cold vite dev server leaves
+ // seconds of blank frames at the head of the recording. Load once in a
+ // throwaway page of the SAME recording context and discard its video, so
+ // the kept recording starts against a warm server.
+ const warm=await context.newPage();
+ await warm.goto(`http://127.0.0.1:${VP}/?view=hero`,{waitUntil:"networkidle"});
+ await warm.waitForFunction(()=>window.__heroDebug!==undefined,null,{timeout:30000});
+ const warmVideo=await warm.video().path(); await warm.close(); rmSync(warmVideo,{force:true});
  const page=await context.newPage(), errors=[]; page.on("pageerror",e=>errors.push(String(e)));
  await page.goto(`http://127.0.0.1:${VP}/?view=hero`,{waitUntil:"networkidle"});
  await page.waitForFunction(()=>window.__heroDebug?.events?.some(e=>/revoked Wren/.test(e.summary)),null,{timeout:30000});
@@ -41,6 +49,6 @@ try{
  await portrait.waitForFunction(()=>window.__heroDebug?.complete===true,null,{timeout:50000}); await sleep(1000);
  await portrait.screenshot({path:resolve(out,"final-portrait.png")}); assert.deepEqual(portraitErrors,[],"portrait page errors"); await portrait.close(); await browser.close();
  execFileSync("ffmpeg",["-y","-i",resolve(out,"openline-hero.webm"),"-c:v","libx264","-crf","18","-pix_fmt","yuv420p","-movflags","+faststart","-an",resolve(out,"openline-hero.mp4")],{stdio:"ignore"});
- execFileSync("ffmpeg",["-y","-ss","28","-i",resolve(out,"openline-hero.mp4"),"-t","12","-c:v","libx264","-crf","20","-pix_fmt","yuv420p","-an",resolve(out,"openline-hero-social.mp4")],{stdio:"ignore"});
+ execFileSync("ffmpeg",["-y","-sseof","-12","-i",resolve(out,"openline-hero.mp4"),"-t","12","-c:v","libx264","-crf","20","-pix_fmt","yuv420p","-an",resolve(out,"openline-hero-social.mp4")],{stdio:"ignore"});
  console.log(`HERO PASS: ${facts.scene.receipts.length} receipts, ${facts.checkpoints.length} checkpoints; no page errors`);
 } finally {stop()}
