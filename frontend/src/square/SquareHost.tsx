@@ -75,7 +75,7 @@ export function SquareHost() {
         className="square-frame"
       />
       <div className={`square-fade${fading ? " on" : ""}`}>
-        {fading && <span>The workshop — where every consequential action is approved, or stopped.</span>}
+        {fading && <div className="doorway-transition"><i/><span>Entering the Workshop</span><small>same town · consequential work inside</small></div>}
       </div>
     </div>
   );

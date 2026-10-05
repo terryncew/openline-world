@@ -29,6 +29,7 @@ export function ReceiverGate({
   onSelectGate?: () => void;
 }) {
   const lintelRef = useRef<THREE.Mesh>(null);
+  const shutterRef = useRef<THREE.Group>(null);
   const flashRef = useRef<THREE.Mesh>(null);
   const lastDecision = useMemo(() => {
     const decided = proposals
@@ -52,6 +53,10 @@ export function ReceiverGate({
     const lintel = lintelRef.current;
     if (lintel) {
       lintel.position.y = THREE.MathUtils.damp(lintel.position.y, 3.35 + liftTarget, 4, 0.016);
+    }
+    if (shutterRef.current) {
+      const blocked = lastDecision?.status === "stopped" && t - flashStart.current < 4.5;
+      shutterRef.current.position.y = THREE.MathUtils.damp(shutterRef.current.position.y, blocked ? 1.35 : 3.9, 7, 0.016);
     }
     // decision flash ring at the threshold. STOPPED holds longer and
     // larger — the refusal is the consequential beat and must be
@@ -77,6 +82,9 @@ export function ReceiverGate({
 
   return (
     <group position={[GATE_X, 0, GATE_Z]}>
+      {/* receiver bay is workshop architecture, not a worker feature */}
+      <mesh position={[.35,2,-2.15]}><boxGeometry args={[2.2,4.1,1.1]}/><meshStandardMaterial color="#38536a" roughness={.93}/></mesh>
+      <mesh position={[.35,4.15,0]}><boxGeometry args={[2.2,.35,5.2]}/><meshStandardMaterial color="#4a6f8a" roughness={.93}/></mesh>
       {/* pillars */}
       {[-1.35, 1.35].map((z) => (
         <mesh key={z} position={[0, 1.6, z]} onClick={(e) => { e.stopPropagation(); onSelectGate?.(); }}>
@@ -96,6 +104,12 @@ export function ReceiverGate({
         <boxGeometry args={[1.0, 0.55, 3.9]} />
         <meshStandardMaterial color="#d8cba6" roughness={0.8} />
       </mesh>
+      {/* a real STOP closes a heavy physical shutter at the threshold */}
+      <group ref={shutterRef} position={[0,3.9,0]}>
+        {[-1.05,-.7,-.35,0,.35,.7,1.05].map(z=><mesh key={z} position={[0,0,z]}><boxGeometry args={[.28,2.65,.18]}/><meshStandardMaterial color="#8f342c" roughness={.88}/></mesh>)}
+        <mesh position={[-.08,.15,0]}><boxGeometry args={[.22,.32,2.7]}/><meshStandardMaterial color="#3d3428" roughness={.9}/></mesh>
+      </group>
+      <mesh position={[-.58,3.65,2]}><sphereGeometry args={[.18,14,10]}/><meshStandardMaterial color={lastDecision?.status==="stopped"?STOP_RED:ALLOW_GREEN} emissive={lastDecision?.status==="stopped"?STOP_RED:ALLOW_GREEN} emissiveIntensity={.45} roughness={.7}/></mesh>
       {/* threshold plane marker: faint line the packet must not cross
           without a decision */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>

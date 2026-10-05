@@ -409,8 +409,8 @@ export function VizView({
     <div className="viz-root">
       <header className="viz-topbar">
         <div className="viz-brand">
-          <strong>OpenLine World — visualization</strong>
-          <span className="viz-fine">read-only: every object traces to a real event</span>
+          <strong>OpenLine Workshop</strong>
+          <span className="viz-fine">live miniature · every action traces to the work</span>
         </div>
         <div className="viz-controls">
           <button className="viz-btn" onClick={() => setCameraView("world")}>World</button>
@@ -422,6 +422,7 @@ export function VizView({
       </header>
       {streamError && <div className="viz-err">{streamError}</div>}
       <main className="viz-stage">
+        <div className="workshop-plaque" aria-hidden="true"><b>WORKSHOP</b><span>receiver bay · owner station · work floor</span></div>
         <VizCanvas>
           <CameraRig
             view={cameraView}
