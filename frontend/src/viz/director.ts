@@ -10,6 +10,7 @@
  * driven demo for a passive replay.
  */
 import { api } from "../api.ts";
+import { promptInjection } from "../scenarios/promptInjection.ts";
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
@@ -107,4 +108,46 @@ export function launchAuthorityDemo(opts: LaunchOpts = {}): () => void {
     cancelled = true;
     clearTimeout(timer);
   };
+}
+
+/** Prompt-injection presentation: same real gate, no model/API calls.
+ * A deferred launch prevents React StrictMode's discarded mount from
+ * resetting the current session. Errors are reported to the view.
+ */
+export function launchPromptInjection(
+  opts: LaunchOpts & { onComplete: () => void; onError: (error: unknown) => void }
+): () => void {
+  let cancelled = false;
+  const stopped = () => cancelled || !!opts.shouldStop?.();
+  const timer = setTimeout(async () => {
+    try {
+      if (stopped()) return;
+      await api.resetPromptInjection();
+      if (stopped()) return;
+      opts.onReset?.();
+      // 3 seconds wide, then six 4-second beats; final wide at 23s.
+      const beats = Object.values(promptInjection.beats);
+      const t0 = performance.now();
+      for (let i = 0; i < beats.length - 1; i++) {
+        const until = t0 + beats[i];
+        while (performance.now() < until) {
+          if (stopped()) return;
+          await sleep(Math.min(200, Math.max(0, until - performance.now())));
+        }
+        if (stopped()) return;
+        const result = await api.advancePromptInjection();
+        if (stopped()) return;
+        opts.onStep?.(result.step, result.total);
+      }
+      const until = t0 + promptInjection.beats.end;
+      while (performance.now() < until) {
+        if (stopped()) return;
+        await sleep(100);
+      }
+      if (!stopped()) opts.onComplete();
+    } catch (error) {
+      if (!stopped()) opts.onError(error);
+    }
+  }, opts.deferMs ?? 0);
+  return () => { cancelled = true; clearTimeout(timer); };
 }

@@ -13,6 +13,7 @@ import { VizView } from "./viz/VizView";
 import { AuthorityDemoView } from "./viz/AuthorityDemoView";
 import { SquareHost } from "./square/SquareHost";
 import { HeroView } from "./hero/HeroView";
+import { PromptInjectionView } from "./scenarios/PromptInjectionView";
 import "./styles.css";
 
 const HELPER_FOCUS: Record<string, Focus> = {
@@ -51,6 +52,8 @@ export default function App() {
       ? v
       : "square";
   });
+
+  if (new URLSearchParams(window.location.search).get("scenario") === "prompt-injection") return <PromptInjectionView />;
 
   if (view === "hero") return <HeroView />;
 
