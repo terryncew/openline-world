@@ -1,0 +1,23 @@
+CANONICAL VOICEOVER — authority-continuity demo
+Frozen 2026-10-05 by owner order. Do not edit, "improve", or paraphrase.
+The strength is that it teaches one thing cleanly: replacement does not
+equal inherited authority, and history survives the handoff.
+Target: ~45-50 seconds at a normal calm speaking pace.
+
+---
+
+Here's a problem we're about to have with AI agents.
+
+If one worker gets replaced, the new one shouldn't automatically inherit everything the old one was allowed to do.
+
+In this demo, Wren has permission to work on a job. The receiver checks that authority before anything happens, and keeps the receipt.
+
+Then Wren is revoked.
+
+Wren can still try, but the receiver stops the action.
+
+Juniper replaces Wren, and the job and its history are still there. But Juniper doesn't inherit Wren's permission.
+
+The owner has to explicitly authorize Juniper before the work can continue.
+
+The model can change. The authority and the history don't have to.
