@@ -12,6 +12,7 @@ import { SharedWorld } from "./world/SharedWorld";
 import { VizView } from "./viz/VizView";
 import { AuthorityDemoView } from "./viz/AuthorityDemoView";
 import { SquareHost } from "./square/SquareHost";
+import { HeroView } from "./hero/HeroView";
 import "./styles.css";
 
 const HELPER_FOCUS: Record<string, Focus> = {
@@ -39,17 +40,19 @@ function focusFor(step: number, fallback: Focus): Focus {
   return f;
 }
 
-type View = "watch" | "explore" | "changed" | "world" | "viz" | "authority" | "square";
+type View = "watch" | "explore" | "changed" | "world" | "viz" | "authority" | "hero" | "square";
 
 export default function App() {
   const [view, setView] = useState<View>(() => {
     const v = new URLSearchParams(window.location.search).get("view");
     // The Square is the home screen of the world layer; every existing
     // view stays reachable by its explicit ?view= param.
-    return v === "viz" || v === "watch" || v === "explore" || v === "changed" || v === "world" || v === "authority"
+    return v === "viz" || v === "watch" || v === "explore" || v === "changed" || v === "world" || v === "authority" || v === "hero"
       ? v
       : "square";
   });
+
+  if (view === "hero") return <HeroView />;
 
   // The Square mounts with zero backend contact: no subscriptions, no
   // snapshot gate. It lives in an opaque-origin sandboxed iframe whose
