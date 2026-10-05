@@ -1,8 +1,38 @@
 /** Permanent miniature Workshop architecture. Pure presentation: no state or writers. */
+import { useMemo } from "react";
 import { RoundedBox } from "@react-three/drei";
+import * as THREE from "three";
 
 const C = { cream:"#f3ead9", plaster:"#d8c9ad", blue:"#4a6f8a", blueDark:"#38536a", terra:"#c26d4b", wood:"#a9805a", woodDark:"#6f5036", ink:"#3d3428", warm:"#e8a34f", sage:"#8ba888" };
 const mat = (color:string) => <meshStandardMaterial color={color} roughness={0.92} metalness={0}/>;
+
+/** Physically-mounted Workshop sign: hangs from the roof ribs, part of the
+ *  3D scene — never an HTML overlay, never colliding with app chrome. */
+function WorkshopSign() {
+  const texture = useMemo(() => {
+    const cv = document.createElement("canvas");
+    cv.width = 512; cv.height = 128;
+    const g = cv.getContext("2d")!;
+    g.fillStyle = "#6f5036"; g.fillRect(0, 0, 512, 128);
+    g.strokeStyle = "#a9805a"; g.lineWidth = 10; g.strokeRect(8, 8, 496, 112);
+    g.fillStyle = "#f3ead9";
+    g.font = "bold 56px Georgia, serif";
+    g.textAlign = "center"; g.textBaseline = "middle";
+    g.fillText("WORKSHOP", 256, 68);
+    const tx = new THREE.CanvasTexture(cv);
+    tx.colorSpace = THREE.SRGBColorSpace;
+    tx.anisotropy = 4;
+    return tx;
+  }, []);
+  return <group position={[0, 5.1, 1.8]}>
+    {/* hanging chains */}
+    {[-1.4, 1.4].map(x => <mesh key={x} position={[x, 0.75, 0]}><cylinderGeometry args={[0.03, 0.03, 1.1, 8]}/>{mat(C.ink)}</mesh>)}
+    <mesh castShadow>
+      <boxGeometry args={[3.6, 0.9, 0.12]}/>
+      <meshStandardMaterial map={texture} roughness={0.9}/>
+    </mesh>
+  </group>;
+}
 
 function Window({ x }:{x:number}) {
   return <group position={[x,3.9,-5.82]}>
@@ -22,6 +52,7 @@ export function WorkshopInterior(){
     <mesh position={[-10.8,3.2,0]}><boxGeometry args={[.35,6.4,12]}/>{mat(C.terra)}</mesh>
     <mesh position={[10.8,3.2,0]}><boxGeometry args={[.35,6.4,12]}/>{mat(C.blue)}</mesh>
     <Window x={-4.4}/><Window x={3.2}/>
+    <WorkshopSign/>
     {/* roof ribs echo the exterior Workshop gable */}
     {[-8,-4,0,4,8].map(x=><group key={x} position={[x,6.55,-1.2]} rotation={[0,0,Math.PI/2]}>
       <mesh rotation={[0,0,.42]} position={[0,2.2,0]}><boxGeometry args={[.18,5,.2]}/>{mat(C.woodDark)}</mesh>

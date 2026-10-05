@@ -14,6 +14,10 @@
  *   "replacement" — the worker-replacement payoff: a medium shot
  *                   framing the dimmed old worker + dead seal, the new
  *                   worker + bright seal, and the records arc.
+ *   "work"        — an authorized worker at the bench: frames the
+ *                   workbench, the active worker, and the persistent job.
+ *                   Used when authority is granted or a consequence is
+ *                   allowed — the work itself takes focus, not the gate.
  *
  * Motion stays slow and damped; nothing here can nauseate.
  */
@@ -27,7 +31,7 @@ import { GATE_FOCUS } from "./ProposalPackets";
 export type VizCameraView = "world" | "worker" | "receiver" | "records";
 
 /** Timeline-driven close-ups. Null = rest at the view framing. */
-export type VizCloseup = "gate" | "replacement" | null;
+export type VizCloseup = "gate" | "replacement" | "work" | null;
 
 const WORLD_POS: [number, number, number] = [0, 9.5, 15];
 const WORLD_TGT: [number, number, number] = [1.2, 0.8, 0];
@@ -53,6 +57,13 @@ const GATE_CLOSEUP_TGT: [number, number, number] = [6.5, 1.4, 0];
  * records arc behind the gate (east). */
 const REPLACEMENT_POS: [number, number, number] = [4.2, 5.4, 10.8];
 const REPLACEMENT_TGT: [number, number, number] = [2.6, 0.9, 1.0];
+
+/* Work close-up: the bench and the worker. Frames the workbench
+ * (at [-1.2,0,3.4]) and the worker ring around [-2.2,0,1.2] — the
+ * active worker, the persistent job, and the bench in one shot.
+ * Pulled back enough that the worker doesn't fill the frame. */
+const WORK_POS: [number, number, number] = [-2.5, 6.5, 13.5];
+const WORK_TGT: [number, number, number] = [-1.8, 0.7, 2.0];
 
 export function CameraRig({
   view,
@@ -120,6 +131,9 @@ export function CameraRig({
     } else if (view === "world" && closeup === "replacement") {
       p = REPLACEMENT_POS;
       g = REPLACEMENT_TGT;
+    } else if (view === "world" && closeup === "work") {
+      p = WORK_POS;
+      g = WORK_TGT;
     }
     posGoal.current.set(...p);
     tgtGoal.current.set(...g);
