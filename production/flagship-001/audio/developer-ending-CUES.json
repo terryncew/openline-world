@@ -1,0 +1,256 @@
+{
+  "name": "developer-ending",
+  "sample_rate": 48000,
+  "cues": [
+    {
+      "kind": "paper",
+      "time": 0.15,
+      "shot": "job"
+    },
+    {
+      "kind": "wood",
+      "time": 2.48,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 2.72,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 2.96,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 3.2,
+      "shot": "wren"
+    },
+    {
+      "kind": "voice",
+      "id": "handover",
+      "time": 5.4,
+      "seconds": 1.3653333333333333,
+      "text": "You hand over the work."
+    },
+    {
+      "kind": "wood",
+      "time": 6.2,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 6.68,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 7.16,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 7.64,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 8.12,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 8.6,
+      "shot": "square"
+    },
+    {
+      "kind": "bell",
+      "time": 9.3,
+      "shot": "owner"
+    },
+    {
+      "kind": "voice",
+      "id": "rules",
+      "time": 9.7,
+      "seconds": 1.0024583333333332,
+      "text": "Not the rules."
+    },
+    {
+      "kind": "ratchet",
+      "time": 12.5,
+      "shot": "allow"
+    },
+    {
+      "kind": "paper",
+      "time": 13.2,
+      "shot": "allow"
+    },
+    {
+      "kind": "wood",
+      "time": 15.35,
+      "shot": "work"
+    },
+    {
+      "kind": "wood",
+      "time": 16.35,
+      "shot": "work"
+    },
+    {
+      "kind": "wood",
+      "time": 17.35,
+      "shot": "work"
+    },
+    {
+      "kind": "voice",
+      "id": "revoke",
+      "time": 18.15,
+      "seconds": 1.52725,
+      "text": "And you can change your mind."
+    },
+    {
+      "kind": "bell",
+      "time": 18.75,
+      "shot": "revoke"
+    },
+    {
+      "kind": "ratchet",
+      "time": 21.7,
+      "shot": "stop"
+    },
+    {
+      "kind": "latch",
+      "time": 22.85,
+      "shot": "stop"
+    },
+    {
+      "kind": "complete-silence",
+      "time": 23.06,
+      "seconds": 0.620000000000001
+    },
+    {
+      "kind": "paper",
+      "time": 25.25,
+      "shot": "stamp"
+    },
+    {
+      "kind": "paper",
+      "time": 27.25,
+      "shot": "receipt-ui"
+    },
+    {
+      "kind": "voice",
+      "id": "receiver",
+      "time": 27.25,
+      "seconds": 1.6135833333333334,
+      "text": "The receiver still decides."
+    },
+    {
+      "kind": "wood",
+      "time": 32.06,
+      "shot": "arrival"
+    },
+    {
+      "kind": "wood",
+      "time": 32.34,
+      "shot": "arrival"
+    },
+    {
+      "kind": "wood",
+      "time": 32.62,
+      "shot": "arrival"
+    },
+    {
+      "kind": "voice",
+      "id": "permission",
+      "time": 37.35,
+      "seconds": 2.005333333333333,
+      "text": "A new worker needs your permission."
+    },
+    {
+      "kind": "bell",
+      "time": 38.55,
+      "shot": "newgrant"
+    },
+    {
+      "kind": "ratchet",
+      "time": 42.5,
+      "shot": "continue"
+    },
+    {
+      "kind": "paper",
+      "time": 43.2,
+      "shot": "continue"
+    },
+    {
+      "kind": "voice",
+      "id": "history",
+      "time": 45.4,
+      "seconds": 1.7562083333333334,
+      "text": "The work, and its history, stay."
+    },
+    {
+      "kind": "wood",
+      "time": 49.2,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 49.68,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 50.16,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 50.64,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 51.12,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 51.6,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 52.08,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 52.56,
+      "shot": "square-out"
+    },
+    {
+      "kind": "voice",
+      "id": "brand",
+      "time": 53.45,
+      "seconds": 0.972625,
+      "text": "OpenLine."
+    },
+    {
+      "kind": "voice",
+      "id": "promise",
+      "time": 55.5,
+      "seconds": 2.624,
+      "text": "The worker can change. Your authority doesn't."
+    },
+    {
+      "kind": "voice",
+      "id": "developer",
+      "time": 60.6,
+      "seconds": 2.304,
+      "text": "Build your next worker around this boundary."
+    }
+  ],
+  "original_score": "D-A-E motif; deterministic physical synth score and foley",
+  "perceptual_listening": "unavailable to this agent"
+}

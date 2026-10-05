@@ -1,0 +1,136 @@
+{
+  "name": "hero-30",
+  "sample_rate": 48000,
+  "cues": [
+    {
+      "kind": "paper",
+      "time": 0.15,
+      "shot": "job"
+    },
+    {
+      "kind": "wood",
+      "time": 1.48,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 1.72,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 1.96,
+      "shot": "wren"
+    },
+    {
+      "kind": "voice",
+      "id": "handover",
+      "time": 2.15,
+      "seconds": 1.3653333333333333,
+      "text": "You hand over the work."
+    },
+    {
+      "kind": "wood",
+      "time": 2.2,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 4.2,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 4.68,
+      "shot": "square"
+    },
+    {
+      "kind": "ratchet",
+      "time": 5.5,
+      "shot": "allow"
+    },
+    {
+      "kind": "voice",
+      "id": "rules",
+      "time": 6,
+      "seconds": 1.0024583333333332,
+      "text": "Not the rules."
+    },
+    {
+      "kind": "paper",
+      "time": 6.2,
+      "shot": "allow"
+    },
+    {
+      "kind": "bell",
+      "time": 7.75,
+      "shot": "revoke"
+    },
+    {
+      "kind": "ratchet",
+      "time": 9.7,
+      "shot": "stop"
+    },
+    {
+      "kind": "latch",
+      "time": 10.85,
+      "shot": "stop"
+    },
+    {
+      "kind": "complete-silence",
+      "time": 11.06,
+      "seconds": 0.6199999999999992
+    },
+    {
+      "kind": "paper",
+      "time": 12.25,
+      "shot": "receipt-ui"
+    },
+    {
+      "kind": "wood",
+      "time": 15.018333,
+      "shot": "arrival"
+    },
+    {
+      "kind": "wood",
+      "time": 15.298333,
+      "shot": "arrival"
+    },
+    {
+      "kind": "wood",
+      "time": 15.578333,
+      "shot": "arrival"
+    },
+    {
+      "kind": "bell",
+      "time": 19.55,
+      "shot": "newgrant"
+    },
+    {
+      "kind": "ratchet",
+      "time": 21.5,
+      "shot": "continue"
+    },
+    {
+      "kind": "paper",
+      "time": 22.2,
+      "shot": "continue"
+    },
+    {
+      "kind": "voice",
+      "id": "brand",
+      "time": 25.1,
+      "seconds": 0.972625,
+      "text": "OpenLine."
+    },
+    {
+      "kind": "voice",
+      "id": "promise",
+      "time": 26.15,
+      "seconds": 2.624,
+      "text": "The worker can change. Your authority doesn't."
+    }
+  ],
+  "original_score": "D-A-E motif; deterministic physical synth score and foley",
+  "perceptual_listening": "unavailable to this agent"
+}

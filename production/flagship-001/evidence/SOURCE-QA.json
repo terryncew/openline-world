@@ -1,0 +1,200 @@
+{
+  "source_sha": "2235fa6ce916876cd39ed35be97263ddfc111b6a",
+  "clips": [
+    {
+      "id": "job",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/job.mp4",
+      "sha256": "cc32c5bd405da4e67c7c95ee387e35637448302641a367a3513589fe6dcf9ab2",
+      "seconds": 4,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "square",
+      "classification": "DRAMATIZATION",
+      "source": "source/square.mp4",
+      "sha256": "1d99b6743ac2672d8491491a958ba0870acb7e92fbe71a6c059ec3878f885faf",
+      "seconds": 5,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "wren",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/wren.mp4",
+      "sha256": "7f4fa27902a5a45c908b71194053a8d3985db94acefed5f501a20c603bce77b8",
+      "seconds": 5,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "owner",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/owner.mp4",
+      "sha256": "f350315b4f54a1fbea8dc95a285d191c0940742b5538009451ec1518e2593ac0",
+      "seconds": 4,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "allow",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/allow.mp4",
+      "sha256": "2cd694a891c6a13a1863ceed669dff2ed0323bc608b0f13e20111895386b2736",
+      "seconds": 4,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "work",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/work.mp4",
+      "sha256": "31505584fdc4ac6bc1655780da59f319f0064cdfcf9f49c81c9fc257236e3c52",
+      "seconds": 6,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "revoke",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/revoke.mp4",
+      "sha256": "b65d218b89bc38457f81192c282e7ab395963840388eabf0fdf089e4c6ad852e",
+      "seconds": 5,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "stop",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/stop.mp4",
+      "sha256": "35945340d1f240a81b973e9051d4b55fe9527d61b7260d8eaf24aa98ea12e50a",
+      "seconds": 5,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "stamp",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/stamp.mp4",
+      "sha256": "e0bd09500a31543108b54b7b6fa6db400c59d82cbb8033032c1f6d164832e08f",
+      "seconds": 3,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "arrival",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/arrival.mp4",
+      "sha256": "c559b2ccbc9b8609e51d42755820a8b81fac9f64fe824d303bb56da321fa3c4b",
+      "seconds": 6,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "newgrant",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/newgrant.mp4",
+      "sha256": "00492200422c92373b574194f366e7fbc8b5ebb362b8a1106637fbc211caa287",
+      "seconds": 6,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "continue",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/continue.mp4",
+      "sha256": "8ba8dff719313d6e615b941b0156ec86f91271bd525caeca75e1bad9c2c270ed",
+      "seconds": 4,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "history",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/history.mp4",
+      "sha256": "ed9a6de2b0a700c6dcaa68e416321bb94261fe95bb34903d34d465bf1766fc3c",
+      "seconds": 5,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "together",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/together.mp4",
+      "sha256": "d91facc1a1b438ac2dc8fa3af5cdb4390aba9fb345a64c1f0f9863ffc904a661",
+      "seconds": 7,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "square-out",
+      "classification": "DRAMATIZATION",
+      "source": "source/square-out.mp4",
+      "sha256": "0c7b284221290a46b29c41f04b470c99f9c17be2a30607163e473487adf02cfe",
+      "seconds": 6,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    },
+    {
+      "id": "checkpoints",
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/checkpoints.mp4",
+      "sha256": "7dacaa96e4c4b40d1c2ef4f88036bc231d1acbe75b48d46eb16f79269571f5da",
+      "seconds": 2,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24
+    }
+  ],
+  "actor_positions": "Verified at final keys for wren/work/revoke/arrival/newgrant/together; canonical homes within .025 units",
+  "receipt_UI": "Exact chronological first two public receipt projections; all fields match complete signed records",
+  "checkpoint_insert": "Original pieces revealed below original bench; no object moved"
+}

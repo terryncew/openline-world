@@ -1,0 +1,201 @@
+{
+  "name": "social-vertical-30",
+  "seconds": 30.0,
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 24,
+  "segments": [
+    {
+      "id": "job",
+      "start": 0,
+      "seconds": 1,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/job.mp4",
+      "source_trim_start": 0.0,
+      "crop_x": 656,
+      "proof_overlay": null,
+      "render_source": "source/job.mp4",
+      "render_source_sha256": "cc32c5bd405da4e67c7c95ee387e35637448302641a367a3513589fe6dcf9ab2",
+      "framing": "Authored portrait crop"
+    },
+    {
+      "id": "wren",
+      "start": 1,
+      "seconds": 3,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/wren.mp4",
+      "source_trim_start": 0.0,
+      "crop_x": 658,
+      "proof_overlay": null,
+      "render_source": "source/wren.mp4",
+      "render_source_sha256": "7f4fa27902a5a45c908b71194053a8d3985db94acefed5f501a20c603bce77b8",
+      "framing": "Authored portrait crop"
+    },
+    {
+      "id": "square",
+      "start": 4,
+      "seconds": 1,
+      "classification": "DRAMATIZATION",
+      "source": "source/square.mp4",
+      "source_trim_start": 0.0,
+      "crop_x": 665,
+      "proof_overlay": null,
+      "render_source": "source/square.mp4",
+      "render_source_sha256": "1d99b6743ac2672d8491491a958ba0870acb7e92fbe71a6c059ec3878f885faf",
+      "framing": "Authored portrait crop"
+    },
+    {
+      "id": "allow",
+      "start": 5,
+      "seconds": 2,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/allow.mp4",
+      "source_trim_start": 0.0,
+      "crop_x": 777,
+      "proof_overlay": null,
+      "render_source": "source/allow.mp4",
+      "render_source_sha256": "2cd694a891c6a13a1863ceed669dff2ed0323bc608b0f13e20111895386b2736",
+      "framing": "Authored portrait crop"
+    },
+    {
+      "id": "revoke",
+      "start": 7,
+      "seconds": 2,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/revoke.mp4",
+      "source_trim_start": 0.0,
+      "crop_x": 660,
+      "proof_overlay": null,
+      "render_source": "source/revoke.mp4",
+      "render_source_sha256": "b65d218b89bc38457f81192c282e7ab395963840388eabf0fdf089e4c6ad852e",
+      "framing": "Authored portrait crop"
+    },
+    {
+      "id": "stop",
+      "start": 9,
+      "seconds": 3,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/stop.mp4",
+      "source_trim_start": 0.0,
+      "crop_x": 735,
+      "proof_overlay": null,
+      "render_source": "source/stop.mp4",
+      "render_source_sha256": "35945340d1f240a81b973e9051d4b55fe9527d61b7260d8eaf24aa98ea12e50a",
+      "framing": "Authored portrait crop"
+    },
+    {
+      "id": "receipt-ui",
+      "start": 12,
+      "seconds": 3,
+      "classification": "REAL CAPTURE",
+      "source": "source/receipt-ui.png",
+      "source_trim_start": 0,
+      "crop_x": null,
+      "proof_overlay": "Factual fields from receipt-2.json with existing UI pixels",
+      "render_source": "source/receipt-proof-vertical.png",
+      "render_source_sha256": "1068ad9bf6b22be9c720a2f9b68e846b5166360203992fce0011c980af1723d7",
+      "framing": "Native frame"
+    },
+    {
+      "id": "arrival",
+      "start": 15,
+      "seconds": 3,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/arrival.mp4",
+      "source_trim_start": 1.0416666666666667,
+      "crop_x": 1256,
+      "proof_overlay": null,
+      "render_source": "source/arrival.mp4",
+      "render_source_sha256": "c559b2ccbc9b8609e51d42755820a8b81fac9f64fe824d303bb56da321fa3c4b",
+      "framing": "Authored portrait crop"
+    },
+    {
+      "id": "newgrant",
+      "start": 18,
+      "seconds": 3,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/newgrant.mp4",
+      "source_trim_start": 0.0,
+      "crop_x": null,
+      "proof_overlay": null,
+      "render_source": "source/newgrant.mp4",
+      "render_source_sha256": "00492200422c92373b574194f366e7fbc8b5ebb362b8a1106637fbc211caa287",
+      "framing": "Full owner-link inset"
+    },
+    {
+      "id": "continue",
+      "start": 21,
+      "seconds": 1.5,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/continue.mp4",
+      "source_trim_start": 0.0,
+      "crop_x": 777,
+      "proof_overlay": null,
+      "render_source": "source/continue.mp4",
+      "render_source_sha256": "8ba8dff719313d6e615b941b0156ec86f91271bd525caeca75e1bad9c2c270ed",
+      "framing": "Authored portrait crop"
+    },
+    {
+      "id": "history",
+      "start": 22.5,
+      "seconds": 2.5,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/history.mp4",
+      "source_trim_start": 0.9166666666666666,
+      "crop_x": 656,
+      "proof_overlay": null,
+      "render_source": "source/history.mp4",
+      "render_source_sha256": "ed9a6de2b0a700c6dcaa68e416321bb94261fe95bb34903d34d465bf1766fc3c",
+      "framing": "Authored portrait crop"
+    },
+    {
+      "id": "end",
+      "start": 25.0,
+      "seconds": 5,
+      "classification": "EXPLANATORY VISUALIZATION",
+      "source": "source/end.png",
+      "source_trim_start": 0,
+      "crop_x": null,
+      "proof_overlay": null,
+      "render_source": "source/end-vertical.png",
+      "render_source_sha256": "0ccb048c675811aba34faf1c23c70bacef01808fc460dea1c3dc63bffbc23158",
+      "framing": "Native frame"
+    }
+  ],
+  "voice": [
+    {
+      "start": 2.15,
+      "id": "handover"
+    },
+    {
+      "start": 6,
+      "id": "rules"
+    },
+    {
+      "start": 25.1,
+      "id": "brand"
+    },
+    {
+      "start": 26.15,
+      "id": "promise"
+    }
+  ],
+  "file": "renders/openline-social-vertical-30.mp4",
+  "delivery_gain_db": -0.43,
+  "encoded_audio_measurement": {
+    "input_i": "-16.36",
+    "input_tp": "-1.84",
+    "input_lra": "10.10",
+    "input_thresh": "-28.39",
+    "output_i": "-15.65",
+    "output_tp": "-1.50",
+    "output_lra": "9.00",
+    "output_thresh": "-27.46",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.35"
+  },
+  "bytes": 8107851,
+  "sha256": "e9bcb484db741f31037b4bc4f04409acf35a3d32aa01fec111b1f70e00d7a5a2"
+}

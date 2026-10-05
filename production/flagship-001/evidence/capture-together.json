@@ -1,0 +1,589 @@
+{
+  "id": "together",
+  "frames": 168,
+  "fps": 24,
+  "size": [
+    1920,
+    1080
+  ],
+  "seconds": 7,
+  "method": "fixed-clock offline render; automatic RAF disabled; original frame subscribers with exact 1/24s delta; original canon; real frozen events; editorial camera and shadows",
+  "keys": [
+    {
+      "frame": 0,
+      "seconds": 0,
+      "facts": {
+        "step": 10,
+        "job": {
+          "jobId": "task-workshop-1",
+          "title": "project notes",
+          "openedSeq": 2
+        },
+        "receipts": [
+          {
+            "id": "92999def36254d98aa9c0f99f748a7ca",
+            "receiptId": "92999def36254d98aa9c0f99f748a7ca",
+            "seq": 6,
+            "helper": "wren",
+            "action": "notes.write",
+            "decision": "ALLOWED",
+            "reasonCodes": [],
+            "receipt": {
+              "schema": "openline.gate.action_receipt.v1",
+              "gate_id": "workshop-receiver",
+              "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+              "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+              "mandate_id": "mandate-wren-1",
+              "subject_id": "wren",
+              "action": "notes.write",
+              "decision": "ALLOWED",
+              "reason_codes": [],
+              "presentation_hash": "ec9e2a34f8317e71f11278c3594fc28fd55bed01b18e1424d404bfee239e6e04",
+              "decided_at": "2026-10-05T22:45:28.781158Z",
+              "signature": {
+                "algorithm": "Ed25519",
+                "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+                "value": "67f656a7bc5b69c3f39a5a1be35af9b473fe2655d7e74913c00602380c3913aa853f1fa0be571c1bf8a5d4919c0fa078283c1e3a94deb11138b0a8c17dc3a805"
+              }
+            },
+            "provenance": "receiver-signed"
+          },
+          {
+            "id": "8d750818d2774b75bf9d3667cd2d9d3a",
+            "receiptId": "8d750818d2774b75bf9d3667cd2d9d3a",
+            "seq": 11,
+            "helper": "wren",
+            "action": "notes.read",
+            "decision": "STOPPED",
+            "reasonCodes": [
+              "MANDATE_REVOKED"
+            ],
+            "receipt": {
+              "schema": "openline.gate.action_receipt.v1",
+              "gate_id": "workshop-receiver",
+              "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+              "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+              "mandate_id": "mandate-wren-1",
+              "subject_id": "wren",
+              "action": "notes.read",
+              "decision": "STOPPED",
+              "reason_codes": [
+                "MANDATE_REVOKED"
+              ],
+              "presentation_hash": "7b8fb5a8c54c3a3293e71eb86560ddcff47bfd179342f3a6a70225e62b2a88de",
+              "decided_at": "2026-10-05T22:45:28.790662Z",
+              "signature": {
+                "algorithm": "Ed25519",
+                "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+                "value": "716e2e402533b59397a36ccb5a04efc9f1b451b25ccb5c2269b6b565a83352c8d18f0cb511e8aa31f3d123b4f6f1a773ae187679aba700379e13dbf96fc6280d"
+              }
+            },
+            "provenance": "receiver-signed"
+          },
+          {
+            "id": "bdb80cea646649a38213dce0738eccb9",
+            "receiptId": "bdb80cea646649a38213dce0738eccb9",
+            "seq": 17,
+            "helper": "juniper",
+            "action": "notes.write",
+            "decision": "ALLOWED",
+            "reasonCodes": [],
+            "receipt": {
+              "schema": "openline.gate.action_receipt.v1",
+              "gate_id": "workshop-receiver",
+              "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+              "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+              "mandate_id": "mandate-juniper-2",
+              "subject_id": "juniper",
+              "action": "notes.write",
+              "decision": "ALLOWED",
+              "reason_codes": [],
+              "presentation_hash": "8b237b3c3a908d21ae2b6f2c140fcc2573f84db6164abff325d854ae076e2cd8",
+              "decided_at": "2026-10-05T22:45:28.804282Z",
+              "signature": {
+                "algorithm": "Ed25519",
+                "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+                "value": "2b757443e3fc11789f20410e47e74e90b1dd39be0714369a8bf13bbec3995ab5fb61749b5e165394a56dfd8d16d4cf68f48f35115fb93c559788e9eabdbb7d06"
+              }
+            },
+            "provenance": "receiver-signed"
+          }
+        ],
+        "workers": [
+          {
+            "workerId": "wren",
+            "mandateId": "mandate-wren-1",
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": false,
+            "admitted": true,
+            "enteredSeq": 3,
+            "revokedSeq": 8,
+            "provenance": "owner-signed"
+          },
+          {
+            "workerId": "juniper",
+            "mandateId": "mandate-juniper-2",
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "admitted": true,
+            "enteredSeq": 12,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "authorities": [
+          {
+            "mandateId": "mandate-wren-1",
+            "workerId": "wren",
+            "ownerPrincipal": null,
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": false,
+            "createdSeq": 3,
+            "revokedSeq": 8,
+            "provenance": "owner-signed"
+          },
+          {
+            "mandateId": "mandate-juniper-2",
+            "workerId": "juniper",
+            "ownerPrincipal": null,
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "createdSeq": 14,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "checkpoints": [
+          {
+            "seq": 6,
+            "helper": "wren",
+            "action": "notes.write",
+            "checkpoint": 1,
+            "task_id": "task-workshop-1"
+          },
+          {
+            "seq": 17,
+            "helper": "juniper",
+            "action": "notes.write",
+            "checkpoint": 2,
+            "task_id": "task-workshop-1"
+          }
+        ]
+      },
+      "workerPositions": [
+        {
+          "id": "wren",
+          "pos": [
+            -3.1000000000000414,
+            0,
+            1.4
+          ]
+        },
+        {
+          "id": "juniper",
+          "pos": [
+            0.8999999999999269,
+            0,
+            1.6
+          ]
+        }
+      ]
+    },
+    {
+      "frame": 92,
+      "seconds": 3.8333333333333335,
+      "facts": {
+        "step": 10,
+        "job": {
+          "jobId": "task-workshop-1",
+          "title": "project notes",
+          "openedSeq": 2
+        },
+        "receipts": [
+          {
+            "id": "92999def36254d98aa9c0f99f748a7ca",
+            "receiptId": "92999def36254d98aa9c0f99f748a7ca",
+            "seq": 6,
+            "helper": "wren",
+            "action": "notes.write",
+            "decision": "ALLOWED",
+            "reasonCodes": [],
+            "receipt": {
+              "schema": "openline.gate.action_receipt.v1",
+              "gate_id": "workshop-receiver",
+              "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+              "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+              "mandate_id": "mandate-wren-1",
+              "subject_id": "wren",
+              "action": "notes.write",
+              "decision": "ALLOWED",
+              "reason_codes": [],
+              "presentation_hash": "ec9e2a34f8317e71f11278c3594fc28fd55bed01b18e1424d404bfee239e6e04",
+              "decided_at": "2026-10-05T22:45:28.781158Z",
+              "signature": {
+                "algorithm": "Ed25519",
+                "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+                "value": "67f656a7bc5b69c3f39a5a1be35af9b473fe2655d7e74913c00602380c3913aa853f1fa0be571c1bf8a5d4919c0fa078283c1e3a94deb11138b0a8c17dc3a805"
+              }
+            },
+            "provenance": "receiver-signed"
+          },
+          {
+            "id": "8d750818d2774b75bf9d3667cd2d9d3a",
+            "receiptId": "8d750818d2774b75bf9d3667cd2d9d3a",
+            "seq": 11,
+            "helper": "wren",
+            "action": "notes.read",
+            "decision": "STOPPED",
+            "reasonCodes": [
+              "MANDATE_REVOKED"
+            ],
+            "receipt": {
+              "schema": "openline.gate.action_receipt.v1",
+              "gate_id": "workshop-receiver",
+              "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+              "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+              "mandate_id": "mandate-wren-1",
+              "subject_id": "wren",
+              "action": "notes.read",
+              "decision": "STOPPED",
+              "reason_codes": [
+                "MANDATE_REVOKED"
+              ],
+              "presentation_hash": "7b8fb5a8c54c3a3293e71eb86560ddcff47bfd179342f3a6a70225e62b2a88de",
+              "decided_at": "2026-10-05T22:45:28.790662Z",
+              "signature": {
+                "algorithm": "Ed25519",
+                "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+                "value": "716e2e402533b59397a36ccb5a04efc9f1b451b25ccb5c2269b6b565a83352c8d18f0cb511e8aa31f3d123b4f6f1a773ae187679aba700379e13dbf96fc6280d"
+              }
+            },
+            "provenance": "receiver-signed"
+          },
+          {
+            "id": "bdb80cea646649a38213dce0738eccb9",
+            "receiptId": "bdb80cea646649a38213dce0738eccb9",
+            "seq": 17,
+            "helper": "juniper",
+            "action": "notes.write",
+            "decision": "ALLOWED",
+            "reasonCodes": [],
+            "receipt": {
+              "schema": "openline.gate.action_receipt.v1",
+              "gate_id": "workshop-receiver",
+              "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+              "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+              "mandate_id": "mandate-juniper-2",
+              "subject_id": "juniper",
+              "action": "notes.write",
+              "decision": "ALLOWED",
+              "reason_codes": [],
+              "presentation_hash": "8b237b3c3a908d21ae2b6f2c140fcc2573f84db6164abff325d854ae076e2cd8",
+              "decided_at": "2026-10-05T22:45:28.804282Z",
+              "signature": {
+                "algorithm": "Ed25519",
+                "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+                "value": "2b757443e3fc11789f20410e47e74e90b1dd39be0714369a8bf13bbec3995ab5fb61749b5e165394a56dfd8d16d4cf68f48f35115fb93c559788e9eabdbb7d06"
+              }
+            },
+            "provenance": "receiver-signed"
+          }
+        ],
+        "workers": [
+          {
+            "workerId": "wren",
+            "mandateId": "mandate-wren-1",
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": false,
+            "admitted": true,
+            "enteredSeq": 3,
+            "revokedSeq": 8,
+            "provenance": "owner-signed"
+          },
+          {
+            "workerId": "juniper",
+            "mandateId": "mandate-juniper-2",
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "admitted": true,
+            "enteredSeq": 12,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "authorities": [
+          {
+            "mandateId": "mandate-wren-1",
+            "workerId": "wren",
+            "ownerPrincipal": null,
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": false,
+            "createdSeq": 3,
+            "revokedSeq": 8,
+            "provenance": "owner-signed"
+          },
+          {
+            "mandateId": "mandate-juniper-2",
+            "workerId": "juniper",
+            "ownerPrincipal": null,
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "createdSeq": 14,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "checkpoints": [
+          {
+            "seq": 6,
+            "helper": "wren",
+            "action": "notes.write",
+            "checkpoint": 1,
+            "task_id": "task-workshop-1"
+          },
+          {
+            "seq": 17,
+            "helper": "juniper",
+            "action": "notes.write",
+            "checkpoint": 2,
+            "task_id": "task-workshop-1"
+          }
+        ]
+      },
+      "workerPositions": [
+        {
+          "id": "wren",
+          "pos": [
+            -3.0999999999999996,
+            0,
+            1.4
+          ]
+        },
+        {
+          "id": "juniper",
+          "pos": [
+            0.9000000000000002,
+            0,
+            1.6
+          ]
+        }
+      ]
+    },
+    {
+      "frame": 167,
+      "seconds": 6.958333333333333,
+      "facts": {
+        "step": 10,
+        "job": {
+          "jobId": "task-workshop-1",
+          "title": "project notes",
+          "openedSeq": 2
+        },
+        "receipts": [
+          {
+            "id": "92999def36254d98aa9c0f99f748a7ca",
+            "receiptId": "92999def36254d98aa9c0f99f748a7ca",
+            "seq": 6,
+            "helper": "wren",
+            "action": "notes.write",
+            "decision": "ALLOWED",
+            "reasonCodes": [],
+            "receipt": {
+              "schema": "openline.gate.action_receipt.v1",
+              "gate_id": "workshop-receiver",
+              "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+              "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+              "mandate_id": "mandate-wren-1",
+              "subject_id": "wren",
+              "action": "notes.write",
+              "decision": "ALLOWED",
+              "reason_codes": [],
+              "presentation_hash": "ec9e2a34f8317e71f11278c3594fc28fd55bed01b18e1424d404bfee239e6e04",
+              "decided_at": "2026-10-05T22:45:28.781158Z",
+              "signature": {
+                "algorithm": "Ed25519",
+                "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+                "value": "67f656a7bc5b69c3f39a5a1be35af9b473fe2655d7e74913c00602380c3913aa853f1fa0be571c1bf8a5d4919c0fa078283c1e3a94deb11138b0a8c17dc3a805"
+              }
+            },
+            "provenance": "receiver-signed"
+          },
+          {
+            "id": "8d750818d2774b75bf9d3667cd2d9d3a",
+            "receiptId": "8d750818d2774b75bf9d3667cd2d9d3a",
+            "seq": 11,
+            "helper": "wren",
+            "action": "notes.read",
+            "decision": "STOPPED",
+            "reasonCodes": [
+              "MANDATE_REVOKED"
+            ],
+            "receipt": {
+              "schema": "openline.gate.action_receipt.v1",
+              "gate_id": "workshop-receiver",
+              "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+              "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+              "mandate_id": "mandate-wren-1",
+              "subject_id": "wren",
+              "action": "notes.read",
+              "decision": "STOPPED",
+              "reason_codes": [
+                "MANDATE_REVOKED"
+              ],
+              "presentation_hash": "7b8fb5a8c54c3a3293e71eb86560ddcff47bfd179342f3a6a70225e62b2a88de",
+              "decided_at": "2026-10-05T22:45:28.790662Z",
+              "signature": {
+                "algorithm": "Ed25519",
+                "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+                "value": "716e2e402533b59397a36ccb5a04efc9f1b451b25ccb5c2269b6b565a83352c8d18f0cb511e8aa31f3d123b4f6f1a773ae187679aba700379e13dbf96fc6280d"
+              }
+            },
+            "provenance": "receiver-signed"
+          },
+          {
+            "id": "bdb80cea646649a38213dce0738eccb9",
+            "receiptId": "bdb80cea646649a38213dce0738eccb9",
+            "seq": 17,
+            "helper": "juniper",
+            "action": "notes.write",
+            "decision": "ALLOWED",
+            "reasonCodes": [],
+            "receipt": {
+              "schema": "openline.gate.action_receipt.v1",
+              "gate_id": "workshop-receiver",
+              "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+              "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+              "mandate_id": "mandate-juniper-2",
+              "subject_id": "juniper",
+              "action": "notes.write",
+              "decision": "ALLOWED",
+              "reason_codes": [],
+              "presentation_hash": "8b237b3c3a908d21ae2b6f2c140fcc2573f84db6164abff325d854ae076e2cd8",
+              "decided_at": "2026-10-05T22:45:28.804282Z",
+              "signature": {
+                "algorithm": "Ed25519",
+                "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+                "value": "2b757443e3fc11789f20410e47e74e90b1dd39be0714369a8bf13bbec3995ab5fb61749b5e165394a56dfd8d16d4cf68f48f35115fb93c559788e9eabdbb7d06"
+              }
+            },
+            "provenance": "receiver-signed"
+          }
+        ],
+        "workers": [
+          {
+            "workerId": "wren",
+            "mandateId": "mandate-wren-1",
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": false,
+            "admitted": true,
+            "enteredSeq": 3,
+            "revokedSeq": 8,
+            "provenance": "owner-signed"
+          },
+          {
+            "workerId": "juniper",
+            "mandateId": "mandate-juniper-2",
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "admitted": true,
+            "enteredSeq": 12,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "authorities": [
+          {
+            "mandateId": "mandate-wren-1",
+            "workerId": "wren",
+            "ownerPrincipal": null,
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": false,
+            "createdSeq": 3,
+            "revokedSeq": 8,
+            "provenance": "owner-signed"
+          },
+          {
+            "mandateId": "mandate-juniper-2",
+            "workerId": "juniper",
+            "ownerPrincipal": null,
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "createdSeq": 14,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "checkpoints": [
+          {
+            "seq": 6,
+            "helper": "wren",
+            "action": "notes.write",
+            "checkpoint": 1,
+            "task_id": "task-workshop-1"
+          },
+          {
+            "seq": 17,
+            "helper": "juniper",
+            "action": "notes.write",
+            "checkpoint": 2,
+            "task_id": "task-workshop-1"
+          }
+        ]
+      },
+      "workerPositions": [
+        {
+          "id": "wren",
+          "pos": [
+            -3.0999999999999996,
+            0,
+            1.4
+          ]
+        },
+        {
+          "id": "juniper",
+          "pos": [
+            0.9000000000000002,
+            0,
+            1.6
+          ]
+        }
+      ]
+    }
+  ]
+}

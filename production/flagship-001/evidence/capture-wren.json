@@ -1,0 +1,151 @@
+{
+  "id": "wren",
+  "frames": 120,
+  "fps": 24,
+  "size": [
+    1920,
+    1080
+  ],
+  "seconds": 5,
+  "method": "fixed-clock offline render; automatic RAF disabled; original frame subscribers with exact 1/24s delta; original canon; real frozen events; editorial camera and shadows",
+  "keys": [
+    {
+      "frame": 0,
+      "seconds": 0,
+      "facts": {
+        "step": 1,
+        "job": {
+          "jobId": "task-workshop-1",
+          "title": "project notes",
+          "openedSeq": 2
+        },
+        "receipts": [],
+        "workers": [],
+        "authorities": [],
+        "checkpoints": []
+      },
+      "workerPositions": [
+        {
+          "id": "wren"
+        },
+        {
+          "id": "juniper"
+        }
+      ]
+    },
+    {
+      "frame": 66,
+      "seconds": 2.75,
+      "facts": {
+        "step": 2,
+        "job": {
+          "jobId": "task-workshop-1",
+          "title": "project notes",
+          "openedSeq": 2
+        },
+        "receipts": [],
+        "workers": [
+          {
+            "workerId": "wren",
+            "mandateId": "mandate-wren-1",
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "admitted": true,
+            "enteredSeq": 3,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "authorities": [
+          {
+            "mandateId": "mandate-wren-1",
+            "workerId": "wren",
+            "ownerPrincipal": null,
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "createdSeq": 3,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "checkpoints": []
+      },
+      "workerPositions": [
+        {
+          "id": "wren",
+          "pos": [
+            -3.1000010206083064,
+            0,
+            1.4
+          ]
+        },
+        {
+          "id": "juniper"
+        }
+      ]
+    },
+    {
+      "frame": 119,
+      "seconds": 4.958333333333333,
+      "facts": {
+        "step": 2,
+        "job": {
+          "jobId": "task-workshop-1",
+          "title": "project notes",
+          "openedSeq": 2
+        },
+        "receipts": [],
+        "workers": [
+          {
+            "workerId": "wren",
+            "mandateId": "mandate-wren-1",
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "admitted": true,
+            "enteredSeq": 3,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "authorities": [
+          {
+            "mandateId": "mandate-wren-1",
+            "workerId": "wren",
+            "ownerPrincipal": null,
+            "scopes": [
+              "notes.read",
+              "notes.write"
+            ],
+            "active": true,
+            "createdSeq": 3,
+            "revokedSeq": null,
+            "provenance": "owner-signed"
+          }
+        ],
+        "checkpoints": []
+      },
+      "workerPositions": [
+        {
+          "id": "wren",
+          "pos": [
+            -3.100000000000021,
+            0,
+            1.4
+          ]
+        },
+        {
+          "id": "juniper"
+        }
+      ]
+    }
+  ]
+}

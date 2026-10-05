@@ -1,0 +1,31 @@
+test_agent_done_creates_no_receipt (backend.tests.test_workshop.TestActivityVsAcceptance.test_agent_done_creates_no_receipt) ... ok
+test_demo_script_distinguishes_done_from_acceptance (backend.tests.test_workshop.TestActivityVsAcceptance.test_demo_script_distinguishes_done_from_acceptance) ... ok
+test_first_read_is_a_real_allowed_decision (backend.tests.test_workshop.TestActivityVsAcceptance.test_first_read_is_a_real_allowed_decision) ... ok
+test_only_gate_decisions_mint_receipts (backend.tests.test_workshop.TestActivityVsAcceptance.test_only_gate_decisions_mint_receipts) ... ok
+test_revocation_stops_later_requests (backend.tests.test_workshop.TestActivityVsAcceptance.test_revocation_stops_later_requests) ... ok
+test_connected_mode_live_then_stale (backend.tests.test_workshop.TestDisconnectState.test_connected_mode_live_then_stale) ... ok
+test_connected_mode_without_events_is_waiting (backend.tests.test_workshop.TestDisconnectState.test_connected_mode_without_events_is_waiting) ... ok
+test_demo_mode_reports_local_demo (backend.tests.test_workshop.TestDisconnectState.test_demo_mode_reports_local_demo) ... ok
+test_duplicate_event_id_is_dropped (backend.tests.test_workshop.TestEventReplayDedup.test_duplicate_event_id_is_dropped) ... ok
+test_replay_since_seq (backend.tests.test_workshop.TestEventReplayDedup.test_replay_since_seq) ... ok
+test_seq_is_monotonic (backend.tests.test_workshop.TestEventReplayDedup.test_seq_is_monotonic) ... ok
+test_juniper_gets_its_own_mandate_never_wrens (backend.tests.test_workshop.TestHandoff.test_juniper_gets_its_own_mandate_never_wrens) ... ok
+test_new_session_dirs_are_unique (backend.tests.test_workshop.TestSessionIsolation.test_new_session_dirs_are_unique) ... ok
+test_reset_starts_fresh_session_without_touching_old_history (backend.tests.test_workshop.TestSessionIsolation.test_reset_starts_fresh_session_without_touching_old_history) ... ok
+test_authority_demo_beat_sequence (backend.tests.test_workshop.TestWhatChangedContract.test_authority_demo_beat_sequence) ... ok
+test_authority_demo_job_checkpoints (backend.tests.test_workshop.TestWhatChangedContract.test_authority_demo_job_checkpoints) ... ok
+test_boot_baseline_wren_active_with_note_scopes (backend.tests.test_workshop.TestWhatChangedContract.test_boot_baseline_wren_active_with_note_scopes) ... ok
+test_evaluation_executes_no_effect (backend.tests.test_workshop.TestWhatChangedContract.test_evaluation_executes_no_effect) ... ok
+test_every_receipt_signature_verifies (backend.tests.test_workshop.TestWhatChangedContract.test_every_receipt_signature_verifies) ... ok
+test_gate_evaluation_is_effect_free (backend.tests.test_workshop.TestWhatChangedContract.test_gate_evaluation_is_effect_free) ... ok
+test_job_effect_scope (backend.tests.test_workshop.TestWhatChangedContract.test_job_effect_scope) ... ok
+test_outside_scope_is_refused_with_reason_code (backend.tests.test_workshop.TestWhatChangedContract.test_outside_scope_is_refused_with_reason_code) ... ok
+test_pre_grant_no_receiver_signed_artifact (backend.tests.test_workshop.TestWhatChangedContract.test_pre_grant_no_receiver_signed_artifact) ... ok
+test_revocation_is_permanent_within_session (backend.tests.test_workshop.TestWhatChangedContract.test_revocation_is_permanent_within_session) ... ok
+test_unknown_helper_yields_no_decision (backend.tests.test_workshop.TestWhatChangedContract.test_unknown_helper_yields_no_decision) ... ok
+test_withdraw_permission_is_revoke_plus_narrower_mandate (backend.tests.test_workshop.TestWhatChangedContract.test_withdraw_permission_is_revoke_plus_narrower_mandate) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.383s
+
+OK

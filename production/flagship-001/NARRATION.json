@@ -1,0 +1,46 @@
+[
+  {
+    "id": "handover",
+    "text": "You hand over the work."
+  },
+  {
+    "id": "rules",
+    "text": "Not the rules."
+  },
+  {
+    "id": "revoke",
+    "text": "And you can change your mind."
+  },
+  {
+    "id": "receiver",
+    "text": "The receiver still decides."
+  },
+  {
+    "id": "permission",
+    "text": "A new worker needs your permission."
+  },
+  {
+    "id": "history",
+    "text": "The work, and its history, stay."
+  },
+  {
+    "id": "build",
+    "text": "Build around what stays."
+  },
+  {
+    "id": "brand",
+    "text": "OpenLine."
+  },
+  {
+    "id": "promise",
+    "text": "The worker can change. Your authority doesn't."
+  },
+  {
+    "id": "developer",
+    "text": "Build your next worker around this boundary."
+  },
+  {
+    "id": "buyer",
+    "text": "Put the decision at the receiver."
+  }
+]
