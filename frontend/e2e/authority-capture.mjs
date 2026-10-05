@@ -77,10 +77,8 @@ async function main() {
     await waitFor(`http://127.0.0.1:${VITE_PORT}/`);
 
     const { chromium } = await import("playwright");
-    const browser = await chromium.launch({
-      executablePath: "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
-      args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
-    });
+    const { browserLaunchOptions } = await import("./browser-launch.mjs");
+    const browser = await chromium.launch(browserLaunchOptions());
 
     // ---- desktop: video + still ----
     const ctx = await browser.newContext({
@@ -97,14 +95,23 @@ async function main() {
     // sets visualT0Ms on the first rendered Beat-1 frame and visualT1Ms
     // on the first rendered frame where the visual-completion predicate
     // holds — actual rendered-state timing, not polling time.
-    // CP3 §5: wait for T1 to be set (FrameTimer runs in the Canvas;
-    // the debug flag may flip a frame before T1 is captured).
+    // §3: TRUE PRE-ENDCARD. Require the settled caption-free state:
+    // visualComplete true, T1 captured, and the explanatory end card NOT
+    // yet visible. The pre-endcard PNGs must not contain the end-card text.
     await page.waitForFunction(
       () => window.__authorityDebug
         && window.__authorityDebug.visualComplete === true
-        && window.__authorityDebug.visualT1Ms !== null,
+        && window.__authorityDebug.visualT1Ms !== null
+        && window.__authorityDebug.endCardVisible === false,
       null, { timeout: 120000 }
     );
+    // explicitly verify the end card is not visible before screenshotting
+    const preDbg = await page.evaluate(() => ({
+      endCardVisible: window.__authorityDebug.endCardVisible,
+      endCardInDom: !!document.querySelector(".viz-endcard"),
+    }));
+    assert.equal(preDbg.endCardVisible, false, "end card state false at pre-endcard capture");
+    assert.equal(preDbg.endCardInDom, false, "end card not in DOM at pre-endcard capture");
     const timing = await page.evaluate(() => ({
       t0: window.__authorityDebug.visualT0Ms,
       t1: window.__authorityDebug.visualT1Ms,
@@ -123,7 +130,13 @@ async function main() {
     // same persistent crate/job + ticket, 3 countable receipt marks,
     // checkpoint 1, checkpoint 2, inert unadmitted side-table proposal.
     await page.screenshot({ path: resolve(SHOTS, "authority-desktop-pre-endcard.png") });
-    console.log("desktop pre-endcard still captured");
+    console.log("desktop pre-endcard still captured (end card not visible)");
+    // §3: wait for the end card to appear before the final screenshots —
+    // the end-card hold is outside the timed sequence.
+    await page.waitForFunction(
+      () => window.__authorityDebug && window.__authorityDebug.endCardVisible === true,
+      null, { timeout: 30000 }
+    );
     // end-card hold (outside the timed sequence)
     await sleep(2500);
 
@@ -166,12 +179,24 @@ async function main() {
     await mpage.waitForFunction(
       () => window.__authorityDebug
         && window.__authorityDebug.visualComplete === true
-        && window.__authorityDebug.visualT1Ms !== null,
+        && window.__authorityDebug.visualT1Ms !== null
+        && window.__authorityDebug.endCardVisible === false,
       null, { timeout: 120000 }
     );
+    // §3: verify end card absent before the portrait pre-endcard still
+    const mpre = await mpage.evaluate(() => ({
+      endCardVisible: window.__authorityDebug.endCardVisible,
+      endCardInDom: !!document.querySelector(".viz-endcard"),
+    }));
+    assert.equal(mpre.endCardVisible, false, "portrait end card state false");
+    assert.equal(mpre.endCardInDom, false, "portrait end card not in DOM");
     // CP3 §7: portrait pre-endcard still, before the end-card hold
     await mpage.screenshot({ path: resolve(SHOTS, "authority-portrait-pre-endcard.png") });
-    console.log("portrait pre-endcard still captured");
+    console.log("portrait pre-endcard still captured (end card not visible)");
+    await mpage.waitForFunction(
+      () => window.__authorityDebug && window.__authorityDebug.endCardVisible === true,
+      null, { timeout: 30000 }
+    );
     await sleep(2500);
     const mdbg = await mpage.evaluate(() => window.__authorityDebug);
     assert.equal(mdbg.receipts.length, 3);

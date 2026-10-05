@@ -34,9 +34,9 @@ const WORLD_TGT: [number, number, number] = [1.2, 0.8, 0];
 /** Authored portrait framing: pulled back and raised so the east-west
  *  spread (obelisk → gate) stays readable on narrow screens. Not a
  *  narrowed desktop camera — a different authored position. */
-const PORTRAIT_POS: [number, number, number] = [0.5, 17, 28];
-const PORTRAIT_TGT: [number, number, number] = [0.8, 0.6, 0.4];
-const PORTRAIT_FOV = 60;
+const PORTRAIT_POS: [number, number, number] = [-0.5, 13, 21];
+const PORTRAIT_TGT: [number, number, number] = [-0.8, 0.8, 0.2];
+const PORTRAIT_FOV = 58;
 const RECEIVER_POS: [number, number, number] = [11.5, 4.5, 7.5];
 const RECORDS_POS: [number, number, number] = [14.5, 6, -6];
 const RECORDS_TGT: [number, number, number] = [10.5, 0.5, 0];

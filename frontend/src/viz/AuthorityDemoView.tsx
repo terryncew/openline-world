@@ -25,7 +25,8 @@ import {
 } from "./snapshotGuard.ts";
 import { revealDelay } from "./pacing";
 import { VizCanvas, VIZ_SMALL_SCREEN } from "./scene/VizCanvas";
-import { OwnerObelisk } from "./scene/OwnerObelisk";
+import { OwnerObelisk, OBELISK_POS } from "./scene/OwnerObelisk";
+import { Nameplate } from "./scene/Nameplate";
 import { WorkerSwarm } from "./scene/WorkerSwarm";
 import { AuthoritySeals } from "./scene/AuthoritySeals";
 import { ReceiverGate } from "./scene/ReceiverGate";
@@ -246,6 +247,33 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
   const visualComplete =
     storyComplete && crateSettled && sealsSettled && cameraSettled;
 
+  // §2: TRUE PRE-ENDCARD STATE. visualComplete marks the settled Beat-7
+  // scene (T1 is the first R3F frame where it holds). The explanatory end
+  // card appears only after a deterministic presentation hold, so the
+  // caption-free settled world is capturable. The hold is presentation-only:
+  // it changes no timing, receipts, checkpoints, authority, or semantics.
+  const END_CARD_HOLD_MS = 2500;
+  const [endCardVisible, setEndCardVisible] = useState(false);
+  const endCardTimer = useRef<number | null>(null);
+  useEffect(() => {
+    if (visualComplete && !endCardVisible) {
+      if (endCardTimer.current !== null) window.clearTimeout(endCardTimer.current);
+      endCardTimer.current = window.setTimeout(() => setEndCardVisible(true), END_CARD_HOLD_MS);
+    } else if (!visualComplete && endCardVisible) {
+      if (endCardTimer.current !== null) {
+        window.clearTimeout(endCardTimer.current);
+        endCardTimer.current = null;
+      }
+      setEndCardVisible(false);
+    }
+    return () => {
+      if (endCardTimer.current !== null) {
+        window.clearTimeout(endCardTimer.current);
+        endCardTimer.current = null;
+      }
+    };
+  }, [visualComplete, endCardVisible]);
+
   // CP3 §5: actual R3F-frame timing. FrameTimer sits inside the Canvas and
   // captures performance.now() on the first R3F frame where the Beat 1
   // persistent job is visible (T0) and on the first R3F frame where final
@@ -288,6 +316,7 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
       jobVisible: scene.job != null,
       storyComplete,
       visualComplete,
+      endCardVisible,
       crateSettled,
       sealsSettled,
       cameraSettled,
@@ -356,6 +385,23 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
             onCameraSettled={() => setCameraSettled(true)}
           />
           <OwnerObelisk />
+          {/* §4: scene-native identity cues — restrained nameplates attached
+              to the physical objects. No prose, no explanations. */}
+          <Nameplate
+            text="Wren"
+            position={[-3.1, 1.75, 1.4]}
+            accent="#4a9e5c"
+          />
+          <Nameplate
+            text="Juniper"
+            position={[0.9, 1.75, 1.6]}
+            accent="#c9a84c"
+          />
+          <Nameplate
+            text="Owner"
+            position={[OBELISK_POS[0], 3.6, OBELISK_POS[2]]}
+            accent="#d4af37"
+          />
           <JobCrate
             job={scene.job}
             receipts={scene.receipts}
@@ -393,10 +439,9 @@ export function AuthorityDemoView({ onExit }: { onExit: () => void }) {
           />
         </VizCanvas>
       </main>
-      {/* Defect 7: no running beat captions. The end card appears only
-          after the VISUAL completion predicate holds — outside the timed
-          sequence. */}
-      {visualComplete && (
+      {/* The end card appears only after the caption-free presentation hold
+          following visual completion — outside the timed sequence. */}
+      {endCardVisible && (
         <footer className="viz-caption viz-endcard">{END_CARD}</footer>
       )}
     </div>

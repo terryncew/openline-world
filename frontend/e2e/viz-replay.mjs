@@ -74,11 +74,8 @@ async function main() {
     await waitFor(`http://127.0.0.1:${VITE_PORT}/`);
 
     const { chromium } = await import("playwright");
-    const browser = await chromium.launch({
-      // use the pre-installed chromium build (no download in this env)
-      executablePath: "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
-      args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
-    });
+    const { browserLaunchOptions } = await import("./browser-launch.mjs");
+    const browser = await chromium.launch(browserLaunchOptions());
     const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
     const errors = [];
     page.on("pageerror", (e) => errors.push(String(e)));

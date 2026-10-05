@@ -47,10 +47,8 @@ try {
   await waitFor(`http://127.0.0.1:${BACKEND_PORT}/api/health`);
   await waitFor(`http://127.0.0.1:${VITE_PORT}/`);
   const { chromium } = await import("playwright");
-  const browser = await chromium.launch({
-    executablePath: "/home/hatch/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
-    args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
-  });
+  const { browserLaunchOptions } = await import("./browser-launch.mjs");
+  const browser = await chromium.launch(browserLaunchOptions());
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await page.goto(`http://127.0.0.1:${VITE_PORT}/`, { waitUntil: "networkidle" });
   await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
