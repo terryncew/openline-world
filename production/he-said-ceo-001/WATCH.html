@@ -2,5 +2,5 @@
 <style>body{margin:0;background:#f3ecdc;color:#1b2a3c;font:16px system-ui,sans-serif;display:grid;justify-items:center;gap:16px;padding:24px}h1{font:32px Georgia,serif;margin:0}video{max-width:min(100%,430px);max-height:78vh;background:#f3ecdc}button{font:inherit;background:transparent;border:1px solid #1b2a3c;color:inherit;padding:10px 18px;cursor:pointer}p{max-width:600px;line-height:1.5;margin:0}a{color:inherit}</style>
 <h1>HE SAID HE WAS THE CEO</h1><div><button onclick="selectFilm('narrated')">Narrated</button> <button onclick="selectFilm('muted')">Silent</button></div>
 <video id="film" controls playsinline preload="metadata" poster="poster.png" src="renders/he-said-ceo-narrated.mp4"><track kind="captions" srclang="en" label="Dialogue" src="captions.vtt"></video>
-<p>43-second developer preview. Fictional dialogue followed by a recorded local OpenLine test. No payment executed.</p><p>Local neural dialogue. Publication on hold.</p>
+<p>31-second developer preview. One fictional physical scene, followed by the original recorded OpenLine refusal. No payment executed.</p><p>A prompt can steer the agent. It can’t rewrite permission.</p><p>Local neural dialogue at natural rate. Publication on hold.</p>
 <script>function selectFilm(edition){const v=document.getElementById('film');v.src='renders/he-said-ceo-'+edition+'.mp4';v.load()}</script></html>

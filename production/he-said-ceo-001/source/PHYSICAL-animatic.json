@@ -1,0 +1,270 @@
+{
+  "classification": "DRAMATIZATION",
+  "physical_schedule_sha256": "16392ba7218394250068399ad82c0ee4aa35b5ca443ef38b9e09d140df226135",
+  "method": "Original CanonicalRobot and ReceiverGate meshes. Fiber advance(frame/fps); production-only pose overrides; direct same-task WebGL export. No reducer events, decisions, mutating requests or model behavior generated.",
+  "fps": 30,
+  "frames": 658,
+  "size": [
+    540,
+    540
+  ],
+  "timeline_sha256": "c14e8abf1d013c4890e79a54cf4122fa205ed7df8665f534edd54507c2dceb45",
+  "file": "source/physical-animatic.mp4",
+  "sha256": "9bb1aba2f2f52ed69d5a79d03f6d4fca656605f3a21bddd6ffbc0ed7965d88e9",
+  "poses": [
+    {
+      "frame": 0,
+      "agent_x": -2.5,
+      "proposal_x": -2.06,
+      "gate_x": 1.45,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 30,
+      "agent_x": -2.5,
+      "proposal_x": -2.06,
+      "gate_x": 1.45,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 60,
+      "agent_x": -2.5,
+      "proposal_x": -2.06,
+      "gate_x": 1.45,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 90,
+      "agent_x": -2.5,
+      "proposal_x": -2.06,
+      "gate_x": 1.45,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 120,
+      "agent_x": -2.5,
+      "proposal_x": -2.06,
+      "gate_x": 1.45,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 150,
+      "agent_x": -2.5,
+      "proposal_x": -2.06,
+      "gate_x": 1.45,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 180,
+      "agent_x": -2.5,
+      "proposal_x": -1.862004646976788,
+      "gate_x": 1.45,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 210,
+      "agent_x": -0.8119259732157107,
+      "proposal_x": -0.06521771305556934,
+      "gate_x": 1.45,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 240,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.3871720116618076,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 270,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 300,
+      "agent_x": 0.14868265225415245,
+      "proposal_x": 0.9653059357473794,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": true,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 330,
+      "agent_x": 0.06081190184239402,
+      "proposal_x": 0.8335437855536862,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": true,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 360,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 390,
+      "agent_x": 0.13929258581495668,
+      "proposal_x": 1.0242915725941875,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": true,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 420,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 450,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 480,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 510,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 540,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 570,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 600,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 630,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 657,
+      "agent_x": 0.04999999999999982,
+      "proposal_x": 0.7967082601601407,
+      "gate_x": 1.45,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "classification": "DRAMATIZATION"
+    }
+  ],
+  "pageErrors": []
+}

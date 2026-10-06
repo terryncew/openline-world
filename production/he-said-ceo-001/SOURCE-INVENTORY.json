@@ -1,282 +1,361 @@
 {
   "base_sha": "792372a2cd87a01e0500a229e60114b0a00ac64c",
   "checkpoint": "13e9c60abc45036c81aaa604855250b0e5384273",
+  "replaces_delivery": "a106022d78e848c27dc0871f9622fd65a424908c",
+  "current_delivery": {
+    "seconds": 31,
+    "frames": 930,
+    "fps": 30
+  },
+  "timeline_sha256": "c14e8abf1d013c4890e79a54cf4122fa205ed7df8665f534edd54507c2dceb45",
   "production": [
     {
       "path": "production/he-said-ceo-001/evidence/RECOVERY-CAPTURE-FAILURE.log",
       "bytes": 3298,
       "sha256": "1561d9aab382fee7bd3b48b1d9e6cb58727d555edb326538421445c21e28bd71",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "role": "PRODUCTION / EVIDENCE AUDIT RECORD"
     },
     {
       "path": "production/he-said-ceo-001/evidence/REGRESSION-QA.json",
-      "bytes": 402,
-      "sha256": "be3f373192465679caaa2eee530329d33842bebf66ddb2b81c96181b9a7f681c",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 433,
+      "sha256": "44a01e9128c7fd7dbdcb86eca4af74a812c30a413ae7cb57b5aa9a8fdbb39d7f",
+      "role": "PRODUCTION / EVIDENCE AUDIT RECORD"
     },
     {
       "path": "production/he-said-ceo-001/evidence/UI-CAPTURE.json",
       "bytes": 4946,
       "sha256": "d9d38f69ec3b5f9e7c7de9298a225f2cd8e21e521c76f6969a89d97b7870c6a5",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "role": "REAL UI CAPTURE PROVENANCE \u2014 exact preserved public projection"
     },
     {
       "path": "production/he-said-ceo-001/evidence/owner-authority-events.json",
       "bytes": 1037,
       "sha256": "9e34096ce0cd39fd982f27a111c2676bc9a78243fe886e4c545538030d5d58da",
-      "role": "RECOVERED REAL EVIDENCE"
+      "role": "RECOVERED REAL EVIDENCE \u2014 frozen signed test records"
     },
     {
       "path": "production/he-said-ceo-001/evidence/receipt-allowed.json",
       "bytes": 999,
       "sha256": "94e353a5e048147ca78ca34aa09d8471786295367f7a1993094691574b048b6d",
-      "role": "RECOVERED REAL EVIDENCE"
+      "role": "RECOVERED REAL EVIDENCE \u2014 frozen signed test records"
     },
     {
       "path": "production/he-said-ceo-001/evidence/receipt-stopped.json",
       "bytes": 1032,
       "sha256": "22a1d51a189a86310f6b26fc84a3cc81e7f20c2c13177b4f16ee647d12dc0a68",
-      "role": "RECOVERED REAL EVIDENCE"
+      "role": "RECOVERED REAL EVIDENCE \u2014 frozen signed test records"
     },
     {
       "path": "production/he-said-ceo-001/evidence/reloaded-wallet-receipts.json",
       "bytes": 2124,
       "sha256": "608de16939c46a88e006eca97b2edbb098fc3038907e5fa391c48d83fb3d3050",
-      "role": "RECOVERED REAL EVIDENCE"
+      "role": "RECOVERED REAL EVIDENCE \u2014 frozen signed test records"
     },
     {
       "path": "production/he-said-ceo-001/evidence/run.json",
       "bytes": 22133,
       "sha256": "58bf7ee8cd15037edf8b5bec741e0e1dcede655935173038e1dafa32eeea30c9",
-      "role": "RECOVERED REAL EVIDENCE"
+      "role": "RECOVERED REAL EVIDENCE \u2014 frozen signed test records"
     },
     {
       "path": "production/he-said-ceo-001/evidence/ui-receipts.json",
       "bytes": 1880,
       "sha256": "652f22702d203153aaea5a6c4c30b9e88bddf0a6a2cb20e940afce86264353ae",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "role": "REAL UI CAPTURE PROVENANCE \u2014 exact preserved public projection"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/PHYSICAL-animatic.json",
+      "bytes": 7107,
+      "sha256": "d2f5d026b07c460c93cb512b295754f0b8cb31134f99e2df87fd81e7603bf3de",
+      "role": "DRAMATIZATION \u2014 original World meshes, production-only fixed-frame poses"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/PHYSICAL-final.json",
+      "bytes": 7106,
+      "sha256": "f255fcd42c5c9bb0a346bc4cc90fdf99dbcc7c12e171b81c20901f7fdcf89e0d",
+      "role": "DRAMATIZATION \u2014 original World meshes, production-only fixed-frame poses"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/physical-animatic.mp4",
+      "bytes": 180663,
+      "sha256": "9bb1aba2f2f52ed69d5a79d03f6d4fca656605f3a21bddd6ffbc0ed7965d88e9",
+      "role": "DRAMATIZATION \u2014 original World meshes, production-only fixed-frame poses"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/physical-final.mp4",
+      "bytes": 606490,
+      "sha256": "1a07dcdafb69f00fc38a9a77bec1ea98592426942a1902bf1e08a8fb97254aa8",
+      "role": "DRAMATIZATION \u2014 original World meshes, production-only fixed-frame poses"
     },
     {
       "path": "production/he-said-ceo-001/source/proposal-row.png",
       "bytes": 14637,
       "sha256": "a23f3b16b778732684473d5e43d87593f43d91b2c72948141cc6cb8bd0d573cd",
-      "role": "REAL UI CAPTURE"
+      "role": "REAL UI CAPTURE \u2014 retained supporting record; excluded from current picture"
     },
     {
       "path": "production/he-said-ceo-001/source/receipt-allowed-detail.png",
       "bytes": 76226,
       "sha256": "2bd62df5b743d6ccbd5f4d306dbfe0bc190ba7b22c16b4e9ca7b23f87dc3ac31",
-      "role": "REAL UI CAPTURE"
+      "role": "REAL UI CAPTURE \u2014 retained supporting record; excluded from current picture"
     },
     {
       "path": "production/he-said-ceo-001/source/receipt-allowed-full-ui.png",
       "bytes": 131055,
       "sha256": "ea44b3a21f06ec640449ae985c46939b2f3be5624aa363fb1c091f357988e6cc",
-      "role": "REAL UI CAPTURE"
+      "role": "REAL UI CAPTURE \u2014 retained supporting record; excluded from current picture"
     },
     {
       "path": "production/he-said-ceo-001/source/receipt-allowed-reason.png",
       "bytes": 3268,
       "sha256": "b1152c798cf2e4249718f8cc2a507ade5ed150e40b11c79cf7747d78df2eab82",
-      "role": "REAL UI CAPTURE"
+      "role": "REAL UI CAPTURE \u2014 retained supporting record; excluded from current picture"
     },
     {
       "path": "production/he-said-ceo-001/source/receipt-list.png",
       "bytes": 45579,
       "sha256": "b589057071639f125262e035797c7682c335d1db78681ff140ad469783b7fe01",
-      "role": "REAL UI CAPTURE"
+      "role": "REAL UI CAPTURE \u2014 retained supporting record; excluded from current picture"
     },
     {
       "path": "production/he-said-ceo-001/source/receipt-stopped-detail.png",
       "bytes": 85069,
       "sha256": "186a6d9e4381a01ffa18da4cdd76a358c525eab5c95d4df0d041ea70aea7d379",
-      "role": "REAL UI CAPTURE"
+      "role": "REAL UI CAPTURE \u2014 current film proof; original recorded STOPPED panel"
     },
     {
       "path": "production/he-said-ceo-001/source/receipt-stopped-full-ui.png",
       "bytes": 139759,
       "sha256": "fadd3db639ae3b81faa1132b3a9d216571281acebc1b3a36bfa4483a8f7d1eca",
-      "role": "REAL UI CAPTURE"
+      "role": "REAL UI CAPTURE \u2014 retained supporting record; excluded from current picture"
     },
     {
       "path": "production/he-said-ceo-001/source/receipt-stopped-reason.png",
       "bytes": 12071,
       "sha256": "13ddefa9d70b1beff9d6f8f81885f65ffe04f8857cd6f406598fbc92ffd51670",
-      "role": "REAL UI CAPTURE"
+      "role": "REAL UI CAPTURE \u2014 retained supporting record; excluded from current picture"
     },
     {
       "path": "production/he-said-ceo-001/audio/MIX.json",
-      "bytes": 2247,
-      "sha256": "bb385020f2350ced43897549f47ac6f4313b4b9ab6abb0f3fa41abfc3e4523d5",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 3715,
+      "sha256": "5266e23a5786cdb580c778cebe38a4796787ddadc02ac0ae43fca8e4c74062cc",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
       "path": "production/he-said-ceo-001/audio/VOICE-SOURCES.json",
-      "bytes": 2324,
-      "sha256": "65ca047d75aeed39ad342a7ca82c7839b0d83a5ecd60eba77535e8ae6d38822c",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 3887,
+      "sha256": "bc79ed370cce72082d3d125d580f7035d870c80014b35c11d95a6a4c0f21e549",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
       "path": "production/he-said-ceo-001/audio/final-mix.flac",
-      "bytes": 1067840,
-      "sha256": "5a0411b60eafabe826001c90c6e62af5f4a1de22275261bb9edc67088eb897bf",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 2614311,
+      "sha256": "90604d7f9beb724544ccbd0775a4e7a50f9df91a20810ae596fda6b836dd458c",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
       "path": "production/he-said-ceo-001/audio/voice-absolutely.wav",
-      "bytes": 61050,
-      "sha256": "71f2fdfbcfdbc9527373c9a1623480a2d8bef0a5fa6cd40d9116a3e64e51813d",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 62454,
+      "sha256": "54b36ef53cbf1d87106b7268f52db74f9e77455f2f16bb9bcb7a5f78518d9024",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
-      "path": "production/he-said-ceo-001/audio/voice-ask.wav",
-      "bytes": 121632,
-      "sha256": "8fda68757aefb040c731a5829716e8a2e9b515cf5d41c3c98a84357e7b08f3b5",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "path": "production/he-said-ceo-001/audio/voice-attempt.wav",
+      "bytes": 64506,
+      "sha256": "f1aef69009a2cd6de087838a92753e2b0939bd3301f8dad442cf731cf19ecde0",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-authority.wav",
+      "bytes": 194306,
+      "sha256": "5fd7b6990e62f69ab8646e2d084a3f4e53313993f77befe49ba21fc5fa4f59ee",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-boundary.wav",
+      "bytes": 223460,
+      "sha256": "612f7ae5444e477615aa98ae4703b420509aa1e1cf1a161572bbd74ec3f025f4",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
       "path": "production/he-said-ceo-001/audio/voice-ceo.wav",
-      "bytes": 73436,
-      "sha256": "74d095a367867e8214bc29d549c235d4eacf19e31a48feadb96e34faad576718",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 109430,
+      "sha256": "40eefc198cc70f58f8aca8a5e578a48c8cabdd782c6298db83788528feedcd71",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
       "path": "production/he-said-ceo-001/audio/voice-end.wav",
-      "bytes": 109008,
-      "sha256": "3cbd6e27d60a80a972584acf38e8947a0826fef904427acaa442f79b8586ecee",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 298604,
+      "sha256": "13a8cc07995e2b655954be1acf9ad001dc127d1cdd3ac110bb80ffe603921044",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
-      "path": "production/he-said-ceo-001/audio/voice-logo.wav",
-      "bytes": 105578,
-      "sha256": "eca407f2528a290102a59c5d21d23106943419adbf50c3b4082aa257db424d12",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "path": "production/he-said-ceo-001/audio/voice-message.wav",
+      "bytes": 377742,
+      "sha256": "8cf70b2153c7bc00b420073486d88e47ad96b626223c70cf7af80e0fe196ebd1",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-no.wav",
+      "bytes": 43184,
+      "sha256": "ab18ebb09b27c8c6f5fb316a12dcf42f6616c3c02b8b4b0e763b639011415cfc",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
       "path": "production/he-said-ceo-001/audio/voice-please.wav",
-      "bytes": 69794,
-      "sha256": "7fa6126d9c80b62022d9e0f5532e223b9ca13a72c15acdb3d36da3a967a64d44",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 71226,
+      "sha256": "9d378d4b79cbced0c7ee968b721eb97e1423ca91066ffc890e5cbd1fdaf5cb5a",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
-      "path": "production/he-said-ceo-001/audio/voice-punchline.wav",
-      "bytes": 154580,
-      "sha256": "d53301e26bab9c85c5db22d4cf0ab49681b71f12af8450fe0b08049d2179363f",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "path": "production/he-said-ceo-001/audio/voice-proof.wav",
+      "bytes": 320354,
+      "sha256": "37f092e9ffc21a6350eaae21210b350fe65a748033b1c8f9ca6fd924ab6bd2f4",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-still-no.wav",
+      "bytes": 56652,
+      "sha256": "4489f5fba0f9f5539b9019c623c37f19f15782aa2f0f84ff5a02f659acc2ba46",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-stop.wav",
+      "bytes": 98276,
+      "sha256": "e6e9f2e083dfc4748ce5b346756015274d392fca7279016e3689104abe17937e",
+      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/capture-physical.mjs",
+      "bytes": 3806,
+      "sha256": "61b34452782300f1a52a0723ac4cdd445831582c1047504b9e08a5af70794736",
+      "role": "PRODUCTION-ONLY DRAMATIZATION SOURCE \u2014 no protocol events or API mutations"
     },
     {
       "path": "production/he-said-ceo-001/tools/capture-ui.mjs",
       "bytes": 4825,
       "sha256": "8ce21d33afd7f9c6d6297455a237861865f48a87fdca3392d33e4b1e60d61634",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/contact.py",
-      "bytes": 846,
-      "sha256": "fa0563e418266774be88931c7cd13b11c6526c73c2b74c93ce712449f279fbfb",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 1163,
+      "sha256": "2791494e166c24b16a4e57b7e6c05c4fb910c50f31adc5c98d00de32f9a18b6c",
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/evidence.py",
       "bytes": 5173,
       "sha256": "b882ae5835eb707264e0fc90774eeea7a246eca4530f5fd5791cf1eee81ea04d",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/inventory.py",
-      "bytes": 2352,
-      "sha256": "0d1d590e659cb4e3ea438f32ecc17ce3dcf0956f795fab027923b870e1967a03",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 5328,
+      "sha256": "e45f59c4214abc3c18802e332a5febd0e37a122505131d2c27722ff39807a79d",
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/mix.py",
-      "bytes": 3390,
-      "sha256": "f14819ff6db67dd49d31b31c6b219789bff7fd5145d2ee115add9853cd69250f",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 3443,
+      "sha256": "2383b24290d6453256c62f6b8c8a51ba7973fbbc3f30cdae78db79af3e5c391a",
+      "role": "EDITABLE PRODUCTION SOURCE"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/physical.html",
+      "bytes": 552,
+      "sha256": "13f7244f87c7e720266fa43c85a93d0387b78011c5741bec2656f034f4b0526d",
+      "role": "PRODUCTION-ONLY DRAMATIZATION SOURCE \u2014 no protocol events or API mutations"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/physical.tsx",
+      "bytes": 6658,
+      "sha256": "94d1a2af4a1efc72d2d17f2f32c75922dee8eda29be3dea18f6ed48a2b79ad80",
+      "role": "PRODUCTION-ONLY DRAMATIZATION SOURCE \u2014 no protocol events or API mutations"
     },
     {
       "path": "production/he-said-ceo-001/tools/plan.py",
-      "bytes": 5917,
-      "sha256": "0fca182b785921ae2fe4d10964903a21f31d60c2721115114a674e6e8c3dd7d3",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 5396,
+      "sha256": "c5d7bd13fbad4b69df3fd45b81bfe4c470b96b847f0825f9e68d4eee16c19905",
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/playback.mjs",
-      "bytes": 4615,
-      "sha256": "130f849f6c0dc0bd398223d6a8767315c3e7775416d237d955feb437d7745ee7",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 6157,
+      "sha256": "44d62000af58921f6caf19bccb34d6b8ba727141fdc0845b25f6cafd9c7bb845",
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/prepare-projection.py",
       "bytes": 908,
       "sha256": "0d8ce5cd0bb66ea9463a939c82ad6cce5dd5aaf5edb717da7a384fbc9f13596d",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/render.py",
-      "bytes": 7966,
-      "sha256": "c291921206a964d794923deb37727a01f5425675b800d6c69d8f6b31c1a46927",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 7205,
+      "sha256": "d892b3660b5f0700091274714db2d2dacc7f5cbcc2e252714b20c7c249bb4c80",
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/stage.html",
       "bytes": 447,
       "sha256": "18d0dc61361ed78431b5debfff1ddb20346807705a2be4f283274f6128acd4cb",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/stage.tsx",
       "bytes": 574,
       "sha256": "2e1d820e7057030e7e12911216ac3722b823f8320ad7cbda720d8c31303c49d6",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/verify.py",
-      "bytes": 7433,
-      "sha256": "cc8e30abae0d4c05706572c6769b8b342a92bdad8aa4b166b778d10637fc191b",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 19445,
+      "sha256": "15fc60f0999b53a6dd73d65aa03c576726dea0081ced9c93364536dd14c63f14",
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/voice.py",
-      "bytes": 1947,
-      "sha256": "505deae039f8da9aa663cae32ed05271c4347061335ff066ca33845ca73ccc06",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 2011,
+      "sha256": "dcd17937e51c57cac8220528adb722f14731a3d74d21f2f0f584a3297b371479",
+      "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/renders/RENDER.json",
-      "bytes": 26620,
-      "sha256": "eb1d61a15606030ef7601684049e03010c6b69f78ff7b4a503be0e4288d0c7fa",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 10119,
+      "sha256": "37a216492591e00224f62cf97431cb5bcbc14af47fcc07bf9be3200c1386ee9d",
+      "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/renders/he-said-ceo-muted.mp4",
-      "bytes": 2006503,
-      "sha256": "2877e31da820a068ba9277f8dfb2594bafac0865e742c82dcb31ab52a9e80f69",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 789516,
+      "sha256": "36b94eb8902f72a3666499d244dd14a7353d2c83a8e7542926a9d3608c449f75",
+      "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/renders/he-said-ceo-narrated.mp4",
-      "bytes": 2352454,
-      "sha256": "3c92a25d76e304f2a5c646132301a909294a6c78158dace820701c824d844b12",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 1640668,
+      "sha256": "12ddadfc8f9aa6b708e490028f77ec05e1605ccde65820d5e3885356c48d3fd2",
+      "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/animatic/PLAYBACK.json",
-      "bytes": 16854,
-      "sha256": "2c7647b5df3704272877ec37ee3e2e88b24a06b9266486d9a47173474e3fbf24",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 12280,
+      "sha256": "e25620d2b8c5bbb65809850ab355d8e3ae83fcbf730d726de642c8c431e07f05",
+      "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/animatic/RENDER.json",
-      "bytes": 26621,
-      "sha256": "2e7a35cb8c77f11d38fa5eea636e6385df3a6b4323adb7241d51988204b0822a",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 10126,
+      "sha256": "6700986fa99274271a4492aef6cc7332658050682f36a95e088fc22707380bfb",
+      "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/animatic/he-said-ceo-animatic.mp4",
-      "bytes": 685365,
-      "sha256": "eab7391ebadd35aba87ee0e35d626b3bfdec0d7329b17500a0ecd256ded75b0a",
-      "role": "PRODUCTION / DERIVED ARTIFACT"
+      "bytes": 1141620,
+      "sha256": "d029b53b637974606a9010420b9fcdc39561ea5f2c00ee07934eb5796182ef41",
+      "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/FACTS.json",
@@ -286,86 +365,86 @@
     },
     {
       "path": "production/he-said-ceo-001/TIMELINE.json",
-      "bytes": 9012,
-      "sha256": "afc18e14004710a3c6438e2c4092d0dccf4e52e07812c9807282eb3ed890b6c9",
+      "bytes": 6788,
+      "sha256": "c14e8abf1d013c4890e79a54cf4122fa205ed7df8665f534edd54507c2dceb45",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/CLAIM-SHOT-MAP.json",
-      "bytes": 16957,
-      "sha256": "f8cd114be82b6505c8f6d81152dcab4735b044b093c7b332407801a52e93127d",
+      "bytes": 11240,
+      "sha256": "8b8ba434668fff2940101a5386ae2f28a6880493a40f2fa85619ff33e46a3e0e",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/CAPTIONS.json",
-      "bytes": 1814,
-      "sha256": "a30a71c6c89fd29134feeebca5b55c897204ac98fd55f7b9ed2d2dbac7a6f2f0",
+      "bytes": 3319,
+      "sha256": "5ede27b1b05fe60d8c5a3693414868c4df0bbddb69844aebd613cd1a506e32b7",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/captions.srt",
-      "bytes": 405,
-      "sha256": "bdc103e5ed1352eeacbee3967f3e5632a16fa281a0bb7a174b6cabf76bc06fd8",
+      "bytes": 830,
+      "sha256": "0caa91d2fa1cbcee48223e46fb59dc372d7d65e6e7eba9df05423bf005aeac61",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/captions.vtt",
-      "bytes": 399,
-      "sha256": "27b843e91b974dc325f15c867b526093c71f3d8904383ee553dfea8e905ab361",
+      "bytes": 811,
+      "sha256": "293f5a866bdfd0c6f09c719ba6bf2a54e4f72a38e9fca796dbd974597bf2e00e",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/poster.png",
-      "bytes": 889667,
-      "sha256": "f5fcae5cf71fe7285b0e2c6040e280f1e78611b229f2f5e72ec4d30905fe5238",
+      "bytes": 161287,
+      "sha256": "f5512762967dbae609d36847ac4d3f7b67d7f7a44553489548e51ac56e529334",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/README.md",
-      "bytes": 3680,
-      "sha256": "65ba104e44019bebf576e6fd9c97f0b05ee2dc3db724d5f66e678f83a814e53c",
+      "bytes": 4784,
+      "sha256": "832ca2bf9f5770f691b963e5a7037dd86832bcd6e18155f902774f03211bf86e",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/AUDIT.md",
-      "bytes": 4054,
-      "sha256": "0b6ba4c575feb5ee40122e8aa0174e9bc0bf5fcae6d0e2a1d52ec160b6b454e6",
+      "bytes": 6312,
+      "sha256": "923a1a2b8ea314414c26c3ecb02bea467248b79dfb9e69a9a4934c8ab0c64249",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/SCREENPLAY.md",
-      "bytes": 1897,
-      "sha256": "917f4645d50de2063cff6f629e678181c775a499dc5deaffcbcb2d26d238c75f",
+      "bytes": 3543,
+      "sha256": "8d1df1890ded0e407cd3f20dc62c18e9a64744368708681d331d4c683df9462a",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/DELIVERY.md",
-      "bytes": 5069,
-      "sha256": "2b9ab01ee35b997f17850dc4d368172f93bcf4e0bc798f8e7c4d66257de2f8dc",
+      "bytes": 7513,
+      "sha256": "293566d1ac1585be860fe28c428f7cbcced8e10ef6ee76960315633e87b6e0c1",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/WATCH.html",
-      "bytes": 1267,
-      "sha256": "3b7b456eaf05dd035384668338e05d3baae64bbf21f4b66408cda7a67b1cedcc",
+      "bytes": 1369,
+      "sha256": "5169b9f01322a0e9115f361099a42778a32ede673900e79d19aa65eac3c1f563",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/ANIMATIC-REVIEW.md",
-      "bytes": 3026,
-      "sha256": "51cb2d2cb9ec7869d148afccd6929cd355deda276ac3925f3831f59aa0f381e5",
+      "bytes": 3540,
+      "sha256": "c2a1339afa40cb3fd6655a75b96cedf2b13092ee3cd160c6c90ec2957a078948",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/TECHNICAL-QA.json",
-      "bytes": 5009,
-      "sha256": "e55134673c9e6e241bbe5e8be8372ea0674bba1d49997d5bddd9417e89b92799",
+      "bytes": 8317,
+      "sha256": "37579f4cf9a567eafbcf077559013abcafddbf243219aeec0fde328a9758ddc3",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/PLAYBACK-QA.json",
-      "bytes": 33952,
-      "sha256": "d67f793bc32c8d377191a5f0fa451611b0d7830712909851112b9deaafe788d1",
+      "bytes": 25312,
+      "sha256": "b31f4dc35f3c6379872da4314a8a7e86987e81cbdb03a573167df714f4d9180b",
       "role": "PRODUCTION / PROOF MANIFEST"
     }
   ],
@@ -411,6 +490,30 @@
       "bytes": 366568,
       "sha256": "0e0130c57e367cb4c993946e3cf0c1465fe4ee656c78510e94c4f905c21f9189",
       "role": "EXISTING REFERENCE ONLY \u2014 not footage of this recovered run"
+    },
+    {
+      "path": "frontend/src/viz/scene/CanonicalRobot.tsx",
+      "bytes": 3327,
+      "sha256": "f9e6e832e1abd22de5673cf4adfa78ea62804b1abf3303f49c99ac9acb61baf9",
+      "role": "DIRECT CANON REUSE \u2014 unchanged World geometry, materials or layout"
+    },
+    {
+      "path": "frontend/src/viz/scene/ReceiverGate.tsx",
+      "bytes": 5982,
+      "sha256": "573534e712413774c1fa83b32f77a8a377b260782644ffcc10c8f60809c9f3db",
+      "role": "DIRECT CANON REUSE \u2014 unchanged World geometry, materials or layout"
+    },
+    {
+      "path": "frontend/src/viz/scene/ProposalPackets.tsx",
+      "bytes": 6887,
+      "sha256": "e90ce0cc3757b7c9b5616cc8d3b1cd53ab2ed511a62f74ff33855f81627fa67e",
+      "role": "DIRECT CANON REUSE \u2014 unchanged World geometry, materials or layout"
+    },
+    {
+      "path": "frontend/src/viz/scene/layout.ts",
+      "bytes": 3475,
+      "sha256": "b320e5de7b7d06feb13f4d2f6f01cb3e8148cfdfd9e46cde672d6bbf73e764ce",
+      "role": "DIRECT CANON REUSE \u2014 unchanged World geometry, materials or layout"
     },
     {
       "path": "backend/server.py",
@@ -461,6 +564,18 @@
       "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
     },
     {
+      "path": "production/flagship-001/tools/stage.tsx",
+      "bytes": 2646,
+      "sha256": "b4d981bb4e0d75a36d764072244d8a3988c7e7fda7debac544168c219e710ca3",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "production/flagship-001/tools/capture.mjs",
+      "bytes": 8926,
+      "sha256": "7df2ee81882f4da1d7b6b0b4c444071fd2b46f07f7910335eaea71f3601df974",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
       "path": "production/flagship-001/tools/render.py",
       "bytes": 5925,
       "sha256": "045f222f3c9ae633907bdb3e64bff8f1b18d4b2777ed8a32f72af042d625d92d",
@@ -485,8 +600,9 @@
       "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
     }
   ],
+  "classification_policy": "Physical scene is DRAMATIZATION. Only the preserved STOPPED UI panel is REAL CAPTURE in the current picture. ALLOWED comparison is underlying evidence only.",
   "private_keys_exported": false,
   "paid_assets": false,
   "external_api_spend": 0,
-  "voice_disclosure": "Local neural voice; full takes included. No human recording."
+  "voice_disclosure": "Local neural voice at natural speed 1.0; full takes included. No human recording; human listening unverified."
 }

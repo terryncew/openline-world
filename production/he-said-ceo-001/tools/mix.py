@@ -25,9 +25,9 @@ log=subprocess.run(cmd,capture_output=True,text=True,check=True).stderr;measure=
 f='loudnorm=I=-16:TP=-2:LRA=8:measured_I={input_i}:measured_TP={input_tp}:measured_LRA={input_lra}:measured_thresh={input_thresh}:offset={target_offset}:linear=true'.format(**measure)
 subprocess.run(['ffmpeg','-v','error','-y','-i',str(ROOT/'work/mix-raw.wav'),'-af',f,'-ar',str(SR),'-c:a','flac',str(ROOT/'audio/final-mix.flac')],check=True)
 (ROOT/'audio/MIX.json').write_text(json.dumps({'timeline':'TIMELINE.json','sample_rate':SR,'samples':len(mix),'channels':2,'original_sfx':True,'score':False,'voice_sources':'VOICE-SOURCES.json','loudness_first_pass':measure,'speech_cues':entries,'silence_windows':T['silence_windows']},indent=2)+'\n')
-(ROOT/'CAPTIONS.json').write_text(json.dumps({'source':'TIMELINE.json + measured full voice takes','fps':30,'visual_policy':'Designed type already contains the dialogue. External captions are optional and are not burned over it.','cues':entries},indent=2,ensure_ascii=False)+'\n')
+(ROOT/'CAPTIONS.json').write_text(json.dumps({'source':'TIMELINE.json + measured full voice takes','fps':30,'visual_policy':'Physical staging plus only essential designed dialogue/value lines. Full voiceover captions remain external; no duplicated burned-in narration.','cues':entries},indent=2,ensure_ascii=False)+'\n')
 def timestamp(s):
  ms=round(s*1000);return f'{ms//3600000:02d}:{ms//60000%60:02d}:{ms//1000%60:02d},{ms%1000:03d}'
 (ROOT/'captions.srt').write_text('\n\n'.join(f"{i+1}\n{timestamp(e['start_seconds'])} --> {timestamp(e['end_seconds'])}\n{e['text']}" for i,e in enumerate(entries))+'\n')
 (ROOT/'captions.vtt').write_text('WEBVTT\n\n'+'\n\n'.join(f"{timestamp(e['start_seconds']).replace(',','.')} --> {timestamp(e['end_seconds']).replace(',','.')}\n{e['text']}" for e in entries)+'\n')
-print('Sample-accurate mix and captions generated. 43s; all takes intact; silence preserved.')
+print('Sample-accurate mix and captions generated.',T['seconds'],'s; all takes intact; silence preserved.')
