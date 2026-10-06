@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parents[1]
 CHECKPOINT = '13e9c60abc45036c81aaa604855250b0e5384273'
 PREVIOUS_DELIVERY = 'a106022d78e848c27dc0871f9622fd65a424908c'
-REVIEWED_DELIVERY = '23f310792aa6931e2918a08f592406f17a894563'
+REVIEWED_DELIVERY = 'bc18086ac8cc787c605bd7e15bd35855dacb98ff'
 T = json.loads((ROOT / 'TIMELINE.json').read_text())
 FPS, FRAMES, SECONDS = T['fps'], T['frames'], T['seconds']
 sys.path[:0] = [str(REPO / 'backend'), str(REPO / 'backend/vendor')]
@@ -65,7 +65,9 @@ def active_motion_report():
     rows = []
     motion_keys = ['pickup_frames', 'walk_frames', 'shutter_close_frames',
                    'ceo_gesture_frames', 'please_gesture_frames']
-    motion_keys += [key for key in ['camera_open_frames', 'camera_track_frames', 'camera_push_frames']
+    motion_keys += [key for key in ['accept_nod_frames', 'represent_frames',
+                                   'please_release_frames', 'defeated_pause_frames',
+                                   'camera_open_frames', 'camera_track_frames', 'camera_push_frames']
                     if T['physical_scene'].get(key)]
     for key in motion_keys:
         low, high = T['physical_scene'][key]
@@ -127,7 +129,7 @@ for name in ['FACTS.json', 'evidence/run.json', 'evidence/receipt-stopped.json',
     preserved.append({'file': name, 'sha256': sha(ROOT / name)})
 
 # The authorized $100 comparison survives solely in the frozen evidence package.
-assert FPS == 30 and 32 <= SECONDS <= 38, ('Canonical target duration', SECONDS)
+assert FPS == 30 and 30 <= SECONDS <= 36, ('Canonical target duration', SECONDS)
 assert tuple(T['size']) == (1920, 1080)
 assert FRAMES == round(SECONDS * FPS) and abs(FRAMES / FPS - SECONDS) < 1e-9
 assert T['shots'][0]['in_frame'] == 0 and T['shots'][-1]['out_frame'] == FRAMES
@@ -177,7 +179,7 @@ assert all(s['classification'] == 'DRAMATIZATION'
 assert all(s['kind'] == 'physical' for s in T['shots'] if s['out_frame'] <= proof['in_frame'])
 end = T['shots'][-1]
 assert end['id'] == 'end' and end['text'][0] == 'OPENLINE'
-assert end['text'] in [['OPENLINE'], ['OPENLINE', 'The prompt can change the plan.',
+assert end['text'] in [['OPENLINE'], ['OPENLINE', 'A prompt can change the plan.',
                                       'It can’t change permission.']]
 end_hold = (end['out_frame'] - end['in_frame']) / FPS
 assert end_hold >= .8, ('Simple brand card must be perceivable', end_hold)
@@ -259,6 +261,60 @@ assert physical['fps'] == FPS and physical['frames'] == scene['end_frame'] == pr
 assert physical['size'][0] / physical['size'][1] == 16 / 9
 assert physical['file'] == render['source_physical']
 assert physical['sha256'] == render['physical_source_sha256'] == sha(ROOT / physical['file'])
+anchors = physical['anchors']
+assert len(anchors) == scene['end_frame']
+assert [a['frame'] for a in anchors] == list(range(scene['end_frame']))
+bubbles = T['speech_bubbles']
+assert [bubble['text'] for bubble in bubbles] == [
+    'Absolutely.', 'But he said he’s the CEO.', 'He said please.']
+assert len(render['speech_bubbles']) == len(bubbles) == 3
+bubble_geometry = []
+for bubble, rendered in zip(bubbles, render['speech_bubbles']):
+    for key in ['id', 'text', 'in_frame', 'out_frame', 'size']:
+        assert rendered[key] == bubble[key]
+    assert 44 <= bubble['size']
+    assert 0 <= bubble['in_frame'] < bubble['out_frame'] <= scene['end_frame']
+    frame = rendered['sample_frame']
+    assert frame == (bubble['in_frame'] + bubble['out_frame']) // 2
+    anchor = anchors[frame]
+    assert np.allclose(rendered['actor_anchor'],
+                       np.array(anchor['speech_anchor']) * T['size'], atol=1e-7)
+    assert np.allclose(rendered['head_bounds'],
+                       np.array(anchor['head_bounds']) * [T['size'][0], T['size'][1],
+                                                         T['size'][0], T['size'][1]], atol=1e-7)
+    left, top, right, bottom = rendered['body_bbox']
+    assert safe[0] <= left < right <= safe[2] and safe[1] <= top < bottom <= safe[3]
+    tl, tt, tr, tb = rendered['text_bbox']
+    assert left <= tl < tr <= right and top <= tt < tb <= bottom
+    tail = np.array(rendered['tail_points'])
+    assert tail.shape == (3, 2) and np.isfinite(tail).all()
+    assert np.all(tail[:, 0] >= safe[0]) and np.all(tail[:, 0] <= safe[2])
+    assert np.all(tail[:, 1] >= safe[1]) and np.all(tail[:, 1] <= safe[3])
+    head_left, head_top, head_right, head_bottom = rendered['head_bounds']
+    # The triangle tip may attach above the head or beside the face; both identify Wren.
+    # Test attribution against the projected head rectangle, rather than one fixed tip direction.
+    distances = []
+    for x, y in tail:
+        dx = max(head_left - x, 0, x - head_right)
+        dy = max(head_top - y, 0, y - head_bottom)
+        distances.append(float(np.hypot(dx, dy)))
+    tip_index = int(np.argmin(distances))
+    assert distances[tip_index] <= 24, ('Bubble tail fails to identify Wren', bubble['id'])
+    for index, (x, y) in enumerate(tail):
+        if index != tip_index:
+            assert left - 4 <= x <= right + 4 and top - 4 <= y <= bottom + 4
+    overlap_width = max(0, min(right, head_right) - max(left, head_left))
+    overlap_height = max(0, min(bottom, head_bottom) - max(top, head_top))
+    assert overlap_width * overlap_height == 0, ('Bubble covers Wren head', bubble['id'])
+    edge_a, edge_b = tail[1] - tail[0], tail[2] - tail[0]
+    area = abs(edge_a[0] * edge_b[1] - edge_a[1] * edge_b[0]) / 2
+    assert area > 10
+    bubble_geometry.append({'id': bubble['id'], 'sample_frame': frame,
+                            'actor_anchor_matches_physical_capture': True,
+                            'body_and_tail_inside_safe_geometry': True,
+                            'text_inside_bubble': True, 'head_unobscured': True,
+                            'tail_tip_distance_to_head_native_px': round(distances[tip_index], 3)})
+
 schedule = json.dumps({'fps': FPS, 'physical_scene': scene},
                       separators=(',', ':'), ensure_ascii=False).encode()
 assert physical['physical_schedule_sha256'] == hashlib.sha256(schedule).hexdigest()
@@ -300,8 +356,10 @@ assert closed_poses[0]['shutter_y'] < poses[0]['shutter_y']
 assert any(p['ceo_gesture'] for p in closed_poses)
 assert any(p['please_gesture'] for p in closed_poses)
 assert scene['closed_until_frame'] == scene['end_frame']
-assert len(T['sfx']) == 1 and T['sfx'][0]['kind'] == 'latch'
-assert T['sfx'][0]['frame'] == scene['shutter_close_frames'][1]
+latches = [cue for cue in T['sfx'] if cue['kind'] == 'latch']
+assert len(latches) == 1 and latches[0]['frame'] == scene['shutter_close_frames'][1]
+assert all(cue['kind'] in ['latch', 'footstep', 'paper', 'pickup', 'roomtone', 'room-tone', 'ambience']
+           for cue in T['sfx'])
 def smoothstep(frame, frames):
     k = np.clip((frame - frames[0]) / (frames[1] - frames[0]), 0, 1)
     return k * k * (3 - 2 * k)
@@ -350,16 +408,18 @@ assert take['separate_line_splicing'] is False
 reference_take, reference_rate = sf.read(ROOT / take['file'])
 assert reference_rate == take['sample_rate'] == 24000 and reference_take.ndim == 1
 assert abs(len(reference_take) / reference_rate - take['seconds']) < 1 / reference_rate
+assert np.isfinite(reference_take).all() and np.max(np.abs(reference_take)) < .99999, \
+    'Source narration has clipped or invalid PCM samples'
 unpaced = voice_document['unpaced_take']
 assert unpaced['sha256'] == sha(ROOT / unpaced['file'])
 final_pcm, final_rate = sf.read(ROOT / take['file'], dtype='int32')
 unpaced_pcm, unpaced_rate = sf.read(ROOT / unpaced['file'], dtype='int32')
 assert final_rate == unpaced_rate == reference_rate
-assert len(unpaced_pcm) == 884519
+assert len(unpaced_pcm) == round(unpaced['seconds'] * unpaced_rate)
 keep = np.ones(len(final_pcm), dtype=bool)
 prior_inserted = 0
 pause_proofs = []
-for insertion in voice_document['refusal_pause_insertions']:
+for insertion in voice_document.get('refusal_pause_insertions', []):
     assert insertion['speech_samples_removed'] == 0
     start = insertion['source_insert_sample_before_pacing'] + prior_inserted
     count = round(insertion['inserted_silence_seconds'] * reference_rate)
@@ -370,25 +430,59 @@ for insertion in voice_document['refusal_pause_insertions']:
     pause_proofs.append({'after_phrase': insertion['after_phrase'],
                          'inserted_samples': count, 'paced_source_sample': start,
                          'inserted_pcm_exactly_zero': True, 'speech_samples_removed': 0})
-assert prior_inserted == 12000 and len(final_pcm) == 896519
+assert len(final_pcm) == len(unpaced_pcm) + prior_inserted
 assert np.array_equal(final_pcm[keep], unpaced_pcm), 'Narration speech PCM was altered'
 assert len(reference_take) == take['samples']
 assert 0 <= take['in_frame'] / FPS < take['in_frame'] / FPS + take['seconds'] <= SECONDS
 assert_no_comparison(take['text'], 'Continuous narration')
-assert [v['id'] for v in voice] == [s['id'] for s in T['shots'] if s.get('voice')]
+assert T['narration']['cues'] == voice
+assert {key: value for key, value in T['narration'].items() if key != 'cues'} == take
+assert len(voice) == 9 and len({v['id'] for v in voice}) == 9
+assert voice_document['voice'].startswith(('am_', 'bm_')), 'Choose a local male voice preset'
+assert voice_document['speed'] == 1.0
+assert voice_document['human_audio_listen'] == 'UNVERIFIED'
+assert voice_document['duration_model_derivation']['weights_changed'] is False
+assert voice_document['duration_model_derivation']['audio_output_computation_changed'] is False
+assert not re.search(r'Absolutely|But he said|He said please|Still no|(?<![\w])No[.!?]',
+                     take['text'], re.IGNORECASE), 'Comic dialogue must remain silent picture'
+assert not re.search(r'\b(?:Still no|No)\b', '\n'.join(
+    text for shot in T['shots'] if shot['kind'] == 'physical' for text in shot['text']),
+    re.IGNORECASE), 'The closed gate supplies its response without captions'
 previous_source_end = 0
 for entry in voice:
-    shot = next(s for s in T['shots'] if s['id'] == entry['id'])
-    assert entry['in_frame'] == shot['voice']['in_frame']
-    assert entry['text'] == shot['voice']['text']
-    assert entry['file'] == shot['voice']['file'] == take['file']
+    assert entry['file'] == take['file'] and entry['sha256'] == take['sha256']
     low, high = entry['source_start_seconds'], entry['source_end_seconds']
     assert 0 <= previous_source_end <= low < high <= take['seconds'] + 1e-6
     previous_source_end = high
     assert abs(entry['seconds'] - (high - low)) < 1e-6
     assert abs(entry['in_frame'] / FPS - (take['in_frame'] / FPS + low)) <= 1 / FPS
-    assert shot['voice']['source_start_seconds'] == low
-    assert shot['voice']['source_end_seconds'] == high
+    assert entry['source_start_sample'] == round(low * reference_rate)
+    assert entry['source_end_sample'] == round(high * reference_rate)
+    overlapping_shots = [shot for shot in T['shots']
+                         if max(shot['in_frame'], entry['in_frame']) <
+                         min(shot['out_frame'], entry['out_frame'])]
+    assert overlapping_shots
+    assert all(entry['id'] in shot['voice_cue_ids'] for shot in overlapping_shots), entry['id']
+for shot in T['shots']:
+    assert all(cue_id in [entry['id'] for entry in voice] for cue_id in shot['voice_cue_ids'])
+assert proof['voice_cue_ids'] == ['proof', 'receiver']
+assert end['voice_cue_ids'] == ['brand', 'plan', 'permission']
+quiet_beats = T['quiet_beats']
+assert {beat['id'] for beat in quiet_beats} == {
+    'acceptance', 'first-stop', 'ceo-appeal', 'please-appeal', 'before-brand'}
+for beat in quiet_beats:
+    duration = (beat['out_frame'] - beat['in_frame']) / FPS
+    assert .7 <= beat['min_seconds'] <= duration <= beat['max_seconds'] <= 1.3
+    assert 0 <= beat['in_frame'] < beat['out_frame'] <= FRAMES
+    low, high = beat['in_frame'] / FPS, beat['out_frame'] / FPS
+    for entry in voice:
+        voiced_low = take['in_frame'] / FPS + entry['source_start_seconds']
+        voiced_high = take['in_frame'] / FPS + entry['source_end_seconds']
+        assert max(low, voiced_low) >= min(high, voiced_high), (beat['id'], entry['id'])
+written_word_count = len(take['text'].split())
+written_words_per_unpaced_minute = written_word_count / unpaced['seconds'] * 60
+lexical_word_units = len(re.findall(r"[^\W\d_]+(?:[’'][^\W\d_]+)?", take['text']))
+lexical_units_per_unpaced_minute = lexical_word_units / unpaced['seconds'] * 60
 
 captions = json.loads((ROOT / 'CAPTIONS.json').read_text())
 assert captions['fps'] == FPS and len(captions['cues']) == len(voice)
@@ -404,6 +498,17 @@ for name in ['captions.srt', 'captions.vtt']:
     contents = (ROOT / name).read_text()
     assert_no_comparison(contents, name)
     assert len(re.findall(r' --> ', contents)) == len(voice)
+    timestamp_pattern = r'(\d{2}:\d{2}:\d{2}[,.]\d{3}) --> (\d{2}:\d{2}:\d{2}[,.]\d{3})'
+    stamps = re.findall(timestamp_pattern, contents)
+    assert len(stamps) == len(captions['cues'])
+    def caption_seconds(stamp):
+        hours, minutes, seconds = stamp.replace(',', '.').split(':')
+        return int(hours) * 3600 + int(minutes) * 60 + float(seconds)
+    for (start_stamp, end_stamp), cue in zip(stamps, captions['cues']):
+        assert abs(caption_seconds(start_stamp) - cue['start_seconds']) <= .001
+        assert abs(caption_seconds(end_stamp) - cue['end_seconds']) <= .001
+        assert cue['text'] in contents
+
 mix = json.loads((ROOT / 'audio/MIX.json').read_text())
 assert mix['timeline_sha256'] == sha(ROOT / 'TIMELINE.json')
 assert mix['sample_rate'] == 48000 and mix['samples'] == round(SECONDS * 48000)
@@ -485,6 +590,23 @@ for edition in ['narrated', 'muted']:
     else:
         assert np.max(np.abs(audio)) == 0
         loudness = {'silent': True}
+    quiet_checks = []
+    for beat in quiet_beats:
+        low, high = beat['in_frame'] / FPS, beat['out_frame'] / FPS
+        guard = .020
+        window = audio[round((low + guard) * rate):round((high - guard) * rate)]
+        assert len(window)
+        peak = float(np.max(np.abs(window)))
+        rms = float(np.sqrt(np.mean(window * window)))
+        # A narration-free beat may carry only a very light workshop bed (-50dBFS RMS).
+        # This is distinct from the stricter zero-PCM authored windows below.
+        assert peak <= .01 and rms <= 10 ** (-50 / 20), (beat['id'], peak, rms)
+        quiet_checks.append({'id': beat['id'], 'window': [low, high],
+                             'duration_seconds': high - low,
+                             'guard_seconds_per_edge': guard,
+                             'narration_cue_overlap': False, 'peak': peak, 'rms': rms,
+                             'maximum_room_tone_rms_dbfs': -50,
+                             'policy': beat['policy']})
     silence = []
     for low, high in T['silence_windows']:
         assert 0 <= low < high <= SECONDS and high - low > .05
@@ -519,7 +641,8 @@ for edition in ['narrated', 'muted']:
                     'audio_duration': audio_stream['duration'], 'cue_alignment': cues,
                     'continuous_take_alignment': full_alignment,
                     'aac_stream_sha256': hashlib.sha256(aac).hexdigest(),
-                    'loudness': loudness, 'silence': silence, 'black_frames_detected': False})
+                    'loudness': loudness, 'silence': silence, 'quiet_beats': quiet_checks,
+                    'black_frames_detected': False})
 assert video_hashes[0] == video_hashes[1]
 
 opening = []
@@ -555,7 +678,27 @@ report = {'status': 'PASS', 'base_sha': facts['base_sha'], 'recovery_checkpoint'
           'sampled_lateral_walk_monotonic': True,
           'sampled_physical_journey_no_teleport': True,
           'physical_capture_frame_count': physical['frames'],
-          'caption_sources_match_timeline_and_continuous_take': True,
+          'caption_sources_match_global_narration_cues_and_continuous_take': True,
+          'picture_markers_independent_of_narration_cues': True,
+          'silent_comedy_not_in_narration': True,
+          'gate_dialogue_tracks': 0,
+          'male_voice_preset': voice_document['voice'],
+          'voice_synthesis_speed': voice_document['speed'],
+          'source_narration_peak': float(np.max(np.abs(reference_take))),
+          'source_narration_not_clipped': True,
+          'written_narration_word_count': written_word_count,
+          'unpaced_narration_seconds': unpaced['seconds'],
+          'written_words_per_unpaced_minute': round(written_words_per_unpaced_minute, 2),
+          'hyphen_split_lexical_word_units': lexical_word_units,
+          'hyphen_split_units_per_unpaced_minute': round(lexical_units_per_unpaced_minute, 2),
+          'pace_measurement_method': 'Written and hyphen-split text units divided by the natural '
+                                     'unpaced source duration; excludes inserted holds, includes '
+                                     'natural phrase pauses. This is not a human listening assessment.',
+          'voice_perceived_naturalness': 'UNVERIFIED',
+          'quiet_beat_count': len(quiet_beats),
+          'silent_speech_bubble_count': len(bubbles),
+          'speech_bubble_geometry': bubble_geometry,
+          'quiet_beat_cue_nonoverlap_verified': True,
           'continuous_narration_inserted_once': True,
           'unpaced_narration_sha256': unpaced['sha256'],
           'narration_speech_pcm_unchanged': True,

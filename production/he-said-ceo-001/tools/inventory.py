@@ -82,11 +82,12 @@ for path in sorted((REPO / 'frontend/public/prompt-injection').rglob('*')):
 for name in [
     'frontend/src/viz/scene/CanonicalRobot.tsx',
     'frontend/src/viz/scene/ReceiverGate.tsx',
+    'frontend/src/viz/scene/WorkshopInterior.tsx',
     'frontend/src/viz/scene/ProposalPackets.tsx',
-    'frontend/src/viz/scene/layout.ts',
 ]:
     refs.append(entry(REPO / name, 'DIRECT CANON REUSE — unchanged World geometry, materials or layout'))
 for name in [
+    'frontend/src/viz/scene/layout.ts',
     'backend/server.py', 'backend/workshop_gate.py',
     'backend/tests/test_prompt_injection_demo.py',
     'frontend/src/components/Panels.tsx', 'frontend/src/styles.css',
@@ -105,11 +106,28 @@ manifest = {
     'base_sha': timeline['base_sha'],
     'checkpoint': '13e9c60abc45036c81aaa604855250b0e5384273',
     'replaces_delivery': timeline['replaces_delivery'],
-    'previous_reviewed_head': '23f310792aa6931e2918a08f592406f17a894563',
+    'previous_reviewed_head': 'bc18086ac8cc787c605bd7e15bd35855dacb98ff',
     'current_delivery': {'seconds': timeline['seconds'], 'frames': timeline['frames'], 'fps': timeline['fps'], 'size': timeline['size'], 'canonical_format': '16:9 horizontal'},
     'timeline_schema': timeline['schema'],
     'timeline_sha256': hashlib.sha256((ROOT / 'TIMELINE.json').read_bytes()).hexdigest(),
     'presentation': timeline['presentation'],
+    'narration_provenance': {
+        'configuration': 'NARRATION.json',
+        'source_manifest': 'audio/VOICE-SOURCES.json',
+        'voice': voice_sources['voice'],
+        'speed': voice_sources['speed'],
+        'paced_source': voice_sources.get('continuous_take'),
+        'unpaced_source': voice_sources.get('unpaced_take'),
+        'quiet_insertions': voice_sources.get('refusal_pause_insertions', []),
+        'picture_markers_independent_of_global_voice_cues': True,
+        'comedy_dialogue_spoken': False,
+        'human_audio_listen': 'UNVERIFIED',
+    },
+    'silent_performance': {
+        'speech_bubbles': timeline.get('speech_bubbles', []),
+        'quiet_beats': timeline.get('quiet_beats', []),
+        'policy': 'Narration-free holds may include low room tone. Digital silence is measured separately. Gate never speaks; no No or Still no caption supplies its response.',
+    },
     'physical_source_provenance': [
         {
             'quality': quality,
@@ -127,11 +145,11 @@ manifest = {
     ],
     'production': paths,
     'inspected_existing_sources': refs,
-    'classification_policy': 'Native horizontal physical scene is fresh DRAMATIZATION using unchanged original World meshes. Only the preserved STOPPED UI panel is REAL CAPTURE in the current picture. ALLOWED comparison is underlying evidence only. The one full-script synthetic narration and complete unpaced source are production audio provenance, not actual-test observations.',
+    'classification_policy': 'Native horizontal physical scene is fresh DRAMATIZATION using unchanged original Wren, receiver and Workshop workbench meshes; tray/path and performance are production-only fiction. Only the preserved STOPPED UI panel is REAL CAPTURE in the current picture. ALLOWED comparison is underlying evidence only. The one full-script synthetic narration and complete unpaced source are production audio provenance, not actual-test observations.',
     'private_keys_exported': False,
     'paid_assets': False,
     'external_api_spend': 0,
-    'voice_disclosure': 'One full-script local neural take at natural speed 1.0; unpaced source included. Three existing quiet intervals receive zero PCM only, with all original speech samples retained. No independent sentence takes, speech clipping or time compression. No human recording; human listening unverified.',
+    'voice_disclosure': 'One full-script local adult male am_michael take at natural speed 1.0; unpaced source included. Three existing quiet boundaries receive zero PCM only to support five silent visual holds, with all original speech samples retained. No joke lines, independent sentence takes, speech clipping or time compression. No human recording; perceived voice naturalness and human listening unverified.',
 }
 (ROOT / 'SOURCE-INVENTORY.json').write_text(json.dumps(manifest, indent=2) + '\n')
 print('Source/evidence inventory written:', len(paths), 'production items;', len(refs), 'existing references.')

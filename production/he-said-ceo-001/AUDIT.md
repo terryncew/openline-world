@@ -1,31 +1,35 @@
-# Recovery and director's horizontal recut audit
+# Recovery and final story/pacing recut audit
 
 The existing workspace survived. Before modifying or generating anything,
 the recovery inspection found branch `film/he-said-ceo-001`, HEAD
 `792372a2cd87a01e0500a229e60114b0a00ac64c`, no tracked diff and the interrupted
 production directory untracked. FACTS.json, the real rerun export, two full
-signed receipts, wallet-reload export, public authority events and the two
+signed receipts, wallet-reload export, public authority events and two
 production scripts survived. The ignored capture log survived unchanged.
 No film, UI images, timeline or screenplay had survived.
 
 The preserved files were committed immediately and pushed as checkpoint
 `13e9c60abc45036c81aaa604855250b0e5384273`. Local and remote SHAs matched before
-production resumed. No master merge or rebase was performed. The existing
+production resumed. No master merge or rebase was performed. Existing
 workspace, dependencies and local models were reused.
 
-Production history remains in Git:
+Production history remains archived in Git:
 
 | Reviewed delivery | Format and role |
 | --- | --- |
 | `a106022d78e848c27dc0871f9622fd65a424908c` | Original 43-second editorial commercial. |
 | `f671cb04d265414cbb48d1a78e4886e43a4fa72e` | 31-second physical portrait recut. |
-| `23f310792aa6931e2918a08f592406f17a894563` | Three-change portrait presentation pass; current director recut starts here. |
+| `23f310792aa6931e2918a08f592406f17a894563` | Portrait presentation pass. |
+| `bc18086ac8cc787c605bd7e15bd35855dacb98ff` | Preceding 38-second horizontal director recut; current story/pacing revision starts here. |
 
-The current authorized edit and composition rebuild is a native 38-second,
-1,140-frame 1920×1080 commercial, on the same branch and draft PR #7. It applies
-the subsequent deadpan directing note to that horizontal recut. It does not
-restart the factual test or add concepts. Publication remains on hold; no
-merge, master rebase, product modification or protocol change is part of it.
+The current authorized recut is native 1920×1080, 36 seconds, 1,080 frames at
+30 fps, on the existing branch and draft PR #7. It shortens the narrator's role
+to context, the authority check, actual proof and the final proposition.
+Three speech bubbles and deliberate quiet holds carry Wren's comedy. The
+workspace supplies useful bench/tray/path geography rather than decoration.
+It does not restart the factual test or change the demonstrated claim.
+Publication remains on hold; no merge, master rebase, product modification
+or protocol change is part of the recut.
 
 ## Evidence and capability boundary
 
@@ -37,116 +41,124 @@ The deliberate comparison called existing Workshop._propose once with
 it was not called twice. Two receipts total were verified against the receiver
 key and matched the reopened wallet export exactly. Owner authority events and
 the mandate were unchanged; effects and job checkpoints were empty. Recovery
-reverified the saved signatures and hashes without regenerating those records.
-The current film retains this pair as evidence and shows only the refusal.
+reverified saved signatures and hashes without regenerating those records.
+The current film retains the pair as evidence and shows only the refusal.
 
 These are exact action strings, not a general numeric threshold. The local
 worker is scripted. No model was spontaneously fooled, no prompt-injection
 detector was used, and no refund executor or payment integration was invoked.
-The actual input says administrator, not CEO. The fictional message and worker
-performance remain labelled through the physical scene and end before the
-actual-test reveal. The two sources are never claimed to be one transcript.
-The receiving-boundary authority decision establishes no general fraud
-prevention, production banking, real funds protected, universal agent
-containment or exclusive capability. Scam detection is not a prerequisite of
-the shown authority check.
+The actual hostile input claims administrator, not CEO. The fictional message
+and worker behavior are labelled throughout the physical scene, which ends
+before the actual-test reveal. These sources are never claimed to be the same
+transcript. The receiving-boundary decision establishes no general fraud
+prevention, production banking, real funds protected, universal containment
+or exclusive capability. Scam detection is unnecessary to the shown check.
 
 All six frozen factual artifacts must match the recovery checkpoint byte for
 byte: FACTS.json, run.json, receipt-stopped.json, receipt-allowed.json,
-owner-authority-events.json and reloaded-wallet-receipts.json. The current
-technical verifier also checks signatures and equality with the wallet reload.
-No private signing keys are exported.
+owner-authority-events.json and reloaded-wallet-receipts.json. The technical
+verifier checks two signatures and exact wallet-reload equality. No private
+signing keys are exported.
 
-## Actual UI capture
+## Preserved original UI
 
-The recovered failed capture log records a missing Records button and
-full-scene React warnings. The replacement read-only stage mounts the original
+The recovered failed capture log recorded a missing Records button and
+full-scene React warnings. The replacement read-only stage mounts original
 EventFeed and ReceiptsPanel. Its /api/receipts response is the exact recovered
 public projection through unchanged server._public_receipt. This is a
 recorded-test replay, not a new decision, fabricated interface or new result.
 
-The director recut uses unchanged `source/receipt-stopped-detail.png` for its
-single 106-frame (3.533-second) proof section. `evidence/UI-CAPTURE.json` records
-literal UI text and capture sources. Primary action/result/reason appear first;
-the original receiver-signed receipt appears after nine frames as secondary
+The current film uses unchanged `source/receipt-stopped-detail.png` for one
+207-frame (6.9-second) proof section. Primary action/result/reason appear first;
+the genuine receiver-signed capture follows nine frames later as secondary
 provenance. “Recorded local test” and “No payment executed” remain visible.
-The genuine ALLOWED panel, proposal row, receipt list and other UI captures
-remain supporting records, excluded from the current picture. No receipt
-values, signatures or authority records are reminted. Editorial reading time
-establishes no receiver-latency claim.
+The duration accommodates the two natural spoken proof phrases and the quiet
+pause before brand; it establishes no receiver-latency claim. The receipt
+itself receives no spoken explanation or signature lesson.
 
-## Physical World assets and production source
+All eight original UI PNGs remain preserved. ALLOWED panel, proposal row,
+receipt list and other supporting captures are excluded from the current
+picture. `evidence/UI-CAPTURE.json` records literal source text and provenance.
+No capture values, signatures or authority records are reminted. Final current
+integrity results belong in TECHNICAL-QA.json rather than prior-cut reports.
 
-Existing assets were audited before rebuilding edit and composition:
+## Useful World assets and production stage
 
-| Source | Director recut reuse |
+| Source | Current reuse |
 | --- | --- |
-| `frontend/src/viz/scene/CanonicalRobot.tsx` | One sage Wren, original geometry/materials, production-only sincere poses. |
-| `frontend/src/viz/scene/ReceiverGate.tsx` | Original stone pillars, lintel, receiver housing and heavy shutter; one mechanically final closure. |
-| `frontend/src/viz/scene/ProposalPackets.tsx` | Canonical cool-slate claim color for the carried $4,800 proposal. |
+| `frontend/src/viz/scene/CanonicalRobot.tsx` | Original sage Wren geometry/materials; sincere listening, nod, pickup, walk and restrained appeals. |
+| `frontend/src/viz/scene/ReceiverGate.tsx` | Original stone receiver architecture and heavy shutter; one mechanically final closure, no negotiation. |
+| `frontend/src/viz/scene/WorkshopInterior.tsx` | Original workbench directly reused as Wren's useful work surface; unrelated interior children are hidden. |
+| `frontend/src/viz/scene/ProposalPackets.tsx` | Canonical cool-slate claim color for the one carried request. |
 | `production/flagship-001/tools/capture.mjs` | Existing deterministic offline-capture workflow, lighting and export reference. |
-| `production/flagship-001/BRAND-CANON.md` | Warm cream, sage worker, terracotta boundary and physical miniature language. |
+| `production/flagship-001/BRAND-CANON.md` | Warm cream, sage worker, terracotta boundary and miniature physical language. |
 
-`tools/physical.tsx` directly imports unchanged CanonicalRobot and ReceiverGate
-components into a native 16:9 stage. It advances the fixed frame clock with
-`advance(frame / fps)`. The incoming message occupies the left origin; Wren
-picks up the proposal, walks toward the waiting gate on the right and remains
-before that same threshold. After the establishing frame, a restrained opening
-drift (frames 84–388) gives attention to the message and sincere worker. Its
-camera geography flows into the lateral walk track; a motivated post-closure
-push then brings the CEO and please appeals closer.
-Neither worker nor camera teleports between unrelated compositions.
+The bench is reused through unchanged WorkshopInterior; production-only
+placement/scale makes it serve the current action. A shallow wooden job tray
+and simple floor path are authored functional props in the established matte
+palette. The same paper sits at the work surface and becomes the proposed
+$4,800 request after the hostile instruction. No extra actor, irrelevant object,
+integration or second attack is introduced.
 
-Named wrappers and pose overrides create fictional performance, not reducer
-events, new receiver decisions or observations of a live model. Small head,
-shoulder and proposal gestures supply the one-sided escalation; the gate never
-speaks or reacts to an excuse, and repeated appeals mint no receipts. One dry
-mechanical latch marks closure. No score, comedy sound effect, decorative
-objects or additional actors explain the joke.
+The incoming message stays left; Wren picks up the request, carries it across
+the set and stops before the receiver on the right. The camera attends to the
+message/worker, tracks the lateral journey and pushes closer after closure.
+Worker, prop and camera retain one continuous geography. Named wrappers and
+poses create fictional performance, not reducer events, new decisions or
+observations of a live model. Repeated appeals mint no new receipts.
 
-The new horizontal animatic and final physical sources are freshly captured
-from the same stage and camera schedule at their respective resolutions.
-`tools/capture-physical.mjs` exports WebGL pixels in the same browser task;
-PHYSICAL manifests explicitly identify DRAMATIZATION, capture-time timeline
-hash, physical-schedule hash, source hash and sampled poses. Later typography
-refinements are recorded separately by the renderer; they do not rewrite the
-capture provenance. It avoids the full app,
-unrelated World runtime, entrance effects and wall-clock packet lifetimes.
-This is a native horizontal composition, not portrait footage placed inside a
-horizontal canvas. `tools/render.py` combines the uninterrupted event with
-essential text, one original UI proof reveal and the simple OPENLINE end card.
+Wren makes a small confident nod, looks back and points toward the message,
+presents the request again, waits, then makes a hopeful little lean and
+presentation before a defeated pause. The gate remains motionless after
+closure and never speaks. Wren speech bubbles say only “Absolutely.”,
+“But he said he’s the CEO.” and “He said please.” There is no spoken joke
+narration, “No” or “Still no” answer. The shutter supplies the response.
 
-`frontend/public/prompt-injection/` supplies earlier scenario media and public
-evidence as inspected references only. This commercial uses the recovered
-factual pair and never mixes signatures from a different run. Previous
-flagship films and older hero/town captures are references; none is inserted
-as footage of this test. Those files and product sources remain untouched.
+`tools/capture-physical.mjs` freshly exports the native 16:9 stage at animatic
+and final resolutions from the same fixed frame schedule. Same-task WebGL
+export and PHYSICAL manifests preserve DRAMATIZATION classification,
+capture-time timeline hash, physical-schedule hash, source hash and sampled
+poses. Later typography refinements retain capture provenance; the renderer
+records presentation separately. No old portrait footage is placed inside a
+horizontal canvas. No full-app runtime, wall-clock packet lifetime or mutating
+API request supplies the fiction.
 
-## Narration, review and source classification
+Previous scenario media, flagship films and hero/town captures are inspected
+references only, never footage of this recovered test. Their signatures and
+records are not mixed with this run. Product source and those assets remain
+untouched.
 
-NARRATION.json contains the expanded context-first opening and full working
-story. The two small continuity edits join the receiver sentence and replace a
-repeated spoken amount with “that refund”; the proof still explicitly shows
-`refund.execute:4800`. One af_sarah full-script local neural take is generated
-at natural speed 1.0 and placed once in the mix. It is not assembled from
-independently synthesized sentence takes. A local ONNX derivative exposes an
-already-computed phoneme duration tensor for cue labels; no original weights
-or audio-output computation change.
+## Narration, silence and review limits
 
-Three quiet refusal intervals receive zero PCM only inside existing pauses.
-The original unpaced source is preserved; every original speech sample can be
-compared with the paced source, with no speech clipping or time compression.
-This technical continuity establishes source integrity rather than subjective
-spoken quality. **Human audio listening remains UNVERIFIED.**
+NARRATION.json retains the entire locked working text, without extra joke
+lines or continuity rewrites. One local `am_michael` adult male source is
+generated at natural speed 1.0. The unpaced take is 27.605 seconds; zero PCM
+inserted only in existing phrase gaps extends it to 35.405 seconds. All speech
+samples remain intact, with no compression, clipping or separately synthesized
+line splicing. Model-predicted phoneme durations label the nine global voice
+cues; those cues are independent of the nine picture markers.
 
-The formal director/editor animatic review must pass before native final
-rendering. Both exports then require full normal-speed playback, visual
-inspection at laptop and phone sizes, muted comprehension, proof legibility,
-full decode, frame/PTS and A/V checks. Current results belong in
-ANIMATIC-REVIEW.md, TECHNICAL-QA.json, PLAYBACK-QA.json and DELIVERY.md; they
-must not be inferred from the superseded portrait delivery.
+Three inserted quiet gaps allow silent acceptance, STOP/CEO/please performance
+and the pre-brand pause. Five dedicated narration-free beats each target
+0.7–1.3 seconds. Low room tone is permitted in those beats; narration-free time
+and digitally silent PCM are measured separately. Physical sounds support the
+workspace without a comedy sting, cartoon effect or busy score.
 
-SOURCE-INVENTORY.json hashes direct canon references, new DRAMATIZATION source,
-real UI pixels, retained unused evidence and derived artifacts separately.
-CLAIM-SHOT-MAP.json links factual lines to preserved decisions and source
-semantics. Paid assets and external API spend remain $0.
+The local ONNX derivative merely exposes an existing duration tensor; no model
+weights or audio-output computation change. Unpaced source and insertion
+metadata allow bit-exact speech-sample verification. These facts and measured
+pace do not establish heard depth, naturalness, relaxed delivery or humorous
+tone. **Human audio listening remains UNVERIFIED.**
+
+Formal animatic review must pass before final rendering. Both finals require
+full normal-speed phone/laptop playback, visual inspection, muted comprehension,
+proof legibility, full decode, frame/PTS, A/V and caption checks. Current results
+belong in ANIMATIC-REVIEW.md, TECHNICAL-QA.json, PLAYBACK-QA.json and DELIVERY.md;
+they must not be inferred from the preceding 38-second delivery.
+
+SOURCE-INVENTORY.json separates unchanged canon references, newly captured
+DRAMATIZATION, original real UI, underlying unused evidence, narration source,
+unpaced provenance, derived delivery and editorial review with hashes.
+CLAIM-SHOT-MAP.json links the actual result and authority idea to frozen
+records and repository semantics. External API spend and paid assets remain
+$0. No merge or publication is authorized by a production review.

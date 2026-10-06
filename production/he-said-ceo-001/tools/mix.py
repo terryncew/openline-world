@@ -38,6 +38,11 @@ assert audio.ndim == 1 and rate == TAKE['sample_rate'] == 24000
 assert len(audio) == TAKE['samples']
 assert abs(len(audio) / rate - TAKE['seconds']) <= 1 / rate
 assert TAKE['in_frame'] == 6
+assert T['narration']['file'] == TAKE['file']
+assert T['narration']['sha256'] == TAKE['sha256']
+assert T['narration']['text'] == TAKE['text']
+assert T['narration']['in_frame'] == TAKE['in_frame']
+assert T['narration']['cues'] == VOICE['lines']
 # Ordinary sample-rate conversion preserves the full source duration and every
 # original sample at the matching output position. It never speeds speech up.
 count = round(len(audio) * SR / rate)
@@ -60,6 +65,26 @@ for line in VOICE['lines']:
         'start_sample_48k':round(cue_start * SR),
         'end_sample_48k':round(cue_end * SR),
         'timing_kind':'Continuous-source model-predicted phoneme alignment'
+    })
+
+quiet_beats = []
+for beat in T.get('quiet_beats', []):
+    low, high = beat['in_frame'] / FPS, beat['out_frame'] / FPS
+    seconds = high - low
+    assert beat['min_seconds'] <= seconds <= beat['max_seconds']
+    overlaps = [entry['id'] for entry in entries
+                if entry['start_seconds'] < high and entry['end_seconds'] > low]
+    assert not overlaps, ('A quiet performance beat overlaps narration', beat['id'], overlaps)
+    source_low = max(0, round((low - start) * SR))
+    source_high = min(len(resampled), round((high - start) * SR))
+    reference = resampled[source_low:source_high]
+    assert len(reference)
+    quiet_beats.append({
+        **beat, 'start_seconds':low, 'end_seconds':high, 'seconds':seconds,
+        'annotated_narration_cue_overlap':False,
+        'unnormalized_source_peak':float(np.max(np.abs(reference))),
+        'unnormalized_source_rms':float(np.sqrt(np.mean(reference * reference))),
+        'assessment':'No source-timed speech cue; measured source residual is reported explicitly. Human listening remains unverified.'
     })
 
 assert len(T['sfx']) == 1 and T['sfx'][0]['kind'] == 'latch'
@@ -125,6 +150,7 @@ mix_document = {
     'normalization':'Whole-program two-pass loudnorm, -16 LUFS / -2 dBTP',
     'loudness_first_pass':measure, 'speech_cues':entries,
     'silence_windows':T['silence_windows'], 'raw_pcm_silence_checks':silence_checks,
+    'quiet_beat_measurements':quiet_beats,
     'file':'audio/final-mix.flac', 'sha256':sha(final),
     'human_audio_listen':'UNVERIFIED', 'external_api_spend':0
 }

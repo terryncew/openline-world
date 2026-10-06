@@ -1,31 +1,31 @@
 {
-  "timeline_sha256": "71c06d8bf7483554d005a1cadf41897b7405f1738025dc0c9581e74779e843a5",
+  "timeline_sha256": "763941e2ca6234d183785579c4a0e47467eadc5318fa1099b7923f399259736e",
   "quality": "animatic",
-  "frames": 1140,
+  "frames": 1080,
   "size": [
     960,
     540
   ],
-  "duration": 38,
-  "narrated_sha256": "147bf3cc9c1c8ca7481108b40670c662cf21d9cddb6a396e2b4043a281f9f569",
+  "duration": 36,
+  "narrated_sha256": "74121a1dcf9eace0eb8d3380ec3f25408a4d1791e3d660c3b7b2f1778432ffe3",
   "delivery_gain_db": 0,
   "encoded_loudness": {
-    "input_i": "-16.02",
-    "input_tp": "-1.96",
-    "input_lra": "1.50",
-    "input_thresh": "-26.27",
-    "output_i": "-16.10",
-    "output_tp": "-1.83",
-    "output_lra": "1.20",
-    "output_thresh": "-26.32",
+    "input_i": "-16.12",
+    "input_tp": "-1.77",
+    "input_lra": "3.90",
+    "input_thresh": "-26.87",
+    "output_i": "-15.74",
+    "output_tp": "-1.50",
+    "output_lra": "3.80",
+    "output_thresh": "-26.36",
     "normalization_type": "dynamic",
-    "target_offset": "0.10"
+    "target_offset": "-0.26"
   },
   "layout": [
     {
       "id": "opener",
       "in_frame": 0,
-      "hold_seconds": 3.033333333333333,
+      "hold_seconds": 2.6666666666666665,
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
@@ -49,9 +49,9 @@
           "face": "sans",
           "bbox": [
             128,
-            956,
+            145,
             470.98,
-            1000
+            189
           ],
           "color": [
             27,
@@ -60,36 +60,12 @@
           ]
         }
       ],
-      "physical_scene_frame": 45
-    },
-    {
-      "id": "manipulation",
-      "in_frame": 91,
-      "hold_seconds": 4.166666666666667,
-      "text_boxes": [
-        {
-          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 30,
-          "face": "sans",
-          "bbox": [
-            128,
-            72,
-            590.33,
-            94
-          ],
-          "color": [
-            87,
-            92,
-            86
-          ]
-        }
-      ],
-      "physical_scene_frame": 153
+      "physical_scene_frame": 40
     },
     {
       "id": "attack",
-      "in_frame": 216,
-      "hold_seconds": 5.7,
+      "in_frame": 80,
+      "hold_seconds": 7.366666666666666,
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
@@ -108,12 +84,12 @@
           ]
         }
       ],
-      "physical_scene_frame": 301
+      "physical_scene_frame": 190
     },
     {
       "id": "accept",
-      "in_frame": 387,
-      "hold_seconds": 1.7666666666666666,
+      "in_frame": 301,
+      "hold_seconds": 0.9,
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
@@ -132,14 +108,14 @@
           ]
         },
         {
-          "text": "\u201cAbsolutely.\u201d",
-          "size": 48,
+          "text": "Absolutely.",
+          "size": 52,
           "face": "sans",
           "bbox": [
-            128,
-            956,
-            405.61,
-            1003
+            157,
+            486.5543721601359,
+            424.03,
+            539.5543721601359
           ],
           "color": [
             27,
@@ -148,12 +124,12 @@
           ]
         }
       ],
-      "physical_scene_frame": 413
+      "physical_scene_frame": 314
     },
     {
-      "id": "fooled",
-      "in_frame": 440,
-      "hold_seconds": 2.433333333333333,
+      "id": "journey",
+      "in_frame": 328,
+      "hold_seconds": 4.8,
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
@@ -172,12 +148,12 @@
           ]
         }
       ],
-      "physical_scene_frame": 476
+      "physical_scene_frame": 400
     },
     {
-      "id": "walk",
-      "in_frame": 513,
-      "hold_seconds": 1.5,
+      "id": "stop",
+      "in_frame": 472,
+      "hold_seconds": 2.1666666666666665,
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
@@ -196,100 +172,12 @@
           ]
         }
       ],
-      "physical_scene_frame": 535
-    },
-    {
-      "id": "check",
-      "in_frame": 558,
-      "hold_seconds": 2.3666666666666667,
-      "text_boxes": [
-        {
-          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 30,
-          "face": "sans",
-          "bbox": [
-            128,
-            72,
-            590.33,
-            94
-          ],
-          "color": [
-            87,
-            92,
-            86
-          ]
-        }
-      ],
-      "physical_scene_frame": 593
-    },
-    {
-      "id": "amount",
-      "in_frame": 629,
-      "hold_seconds": 1.4333333333333333,
-      "text_boxes": [
-        {
-          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 30,
-          "face": "sans",
-          "bbox": [
-            128,
-            72,
-            590.33,
-            94
-          ],
-          "color": [
-            87,
-            92,
-            86
-          ]
-        }
-      ],
-      "physical_scene_frame": 650
-    },
-    {
-      "id": "no-amount",
-      "in_frame": 672,
-      "hold_seconds": 0.5,
-      "text_boxes": [
-        {
-          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 30,
-          "face": "sans",
-          "bbox": [
-            128,
-            72,
-            590.33,
-            94
-          ],
-          "color": [
-            87,
-            92,
-            86
-          ]
-        },
-        {
-          "text": "No.",
-          "size": 48,
-          "face": "sans",
-          "bbox": [
-            128,
-            956,
-            206.39,
-            990
-          ],
-          "color": [
-            27,
-            42,
-            60
-          ]
-        }
-      ],
-      "physical_scene_frame": 679
+      "physical_scene_frame": 504
     },
     {
       "id": "ceo",
-      "in_frame": 687,
-      "hold_seconds": 1.6,
+      "in_frame": 537,
+      "hold_seconds": 2.7,
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
@@ -308,14 +196,14 @@
           ]
         },
         {
-          "text": "\u201cBut he said he\u2019s the CEO.\u201d",
-          "size": 48,
+          "text": "But he said he\u2019s the CEO.",
+          "size": 52,
           "face": "sans",
           "bbox": [
-            128,
-            956,
-            717.41,
-            992
+            259,
+            260.4192942763608,
+            860.09,
+            301.4192942763608
           ],
           "color": [
             27,
@@ -324,52 +212,12 @@
           ]
         }
       ],
-      "physical_scene_frame": 711
-    },
-    {
-      "id": "still-no",
-      "in_frame": 735,
-      "hold_seconds": 0.7666666666666667,
-      "text_boxes": [
-        {
-          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 30,
-          "face": "sans",
-          "bbox": [
-            128,
-            72,
-            590.33,
-            94
-          ],
-          "color": [
-            87,
-            92,
-            86
-          ]
-        },
-        {
-          "text": "Still no.",
-          "size": 48,
-          "face": "sans",
-          "bbox": [
-            128,
-            956,
-            292.92,
-            992
-          ],
-          "color": [
-            27,
-            42,
-            60
-          ]
-        }
-      ],
-      "physical_scene_frame": 746
+      "physical_scene_frame": 577
     },
     {
       "id": "please",
-      "in_frame": 758,
-      "hold_seconds": 1.0333333333333334,
+      "in_frame": 618,
+      "hold_seconds": 2.3333333333333335,
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
@@ -388,14 +236,14 @@
           ]
         },
         {
-          "text": "\u201cHe said please.\u201d",
-          "size": 48,
+          "text": "He said please.",
+          "size": 52,
           "face": "sans",
           "bbox": [
-            128,
-            956,
-            500.72,
-            1003
+            503,
+            241.25086062411776,
+            869.45,
+            294.25086062411776
           ],
           "color": [
             27,
@@ -404,116 +252,12 @@
           ]
         }
       ],
-      "physical_scene_frame": 773
-    },
-    {
-      "id": "no-please",
-      "in_frame": 789,
-      "hold_seconds": 0.4666666666666667,
-      "text_boxes": [
-        {
-          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 30,
-          "face": "sans",
-          "bbox": [
-            128,
-            72,
-            590.33,
-            94
-          ],
-          "color": [
-            87,
-            92,
-            86
-          ]
-        },
-        {
-          "text": "No.",
-          "size": 48,
-          "face": "sans",
-          "bbox": [
-            128,
-            956,
-            206.39,
-            990
-          ],
-          "color": [
-            27,
-            42,
-            60
-          ]
-        }
-      ],
-      "physical_scene_frame": 796
-    },
-    {
-      "id": "scam",
-      "in_frame": 803,
-      "hold_seconds": 2.3,
-      "text_boxes": [
-        {
-          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 30,
-          "face": "sans",
-          "bbox": [
-            128,
-            72,
-            590.33,
-            94
-          ],
-          "color": [
-            87,
-            92,
-            86
-          ]
-        }
-      ],
-      "physical_scene_frame": 837
-    },
-    {
-      "id": "permission",
-      "in_frame": 872,
-      "hold_seconds": 3.533333333333333,
-      "text_boxes": [
-        {
-          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 30,
-          "face": "sans",
-          "bbox": [
-            128,
-            72,
-            590.33,
-            94
-          ],
-          "color": [
-            87,
-            92,
-            86
-          ]
-        },
-        {
-          "text": "The prompt can change the plan. It can\u2019t change permission.",
-          "size": 48,
-          "face": "sans",
-          "bbox": [
-            128,
-            956,
-            1491.95,
-            1003
-          ],
-          "color": [
-            27,
-            42,
-            60
-          ]
-        }
-      ],
-      "physical_scene_frame": 925
+      "physical_scene_frame": 653
     },
     {
       "id": "proof",
-      "in_frame": 978,
-      "hold_seconds": 3.533333333333333,
+      "in_frame": 688,
+      "hold_seconds": 6.9,
       "text_boxes": [
         {
           "text": "ACTUAL OPENLINE TEST",
@@ -644,12 +388,12 @@
         "width": 680,
         "height": 363
       },
-      "receipt_reveal_frame": 987
+      "receipt_reveal_frame": 697
     },
     {
       "id": "end",
-      "in_frame": 1084,
-      "hold_seconds": 1.8666666666666667,
+      "in_frame": 895,
+      "hold_seconds": 6.166666666666667,
       "text_boxes": [
         {
           "text": "OPENLINE",
@@ -657,9 +401,41 @@
           "face": "serif",
           "bbox": [
             638,
-            494,
+            394,
             1281.61,
-            586
+            486
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "A prompt can change the plan.",
+          "size": 48,
+          "face": "sans",
+          "bbox": [
+            613,
+            616,
+            1306.23,
+            663
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "It can\u2019t change permission.",
+          "size": 48,
+          "face": "sans",
+          "bbox": [
+            657,
+            692,
+            1262.47,
+            739
           ],
           "color": [
             27,
@@ -667,6 +443,140 @@
             60
           ]
         }
+      ]
+    }
+  ],
+  "speech_bubbles": [
+    {
+      "id": "absolutely",
+      "text": "Absolutely.",
+      "in_frame": 301,
+      "out_frame": 353,
+      "sample_frame": 327,
+      "size": 52,
+      "body_bbox": [
+        138.70498614321048,
+        464.68941781957676,
+        461.7362361432105,
+        557.6894178195768
+      ],
+      "tail_points": [
+        [
+          459.7362361432105,
+          500.18941781957676
+        ],
+        [
+          523.7362361432105,
+          511.18941781957676
+        ],
+        [
+          459.7362361432105,
+          522.1894178195768
+        ]
+      ],
+      "actor_anchor": [
+        685.4930810045424,
+        499.421948272734
+      ],
+      "head_bounds": [
+        531.7362361432105,
+        430.76262944998916,
+        723.086063136881,
+        591.6162061891644
+      ],
+      "text_bbox": [
+        167,
+        484.68941781957676,
+        434.03,
+        537.6894178195768
+      ]
+    },
+    {
+      "id": "ceo-appeal",
+      "text": "But he said he\u2019s the CEO.",
+      "in_frame": 537,
+      "out_frame": 617,
+      "sample_frame": 577,
+      "size": 52,
+      "body_bbox": [
+        231.4786398851884,
+        240.4192942763608,
+        888.5723898851884,
+        321.4192942763608
+      ],
+      "tail_points": [
+        [
+          777.5723898851884,
+          319.4192942763608
+        ],
+        [
+          788.5723898851884,
+          363.4192942763608
+        ],
+        [
+          799.5723898851884,
+          319.4192942763608
+        ]
+      ],
+      "actor_anchor": [
+        788.5723898851884,
+        462.1753878858932
+      ],
+      "head_bounds": [
+        566.2837235806591,
+        371.4192942763608,
+        854.2861880614257,
+        577.9731841134494
+      ],
+      "text_bbox": [
+        259,
+        260.4192942763608,
+        860.09,
+        301.4192942763608
+      ]
+    },
+    {
+      "id": "please-appeal",
+      "text": "He said please.",
+      "in_frame": 618,
+      "out_frame": 686,
+      "sample_frame": 652,
+      "size": 52,
+      "body_bbox": [
+        474.5380578610964,
+        221.29477273075355,
+        896.9911828610964,
+        314.29477273075355
+      ],
+      "tail_points": [
+        [
+          785.9911828610964,
+          312.29477273075355
+        ],
+        [
+          796.9911828610964,
+          356.29477273075355
+        ],
+        [
+          807.9911828610964,
+          312.29477273075355
+        ]
+      ],
+      "actor_anchor": [
+        796.9911828610964,
+        469.8634699727508
+      ],
+      "head_bounds": [
+        567.6633507767215,
+        364.29477273075355,
+        872.6068546080049,
+        594.3248369696981
+      ],
+      "text_bbox": [
+        503,
+        241.29477273075355,
+        869.45,
+        294.29477273075355
       ]
     }
   ],
@@ -692,10 +602,30 @@
     "dialogue": {
       "position": [
         128,
-        956
+        145
       ],
-      "size": 48,
+      "size": 44,
       "gap": 16
+    },
+    "speech_bubble": {
+      "padding": [
+        28,
+        20
+      ],
+      "radius": 22,
+      "stroke_width": 3,
+      "color": [
+        27,
+        42,
+        60
+      ],
+      "background": [
+        250,
+        247,
+        237
+      ],
+      "head_gap": 150,
+      "tail_width": 22
     },
     "actual_test_layout": {
       "primary": [
@@ -772,7 +702,7 @@
           535
         ],
         "width": 680,
-        "crop": "Use unchanged proof-shot crop; scale and position only."
+        "crop": "Unchanged proof-shot crop; scale and position only."
       },
       "footnotes": [
         {
@@ -801,14 +731,34 @@
       "face": "serif",
       "center": [
         960,
-        540
+        440
+      ],
+      "support": [
+        {
+          "text": "A prompt can change the plan.",
+          "size": 48,
+          "face": "sans",
+          "center": [
+            960,
+            640
+          ]
+        },
+        {
+          "text": "It can\u2019t change permission.",
+          "size": 48,
+          "face": "sans",
+          "center": [
+            960,
+            716
+          ]
+        }
       ]
     }
   },
   "picture_edit": "One unbroken physical performance until the proof cut; one brand cut. Text cue markers are not picture cuts.",
   "source_physical": "source/physical-animatic.mp4",
   "physical_capture_report": "source/PHYSICAL-animatic.json",
-  "physical_source_sha256": "7860343a43bda791e2f52497bd426dd7910169d6f59167cd67afa30c2d6ede91",
+  "physical_source_sha256": "12aed433199ecae7fbaf1b896c5f51c1b21045a369606978812f9b88bf6ce8a4",
   "fonts": [
     {
       "path": "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",

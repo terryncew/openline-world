@@ -81,8 +81,17 @@ def pace_refusals(audio, rate, timings, known, config, model):
         start, length = _run_around(quiet, round(marker['end'] * rate / frame), 15)
         assert length, ('No existing quiet boundary to pace safely', target['after_phrase'])
         existing = length * frame / rate
-        added = max(0, round((target['minimum_quiet_seconds'] - existing) * rate))
-        middle = (start + length // 2) * frame
+        if 'add_silence_seconds' in target:
+            added = round(target['add_silence_seconds'] * rate)
+            assert added >= 0
+            # The new quiet performance starts immediately after the phrase.
+            # Keep its caption end outside the inserted silence.
+            middle = round(marker['end'] * rate)
+            assert start * frame <= middle < (start + length) * frame
+            assert quiet[middle // frame], 'Phrase end must already be quiet.'
+        else:
+            added = max(0, round((target['minimum_quiet_seconds'] - existing) * rate))
+            middle = (start + length // 2) * frame
         inserts.append((middle, added))
         reports.append({
             **target, 'original_quiet_seconds':existing,
@@ -98,10 +107,11 @@ def pace_refusals(audio, rate, timings, known, config, model):
         cursor = middle
     parts.append(audio[cursor:])
     paced = np.concatenate(parts) if inserts else audio
-    def shifted(seconds):
+    def shifted(seconds, ending=False):
         return seconds + sum(added / rate for middle, added in inserts
-                             if round(seconds * rate) >= middle)
-    moved = [{**span, 'start':shifted(span['start']), 'end':shifted(span['end'])}
+                             if (round(seconds * rate) > middle if ending
+                                 else round(seconds * rate) >= middle))
+    moved = [{**span, 'start':shifted(span['start']), 'end':shifted(span['end'], ending=True)}
              for span in timings]
     shift = 0
     for report in reports:
@@ -129,11 +139,25 @@ def main():
     destination.parent.mkdir(exist_ok=True)
     if args.metadata_from:
         previous = json.loads(args.metadata_from.read_text())
-        assert previous['text'] == text and previous['known'] == known
-        audio, rate = sf.read(destination, dtype='float32')
-        assert abs(len(audio) / rate - previous['seconds']) <= 1 / rate, \
-            'The reuse input must be the unpaced continuous inference, not an already paced source.'
-        timings = previous['timings']
+        if 'continuous_take' in previous:
+            assert previous['continuous_take']['text'] == text
+            raw = previous['unpaced_take']
+            raw_file = ROOT / raw['file']
+            assert sha(raw_file) == raw['sha256']
+            audio, rate = sf.read(raw_file, dtype='float32')
+            if 'unpaced_phoneme_timings' in previous:
+                timings = previous['unpaced_phoneme_timings']
+            else:
+                assert not previous['refusal_pause_insertions'], 'Raw timings required before repacing.'
+                timings = previous['phoneme_timings']
+            assert ''.join(span['phoneme'] for span in timings) == known
+            assert abs(len(audio) / rate - raw['seconds']) <= 1 / rate
+        else:
+            assert previous['text'] == text and previous['known'] == known
+            audio, rate = sf.read(destination, dtype='float32')
+            assert abs(len(audio) / rate - previous['seconds']) <= 1 / rate, \
+                'The reuse input must be the unpaced continuous inference, not an already paced source.'
+            timings = previous['timings']
     else:
         audio, rate, spans = model.create_timed(
             text, voice=config['voice'], speed=1.0, lang=config['lang'],
@@ -148,6 +172,7 @@ def main():
     audio, rate = sf.read(raw_destination, dtype='float32')
     raw_audio_sha = sha(raw_destination)
     raw_seconds = len(audio) / rate
+    raw_timings = [dict(span) for span in timings]
     audio, timings, refusal_pauses = pace_refusals(audio, rate, timings, known, config, model)
     # Save every speech sample from the full source, with deliberate quiet holds.
     sf.write(destination, audio, rate, subtype='PCM_24')
@@ -218,7 +243,8 @@ def main():
         },
         'refusal_pause_insertions':refusal_pauses,
         'lines':lines,
-        'phoneme_timings':timings
+        'phoneme_timings':timings,
+        'unpaced_phoneme_timings':raw_timings
     }
     (ROOT / 'audio/VOICE-SOURCES.json').write_text(
         json.dumps(result, indent=2, ensure_ascii=False) + '\n')

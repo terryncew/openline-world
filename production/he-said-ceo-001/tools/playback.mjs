@@ -82,6 +82,22 @@ try{
       reviewTargets.push({id:'proof-within-two-seconds',
         target:proof.in_frame/T.fps+1.2,limit:proof.in_frame/T.fps+2,
         kind:'actual-test hierarchy before two seconds'});
+      for(const bubble of T.speech_bubbles||[]){
+        reviewTargets.push({id:'bubble-'+bubble.id,
+          target:(bubble.in_frame+bubble.out_frame)/(2*T.fps),
+          limit:bubble.out_frame/T.fps,kind:'silent Wren speech bubble with actor tail'});
+      }
+      for(const beat of T.quiet_beats||[]){
+        reviewTargets.push({id:'quiet-'+beat.id,
+          target:(beat.in_frame+beat.out_frame)/(2*T.fps),
+          limit:beat.out_frame/T.fps,kind:'narration-free performance hold'});
+      }
+      const finalCue=T.narration?.cues?.at(-1);
+      if(finalCue){
+        reviewTargets.push({id:'end-complete',
+          target:(finalCue.in_frame+finalCue.out_frame)/(2*T.fps),
+          limit:T.seconds,kind:'completed brand and muted value proposition'});
+      }
       reviewTargets.sort((a,b)=>a.target-b.target);
       const stamps=[];
       for(const sample of reviewTargets){
@@ -117,8 +133,8 @@ try{
         orientation:device.orientation,file,
         sha256:createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex'),
         method:'Complete normal-speed browser playback from 0 to ended, no seeking; '
-          +'opening, every editorial beat midpoint, gesture peaks, proof before two seconds '
-          +'and ended screenshots. Canonical 16:9 film contains the viewport without cropping.',
+          +'opening, every picture beat, silent speech bubble, quiet hold, gesture peak, proof before two seconds '
+          +'and complete end-card screenshots. Canonical 16:9 film contains the viewport without cropping.',
         target_frames:T.frames,target_seconds:T.seconds,stamps,...state,pageErrors:errors});
       writeFileSync(resolve(root,animatic?'animatic/PLAYBACK.json':'PLAYBACK-QA.json'),
         JSON.stringify({
