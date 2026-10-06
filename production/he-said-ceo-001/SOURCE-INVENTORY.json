@@ -1,0 +1,492 @@
+{
+  "base_sha": "792372a2cd87a01e0500a229e60114b0a00ac64c",
+  "checkpoint": "13e9c60abc45036c81aaa604855250b0e5384273",
+  "production": [
+    {
+      "path": "production/he-said-ceo-001/evidence/RECOVERY-CAPTURE-FAILURE.log",
+      "bytes": 3298,
+      "sha256": "1561d9aab382fee7bd3b48b1d9e6cb58727d555edb326538421445c21e28bd71",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/evidence/REGRESSION-QA.json",
+      "bytes": 402,
+      "sha256": "be3f373192465679caaa2eee530329d33842bebf66ddb2b81c96181b9a7f681c",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/evidence/UI-CAPTURE.json",
+      "bytes": 4946,
+      "sha256": "d9d38f69ec3b5f9e7c7de9298a225f2cd8e21e521c76f6969a89d97b7870c6a5",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/evidence/owner-authority-events.json",
+      "bytes": 1037,
+      "sha256": "9e34096ce0cd39fd982f27a111c2676bc9a78243fe886e4c545538030d5d58da",
+      "role": "RECOVERED REAL EVIDENCE"
+    },
+    {
+      "path": "production/he-said-ceo-001/evidence/receipt-allowed.json",
+      "bytes": 999,
+      "sha256": "94e353a5e048147ca78ca34aa09d8471786295367f7a1993094691574b048b6d",
+      "role": "RECOVERED REAL EVIDENCE"
+    },
+    {
+      "path": "production/he-said-ceo-001/evidence/receipt-stopped.json",
+      "bytes": 1032,
+      "sha256": "22a1d51a189a86310f6b26fc84a3cc81e7f20c2c13177b4f16ee647d12dc0a68",
+      "role": "RECOVERED REAL EVIDENCE"
+    },
+    {
+      "path": "production/he-said-ceo-001/evidence/reloaded-wallet-receipts.json",
+      "bytes": 2124,
+      "sha256": "608de16939c46a88e006eca97b2edbb098fc3038907e5fa391c48d83fb3d3050",
+      "role": "RECOVERED REAL EVIDENCE"
+    },
+    {
+      "path": "production/he-said-ceo-001/evidence/run.json",
+      "bytes": 22133,
+      "sha256": "58bf7ee8cd15037edf8b5bec741e0e1dcede655935173038e1dafa32eeea30c9",
+      "role": "RECOVERED REAL EVIDENCE"
+    },
+    {
+      "path": "production/he-said-ceo-001/evidence/ui-receipts.json",
+      "bytes": 1880,
+      "sha256": "652f22702d203153aaea5a6c4c30b9e88bddf0a6a2cb20e940afce86264353ae",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/proposal-row.png",
+      "bytes": 14637,
+      "sha256": "a23f3b16b778732684473d5e43d87593f43d91b2c72948141cc6cb8bd0d573cd",
+      "role": "REAL UI CAPTURE"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/receipt-allowed-detail.png",
+      "bytes": 76226,
+      "sha256": "2bd62df5b743d6ccbd5f4d306dbfe0bc190ba7b22c16b4e9ca7b23f87dc3ac31",
+      "role": "REAL UI CAPTURE"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/receipt-allowed-full-ui.png",
+      "bytes": 131055,
+      "sha256": "ea44b3a21f06ec640449ae985c46939b2f3be5624aa363fb1c091f357988e6cc",
+      "role": "REAL UI CAPTURE"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/receipt-allowed-reason.png",
+      "bytes": 3268,
+      "sha256": "b1152c798cf2e4249718f8cc2a507ade5ed150e40b11c79cf7747d78df2eab82",
+      "role": "REAL UI CAPTURE"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/receipt-list.png",
+      "bytes": 45579,
+      "sha256": "b589057071639f125262e035797c7682c335d1db78681ff140ad469783b7fe01",
+      "role": "REAL UI CAPTURE"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/receipt-stopped-detail.png",
+      "bytes": 85069,
+      "sha256": "186a6d9e4381a01ffa18da4cdd76a358c525eab5c95d4df0d041ea70aea7d379",
+      "role": "REAL UI CAPTURE"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/receipt-stopped-full-ui.png",
+      "bytes": 139759,
+      "sha256": "fadd3db639ae3b81faa1132b3a9d216571281acebc1b3a36bfa4483a8f7d1eca",
+      "role": "REAL UI CAPTURE"
+    },
+    {
+      "path": "production/he-said-ceo-001/source/receipt-stopped-reason.png",
+      "bytes": 12071,
+      "sha256": "13ddefa9d70b1beff9d6f8f81885f65ffe04f8857cd6f406598fbc92ffd51670",
+      "role": "REAL UI CAPTURE"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/MIX.json",
+      "bytes": 2247,
+      "sha256": "bb385020f2350ced43897549f47ac6f4313b4b9ab6abb0f3fa41abfc3e4523d5",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/VOICE-SOURCES.json",
+      "bytes": 2324,
+      "sha256": "65ca047d75aeed39ad342a7ca82c7839b0d83a5ecd60eba77535e8ae6d38822c",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/final-mix.flac",
+      "bytes": 1067840,
+      "sha256": "5a0411b60eafabe826001c90c6e62af5f4a1de22275261bb9edc67088eb897bf",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-absolutely.wav",
+      "bytes": 61050,
+      "sha256": "71f2fdfbcfdbc9527373c9a1623480a2d8bef0a5fa6cd40d9116a3e64e51813d",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-ask.wav",
+      "bytes": 121632,
+      "sha256": "8fda68757aefb040c731a5829716e8a2e9b515cf5d41c3c98a84357e7b08f3b5",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-ceo.wav",
+      "bytes": 73436,
+      "sha256": "74d095a367867e8214bc29d549c235d4eacf19e31a48feadb96e34faad576718",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-end.wav",
+      "bytes": 109008,
+      "sha256": "3cbd6e27d60a80a972584acf38e8947a0826fef904427acaa442f79b8586ecee",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-logo.wav",
+      "bytes": 105578,
+      "sha256": "eca407f2528a290102a59c5d21d23106943419adbf50c3b4082aa257db424d12",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-please.wav",
+      "bytes": 69794,
+      "sha256": "7fa6126d9c80b62022d9e0f5532e223b9ca13a72c15acdb3d36da3a967a64d44",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/audio/voice-punchline.wav",
+      "bytes": 154580,
+      "sha256": "d53301e26bab9c85c5db22d4cf0ab49681b71f12af8450fe0b08049d2179363f",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/capture-ui.mjs",
+      "bytes": 4825,
+      "sha256": "8ce21d33afd7f9c6d6297455a237861865f48a87fdca3392d33e4b1e60d61634",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/contact.py",
+      "bytes": 846,
+      "sha256": "fa0563e418266774be88931c7cd13b11c6526c73c2b74c93ce712449f279fbfb",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/evidence.py",
+      "bytes": 5173,
+      "sha256": "b882ae5835eb707264e0fc90774eeea7a246eca4530f5fd5791cf1eee81ea04d",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/inventory.py",
+      "bytes": 2352,
+      "sha256": "0d1d590e659cb4e3ea438f32ecc17ce3dcf0956f795fab027923b870e1967a03",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/mix.py",
+      "bytes": 3390,
+      "sha256": "f14819ff6db67dd49d31b31c6b219789bff7fd5145d2ee115add9853cd69250f",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/plan.py",
+      "bytes": 5917,
+      "sha256": "0fca182b785921ae2fe4d10964903a21f31d60c2721115114a674e6e8c3dd7d3",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/playback.mjs",
+      "bytes": 4615,
+      "sha256": "130f849f6c0dc0bd398223d6a8767315c3e7775416d237d955feb437d7745ee7",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/prepare-projection.py",
+      "bytes": 908,
+      "sha256": "0d8ce5cd0bb66ea9463a939c82ad6cce5dd5aaf5edb717da7a384fbc9f13596d",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/render.py",
+      "bytes": 7966,
+      "sha256": "c291921206a964d794923deb37727a01f5425675b800d6c69d8f6b31c1a46927",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/stage.html",
+      "bytes": 447,
+      "sha256": "18d0dc61361ed78431b5debfff1ddb20346807705a2be4f283274f6128acd4cb",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/stage.tsx",
+      "bytes": 574,
+      "sha256": "2e1d820e7057030e7e12911216ac3722b823f8320ad7cbda720d8c31303c49d6",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/verify.py",
+      "bytes": 7433,
+      "sha256": "cc8e30abae0d4c05706572c6769b8b342a92bdad8aa4b166b778d10637fc191b",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/tools/voice.py",
+      "bytes": 1947,
+      "sha256": "505deae039f8da9aa663cae32ed05271c4347061335ff066ca33845ca73ccc06",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/renders/RENDER.json",
+      "bytes": 26620,
+      "sha256": "eb1d61a15606030ef7601684049e03010c6b69f78ff7b4a503be0e4288d0c7fa",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/renders/he-said-ceo-muted.mp4",
+      "bytes": 2006503,
+      "sha256": "2877e31da820a068ba9277f8dfb2594bafac0865e742c82dcb31ab52a9e80f69",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/renders/he-said-ceo-narrated.mp4",
+      "bytes": 2352454,
+      "sha256": "3c92a25d76e304f2a5c646132301a909294a6c78158dace820701c824d844b12",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/animatic/PLAYBACK.json",
+      "bytes": 16854,
+      "sha256": "2c7647b5df3704272877ec37ee3e2e88b24a06b9266486d9a47173474e3fbf24",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/animatic/RENDER.json",
+      "bytes": 26621,
+      "sha256": "2e7a35cb8c77f11d38fa5eea636e6385df3a6b4323adb7241d51988204b0822a",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/animatic/he-said-ceo-animatic.mp4",
+      "bytes": 685365,
+      "sha256": "eab7391ebadd35aba87ee0e35d626b3bfdec0d7329b17500a0ecd256ded75b0a",
+      "role": "PRODUCTION / DERIVED ARTIFACT"
+    },
+    {
+      "path": "production/he-said-ceo-001/FACTS.json",
+      "bytes": 3019,
+      "sha256": "2a9fab862f3577b53a959724988ac6a06bcbc8ea1ed7de69eb6a41e2aca4bc4c",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/TIMELINE.json",
+      "bytes": 9012,
+      "sha256": "afc18e14004710a3c6438e2c4092d0dccf4e52e07812c9807282eb3ed890b6c9",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/CLAIM-SHOT-MAP.json",
+      "bytes": 16957,
+      "sha256": "f8cd114be82b6505c8f6d81152dcab4735b044b093c7b332407801a52e93127d",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/CAPTIONS.json",
+      "bytes": 1814,
+      "sha256": "a30a71c6c89fd29134feeebca5b55c897204ac98fd55f7b9ed2d2dbac7a6f2f0",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/captions.srt",
+      "bytes": 405,
+      "sha256": "bdc103e5ed1352eeacbee3967f3e5632a16fa281a0bb7a174b6cabf76bc06fd8",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/captions.vtt",
+      "bytes": 399,
+      "sha256": "27b843e91b974dc325f15c867b526093c71f3d8904383ee553dfea8e905ab361",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/poster.png",
+      "bytes": 889667,
+      "sha256": "f5fcae5cf71fe7285b0e2c6040e280f1e78611b229f2f5e72ec4d30905fe5238",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/README.md",
+      "bytes": 3680,
+      "sha256": "65ba104e44019bebf576e6fd9c97f0b05ee2dc3db724d5f66e678f83a814e53c",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/AUDIT.md",
+      "bytes": 4054,
+      "sha256": "0b6ba4c575feb5ee40122e8aa0174e9bc0bf5fcae6d0e2a1d52ec160b6b454e6",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/SCREENPLAY.md",
+      "bytes": 1897,
+      "sha256": "917f4645d50de2063cff6f629e678181c775a499dc5deaffcbcb2d26d238c75f",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/DELIVERY.md",
+      "bytes": 5069,
+      "sha256": "2b9ab01ee35b997f17850dc4d368172f93bcf4e0bc798f8e7c4d66257de2f8dc",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/WATCH.html",
+      "bytes": 1267,
+      "sha256": "3b7b456eaf05dd035384668338e05d3baae64bbf21f4b66408cda7a67b1cedcc",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/ANIMATIC-REVIEW.md",
+      "bytes": 3026,
+      "sha256": "51cb2d2cb9ec7869d148afccd6929cd355deda276ac3925f3831f59aa0f381e5",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/TECHNICAL-QA.json",
+      "bytes": 5009,
+      "sha256": "e55134673c9e6e241bbe5e8be8372ea0674bba1d49997d5bddd9417e89b92799",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/PLAYBACK-QA.json",
+      "bytes": 33952,
+      "sha256": "d67f793bc32c8d377191a5f0fa451611b0d7830712909851112b9deaafe788d1",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    }
+  ],
+  "inspected_existing_sources": [
+    {
+      "path": "frontend/public/prompt-injection/MEDIA-QA.json",
+      "bytes": 3996,
+      "sha256": "f67f4298d03734b11fbe1edad04f8539f38e9d465829787daa4af746c90fca50",
+      "role": "EXISTING REFERENCE ONLY \u2014 not footage of this recovered run"
+    },
+    {
+      "path": "frontend/public/prompt-injection/README.md",
+      "bytes": 1641,
+      "sha256": "b548f769b7d4f72717cdf4f26dd624fd1f99442180b99591344f80d76c182004",
+      "role": "EXISTING REFERENCE ONLY \u2014 not footage of this recovered run"
+    },
+    {
+      "path": "frontend/public/prompt-injection/VOICEOVER.txt",
+      "bytes": 289,
+      "sha256": "fcf6a672b93617f106d5dfca0df0b2abafdaa38834ccba3435315050c2b381aa",
+      "role": "EXISTING REFERENCE ONLY \u2014 not footage of this recovered run"
+    },
+    {
+      "path": "frontend/public/prompt-injection/final-history.png",
+      "bytes": 564646,
+      "sha256": "f46e796e04a423d183a320fea26985a48fd7226e4c3a9bd9b951a2ae91c504f0",
+      "role": "EXISTING REFERENCE ONLY \u2014 not footage of this recovered run"
+    },
+    {
+      "path": "frontend/public/prompt-injection/final.mp4",
+      "bytes": 3200621,
+      "sha256": "cf9860a6de569f31557c355689c28ddbe7317dd7bfef69afb6fd6b167cb3c4d4",
+      "role": "EXISTING REFERENCE ONLY \u2014 not footage of this recovered run"
+    },
+    {
+      "path": "frontend/public/prompt-injection/hostile-request.png",
+      "bytes": 489218,
+      "sha256": "79c12858a929e28796fbf60e8323f0984667ae2137dd32076a1ed4ad6d4d1b88",
+      "role": "EXISTING REFERENCE ONLY \u2014 not footage of this recovered run"
+    },
+    {
+      "path": "frontend/public/prompt-injection/stop.png",
+      "bytes": 366568,
+      "sha256": "0e0130c57e367cb4c993946e3cf0c1465fe4ee656c78510e94c4f905c21f9189",
+      "role": "EXISTING REFERENCE ONLY \u2014 not footage of this recovered run"
+    },
+    {
+      "path": "backend/server.py",
+      "bytes": 49708,
+      "sha256": "1107738f2fdad198b36a223205c551e9727b919e7bc00a8c35837824515c2baf",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "backend/workshop_gate.py",
+      "bytes": 6875,
+      "sha256": "3b18986f7eca20313ff982c2f90bbabd7c7fd469bdde4f1ce261743f636a519b",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "backend/tests/test_prompt_injection_demo.py",
+      "bytes": 6441,
+      "sha256": "c80b55452e21ed45c33b0f219a4a5ae50732919a6ea0cf94cd0d01c638f865ac",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "frontend/src/components/Panels.tsx",
+      "bytes": 9425,
+      "sha256": "503bd0713808b3a640157c07dd9e7a35affba69af6a93ab34b7e795674614350",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "frontend/src/styles.css",
+      "bytes": 11478,
+      "sha256": "8e0c153a7dc3d86e927be688e6440f4596526f62bd210bed2a1d4d22bfb6ab3a",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "production/flagship-001/AUDIT.md",
+      "bytes": 4979,
+      "sha256": "574c7ee348edafca66c218f42da5f635903f27cd8dc86ec3c61a812145f96988",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "production/flagship-001/BRAND-CANON.md",
+      "bytes": 1393,
+      "sha256": "04dc8ebb40f9e6e36f763af90d0d70aaefd356157143240bb0a871fd7375d87e",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "production/flagship-001/ASSET-INVENTORY.json",
+      "bytes": 13872,
+      "sha256": "e3ed22b3ce611b989b7769e590ef886873d423a644740ffbc0f6e346682289c0",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "production/flagship-001/tools/render.py",
+      "bytes": 5925,
+      "sha256": "045f222f3c9ae633907bdb3e64bff8f1b18d4b2777ed8a32f72af042d625d92d",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "production/flagship-001/tools/narrate.py",
+      "bytes": 1914,
+      "sha256": "9457887723725623d0351e67041180597ea804e88ef950e0cb545e93b277eaf3",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "production/flagship-001/tools/playback.mjs",
+      "bytes": 4646,
+      "sha256": "5c13fa36f1b57ffb963d10cc4c070058be99416858fb9987585ff0db9fc7d19e",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    },
+    {
+      "path": "production/flagship-001/tools/verify.py",
+      "bytes": 4047,
+      "sha256": "ff4f43edd7c138a2a9c83a6665f21fae4ee2f8ca3d96ff95500b2a81df82a7fb",
+      "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
+    }
+  ],
+  "private_keys_exported": false,
+  "paid_assets": false,
+  "external_api_spend": 0,
+  "voice_disclosure": "Local neural voice; full takes included. No human recording."
+}

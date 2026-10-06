@@ -1,0 +1,100 @@
+{
+  "timeline": "TIMELINE.json",
+  "sample_rate": 48000,
+  "samples": 2064000,
+  "channels": 2,
+  "original_sfx": true,
+  "score": false,
+  "voice_sources": "VOICE-SOURCES.json",
+  "loudness_first_pass": {
+    "input_i": "-22.14",
+    "input_tp": "-8.37",
+    "input_lra": "7.60",
+    "input_thresh": "-33.65",
+    "output_i": "-15.93",
+    "output_tp": "-2.00",
+    "output_lra": "4.90",
+    "output_thresh": "-27.23",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.07"
+  },
+  "speech_cues": [
+    {
+      "id": "absolutely",
+      "text": "Absolutely.",
+      "in_frame": 132,
+      "out_frame": 157,
+      "start_seconds": 4.4,
+      "end_seconds": 5.247291666666667,
+      "file": "audio/voice-absolutely.wav"
+    },
+    {
+      "id": "ceo",
+      "text": "He's the CEO.",
+      "in_frame": 201,
+      "out_frame": 232,
+      "start_seconds": 6.7,
+      "end_seconds": 7.719333333333333,
+      "file": "audio/voice-ceo.wav"
+    },
+    {
+      "id": "logo",
+      "text": "He used the company logo.",
+      "in_frame": 267,
+      "out_frame": 311,
+      "start_seconds": 8.9,
+      "end_seconds": 10.36575,
+      "file": "audio/voice-logo.wav"
+    },
+    {
+      "id": "please",
+      "text": "He said please.",
+      "in_frame": 354,
+      "out_frame": 383,
+      "start_seconds": 11.8,
+      "end_seconds": 12.76875,
+      "file": "audio/voice-please.wav"
+    },
+    {
+      "id": "ask",
+      "text": "What about the hundred-dollar refund?",
+      "in_frame": 495,
+      "out_frame": 546,
+      "start_seconds": 16.5,
+      "end_seconds": 18.188708333333334,
+      "file": "audio/voice-ask.wav"
+    },
+    {
+      "id": "punchline",
+      "text": "Apparently I'm the hundred-dollar guy.",
+      "in_frame": 612,
+      "out_frame": 676,
+      "start_seconds": 20.4,
+      "end_seconds": 22.546333333333333,
+      "file": "audio/voice-punchline.wav"
+    },
+    {
+      "id": "end",
+      "text": "Being smart isn't permission.",
+      "in_frame": 1179,
+      "out_frame": 1224,
+      "start_seconds": 39.3,
+      "end_seconds": 40.81337499999999,
+      "file": "audio/voice-end.wav"
+    }
+  ],
+  "silence_windows": [
+    [
+      15.2,
+      16.3
+    ],
+    [
+      23.7,
+      25.4
+    ],
+    [
+      42.2,
+      43
+    ]
+  ]
+}

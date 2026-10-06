@@ -1,0 +1,75 @@
+{
+  "engine": "kokoro-onnx 0.6.1",
+  "voice": "af_heart",
+  "speed": 1.06,
+  "synthesized": true,
+  "human_recording": false,
+  "model_sha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voice_file_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "external_api_spend": 0,
+  "lines": [
+    {
+      "id": "absolutely",
+      "text": "Absolutely.",
+      "in_frame": 132,
+      "file": "audio/voice-absolutely.wav",
+      "seconds": 0.8472916666666667,
+      "sample_rate": 24000,
+      "sha256": "71f2fdfbcfdbc9527373c9a1623480a2d8bef0a5fa6cd40d9116a3e64e51813d"
+    },
+    {
+      "id": "ceo",
+      "text": "He's the CEO.",
+      "in_frame": 201,
+      "file": "audio/voice-ceo.wav",
+      "seconds": 1.0193333333333334,
+      "sample_rate": 24000,
+      "sha256": "74d095a367867e8214bc29d549c235d4eacf19e31a48feadb96e34faad576718"
+    },
+    {
+      "id": "logo",
+      "text": "He used the company logo.",
+      "in_frame": 267,
+      "file": "audio/voice-logo.wav",
+      "seconds": 1.46575,
+      "sample_rate": 24000,
+      "sha256": "eca407f2528a290102a59c5d21d23106943419adbf50c3b4082aa257db424d12"
+    },
+    {
+      "id": "please",
+      "text": "He said please.",
+      "in_frame": 354,
+      "file": "audio/voice-please.wav",
+      "seconds": 0.96875,
+      "sample_rate": 24000,
+      "sha256": "7fa6126d9c80b62022d9e0f5532e223b9ca13a72c15acdb3d36da3a967a64d44"
+    },
+    {
+      "id": "ask",
+      "text": "What about the hundred-dollar refund?",
+      "in_frame": 495,
+      "file": "audio/voice-ask.wav",
+      "seconds": 1.6887083333333333,
+      "sample_rate": 24000,
+      "sha256": "8fda68757aefb040c731a5829716e8a2e9b515cf5d41c3c98a84357e7b08f3b5"
+    },
+    {
+      "id": "punchline",
+      "text": "Apparently I'm the hundred-dollar guy.",
+      "in_frame": 612,
+      "file": "audio/voice-punchline.wav",
+      "seconds": 2.146333333333333,
+      "sample_rate": 24000,
+      "sha256": "d53301e26bab9c85c5db22d4cf0ab49681b71f12af8450fe0b08049d2179363f"
+    },
+    {
+      "id": "end",
+      "text": "Being smart isn't permission.",
+      "in_frame": 1179,
+      "file": "audio/voice-end.wav",
+      "seconds": 1.513375,
+      "sample_rate": 24000,
+      "sha256": "3cbd6e27d60a80a972584acf38e8947a0826fef904427acaa442f79b8586ecee"
+    }
+  ]
+}

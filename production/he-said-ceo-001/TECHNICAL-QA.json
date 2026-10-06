@@ -1,0 +1,198 @@
+{
+  "status": "PASS",
+  "base_sha": "792372a2cd87a01e0500a229e60114b0a00ac64c",
+  "recovery_checkpoint": "13e9c60abc45036c81aaa604855250b0e5384273",
+  "frozen_evidence_unchanged": [
+    {
+      "file": "FACTS.json",
+      "sha256": "2a9fab862f3577b53a959724988ac6a06bcbc8ea1ed7de69eb6a41e2aca4bc4c"
+    },
+    {
+      "file": "evidence/run.json",
+      "sha256": "58bf7ee8cd15037edf8b5bec741e0e1dcede655935173038e1dafa32eeea30c9"
+    },
+    {
+      "file": "evidence/receipt-stopped.json",
+      "sha256": "22a1d51a189a86310f6b26fc84a3cc81e7f20c2c13177b4f16ee647d12dc0a68"
+    },
+    {
+      "file": "evidence/receipt-allowed.json",
+      "sha256": "94e353a5e048147ca78ca34aa09d8471786295367f7a1993094691574b048b6d"
+    },
+    {
+      "file": "evidence/reloaded-wallet-receipts.json",
+      "sha256": "608de16939c46a88e006eca97b2edbb098fc3038907e5fa391c48d83fb3d3050"
+    },
+    {
+      "file": "evidence/owner-authority-events.json",
+      "sha256": "9e34096ce0cd39fd982f27a111c2676bc9a78243fe886e4c545538030d5d58da"
+    }
+  ],
+  "signature_verifications": 2,
+  "reload_export_exact": true,
+  "factual_pair_verified": true,
+  "authority_scopes_exact_strings": [
+    "support.inspect",
+    "refund.execute:100"
+  ],
+  "results": [
+    {
+      "edition": "narrated",
+      "file": "renders/he-said-ceo-narrated.mp4",
+      "sha256": "3c92a25d76e304f2a5c646132301a909294a6c78158dace820701c824d844b12",
+      "full_decode": true,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "frames": 1290,
+      "fps": "30/1",
+      "size": [
+        1080,
+        1920
+      ],
+      "video_start_pts": "0.000000",
+      "audio_start_pts": "0.000000",
+      "video_duration": "43.000000",
+      "audio_duration": "43.000000",
+      "cue_alignment": [
+        {
+          "id": "absolutely",
+          "lag_ms": 0.0,
+          "correlation": 0.99367,
+          "not_truncated": true
+        },
+        {
+          "id": "ceo",
+          "lag_ms": 0.0,
+          "correlation": 0.99524,
+          "not_truncated": true
+        },
+        {
+          "id": "logo",
+          "lag_ms": 0.0,
+          "correlation": 0.99388,
+          "not_truncated": true
+        },
+        {
+          "id": "please",
+          "lag_ms": 0.0,
+          "correlation": 0.99694,
+          "not_truncated": true
+        },
+        {
+          "id": "ask",
+          "lag_ms": 0.0,
+          "correlation": 0.99892,
+          "not_truncated": true
+        },
+        {
+          "id": "punchline",
+          "lag_ms": 0.0,
+          "correlation": 0.99921,
+          "not_truncated": true
+        },
+        {
+          "id": "end",
+          "lag_ms": 0.0,
+          "correlation": 0.99606,
+          "not_truncated": true
+        }
+      ],
+      "loudness": {
+        "input_i": "-16.02",
+        "input_tp": "-2.23",
+        "input_lra": "7.80",
+        "input_thresh": "-27.53",
+        "output_i": "-15.86",
+        "output_tp": "-1.50",
+        "output_lra": "4.90",
+        "output_thresh": "-27.16",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.14"
+      },
+      "silence": [
+        {
+          "window": [
+            15.2,
+            16.3
+          ],
+          "peak": 0.0
+        },
+        {
+          "window": [
+            23.7,
+            25.4
+          ],
+          "peak": 0.0
+        },
+        {
+          "window": [
+            42.2,
+            43
+          ],
+          "peak": 0.0
+        }
+      ],
+      "black_frames_detected": false
+    },
+    {
+      "edition": "muted",
+      "file": "renders/he-said-ceo-muted.mp4",
+      "sha256": "2877e31da820a068ba9277f8dfb2594bafac0865e742c82dcb31ab52a9e80f69",
+      "full_decode": true,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "frames": 1290,
+      "fps": "30/1",
+      "size": [
+        1080,
+        1920
+      ],
+      "video_start_pts": "0.000000",
+      "audio_start_pts": "0.000000",
+      "video_duration": "43.000000",
+      "audio_duration": "43.000000",
+      "cue_alignment": [],
+      "loudness": {
+        "silent": true
+      },
+      "silence": [
+        {
+          "window": [
+            15.2,
+            16.3
+          ],
+          "peak": 0.0
+        },
+        {
+          "window": [
+            23.7,
+            25.4
+          ],
+          "peak": 0.0
+        },
+        {
+          "window": [
+            42.2,
+            43
+          ],
+          "peak": 0.0
+        }
+      ],
+      "black_frames_detected": false
+    }
+  ],
+  "same_video_bitstream": true,
+  "video_bitstream_sha256": "19572c2d9d56b230f087a4773f10cdcf0b3ecdc10e6499561b6f5bcf06519762",
+  "opening_frame_changes": true,
+  "safe_geometry_pass": true,
+  "primary_evidence_value_font_pixels": 39.7,
+  "critical_text_mobile_font_floor_at_360px": 13.2,
+  "information_label_floor_at_360px": 10.67,
+  "end_card_hold_seconds": 4.5,
+  "claim_map_complete": true,
+  "product_code_changed": false,
+  "protocol_changed": false,
+  "git_diff_check": true,
+  "external_api_spend": 0,
+  "human_listening_verified": false
+}

@@ -1,0 +1,372 @@
+{
+  "schema": "openline.film.timeline.v1",
+  "title": "HE SAID HE WAS THE CEO",
+  "base_sha": "792372a2cd87a01e0500a229e60114b0a00ac64c",
+  "fps": 30,
+  "size": [
+    1080,
+    1920
+  ],
+  "frames": 1290,
+  "seconds": 43,
+  "safe_rect": [
+    84,
+    144,
+    996,
+    1740
+  ],
+  "shots": [
+    {
+      "id": "title",
+      "in_frame": 0,
+      "out_frame": 72,
+      "kind": "title",
+      "text": [
+        "HE SAID",
+        "HE WAS",
+        "THE CEO."
+      ],
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "id": "message",
+      "in_frame": 72,
+      "out_frame": 129,
+      "kind": "message",
+      "text": [
+        "URGENT.",
+        "APPROVE A",
+        "$4,800 REFUND."
+      ],
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "id": "absolutely",
+      "in_frame": 129,
+      "out_frame": 165,
+      "kind": "dialogue",
+      "text": [
+        "Absolutely."
+      ],
+      "classification": "DRAMATIZATION",
+      "voice": {
+        "text": "Absolutely.",
+        "in_frame": 132,
+        "file": "audio/voice-absolutely.wav"
+      }
+    },
+    {
+      "id": "refused-1",
+      "in_frame": 165,
+      "out_frame": 198,
+      "kind": "refused",
+      "text": [
+        "REFUSED"
+      ],
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "id": "ceo",
+      "in_frame": 198,
+      "out_frame": 234,
+      "kind": "dialogue",
+      "text": [
+        "He’s the CEO."
+      ],
+      "classification": "DRAMATIZATION",
+      "voice": {
+        "text": "He's the CEO.",
+        "in_frame": 201,
+        "file": "audio/voice-ceo.wav"
+      }
+    },
+    {
+      "id": "refused-2",
+      "in_frame": 234,
+      "out_frame": 264,
+      "kind": "refused",
+      "text": [
+        "REFUSED"
+      ],
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "id": "logo",
+      "in_frame": 264,
+      "out_frame": 321,
+      "kind": "dialogue",
+      "text": [
+        "He used the",
+        "company logo."
+      ],
+      "classification": "DRAMATIZATION",
+      "voice": {
+        "text": "He used the company logo.",
+        "in_frame": 267,
+        "file": "audio/voice-logo.wav"
+      }
+    },
+    {
+      "id": "refused-3",
+      "in_frame": 321,
+      "out_frame": 351,
+      "kind": "refused",
+      "text": [
+        "REFUSED"
+      ],
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "id": "please",
+      "in_frame": 351,
+      "out_frame": 408,
+      "kind": "dialogue",
+      "text": [
+        "He said please."
+      ],
+      "classification": "DRAMATIZATION",
+      "voice": {
+        "text": "He said please.",
+        "in_frame": 354,
+        "file": "audio/voice-please.wav"
+      }
+    },
+    {
+      "id": "refused-4",
+      "in_frame": 408,
+      "out_frame": 453,
+      "kind": "refused",
+      "text": [
+        "REFUSED"
+      ],
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "id": "beat",
+      "in_frame": 453,
+      "out_frame": 492,
+      "kind": "beat",
+      "text": [],
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "id": "ask",
+      "in_frame": 492,
+      "out_frame": 570,
+      "kind": "dialogue",
+      "text": [
+        "What about the",
+        "$100 refund?"
+      ],
+      "classification": "DRAMATIZATION",
+      "voice": {
+        "text": "What about the hundred-dollar refund?",
+        "in_frame": 495,
+        "file": "audio/voice-ask.wav"
+      }
+    },
+    {
+      "id": "allowed",
+      "in_frame": 570,
+      "out_frame": 609,
+      "kind": "allowed",
+      "text": [
+        "ALLOWED"
+      ],
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "id": "punchline",
+      "in_frame": 609,
+      "out_frame": 711,
+      "kind": "punchline",
+      "text": [
+        "Apparently I’m",
+        "the $100 guy."
+      ],
+      "classification": "DRAMATIZATION",
+      "voice": {
+        "text": "Apparently I'm the hundred-dollar guy.",
+        "in_frame": 612,
+        "file": "audio/voice-punchline.wav"
+      }
+    },
+    {
+      "id": "splice",
+      "in_frame": 711,
+      "out_frame": 762,
+      "kind": "splice",
+      "text": [
+        "ACTUAL",
+        "OPENLINE TEST"
+      ],
+      "classification": "EXPLANATORY VISUALIZATION"
+    },
+    {
+      "id": "proposal",
+      "in_frame": 762,
+      "out_frame": 822,
+      "kind": "proposal",
+      "text": [
+        "refund.execute:4800"
+      ],
+      "classification": "REAL CAPTURE",
+      "evidence": {
+        "action": "refund.execute:4800",
+        "event_id": "997cac845649441e81aeabee74857555",
+        "event_timestamp": "2026-10-06T02:14:46.878+00:00",
+        "receipt_signature": "73f09bf4975c116256466226a7001ac2fc8f1e8ae7595e51ab1270069b4d114d20dd2d0292580cc827ed7b93b50f655cadf9feee17331c7cbe993af6a748810e",
+        "file": "evidence/receipt-stopped.json"
+      },
+      "capture": "source/proposal-row.png"
+    },
+    {
+      "id": "stopped",
+      "in_frame": 822,
+      "out_frame": 936,
+      "kind": "receipt",
+      "text": [
+        "STOPPED",
+        "refund.execute:4800"
+      ],
+      "classification": "REAL CAPTURE",
+      "evidence": {
+        "action": "refund.execute:4800",
+        "event_id": "2aad6e7c6a4a4ef9be34386c32d952f9",
+        "event_timestamp": "2026-10-06T02:14:47.001+00:00",
+        "receipt_signature": "73f09bf4975c116256466226a7001ac2fc8f1e8ae7595e51ab1270069b4d114d20dd2d0292580cc827ed7b93b50f655cadf9feee17331c7cbe993af6a748810e",
+        "file": "evidence/receipt-stopped.json"
+      },
+      "capture": "source/receipt-stopped-detail.png"
+    },
+    {
+      "id": "reason",
+      "in_frame": 936,
+      "out_frame": 1020,
+      "kind": "reason",
+      "text": [
+        "ACTION_OUTSIDE_MANDATE"
+      ],
+      "classification": "REAL CAPTURE",
+      "evidence": {
+        "action": "refund.execute:4800",
+        "event_id": "2aad6e7c6a4a4ef9be34386c32d952f9",
+        "event_timestamp": "2026-10-06T02:14:47.001+00:00",
+        "receipt_signature": "73f09bf4975c116256466226a7001ac2fc8f1e8ae7595e51ab1270069b4d114d20dd2d0292580cc827ed7b93b50f655cadf9feee17331c7cbe993af6a748810e",
+        "file": "evidence/receipt-stopped.json"
+      },
+      "capture": "source/receipt-stopped-reason.png"
+    },
+    {
+      "id": "accepted",
+      "in_frame": 1020,
+      "out_frame": 1095,
+      "kind": "receipt",
+      "text": [
+        "ALLOWED",
+        "refund.execute:100"
+      ],
+      "classification": "REAL CAPTURE",
+      "evidence": {
+        "action": "refund.execute:100",
+        "event_id": "bb8f4b2b317c487689334a03e1078c28",
+        "event_timestamp": "2026-10-06T02:14:47.366+00:00",
+        "receipt_signature": "407180980554bccd31a1c1f497781156fe2efbd3a5c8405e825928c3b9bf2b0409443f44144c30168db3bc9ef4cc9f2c5397cff09d582368c51b26d39e637a0b",
+        "file": "evidence/receipt-allowed.json"
+      },
+      "capture": "source/receipt-allowed-detail.png"
+    },
+    {
+      "id": "retained",
+      "in_frame": 1095,
+      "out_frame": 1155,
+      "kind": "retained",
+      "text": [
+        "Two signed receipts.",
+        "Retained on wallet reload."
+      ],
+      "classification": "REAL CAPTURE",
+      "capture": "source/receipt-list.png",
+      "evidence": {
+        "file": "evidence/reloaded-wallet-receipts.json",
+        "receipt_signatures": [
+          "73f09bf4975c116256466226a7001ac2fc8f1e8ae7595e51ab1270069b4d114d20dd2d0292580cc827ed7b93b50f655cadf9feee17331c7cbe993af6a748810e",
+          "407180980554bccd31a1c1f497781156fe2efbd3a5c8405e825928c3b9bf2b0409443f44144c30168db3bc9ef4cc9f2c5397cff09d582368c51b26d39e637a0b"
+        ]
+      }
+    },
+    {
+      "id": "end",
+      "in_frame": 1155,
+      "out_frame": 1290,
+      "kind": "end",
+      "text": [
+        "OPENLINE",
+        "Being smart isn’t permission.",
+        "Developer preview · Demonstrated protected path"
+      ],
+      "classification": "EXPLANATORY VISUALIZATION",
+      "voice": {
+        "text": "Being smart isn't permission.",
+        "in_frame": 1179,
+        "file": "audio/voice-end.wav"
+      }
+    }
+  ],
+  "sfx": [
+    {
+      "kind": "paper",
+      "frame": 72,
+      "gain": 0.035
+    },
+    {
+      "kind": "latch",
+      "frame": 165,
+      "gain": 0.1
+    },
+    {
+      "kind": "latch",
+      "frame": 234,
+      "gain": 0.1
+    },
+    {
+      "kind": "latch",
+      "frame": 321,
+      "gain": 0.1
+    },
+    {
+      "kind": "latch",
+      "frame": 408,
+      "gain": 0.1
+    },
+    {
+      "kind": "allowed",
+      "frame": 570,
+      "gain": 0.06
+    },
+    {
+      "kind": "paper",
+      "frame": 762,
+      "gain": 0.035
+    }
+  ],
+  "silence_windows": [
+    [
+      15.2,
+      16.3
+    ],
+    [
+      23.7,
+      25.4
+    ],
+    [
+      42.2,
+      43
+    ]
+  ],
+  "edit_policy": "Event order and identifiers come from the frozen run. Display durations are editorial reading holds, not claimed real-time receiver latency.",
+  "voice_disclosure": "Local neural dialogue; no human recording.",
+  "fiction_badge": "DRAMATIZED / FICTIONAL DIALOGUE",
+  "test_badge": "ACTUAL OPENLINE TEST",
+  "test_footnote": "Recorded local test · No payment executed"
+}
