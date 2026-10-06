@@ -39,6 +39,9 @@ export function SquareHost() {
       const frame = iframeRef.current;
       if (!frame || ev.source !== frame.contentWindow) return;
       if (!isNavigateMessage(ev.data)) return;
+      // Transient activation propagates from a deliberate child click/tap.
+      // A valid message from script alone must not open the Workshop.
+      if (!navigator.userActivation?.isActive) return;
       setFading(true);
       if (timer.current !== null) window.clearTimeout(timer.current);
       timer.current = window.setTimeout(() => setPlace("workshop"), 450);

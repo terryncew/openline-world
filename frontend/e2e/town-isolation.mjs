@@ -8,7 +8,7 @@
  *
  * Run: node e2e/town-isolation.mjs (backend + vite are started here).
  */
-import { spawn, execSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -33,13 +33,9 @@ const check = (name, ok, detail = "") => {
   if (!ok) process.exitCode = 1;
 };
 
-for (const p of [BACKEND_PORT, VITE_PORT]) {
-  try { execSync(`fuser -k ${p}/tcp 2>/dev/null`); } catch {}
-}
-await sleep(500);
 const env = { ...process.env, WORKSHOP_PORT: String(BACKEND_PORT) };
-const backend = spawn("python3", ["backend/server.py"], { cwd: repo, env, stdio: "ignore" });
-const vite = spawn("npx", ["vite", "--port", String(VITE_PORT), "--strictPort", "--host", "127.0.0.1"], { cwd: frontend, env, stdio: "ignore" });
+const backend = spawn(resolve(repo, ".venv/bin/python"), ["backend/server.py"], { cwd: repo, env, stdio: "ignore" });
+const vite = spawn(process.execPath, [resolve(frontend, "node_modules/vite/bin/vite.js"), "--port", String(VITE_PORT), "--strictPort", "--host", "127.0.0.1"], { cwd: frontend, env, stdio: "ignore" });
 const kill = () => { try { backend.kill(); } catch {} try { vite.kill(); } catch {} };
 process.on("exit", kill);
 
@@ -49,7 +45,12 @@ try {
   const { chromium } = await import("playwright");
   const { browserLaunchOptions } = await import("./browser-launch.mjs");
   const browser = await chromium.launch(browserLaunchOptions());
-  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  // Permit local-network requests in this test profile so the opaque child
+  // actually reaches the server; a browser-only refusal cannot prove 403.
+  const page = await browser.newPage({
+    viewport: { width: 1280, height: 800 },
+    permissions: ["local-network-access"],
+  });
   await page.goto(`http://127.0.0.1:${VITE_PORT}/`, { waitUntil: "networkidle" });
   await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
   await sleep(6000); // town mounts
@@ -132,12 +133,21 @@ try {
   check("child top-navigation blocked", topNav === "blocked" && stillSquare, topNav);
 
   // 7. HOSTILE DOCUMENT: replace the frame content with an attacker's page.
-  // It can only speak through the validated intent channel — a forged
-  // intent is ignored; the exact valid intent is (correctly) honored.
-  await frame.goto("data:text/html,<body>hostile</body>");
+  // Even the exact valid intent must be refused without user activation.
+  const hostileURL = `http://127.0.0.1:${VITE_PORT}/hostile-test.html`;
+  await page.route(hostileURL, (route) => route.fulfill({
+    contentType: "text/html",
+    body: `<body>hostile<script>
+      parent.postMessage({type: "openline:navigate", intent: "enter-workshop"}, "*");
+    </script>`,
+  }));
+  // Playwright evaluate() can grant activation; let prior probes expire.
+  await sleep(6000);
+  await frame.goto(hostileURL);
   await sleep(1000);
-  const hostile = page.frames().find((f) => f.url().startsWith("data:text/html"));
+  const hostile = page.frames().find((f) => f.url() === hostileURL);
   check("hostile frame loaded", !!hostile);
+  check("scripted exact intent ignored without user action", !(await vizOpen()));
   if (hostile) {
     await hostile.evaluate(() => parent.postMessage(
       { type: "openline:navigate", intent: "enter-workshop", evil: true }, "*"));
@@ -149,6 +159,22 @@ try {
       catch { return "blocked"; }
     });
     check("hostile cannot read parent DOM", hRead === "blocked", hRead);
+
+    // The replacement has no CSP: test the actual server denial and state.
+    const api = `http://127.0.0.1:${BACKEND_PORT}`;
+    const before = await (await fetch(`${api}/api/state`)).json();
+    const denied = await hostile.evaluate(async (url) => {
+      const response = await fetch(url, { method: "POST" });
+      return { status: response.status, body: await response.json() };
+    }, `http://127.0.0.1:${VITE_PORT}/api/demo/advance`);
+    const after = await (await fetch(`${api}/api/state`)).json();
+    check("opaque-origin backend write refused", denied.status === 403 &&
+      denied.body.error === "OPAQUE_ORIGIN_FORBIDDEN", JSON.stringify(denied));
+    check("backend state unchanged after refusal", JSON.stringify(before) === JSON.stringify(after));
+    const positive = await fetch(`${api}/api/demo/advance`, { method: "POST" });
+    const advanced = await (await fetch(`${api}/api/state`)).json();
+    check("no-origin local write preserved", positive.ok && advanced.demo.step === before.demo.step + 1);
+
   }
 
   // 8. POSITIVE CONTROL: the exact valid intent from the frame opens the viz
@@ -156,12 +182,20 @@ try {
   await page.reload({ waitUntil: "networkidle" });
   await page.waitForSelector("iframe.square-frame", { timeout: 30000 });
   await sleep(6000);
-  const frame2 = page.frames().find((f) => f.url().endsWith("town.html"));
-  await frame2.evaluate(() => parent.postMessage(
-    { type: "openline:navigate", intent: "enter-workshop" }, "*"));
+  // Project the current genuine WorkshopDoor hitbox; use a real mouse click,
+  // never evaluate(postMessage), for the transient-activation positive control.
+  const { PerspectiveCamera, Vector3 } = await import("three");
+  const camera = new PerspectiveCamera(38, 1280 / 800, 0.1, 80);
+  camera.position.set(2.4, 5.8, 12.8);
+  camera.lookAt(0.7, 0.9, -1.2);
+  camera.updateMatrixWorld();
+  const door = new Vector3(1.6 - Math.sin(0.12) * 1.45, 1, -4.2 + Math.cos(0.12) * 1.45).project(camera);
+  await page.mouse.click((door.x + 1) * 640, (1 - door.y) * 400);
   await page.waitForFunction(() => !!document.querySelector(".viz-root"), null, { timeout: 15000 })
     .catch(() => null);
-  check("valid intent opens workshop", await vizOpen());
+  check("user-activated genuine door opens workshop", await vizOpen());
+  const health = await page.evaluate(async () => (await fetch("/api/health")).json());
+  check("ordinary same-origin API proxy works", health.status === "ok");
 
   await browser.close();
   const failed = results.filter((r) => !r.ok).length;

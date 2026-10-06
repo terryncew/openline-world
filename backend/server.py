@@ -610,8 +610,32 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, *args: object) -> None:
         return
 
+    def _reject_opaque_origin(self) -> bool:
+        """Opaque sandbox documents are never workshop API principals.
+
+        The genuine UI is same-origin through Vite's proxy (or a loopback
+        origin in development). A replaced sandbox document has Origin:
+        null; reject it before route handling so a lost child CSP cannot
+        read or mutate backend state. Requests without Origin remain valid
+        for the local CLI and tests.
+        """
+        if self.headers.get("Origin") != "null":
+            return False
+        encoded = json.dumps({"error": "OPAQUE_ORIGIN_FORBIDDEN"}).encode("utf-8")
+        self.send_response(403)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(encoded)))
+        # Exposing this fixed denial lets containment tests distinguish a
+        # server-side rejection from a browser-only CORS failure.
+        self.send_header("Access-Control-Allow-Origin", "null")
+        self.end_headers()
+        self.wfile.write(encoded)
+        return True
+
     # -- routes --------------------------------------------------------------
     def do_OPTIONS(self) -> None:  # noqa: N802
+        if self._reject_opaque_origin():
+            return
         self.send_response(204)
         origin = self.headers.get("Origin", "")
         if _origin_allowed(origin):
@@ -621,6 +645,8 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self) -> None:  # noqa: N802
+        if self._reject_opaque_origin():
+            return
         try:
             if self.path == "/api/health":
                 self._send(200, {"status": "ok", "mode": self.workshop.mode})
@@ -681,6 +707,8 @@ class Handler(BaseHTTPRequestHandler):
             pass
 
     def do_POST(self) -> None:  # noqa: N802
+        if self._reject_opaque_origin():
+            return
         try:
             path = self.path
             if path == "/api/adapter/hooks":
