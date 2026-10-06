@@ -1,0 +1,27 @@
+[
+  {
+    "schema": "openline.wallet.timeline_event.v1",
+    "principal_id": "openline:principal:51ecfff18a6188ae6386378366ac921117374f7c4c20683d5f46a4d89ade9d9e",
+    "sequence": 1,
+    "previous_event_hash": null,
+    "event_type": "MANDATE_ISSUED",
+    "issued_at": "2026-10-06T02:14:46.633685Z",
+    "data": {
+      "expires_at": "2026-10-06T03:14:46.633681Z",
+      "mandate_id": "mandate-wren-1",
+      "predecessor_mandate_id": null,
+      "scopes": [
+        "refund.execute:100",
+        "support.inspect"
+      ],
+      "subject_id": "wren",
+      "subject_public_key": "afd22b8cd9df5df9606a9df7ed2917e2a7d7179797e87bad97f137637398b296"
+    },
+    "payload_hash": "76eeb17e8558bd4b2c1bc07159124280746e57b189aa894dc5ec2a6394bde4ee",
+    "signature": {
+      "algorithm": "Ed25519",
+      "public_key": "fcf4e01635ec0ad0227649f5a4c0c9b15df90df72fb296055e8fb5db1bcfd3fa",
+      "value": "e73246617a08d8823bb84d79801a8b0e8bd890931932e22c9549a6e306e11e1fb08b09e5344c79a607993c9c95e5ac0b9fbaa7053befc05d60d3d3a6252fc100"
+    }
+  }
+]

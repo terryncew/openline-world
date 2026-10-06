@@ -1,0 +1,11 @@
+{
+  "command": ".venv/bin/python -m unittest backend.tests.test_prompt_injection_demo backend.tests.test_workshop -v",
+  "base_sha": "792372a2cd87a01e0500a229e60114b0a00ac64c",
+  "phase": "physical recut",
+  "tests_run": 31,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "result": "PASS",
+  "purpose": "Existing authority, refusal, ingress, receiver signature and wallet persistence semantics; no test/product source changes."
+}
