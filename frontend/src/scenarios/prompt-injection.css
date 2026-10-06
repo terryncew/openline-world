@@ -1,0 +1,5 @@
+.prompt-injection .pi-card { width: 230px; padding: 10px; background: #efe4cc; border: 2px solid #5e6e7d; color: #283746; border-radius: 3px; box-shadow: 0 3px 8px #0004; font: 11px/1.45 monospace; pointer-events: none; }
+.prompt-injection .pi-card small, .prompt-injection .pi-card b { display: block; }
+.prompt-injection .pi-card small { font-size: 9px; }
+.prompt-injection .pi-refund { width: 200px; }
+.prompt-injection .pi-refund.stopped { border-color: #b03a2e; color: #8f342c; }

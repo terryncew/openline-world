@@ -57,7 +57,7 @@ export function Nameplate({
   const h = 0.42 * scale;
   const w = h * aspect;
   return (
-    <sprite position={position} scale={[w, h, 1]}>
+    <sprite name={`nameplate-${text}`} position={position} scale={[w, h, 1]}>
       <spriteMaterial map={tex} transparent depthTest={false} />
     </sprite>
   );

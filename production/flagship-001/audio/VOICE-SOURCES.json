@@ -1,0 +1,100 @@
+{
+  "engine": "kokoro-onnx 0.6.1",
+  "voice": "af_heart",
+  "speed": 0.96,
+  "synthesized": true,
+  "human_recording": false,
+  "model_sha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voice_file_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "upstream": "https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0",
+  "lines": [
+    {
+      "id": "handover",
+      "text": "You hand over the work.",
+      "file": "audio/voice-handover.wav",
+      "seconds": 1.3653333333333333,
+      "sample_rate": 24000,
+      "sha256": "b9ff3fbc674d221cbe71252c5e8397fd1fe8bb02d1ed639310dce506db498b6a"
+    },
+    {
+      "id": "rules",
+      "text": "Not the rules.",
+      "file": "audio/voice-rules.wav",
+      "seconds": 1.0024583333333332,
+      "sample_rate": 24000,
+      "sha256": "2abfa45d1bf49f223cb544348ae82f2d02d47c7602e60775699339d48ce61b86"
+    },
+    {
+      "id": "revoke",
+      "text": "And you can change your mind.",
+      "file": "audio/voice-revoke.wav",
+      "seconds": 1.52725,
+      "sample_rate": 24000,
+      "sha256": "e3dcb9e26aee3fcd2d199268432f8cdd264b83fb78c3682706673f0e37884001"
+    },
+    {
+      "id": "receiver",
+      "text": "The receiver still decides.",
+      "file": "audio/voice-receiver.wav",
+      "seconds": 1.6135833333333334,
+      "sample_rate": 24000,
+      "sha256": "015653af5a0a4bf0291ad25249283974aadaa7e49b2d26adc53d87c90b348bfd"
+    },
+    {
+      "id": "permission",
+      "text": "A new worker needs your permission.",
+      "file": "audio/voice-permission.wav",
+      "seconds": 2.005333333333333,
+      "sample_rate": 24000,
+      "sha256": "aff3db073a3258935adbfca5fcafe7f718b6b7a5d0b95ee801af6bea17cf6a60"
+    },
+    {
+      "id": "history",
+      "text": "The work, and its history, stay.",
+      "file": "audio/voice-history.wav",
+      "seconds": 1.7562083333333334,
+      "sample_rate": 24000,
+      "sha256": "b7cea6469d4f84bbf59c2b6c71871fb5b6e9e18a29089d0e35d79f9ea994403c"
+    },
+    {
+      "id": "build",
+      "text": "Build around what stays.",
+      "file": "audio/voice-build.wav",
+      "seconds": 1.472,
+      "sample_rate": 24000,
+      "sha256": "3a4c2528cf5c4ed3102301fde5cce3d753bcbc9af53f9cbb2001f1648b2a3c1b"
+    },
+    {
+      "id": "brand",
+      "text": "OpenLine.",
+      "file": "audio/voice-brand.wav",
+      "seconds": 0.972625,
+      "sample_rate": 24000,
+      "sha256": "ce1e98e2662ac969a361d5fb724f94cc22ee409c1b5fd45ca1bb5394b6d52cce"
+    },
+    {
+      "id": "promise",
+      "text": "The worker can change. Your authority doesn't.",
+      "file": "audio/voice-promise.wav",
+      "seconds": 2.624,
+      "sample_rate": 24000,
+      "sha256": "efa4c9a2c4b465a51372690dca8716b948e1de38eba299aa13b4dc4a1957ee61"
+    },
+    {
+      "id": "developer",
+      "text": "Build your next worker around this boundary.",
+      "file": "audio/voice-developer.wav",
+      "seconds": 2.304,
+      "sample_rate": 24000,
+      "sha256": "8ef5b3d7318889ff95cc99d8ffeb4a80d029522b1a0e5d713df096e072d2d246"
+    },
+    {
+      "id": "buyer",
+      "text": "Put the decision at the receiver.",
+      "file": "audio/voice-buyer.wav",
+      "seconds": 1.8220416666666666,
+      "sample_rate": 24000,
+      "sha256": "6f074d53782bfa398cf84d8bc3ea84345dfdd97d851c4abd0f07d65ab8f07007"
+    }
+  ]
+}

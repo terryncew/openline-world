@@ -1,0 +1,342 @@
+{
+  "base_sha": "2235fa6ce916876cd39ed35be97263ddfc111b6a",
+  "scope": "Existing capability corpus; fresh selected evidence is in evidence/authority-run.json and workshop-tests.txt",
+  "artifacts": [
+    {
+      "path": "README.md",
+      "bytes": 14200,
+      "sha256": "4cdc2d972930c957507db3b1ababc9d96a2bcd64d182412a3e6b18b7a3426a25",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "backend/tests/test_prompt_injection_demo.py",
+      "bytes": 6441,
+      "sha256": "c80b55452e21ed45c33b0f219a4a5ae50732919a6ea0cf94cd0d01c638f865ac",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "backend/tests/test_workshop.py",
+      "bytes": 21791,
+      "sha256": "6668403bcbeba563d5bc97f1c2a32bedbc6d4d72dca62092df19abdbd08d13d3",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "clients/demo_custody.py",
+      "bytes": 14199,
+      "sha256": "79eb20130ecf99421068225b74526b997f97c1c4376dca6b48057b8fc15af71a",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/README-QUICKSTART.md",
+      "bytes": 4821,
+      "sha256": "e7bdec4e9b83f784fbc9cb9f6f2dc4b970999c0d9c2c25802a3226978fc273d7",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/custody-browser-integration.md",
+      "bytes": 9720,
+      "sha256": "8392657b1198f86d16fa585c11305c73084a745a63945d214cd528beca86b817",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/custody-handoff.md",
+      "bytes": 3449,
+      "sha256": "64df3787495e2c5eafbc61d72e355adf29daa103af99c4d2f0855cf6a1b59c9b",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/custody-migration-note.md",
+      "bytes": 1481,
+      "sha256": "4945e889e983ae025baee97cb6b59568510bbc1ab089fa86449330b71315b18a",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/dev-readme.md",
+      "bytes": 4131,
+      "sha256": "f7ae6c663a9d47bdf73547f1785d61c013332f30e330e09eea999d50c7e6f7ac",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/joining.md",
+      "bytes": 9899,
+      "sha256": "693de6a9612ce640ac386c508c9977400787a4d72b3ee7a0f044c9a5a631acc7",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/removed-test-coverage-map.md",
+      "bytes": 9550,
+      "sha256": "6f937cd1fda28dde31d537d20bb5eee8cb598eb16bdf77e362224f8348437266",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/separate-custody-design.md",
+      "bytes": 8670,
+      "sha256": "5bfbd1b9713f0afdcf568dbed4f2b587fa09b3b5c73fdd18df5b65ce2d707dd5",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/test-count-reconciliation.md",
+      "bytes": 8296,
+      "sha256": "61bb32a4df35ac7b1e4956424dfa9a587ba7310c3d3c61a5047ac3cbc813a6db",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "docs/transports.md",
+      "bytes": 8051,
+      "sha256": "1b19fdd0e877be8889af30f4044ce1aa9c3e2b07dcddd2f311116898ccddfe57",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "frontend/src/viz/scene/WorkshopInterior.tsx",
+      "bytes": 4574,
+      "sha256": "318735fc10f0aea821cf847e27969ef3a6ba598a9c9e75f2f9f4c33754751466",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "frontend/src/world/scene/act/BINDING.md",
+      "bytes": 5010,
+      "sha256": "da563887f569a987a462a34386a476fc43b8090399becd57067b5bd924d5dd45",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/DEFECT-NOTE.md",
+      "bytes": 3139,
+      "sha256": "4537a93ce82ceb72303a9541aa05ecafb2a3ec3d7e18854cbd3a9e1101f04415",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/INTRO.md",
+      "bytes": 2163,
+      "sha256": "3846c860f02d231daec094aa51730d9395a27661d48d8319c40ffa1f842e950a",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/PARTICIPATE.md",
+      "bytes": 7086,
+      "sha256": "09b20e407ae8374d15f666b9de1b7913d7535c3b97f6508a2a52a4e3adced704",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/README.md",
+      "bytes": 1371,
+      "sha256": "43f9171396bfcc615181b27f0f44cff66d98a1f827850effa91a1b1dec06e9f2",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/client/CHALLENGE-CRITERIA-001.md",
+      "bytes": 7455,
+      "sha256": "86be00e377e030b00b4a8d33b3c9b0d4d95e7049125981d714023a2ca5f6537a",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/client/PROBLEM.md",
+      "bytes": 3341,
+      "sha256": "213994dc13923d1fd455dec5b9f2aa1687960c35f9702e8ddbbc2a2af5729ad0",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/client/VENDORING.md",
+      "bytes": 3770,
+      "sha256": "d685d3be1f63f336dbbbf4c1b1c8822a6e5bed6c4978b70453af483d74b13513",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/client/toy-app/EXPECTED.md",
+      "bytes": 1669,
+      "sha256": "847107aaf1f74cc30e12da2f5dbdd919d28f81ae34e54d4618c62aea1806a248",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/client/toy-app/README.md",
+      "bytes": 415,
+      "sha256": "5536023ce10062575177e9665bebd19d98a281c5985beca805279f42994f61d9",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/challenge-001/trust-anchor-announcement-SIGNED.json",
+      "bytes": 2432,
+      "sha256": "f2b8fbbaa2525fb6c27e2cad80da25d6a4c1f495d3c905b1cfe302818975dca4",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "pilot/world-authority-001/CAPTURE_EVIDENCE.json",
+      "bytes": 1744,
+      "sha256": "5d6ec5b6537d3160a9b68adab996c4c36094ebc6dc46cdc43f43e43484c2021e",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/ACCEPTANCE-CLARIFICATION.md",
+      "bytes": 4647,
+      "sha256": "128a960b8e6b3537a65ab44c93e623a9fbd28b4eb54baf396261812b06df6a16",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/ADAPTER.md",
+      "bytes": 3694,
+      "sha256": "7d0bdf1b6b89e14c7173d1f2a506cd42271872f987e5aa90b14be20116980195",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/COMMONS-BRIEF.md",
+      "bytes": 8312,
+      "sha256": "ed22a3375792f93729b94525a80c15800d453d4e5b9160af953110f91f92af0d",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/COMMONS-CRITERIA-2026-09-27.md",
+      "bytes": 3635,
+      "sha256": "3e83ee7171f829316bef07c1bf413b1711a280823b81ef46832aac441152d6eb",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/COMMONS-CRITERIA.md",
+      "bytes": 3946,
+      "sha256": "80f6f2d5b98d814db6a4dd100ca0f944ce0af904f9f62bbd9621d1c7b070e335",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/CRITERIA.md",
+      "bytes": 1812,
+      "sha256": "2e35042744777e8b6c7406df42294e4c7f01f1508ec893e567b536e81699542a",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/EVIDENCE-REDACTION.md",
+      "bytes": 3675,
+      "sha256": "17b1505db338a74a2e9fb1c51ac464ac85556ea32506dd319a9bd6af8c8b5d98",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/ISOLATION-VERDICT-2026-09-27.md",
+      "bytes": 5263,
+      "sha256": "537ef1661dcafc810c4bef16594af68d87c937f4cd308d7db803cf8d8242261a",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/LIMITS.md",
+      "bytes": 2626,
+      "sha256": "a569d9cc3b65dd2ad916fbb5785d8fc20105cff1f9b45d591ca9e871d9feca2c",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/avatar-migration/QA-NOTES.md",
+      "bytes": 2149,
+      "sha256": "eb542020dc6840e6a8a95b6b6514cb24573461f51036a99fe7fb33b1e0cbee39",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/bureau/CONSEQUENCE-HISTORY-REPORT.md",
+      "bytes": 14928,
+      "sha256": "f73c33b27dc046f43aa69b33923ed0b690d9823a9c639de70873b868c6d92811",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/bureau/REDACTIONS.md",
+      "bytes": 2020,
+      "sha256": "dd39038dd724db2a9df7bd628c21a015f9576477be7badf77598ae3424281db3",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/bureau/SOURCE-MANIFEST.md",
+      "bytes": 2715,
+      "sha256": "baeda3fc193bfc97da026d279b3a5a2be53f954d54aa63795ed819a4c9881440",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/bureau/records/canary-evidence.json",
+      "bytes": 1180,
+      "sha256": "3a115e2ae96b0b025e9fb0ede0d10f9a06794cfab7eebee4bfa8cb3a376c44bb",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/commons/package/manifest.json",
+      "bytes": 1802,
+      "sha256": "2266d7331b306095964ad77b1be6e92eb619476746e3a7186f935673c50af5e4",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/correction-20260927T000442Z.json",
+      "bytes": 1664,
+      "sha256": "0ee6933c8f5a1611dbb4562502523232991943c4d1aeebcbab93a58f997fbeb2",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/evaluation-20260926T233916Z.json",
+      "bytes": 1454,
+      "sha256": "b25aa02616a98d359c719cbf0d86519d934fb797e47c119904c8120edbb200dc",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/notes-20260926T233916Z.md",
+      "bytes": 2872,
+      "sha256": "88fbae250a1c168a954153c6f0622e867ade56d9d3d2acc0f8ab871ca374d3bf",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/report-20260926T233916Z.md",
+      "bytes": 2615,
+      "sha256": "d80eed02cabf6e331e96258e8bb61d75d1dc1499447de99112ba2cb123b1f558",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/run-20260926T233916Z.json",
+      "bytes": 16770,
+      "sha256": "c7ae307fc4dfcb8fcc6879d2eb084da0dbff2447480b8cd95993d8e160303e11",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/uc001/ACCOUNTING-EVIDENCE.md",
+      "bytes": 2990,
+      "sha256": "3c2bed3ef47dfe2e8977e523d56fc3b1f318a4983b2468cba602a54d11353da9",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/uc001/evidence/CONTRACT-frozen.json",
+      "bytes": 913,
+      "sha256": "e10c74e4065a0877ebe9b1c7e5febd060414e44bb4419edd25c573f16297f5bb",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/uc001/evidence/balances.json",
+      "bytes": 3528,
+      "sha256": "f9ab3ed82db3ad1e439866883851ea3f5f0f9305292c30f3cb1dad626d7718ab",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/uc001/evidence/demo1-accepted.json",
+      "bytes": 3396,
+      "sha256": "459bfc9874584f4f8909ac8955707be23ee272688681e60e95d73e31e433a0a2",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/uc001/evidence/demo2-rejected.json",
+      "bytes": 3429,
+      "sha256": "a145edb4987adf5f552ced6ce69a16c33d63c3d046dd26af33257fb150d472d2",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/uc001/evidence/demo3-cap.json",
+      "bytes": 2677,
+      "sha256": "8581c368c722a1be71f76a60a6a5376eeb8acd9b21cf5f53d6bd02cf7511b731",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/uc001/evidence/demo4-revocation.json",
+      "bytes": 2655,
+      "sha256": "3e81f276ed7bafad2d35ebfde19b3ff29f0e85afe27c47283480e7654061237c",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/uc001/evidence/demo5-crash-retry.json",
+      "bytes": 3913,
+      "sha256": "d04353fdf81cd430279281e7ec955867101eaf2c42763546aff43e52d51f1bd0",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    },
+    {
+      "path": "research/uc001/evidence/demo6-altered.json",
+      "bytes": 2871,
+      "sha256": "bce1c2870ceff89f952bd81e1c7ff08355b1b8bc552be1c55c1ca25eaebafd57",
+      "status": "Existing repository artifact; not a fresh execution or endorsement"
+    }
+  ]
+}

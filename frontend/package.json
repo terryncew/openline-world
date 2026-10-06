@@ -12,6 +12,7 @@
     "test:e2e": "node e2e/viz-replay.mjs",
     "test:hero": "node e2e/hero-capture.mjs",
     "test:bench": "node e2e/viz-bench.mjs",
+    "test:prompt-injection": "node e2e/prompt-injection.mjs",
     "test:visual-canon": "node e2e/visual-canon.mjs"
   },
   "dependencies": {

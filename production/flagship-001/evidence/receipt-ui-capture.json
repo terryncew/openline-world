@@ -1,0 +1,8 @@
+{
+  "classification": "REAL CAPTURE",
+  "component": "frontend/src/components/Panels.tsx:ReceiptsPanel",
+  "data": "Exact saved real /api/receipts projection; static replay of verified signed artifacts",
+  "layout": "Capture-only centering and font scaling",
+  "body": "Records — signed receipts\nClose\n\nEach receipt was signed by the receiver's key and the signature was verified before it was recorded. Agents cannot mint these.\n\nALLOWED notes.write\nwren\nSTOPPED notes.read\nwren\nDecision\nSTOPPED\nAction\nnotes.read\nHelper\nwren\nReasons\nMANDATE_REVOKED\nDecided at\n2026-10-05T22:45:28.790662Z\nSignature\n716e2e402533b59397a36ccb5a04efc9f1b451b25ccb5c22…\nGate key\n51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9…\n\nSigned by the receiver's key. Agents cannot mint these.",
+  "pageErrors": []
+}

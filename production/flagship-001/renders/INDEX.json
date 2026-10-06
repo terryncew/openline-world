@@ -1,0 +1,1711 @@
+{
+  "title": "The Work Stays",
+  "base_sha": "2235fa6ce916876cd39ed35be97263ddfc111b6a",
+  "renders": [
+    {
+      "name": "master-90",
+      "seconds": 90,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/job.mp4",
+          "render_source_sha256": "cc32c5bd405da4e67c7c95ee387e35637448302641a367a3513589fe6dcf9ab2",
+          "framing": "Native frame"
+        },
+        {
+          "id": "wren",
+          "start": 4,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/wren.mp4",
+          "render_source_sha256": "7f4fa27902a5a45c908b71194053a8d3985db94acefed5f501a20c603bce77b8",
+          "framing": "Native frame"
+        },
+        {
+          "id": "square",
+          "start": 9,
+          "seconds": 5,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/square.mp4",
+          "render_source_sha256": "1d99b6743ac2672d8491491a958ba0870acb7e92fbe71a6c059ec3878f885faf",
+          "framing": "Native frame"
+        },
+        {
+          "id": "owner",
+          "start": 14,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/owner.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/owner.mp4",
+          "render_source_sha256": "f350315b4f54a1fbea8dc95a285d191c0940742b5538009451ec1518e2593ac0",
+          "framing": "Native frame"
+        },
+        {
+          "id": "allow",
+          "start": 18,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/allow.mp4",
+          "render_source_sha256": "2cd694a891c6a13a1863ceed669dff2ed0323bc608b0f13e20111895386b2736",
+          "framing": "Native frame"
+        },
+        {
+          "id": "work",
+          "start": 22,
+          "seconds": 6,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/work.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/work.mp4",
+          "render_source_sha256": "31505584fdc4ac6bc1655780da59f319f0064cdfcf9f49c81c9fc257236e3c52",
+          "framing": "Native frame"
+        },
+        {
+          "id": "revoke",
+          "start": 28,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/revoke.mp4",
+          "render_source_sha256": "b65d218b89bc38457f81192c282e7ab395963840388eabf0fdf089e4c6ad852e",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stop",
+          "start": 33,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stop.mp4",
+          "render_source_sha256": "35945340d1f240a81b973e9051d4b55fe9527d61b7260d8eaf24aa98ea12e50a",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stamp",
+          "start": 38,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stamp.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stamp.mp4",
+          "render_source_sha256": "e0bd09500a31543108b54b7b6fa6db400c59d82cbb8033032c1f6d164832e08f",
+          "framing": "Native frame"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 41,
+          "seconds": 7,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": "Factual fields from receipt-2.json with existing UI pixels",
+          "render_source": "source/receipt-proof.png",
+          "render_source_sha256": "636e44c9dc9af12bc29671827aa4c8f2a38102fd01c9643f991b0c211d4dff1c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "arrival",
+          "start": 48,
+          "seconds": 6,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/arrival.mp4",
+          "render_source_sha256": "c559b2ccbc9b8609e51d42755820a8b81fac9f64fe824d303bb56da321fa3c4b",
+          "framing": "Native frame"
+        },
+        {
+          "id": "newgrant",
+          "start": 54,
+          "seconds": 6,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/newgrant.mp4",
+          "render_source_sha256": "00492200422c92373b574194f366e7fbc8b5ebb362b8a1106637fbc211caa287",
+          "framing": "Native frame"
+        },
+        {
+          "id": "continue",
+          "start": 60,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/continue.mp4",
+          "render_source_sha256": "8ba8dff719313d6e615b941b0156ec86f91271bd525caeca75e1bad9c2c270ed",
+          "framing": "Native frame"
+        },
+        {
+          "id": "history",
+          "start": 64,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/history.mp4",
+          "render_source_sha256": "ed9a6de2b0a700c6dcaa68e416321bb94261fe95bb34903d34d465bf1766fc3c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "checkpoints",
+          "start": 69,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/checkpoints.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/checkpoints.mp4",
+          "render_source_sha256": "7dacaa96e4c4b40d1c2ef4f88036bc231d1acbe75b48d46eb16f79269571f5da",
+          "framing": "Native frame"
+        },
+        {
+          "id": "together",
+          "start": 71,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/together.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/together.mp4",
+          "render_source_sha256": "d91facc1a1b438ac2dc8fa3af5cdb4390aba9fb345a64c1f0f9863ffc904a661",
+          "framing": "Native frame"
+        },
+        {
+          "id": "square-out",
+          "start": 76,
+          "seconds": 6,
+          "classification": "DRAMATIZATION",
+          "source": "source/square-out.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/square-out.mp4",
+          "render_source_sha256": "0c7b284221290a46b29c41f04b470c99f9c17be2a30607163e473487adf02cfe",
+          "framing": "Native frame"
+        },
+        {
+          "id": "end",
+          "start": 82,
+          "seconds": 8,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/end.png",
+          "render_source_sha256": "36e63c047049ddff09b30f5138232d864ff8bd1a7072dc065e043fbd6be89bb0",
+          "framing": "Native frame"
+        }
+      ],
+      "voice": [
+        {
+          "start": 9.6,
+          "id": "handover"
+        },
+        {
+          "start": 14.7,
+          "id": "rules"
+        },
+        {
+          "start": 28.45,
+          "id": "revoke"
+        },
+        {
+          "start": 41.65,
+          "id": "receiver"
+        },
+        {
+          "start": 54.55,
+          "id": "permission"
+        },
+        {
+          "start": 64.8,
+          "id": "history"
+        },
+        {
+          "start": 77,
+          "id": "build"
+        },
+        {
+          "start": 82.75,
+          "id": "brand"
+        },
+        {
+          "start": 85.0,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-master-90.mp4",
+      "delivery_gain_db": 0,
+      "encoded_audio_measurement": {
+        "input_i": "-16.62",
+        "input_tp": "-1.86",
+        "input_lra": "9.20",
+        "input_thresh": "-28.15",
+        "output_i": "-16.17",
+        "output_tp": "-1.50",
+        "output_lra": "8.40",
+        "output_thresh": "-27.28",
+        "normalization_type": "dynamic",
+        "target_offset": "0.17"
+      },
+      "bytes": 23968841,
+      "sha256": "49f38eb881e505cb9bb0302be393f09d86dc9b4d2f712d38a258ff6e09854d17"
+    },
+    {
+      "name": "flagship-60",
+      "seconds": 60,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/job.mp4",
+          "render_source_sha256": "cc32c5bd405da4e67c7c95ee387e35637448302641a367a3513589fe6dcf9ab2",
+          "framing": "Native frame"
+        },
+        {
+          "id": "wren",
+          "start": 2,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/wren.mp4",
+          "render_source_sha256": "7f4fa27902a5a45c908b71194053a8d3985db94acefed5f501a20c603bce77b8",
+          "framing": "Native frame"
+        },
+        {
+          "id": "square",
+          "start": 6,
+          "seconds": 3,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/square.mp4",
+          "render_source_sha256": "1d99b6743ac2672d8491491a958ba0870acb7e92fbe71a6c059ec3878f885faf",
+          "framing": "Native frame"
+        },
+        {
+          "id": "owner",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/owner.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/owner.mp4",
+          "render_source_sha256": "f350315b4f54a1fbea8dc95a285d191c0940742b5538009451ec1518e2593ac0",
+          "framing": "Native frame"
+        },
+        {
+          "id": "allow",
+          "start": 12,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/allow.mp4",
+          "render_source_sha256": "2cd694a891c6a13a1863ceed669dff2ed0323bc608b0f13e20111895386b2736",
+          "framing": "Native frame"
+        },
+        {
+          "id": "work",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/work.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/work.mp4",
+          "render_source_sha256": "31505584fdc4ac6bc1655780da59f319f0064cdfcf9f49c81c9fc257236e3c52",
+          "framing": "Native frame"
+        },
+        {
+          "id": "revoke",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/revoke.mp4",
+          "render_source_sha256": "b65d218b89bc38457f81192c282e7ab395963840388eabf0fdf089e4c6ad852e",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stop",
+          "start": 21,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stop.mp4",
+          "render_source_sha256": "35945340d1f240a81b973e9051d4b55fe9527d61b7260d8eaf24aa98ea12e50a",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stamp",
+          "start": 25,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stamp.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stamp.mp4",
+          "render_source_sha256": "e0bd09500a31543108b54b7b6fa6db400c59d82cbb8033032c1f6d164832e08f",
+          "framing": "Native frame"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 27,
+          "seconds": 5,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": "Factual fields from receipt-2.json with existing UI pixels",
+          "render_source": "source/receipt-proof.png",
+          "render_source_sha256": "636e44c9dc9af12bc29671827aa4c8f2a38102fd01c9643f991b0c211d4dff1c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "arrival",
+          "start": 32,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4",
+          "source_trim_start": 1.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/arrival.mp4",
+          "render_source_sha256": "c559b2ccbc9b8609e51d42755820a8b81fac9f64fe824d303bb56da321fa3c4b",
+          "framing": "Native frame"
+        },
+        {
+          "id": "newgrant",
+          "start": 37,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/newgrant.mp4",
+          "render_source_sha256": "00492200422c92373b574194f366e7fbc8b5ebb362b8a1106637fbc211caa287",
+          "framing": "Native frame"
+        },
+        {
+          "id": "continue",
+          "start": 42,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/continue.mp4",
+          "render_source_sha256": "8ba8dff719313d6e615b941b0156ec86f91271bd525caeca75e1bad9c2c270ed",
+          "framing": "Native frame"
+        },
+        {
+          "id": "history",
+          "start": 45,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4",
+          "source_trim_start": 0.9166666666666666,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/history.mp4",
+          "render_source_sha256": "ed9a6de2b0a700c6dcaa68e416321bb94261fe95bb34903d34d465bf1766fc3c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "square-out",
+          "start": 49,
+          "seconds": 4,
+          "classification": "DRAMATIZATION",
+          "source": "source/square-out.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/square-out.mp4",
+          "render_source_sha256": "0c7b284221290a46b29c41f04b470c99f9c17be2a30607163e473487adf02cfe",
+          "framing": "Native frame"
+        },
+        {
+          "id": "end",
+          "start": 53,
+          "seconds": 7,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/end.png",
+          "render_source_sha256": "36e63c047049ddff09b30f5138232d864ff8bd1a7072dc065e043fbd6be89bb0",
+          "framing": "Native frame"
+        }
+      ],
+      "voice": [
+        {
+          "start": 5.4,
+          "id": "handover"
+        },
+        {
+          "start": 9.7,
+          "id": "rules"
+        },
+        {
+          "start": 18.15,
+          "id": "revoke"
+        },
+        {
+          "start": 27.25,
+          "id": "receiver"
+        },
+        {
+          "start": 37.35,
+          "id": "permission"
+        },
+        {
+          "start": 45.4,
+          "id": "history"
+        },
+        {
+          "start": 53.45,
+          "id": "brand"
+        },
+        {
+          "start": 55.5,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-flagship-60.mp4",
+      "delivery_gain_db": 0,
+      "encoded_audio_measurement": {
+        "input_i": "-16.11",
+        "input_tp": "-1.76",
+        "input_lra": "7.90",
+        "input_thresh": "-28.33",
+        "output_i": "-16.35",
+        "output_tp": "-1.50",
+        "output_lra": "7.10",
+        "output_thresh": "-28.20",
+        "normalization_type": "dynamic",
+        "target_offset": "0.35"
+      },
+      "bytes": 15868167,
+      "sha256": "8ec48cdc7b07f9aee0f97e61dc46f46a404e37277e0b8cf716ea842e216b4977"
+    },
+    {
+      "name": "hero-30",
+      "seconds": 30.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 1,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/job.mp4",
+          "render_source_sha256": "cc32c5bd405da4e67c7c95ee387e35637448302641a367a3513589fe6dcf9ab2",
+          "framing": "Native frame"
+        },
+        {
+          "id": "wren",
+          "start": 1,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/wren.mp4",
+          "render_source_sha256": "7f4fa27902a5a45c908b71194053a8d3985db94acefed5f501a20c603bce77b8",
+          "framing": "Native frame"
+        },
+        {
+          "id": "square",
+          "start": 4,
+          "seconds": 1,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/square.mp4",
+          "render_source_sha256": "1d99b6743ac2672d8491491a958ba0870acb7e92fbe71a6c059ec3878f885faf",
+          "framing": "Native frame"
+        },
+        {
+          "id": "allow",
+          "start": 5,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/allow.mp4",
+          "render_source_sha256": "2cd694a891c6a13a1863ceed669dff2ed0323bc608b0f13e20111895386b2736",
+          "framing": "Native frame"
+        },
+        {
+          "id": "revoke",
+          "start": 7,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/revoke.mp4",
+          "render_source_sha256": "b65d218b89bc38457f81192c282e7ab395963840388eabf0fdf089e4c6ad852e",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stop",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stop.mp4",
+          "render_source_sha256": "35945340d1f240a81b973e9051d4b55fe9527d61b7260d8eaf24aa98ea12e50a",
+          "framing": "Native frame"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 12,
+          "seconds": 3,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": "Factual fields from receipt-2.json with existing UI pixels",
+          "render_source": "source/receipt-proof.png",
+          "render_source_sha256": "636e44c9dc9af12bc29671827aa4c8f2a38102fd01c9643f991b0c211d4dff1c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "arrival",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4",
+          "source_trim_start": 1.0416666666666667,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/arrival.mp4",
+          "render_source_sha256": "c559b2ccbc9b8609e51d42755820a8b81fac9f64fe824d303bb56da321fa3c4b",
+          "framing": "Native frame"
+        },
+        {
+          "id": "newgrant",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/newgrant.mp4",
+          "render_source_sha256": "00492200422c92373b574194f366e7fbc8b5ebb362b8a1106637fbc211caa287",
+          "framing": "Native frame"
+        },
+        {
+          "id": "continue",
+          "start": 21,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/continue.mp4",
+          "render_source_sha256": "8ba8dff719313d6e615b941b0156ec86f91271bd525caeca75e1bad9c2c270ed",
+          "framing": "Native frame"
+        },
+        {
+          "id": "history",
+          "start": 22.5,
+          "seconds": 2.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4",
+          "source_trim_start": 0.9166666666666666,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/history.mp4",
+          "render_source_sha256": "ed9a6de2b0a700c6dcaa68e416321bb94261fe95bb34903d34d465bf1766fc3c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "end",
+          "start": 25.0,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/end.png",
+          "render_source_sha256": "36e63c047049ddff09b30f5138232d864ff8bd1a7072dc065e043fbd6be89bb0",
+          "framing": "Native frame"
+        }
+      ],
+      "voice": [
+        {
+          "start": 2.15,
+          "id": "handover"
+        },
+        {
+          "start": 6,
+          "id": "rules"
+        },
+        {
+          "start": 25.1,
+          "id": "brand"
+        },
+        {
+          "start": 26.15,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-hero-30.mp4",
+      "delivery_gain_db": 0,
+      "encoded_audio_measurement": {
+        "input_i": "-15.94",
+        "input_tp": "-1.62",
+        "input_lra": "10.10",
+        "input_thresh": "-27.98",
+        "output_i": "-15.68",
+        "output_tp": "-1.50",
+        "output_lra": "8.60",
+        "output_thresh": "-27.49",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.32"
+      },
+      "bytes": 8069363,
+      "sha256": "cc510632354ef59eba2eefd385e5d078d3dcf5de43302371ed36e8a949961047"
+    },
+    {
+      "name": "cut-15",
+      "seconds": 15.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 0.75,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/job.mp4",
+          "render_source_sha256": "cc32c5bd405da4e67c7c95ee387e35637448302641a367a3513589fe6dcf9ab2",
+          "framing": "Native frame"
+        },
+        {
+          "id": "wren",
+          "start": 0.75,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4",
+          "source_trim_start": 0.3333333333333333,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/wren.mp4",
+          "render_source_sha256": "7f4fa27902a5a45c908b71194053a8d3985db94acefed5f501a20c603bce77b8",
+          "framing": "Native frame"
+        },
+        {
+          "id": "allow",
+          "start": 2.25,
+          "seconds": 0.75,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4",
+          "source_trim_start": 0.7083333333333334,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/allow.mp4",
+          "render_source_sha256": "2cd694a891c6a13a1863ceed669dff2ed0323bc608b0f13e20111895386b2736",
+          "framing": "Native frame"
+        },
+        {
+          "id": "revoke",
+          "start": 3.0,
+          "seconds": 1,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/revoke.mp4",
+          "render_source_sha256": "b65d218b89bc38457f81192c282e7ab395963840388eabf0fdf089e4c6ad852e",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stop",
+          "start": 4.0,
+          "seconds": 1.75,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4",
+          "source_trim_start": 0.25,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stop.mp4",
+          "render_source_sha256": "35945340d1f240a81b973e9051d4b55fe9527d61b7260d8eaf24aa98ea12e50a",
+          "framing": "Native frame"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 5.75,
+          "seconds": 1.75,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": "Factual fields from receipt-2.json with existing UI pixels",
+          "render_source": "source/receipt-proof.png",
+          "render_source_sha256": "636e44c9dc9af12bc29671827aa4c8f2a38102fd01c9643f991b0c211d4dff1c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "arrival",
+          "start": 7.5,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4",
+          "source_trim_start": 2.2083333333333335,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/arrival.mp4",
+          "render_source_sha256": "c559b2ccbc9b8609e51d42755820a8b81fac9f64fe824d303bb56da321fa3c4b",
+          "framing": "Native frame"
+        },
+        {
+          "id": "newgrant",
+          "start": 9.0,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4",
+          "source_trim_start": 0.2916666666666667,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/newgrant.mp4",
+          "render_source_sha256": "00492200422c92373b574194f366e7fbc8b5ebb362b8a1106637fbc211caa287",
+          "framing": "Native frame"
+        },
+        {
+          "id": "history",
+          "start": 10.5,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4",
+          "source_trim_start": 0.9166666666666666,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/history.mp4",
+          "render_source_sha256": "ed9a6de2b0a700c6dcaa68e416321bb94261fe95bb34903d34d465bf1766fc3c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "end",
+          "start": 12.0,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/end.png",
+          "render_source_sha256": "36e63c047049ddff09b30f5138232d864ff8bd1a7072dc065e043fbd6be89bb0",
+          "framing": "Native frame"
+        }
+      ],
+      "voice": [
+        {
+          "start": 12.0,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-cut-15.mp4",
+      "delivery_gain_db": 0,
+      "encoded_audio_measurement": {
+        "input_i": "-15.39",
+        "input_tp": "-1.56",
+        "input_lra": "12.80",
+        "input_thresh": "-26.84",
+        "output_i": "-15.20",
+        "output_tp": "-1.50",
+        "output_lra": "14.50",
+        "output_thresh": "-26.46",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.80"
+      },
+      "bytes": 4256768,
+      "sha256": "69eea7091c1a1e8dd2d87ce09f4f9e4e2dcef452c75badb03d91cf8409dbf7fb"
+    },
+    {
+      "name": "social-vertical-30",
+      "seconds": 30.0,
+      "size": [
+        1080,
+        1920
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 1,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": 656,
+          "proof_overlay": null,
+          "render_source": "source/job.mp4",
+          "render_source_sha256": "cc32c5bd405da4e67c7c95ee387e35637448302641a367a3513589fe6dcf9ab2",
+          "framing": "Authored portrait crop"
+        },
+        {
+          "id": "wren",
+          "start": 1,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": 658,
+          "proof_overlay": null,
+          "render_source": "source/wren.mp4",
+          "render_source_sha256": "7f4fa27902a5a45c908b71194053a8d3985db94acefed5f501a20c603bce77b8",
+          "framing": "Authored portrait crop"
+        },
+        {
+          "id": "square",
+          "start": 4,
+          "seconds": 1,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": 665,
+          "proof_overlay": null,
+          "render_source": "source/square.mp4",
+          "render_source_sha256": "1d99b6743ac2672d8491491a958ba0870acb7e92fbe71a6c059ec3878f885faf",
+          "framing": "Authored portrait crop"
+        },
+        {
+          "id": "allow",
+          "start": 5,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": 777,
+          "proof_overlay": null,
+          "render_source": "source/allow.mp4",
+          "render_source_sha256": "2cd694a891c6a13a1863ceed669dff2ed0323bc608b0f13e20111895386b2736",
+          "framing": "Authored portrait crop"
+        },
+        {
+          "id": "revoke",
+          "start": 7,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": 660,
+          "proof_overlay": null,
+          "render_source": "source/revoke.mp4",
+          "render_source_sha256": "b65d218b89bc38457f81192c282e7ab395963840388eabf0fdf089e4c6ad852e",
+          "framing": "Authored portrait crop"
+        },
+        {
+          "id": "stop",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": 735,
+          "proof_overlay": null,
+          "render_source": "source/stop.mp4",
+          "render_source_sha256": "35945340d1f240a81b973e9051d4b55fe9527d61b7260d8eaf24aa98ea12e50a",
+          "framing": "Authored portrait crop"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 12,
+          "seconds": 3,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": "Factual fields from receipt-2.json with existing UI pixels",
+          "render_source": "source/receipt-proof-vertical.png",
+          "render_source_sha256": "1068ad9bf6b22be9c720a2f9b68e846b5166360203992fce0011c980af1723d7",
+          "framing": "Native frame"
+        },
+        {
+          "id": "arrival",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4",
+          "source_trim_start": 1.0416666666666667,
+          "crop_x": 1256,
+          "proof_overlay": null,
+          "render_source": "source/arrival.mp4",
+          "render_source_sha256": "c559b2ccbc9b8609e51d42755820a8b81fac9f64fe824d303bb56da321fa3c4b",
+          "framing": "Authored portrait crop"
+        },
+        {
+          "id": "newgrant",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/newgrant.mp4",
+          "render_source_sha256": "00492200422c92373b574194f366e7fbc8b5ebb362b8a1106637fbc211caa287",
+          "framing": "Full owner-link inset"
+        },
+        {
+          "id": "continue",
+          "start": 21,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": 777,
+          "proof_overlay": null,
+          "render_source": "source/continue.mp4",
+          "render_source_sha256": "8ba8dff719313d6e615b941b0156ec86f91271bd525caeca75e1bad9c2c270ed",
+          "framing": "Authored portrait crop"
+        },
+        {
+          "id": "history",
+          "start": 22.5,
+          "seconds": 2.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4",
+          "source_trim_start": 0.9166666666666666,
+          "crop_x": 656,
+          "proof_overlay": null,
+          "render_source": "source/history.mp4",
+          "render_source_sha256": "ed9a6de2b0a700c6dcaa68e416321bb94261fe95bb34903d34d465bf1766fc3c",
+          "framing": "Authored portrait crop"
+        },
+        {
+          "id": "end",
+          "start": 25.0,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/end-vertical.png",
+          "render_source_sha256": "0ccb048c675811aba34faf1c23c70bacef01808fc460dea1c3dc63bffbc23158",
+          "framing": "Native frame"
+        }
+      ],
+      "voice": [
+        {
+          "start": 2.15,
+          "id": "handover"
+        },
+        {
+          "start": 6,
+          "id": "rules"
+        },
+        {
+          "start": 25.1,
+          "id": "brand"
+        },
+        {
+          "start": 26.15,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-social-vertical-30.mp4",
+      "delivery_gain_db": -0.43,
+      "encoded_audio_measurement": {
+        "input_i": "-16.36",
+        "input_tp": "-1.84",
+        "input_lra": "10.10",
+        "input_thresh": "-28.39",
+        "output_i": "-15.65",
+        "output_tp": "-1.50",
+        "output_lra": "9.00",
+        "output_thresh": "-27.46",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.35"
+      },
+      "bytes": 8107851,
+      "sha256": "e9bcb484db741f31037b4bc4f04409acf35a3d32aa01fec111b1f70e00d7a5a2"
+    },
+    {
+      "name": "developer-ending",
+      "seconds": 68,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/job.mp4",
+          "render_source_sha256": "cc32c5bd405da4e67c7c95ee387e35637448302641a367a3513589fe6dcf9ab2",
+          "framing": "Native frame"
+        },
+        {
+          "id": "wren",
+          "start": 2,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/wren.mp4",
+          "render_source_sha256": "7f4fa27902a5a45c908b71194053a8d3985db94acefed5f501a20c603bce77b8",
+          "framing": "Native frame"
+        },
+        {
+          "id": "square",
+          "start": 6,
+          "seconds": 3,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/square.mp4",
+          "render_source_sha256": "1d99b6743ac2672d8491491a958ba0870acb7e92fbe71a6c059ec3878f885faf",
+          "framing": "Native frame"
+        },
+        {
+          "id": "owner",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/owner.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/owner.mp4",
+          "render_source_sha256": "f350315b4f54a1fbea8dc95a285d191c0940742b5538009451ec1518e2593ac0",
+          "framing": "Native frame"
+        },
+        {
+          "id": "allow",
+          "start": 12,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/allow.mp4",
+          "render_source_sha256": "2cd694a891c6a13a1863ceed669dff2ed0323bc608b0f13e20111895386b2736",
+          "framing": "Native frame"
+        },
+        {
+          "id": "work",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/work.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/work.mp4",
+          "render_source_sha256": "31505584fdc4ac6bc1655780da59f319f0064cdfcf9f49c81c9fc257236e3c52",
+          "framing": "Native frame"
+        },
+        {
+          "id": "revoke",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/revoke.mp4",
+          "render_source_sha256": "b65d218b89bc38457f81192c282e7ab395963840388eabf0fdf089e4c6ad852e",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stop",
+          "start": 21,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stop.mp4",
+          "render_source_sha256": "35945340d1f240a81b973e9051d4b55fe9527d61b7260d8eaf24aa98ea12e50a",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stamp",
+          "start": 25,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stamp.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stamp.mp4",
+          "render_source_sha256": "e0bd09500a31543108b54b7b6fa6db400c59d82cbb8033032c1f6d164832e08f",
+          "framing": "Native frame"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 27,
+          "seconds": 5,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": "Factual fields from receipt-2.json with existing UI pixels",
+          "render_source": "source/receipt-proof.png",
+          "render_source_sha256": "636e44c9dc9af12bc29671827aa4c8f2a38102fd01c9643f991b0c211d4dff1c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "arrival",
+          "start": 32,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4",
+          "source_trim_start": 1.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/arrival.mp4",
+          "render_source_sha256": "c559b2ccbc9b8609e51d42755820a8b81fac9f64fe824d303bb56da321fa3c4b",
+          "framing": "Native frame"
+        },
+        {
+          "id": "newgrant",
+          "start": 37,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/newgrant.mp4",
+          "render_source_sha256": "00492200422c92373b574194f366e7fbc8b5ebb362b8a1106637fbc211caa287",
+          "framing": "Native frame"
+        },
+        {
+          "id": "continue",
+          "start": 42,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/continue.mp4",
+          "render_source_sha256": "8ba8dff719313d6e615b941b0156ec86f91271bd525caeca75e1bad9c2c270ed",
+          "framing": "Native frame"
+        },
+        {
+          "id": "history",
+          "start": 45,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4",
+          "source_trim_start": 0.9166666666666666,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/history.mp4",
+          "render_source_sha256": "ed9a6de2b0a700c6dcaa68e416321bb94261fe95bb34903d34d465bf1766fc3c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "square-out",
+          "start": 49,
+          "seconds": 4,
+          "classification": "DRAMATIZATION",
+          "source": "source/square-out.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/square-out.mp4",
+          "render_source_sha256": "0c7b284221290a46b29c41f04b470c99f9c17be2a30607163e473487adf02cfe",
+          "framing": "Native frame"
+        },
+        {
+          "id": "end",
+          "start": 53,
+          "seconds": 7,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/end.png",
+          "render_source_sha256": "36e63c047049ddff09b30f5138232d864ff8bd1a7072dc065e043fbd6be89bb0",
+          "framing": "Native frame"
+        },
+        {
+          "id": "developer",
+          "start": 60,
+          "seconds": 8,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/developer.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/developer.png",
+          "render_source_sha256": "4055e0a7933f3bb95fb12fbabbb29bf97789e1138be65d54c7f069d2a38ab490",
+          "framing": "Native frame"
+        }
+      ],
+      "voice": [
+        {
+          "start": 5.4,
+          "id": "handover"
+        },
+        {
+          "start": 9.7,
+          "id": "rules"
+        },
+        {
+          "start": 18.15,
+          "id": "revoke"
+        },
+        {
+          "start": 27.25,
+          "id": "receiver"
+        },
+        {
+          "start": 37.35,
+          "id": "permission"
+        },
+        {
+          "start": 45.4,
+          "id": "history"
+        },
+        {
+          "start": 53.45,
+          "id": "brand"
+        },
+        {
+          "start": 55.5,
+          "id": "promise"
+        },
+        {
+          "start": 60.6,
+          "id": "developer"
+        }
+      ],
+      "file": "renders/openline-developer-ending.mp4",
+      "delivery_gain_db": -0.33,
+      "encoded_audio_measurement": {
+        "input_i": "-16.69",
+        "input_tp": "-1.63",
+        "input_lra": "9.90",
+        "input_thresh": "-28.83",
+        "output_i": "-16.42",
+        "output_tp": "-1.50",
+        "output_lra": "6.90",
+        "output_thresh": "-28.18",
+        "normalization_type": "dynamic",
+        "target_offset": "0.42"
+      },
+      "bytes": 16467222,
+      "sha256": "0ab754704fccc1bed59ef25179b5c6ec3c2ede463481ea214d32ad63764b2bea"
+    },
+    {
+      "name": "buyer-ending",
+      "seconds": 68,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/job.mp4",
+          "render_source_sha256": "cc32c5bd405da4e67c7c95ee387e35637448302641a367a3513589fe6dcf9ab2",
+          "framing": "Native frame"
+        },
+        {
+          "id": "wren",
+          "start": 2,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/wren.mp4",
+          "render_source_sha256": "7f4fa27902a5a45c908b71194053a8d3985db94acefed5f501a20c603bce77b8",
+          "framing": "Native frame"
+        },
+        {
+          "id": "square",
+          "start": 6,
+          "seconds": 3,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/square.mp4",
+          "render_source_sha256": "1d99b6743ac2672d8491491a958ba0870acb7e92fbe71a6c059ec3878f885faf",
+          "framing": "Native frame"
+        },
+        {
+          "id": "owner",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/owner.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/owner.mp4",
+          "render_source_sha256": "f350315b4f54a1fbea8dc95a285d191c0940742b5538009451ec1518e2593ac0",
+          "framing": "Native frame"
+        },
+        {
+          "id": "allow",
+          "start": 12,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/allow.mp4",
+          "render_source_sha256": "2cd694a891c6a13a1863ceed669dff2ed0323bc608b0f13e20111895386b2736",
+          "framing": "Native frame"
+        },
+        {
+          "id": "work",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/work.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/work.mp4",
+          "render_source_sha256": "31505584fdc4ac6bc1655780da59f319f0064cdfcf9f49c81c9fc257236e3c52",
+          "framing": "Native frame"
+        },
+        {
+          "id": "revoke",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/revoke.mp4",
+          "render_source_sha256": "b65d218b89bc38457f81192c282e7ab395963840388eabf0fdf089e4c6ad852e",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stop",
+          "start": 21,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stop.mp4",
+          "render_source_sha256": "35945340d1f240a81b973e9051d4b55fe9527d61b7260d8eaf24aa98ea12e50a",
+          "framing": "Native frame"
+        },
+        {
+          "id": "stamp",
+          "start": 25,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stamp.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/stamp.mp4",
+          "render_source_sha256": "e0bd09500a31543108b54b7b6fa6db400c59d82cbb8033032c1f6d164832e08f",
+          "framing": "Native frame"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 27,
+          "seconds": 5,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": "Factual fields from receipt-2.json with existing UI pixels",
+          "render_source": "source/receipt-proof.png",
+          "render_source_sha256": "636e44c9dc9af12bc29671827aa4c8f2a38102fd01c9643f991b0c211d4dff1c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "arrival",
+          "start": 32,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4",
+          "source_trim_start": 1.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/arrival.mp4",
+          "render_source_sha256": "c559b2ccbc9b8609e51d42755820a8b81fac9f64fe824d303bb56da321fa3c4b",
+          "framing": "Native frame"
+        },
+        {
+          "id": "newgrant",
+          "start": 37,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/newgrant.mp4",
+          "render_source_sha256": "00492200422c92373b574194f366e7fbc8b5ebb362b8a1106637fbc211caa287",
+          "framing": "Native frame"
+        },
+        {
+          "id": "continue",
+          "start": 42,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/continue.mp4",
+          "render_source_sha256": "8ba8dff719313d6e615b941b0156ec86f91271bd525caeca75e1bad9c2c270ed",
+          "framing": "Native frame"
+        },
+        {
+          "id": "history",
+          "start": 45,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4",
+          "source_trim_start": 0.9166666666666666,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/history.mp4",
+          "render_source_sha256": "ed9a6de2b0a700c6dcaa68e416321bb94261fe95bb34903d34d465bf1766fc3c",
+          "framing": "Native frame"
+        },
+        {
+          "id": "square-out",
+          "start": 49,
+          "seconds": 4,
+          "classification": "DRAMATIZATION",
+          "source": "source/square-out.mp4",
+          "source_trim_start": 0.0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/square-out.mp4",
+          "render_source_sha256": "0c7b284221290a46b29c41f04b470c99f9c17be2a30607163e473487adf02cfe",
+          "framing": "Native frame"
+        },
+        {
+          "id": "end",
+          "start": 53,
+          "seconds": 7,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/end.png",
+          "render_source_sha256": "36e63c047049ddff09b30f5138232d864ff8bd1a7072dc065e043fbd6be89bb0",
+          "framing": "Native frame"
+        },
+        {
+          "id": "buyer",
+          "start": 60,
+          "seconds": 8,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/buyer.png",
+          "source_trim_start": 0,
+          "crop_x": null,
+          "proof_overlay": null,
+          "render_source": "source/buyer.png",
+          "render_source_sha256": "9d50d6905d38871ab01b9bcbffcfe1e135d40e403042e59d709444c962cff107",
+          "framing": "Native frame"
+        }
+      ],
+      "voice": [
+        {
+          "start": 5.4,
+          "id": "handover"
+        },
+        {
+          "start": 9.7,
+          "id": "rules"
+        },
+        {
+          "start": 18.15,
+          "id": "revoke"
+        },
+        {
+          "start": 27.25,
+          "id": "receiver"
+        },
+        {
+          "start": 37.35,
+          "id": "permission"
+        },
+        {
+          "start": 45.4,
+          "id": "history"
+        },
+        {
+          "start": 53.45,
+          "id": "brand"
+        },
+        {
+          "start": 55.5,
+          "id": "promise"
+        },
+        {
+          "start": 60.6,
+          "id": "buyer"
+        }
+      ],
+      "file": "renders/openline-buyer-ending.mp4",
+      "delivery_gain_db": 0,
+      "encoded_audio_measurement": {
+        "input_i": "-16.46",
+        "input_tp": "-1.90",
+        "input_lra": "8.40",
+        "input_thresh": "-28.43",
+        "output_i": "-16.48",
+        "output_tp": "-1.50",
+        "output_lra": "6.70",
+        "output_thresh": "-28.21",
+        "normalization_type": "dynamic",
+        "target_offset": "0.48"
+      },
+      "bytes": 16505597,
+      "sha256": "60204b0d415dffd2fe96f541805b4867579387747d9e3bab82bccb84fbfddd14"
+    }
+  ]
+}

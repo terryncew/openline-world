@@ -1,0 +1,540 @@
+{
+  "base_sha": "2235fa6ce916876cd39ed35be97263ddfc111b6a",
+  "signed_receipts_verified": 3,
+  "results": [
+    {
+      "file": "renders/openline-master-90.mp4",
+      "sha256": "49f38eb881e505cb9bb0302be393f09d86dc9b4d2f712d38a258ff6e09854d17",
+      "bytes": 23968841,
+      "seconds": 90.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "stream_start_seconds": {
+        "video": 0.0,
+        "audio": 0.0
+      },
+      "audio_duration_delta_ms": 0.0,
+      "decode": "PASS",
+      "voice_windows": [
+        {
+          "id": "handover",
+          "start": 9.6,
+          "correlation": 0.99329,
+          "lag_ms": 0.0,
+          "speech_end": 10.965333333333334
+        },
+        {
+          "id": "rules",
+          "start": 14.7,
+          "correlation": 0.97403,
+          "lag_ms": 0.0,
+          "speech_end": 15.702458333333333
+        },
+        {
+          "id": "revoke",
+          "start": 28.45,
+          "correlation": 0.96019,
+          "lag_ms": 0.0,
+          "speech_end": 29.977249999999998
+        },
+        {
+          "id": "receiver",
+          "start": 41.65,
+          "correlation": 0.98936,
+          "lag_ms": 0.0,
+          "speech_end": 43.26358333333333
+        },
+        {
+          "id": "permission",
+          "start": 54.55,
+          "correlation": 0.94166,
+          "lag_ms": 0.0,
+          "speech_end": 56.55533333333333
+        },
+        {
+          "id": "history",
+          "start": 64.8,
+          "correlation": 0.9833,
+          "lag_ms": 0.0,
+          "speech_end": 66.55620833333333
+        },
+        {
+          "id": "build",
+          "start": 77,
+          "correlation": 0.98797,
+          "lag_ms": 0.0,
+          "speech_end": 78.472
+        },
+        {
+          "id": "brand",
+          "start": 82.75,
+          "correlation": 0.97621,
+          "lag_ms": 0.0,
+          "speech_end": 83.722625
+        },
+        {
+          "id": "promise",
+          "start": 85.0,
+          "correlation": 0.9845,
+          "lag_ms": 0.0,
+          "speech_end": 87.624
+        }
+      ],
+      "silence_peak": 0.0,
+      "loudness": {
+        "input_i": "-16.62",
+        "input_tp": "-1.86",
+        "input_lra": "9.20",
+        "input_thresh": "-28.15",
+        "output_i": "-16.17",
+        "output_tp": "-1.50",
+        "output_lra": "8.40",
+        "output_thresh": "-27.28",
+        "normalization_type": "dynamic",
+        "target_offset": "0.17"
+      }
+    },
+    {
+      "file": "renders/openline-flagship-60.mp4",
+      "sha256": "8ec48cdc7b07f9aee0f97e61dc46f46a404e37277e0b8cf716ea842e216b4977",
+      "bytes": 15868167,
+      "seconds": 60.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "stream_start_seconds": {
+        "video": 0.0,
+        "audio": 0.0
+      },
+      "audio_duration_delta_ms": 0.0,
+      "decode": "PASS",
+      "voice_windows": [
+        {
+          "id": "handover",
+          "start": 5.4,
+          "correlation": 0.99701,
+          "lag_ms": 0.0,
+          "speech_end": 6.765333333333333
+        },
+        {
+          "id": "rules",
+          "start": 9.7,
+          "correlation": 0.97971,
+          "lag_ms": 0.0,
+          "speech_end": 10.702458333333333
+        },
+        {
+          "id": "revoke",
+          "start": 18.15,
+          "correlation": 0.96902,
+          "lag_ms": 0.0,
+          "speech_end": 19.677249999999997
+        },
+        {
+          "id": "receiver",
+          "start": 27.25,
+          "correlation": 0.9861,
+          "lag_ms": 0.0,
+          "speech_end": 28.863583333333334
+        },
+        {
+          "id": "permission",
+          "start": 37.35,
+          "correlation": 0.95118,
+          "lag_ms": 0.0,
+          "speech_end": 39.355333333333334
+        },
+        {
+          "id": "history",
+          "start": 45.4,
+          "correlation": 0.99125,
+          "lag_ms": 0.0,
+          "speech_end": 47.15620833333333
+        },
+        {
+          "id": "brand",
+          "start": 53.45,
+          "correlation": 0.98254,
+          "lag_ms": 0.0,
+          "speech_end": 54.422625000000004
+        },
+        {
+          "id": "promise",
+          "start": 55.5,
+          "correlation": 0.98976,
+          "lag_ms": 0.0,
+          "speech_end": 58.124
+        }
+      ],
+      "silence_peak": 0.0,
+      "loudness": {
+        "input_i": "-16.11",
+        "input_tp": "-1.76",
+        "input_lra": "7.90",
+        "input_thresh": "-28.33",
+        "output_i": "-16.35",
+        "output_tp": "-1.50",
+        "output_lra": "7.10",
+        "output_thresh": "-28.20",
+        "normalization_type": "dynamic",
+        "target_offset": "0.35"
+      }
+    },
+    {
+      "file": "renders/openline-hero-30.mp4",
+      "sha256": "cc510632354ef59eba2eefd385e5d078d3dcf5de43302371ed36e8a949961047",
+      "bytes": 8069363,
+      "seconds": 30.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "stream_start_seconds": {
+        "video": 0.0,
+        "audio": 0.0
+      },
+      "audio_duration_delta_ms": 0.0,
+      "decode": "PASS",
+      "voice_windows": [
+        {
+          "id": "handover",
+          "start": 2.15,
+          "correlation": 0.99242,
+          "lag_ms": 0.0,
+          "speech_end": 3.5153333333333334
+        },
+        {
+          "id": "rules",
+          "start": 6,
+          "correlation": 0.96953,
+          "lag_ms": 0.0,
+          "speech_end": 7.002458333333333
+        },
+        {
+          "id": "brand",
+          "start": 25.1,
+          "correlation": 0.9836,
+          "lag_ms": 0.0,
+          "speech_end": 26.072625000000002
+        },
+        {
+          "id": "promise",
+          "start": 26.15,
+          "correlation": 0.98611,
+          "lag_ms": 0.0,
+          "speech_end": 28.773999999999997
+        }
+      ],
+      "silence_peak": 0.0,
+      "loudness": {
+        "input_i": "-15.94",
+        "input_tp": "-1.62",
+        "input_lra": "10.10",
+        "input_thresh": "-27.98",
+        "output_i": "-15.68",
+        "output_tp": "-1.50",
+        "output_lra": "8.60",
+        "output_thresh": "-27.49",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.32"
+      }
+    },
+    {
+      "file": "renders/openline-cut-15.mp4",
+      "sha256": "69eea7091c1a1e8dd2d87ce09f4f9e4e2dcef452c75badb03d91cf8409dbf7fb",
+      "bytes": 4256768,
+      "seconds": 15.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "stream_start_seconds": {
+        "video": 0.0,
+        "audio": 0.0
+      },
+      "audio_duration_delta_ms": 0.0,
+      "decode": "PASS",
+      "voice_windows": [
+        {
+          "id": "promise",
+          "start": 12.0,
+          "correlation": 0.98152,
+          "lag_ms": 0.0,
+          "speech_end": 14.624
+        }
+      ],
+      "silence_peak": 0.0,
+      "loudness": {
+        "input_i": "-15.39",
+        "input_tp": "-1.56",
+        "input_lra": "12.80",
+        "input_thresh": "-26.84",
+        "output_i": "-15.20",
+        "output_tp": "-1.50",
+        "output_lra": "14.50",
+        "output_thresh": "-26.46",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.80"
+      }
+    },
+    {
+      "file": "renders/openline-social-vertical-30.mp4",
+      "sha256": "e9bcb484db741f31037b4bc4f04409acf35a3d32aa01fec111b1f70e00d7a5a2",
+      "bytes": 8107851,
+      "seconds": 30.0,
+      "size": [
+        1080,
+        1920
+      ],
+      "fps": 24,
+      "stream_start_seconds": {
+        "video": 0.0,
+        "audio": 0.0
+      },
+      "audio_duration_delta_ms": 0.0,
+      "decode": "PASS",
+      "voice_windows": [
+        {
+          "id": "handover",
+          "start": 2.15,
+          "correlation": 0.99231,
+          "lag_ms": 0.0,
+          "speech_end": 3.5153333333333334
+        },
+        {
+          "id": "rules",
+          "start": 6,
+          "correlation": 0.96926,
+          "lag_ms": 0.0,
+          "speech_end": 7.002458333333333
+        },
+        {
+          "id": "brand",
+          "start": 25.1,
+          "correlation": 0.98355,
+          "lag_ms": 0.0,
+          "speech_end": 26.072625000000002
+        },
+        {
+          "id": "promise",
+          "start": 26.15,
+          "correlation": 0.98608,
+          "lag_ms": 0.0,
+          "speech_end": 28.773999999999997
+        }
+      ],
+      "silence_peak": 0.0,
+      "loudness": {
+        "input_i": "-16.36",
+        "input_tp": "-1.84",
+        "input_lra": "10.10",
+        "input_thresh": "-28.39",
+        "output_i": "-15.65",
+        "output_tp": "-1.50",
+        "output_lra": "9.00",
+        "output_thresh": "-27.46",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.35"
+      }
+    },
+    {
+      "file": "renders/openline-developer-ending.mp4",
+      "sha256": "0ab754704fccc1bed59ef25179b5c6ec3c2ede463481ea214d32ad63764b2bea",
+      "bytes": 16467222,
+      "seconds": 68.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "stream_start_seconds": {
+        "video": 0.0,
+        "audio": 0.0
+      },
+      "audio_duration_delta_ms": 0.0,
+      "decode": "PASS",
+      "voice_windows": [
+        {
+          "id": "handover",
+          "start": 5.4,
+          "correlation": 0.99696,
+          "lag_ms": 0.0,
+          "speech_end": 6.765333333333333
+        },
+        {
+          "id": "rules",
+          "start": 9.7,
+          "correlation": 0.97959,
+          "lag_ms": 0.0,
+          "speech_end": 10.702458333333333
+        },
+        {
+          "id": "revoke",
+          "start": 18.15,
+          "correlation": 0.96916,
+          "lag_ms": 0.0,
+          "speech_end": 19.677249999999997
+        },
+        {
+          "id": "receiver",
+          "start": 27.25,
+          "correlation": 0.98614,
+          "lag_ms": 0.0,
+          "speech_end": 28.863583333333334
+        },
+        {
+          "id": "permission",
+          "start": 37.35,
+          "correlation": 0.9513,
+          "lag_ms": 0.0,
+          "speech_end": 39.355333333333334
+        },
+        {
+          "id": "history",
+          "start": 45.4,
+          "correlation": 0.99118,
+          "lag_ms": 0.0,
+          "speech_end": 47.15620833333333
+        },
+        {
+          "id": "brand",
+          "start": 53.45,
+          "correlation": 0.98238,
+          "lag_ms": 0.0,
+          "speech_end": 54.422625000000004
+        },
+        {
+          "id": "promise",
+          "start": 55.5,
+          "correlation": 0.98969,
+          "lag_ms": 0.0,
+          "speech_end": 58.124
+        },
+        {
+          "id": "developer",
+          "start": 60.6,
+          "correlation": 0.99315,
+          "lag_ms": 0.0,
+          "speech_end": 62.904
+        }
+      ],
+      "silence_peak": 0.0,
+      "loudness": {
+        "input_i": "-16.69",
+        "input_tp": "-1.63",
+        "input_lra": "9.90",
+        "input_thresh": "-28.83",
+        "output_i": "-16.42",
+        "output_tp": "-1.50",
+        "output_lra": "6.90",
+        "output_thresh": "-28.18",
+        "normalization_type": "dynamic",
+        "target_offset": "0.42"
+      }
+    },
+    {
+      "file": "renders/openline-buyer-ending.mp4",
+      "sha256": "60204b0d415dffd2fe96f541805b4867579387747d9e3bab82bccb84fbfddd14",
+      "bytes": 16505597,
+      "seconds": 68.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "stream_start_seconds": {
+        "video": 0.0,
+        "audio": 0.0
+      },
+      "audio_duration_delta_ms": 0.0,
+      "decode": "PASS",
+      "voice_windows": [
+        {
+          "id": "handover",
+          "start": 5.4,
+          "correlation": 0.99666,
+          "lag_ms": 0.0,
+          "speech_end": 6.765333333333333
+        },
+        {
+          "id": "rules",
+          "start": 9.7,
+          "correlation": 0.9785,
+          "lag_ms": 0.0,
+          "speech_end": 10.702458333333333
+        },
+        {
+          "id": "revoke",
+          "start": 18.15,
+          "correlation": 0.96872,
+          "lag_ms": 0.0,
+          "speech_end": 19.677249999999997
+        },
+        {
+          "id": "receiver",
+          "start": 27.25,
+          "correlation": 0.98229,
+          "lag_ms": 0.0,
+          "speech_end": 28.863583333333334
+        },
+        {
+          "id": "permission",
+          "start": 37.35,
+          "correlation": 0.95099,
+          "lag_ms": 0.0,
+          "speech_end": 39.355333333333334
+        },
+        {
+          "id": "history",
+          "start": 45.4,
+          "correlation": 0.99084,
+          "lag_ms": 0.0,
+          "speech_end": 47.15620833333333
+        },
+        {
+          "id": "brand",
+          "start": 53.45,
+          "correlation": 0.98184,
+          "lag_ms": 0.0,
+          "speech_end": 54.422625000000004
+        },
+        {
+          "id": "promise",
+          "start": 55.5,
+          "correlation": 0.98905,
+          "lag_ms": 0.0,
+          "speech_end": 58.124
+        },
+        {
+          "id": "buyer",
+          "start": 60.6,
+          "correlation": 0.98685,
+          "lag_ms": 0.0,
+          "speech_end": 62.422041666666665
+        }
+      ],
+      "silence_peak": 0.0,
+      "loudness": {
+        "input_i": "-16.46",
+        "input_tp": "-1.90",
+        "input_lra": "8.40",
+        "input_thresh": "-28.43",
+        "output_i": "-16.48",
+        "output_tp": "-1.50",
+        "output_lra": "6.70",
+        "output_thresh": "-28.21",
+        "normalization_type": "dynamic",
+        "target_offset": "0.48"
+      }
+    }
+  ],
+  "subjective_audio_listening": "UNVERIFIED: audio input unavailable to this agent",
+  "cold_viewer_comprehension": "UNRUN: no independent viewer in this environment"
+}

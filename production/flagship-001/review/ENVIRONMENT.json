@@ -1,0 +1,16 @@
+{
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.5.3",
+    "soundfile": "0.14.0",
+    "cryptography": "50.0.2",
+    "onnxruntime": "1.30.0",
+    "kokoro-onnx": "0.6.1"
+  },
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "node": "v24.19.0",
+  "playwright": "1.63.0",
+  "platform": "Linux x86_64, CPU software renderer; four-core quota; no GPU device",
+  "capture": "24 fps at native 1920x1080; fixed presentation clock"
+}

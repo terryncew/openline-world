@@ -1,0 +1,75 @@
+{
+  "name": "cut-15",
+  "sample_rate": 48000,
+  "cues": [
+    {
+      "kind": "paper",
+      "time": 0.15,
+      "shot": "job"
+    },
+    {
+      "kind": "wood",
+      "time": 0.896667,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 1.136667,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 1.376667,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 1.616667,
+      "shot": "wren"
+    },
+    {
+      "kind": "paper",
+      "time": 2.741667,
+      "shot": "allow"
+    },
+    {
+      "kind": "bell",
+      "time": 3.75,
+      "shot": "revoke"
+    },
+    {
+      "kind": "ratchet",
+      "time": 4.45,
+      "shot": "stop"
+    },
+    {
+      "kind": "latch",
+      "time": 5.6,
+      "shot": "stop"
+    },
+    {
+      "kind": "complete-silence",
+      "time": 5.8100000000000005,
+      "seconds": 0.6200000000000001
+    },
+    {
+      "kind": "paper",
+      "time": 6.0,
+      "shot": "receipt-ui"
+    },
+    {
+      "kind": "bell",
+      "time": 10.258333,
+      "shot": "newgrant"
+    },
+    {
+      "kind": "voice",
+      "id": "promise",
+      "time": 12.0,
+      "seconds": 2.624,
+      "text": "The worker can change. Your authority doesn't."
+    }
+  ],
+  "original_score": "D-A-E motif; deterministic physical synth score and foley",
+  "perceptual_listening": "unavailable to this agent"
+}

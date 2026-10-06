@@ -1,0 +1,49 @@
+{
+  "id": "square-out",
+  "frames": 144,
+  "fps": 24,
+  "size": [
+    1920,
+    1080
+  ],
+  "seconds": 6,
+  "method": "fixed-clock offline render; automatic RAF disabled; original frame subscribers with exact 1/24s delta; original canon; real frozen events; editorial camera and shadows",
+  "keys": [
+    {
+      "frame": 0,
+      "seconds": 0,
+      "workerPositions": [
+        {
+          "id": "wren"
+        },
+        {
+          "id": "juniper"
+        }
+      ]
+    },
+    {
+      "frame": 79,
+      "seconds": 3.2916666666666665,
+      "workerPositions": [
+        {
+          "id": "wren"
+        },
+        {
+          "id": "juniper"
+        }
+      ]
+    },
+    {
+      "frame": 143,
+      "seconds": 5.958333333333333,
+      "workerPositions": [
+        {
+          "id": "wren"
+        },
+        {
+          "id": "juniper"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "openline.gate.action_receipt.v1",
+  "gate_id": "workshop-receiver",
+  "gate_public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+  "principal_id": "openline:principal:6c6628d261229c7edd03d68dc82950237b83d5b7265fabcf7e5c0cd7ba3c74b5",
+  "mandate_id": "mandate-wren-1",
+  "subject_id": "wren",
+  "action": "notes.read",
+  "decision": "STOPPED",
+  "reason_codes": [
+    "MANDATE_REVOKED"
+  ],
+  "presentation_hash": "7b8fb5a8c54c3a3293e71eb86560ddcff47bfd179342f3a6a70225e62b2a88de",
+  "decided_at": "2026-10-05T22:45:28.790662Z",
+  "wallet_policy_authority": "NONE",
+  "decision_authority": "RECEIVER_GATE",
+  "payload_hash": "bf90ac12577ba307531dbf150dc37e0ba4ee9cc1ba4a074035f44920a936cb83",
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "51d7a48a8d8a6b76b95ef0f7d826685191f05f935e6f15a9f244c4989a097e2c",
+    "value": "716e2e402533b59397a36ccb5a04efc9f1b451b25ccb5c2269b6b565a83352c8d18f0cb511e8aa31f3d123b4f6f1a773ae187679aba700379e13dbf96fc6280d"
+  }
+}

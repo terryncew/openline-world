@@ -1,0 +1,993 @@
+{
+  "master": "master-90",
+  "variants": [
+    {
+      "name": "master-90",
+      "seconds": 90,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4"
+        },
+        {
+          "id": "wren",
+          "start": 4,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4"
+        },
+        {
+          "id": "square",
+          "start": 9,
+          "seconds": 5,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4"
+        },
+        {
+          "id": "owner",
+          "start": 14,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/owner.mp4"
+        },
+        {
+          "id": "allow",
+          "start": 18,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4"
+        },
+        {
+          "id": "work",
+          "start": 22,
+          "seconds": 6,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/work.mp4"
+        },
+        {
+          "id": "revoke",
+          "start": 28,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4"
+        },
+        {
+          "id": "stop",
+          "start": 33,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4"
+        },
+        {
+          "id": "stamp",
+          "start": 38,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stamp.mp4"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 41,
+          "seconds": 7,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png"
+        },
+        {
+          "id": "arrival",
+          "start": 48,
+          "seconds": 6,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4"
+        },
+        {
+          "id": "newgrant",
+          "start": 54,
+          "seconds": 6,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4"
+        },
+        {
+          "id": "continue",
+          "start": 60,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4"
+        },
+        {
+          "id": "history",
+          "start": 64,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4"
+        },
+        {
+          "id": "checkpoints",
+          "start": 69,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/checkpoints.mp4"
+        },
+        {
+          "id": "together",
+          "start": 71,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/together.mp4"
+        },
+        {
+          "id": "square-out",
+          "start": 76,
+          "seconds": 6,
+          "classification": "DRAMATIZATION",
+          "source": "source/square-out.mp4"
+        },
+        {
+          "id": "end",
+          "start": 82,
+          "seconds": 8,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png"
+        }
+      ],
+      "voice": [
+        {
+          "start": 9.6,
+          "id": "handover"
+        },
+        {
+          "start": 14.7,
+          "id": "rules"
+        },
+        {
+          "start": 28.45,
+          "id": "revoke"
+        },
+        {
+          "start": 41.65,
+          "id": "receiver"
+        },
+        {
+          "start": 54.55,
+          "id": "permission"
+        },
+        {
+          "start": 64.8,
+          "id": "history"
+        },
+        {
+          "start": 77,
+          "id": "build"
+        },
+        {
+          "start": 82.75,
+          "id": "brand"
+        },
+        {
+          "start": 85.0,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-master-90.mp4"
+    },
+    {
+      "name": "flagship-60",
+      "seconds": 60,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4"
+        },
+        {
+          "id": "wren",
+          "start": 2,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4"
+        },
+        {
+          "id": "square",
+          "start": 6,
+          "seconds": 3,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4"
+        },
+        {
+          "id": "owner",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/owner.mp4"
+        },
+        {
+          "id": "allow",
+          "start": 12,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4"
+        },
+        {
+          "id": "work",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/work.mp4"
+        },
+        {
+          "id": "revoke",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4"
+        },
+        {
+          "id": "stop",
+          "start": 21,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4"
+        },
+        {
+          "id": "stamp",
+          "start": 25,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stamp.mp4"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 27,
+          "seconds": 5,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png"
+        },
+        {
+          "id": "arrival",
+          "start": 32,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4"
+        },
+        {
+          "id": "newgrant",
+          "start": 37,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4"
+        },
+        {
+          "id": "continue",
+          "start": 42,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4"
+        },
+        {
+          "id": "history",
+          "start": 45,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4"
+        },
+        {
+          "id": "square-out",
+          "start": 49,
+          "seconds": 4,
+          "classification": "DRAMATIZATION",
+          "source": "source/square-out.mp4"
+        },
+        {
+          "id": "end",
+          "start": 53,
+          "seconds": 7,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png"
+        }
+      ],
+      "voice": [
+        {
+          "start": 5.4,
+          "id": "handover"
+        },
+        {
+          "start": 9.7,
+          "id": "rules"
+        },
+        {
+          "start": 18.15,
+          "id": "revoke"
+        },
+        {
+          "start": 27.25,
+          "id": "receiver"
+        },
+        {
+          "start": 37.35,
+          "id": "permission"
+        },
+        {
+          "start": 45.4,
+          "id": "history"
+        },
+        {
+          "start": 53.45,
+          "id": "brand"
+        },
+        {
+          "start": 55.5,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-flagship-60.mp4"
+    },
+    {
+      "name": "hero-30",
+      "seconds": 30.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 1,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4"
+        },
+        {
+          "id": "wren",
+          "start": 1,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4"
+        },
+        {
+          "id": "square",
+          "start": 4,
+          "seconds": 1,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4"
+        },
+        {
+          "id": "allow",
+          "start": 5,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4"
+        },
+        {
+          "id": "revoke",
+          "start": 7,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4"
+        },
+        {
+          "id": "stop",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 12,
+          "seconds": 3,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png"
+        },
+        {
+          "id": "arrival",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4"
+        },
+        {
+          "id": "newgrant",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4"
+        },
+        {
+          "id": "continue",
+          "start": 21,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4"
+        },
+        {
+          "id": "history",
+          "start": 22.5,
+          "seconds": 2.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4"
+        },
+        {
+          "id": "end",
+          "start": 25.0,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png"
+        }
+      ],
+      "voice": [
+        {
+          "start": 2.15,
+          "id": "handover"
+        },
+        {
+          "start": 6,
+          "id": "rules"
+        },
+        {
+          "start": 25.1,
+          "id": "brand"
+        },
+        {
+          "start": 26.15,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-hero-30.mp4"
+    },
+    {
+      "name": "cut-15",
+      "seconds": 15.0,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 0.75,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4"
+        },
+        {
+          "id": "wren",
+          "start": 0.75,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4"
+        },
+        {
+          "id": "allow",
+          "start": 2.25,
+          "seconds": 0.75,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4"
+        },
+        {
+          "id": "revoke",
+          "start": 3.0,
+          "seconds": 1,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4"
+        },
+        {
+          "id": "stop",
+          "start": 4.0,
+          "seconds": 1.75,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 5.75,
+          "seconds": 1.75,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png"
+        },
+        {
+          "id": "arrival",
+          "start": 7.5,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4"
+        },
+        {
+          "id": "newgrant",
+          "start": 9.0,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4"
+        },
+        {
+          "id": "history",
+          "start": 10.5,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4"
+        },
+        {
+          "id": "end",
+          "start": 12.0,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png"
+        }
+      ],
+      "voice": [
+        {
+          "start": 12.0,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-cut-15.mp4"
+    },
+    {
+      "name": "social-vertical-30",
+      "seconds": 30.0,
+      "size": [
+        1080,
+        1920
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 1,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4"
+        },
+        {
+          "id": "wren",
+          "start": 1,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4"
+        },
+        {
+          "id": "square",
+          "start": 4,
+          "seconds": 1,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4"
+        },
+        {
+          "id": "allow",
+          "start": 5,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4"
+        },
+        {
+          "id": "revoke",
+          "start": 7,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4"
+        },
+        {
+          "id": "stop",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 12,
+          "seconds": 3,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png"
+        },
+        {
+          "id": "arrival",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4"
+        },
+        {
+          "id": "newgrant",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4"
+        },
+        {
+          "id": "continue",
+          "start": 21,
+          "seconds": 1.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4"
+        },
+        {
+          "id": "history",
+          "start": 22.5,
+          "seconds": 2.5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4"
+        },
+        {
+          "id": "end",
+          "start": 25.0,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png"
+        }
+      ],
+      "voice": [
+        {
+          "start": 2.15,
+          "id": "handover"
+        },
+        {
+          "start": 6,
+          "id": "rules"
+        },
+        {
+          "start": 25.1,
+          "id": "brand"
+        },
+        {
+          "start": 26.15,
+          "id": "promise"
+        }
+      ],
+      "file": "renders/openline-social-vertical-30.mp4"
+    },
+    {
+      "name": "developer-ending",
+      "seconds": 68,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4"
+        },
+        {
+          "id": "wren",
+          "start": 2,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4"
+        },
+        {
+          "id": "square",
+          "start": 6,
+          "seconds": 3,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4"
+        },
+        {
+          "id": "owner",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/owner.mp4"
+        },
+        {
+          "id": "allow",
+          "start": 12,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4"
+        },
+        {
+          "id": "work",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/work.mp4"
+        },
+        {
+          "id": "revoke",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4"
+        },
+        {
+          "id": "stop",
+          "start": 21,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4"
+        },
+        {
+          "id": "stamp",
+          "start": 25,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stamp.mp4"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 27,
+          "seconds": 5,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png"
+        },
+        {
+          "id": "arrival",
+          "start": 32,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4"
+        },
+        {
+          "id": "newgrant",
+          "start": 37,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4"
+        },
+        {
+          "id": "continue",
+          "start": 42,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4"
+        },
+        {
+          "id": "history",
+          "start": 45,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4"
+        },
+        {
+          "id": "square-out",
+          "start": 49,
+          "seconds": 4,
+          "classification": "DRAMATIZATION",
+          "source": "source/square-out.mp4"
+        },
+        {
+          "id": "end",
+          "start": 53,
+          "seconds": 7,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png"
+        },
+        {
+          "id": "developer",
+          "start": 60,
+          "seconds": 8,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/developer.png"
+        }
+      ],
+      "voice": [
+        {
+          "start": 5.4,
+          "id": "handover"
+        },
+        {
+          "start": 9.7,
+          "id": "rules"
+        },
+        {
+          "start": 18.15,
+          "id": "revoke"
+        },
+        {
+          "start": 27.25,
+          "id": "receiver"
+        },
+        {
+          "start": 37.35,
+          "id": "permission"
+        },
+        {
+          "start": 45.4,
+          "id": "history"
+        },
+        {
+          "start": 53.45,
+          "id": "brand"
+        },
+        {
+          "start": 55.5,
+          "id": "promise"
+        },
+        {
+          "start": 60.6,
+          "id": "developer"
+        }
+      ],
+      "file": "renders/openline-developer-ending.mp4"
+    },
+    {
+      "name": "buyer-ending",
+      "seconds": 68,
+      "size": [
+        1920,
+        1080
+      ],
+      "fps": 24,
+      "segments": [
+        {
+          "id": "job",
+          "start": 0,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/job.mp4"
+        },
+        {
+          "id": "wren",
+          "start": 2,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/wren.mp4"
+        },
+        {
+          "id": "square",
+          "start": 6,
+          "seconds": 3,
+          "classification": "DRAMATIZATION",
+          "source": "source/square.mp4"
+        },
+        {
+          "id": "owner",
+          "start": 9,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/owner.mp4"
+        },
+        {
+          "id": "allow",
+          "start": 12,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/allow.mp4"
+        },
+        {
+          "id": "work",
+          "start": 15,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/work.mp4"
+        },
+        {
+          "id": "revoke",
+          "start": 18,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/revoke.mp4"
+        },
+        {
+          "id": "stop",
+          "start": 21,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stop.mp4"
+        },
+        {
+          "id": "stamp",
+          "start": 25,
+          "seconds": 2,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/stamp.mp4"
+        },
+        {
+          "id": "receipt-ui",
+          "start": 27,
+          "seconds": 5,
+          "classification": "REAL CAPTURE",
+          "source": "source/receipt-ui.png"
+        },
+        {
+          "id": "arrival",
+          "start": 32,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/arrival.mp4"
+        },
+        {
+          "id": "newgrant",
+          "start": 37,
+          "seconds": 5,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/newgrant.mp4"
+        },
+        {
+          "id": "continue",
+          "start": 42,
+          "seconds": 3,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/continue.mp4"
+        },
+        {
+          "id": "history",
+          "start": 45,
+          "seconds": 4,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/history.mp4"
+        },
+        {
+          "id": "square-out",
+          "start": 49,
+          "seconds": 4,
+          "classification": "DRAMATIZATION",
+          "source": "source/square-out.mp4"
+        },
+        {
+          "id": "end",
+          "start": 53,
+          "seconds": 7,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/end.png"
+        },
+        {
+          "id": "buyer",
+          "start": 60,
+          "seconds": 8,
+          "classification": "EXPLANATORY VISUALIZATION",
+          "source": "source/buyer.png"
+        }
+      ],
+      "voice": [
+        {
+          "start": 5.4,
+          "id": "handover"
+        },
+        {
+          "start": 9.7,
+          "id": "rules"
+        },
+        {
+          "start": 18.15,
+          "id": "revoke"
+        },
+        {
+          "start": 27.25,
+          "id": "receiver"
+        },
+        {
+          "start": 37.35,
+          "id": "permission"
+        },
+        {
+          "start": 45.4,
+          "id": "history"
+        },
+        {
+          "start": 53.45,
+          "id": "brand"
+        },
+        {
+          "start": 55.5,
+          "id": "promise"
+        },
+        {
+          "start": 60.6,
+          "id": "buyer"
+        }
+      ],
+      "file": "renders/openline-buyer-ending.mp4"
+    }
+  ]
+}

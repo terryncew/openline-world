@@ -1,0 +1,441 @@
+{
+  "base_sha": "2235fa6ce916876cd39ed35be97263ddfc111b6a",
+  "assets": [
+    {
+      "path": "assets/ididntsaydothat-demo.gif",
+      "bytes": 4714666,
+      "sha256": "5e4d2d5fa541b8ddd1ca820bbc6965cff6c97adb32aea218ca232613fe15ab82"
+    },
+    {
+      "path": "assets/ididntsaydothat-poster.png",
+      "bytes": 687716,
+      "sha256": "e263126a9472c26f4cddc8236022d83bcb3d241c1770db879f576569d15a7823"
+    },
+    {
+      "path": "assets/ididntsaydothat-v4-narrated.mp4",
+      "bytes": 13280039,
+      "sha256": "3f0c3474b342e81a2cf0bc3d9dafe79c78859ddc63accc033612550bc1c88227",
+      "duration": 43.533333,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "30/1"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0"
+        }
+      ]
+    },
+    {
+      "path": "assets/openline-world-demo.gif",
+      "bytes": 47542,
+      "sha256": "167d0e6ef3911f4eb048283c6d4472c678b3c2da64bfb35ca552d91e2227332e"
+    },
+    {
+      "path": "frontend/public/hero/final-portrait.png",
+      "bytes": 452724,
+      "sha256": "cf47974afa92d5d6f15c6fb637d803f4fceb0ce40a61677bcadd4cb167a332b5"
+    },
+    {
+      "path": "frontend/public/hero/juniper-continuation.png",
+      "bytes": 419138,
+      "sha256": "bc712ab6273a6b3af5744c6883a2d4980bfc6fbf23cede0df88b62dbf69e5fa8"
+    },
+    {
+      "path": "frontend/public/hero/juniper-pregrant.png",
+      "bytes": 459662,
+      "sha256": "a178c4ecad75ddca17ed9e68c0ecd9458e770b6a240dc66ebae2d1f1271e72fe"
+    },
+    {
+      "path": "frontend/public/hero/openline-authority-continuity-social.mp4",
+      "bytes": 3546380,
+      "sha256": "41d3040fde47458fe7a4aa4e4397647bcf1d816c0c2db8a11ffe039db8a49c85",
+      "duration": 44.705011,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1080,
+          "height": 1920,
+          "r_frame_rate": "25/1"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0"
+        }
+      ]
+    },
+    {
+      "path": "frontend/public/hero/openline-hero-social.mp4",
+      "bytes": 377389,
+      "sha256": "d8cf2734c63cc59ccb81276e945e4d653e3513ac5579c47549fb43bd201ff0a5",
+      "duration": 12.0,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/public/hero/openline-hero.mp4",
+      "bytes": 1073370,
+      "sha256": "38004757892f48cd7c2a0fdb615ee33cb347bba520d7715fda07825e063da6b0",
+      "duration": 37.72,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/public/hero/openline-hero.webm",
+      "bytes": 783737,
+      "sha256": "b43f45c91308877d592c2e895a919dd3340de7e8cd636fbe175f9dd644e2c3e0",
+      "duration": 37.76,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "vp9",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/public/hero/poster.png",
+      "bytes": 103004,
+      "sha256": "b2cc145fc2a8d060c88c4ab146e829e5e20f4a6e34ccd3f53a7a4d7f39d21585"
+    },
+    {
+      "path": "frontend/public/hero/pre-grant-failure-desktop.png",
+      "bytes": 97841,
+      "sha256": "e53231c95588a49717cb1b9187851ef92aaf9640982bff5ff60bc716eb19a0e7"
+    },
+    {
+      "path": "frontend/public/hero/refusal-desktop.png",
+      "bytes": 79392,
+      "sha256": "6fe550a9c861d4f16729fc8d859958501c8fd94e5f78b950d965360b117c408f"
+    },
+    {
+      "path": "frontend/public/hero/square-entry.png",
+      "bytes": 464564,
+      "sha256": "a1ab8a08468fdced83f4c3f66a648a5a7c0bf48f62c4bb9424e34790ce0cef46"
+    },
+    {
+      "path": "frontend/public/hero/wren-stopped.png",
+      "bytes": 470769,
+      "sha256": "e434d42345d939663d9d1e92ed6c72127b34f15e83080b933732df75886907a9"
+    },
+    {
+      "path": "frontend/public/hero/wren-working.png",
+      "bytes": 404151,
+      "sha256": "ee9d62150d83e5683deed4f6474e1c5d82df537df62af80c429484de752c31b5"
+    },
+    {
+      "path": "frontend/public/prompt-injection/final-history.png",
+      "bytes": 564646,
+      "sha256": "f46e796e04a423d183a320fea26985a48fd7226e4c3a9bd9b951a2ae91c504f0"
+    },
+    {
+      "path": "frontend/public/prompt-injection/final.mp4",
+      "bytes": 3200621,
+      "sha256": "cf9860a6de569f31557c355689c28ddbe7317dd7bfef69afb6fd6b167cb3c4d4",
+      "duration": 25.666667,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 800,
+          "r_frame_rate": "30/1"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0"
+        }
+      ]
+    },
+    {
+      "path": "frontend/public/prompt-injection/hostile-request.png",
+      "bytes": 489218,
+      "sha256": "79c12858a929e28796fbf60e8323f0984667ae2137dd32076a1ed4ad6d4d1b88"
+    },
+    {
+      "path": "frontend/public/prompt-injection/stop.png",
+      "bytes": 366568,
+      "sha256": "0e0130c57e367cb4c993946e3cf0c1465fe4ee656c78510e94c4f905c21f9189"
+    },
+    {
+      "path": "frontend/src/square/screenshots/01-square-home.png",
+      "bytes": 196091,
+      "sha256": "36cf759239380013304addf614b9ed646b2aaf972efd7af8891d433d10cadaf3"
+    },
+    {
+      "path": "frontend/src/square/screenshots/02-workshop-entered.png",
+      "bytes": 100397,
+      "sha256": "fbd82897b692a06ab36b3b87c9975bf599a708fbb212db2ec08ac5ba68fca953"
+    },
+    {
+      "path": "frontend/src/square/screenshots/03-square-returned.png",
+      "bytes": 195713,
+      "sha256": "2e30946a6ba512634e129dc880f6c968bf9b353fa8c8011128e1b9db204aba4f"
+    },
+    {
+      "path": "frontend/src/square/screenshots/after-landscape.png",
+      "bytes": 198701,
+      "sha256": "8120ef74fbf00ac138cfcef7c4b78524dddbf6c44576756e063d231753ee84f3"
+    },
+    {
+      "path": "frontend/src/square/screenshots/after-portrait-390x844.png",
+      "bytes": 67953,
+      "sha256": "46ab86bc8d33de3a98d61f7db24cd18869540c891150b096504bc09aaa0342ec"
+    },
+    {
+      "path": "frontend/src/square/screenshots/beat-carrier-carry.png",
+      "bytes": 31335,
+      "sha256": "ae7dfbe6642d6eec44076f1c7bff1230cce2e15807d4eb70e7d2b6f1b10ad546"
+    },
+    {
+      "path": "frontend/src/square/screenshots/beat-carrier-lift.png",
+      "bytes": 32871,
+      "sha256": "7f254c5679bb5284a06cf971695e7be2f0b62c37b6c639d7b69d9c2dfd449538"
+    },
+    {
+      "path": "frontend/src/square/screenshots/beat-tinkerer.png",
+      "bytes": 36437,
+      "sha256": "e09c11984ac00a6d581af31374c9e5292972501f63f2f939a470d5259bd21a2e"
+    },
+    {
+      "path": "frontend/src/square/screenshots/before-composition.png",
+      "bytes": 198878,
+      "sha256": "8eedc638e581328b8a5417cfa847a8cd983929bf178bf7d6d955fdbb02676ab4"
+    },
+    {
+      "path": "frontend/src/square/screenshots/before-landscape.png",
+      "bytes": 198878,
+      "sha256": "8eedc638e581328b8a5417cfa847a8cd983929bf178bf7d6d955fdbb02676ab4"
+    },
+    {
+      "path": "frontend/src/square/screenshots/before-portrait-390x844.png",
+      "bytes": 52567,
+      "sha256": "0b5fac08a5220072c732425af6e05a669c21cf0a6e9550446335b302c46c7182"
+    },
+    {
+      "path": "frontend/src/square/screenshots/blockout-a.png",
+      "bytes": 50057,
+      "sha256": "ec75c5351a5ce1e8785fbbb1323032d719f667b81b9f965c85e08bf4cb4e9864"
+    },
+    {
+      "path": "frontend/src/square/screenshots/blockout-b-desktop.png",
+      "bytes": 161732,
+      "sha256": "07723ec1eeb116ee840b2a9fce4eee8e1e642dad6a30eba9a1879d656d949578"
+    },
+    {
+      "path": "frontend/src/square/screenshots/blockout-b.png",
+      "bytes": 53457,
+      "sha256": "93768f0a54af51afad7c3f068d58e1309b6b171d0a4b06256efb9fbbb8c64f75"
+    },
+    {
+      "path": "frontend/src/square/screenshots/blockout-c.png",
+      "bytes": 66087,
+      "sha256": "2321280ce9669da5f8e86bf9ec02d4e0b8e1b6cbf05cd03c14bcec3b28d48206"
+    },
+    {
+      "path": "frontend/src/square/screenshots/passerby-cycle-portrait.mp4",
+      "bytes": 324139,
+      "sha256": "2b3b76fb2b638ad78ff28a1d113142f6e36ecdfa98a794bd7522e4662c7689ba",
+      "duration": 18.0,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/src/square/screenshots/town-clip-short.mp4",
+      "bytes": 2093960,
+      "sha256": "0e5459eee24112837e217e625f54ca36f53bdf439046d510d3c02315d441d996",
+      "duration": 50.0,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/src/square/screenshots/town-composition-capture.mp4",
+      "bytes": 1825350,
+      "sha256": "f6bf5b7d35417b556c67691bae701e3313d6e424b2b822b62662296643bca76c",
+      "duration": 48.76,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/src/square/screenshots/town-cycles-628ab56.mp4",
+      "bytes": 2657624,
+      "sha256": "b844c051c6cdce52cf4ed01f261d2839444b74ee5071a135b1d24d2ed73ef168",
+      "duration": 47.0,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/src/square/screenshots/town-cycles-art2.mp4",
+      "bytes": 2686648,
+      "sha256": "23e3abf821aafb8e79c44c423d67acc9462f9c20af0c1e5e9c6a50e4e26a857b",
+      "duration": 47.48,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/src/square/screenshots/town-cycles-art3.mp4",
+      "bytes": 3173401,
+      "sha256": "a58a049c812934f2cc8f70cc8cdf84f52ce638cd5d24a5bcddc0850017c390f4",
+      "duration": 51.12,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/src/square/screenshots/town-mobile-390x844.png",
+      "bytes": 65899,
+      "sha256": "0a96a67fe5bf27e896f687a1a481b16027e7c2a5d611be196315ed5f18adc33b"
+    },
+    {
+      "path": "frontend/src/square/screenshots/town-mobile-430x932.png",
+      "bytes": 72663,
+      "sha256": "6f1b8ac73d784d16805d2b5fb275d279f86e456df8d809b09ffac7eae177aa22"
+    },
+    {
+      "path": "frontend/src/square/screenshots/town-portrait-capture.mp4",
+      "bytes": 634230,
+      "sha256": "982f3baf8a2fee181934d03824ff19d29f775b6ab61e3b78ce51fb713b03eecc",
+      "duration": 29.48,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/src/viz/screenshots/01-proposal-in-flight.png",
+      "bytes": 69086,
+      "sha256": "ba7765684d46e54a0bb1921972e47662950d088688a93d1bb51dbc32fb6076f1"
+    },
+    {
+      "path": "frontend/src/viz/screenshots/02-allowed.png",
+      "bytes": 68132,
+      "sha256": "398c1ac6481407c7f95200f663910f605cf62b8f3c9ef5d0ede0462be076e888"
+    },
+    {
+      "path": "frontend/src/viz/screenshots/03-stopped.png",
+      "bytes": 74148,
+      "sha256": "4fdaae82a6ee06ba98b6e200a2b1991e850bd372eda982976461c92325fe74c6"
+    },
+    {
+      "path": "frontend/src/viz/screenshots/04-receipts-after-replacement.png",
+      "bytes": 102602,
+      "sha256": "442eb3cc3bad9d0aa98240fb4a2b71489a06907bcf20092242a18c926d90443f"
+    },
+    {
+      "path": "frontend/src/viz/screenshots/05-replacement-payoff.png",
+      "bytes": 95851,
+      "sha256": "0a99b673ebb5dca58d9a65628afa502ec679ea511cd703bb5836326b708869cf"
+    },
+    {
+      "path": "frontend/src/viz/screenshots/authority-demo.webm",
+      "bytes": 2271634,
+      "sha256": "c9574ffc66b522ab5ef56d67590997ce63f0fe38f52415d8e775c1cad31cf116",
+      "duration": 44.52,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "vp8",
+          "width": 1280,
+          "height": 800,
+          "r_frame_rate": "25/1"
+        }
+      ]
+    },
+    {
+      "path": "frontend/src/viz/screenshots/authority-desktop-pre-endcard.png",
+      "bytes": 51528,
+      "sha256": "ed9a7e5f37fd9a3f8809201b96453f575ba522d1e3766226736f0e17c4b8b8c8"
+    },
+    {
+      "path": "frontend/src/viz/screenshots/authority-desktop.png",
+      "bytes": 56345,
+      "sha256": "82ad7f80724c74ca77c192e78de48427333e6a2424b73d92b073fddd7e09fe0d"
+    },
+    {
+      "path": "frontend/src/viz/screenshots/authority-portrait-pre-endcard.png",
+      "bytes": 23520,
+      "sha256": "16703c4ce55dd9350eee5d819470d83ae6cf887ca78e91290dfa5bd0ed21d247"
+    },
+    {
+      "path": "frontend/src/viz/screenshots/authority-portrait.png",
+      "bytes": 28982,
+      "sha256": "ae3930d38168933fa608c213646841888d54245cdd6baabc200415f853a920fd"
+    }
+  ]
+}

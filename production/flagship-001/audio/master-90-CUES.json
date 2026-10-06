@@ -1,0 +1,336 @@
+{
+  "name": "master-90",
+  "sample_rate": 48000,
+  "cues": [
+    {
+      "kind": "paper",
+      "time": 0.15,
+      "shot": "job"
+    },
+    {
+      "kind": "wood",
+      "time": 4.48,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 4.72,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 4.96,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 5.2,
+      "shot": "wren"
+    },
+    {
+      "kind": "wood",
+      "time": 9.2,
+      "shot": "square"
+    },
+    {
+      "kind": "voice",
+      "id": "handover",
+      "time": 9.6,
+      "seconds": 1.3653333333333333,
+      "text": "You hand over the work."
+    },
+    {
+      "kind": "wood",
+      "time": 9.68,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 10.16,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 10.64,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 11.12,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 11.6,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 12.08,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 12.56,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 13.04,
+      "shot": "square"
+    },
+    {
+      "kind": "wood",
+      "time": 13.52,
+      "shot": "square"
+    },
+    {
+      "kind": "bell",
+      "time": 14.3,
+      "shot": "owner"
+    },
+    {
+      "kind": "voice",
+      "id": "rules",
+      "time": 14.7,
+      "seconds": 1.0024583333333332,
+      "text": "Not the rules."
+    },
+    {
+      "kind": "ratchet",
+      "time": 18.5,
+      "shot": "allow"
+    },
+    {
+      "kind": "paper",
+      "time": 19.2,
+      "shot": "allow"
+    },
+    {
+      "kind": "wood",
+      "time": 22.35,
+      "shot": "work"
+    },
+    {
+      "kind": "wood",
+      "time": 23.35,
+      "shot": "work"
+    },
+    {
+      "kind": "wood",
+      "time": 24.35,
+      "shot": "work"
+    },
+    {
+      "kind": "wood",
+      "time": 25.35,
+      "shot": "work"
+    },
+    {
+      "kind": "wood",
+      "time": 26.35,
+      "shot": "work"
+    },
+    {
+      "kind": "wood",
+      "time": 27.35,
+      "shot": "work"
+    },
+    {
+      "kind": "voice",
+      "id": "revoke",
+      "time": 28.45,
+      "seconds": 1.52725,
+      "text": "And you can change your mind."
+    },
+    {
+      "kind": "bell",
+      "time": 28.75,
+      "shot": "revoke"
+    },
+    {
+      "kind": "ratchet",
+      "time": 33.7,
+      "shot": "stop"
+    },
+    {
+      "kind": "latch",
+      "time": 34.85,
+      "shot": "stop"
+    },
+    {
+      "kind": "complete-silence",
+      "time": 35.06,
+      "seconds": 0.6199999999999974
+    },
+    {
+      "kind": "paper",
+      "time": 38.25,
+      "shot": "stamp"
+    },
+    {
+      "kind": "paper",
+      "time": 41.25,
+      "shot": "receipt-ui"
+    },
+    {
+      "kind": "voice",
+      "id": "receiver",
+      "time": 41.65,
+      "seconds": 1.6135833333333334,
+      "text": "The receiver still decides."
+    },
+    {
+      "kind": "wood",
+      "time": 48.5,
+      "shot": "arrival"
+    },
+    {
+      "kind": "wood",
+      "time": 48.78,
+      "shot": "arrival"
+    },
+    {
+      "kind": "wood",
+      "time": 49.06,
+      "shot": "arrival"
+    },
+    {
+      "kind": "wood",
+      "time": 49.34,
+      "shot": "arrival"
+    },
+    {
+      "kind": "wood",
+      "time": 49.62,
+      "shot": "arrival"
+    },
+    {
+      "kind": "voice",
+      "id": "permission",
+      "time": 54.55,
+      "seconds": 2.005333333333333,
+      "text": "A new worker needs your permission."
+    },
+    {
+      "kind": "bell",
+      "time": 55.55,
+      "shot": "newgrant"
+    },
+    {
+      "kind": "ratchet",
+      "time": 60.5,
+      "shot": "continue"
+    },
+    {
+      "kind": "paper",
+      "time": 61.2,
+      "shot": "continue"
+    },
+    {
+      "kind": "paper",
+      "time": 64.25,
+      "shot": "history"
+    },
+    {
+      "kind": "voice",
+      "id": "history",
+      "time": 64.8,
+      "seconds": 1.7562083333333334,
+      "text": "The work, and its history, stay."
+    },
+    {
+      "kind": "wood",
+      "time": 69.1,
+      "shot": "checkpoints"
+    },
+    {
+      "kind": "wood",
+      "time": 69.45,
+      "shot": "checkpoints"
+    },
+    {
+      "kind": "wood",
+      "time": 76.2,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 76.68,
+      "shot": "square-out"
+    },
+    {
+      "kind": "voice",
+      "id": "build",
+      "time": 77,
+      "seconds": 1.472,
+      "text": "Build around what stays."
+    },
+    {
+      "kind": "wood",
+      "time": 77.16,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 77.64,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 78.12,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 78.6,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 79.08,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 79.56,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 80.04,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 80.52,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 81.0,
+      "shot": "square-out"
+    },
+    {
+      "kind": "wood",
+      "time": 81.48,
+      "shot": "square-out"
+    },
+    {
+      "kind": "voice",
+      "id": "brand",
+      "time": 82.75,
+      "seconds": 0.972625,
+      "text": "OpenLine."
+    },
+    {
+      "kind": "voice",
+      "id": "promise",
+      "time": 85.0,
+      "seconds": 2.624,
+      "text": "The worker can change. Your authority doesn't."
+    }
+  ],
+  "original_score": "D-A-E motif; deterministic physical synth score and foley",
+  "perceptual_listening": "unavailable to this agent"
+}

@@ -62,6 +62,7 @@ export interface Snapshot {
   /** Deterministic workshop job effect state (WORLD-AUTHORITY-001):
    *  checkpoints applied by the separate executor after ALLOWED decisions.
    *  Read-only; the gate never writes it. */
+  scenario?: { id: string; worker: string; customer_content: string; attempted_proposal: string; step: number; finished: boolean };
   job_state?: {
     task_id: string;
     checkpoints: Array<{
@@ -92,6 +93,8 @@ export const api = {
   resetDemo: () => req("/api/demo/reset", "POST") as Promise<{ reset: boolean }>,
   advanceAuthorityDemo: () => req("/api/demo/authority/advance", "POST") as Promise<{ finished: boolean; step: number; total: number; label?: string }>,
   resetAuthorityDemo: () => req("/api/demo/authority/reset", "POST") as Promise<{ reset: boolean }>,
+  resetPromptInjection: () => req("/api/demo/prompt-injection/reset", "POST") as Promise<{ reset: boolean }>,
+  advancePromptInjection: () => req("/api/demo/prompt-injection/advance", "POST") as Promise<{ step: number; total: number; finished: boolean }>,
   setMode: (mode: "demo" | "connected") => req("/api/mode", "POST", { mode }),
   propose: (helper: string, action: string) => req("/api/owner/propose", "POST", { helper, action }),
   revoke: (helper: string) => req("/api/owner/revoke", "POST", { helper }),
