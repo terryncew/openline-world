@@ -1,268 +1,1635 @@
 {
   "classification": "DRAMATIZATION",
-  "physical_schedule_sha256": "16392ba7218394250068399ad82c0ee4aa35b5ca443ef38b9e09d140df226135",
-  "method": "Original CanonicalRobot and ReceiverGate meshes. Fiber advance(frame/fps); production-only pose overrides; direct same-task WebGL export. No reducer events, decisions, mutating requests or model behavior generated.",
+  "physical_schedule_sha256": "ed0ebe4a37ed38d8a0801d86ba2fc53c00a2f6a542c4a78e1d133a7f24f785f7",
+  "method": "Native 16:9 original CanonicalRobot and ReceiverGate meshes. Continuous one-event camera track and push. Fiber advance(frame/fps); production-only pose overrides; direct same-task WebGL export. No reducer events, decisions, mutating requests or model behavior generated.",
   "fps": 30,
-  "frames": 658,
+  "frames": 978,
   "size": [
-    1080,
+    1920,
     1080
   ],
-  "timeline_sha256": "c14e8abf1d013c4890e79a54cf4122fa205ed7df8665f534edd54507c2dceb45",
+  "timeline_sha256": "71c06d8bf7483554d005a1cadf41897b7405f1738025dc0c9581e74779e843a5",
   "file": "source/physical-final.mp4",
-  "sha256": "1a07dcdafb69f00fc38a9a77bec1ea98592426942a1902bf1e08a8fb97254aa8",
+  "sha256": "0556b7a4ac524635dd5692721c8020e05092d72b7dfd8b10a7a59adc4070500a",
   "poses": [
     {
       "frame": 0,
-      "agent_x": -2.5,
-      "proposal_x": -2.06,
-      "gate_x": 1.45,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
       "shutter_y": 3.9,
       "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -9,
+      "message_visible": false,
+      "camera_position": [
+        -5.6,
+        4.6,
+        11.7
+      ],
+      "camera_target": [
+        -1,
+        1.9,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.1341947413728743,
+          0.43170988701874524,
+          0.27032285237338305,
+          0.8549651734990156
+        ],
+        "gate": [
+          0.46676041524356227,
+          0.15417147731254272,
+          1.0073802433002998,
+          0.8529696402888196
+        ],
+        "message": null,
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 30,
-      "agent_x": -2.5,
-      "proposal_x": -2.06,
-      "gate_x": 1.45,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
       "shutter_y": 3.9,
       "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -9,
+      "message_visible": false,
+      "camera_position": [
+        -5.6,
+        4.6,
+        11.7
+      ],
+      "camera_target": [
+        -1,
+        1.9,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.13414633048221242,
+          0.4306674535951495,
+          0.27029192197241964,
+          0.8538758965301777
+        ],
+        "gate": [
+          0.46676041524356227,
+          0.15417147731254272,
+          1.0073802433002998,
+          0.8529696402888196
+        ],
+        "message": null,
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 60,
-      "agent_x": -2.5,
-      "proposal_x": -2.06,
-      "gate_x": 1.45,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
       "shutter_y": 3.9,
       "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -5.407407407407408,
+      "message_visible": true,
+      "camera_position": [
+        -5.6,
+        4.6,
+        11.7
+      ],
+      "camera_target": [
+        -1,
+        1.9,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.13411310492766348,
+          0.42995201260594734,
+          0.2703123390041598,
+          0.8545949251973294
+        ],
+        "gate": [
+          0.46676041524356227,
+          0.15417147731254272,
+          1.0073802433002998,
+          0.8529696402888196
+        ],
+        "message": [
+          -0.02140468563197273,
+          0.25612793217402846,
+          0.27509049011353803,
+          0.483094084290429
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 90,
-      "agent_x": -2.5,
-      "proposal_x": -2.06,
-      "gate_x": 1.45,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
       "shutter_y": 3.9,
       "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -5.600691951268406,
+        4.599308048731594,
+        11.698500772251785
+      ],
+      "camera_target": [
+        -1.0020758538052195,
+        1.8999423373942994,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.13425272598326504,
+          0.43021731949334746,
+          0.27048303180625255,
+          0.8559164869647677
+        ],
+        "gate": [
+          0.4668937310981624,
+          0.15413303748444385,
+          1.0075980887809286,
+          0.8529781277843942
+        ],
+        "message": [
+          0.108650042843569,
+          0.2515274095968508,
+          0.37999377863136835,
+          0.4682250680749054
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 120,
-      "agent_x": -2.5,
-      "proposal_x": -2.06,
-      "gate_x": 1.45,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
       "shutter_y": 3.9,
       "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -5.623249562618457,
+        4.576750437381542,
+        11.649625947660008
+      ],
+      "camera_target": [
+        -1.0697486878553726,
+        1.8980625364484618,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.13833833615669827,
+          0.42851965783349844,
+          0.2748221737354066,
+          0.8552692949316334
+        ],
+        "gate": [
+          0.4712561466091624,
+          0.15287975787538322,
+          1.014739661800644,
+          0.8532648075968783
+        ],
+        "message": [
+          0.11267191275196548,
+          0.24978820923860406,
+          0.3846754142264362,
+          0.4664774212191801
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 150,
-      "agent_x": -2.5,
-      "proposal_x": -2.06,
-      "gate_x": 1.45,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
       "shutter_y": 3.9,
       "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -5.672562623013558,
+        4.527437376986441,
+        11.542780983470623
+      ],
+      "camera_target": [
+        -1.2176878690406765,
+        1.89395311474887,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.14733269647079872,
+          0.4239896074531079,
+          0.284398153619007,
+          0.8530310819907394
+        ],
+        "gate": [
+          0.4809048742381769,
+          0.15013897227976652,
+          1.0306271478852356,
+          0.8539607277127298
+        ],
+        "message": [
+          0.12156241935017076,
+          0.24597562895790015,
+          0.3950291136855705,
+          0.4626508398806563
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 180,
-      "agent_x": -2.5,
-      "proposal_x": -1.862004646976788,
-      "gate_x": 1.45,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
       "shutter_y": 3.9,
       "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -5.741711619769646,
+        4.458288380230354,
+        11.392958157165767
+      ],
+      "camera_target": [
+        -1.425134859308937,
+        1.8881906983525294,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.16025666962586033,
+          0.4193489554032497,
+          0.2981427093985095,
+          0.8517601450476053
+        ],
+        "gate": [
+          0.4947021763145216,
+          0.14629315750544075,
+          1.0535714205918918,
+          0.8551045974649136
+        ],
+        "message": [
+          0.13426273919266402,
+          0.24060465216277394,
+          0.4098315027976521,
+          0.4572721812019074
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 210,
-      "agent_x": -0.8119259732157107,
-      "proposal_x": -0.06521771305556934,
-      "gate_x": 1.45,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
       "shutter_y": 3.9,
       "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -5.823777040202653,
+        4.376222959797346,
+        11.215149746227583
+      ],
+      "camera_target": [
+        -1.6713311206079604,
+        1.8813519133164456,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.1760259390687705,
+          0.4154401122188891,
+          0.3149150872245501,
+          0.852054785828091
+        ],
+        "gate": [
+          0.5108452511843232,
+          0.1417243385279015,
+          1.081879922001796,
+          0.8567352394745216
+        ],
+        "message": [
+          0.14970386427381893,
+          0.23419159409628548,
+          0.4278483010649646,
+          0.45087200345006256
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 240,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
-      "shutter_y": 1.3871720116618076,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
+      "shutter_y": 3.9,
       "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -5.911839371628517,
+        4.288160628371482,
+        11.024348028138212
+      ],
+      "camera_target": [
+        -1.9355181148855518,
+        1.8740133856976235,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.1933774667565215,
+          0.4105301724236567,
+          0.333429943629039,
+          0.8517907533860423
+        ],
+        "gate": [
+          0.5283570954535386,
+          0.13416497073970163,
+          1.1136698457130676,
+          0.8588440244114396
+        ],
+        "message": [
+          0.16674066439691293,
+          0.22726073579630413,
+          0.44775421029762585,
+          0.4439879079564291
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 270,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -5.998979101363172,
+        4.201020898636828,
+        10.835545280379794
+      ],
+      "camera_target": [
+        -2.1969373040895173,
+        1.866751741553069,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.21098045219684752,
+          0.4038999554978865,
+          0.3522989965903439,
+          0.8498531807193683
+        ],
+        "gate": [
+          0.5462437053981112,
+          0.12279359034579584,
+          1.1467033609983974,
+          0.861332091794187
+        ],
+        "message": [
+          0.18410181535999165,
+          0.22034915162880836,
+          0.4680707553456398,
+          0.43716426566140426
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 300,
-      "agent_x": 0.14868265225415245,
-      "proposal_x": 0.9653059357473794,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
-      "ceo_gesture": true,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -6.078276716722554,
+        4.121723283277445,
+        10.663733780434466
+      ],
+      "camera_target": [
+        -2.434830150167663,
+        1.8601436069397872,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.2274574341259647,
+          0.39782667744862965,
+          0.37001189261202605,
+          0.8482170579740012
+        ],
+        "gate": [
+          0.563036128632406,
+          0.11212471889350817,
+          1.178260162021968,
+          0.8639771414483425
+        ],
+        "message": [
+          0.20036003008728182,
+          0.21400990829286815,
+          0.4871276995387169,
+          0.43094913258417883
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 330,
-      "agent_x": 0.06081190184239402,
-      "proposal_x": 0.8335437855536862,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
-      "ceo_gesture": true,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
+      "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -6.142812705022598,
+        4.0571872949774015,
+        10.523905805784372
+      ],
+      "camera_target": [
+        -2.628438115067794,
+        1.8547656079147836,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.24125781315992473,
+          0.39456904283196054,
+          0.38485571031234933,
+          0.8487894746993253
+        ],
+        "gate": [
+          0.5770882323551644,
+          0.10319504441691069,
+          1.2050910887967623,
+          0.866421757806739
+        ],
+        "message": [
+          0.21393203368253283,
+          0.20881296133523936,
+          0.5031254124983217,
+          0.42589013840962536
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 360,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -6.185667553579239,
+        4.014332446420761,
+        10.431053633911649
+      ],
+      "camera_target": [
+        -2.757002660737717,
+        1.8511943705350635,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.2506188824339355,
+          0.39327547885643377,
+          0.39493083038375437,
+          0.8501569430705884
+        ],
+        "gate": [
+          0.5866207426496974,
+          0.09713333491486498,
+          1.2235206164076406,
+          0.8682004281293899
+        ],
+        "message": [
+          0.22312060151771984,
+          0.20534183348982504,
+          0.5141544959383002,
+          0.42253163110578473
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 390,
-      "agent_x": 0.13929258581495668,
-      "proposal_x": 1.0242915725941875,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
+      "agent_x": -4.8,
+      "proposal_x": -4.359999999999999,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.428772811547849,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
       "ceo_gesture": false,
-      "please_gesture": true,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -6.2,
+        4,
+        10.4
+      ],
+      "camera_target": [
+        -2.8,
+        1.85,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.2537583547021993,
+          0.3920605947535858,
+          0.3983285429576607,
+          0.8498022855304957
+        ],
+        "gate": [
+          0.5898458988080483,
+          0.09508131701473882,
+          1.2297987501743362,
+          0.8688242708147402
+        ],
+        "message": [
+          0.22622591768549416,
+          0.20417717655451117,
+          0.5178843357301219,
+          0.4214087245555498
+        ],
+        "proposal": null
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 420,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
+      "agent_x": -4.8,
+      "proposal_x": -4.221621842976435,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -4.27026415855911,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -6.2,
+        4,
+        10.4
+      ],
+      "camera_target": [
+        -2.8,
+        1.85,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.23511746888030982,
+          0.3883113619549284,
+          0.4196773183826398,
+          0.8646048942941704
+        ],
+        "gate": [
+          0.5898458988080483,
+          0.09508131701473882,
+          1.2297987501743362,
+          0.8688242708147402
+        ],
+        "message": [
+          0.22622591768549416,
+          0.20417717655451117,
+          0.5178843357301219,
+          0.4214087245555498
+        ],
+        "proposal": [
+          0.32858304556033957,
+          0.6208107994221185,
+          0.43343968867976584,
+          0.7483615552996647
+        ]
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 450,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
+      "agent_x": -4.711479949951172,
+      "proposal_x": -3.9513280440493874,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -3.9905375991369496,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -6.1445204301591305,
+        4,
+        10.4
+      ],
+      "camera_target": [
+        -2.7445204301591297,
+        1.85,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.24376382320978618,
+          0.3853840014259115,
+          0.41970881085919653,
+          0.8544453778193739
+        ],
+        "gate": [
+          0.5864772536683619,
+          0.09496747724280796,
+          1.226190242190949,
+          0.8700159824265723
+        ],
+        "message": [
+          0.22104593255578275,
+          0.20424428489109359,
+          0.5130769073060464,
+          0.421855264649169
+        ],
+        "proposal": [
+          0.34488546913488766,
+          0.5500007841069154,
+          0.44873039586864644,
+          0.6716751737978626
+        ]
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 480,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
+      "agent_x": -3.617138671875,
+      "proposal_x": -2.8569867659732155,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -3.2682907997604453,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -5.46109891340428,
+        4,
+        10.4
+      ],
+      "camera_target": [
+        -2.06109891340428,
+        1.85,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.28148475617073765,
+          0.3861649598225947,
+          0.457036615236566,
+          0.8493007452181103
+        ],
+        "gate": [
+          0.5443445900918498,
+          0.09353022762963026,
+          1.1808034546871733,
+          0.8850303985396086
+        ],
+        "message": [
+          0.15389147176655393,
+          0.2050870226856279,
+          0.4535894029095184,
+          0.42748247225165115
+        ],
+        "proposal": [
+          0.3813600141794775,
+          0.5489181094051541,
+          0.4840994737204558,
+          0.6690512130517507
+        ]
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 510,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
+      "agent_x": -1.892456817626953,
+      "proposal_x": -1.1323049117251691,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -2.1300298439430754,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -4.392729766803841,
+        4,
+        10.4
+      ],
+      "camera_target": [
+        -0.9927297668038408,
+        1.85,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.33981943726332986,
+          0.38143539425847295,
+          0.5154769959471137,
+          0.8349059351002727
+        ],
+        "gate": [
+          0.4745367954073628,
+          0.0911458207372377,
+          1.1062001762700429,
+          0.9098126416021188
+        ],
+        "message": [
+          0.03391411180127696,
+          0.20646690985689603,
+          0.3562601208116698,
+          0.43677553620770193
+        ],
+        "proposal": [
+          0.4378339639971083,
+          0.5413300960422801,
+          0.5393126423717766,
+          0.6587965651895487
+        ]
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 540,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
+      "agent_x": -0.3253601074218748,
+      "proposal_x": 0.43479179847990945,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -1.095772427235921,
+      "shutter_y": 3.9,
+      "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.441518594504234,
+        4,
+        10.4
+      ],
+      "camera_target": [
+        -0.041518594504233786,
+        1.85,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.392685064950969,
+          0.37500452085842123,
+          0.5701210915065359,
+          0.8195810047130674
+        ],
+        "gate": [
+          0.4069760648319122,
+          0.08886783966047962,
+          1.0357234690468893,
+          0.9333421869814852
+        ],
+        "message": [
+          -0.0802548698254959,
+          0.20776440859326895,
+          0.26432005956684523,
+          0.44560462284251934
+        ],
+        "proposal": [
+          0.48903915540098497,
+          0.5323179394120937,
+          0.5895234081111148,
+          0.6472827476657291
+        ]
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 570,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
-      "shutter_y": 1.35,
-      "gate_unchanged": true,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
+      "shutter_y": 3.879552412888176,
+      "gate_unchanged": false,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1000000000000005,
+        4,
+        10.4
+      ],
+      "camera_target": [
+        0.2999999999999998,
+        1.85,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.4165313442943128,
+          0.37742503874770833,
+          0.5945990857643701,
+          0.818460021362787
+        ],
+        "gate": [
+          0.38044722376950724,
+          -0.10503224461626082,
+          1.0182232993892781,
+          0.9421532275251732
+        ],
+        "message": [
+          -0.12307180562853848,
+          0.20824714732712812,
+          0.23000849216434988,
+          0.4489122728602554
+        ],
+        "proposal": [
+          0.511965268657817,
+          0.5335487206551924,
+          0.612047470045004,
+          0.6476428998936785
+        ]
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 600,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
       "shutter_y": 1.35,
       "gate_unchanged": true,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1000000000000005,
+        4,
+        10.4
+      ],
+      "camera_target": [
+        0.2999999999999998,
+        1.85,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.4165389330179043,
+          0.3782098638106389,
+          0.594589699937917,
+          0.8193102270303132
+        ],
+        "gate": [
+          0.381991233586483,
+          0.08801124972575136,
+          1.0094208496872148,
+          0.9421532275251732
+        ],
+        "message": [
+          -0.12307180562853848,
+          0.20824714732712812,
+          0.23000849216434988,
+          0.4489122728602554
+        ],
+        "proposal": [
+          0.5119641928460404,
+          0.5343294186936971,
+          0.6120371692593611,
+          0.6484602867503144
+        ]
+      },
       "classification": "DRAMATIZATION"
     },
     {
       "frame": 630,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
       "shutter_y": 1.35,
       "gate_unchanged": true,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1000000000000005,
+        3.84375,
+        9.884375
+      ],
+      "camera_target": [
+        0.5109374999999998,
+        1.834375,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.3932553511559418,
+          0.3742710927691577,
+          0.5812958238588797,
+          0.8375983419950931
+        ],
+        "gate": [
+          0.35475872057170754,
+          0.05791518802033685,
+          1.0085383580238523,
+          0.9662512108805825
+        ],
+        "message": [
+          -0.1908034352270075,
+          0.19365330925887358,
+          0.19463223820517128,
+          0.4508437797553971
+        ],
+        "proposal": [
+          0.4938851534227177,
+          0.5358525750314007,
+          0.5987514708014952,
+          0.6568912566926741
+        ]
+      },
       "classification": "DRAMATIZATION"
     },
     {
-      "frame": 657,
-      "agent_x": 0.04999999999999982,
-      "proposal_x": 0.7967082601601407,
-      "gate_x": 1.45,
+      "frame": 660,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
       "shutter_y": 1.35,
       "gate_unchanged": true,
       "ceo_gesture": false,
       "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3.2889588496865434,
+        8.053564203965593
+      ],
+      "camera_target": [
+        1.2599055529231666,
+        1.7788958849686543,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.293782025030176,
+          0.35469707037228343,
+          0.5283555211666708,
+          0.9172571700272183
+        ],
+        "gate": [
+          0.235738164229518,
+          -0.08773149917207179,
+          0.9969538120534644,
+          1.078885187389604
+        ],
+        "message": [
+          -0.5486580450459948,
+          0.08161089088476853,
+          0.02928727321014285,
+          0.45738948463178003
+        ],
+        "proposal": [
+          0.41839470412400237,
+          0.5401423463497949,
+          0.5444903552510815,
+          0.6901813086859939
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 690,
+      "agent_x": 0.3139173100960064,
+      "proposal_x": 1.1058278122914142,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6962131147075779,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": true,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.22757998076809982,
+          0.3406222316854852,
+          0.503706368211559,
+          0.9766926797634715
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.3802626711273595,
+          0.542434345502981,
+          0.5206661939049071,
+          0.7105743165273259
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 720,
+      "agent_x": 0.37880107536067203,
+      "proposal_x": 1.2389703262602811,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.8114778361289099,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": true,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.2223352822420624,
+          0.3374641842652384,
+          0.515354988386034,
+          0.9859576356294635
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.40919611257903155,
+          0.5369905458890313,
+          0.5525154543715312,
+          0.7078275316921891
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 750,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.2301028339320268,
+          0.34343198591448915,
+          0.4985559325215114,
+          0.9749832313796967
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.3724244393349531,
+          0.5452513779016904,
+          0.5123511856996692,
+          0.7132278065860042
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 780,
+      "agent_x": 0.39009688679024174,
+      "proposal_x": 1.290587874739554,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6465025530203186,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": true,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.23360902654698068,
+          0.33409709630844564,
+          0.5147525661662592,
+          0.9825716046960007
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.40473802293780015,
+          0.5319867445955403,
+          0.545056959189515,
+          0.6984284794997935
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 810,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.23008343885006355,
+          0.3426501511341904,
+          0.49855582811150295,
+          0.9740533957546751
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.37241569609079206,
+          0.5444860360310317,
+          0.5123520381944817,
+          0.7123744169711803
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 840,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.23005054478851045,
+          0.34132418462949643,
+          0.4985556510319041,
+          0.972476354413212
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.3724008676805504,
+          0.5431880419767702,
+          0.5123534840147275,
+          0.7109270639411989
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 870,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.23007838995694452,
+          0.3424466271211345,
+          0.4985558009316608,
+          0.9738113397343655
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.3724134200746209,
+          0.5442868054567532,
+          0.5123522601136156,
+          0.712152263813403
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 900,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.23012073914640835,
+          0.344153772528255,
+          0.4985560289109982,
+          0.9758416245027586
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.3724325110029689,
+          0.5459579387217703,
+          0.5123503986864582,
+          0.7140156399615112
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 930,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.23010729859960488,
+          0.3436119626165826,
+          0.49855595655625007,
+          0.9751972732140946
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.3724264520018019,
+          0.545427558033589,
+          0.5123509894582069,
+          0.713424253086693
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 960,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.23006037454978961,
+          0.3417204210176397,
+          0.4985557039487838,
+          0.9729476283336823
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.37240529884986406,
+          0.5435759192705919,
+          0.5123530519604536,
+          0.7113595782617913
+        ]
+      },
+      "classification": "DRAMATIZATION"
+    },
+    {
+      "frame": 977,
+      "agent_x": 0.2999999999999998,
+      "proposal_x": 1.060151905901784,
+      "gate_x": 2.1,
+      "proposal_threshold_distance": -0.6830452962286618,
+      "shutter_y": 1.35,
+      "gate_unchanged": true,
+      "ceo_gesture": false,
+      "please_gesture": false,
+      "message_x": -4.15,
+      "message_visible": true,
+      "camera_position": [
+        -3.1,
+        3,
+        7.1
+      ],
+      "camera_target": [
+        1.65,
+        1.75,
+        0
+      ],
+      "projected_bounds": {
+        "wren": [
+          0.23005048488400576,
+          0.34132176989551016,
+          0.4985556507094181,
+          0.9724734823631769
+        ],
+        "gate": [
+          0.15654697719924243,
+          -0.20032893297386845,
+          0.9836277629862616,
+          1.15916559106551
+        ],
+        "message": [
+          -0.8790367006882831,
+          -0.05869200774237804,
+          -0.09517363126989209,
+          0.4520231361200423
+        ],
+        "proposal": [
+          0.3724008406761761,
+          0.5431856781849169,
+          0.5123534866477476,
+          0.7109244281121678
+        ]
+      },
       "classification": "DRAMATIZATION"
     }
   ],

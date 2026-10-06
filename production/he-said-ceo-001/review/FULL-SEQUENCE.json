@@ -1,0 +1,70 @@
+{
+  "source": "renders/he-said-ceo-narrated.mp4",
+  "source_sha256": "2044dfc4cccbdf0995dde0124f9a032d12f1e0e04658f06acf99ca9fdb06971d",
+  "method": "Complete decoded picture sampled by FFmpeg fps=1 at approximately half-second centers; complements complete normal-speed browser playback and separately reviewed active-motion strips. No audio listening implied.",
+  "samples": 38,
+  "strips": [
+    {
+      "file": "review/full-sequence-0.jpg",
+      "approximate_times_seconds": [
+        0.5,
+        1.5,
+        2.5,
+        3.5,
+        4.5,
+        5.5,
+        6.5,
+        7.5,
+        8.5,
+        9.5,
+        10.5,
+        11.5
+      ],
+      "sha256": "6fc27b62e30cb0caa74d0b7ec8243d27fc922c960b8c0aea05eaf0b3d8dbafdb"
+    },
+    {
+      "file": "review/full-sequence-1.jpg",
+      "approximate_times_seconds": [
+        12.5,
+        13.5,
+        14.5,
+        15.5,
+        16.5,
+        17.5,
+        18.5,
+        19.5,
+        20.5,
+        21.5,
+        22.5,
+        23.5
+      ],
+      "sha256": "507b0e255c24a82423c992e3e351b696e4bfd0df4a43b4207f162fb9c3df1ec1"
+    },
+    {
+      "file": "review/full-sequence-2.jpg",
+      "approximate_times_seconds": [
+        24.5,
+        25.5,
+        26.5,
+        27.5,
+        28.5,
+        29.5,
+        30.5,
+        31.5,
+        32.5,
+        33.5,
+        34.5,
+        35.5
+      ],
+      "sha256": "8877b223e6f2e7eb4dc31610652a49ecda865b4c66e7b9c38cb02cb827698136"
+    },
+    {
+      "file": "review/full-sequence-3.jpg",
+      "approximate_times_seconds": [
+        36.5,
+        37.5
+      ],
+      "sha256": "59e4b192883dac04f6c7c1060e5d2d49dc13f16aa4983807f8f76430725803f2"
+    }
+  ]
+}

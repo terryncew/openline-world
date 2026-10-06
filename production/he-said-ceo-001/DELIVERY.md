@@ -1,85 +1,81 @@
-# HE SAID HE WAS THE CEO — final visual-comedy delivery
+# HE SAID HE WAS THE CEO — director's horizontal delivery
 
-Finished 31-second physical commercial on `film/he-said-ceo-001` for review.
-This visual pass continues from reviewed HEAD
-`f671cb04d265414cbb48d1a78e4886e43a4fa72e`. Its approved story, voiceover,
-captions, physical performance, pauses, sound cue and timing remain unchanged.
-**Hold publication. Do not merge.** Base remains
-`792372a2cd87a01e0500a229e60114b0a00ac64c`; master has not been rebased or merged.
-Recovery checkpoint `13e9c60abc45036c81aaa604855250b0e5384273` was pushed and
-local/remote verified before production resumed. This recut replaces the
-43-second delivery at `a106022d78e848c27dc0871f9622fd65a424908c`, which remains
-archived in Git. All six frozen factual artifacts remain byte-identical to the
-recovery checkpoint, and both receiver signatures still verify.
+Canonical 38-second commercial on `film/he-said-ceo-001`, continuing from
+reviewed HEAD `23f310792aa6931e2918a08f592406f17a894563` and draft PR #7.
+1920×1080, 16:9, 30 fps, 1,140 frames. **Hold publication. Do not merge.**
+The original base remains `792372a2cd87a01e0500a229e60114b0a00ac64c`; master
+has not been rebased or merged. Recovery checkpoint
+`13e9c60abc45036c81aaa604855250b0e5384273` was pushed and local/remote verified
+before production resumed. Prior editorial and portrait cuts remain in Git.
+The existing workspace, media dependencies and local models were reused.
 
 | Artifact | File |
 | --- | --- |
-| Narrated portrait MP4 | [renders/he-said-ceo-narrated.mp4](renders/he-said-ceo-narrated.mp4) |
-| Silent portrait MP4 | [renders/he-said-ceo-muted.mp4](renders/he-said-ceo-muted.mp4) |
-| Poster | [poster.png](poster.png) |
+| Narrated horizontal MP4 | [renders/he-said-ceo-narrated.mp4](renders/he-said-ceo-narrated.mp4) |
+| Muted horizontal MP4 | [renders/he-said-ceo-muted.mp4](renders/he-said-ceo-muted.mp4) |
+| Horizontal poster | [poster.png](poster.png) |
 | Captions | [captions.srt](captions.srt), [captions.vtt](captions.vtt), [CAPTIONS.json](CAPTIONS.json) |
 | Local player | [WATCH.html](WATCH.html) |
 | Editable physical stage | [tools/physical.tsx](tools/physical.tsx), [tools/capture-physical.mjs](tools/capture-physical.mjs) |
 | Editable composition and story | [tools/render.py](tools/render.py), [tools/plan.py](tools/plan.py), [SCREENPLAY.md](SCREENPLAY.md) |
+| Continuous narration and timing | [NARRATION.json](NARRATION.json), [audio/VOICE-SOURCES.json](audio/VOICE-SOURCES.json) |
 | Canonical timeline | [TIMELINE.json](TIMELINE.json) |
 | Frozen facts | [FACTS.json](FACTS.json) |
 | Claims and proof | [CLAIM-SHOT-MAP.json](CLAIM-SHOT-MAP.json), [evidence/](evidence/) |
-| Complete reviewed animatic | [animatic/he-said-ceo-animatic.mp4](animatic/he-said-ceo-animatic.mp4), [ANIMATIC-REVIEW.md](ANIMATIC-REVIEW.md) |
+| Reviewed animatic | [animatic/he-said-ceo-animatic.mp4](animatic/he-said-ceo-animatic.mp4), [ANIMATIC-REVIEW.md](ANIMATIC-REVIEW.md) |
 | Verification | [TECHNICAL-QA.json](TECHNICAL-QA.json), [PLAYBACK-QA.json](PLAYBACK-QA.json) |
 | Source/evidence inventory | [SOURCE-INVENTORY.json](SOURCE-INVENTORY.json), [AUDIT.md](AUDIT.md) |
 
-Both finals are 1080×1920, 30 fps, H.264 High / AAC stereo 48kHz, exactly
-930 frames and 31 seconds, in fast-start MP4 files. The silent edition has zero
-audio and the identical H.264 picture stream. Physical carrying, the shutter,
-essential dialogue and short value lines make the story understandable muted;
-optional external captions carry the complete voiceover without duplicating it
-as burned-in text.
+The horizontal commercial is canonical. No vertical derivative was produced.
+Final delivery uses H.264 High / AAC stereo 48kHz in fast-start MP4 files.
+The muted edition has zero audio and shares the narrated edition's H.264 picture
+stream. Complete narration captions remain external; only essential dialogue
+and the one value proposition appear as designed text.
 
-| Delivered bytes | SHA-256 |
-| --- | --- |
-| Narrated MP4 | `b9a7b115b46a76d0df1b760277cb0d33253193d0b24d6c10852548ca7a37cd12` |
-| Silent MP4 | `1128f7bff853d955e7a401648c2b811316db08113b7a2fe06edcb06a77a32138` |
-| Shared H.264 stream | `1c13882cc04a096b1ce54ee63e95507e1543a119c3794fdd73b60c73415687b7` |
-| Poster PNG | `b6d7d7d9f93099a0ad381b53a22ac9c57d72d726aeced3e092f0b5638f832a11` |
+## One continuous event
 
-## Exactly three presentation changes
+The expanded opening naturally explains prompt injection while an outside
+instruction enters Wren's world from the left. One original sage Wren sincerely
+accepts the fictional CEO request, picks up one $4,800 proposal and carries it
+across the horizontal set toward the receiver gate on the right. The camera
+starts with both worker and receiver, drifts toward the message and worker,
+continues into a restrained lateral walk, then pushes closer after refusal.
+Geography, lighting, scale and performance remain continuous.
 
-1. A continuous eased crop begins at frame 242, after shutter closure at frame
-   241. It reaches 1.62× magnification by frame 272, before the CEO argument,
-   and holds until the actual-test transition at frame 658. Wren's hands, the
-   complete gate aperture, closed shutter and STOP mechanism remain visible
-   with surrounding ground. The source perspective and performance are reused;
-   the gate makes no new response.
-2. DRAMATIZED · FICTIONAL SCENE stays at its stable upper-left position in
-   quieter 28 px regular type. Measured contrast is 5.811:1 against the cream
-   background. Phone review confirms it remains present below the hierarchy
-   of the hostile message and comedy.
-3. The proof leads with ACTUAL OPENLINE TEST, `refund.execute:4800`, STOPPED,
-   and `ACTION_OUTSIDE_MANDATE`, in that order. The genuine captured receipt
-   remains visibly secondary below them at 704×375 px. Its source bytes and
-   original crop are unchanged; no substitute receipt is constructed.
+The shutter closes once. Wren looks or gestures back to explain the CEO claim,
+then makes a small hopeful presentation or lean for “please.” The same closed
+gate never changes, speaks or performs a second verdict. Awkward quiet
+intervals and sincere behavior carry the comedy. One dry mechanical latch is
+the only sound cue; there is no score, comedy sting or detector animation.
+The value proposition stays inside the unresolved scene before the proof.
 
-The poster reflects the tighter physical composition. No new props, characters,
-angles, cuts, dialogue, jokes, facts or story information have been added.
+This is a newly captured native 16:9 stage using unchanged CanonicalRobot and
+ReceiverGate meshes. It does not place old portrait footage inside a horizontal
+canvas. Production-only poses, props and camera moves create the fiction
+without protocol events, API mutations or new receipts. A persistent
+DRAMATIZED · FICTIONAL SCENE disclosure identifies the invented CEO message
+and worker behavior. The real saved hostile input claims administrator, not
+CEO; no live model deception is presented as a verified test observation.
 
-## Current story and proof
+## Continuous narration
 
-One original sage Wren accepts the fictional CEO message, picks up the $4,800
-proposal and carries it toward the original heavy Workshop gate. The shutter
-closes once. Wren makes a larger hopeful CEO gesture, then a smaller “please”
-gesture; the same gate stays completely shut. The receiver never speaks or
-changes its verdict in response to an excuse. Natural-rate local neural voice
-uses speed 1.0, without compressing the takes. One original dry latch marks the
-physical stop; there is no score, detector animation or repeated refusal stamp.
+The expanded context-first narration is one complete local af_sarah take at
+natural speed 1.0, placed once from frame 6. The source duration is
+37.354958 seconds. It is not a sequence of independently synthesized lines,
+and no speech is time-compressed or clipped to fit the film. The two modest
+continuity edits join the receiver sentence and say “that refund” in the proof;
+the amount remains explicitly visible as `refund.execute:4800`.
 
-The physical scene is DRAMATIZATION, with a persistent fictional-scene label.
-Original CanonicalRobot and ReceiverGate meshes are imported unchanged into a
-production-only fixed-frame stage. Poses and the carried proposal prop create
-the fiction; no fake protocol events, fresh receipts or model behavior are
-generated. The real scripted test input claims to be an administrator, not CEO.
+Three existing quiet intervals receive a total of 12,000 zero PCM samples,
+providing intentional refusal holds. The complete unpaced source is included
+so every original speech sample can be checked against the paced source.
+Model-predicted phoneme timings supply caption/camera cue labels; those labels
+are not claims of heard conversational delivery.
 
-At frame 658, ACTUAL OPENLINE TEST explicitly begins one 138-frame, 4.6-second
-proof shot. Its primary result hierarchy is:
+## Preserved real proof
+
+At frame 978, ACTUAL OPENLINE TEST explicitly changes from fiction to the
+recorded refusal. The primary fields lead:
 
 ```text
 ACTUAL OPENLINE TEST
@@ -88,89 +84,117 @@ STOPPED
 ACTION_OUTSIDE_MANDATE
 ```
 
-The shot says “Recorded local test” and “No payment executed.” Its editorial
-hold establishes no receiver-latency claim. The genuine `refund.execute:100`
-→ ALLOWED comparison survives only as underlying evidence, excluded from the
-current picture, narration and captions. Both verified Ed25519 receiver
-receipts exactly match the wallet-reload export. Authority events and the
-mandate stayed unchanged. The scopes are exact action strings, not a general
-numeric cap. No refund, funds, payment, bank call or job effect was executed.
+Nine frames later, the unchanged original receiver-signed receipt capture
+appears as secondary provenance. The proof lasts 106 frames, or 3.533 seconds,
+and retains “Recorded local test” and “No payment executed.” The original
+receipt pixels, crop, IDs, timestamps and signature remain unchanged; display
+placement and scale supply the horizontal hierarchy. The editorial hold
+establishes no receiver latency.
 
-The final card holds 134 frames, or 4.47 seconds:
+The genuine `refund.execute:100` → ALLOWED comparison survives only as
+underlying evidence, excluded from picture, narration and captions. Two
+verified receiver receipts exactly match the reopened wallet export. Authority
+events and the mandate remain unchanged. Scopes are exact strings rather than
+a general numeric cap. No executor, payment, bank call, funds movement or job
+effect was performed. No signing keys are exported.
+
+The 56-frame, 1.867-second ending contains only:
 
 ```text
 OPENLINE
-A prompt can steer the agent.
-It can’t rewrite permission.
 ```
 
-This is the demonstrated authority-boundary proposition. The commercial claims
-no CEO detection, prompt-injection detector, universal fraud prevention,
-spontaneous rogue model behavior or live payment protection.
+## Animatic review
 
-## Review and technical results
+The fresh 960×540 animatic passed the formal director/editor review before
+native final rendering. Producing-agent and independent visual review covered
+one-second samples, gesture motion strips, phone/laptop frames and complete
+normal-speed browser playback. Both 38-second animatic playbacks completed
+1,140 decoded frames with zero dropped frames or media/page errors. Proof was
+readable on phone/laptop before two seconds. These are editorial assessments,
+not an audience study or human audio audition.
 
-The fresh complete animatic passed review before final rendering. It used the
-same presentation code and timeline as the final. Both approved physical
-source videos and capture reports were reused byte-for-byte; no new physical
-capture was needed. Their original timeline hash records the earlier capture,
-while their physical-schedule hash matches the unchanged current performance.
-The current render reports separately identify the presentation timeline and
-source hashes. The full voice takes, mix, single latch, captions, evidence and
-ending are also unchanged. Both exported final MP4s then
-played at normal speed from zero to ended in Chromium, without seeking:
-930 decoded frames each, zero dropped frames, no media or page errors. The
-narrated stream played unmuted at volume 1; the silent export played separately.
+Two preflight issues were resolved before approval: captions moved below the
+dark gate base onto clear floor, and a restrained opening attention drift
+replaced the overly static wide hold. The same stage, timing and composition
+now generate final picture. The approved timeline SHA-256 is
+`71c06d8bf7483554d005a1cadf41897b7405f1738025dc0c9581e74779e843a5`;
+animatic SHA-256 is
+`147bf3cc9c1c8ca7481108b40670c662cf21d9cddb6a396e2b4043a281f9f569`.
 
-The producing agent inspected all four final contact sheets, native final CEO,
-please and proof frames, actual phone-size please and proof samples, and the
-updated poster. Wren/gate phone legibility, visual argument comedy, quiet but
-clear fiction disclosure, two-second proof comprehension, preserved real
-receipt and muted comprehension: **PASS**. The primary proof fields are clear
-in phone screenshots taken 1.8876 seconds after transition in the narrated
-edition and 1.8691 seconds in the muted edition. No added visual information
-made the idea harder to understand. An independent fresh-animatic visual
-review answered questions 1–7 YES and question 8 NO; its proof screenshot was
-at +1.893 seconds. These are visual assessments, not an audience study.
-Type is stable and geometrically inside the portrait safe rectangle;
-the opening picture changes, and no black frames were detected. The physical
-capture schedule matches the canonical timeline; sampled worker and proposal
-centers stay before the gate, which stays closed through the arguments.
-Decoded-pixel checks of pickup, walking, shutter closure and both gestures
-found every active frame unique, with no repeated-frame stalls. Static proof
-and end-card reading holds are intentional. The film is materially better than
-f671cb04: the same earnest pleas are easier to read on a phone, and the four
-existing proof fields lead the unchanged receipt without adding a new idea.
+## Final verification
 
-Full decode, exact frame count and duration, audio/video start PTS zero,
-identical picture streams, complete speech containment, preserved silence and
-A/V sync: **PASS**. All 12 cues measured **0 ms lag** against their full source
-takes, with normalized correlation **0.98978–0.99957** and no truncation.
-Narration measures **−16.14 LUFS / −2.00 dBTP**. All three controlled silence
-windows have zero measured peak, including the final 0.22 seconds. The muted
-edition is silent throughout. Caption sources match the timeline and voice.
-Both encoded AAC streams are byte-identical to their approved f671cb04
-counterparts. The timeline excluding its new `presentation` block is equal to
-the approved timeline; 35 locked source, audio, caption and staging artifacts
-are byte-identical to that reviewed HEAD.
+Current technical verification: **PASS**. Both final files decode completely
+as 1,140 frames at 30 fps, exactly 38 seconds and 1920×1080. Video and audio
+start PTS are zero; every video frame timestamp matches the canonical clock.
+H.264 picture streams are identical, the muted audio is zero throughout, and
+no black frames or unintended motion stalls were detected. Every decoded frame
+in all eight declared choreography/camera ranges is unique; closed-gate pauses
+and reading holds are intentional. Captions, claim coverage, safe geometry and
+current physical schedule match the timeline. The physical agent/proposal
+remain before the same receiver, with a continuous monotonic walk and no
+teleportation. `git diff --check` passes.
 
-**Human audio listening: UNVERIFIED.** Dialogue is locally synthesized neural
-speech, not a human recording. Browser playback and encoded-audio measurements
-are complete, but the agents cannot hear audio. A human subjective listening
-pass remains necessary before publication; it has not been represented as
-performed or passed.
+The continuous decoded narration measures **0 ms lag / 0.99714 correlation**
+against its complete source. All 17 cue slices measure **0 ms lag**, normalized
+correlation **0.99322–0.99978**, with no truncated speech. Narration measures
+**−16.02 LUFS / −1.96 dBTP**. Four guarded silence interiors measure zero peak
+and RMS, including the final 0.35-second hold. Removing the 12,000 intentional
+zero samples restores **884,519 original narration samples bit for bit**.
+This confirms continuous-source integrity without claiming heard cadence.
+
+All six frozen factual artifacts and eight original UI PNGs remain byte-equal
+to their reviewed sources. Both receiver signatures verify and the wallet
+reload exactly matches. The current receipt is genuine unchanged capture at
+680×363 px; the persistent fiction disclosure is 30 px with 5.811:1 contrast.
+Minimum essential information type is 34 px in the canonical horizontal frame.
+
+| Delivered bytes | SHA-256 |
+| --- | --- |
+| Narrated MP4 | `2044dfc4cccbdf0995dde0124f9a032d12f1e0e04658f06acf99ca9fdb06971d` |
+| Muted MP4 | `39781db4a8a788583091d294660d538b317c5deae1c761b3204c2759b13aae91` |
+| Shared H.264 stream | `3afd8d9e4f4aa800fee569ccd42512cd6902c426f131079139b707f87772d64f` |
+| Horizontal poster PNG | `49ebf82116a2cc779409c18eb9b218d1a4bdb3f7b495f8a7509d2246afcb967a` |
+
+All four final normal-speed browser playbacks are complete: narrated and muted
+on both phone and laptop, each from zero to ended without seeking. Every run
+completed **38 seconds / 1,140 decoded frames / zero dropped frames**, with no
+media or page errors. The canonical 16:9 picture fits both landscape viewports
+without cropping. The narrated stream played unmuted at volume 1; the muted
+export was played separately and verified silent throughout.
+
+The producing agent inspected the whole final film through 38 decoded
+one-second visual samples, performance motion strips and actual normal-speed
+playback records, plus current phone attack/CEO/please/value/proof frames,
+laptop proof and the horizontal poster. The four full-sequence contact sheets
+and review/FULL-SEQUENCE.json record those current final bytes; they do not
+constitute a new test. Opening context, spatial continuity, motivated camera,
+meaningful frame use, Wren's continuous journey, sincere argument escalation,
+impassive gate, value proposition, actual-test legibility and muted
+comprehension: **PASS**. Proof screenshots completed **1.286–1.322 seconds**
+after transition across the four runs, with the primary fields readable before
+two seconds. The scene reads as one performed commercial, followed by one
+confirming proof reveal and a simple brand card. These are agent visual/editorial
+assessments, not an independent audience study.
+
+One-speaker narration and connected script/edit continuity pass structural
+review. Encoded waveform alignment, preserved original samples and quiet
+intervals also pass. Subjective auditory cadence and pronunciation remain
+unverified, as disclosed below.
+
+**Human audio listen: UNVERIFIED.** The agents cannot hear audio. Structural
+single-source continuity, script review, decoded alignment and measured sound
+checks do not establish subjective cadence, pronunciation or emotional tone.
+The one remaining change before a national commercial buy would be a human
+audition of the uninterrupted narration; publication remains on hold.
 
 The prior reviewed delivery records 31 passing backend authority, refusal,
-ingress, signature and persistence tests with zero failures, errors or skips.
-Those tests were not rerun for this presentation-only pass; product and
-protocol code remain unchanged. Current full playback, decode, A/V timing,
-phone-size checks, muted comprehension and evidence integrity all pass.
-`git diff --check` passes.
-All production changes are under this directory. Product code changed: **NO**.
-Protocol changed: **NO**. Private keys exported: **NO**. External paid services
-or APIs: **$0**.
+ingress, signature and persistence tests with no failures, errors or skips.
+Those tests are not rerun for this production-only recut. Product code changed:
+**NO**. Protocol changed: **NO**. External API spend: **$0**.
 
-README.md contains the reproducible animatic-first composition, playback
-and verification workflow. Ordinary rebuilding uses preserved evidence and
-voice takes; it never regenerates FACTS or receipts. Current artifact hashes
-and audit records are available in TECHNICAL-QA.json and SOURCE-INVENTORY.json.
+README.md contains the reproducible animatic-first workflow using the existing
+system Python and media venv. Ordinary rebuilding preserves FACTS and receipts.
+Current final measurements and artifact hashes belong in TECHNICAL-QA.json and
+SOURCE-INVENTORY.json. The final revision updates the existing draft PR #7; it is neither merged
+nor published.

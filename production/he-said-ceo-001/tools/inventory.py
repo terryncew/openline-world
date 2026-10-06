@@ -8,6 +8,10 @@ REPO = ROOT.parents[1]
 timeline = json.loads((ROOT / 'TIMELINE.json').read_text())
 current_captures = {shot['capture'] for shot in timeline['shots'] if 'capture' in shot}
 current_voice = {shot['voice']['file'] for shot in timeline['shots'] if 'voice' in shot}
+if timeline.get('narration'):
+    current_voice.add(timeline['narration']['file'])
+voice_sources = json.loads((ROOT / 'audio/VOICE-SOURCES.json').read_text())
+unpaced_voice = voice_sources.get('unpaced_take', {}).get('file')
 frozen_names = {
     'run.json', 'receipt-stopped.json', 'receipt-allowed.json',
     'owner-authority-events.json', 'reloaded-wallet-receipts.json',
@@ -40,6 +44,10 @@ def production_role(path, directory):
             return 'REAL UI CAPTURE — retained supporting record; excluded from current picture'
         return 'PRODUCTION / SOURCE ARTIFACT'
     if directory == 'audio':
+        if local == unpaced_voice:
+            return 'SYNTHETIC NARRATION PROVENANCE — complete natural model output before zero-PCM refusal pauses; all speech samples retained in current source'
+        if local in current_voice:
+            return 'CURRENT CONTINUOUS SYNTHETIC NARRATION — one full-script local neural source at natural speed; no independent sentence takes'
         if path.name.startswith('voice-') and local not in current_voice:
             return 'RETAINED SYNTHETIC AUDIO — superseded dialogue; excluded from current mix'
         return 'SYNTHETIC PRODUCTION AUDIO — local neural voice or original latch; no human recording'
@@ -47,16 +55,18 @@ def production_role(path, directory):
         if path.name in {'physical.tsx', 'physical.html', 'capture-physical.mjs'}:
             return 'PRODUCTION-ONLY DRAMATIZATION SOURCE — no protocol events or API mutations'
         return 'EDITABLE PRODUCTION SOURCE'
+    if directory == 'review':
+        return 'DERIVED EDITORIAL REVIEW — current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence'
     return 'DERIVED COMPOSITE — dramatization, one real UI proof and brand end card'
 
 
 paths = []
-for directory in ['evidence', 'source', 'audio', 'tools', 'renders', 'animatic']:
+for directory in ['evidence', 'source', 'audio', 'tools', 'renders', 'animatic', 'review']:
     for path in sorted((ROOT / directory).rglob('*')):
         if path.is_file() and '__pycache__' not in str(path):
             paths.append(entry(path, production_role(path, directory)))
 for name in [
-    'FACTS.json', 'TIMELINE.json', 'CLAIM-SHOT-MAP.json', 'CAPTIONS.json',
+    'FACTS.json', 'TIMELINE.json', 'NARRATION.json', 'CLAIM-SHOT-MAP.json', 'CAPTIONS.json',
     'captions.srt', 'captions.vtt', 'poster.png', 'README.md', 'AUDIT.md',
     'SCREENPLAY.md', 'DELIVERY.md', 'WATCH.html', 'ANIMATIC-REVIEW.md',
     'TECHNICAL-QA.json', 'PLAYBACK-QA.json',
@@ -95,8 +105,8 @@ manifest = {
     'base_sha': timeline['base_sha'],
     'checkpoint': '13e9c60abc45036c81aaa604855250b0e5384273',
     'replaces_delivery': timeline['replaces_delivery'],
-    'previous_reviewed_head': 'f671cb04d265414cbb48d1a78e4886e43a4fa72e',
-    'current_delivery': {'seconds': timeline['seconds'], 'frames': timeline['frames'], 'fps': timeline['fps']},
+    'previous_reviewed_head': '23f310792aa6931e2918a08f592406f17a894563',
+    'current_delivery': {'seconds': timeline['seconds'], 'frames': timeline['frames'], 'fps': timeline['fps'], 'size': timeline['size'], 'canonical_format': '16:9 horizontal'},
     'timeline_schema': timeline['schema'],
     'timeline_sha256': hashlib.sha256((ROOT / 'TIMELINE.json').read_bytes()).hexdigest(),
     'presentation': timeline['presentation'],
@@ -105,20 +115,23 @@ manifest = {
             'quality': quality,
             'source_file': capture['file'],
             'source_sha256': capture['sha256'],
-            'original_capture_timeline_sha256': capture['timeline_sha256'],
+            'capture_timeline_sha256': capture['timeline_sha256'],
             'physical_schedule_sha256': capture['physical_schedule_sha256'],
-            'reused_from_reviewed_head': True,
+            'size': capture['size'],
+            'frames': capture['frames'],
+            'reused_from_reviewed_head': False,
+            'captured_for_director_horizontal_recut': True,
         }
         for quality in ['animatic', 'final']
         for capture in [json.loads((ROOT / f'source/PHYSICAL-{quality}.json').read_text())]
     ],
     'production': paths,
     'inspected_existing_sources': refs,
-    'classification_policy': 'Physical scene is DRAMATIZATION. Only the preserved STOPPED UI panel is REAL CAPTURE in the current picture. ALLOWED comparison is underlying evidence only.',
+    'classification_policy': 'Native horizontal physical scene is fresh DRAMATIZATION using unchanged original World meshes. Only the preserved STOPPED UI panel is REAL CAPTURE in the current picture. ALLOWED comparison is underlying evidence only. The one full-script synthetic narration and complete unpaced source are production audio provenance, not actual-test observations.',
     'private_keys_exported': False,
     'paid_assets': False,
     'external_api_spend': 0,
-    'voice_disclosure': 'Local neural voice at natural speed 1.0; full takes included. No human recording; human listening unverified.',
+    'voice_disclosure': 'One full-script local neural take at natural speed 1.0; unpaced source included. Three existing quiet intervals receive zero PCM only, with all original speech samples retained. No independent sentence takes, speech clipping or time compression. No human recording; human listening unverified.',
 }
 (ROOT / 'SOURCE-INVENTORY.json').write_text(json.dumps(manifest, indent=2) + '\n')
 print('Source/evidence inventory written:', len(paths), 'production items;', len(refs), 'existing references.')

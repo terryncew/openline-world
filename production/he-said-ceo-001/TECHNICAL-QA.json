@@ -2,6 +2,13 @@
   "status": "PASS",
   "base_sha": "792372a2cd87a01e0500a229e60114b0a00ac64c",
   "recovery_checkpoint": "13e9c60abc45036c81aaa604855250b0e5384273",
+  "previous_reviewed_head": "23f310792aa6931e2918a08f592406f17a894563",
+  "authorized_edit_composition_narration_rebuilt": true,
+  "primary_format": [
+    1920,
+    1080
+  ],
+  "canonical_duration": 38,
   "frozen_evidence_unchanged": [
     {
       "file": "FACTS.json",
@@ -37,298 +44,9 @@
   ],
   "story_contains_allowed_comparison": false,
   "actual_proof_shots": 1,
-  "proof_hold_seconds": 4.6,
+  "proof_hold_seconds": 3.533333333333333,
   "actual_ui_capture_unchanged": true,
-  "results": [
-    {
-      "edition": "narrated",
-      "file": "renders/he-said-ceo-narrated.mp4",
-      "sha256": "b9a7b115b46a76d0df1b760277cb0d33253193d0b24d6c10852548ca7a37cd12",
-      "full_decode": true,
-      "video_codec": "h264",
-      "audio_codec": "aac",
-      "frames": 930,
-      "fps": "30/1",
-      "size": [
-        1080,
-        1920
-      ],
-      "video_start_pts": "0.000000",
-      "audio_start_pts": "0.000000",
-      "video_duration": "31.000000",
-      "audio_duration": "31.000000",
-      "cue_alignment": [
-        {
-          "id": "message",
-          "lag_ms": 0.0,
-          "correlation": 0.99556,
-          "not_truncated": true
-        },
-        {
-          "id": "absolutely",
-          "lag_ms": 0.0,
-          "correlation": 0.99193,
-          "not_truncated": true
-        },
-        {
-          "id": "attempt",
-          "lag_ms": 0.0,
-          "correlation": 0.99664,
-          "not_truncated": true
-        },
-        {
-          "id": "stop",
-          "lag_ms": 0.0,
-          "correlation": 0.98978,
-          "not_truncated": true
-        },
-        {
-          "id": "ceo",
-          "lag_ms": 0.0,
-          "correlation": 0.99686,
-          "not_truncated": true
-        },
-        {
-          "id": "still-no",
-          "lag_ms": 0.0,
-          "correlation": 0.99647,
-          "not_truncated": true
-        },
-        {
-          "id": "please",
-          "lag_ms": 0.0,
-          "correlation": 0.99691,
-          "not_truncated": true
-        },
-        {
-          "id": "no",
-          "lag_ms": 0.0,
-          "correlation": 0.99957,
-          "not_truncated": true
-        },
-        {
-          "id": "boundary",
-          "lag_ms": 0.0,
-          "correlation": 0.99821,
-          "not_truncated": true
-        },
-        {
-          "id": "authority",
-          "lag_ms": 0.0,
-          "correlation": 0.99542,
-          "not_truncated": true
-        },
-        {
-          "id": "proof",
-          "lag_ms": 0.0,
-          "correlation": 0.99713,
-          "not_truncated": true
-        },
-        {
-          "id": "end",
-          "lag_ms": 0.0,
-          "correlation": 0.99546,
-          "not_truncated": true
-        }
-      ],
-      "approved_aac_stream_unchanged": true,
-      "aac_stream_sha256": "4f9461577c9a70e367f01eab601661c9a8b26162084847205596406069c0191a",
-      "loudness": {
-        "input_i": "-16.14",
-        "input_tp": "-2.00",
-        "input_lra": "3.80",
-        "input_thresh": "-26.64",
-        "output_i": "-16.40",
-        "output_tp": "-1.60",
-        "output_lra": "3.30",
-        "output_thresh": "-26.88",
-        "normalization_type": "dynamic",
-        "target_offset": "0.40"
-      },
-      "silence": [
-        {
-          "window": [
-            12.12,
-            12.42
-          ],
-          "peak": 0.0
-        },
-        {
-          "window": [
-            14.7,
-            15.2
-          ],
-          "peak": 0.0
-        },
-        {
-          "window": [
-            30.78,
-            31
-          ],
-          "peak": 0.0
-        }
-      ],
-      "black_frames_detected": false
-    },
-    {
-      "edition": "muted",
-      "file": "renders/he-said-ceo-muted.mp4",
-      "sha256": "1128f7bff853d955e7a401648c2b811316db08113b7a2fe06edcb06a77a32138",
-      "full_decode": true,
-      "video_codec": "h264",
-      "audio_codec": "aac",
-      "frames": 930,
-      "fps": "30/1",
-      "size": [
-        1080,
-        1920
-      ],
-      "video_start_pts": "0.000000",
-      "audio_start_pts": "0.000000",
-      "video_duration": "31.000000",
-      "audio_duration": "31.000000",
-      "cue_alignment": [],
-      "approved_aac_stream_unchanged": true,
-      "aac_stream_sha256": "82dfa98429089482e0b227da2f6faf1f95caa197b6cff3f1b4c5b1d933de37b3",
-      "loudness": {
-        "silent": true
-      },
-      "silence": [
-        {
-          "window": [
-            12.12,
-            12.42
-          ],
-          "peak": 0.0
-        },
-        {
-          "window": [
-            14.7,
-            15.2
-          ],
-          "peak": 0.0
-        },
-        {
-          "window": [
-            30.78,
-            31
-          ],
-          "peak": 0.0
-        }
-      ],
-      "black_frames_detected": false
-    }
-  ],
-  "physical_capture_source_sha256": "1a07dcdafb69f00fc38a9a77bec1ea98592426942a1902bf1e08a8fb97254aa8",
-  "physical_schedule_matches_timeline": true,
-  "sampled_agent_and_proposal_centers_before_gate": true,
-  "sampled_gate_closed_through_arguments": true,
-  "physical_capture_frame_count": 658,
-  "caption_sources_match_timeline_and_voice": true,
-  "same_video_bitstream": true,
-  "video_bitstream_sha256": "1c13882cc04a096b1ce54ee63e95507e1543a119c3794fdd73b60c73415687b7",
-  "opening_frame_changes": true,
-  "safe_geometry_pass": true,
-  "information_label_floor_at_360px": 12.0,
-  "fiction_disclosure_size_at_360px": 9.33,
-  "fiction_disclosure_contrast_ratio": 5.811,
-  "proof_primary_labels_in_requested_order": true,
-  "actual_receipt_capture_source_and_crop_unchanged": true,
-  "actual_receipt_capture_secondary_size": [
-    704,
-    375
-  ],
-  "argument_push_in_after_gate_stop": true,
-  "argument_push_in_complete_before_dialogue": true,
-  "argument_push_in_held_through_proof_transition": true,
-  "argument_push_in_linear_magnification": 1.62,
-  "fresh_animatic_reviewed_before_final": true,
-  "end_card_hold_seconds": 4.466666666666667,
-  "claim_map_complete": true,
-  "product_code_changed": false,
-  "protocol_changed": false,
-  "git_diff_check": true,
-  "external_api_spend": 0,
-  "human_listening_verified": false,
-  "reviewed_head": "f671cb04d265414cbb48d1a78e4886e43a4fa72e",
-  "approved_timeline_content_unchanged": true,
-  "approved_voice_mix_captions_and_physical_source_unchanged": [
-    {
-      "file": "audio/MIX.json",
-      "sha256": "5266e23a5786cdb580c778cebe38a4796787ddadc02ac0ae43fca8e4c74062cc"
-    },
-    {
-      "file": "audio/VOICE-SOURCES.json",
-      "sha256": "bc79ed370cce72082d3d125d580f7035d870c80014b35c11d95a6a4c0f21e549"
-    },
-    {
-      "file": "audio/final-mix.flac",
-      "sha256": "90604d7f9beb724544ccbd0775a4e7a50f9df91a20810ae596fda6b836dd458c"
-    },
-    {
-      "file": "audio/voice-absolutely.wav",
-      "sha256": "54b36ef53cbf1d87106b7268f52db74f9e77455f2f16bb9bcb7a5f78518d9024"
-    },
-    {
-      "file": "audio/voice-attempt.wav",
-      "sha256": "f1aef69009a2cd6de087838a92753e2b0939bd3301f8dad442cf731cf19ecde0"
-    },
-    {
-      "file": "audio/voice-authority.wav",
-      "sha256": "5fd7b6990e62f69ab8646e2d084a3f4e53313993f77befe49ba21fc5fa4f59ee"
-    },
-    {
-      "file": "audio/voice-boundary.wav",
-      "sha256": "612f7ae5444e477615aa98ae4703b420509aa1e1cf1a161572bbd74ec3f025f4"
-    },
-    {
-      "file": "audio/voice-ceo.wav",
-      "sha256": "40eefc198cc70f58f8aca8a5e578a48c8cabdd782c6298db83788528feedcd71"
-    },
-    {
-      "file": "audio/voice-end.wav",
-      "sha256": "13a8cc07995e2b655954be1acf9ad001dc127d1cdd3ac110bb80ffe603921044"
-    },
-    {
-      "file": "audio/voice-message.wav",
-      "sha256": "8cf70b2153c7bc00b420073486d88e47ad96b626223c70cf7af80e0fe196ebd1"
-    },
-    {
-      "file": "audio/voice-no.wav",
-      "sha256": "ab18ebb09b27c8c6f5fb316a12dcf42f6616c3c02b8b4b0e763b639011415cfc"
-    },
-    {
-      "file": "audio/voice-please.wav",
-      "sha256": "9d378d4b79cbced0c7ee968b721eb97e1423ca91066ffc890e5cbd1fdaf5cb5a"
-    },
-    {
-      "file": "audio/voice-proof.wav",
-      "sha256": "37f092e9ffc21a6350eaae21210b350fe65a748033b1c8f9ca6fd924ab6bd2f4"
-    },
-    {
-      "file": "audio/voice-still-no.wav",
-      "sha256": "4489f5fba0f9f5539b9019c623c37f19f15782aa2f0f84ff5a02f659acc2ba46"
-    },
-    {
-      "file": "audio/voice-stop.wav",
-      "sha256": "e6e9f2e083dfc4748ce5b346756015274d392fca7279016e3689104abe17937e"
-    },
-    {
-      "file": "source/PHYSICAL-animatic.json",
-      "sha256": "d2f5d026b07c460c93cb512b295754f0b8cb31134f99e2df87fd81e7603bf3de"
-    },
-    {
-      "file": "source/PHYSICAL-final.json",
-      "sha256": "f255fcd42c5c9bb0a346bc4cc90fdf99dbcc7c12e171b81c20901f7fdcf89e0d"
-    },
-    {
-      "file": "source/physical-animatic.mp4",
-      "sha256": "9bb1aba2f2f52ed69d5a79d03f6d4fca656605f3a21bddd6ffbc0ed7965d88e9"
-    },
-    {
-      "file": "source/physical-final.mp4",
-      "sha256": "1a07dcdafb69f00fc38a9a77bec1ea98592426942a1902bf1e08a8fb97254aa8"
-    },
+  "original_ui_captures_unchanged": [
     {
       "file": "source/proposal-row.png",
       "sha256": "a23f3b16b778732684473d5e43d87593f43d91b2c72948141cc6cb8bd0d573cd"
@@ -360,44 +78,420 @@
     {
       "file": "source/receipt-stopped-reason.png",
       "sha256": "13ddefa9d70b1beff9d6f8f81885f65ffe04f8857cd6f406598fbc92ffd51670"
-    },
-    {
-      "file": "CAPTIONS.json",
-      "sha256": "5ede27b1b05fe60d8c5a3693414868c4df0bbddb69844aebd613cd1a506e32b7"
-    },
-    {
-      "file": "captions.srt",
-      "sha256": "0caa91d2fa1cbcee48223e46fb59dc372d7d65e6e7eba9df05423bf005aeac61"
-    },
-    {
-      "file": "captions.vtt",
-      "sha256": "293f5a866bdfd0c6f09c719ba6bf2a54e4f72a38e9fca796dbd974597bf2e00e"
-    },
-    {
-      "file": "tools/physical.html",
-      "sha256": "13f7244f87c7e720266fa43c85a93d0387b78011c5741bec2656f034f4b0526d"
-    },
-    {
-      "file": "tools/physical.tsx",
-      "sha256": "94d1a2af4a1efc72d2d17f2f32c75922dee8eda29be3dea18f6ed48a2b79ad80"
-    },
-    {
-      "file": "tools/capture-physical.mjs",
-      "sha256": "61b34452782300f1a52a0723ac4cdd445831582c1047504b9e08a5af70794736"
-    },
-    {
-      "file": "tools/voice.py",
-      "sha256": "dcd17937e51c57cac8220528adb722f14731a3d74d21f2f0f584a3297b371479"
-    },
-    {
-      "file": "tools/mix.py",
-      "sha256": "2383b24290d6453256c62f6b8c8a51ba7973fbbc3f30cdae78db79af3e5c391a"
     }
   ],
-  "approved_pauses_and_sfx_unchanged": true,
+  "results": [
+    {
+      "edition": "narrated",
+      "file": "renders/he-said-ceo-narrated.mp4",
+      "sha256": "2044dfc4cccbdf0995dde0124f9a032d12f1e0e04658f06acf99ca9fdb06971d",
+      "full_decode": true,
+      "video_codec": "h264",
+      "pixel_format": "yuv420p",
+      "audio_codec": "aac",
+      "frames": 1140,
+      "fps": "30/1",
+      "size": [
+        1920,
+        1080
+      ],
+      "video_start_pts": "0.000000",
+      "audio_start_pts": "0.000000",
+      "every_frame_pts_verified": true,
+      "first_frame_pts": 0.0,
+      "last_frame_pts": 37.966667,
+      "video_duration": "38.000000",
+      "audio_duration": "38.000000",
+      "cue_alignment": [
+        {
+          "id": "opener",
+          "lag_ms": 0.0,
+          "correlation": 0.9981,
+          "source_slice_seconds": [
+            0.0,
+            2.775
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "manipulation",
+          "lag_ms": 0.0,
+          "correlation": 0.99873,
+          "source_slice_seconds": [
+            2.85,
+            6.95
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "attack",
+          "lag_ms": 0.0,
+          "correlation": 0.99541,
+          "source_slice_seconds": [
+            7.0,
+            12.725
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "accept",
+          "lag_ms": 0.0,
+          "correlation": 0.99786,
+          "source_slice_seconds": [
+            12.725,
+            14.425
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "fooled",
+          "lag_ms": 0.0,
+          "correlation": 0.99839,
+          "source_slice_seconds": [
+            14.475000000000001,
+            16.85
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "walk",
+          "lag_ms": 0.0,
+          "correlation": 0.99791,
+          "source_slice_seconds": [
+            16.900000000000002,
+            18.35
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "check",
+          "lag_ms": 0.0,
+          "correlation": 0.99322,
+          "source_slice_seconds": [
+            18.404999999999998,
+            20.705
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "amount",
+          "lag_ms": 0.0,
+          "correlation": 0.9997,
+          "source_slice_seconds": [
+            20.779999999999998,
+            21.904999999999998
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "no-amount",
+          "lag_ms": 0.0,
+          "correlation": 0.99971,
+          "source_slice_seconds": [
+            22.215,
+            22.665
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "ceo",
+          "lag_ms": 0.0,
+          "correlation": 0.9974,
+          "source_slice_seconds": [
+            22.715,
+            24.04
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "still-no",
+          "lag_ms": 0.0,
+          "correlation": 0.99978,
+          "source_slice_seconds": [
+            24.3,
+            25.025000000000002
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "please",
+          "lag_ms": 0.0,
+          "correlation": 0.99764,
+          "source_slice_seconds": [
+            25.075000000000003,
+            26.03
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "no-please",
+          "lag_ms": 0.0,
+          "correlation": 0.99977,
+          "source_slice_seconds": [
+            26.13,
+            26.529999999999998
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "scam",
+          "lag_ms": 0.0,
+          "correlation": 0.99804,
+          "source_slice_seconds": [
+            26.58,
+            28.83
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "permission",
+          "lag_ms": 0.0,
+          "correlation": 0.99877,
+          "source_slice_seconds": [
+            28.88,
+            32.355000000000004
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "proof",
+          "lag_ms": 0.0,
+          "correlation": 0.99849,
+          "source_slice_seconds": [
+            32.43,
+            35.88
+          ],
+          "not_truncated": true
+        },
+        {
+          "id": "end",
+          "lag_ms": 0.0,
+          "correlation": 0.9997,
+          "source_slice_seconds": [
+            35.955000000000005,
+            37.354958333333336
+          ],
+          "not_truncated": true
+        }
+      ],
+      "continuous_take_alignment": {
+        "file": "audio/voice-continuous.wav",
+        "sha256": "5f6a95671925f9ee89dbb3c78c379b79845b604f7d5c8d5aa86622f56b4350ab",
+        "lag_ms": 0.0,
+        "correlation": 0.99714,
+        "not_truncated": true,
+        "one_continuous_take": true
+      },
+      "aac_stream_sha256": "554f4b273ba132e57c5f4306057eefbcac073c9c9960060024c3a2b1ae09a077",
+      "loudness": {
+        "input_i": "-16.02",
+        "input_tp": "-1.96",
+        "input_lra": "1.50",
+        "input_thresh": "-26.27",
+        "output_i": "-16.10",
+        "output_tp": "-1.83",
+        "output_lra": "1.20",
+        "output_thresh": "-26.32",
+        "normalization_type": "dynamic",
+        "target_offset": "0.10"
+      },
+      "silence": [
+        {
+          "window": [
+            22.13,
+            22.29
+          ],
+          "guard_seconds_per_edge": 0.02,
+          "measured_interior_seconds": 0.12,
+          "peak": 0.0,
+          "rms": 0.0,
+          "aac_limit_peak_dbfs": -53.98,
+          "aac_limit_rms_dbfs": -66.02
+        },
+        {
+          "window": [
+            24.3,
+            24.46
+          ],
+          "guard_seconds_per_edge": 0.02,
+          "measured_interior_seconds": 0.12,
+          "peak": 0.0,
+          "rms": 0.0,
+          "aac_limit_peak_dbfs": -53.98,
+          "aac_limit_rms_dbfs": -66.02
+        },
+        {
+          "window": [
+            26.01,
+            26.19
+          ],
+          "guard_seconds_per_edge": 0.02,
+          "measured_interior_seconds": 0.14,
+          "peak": 0.0,
+          "rms": 0.0,
+          "aac_limit_peak_dbfs": -53.98,
+          "aac_limit_rms_dbfs": -66.02
+        },
+        {
+          "window": [
+            37.65,
+            38
+          ],
+          "guard_seconds_per_edge": 0.02,
+          "measured_interior_seconds": 0.31,
+          "peak": 0.0,
+          "rms": 0.0,
+          "aac_limit_peak_dbfs": -53.98,
+          "aac_limit_rms_dbfs": -66.02
+        }
+      ],
+      "black_frames_detected": false
+    },
+    {
+      "edition": "muted",
+      "file": "renders/he-said-ceo-muted.mp4",
+      "sha256": "39781db4a8a788583091d294660d538b317c5deae1c761b3204c2759b13aae91",
+      "full_decode": true,
+      "video_codec": "h264",
+      "pixel_format": "yuv420p",
+      "audio_codec": "aac",
+      "frames": 1140,
+      "fps": "30/1",
+      "size": [
+        1920,
+        1080
+      ],
+      "video_start_pts": "0.000000",
+      "audio_start_pts": "0.000000",
+      "every_frame_pts_verified": true,
+      "first_frame_pts": 0.0,
+      "last_frame_pts": 37.966667,
+      "video_duration": "38.000000",
+      "audio_duration": "38.000000",
+      "cue_alignment": [],
+      "continuous_take_alignment": null,
+      "aac_stream_sha256": "09e6bade7872043bedfa4cf6ae46df1da50fd7a76a2de4548ae6e71101c1055b",
+      "loudness": {
+        "silent": true
+      },
+      "silence": [
+        {
+          "window": [
+            22.13,
+            22.29
+          ],
+          "guard_seconds_per_edge": 0.02,
+          "measured_interior_seconds": 0.12,
+          "peak": 0.0,
+          "rms": 0.0,
+          "aac_limit_peak_dbfs": -53.98,
+          "aac_limit_rms_dbfs": -66.02
+        },
+        {
+          "window": [
+            24.3,
+            24.46
+          ],
+          "guard_seconds_per_edge": 0.02,
+          "measured_interior_seconds": 0.12,
+          "peak": 0.0,
+          "rms": 0.0,
+          "aac_limit_peak_dbfs": -53.98,
+          "aac_limit_rms_dbfs": -66.02
+        },
+        {
+          "window": [
+            26.01,
+            26.19
+          ],
+          "guard_seconds_per_edge": 0.02,
+          "measured_interior_seconds": 0.14,
+          "peak": 0.0,
+          "rms": 0.0,
+          "aac_limit_peak_dbfs": -53.98,
+          "aac_limit_rms_dbfs": -66.02
+        },
+        {
+          "window": [
+            37.65,
+            38
+          ],
+          "guard_seconds_per_edge": 0.02,
+          "measured_interior_seconds": 0.31,
+          "peak": 0.0,
+          "rms": 0.0,
+          "aac_limit_peak_dbfs": -53.98,
+          "aac_limit_rms_dbfs": -66.02
+        }
+      ],
+      "black_frames_detected": false
+    }
+  ],
+  "physical_capture_source_sha256": "0556b7a4ac524635dd5692721c8020e05092d72b7dfd8b10a7a59adc4070500a",
+  "physical_schedule_matches_timeline": true,
+  "sampled_agent_and_proposal_centers_before_gate": true,
+  "sampled_gate_closed_through_arguments": true,
+  "hostile_message_originates_left_and_stays_behind_destination": true,
+  "sampled_camera_follows_continuous_opening_track_and_push": true,
+  "sampled_action_centers_inside_frame": true,
+  "sampled_proposal_before_rotated_threshold_plane": true,
+  "sampled_lateral_walk_monotonic": true,
+  "sampled_physical_journey_no_teleport": true,
+  "physical_capture_frame_count": 978,
+  "caption_sources_match_timeline_and_continuous_take": true,
+  "continuous_narration_inserted_once": true,
+  "unpaced_narration_sha256": "e9fc078465b9c1f32964b398b53becba321b7237f9d90d50aee9ec9dfeed9895",
+  "narration_speech_pcm_unchanged": true,
+  "unpaced_samples_restored_bit_exact": 884519,
+  "intentional_zero_samples_inserted": 12000,
+  "narration_refusal_pause_proofs": [
+    {
+      "after_phrase": "amount",
+      "inserted_samples": 3840,
+      "paced_source_sample": 526320,
+      "inserted_pcm_exactly_zero": true,
+      "speech_samples_removed": 0
+    },
+    {
+      "after_phrase": "ceo",
+      "inserted_samples": 3840,
+      "paced_source_sample": 578400,
+      "inserted_pcm_exactly_zero": true,
+      "speech_samples_removed": 0
+    },
+    {
+      "after_phrase": "please",
+      "inserted_samples": 4320,
+      "paced_source_sample": 619440,
+      "inserted_pcm_exactly_zero": true,
+      "speech_samples_removed": 0
+    }
+  ],
+  "same_video_bitstream": true,
+  "video_bitstream_sha256": "3afd8d9e4f4aa800fee569ccd42512cd6902c426f131079139b707f87772d64f",
+  "opening_frame_changes": true,
+  "safe_geometry_pass": true,
+  "minimum_information_font_native_px": 34,
+  "fiction_disclosure_native_px": 30,
+  "fiction_disclosure_contrast_ratio": 5.811,
+  "proof_primary_labels_present": true,
+  "actual_receipt_capture_source_and_crop_unchanged": true,
+  "actual_receipt_capture_secondary_size": [
+    680,
+    363
+  ],
+  "fresh_animatic_reviewed_before_final": true,
+  "end_card_hold_seconds": 1.8666666666666667,
+  "claim_map_complete": true,
+  "product_code_changed": false,
+  "protocol_changed": false,
+  "git_diff_check": true,
+  "external_api_spend": 0,
+  "human_audio_listen": "UNVERIFIED",
+  "human_listening_verified": false,
   "active_motion_no_unintended_stalls": true,
-  "active_motion_method": "Every RGB frame decoded from the physical source at 270\u00d7270; exact pixel hashes during pickup, walk, shutter, CEO and please. Static reading holds and closed-gate pauses are excluded.",
-  "active_motion_source_sha256": "1a07dcdafb69f00fc38a9a77bec1ea98592426942a1902bf1e08a8fb97254aa8",
+  "active_motion_method": "Every RGB frame decoded from the physical source at 480\u00d7270; exact pixel hashes during pickup, walk, shutter, CEO/please and every declared camera move. Intentional reading holds and closed-gate pauses are excluded.",
+  "active_motion_source_sha256": "0556b7a4ac524635dd5692721c8020e05092d72b7dfd8b10a7a59adc4070500a",
   "active_motion_stall_limits": {
     "minimum_unique_fraction": 0.5,
     "maximum_consecutive_identical_frames": 6
@@ -406,62 +500,98 @@
     {
       "range": "pickup_frames",
       "frames_inclusive": [
-        164,
-        187
+        408,
+        430
       ],
-      "decoded_frames": 24,
-      "unique_frames": 24,
+      "decoded_frames": 23,
+      "unique_frames": 23,
       "unique_fraction": 1.0,
       "max_consecutive_identical_frames": 1,
-      "frame_hashes_sha256": "379b4caeab542673143d9ba6b8b81b743a7a208200f12c1e1bac91c2bc6b8b6c"
+      "frame_hashes_sha256": "12b11a1394c9cb3f845ff1efd0fcbb196576b89c77c993b9f67b2a9ad9913aee"
     },
     {
       "range": "walk_frames",
       "frames_inclusive": [
-        185,
-        226
+        440,
+        568
       ],
-      "decoded_frames": 42,
-      "unique_frames": 42,
+      "decoded_frames": 129,
+      "unique_frames": 129,
       "unique_fraction": 1.0,
       "max_consecutive_identical_frames": 1,
-      "frame_hashes_sha256": "b7a19bd4d31a43f3a69510da6de1483c14217adaf49b313a4127d3d111c0b787"
+      "frame_hashes_sha256": "5ac49a308642fd62c0984c4c446d228439c4517f3cec3813e35bf430abdc7945"
     },
     {
       "range": "shutter_close_frames",
       "frames_inclusive": [
-        227,
-        241
+        569,
+        588
       ],
-      "decoded_frames": 15,
-      "unique_frames": 15,
+      "decoded_frames": 20,
+      "unique_frames": 20,
       "unique_fraction": 1.0,
       "max_consecutive_identical_frames": 1,
-      "frame_hashes_sha256": "64fc9087e68b1944353a0d0cc7a8b7d11abcb76a4e4c91e4253004758f400fb6"
+      "frame_hashes_sha256": "588cbaf4141e3b4ee90ca2b620c11b46e956ef593093efae53e28960c6a0ffb9"
     },
     {
       "range": "ceo_gesture_frames",
       "frames_inclusive": [
-        274,
-        332
+        688,
+        733
       ],
-      "decoded_frames": 59,
-      "unique_frames": 59,
+      "decoded_frames": 46,
+      "unique_frames": 46,
       "unique_fraction": 1.0,
       "max_consecutive_identical_frames": 1,
-      "frame_hashes_sha256": "cbc868c6a19fdea88169e227a8a4eb3a53550b8e43209fa23760d1ba1b0883d9"
+      "frame_hashes_sha256": "e8ac92864f0163a98d43d50df4d8fb05799c0f351fd88db7599d948543beb2ab"
     },
     {
       "range": "please_gesture_frames",
       "frames_inclusive": [
-        377,
-        414
+        762,
+        790
       ],
-      "decoded_frames": 38,
-      "unique_frames": 38,
+      "decoded_frames": 29,
+      "unique_frames": 29,
       "unique_fraction": 1.0,
       "max_consecutive_identical_frames": 1,
-      "frame_hashes_sha256": "94e4679beda544bf0e9be623f95fb241e0ba42a46d07fc6e03317ca04ea3f320"
+      "frame_hashes_sha256": "8a07ddd6954672912daf74672bb74b5f6d370f7fbf720bd4402c3279f1af4512"
+    },
+    {
+      "range": "camera_open_frames",
+      "frames_inclusive": [
+        84,
+        388
+      ],
+      "decoded_frames": 305,
+      "unique_frames": 305,
+      "unique_fraction": 1.0,
+      "max_consecutive_identical_frames": 1,
+      "frame_hashes_sha256": "b6d4a1125013e45b666aeb677b03ccd004ef7b0b98d76e1e970a1ec74d7b6c3c"
+    },
+    {
+      "range": "camera_track_frames",
+      "frames_inclusive": [
+        440,
+        566
+      ],
+      "decoded_frames": 127,
+      "unique_frames": 127,
+      "unique_fraction": 1.0,
+      "max_consecutive_identical_frames": 1,
+      "frame_hashes_sha256": "19c7f033ae4973fa72062c736d9db81b09cfba681d634cc8bb9e0db0cead510b"
+    },
+    {
+      "range": "camera_push_frames",
+      "frames_inclusive": [
+        611,
+        687
+      ],
+      "decoded_frames": 77,
+      "unique_frames": 77,
+      "unique_fraction": 1.0,
+      "max_consecutive_identical_frames": 1,
+      "frame_hashes_sha256": "83267ec0117b7de1ccf45fbf4645390eb0868e75c6fbf5139201bc527de890f3"
     }
   ]
 }

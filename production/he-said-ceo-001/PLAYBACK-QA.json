@@ -1,1235 +1,3091 @@
 {
-  "timeline_sha256": "168637dbc0d37cc29985daf8a348e25726fc5f4ed38cb336304c01f8d2055259",
-  "visual_review": "PASS: both complete normal-speed browser playbacks finished; producing agent inspected both full contact sheets, actual phone-size argument and proof samples, native final frames and updated poster. Independent fresh animatic visual review passed before final rendering.",
+  "timeline_sha256": "71c06d8bf7483554d005a1cadf41897b7405f1738025dc0c9581e74779e843a5",
+  "primary_format": [
+    1920,
+    1080
+  ],
+  "visual_review": "PASS: producing agent reviewed all 38 decoded one-second visual samples across the entire final film, current phone/laptop contact sheets and key frames, both gesture peaks, proof before two seconds and horizontal poster; complete normal-speed browser playback finished for both editions on both devices.",
   "audio_review": "Unmuted stream decoded and played. Agent cannot hear audio; human listening remains unverified. Cue alignment, loudness, peak and silence measured separately.",
+  "human_audio_listen": "UNVERIFIED",
   "results": [
     {
       "edition": "narrated",
+      "device": "phone",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "orientation": "landscape",
       "file": "renders/he-said-ceo-narrated.mp4",
-      "sha256": "b9a7b115b46a76d0df1b760277cb0d33253193d0b24d6c10852548ca7a37cd12",
-      "method": "Complete normal-speed browser playback from 0 to ended, no seeking; opening, every cut midpoint, visual-pass comparison points and ended screenshots at 430×940 phone viewport. Proof hierarchy is sampled before two seconds.",
-      "target_frames": 930,
-      "target_seconds": 31,
+      "sha256": "2044dfc4cccbdf0995dde0124f9a032d12f1e0e04658f06acf99ca9fdb06971d",
+      "method": "Complete normal-speed browser playback from 0 to ended, no seeking; opening, every editorial beat midpoint, gesture peaks, proof before two seconds and ended screenshots. Canonical 16:9 film contains the viewport without cropping.",
+      "target_frames": 1140,
+      "target_seconds": 38,
       "stamps": [
         {
-          "shot": "message",
-          "kind": "shot midpoint",
-          "target": 2.7,
-          "actual": 2.72912,
-          "capture_completed_at": 2.829323
+          "shot": "opener",
+          "kind": "editorial beat midpoint",
+          "target": 1.5166666666666666,
+          "actual": 1.522195,
+          "capture_completed_at": 1.637039
         },
         {
-          "shot": "absolutely",
-          "kind": "shot midpoint",
-          "target": 5.933333333333334,
-          "actual": 5.938431,
-          "capture_completed_at": 6.019427
+          "shot": "manipulation",
+          "kind": "editorial beat midpoint",
+          "target": 5.116666666666666,
+          "actual": 5.140233,
+          "capture_completed_at": 5.257396
         },
         {
-          "shot": "attempt",
-          "kind": "shot midpoint",
-          "target": 7,
-          "actual": 7.004442,
-          "capture_completed_at": 7.067425
+          "shot": "attack",
+          "kind": "editorial beat midpoint",
+          "target": 10.05,
+          "actual": 10.069708,
+          "capture_completed_at": 10.188883
         },
         {
-          "shot": "gate-refused-before-push",
-          "kind": "closed gate at the start of the restrained push",
-          "target": 8.066666666666666,
-          "actual": 8.077424,
-          "capture_completed_at": 8.154694
+          "shot": "accept",
+          "kind": "editorial beat midpoint",
+          "target": 13.783333333333333,
+          "actual": 13.810908,
+          "capture_completed_at": 13.926424
         },
         {
-          "shot": "stop",
-          "kind": "shot midpoint",
-          "target": 8.3,
-          "actual": 8.309812,
-          "capture_completed_at": 8.389398
+          "shot": "fooled",
+          "kind": "editorial beat midpoint",
+          "target": 15.883333333333333,
+          "actual": 15.905289,
+          "capture_completed_at": 15.971005
         },
         {
-          "shot": "argument-tight-composition",
-          "kind": "completed push at the first argument beat",
-          "target": 9.066666666666666,
-          "actual": 9.071823,
-          "capture_completed_at": 9.14652
+          "shot": "walk",
+          "kind": "editorial beat midpoint",
+          "target": 17.85,
+          "actual": 17.857192,
+          "capture_completed_at": 17.925163
+        },
+        {
+          "shot": "gate-refused",
+          "kind": "closed mechanical gate immediately after latch",
+          "target": 19.7,
+          "actual": 19.705676,
+          "capture_completed_at": 19.774473
+        },
+        {
+          "shot": "check",
+          "kind": "editorial beat midpoint",
+          "target": 19.783333333333335,
+          "actual": 19.797022,
+          "capture_completed_at": 19.89126
+        },
+        {
+          "shot": "amount",
+          "kind": "editorial beat midpoint",
+          "target": 21.683333333333334,
+          "actual": 21.687629,
+          "capture_completed_at": 21.758931
+        },
+        {
+          "shot": "no-amount",
+          "kind": "editorial beat midpoint",
+          "target": 22.65,
+          "actual": 22.656939,
+          "capture_completed_at": 22.724789
+        },
+        {
+          "shot": "ceo-gesture",
+          "kind": "CEO appeal at gesture peak",
+          "target": 23.683333333333334,
+          "actual": 23.69626,
+          "capture_completed_at": 23.77255
         },
         {
           "shot": "ceo",
-          "kind": "shot midpoint",
-          "target": 10.1,
-          "actual": 10.10576,
-          "capture_completed_at": 10.204819
+          "kind": "editorial beat midpoint",
+          "target": 23.7,
+          "actual": 23.775589,
+          "capture_completed_at": 23.859007
         },
         {
           "shot": "still-no",
-          "kind": "shot midpoint",
-          "target": 11.816666666666666,
-          "actual": 11.819351,
-          "capture_completed_at": 11.899398
+          "kind": "editorial beat midpoint",
+          "target": 24.883333333333333,
+          "actual": 24.889911,
+          "capture_completed_at": 24.958523
         },
         {
           "shot": "please",
-          "kind": "shot midpoint",
-          "target": 13.2,
-          "actual": 13.211819,
-          "capture_completed_at": 13.29527
+          "kind": "editorial beat midpoint",
+          "target": 25.783333333333335,
+          "actual": 25.787896,
+          "capture_completed_at": 25.857879
         },
         {
-          "shot": "no",
-          "kind": "shot midpoint",
-          "target": 14.6,
-          "actual": 14.607078,
-          "capture_completed_at": 14.690926
+          "shot": "please-gesture",
+          "kind": "smaller please appeal at gesture peak",
+          "target": 25.866666666666667,
+          "actual": 25.880707,
+          "capture_completed_at": 25.973029
         },
         {
-          "shot": "boundary",
-          "kind": "shot midpoint",
-          "target": 17.016666666666666,
-          "actual": 17.039058,
-          "capture_completed_at": 17.12674
+          "shot": "no-please",
+          "kind": "editorial beat midpoint",
+          "target": 26.533333333333335,
+          "actual": 26.545874,
+          "capture_completed_at": 26.625198
         },
         {
-          "shot": "authority",
-          "kind": "shot midpoint",
-          "target": 20.333333333333332,
-          "actual": 20.350431,
-          "capture_completed_at": 20.428676
+          "shot": "scam",
+          "kind": "editorial beat midpoint",
+          "target": 27.916666666666668,
+          "actual": 27.939235,
+          "capture_completed_at": 28.008571
+        },
+        {
+          "shot": "permission",
+          "kind": "editorial beat midpoint",
+          "target": 30.833333333333332,
+          "actual": 30.836425,
+          "capture_completed_at": 30.910399
         },
         {
           "shot": "proof-within-two-seconds",
-          "kind": "proof hierarchy before two seconds",
-          "target": 23.733333333333334,
-          "actual": 23.754834,
-          "capture_completed_at": 23.820934
+          "kind": "actual-test hierarchy before two seconds",
+          "target": 33.800000000000004,
+          "actual": 33.814748,
+          "capture_completed_at": 33.886092
         },
         {
           "shot": "proof",
-          "kind": "shot midpoint",
-          "target": 24.233333333333334,
-          "actual": 24.254502,
-          "capture_completed_at": 24.334004
+          "kind": "editorial beat midpoint",
+          "target": 34.36666666666667,
+          "actual": 34.373836,
+          "capture_completed_at": 34.436302
         },
         {
           "shot": "end",
-          "kind": "shot midpoint",
-          "target": 28.766666666666666,
-          "actual": 28.769585,
-          "capture_completed_at": 28.829259
+          "kind": "editorial beat midpoint",
+          "target": 37.06666666666667,
+          "actual": 37.081276,
+          "capture_completed_at": 37.15144
         }
       ],
-      "duration": 31,
-      "currentTime": 31,
+      "duration": 38,
+      "currentTime": 38,
       "ended": true,
       "playbackRate": 1,
       "muted": false,
       "volume": 1,
-      "decodedFrames": 930,
+      "displayed_size": [
+        693.328125,
+        389.984375
+      ],
+      "decodedFrames": 1140,
       "droppedFrames": 0,
       "mediaErrors": [],
       "samples": [
         {
-          "time": 0.193176,
-          "wall": 1103
+          "time": 0.167903,
+          "wall": 625.5
         },
         {
-          "time": 0.454851,
-          "wall": 1364.6999999955297
+          "time": 0.435946,
+          "wall": 890.7999999970198
         },
         {
-          "time": 0.720257,
-          "wall": 1630.1999999955297
+          "time": 0.700898,
+          "wall": 1155.6000000014901
         },
         {
-          "time": 0.987861,
-          "wall": 1897.5
+          "time": 0.968153,
+          "wall": 1422.8999999985099
         },
         {
-          "time": 1.251828,
-          "wall": 2161.39999999851
+          "time": 1.235284,
+          "wall": 1691.8999999985099
         },
         {
-          "time": 1.51764,
-          "wall": 2427.2999999970198
+          "time": 1.501547,
+          "wall": 1956.2000000029802
         },
         {
-          "time": 1.783032,
-          "wall": 2692.6999999955297
+          "time": 1.762852,
+          "wall": 2218.10000000149
         },
         {
-          "time": 2.054425,
-          "wall": 2964.10000000149
+          "time": 2.028928,
+          "wall": 2483.7999999970198
         },
         {
-          "time": 2.314341,
-          "wall": 3223.89999999851
+          "time": 2.294754,
+          "wall": 2749.5
         },
         {
-          "time": 2.579915,
-          "wall": 3489.5
+          "time": 2.563993,
+          "wall": 3018.7000000029802
         },
         {
-          "time": 2.845598,
-          "wall": 3755.10000000149
+          "time": 2.828804,
+          "wall": 3285.10000000149
         },
         {
-          "time": 3.114431,
-          "wall": 4024
+          "time": 3.098534,
+          "wall": 3553.2999999970198
         },
         {
-          "time": 3.376806,
-          "wall": 4286.5
+          "time": 3.361921,
+          "wall": 3816.60000000149
         },
         {
-          "time": 3.647483,
-          "wall": 4557.10000000149
+          "time": 3.624858,
+          "wall": 4080.5
         },
         {
-          "time": 3.906731,
-          "wall": 4817.60000000149
+          "time": 3.891582,
+          "wall": 4346.29999999702
         },
         {
-          "time": 4.172879,
-          "wall": 5083.29999999702
+          "time": 4.156784,
+          "wall": 4611.89999999851
         },
         {
-          "time": 4.439317,
-          "wall": 5348.89999999851
+          "time": 4.423391,
+          "wall": 4879.10000000149
         },
         {
-          "time": 4.707311,
-          "wall": 5616.89999999851
+          "time": 4.687903,
+          "wall": 5142.60000000149
         },
         {
-          "time": 4.971559,
-          "wall": 5881.89999999851
+          "time": 4.953138,
+          "wall": 5407.79999999702
         },
         {
-          "time": 5.235943,
-          "wall": 6145.89999999851
+          "time": 5.216532,
+          "wall": 5671.20000000298
         },
         {
-          "time": 5.505248,
-          "wall": 6414.79999999702
+          "time": 5.486061,
+          "wall": 5940.70000000298
         },
         {
-          "time": 5.767433,
-          "wall": 6677
+          "time": 5.748569,
+          "wall": 6205.79999999702
         },
         {
-          "time": 6.033046,
-          "wall": 6942.5
+          "time": 6.016255,
+          "wall": 6472.29999999702
         },
         {
-          "time": 6.298754,
-          "wall": 7208.29999999702
+          "time": 6.285334,
+          "wall": 6740
         },
         {
-          "time": 6.564413,
-          "wall": 7473.89999999851
+          "time": 6.551113,
+          "wall": 7005.79999999702
         },
         {
-          "time": 6.829944,
-          "wall": 7739.5
+          "time": 6.820074,
+          "wall": 7274.89999999851
         },
         {
-          "time": 7.095574,
-          "wall": 8005.10000000149
+          "time": 7.075851,
+          "wall": 7530.60000000149
         },
         {
-          "time": 7.36119,
-          "wall": 8270.79999999702
+          "time": 7.342087,
+          "wall": 7797.29999999702
         },
         {
-          "time": 7.626803,
-          "wall": 8536.29999999702
+          "time": 7.61089,
+          "wall": 8065.60000000149
         },
         {
-          "time": 7.899255,
-          "wall": 8808.69999999553
+          "time": 7.874347,
+          "wall": 8329
         },
         {
-          "time": 8.158057,
-          "wall": 9067.69999999553
+          "time": 8.140891,
+          "wall": 8596.5
         },
         {
-          "time": 8.423728,
-          "wall": 9333.19999999553
+          "time": 8.409817,
+          "wall": 8864.89999999851
         },
         {
-          "time": 8.692439,
-          "wall": 9602
+          "time": 8.675634,
+          "wall": 9130.89999999851
         },
         {
-          "time": 8.954958,
-          "wall": 9864.39999999851
+          "time": 8.943451,
+          "wall": 9398.29999999702
         },
         {
-          "time": 9.223067,
-          "wall": 10132.60000000149
+          "time": 9.205825,
+          "wall": 9660.5
         },
         {
-          "time": 9.486174,
-          "wall": 10395.69999999553
+          "time": 9.47358,
+          "wall": 9928.29999999702
         },
         {
-          "time": 9.751807,
-          "wall": 10661.29999999702
+          "time": 9.73211,
+          "wall": 10186.79999999702
         },
         {
-          "time": 10.017462,
-          "wall": 10927
+          "time": 10.005587,
+          "wall": 10460.20000000298
         },
         {
-          "time": 10.283015,
-          "wall": 11192.60000000149
+          "time": 10.262469,
+          "wall": 10718.20000000298
         },
         {
-          "time": 10.548733,
-          "wall": 11458.29999999702
+          "time": 10.525429,
+          "wall": 10983.70000000298
         },
         {
-          "time": 10.814323,
-          "wall": 11723.89999999851
+          "time": 10.791572,
+          "wall": 11250
         },
         {
-          "time": 11.087342,
-          "wall": 11996.79999999702
+          "time": 11.062258,
+          "wall": 11517
         },
         {
-          "time": 11.345565,
-          "wall": 12255.10000000149
+          "time": 11.326046,
+          "wall": 11780.70000000298
         },
         {
-          "time": 11.615634,
-          "wall": 12525.19999999553
+          "time": 11.595022,
+          "wall": 12052.10000000149
         },
         {
-          "time": 11.876819,
-          "wall": 12786.29999999702
+          "time": 11.855943,
+          "wall": 12311.89999999851
         },
         {
-          "time": 12.142514,
-          "wall": 13052
+          "time": 12.122742,
+          "wall": 12577.5
         },
         {
-          "time": 12.408048,
-          "wall": 13317.5
+          "time": 12.386761,
+          "wall": 12843.20000000298
         },
         {
-          "time": 12.68113,
-          "wall": 13590.60000000149
+          "time": 12.657881,
+          "wall": 13112.5
         },
         {
-          "time": 12.93931,
-          "wall": 13848.79999999702
+          "time": 12.92044,
+          "wall": 13375.5
         },
         {
-          "time": 13.209714,
-          "wall": 14119.19999999553
+          "time": 13.187158,
+          "wall": 13641.89999999851
         },
         {
-          "time": 13.472892,
-          "wall": 14382.39999999851
+          "time": 13.453152,
+          "wall": 13907.79999999702
         },
         {
-          "time": 13.736237,
-          "wall": 14645.79999999702
+          "time": 13.71977,
+          "wall": 14174.39999999851
         },
         {
-          "time": 14.00182,
-          "wall": 14911.29999999702
+          "time": 13.982199,
+          "wall": 14436.89999999851
         },
         {
-          "time": 14.267442,
-          "wall": 15177
+          "time": 14.25492,
+          "wall": 14709.60000000149
         },
         {
-          "time": 14.533039,
-          "wall": 15442.60000000149
+          "time": 14.520587,
+          "wall": 14975.29999999702
         },
         {
-          "time": 14.798674,
-          "wall": 15708.19999999553
+          "time": 14.777809,
+          "wall": 15233.79999999702
         },
         {
-          "time": 15.064529,
-          "wall": 15974.10000000149
+          "time": 15.044697,
+          "wall": 15499.29999999702
         },
         {
-          "time": 15.329955,
-          "wall": 16239.39999999851
+          "time": 15.310322,
+          "wall": 15764.89999999851
         },
         {
-          "time": 15.600982,
-          "wall": 16510.5
+          "time": 15.580833,
+          "wall": 16035.5
         },
         {
-          "time": 15.861249,
-          "wall": 16770.69999999553
+          "time": 15.842652,
+          "wall": 16297.29999999702
         },
         {
-          "time": 16.12945,
-          "wall": 17039.10000000149
+          "time": 16.107203,
+          "wall": 16561.89999999851
         },
         {
-          "time": 16.392493,
-          "wall": 17302.10000000149
+          "time": 16.372817,
+          "wall": 16827.39999999851
         },
         {
-          "time": 16.660013,
-          "wall": 17569.60000000149
+          "time": 16.644665,
+          "wall": 17100.29999999702
         },
         {
-          "time": 16.92372,
-          "wall": 17833.19999999553
+          "time": 16.907724,
+          "wall": 17362.39999999851
         },
         {
-          "time": 17.18936,
-          "wall": 18098.79999999702
+          "time": 17.169657,
+          "wall": 17624.29999999702
         },
         {
-          "time": 17.454928,
-          "wall": 18364.5
+          "time": 17.435285,
+          "wall": 17890
         },
         {
-          "time": 17.720601,
-          "wall": 18630.19999999553
+          "time": 17.700929,
+          "wall": 18155.60000000149
         },
         {
-          "time": 17.986262,
-          "wall": 18895.79999999702
+          "time": 17.967486,
+          "wall": 18422.10000000149
         },
         {
-          "time": 18.259787,
-          "wall": 19169.29999999702
+          "time": 18.232114,
+          "wall": 18687
         },
         {
-          "time": 18.517504,
-          "wall": 19427
+          "time": 18.497788,
+          "wall": 18952.39999999851
         },
         {
-          "time": 18.788312,
-          "wall": 19697.79999999702
+          "time": 18.763404,
+          "wall": 19218.10000000149
         },
         {
-          "time": 19.048745,
-          "wall": 19958.29999999702
+          "time": 19.029013,
+          "wall": 19483.70000000298
         },
         {
-          "time": 19.31679,
-          "wall": 20226.29999999702
+          "time": 19.300083,
+          "wall": 19754.70000000298
         },
         {
-          "time": 19.579998,
-          "wall": 20489.5
+          "time": 19.561999,
+          "wall": 20016.70000000298
         },
         {
-          "time": 19.845546,
-          "wall": 20755
+          "time": 19.825896,
+          "wall": 20280.5
         },
         {
-          "time": 20.111242,
-          "wall": 21020.79999999702
+          "time": 20.093811,
+          "wall": 20548.5
         },
         {
-          "time": 20.376818,
-          "wall": 21286.39999999851
+          "time": 20.357114,
+          "wall": 20811.79999999702
         },
         {
-          "time": 20.642478,
-          "wall": 21552
+          "time": 20.622786,
+          "wall": 21077.5
         },
         {
-          "time": 20.907971,
-          "wall": 21817.60000000149
+          "time": 20.88862,
+          "wall": 21343.29999999702
         },
         {
-          "time": 21.173678,
-          "wall": 22083.29999999702
+          "time": 21.16142,
+          "wall": 21616
         },
         {
-          "time": 21.439307,
-          "wall": 22348.79999999702
+          "time": 21.423345,
+          "wall": 21878
         },
         {
-          "time": 21.712479,
-          "wall": 22622.10000000149
+          "time": 21.685433,
+          "wall": 22140.20000000298
         },
         {
-          "time": 21.970568,
-          "wall": 22880.10000000149
+          "time": 21.950923,
+          "wall": 22405.60000000149
         },
         {
-          "time": 22.241307,
-          "wall": 23150.79999999702
+          "time": 22.216551,
+          "wall": 22671.20000000298
         },
         {
-          "time": 22.501839,
-          "wall": 23411.29999999702
+          "time": 22.482198,
+          "wall": 22936.89999999851
         },
         {
-          "time": 22.769949,
-          "wall": 23679.39999999851
+          "time": 22.747771,
+          "wall": 23202.5
         },
         {
-          "time": 23.033103,
-          "wall": 23942.69999999553
+          "time": 23.01343,
+          "wall": 23468.10000000149
         },
         {
-          "time": 23.299966,
-          "wall": 24209.5
+          "time": 23.279044,
+          "wall": 23733.70000000298
         },
         {
-          "time": 23.56435,
-          "wall": 24473.79999999702
+          "time": 23.544819,
+          "wall": 23999.5
         },
         {
-          "time": 23.829916,
-          "wall": 24739.5
+          "time": 23.810233,
+          "wall": 24264.89999999851
         },
         {
-          "time": 24.101379,
-          "wall": 25010.89999999851
+          "time": 24.081609,
+          "wall": 24536.29999999702
         },
         {
-          "time": 24.361188,
-          "wall": 25270.69999999553
+          "time": 24.343453,
+          "wall": 24798.10000000149
         },
         {
-          "time": 24.626842,
-          "wall": 25536.39999999851
+          "time": 24.607155,
+          "wall": 25061.79999999702
         },
         {
-          "time": 24.89244,
-          "wall": 25802
+          "time": 24.872804,
+          "wall": 25327.5
         },
         {
-          "time": 25.165707,
-          "wall": 26075.19999999553
+          "time": 25.14091,
+          "wall": 25595.60000000149
         },
         {
-          "time": 25.423647,
-          "wall": 26333.29999999702
+          "time": 25.404024,
+          "wall": 25858.70000000298
         },
         {
-          "time": 25.694119,
-          "wall": 26603.60000000149
+          "time": 25.669597,
+          "wall": 26124.29999999702
         },
         {
-          "time": 25.954935,
-          "wall": 26864.5
+          "time": 25.935336,
+          "wall": 26390
         },
         {
-          "time": 26.223476,
-          "wall": 27133.10000000149
+          "time": 26.201,
+          "wall": 26655.70000000298
         },
         {
-          "time": 26.486208,
-          "wall": 27395.79999999702
+          "time": 26.466538,
+          "wall": 26921.20000000298
         },
         {
-          "time": 26.751926,
-          "wall": 27661.5
+          "time": 26.732266,
+          "wall": 27186.89999999851
         },
         {
-          "time": 27.017444,
-          "wall": 27926.89999999851
+          "time": 26.997722,
+          "wall": 27452.5
         },
         {
-          "time": 27.28299,
-          "wall": 28192.5
+          "time": 27.27128,
+          "wall": 27725.89999999851
         },
         {
-          "time": 27.548681,
-          "wall": 28458.19999999553
+          "time": 27.533501,
+          "wall": 27988.20000000298
         },
         {
-          "time": 27.814325,
-          "wall": 28723.89999999851
+          "time": 27.795509,
+          "wall": 28250.20000000298
         },
         {
-          "time": 28.085612,
-          "wall": 28995.19999999553
+          "time": 28.060317,
+          "wall": 28514.89999999851
         },
         {
-          "time": 28.345558,
-          "wall": 29255.19999999553
+          "time": 28.333202,
+          "wall": 28787.79999999702
         },
         {
-          "time": 28.614471,
-          "wall": 29524
+          "time": 28.595028,
+          "wall": 29049.70000000298
         },
         {
-          "time": 28.876733,
-          "wall": 29786.39999999851
+          "time": 28.857432,
+          "wall": 29312.10000000149
         },
         {
-          "time": 29.142451,
-          "wall": 30052
+          "time": 29.122809,
+          "wall": 29577.5
         },
         {
-          "time": 29.408157,
-          "wall": 30317.69999999553
+          "time": 29.38841,
+          "wall": 29843.10000000149
         },
         {
-          "time": 29.673724,
-          "wall": 30583.29999999702
+          "time": 29.654051,
+          "wall": 30108.70000000298
         },
         {
-          "time": 29.939372,
-          "wall": 30848.89999999851
+          "time": 29.924944,
+          "wall": 30379.60000000149
         },
         {
-          "time": 30.204979,
-          "wall": 31114.5
+          "time": 30.186651,
+          "wall": 30641.29999999702
         },
         {
-          "time": 30.470576,
-          "wall": 31380.10000000149
+          "time": 30.450907,
+          "wall": 30905.60000000149
         },
         {
-          "time": 30.736266,
-          "wall": 31645.79999999702
+          "time": 30.716551,
+          "wall": 31171.20000000298
         },
         {
-          "time": 31,
-          "wall": 31911.29999999702
+          "time": 30.982174,
+          "wall": 31436.79999999702
         },
         {
-          "time": 31,
-          "wall": 31928.39999999851
+          "time": 31.25424,
+          "wall": 31708.89999999851
+        },
+        {
+          "time": 31.516112,
+          "wall": 31970.79999999702
+        },
+        {
+          "time": 31.77901,
+          "wall": 32233.70000000298
+        },
+        {
+          "time": 32.044671,
+          "wall": 32499.29999999702
+        },
+        {
+          "time": 32.310306,
+          "wall": 32765
+        },
+        {
+          "time": 32.58381,
+          "wall": 33038.5
+        },
+        {
+          "time": 32.845863,
+          "wall": 33300.5
+        },
+        {
+          "time": 33.107719,
+          "wall": 33562.29999999702
+        },
+        {
+          "time": 33.37281,
+          "wall": 33827.5
+        },
+        {
+          "time": 33.638429,
+          "wall": 34093.10000000149
+        },
+        {
+          "time": 33.907955,
+          "wall": 34362.60000000149
+        },
+        {
+          "time": 34.169979,
+          "wall": 34624.70000000298
+        },
+        {
+          "time": 34.435338,
+          "wall": 34890
+        },
+        {
+          "time": 34.700888,
+          "wall": 35155.60000000149
+        },
+        {
+          "time": 34.966552,
+          "wall": 35421.20000000298
+        },
+        {
+          "time": 35.232183,
+          "wall": 35686.79999999702
+        },
+        {
+          "time": 35.497792,
+          "wall": 35952.39999999851
+        },
+        {
+          "time": 35.768311,
+          "wall": 36223
+        },
+        {
+          "time": 36.030429,
+          "wall": 36485.10000000149
+        },
+        {
+          "time": 36.294566,
+          "wall": 36749.39999999851
+        },
+        {
+          "time": 36.56029,
+          "wall": 37015
+        },
+        {
+          "time": 36.825914,
+          "wall": 37280.5
+        },
+        {
+          "time": 37.091532,
+          "wall": 37546.20000000298
+        },
+        {
+          "time": 37.357164,
+          "wall": 37811.89999999851
+        },
+        {
+          "time": 37.622803,
+          "wall": 38077.5
+        },
+        {
+          "time": 37.888417,
+          "wall": 38343.10000000149
+        },
+        {
+          "time": 38,
+          "wall": 38471
         }
       ],
-      "wall_seconds": 31.091,
+      "wall_seconds": 38.10220000000298,
+      "pageErrors": []
+    },
+    {
+      "edition": "narrated",
+      "device": "laptop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "orientation": "landscape",
+      "file": "renders/he-said-ceo-narrated.mp4",
+      "sha256": "2044dfc4cccbdf0995dde0124f9a032d12f1e0e04658f06acf99ca9fdb06971d",
+      "method": "Complete normal-speed browser playback from 0 to ended, no seeking; opening, every editorial beat midpoint, gesture peaks, proof before two seconds and ended screenshots. Canonical 16:9 film contains the viewport without cropping.",
+      "target_frames": 1140,
+      "target_seconds": 38,
+      "stamps": [
+        {
+          "shot": "opener",
+          "kind": "editorial beat midpoint",
+          "target": 1.5166666666666666,
+          "actual": 1.534903,
+          "capture_completed_at": 1.638713
+        },
+        {
+          "shot": "manipulation",
+          "kind": "editorial beat midpoint",
+          "target": 5.116666666666666,
+          "actual": 5.130427,
+          "capture_completed_at": 5.243912
+        },
+        {
+          "shot": "attack",
+          "kind": "editorial beat midpoint",
+          "target": 10.05,
+          "actual": 10.072333,
+          "capture_completed_at": 10.177135
+        },
+        {
+          "shot": "accept",
+          "kind": "editorial beat midpoint",
+          "target": 13.783333333333333,
+          "actual": 13.796963,
+          "capture_completed_at": 13.913119
+        },
+        {
+          "shot": "fooled",
+          "kind": "editorial beat midpoint",
+          "target": 15.883333333333333,
+          "actual": 15.900883,
+          "capture_completed_at": 16.012579
+        },
+        {
+          "shot": "walk",
+          "kind": "editorial beat midpoint",
+          "target": 17.85,
+          "actual": 17.872143,
+          "capture_completed_at": 17.979713
+        },
+        {
+          "shot": "gate-refused",
+          "kind": "closed mechanical gate immediately after latch",
+          "target": 19.7,
+          "actual": 19.719384,
+          "capture_completed_at": 19.837974
+        },
+        {
+          "shot": "check",
+          "kind": "editorial beat midpoint",
+          "target": 19.783333333333335,
+          "actual": 19.841315,
+          "capture_completed_at": 19.968644
+        },
+        {
+          "shot": "amount",
+          "kind": "editorial beat midpoint",
+          "target": 21.683333333333334,
+          "actual": 21.705326,
+          "capture_completed_at": 21.81636
+        },
+        {
+          "shot": "no-amount",
+          "kind": "editorial beat midpoint",
+          "target": 22.65,
+          "actual": 22.665178,
+          "capture_completed_at": 22.787932
+        },
+        {
+          "shot": "ceo-gesture",
+          "kind": "CEO appeal at gesture peak",
+          "target": 23.683333333333334,
+          "actual": 23.697815,
+          "capture_completed_at": 23.823136
+        },
+        {
+          "shot": "ceo",
+          "kind": "editorial beat midpoint",
+          "target": 23.7,
+          "actual": 23.82623,
+          "capture_completed_at": 23.959357
+        },
+        {
+          "shot": "still-no",
+          "kind": "editorial beat midpoint",
+          "target": 24.883333333333333,
+          "actual": 24.894013,
+          "capture_completed_at": 25.001887
+        },
+        {
+          "shot": "please",
+          "kind": "editorial beat midpoint",
+          "target": 25.783333333333335,
+          "actual": 25.790993,
+          "capture_completed_at": 25.900113
+        },
+        {
+          "shot": "please-gesture",
+          "kind": "smaller please appeal at gesture peak",
+          "target": 25.866666666666667,
+          "actual": 25.902354,
+          "capture_completed_at": 26.037066
+        },
+        {
+          "shot": "no-please",
+          "kind": "editorial beat midpoint",
+          "target": 26.533333333333335,
+          "actual": 26.545085,
+          "capture_completed_at": 26.648561
+        },
+        {
+          "shot": "scam",
+          "kind": "editorial beat midpoint",
+          "target": 27.916666666666668,
+          "actual": 27.921354,
+          "capture_completed_at": 28.030225
+        },
+        {
+          "shot": "permission",
+          "kind": "editorial beat midpoint",
+          "target": 30.833333333333332,
+          "actual": 30.839323,
+          "capture_completed_at": 30.953626
+        },
+        {
+          "shot": "proof-within-two-seconds",
+          "kind": "actual-test hierarchy before two seconds",
+          "target": 33.800000000000004,
+          "actual": 33.817446,
+          "capture_completed_at": 33.92168
+        },
+        {
+          "shot": "proof",
+          "kind": "editorial beat midpoint",
+          "target": 34.36666666666667,
+          "actual": 34.368915,
+          "capture_completed_at": 34.474886
+        },
+        {
+          "shot": "end",
+          "kind": "editorial beat midpoint",
+          "target": 37.06666666666667,
+          "actual": 37.082533,
+          "capture_completed_at": 37.170021
+        }
+      ],
+      "duration": 38,
+      "currentTime": 38,
+      "ended": true,
+      "playbackRate": 1,
+      "muted": false,
+      "volume": 1,
+      "displayed_size": [
+        1440,
+        810
+      ],
+      "decodedFrames": 1140,
+      "droppedFrames": 0,
+      "mediaErrors": [],
+      "samples": [
+        {
+          "time": 0.185774,
+          "wall": 564.8000000044703
+        },
+        {
+          "time": 0.451424,
+          "wall": 830.1000000014901
+        },
+        {
+          "time": 0.717055,
+          "wall": 1095.8000000044703
+        },
+        {
+          "time": 0.987229,
+          "wall": 1366
+        },
+        {
+          "time": 1.250129,
+          "wall": 1628.9000000059605
+        },
+        {
+          "time": 1.51392,
+          "wall": 1892.6000000014901
+        },
+        {
+          "time": 1.780929,
+          "wall": 2159.7000000029802
+        },
+        {
+          "time": 2.045176,
+          "wall": 2423.9000000059605
+        },
+        {
+          "time": 2.310792,
+          "wall": 2689.60000000149
+        },
+        {
+          "time": 2.576436,
+          "wall": 2955.2000000029802
+        },
+        {
+          "time": 2.849461,
+          "wall": 3228.2000000029802
+        },
+        {
+          "time": 3.11347,
+          "wall": 3492.3000000044703
+        },
+        {
+          "time": 3.375451,
+          "wall": 3754.2000000029802
+        },
+        {
+          "time": 3.638938,
+          "wall": 4017.7000000029802
+        },
+        {
+          "time": 3.904502,
+          "wall": 4283.30000000447
+        },
+        {
+          "time": 4.170193,
+          "wall": 4548.9000000059605
+        },
+        {
+          "time": 4.435769,
+          "wall": 4814.60000000149
+        },
+        {
+          "time": 4.705578,
+          "wall": 5084.30000000447
+        },
+        {
+          "time": 4.967371,
+          "wall": 5346.10000000149
+        },
+        {
+          "time": 5.232702,
+          "wall": 5611.4000000059605
+        },
+        {
+          "time": 5.498271,
+          "wall": 5877.10000000149
+        },
+        {
+          "time": 5.769252,
+          "wall": 6148
+        },
+        {
+          "time": 6.035005,
+          "wall": 6413.80000000447
+        },
+        {
+          "time": 6.297482,
+          "wall": 6676.20000000298
+        },
+        {
+          "time": 6.560863,
+          "wall": 6939.60000000149
+        },
+        {
+          "time": 6.826476,
+          "wall": 7205.20000000298
+        },
+        {
+          "time": 7.092094,
+          "wall": 7470.80000000447
+        },
+        {
+          "time": 7.357669,
+          "wall": 7736.4000000059605
+        },
+        {
+          "time": 7.628851,
+          "wall": 8007.5
+        },
+        {
+          "time": 7.890984,
+          "wall": 8269.70000000298
+        },
+        {
+          "time": 8.154542,
+          "wall": 8533.30000000447
+        },
+        {
+          "time": 8.420149,
+          "wall": 8798.90000000596
+        },
+        {
+          "time": 8.685797,
+          "wall": 9064.5
+        },
+        {
+          "time": 8.959332,
+          "wall": 9338.10000000149
+        },
+        {
+          "time": 9.22132,
+          "wall": 9600
+        },
+        {
+          "time": 9.483358,
+          "wall": 9862.10000000149
+        },
+        {
+          "time": 9.748292,
+          "wall": 10127
+        },
+        {
+          "time": 10.013893,
+          "wall": 10392.60000000149
+        },
+        {
+          "time": 10.279541,
+          "wall": 10658.30000000447
+        },
+        {
+          "time": 10.546752,
+          "wall": 10925.5
+        },
+        {
+          "time": 10.810814,
+          "wall": 11189.5
+        },
+        {
+          "time": 11.076418,
+          "wall": 11455.10000000149
+        },
+        {
+          "time": 11.342052,
+          "wall": 11720.70000000298
+        },
+        {
+          "time": 11.607661,
+          "wall": 11986.40000000596
+        },
+        {
+          "time": 11.878274,
+          "wall": 12257
+        },
+        {
+          "time": 12.14153,
+          "wall": 12520.20000000298
+        },
+        {
+          "time": 12.404496,
+          "wall": 12783.40000000596
+        },
+        {
+          "time": 12.670177,
+          "wall": 13048.90000000596
+        },
+        {
+          "time": 12.935772,
+          "wall": 13314.5
+        },
+        {
+          "time": 13.201455,
+          "wall": 13580.20000000298
+        },
+        {
+          "time": 13.472065,
+          "wall": 13850.80000000447
+        },
+        {
+          "time": 13.734162,
+          "wall": 14112.90000000596
+        },
+        {
+          "time": 13.998299,
+          "wall": 14377
+        },
+        {
+          "time": 14.263975,
+          "wall": 14642.70000000298
+        },
+        {
+          "time": 14.529563,
+          "wall": 14908.30000000447
+        },
+        {
+          "time": 14.802674,
+          "wall": 15181.40000000596
+        },
+        {
+          "time": 15.060849,
+          "wall": 15439.60000000149
+        },
+        {
+          "time": 15.332747,
+          "wall": 15711.5
+        },
+        {
+          "time": 15.594636,
+          "wall": 15973.40000000596
+        },
+        {
+          "time": 15.858704,
+          "wall": 16237.40000000596
+        },
+        {
+          "time": 16.126653,
+          "wall": 16505.5
+        },
+        {
+          "time": 16.388919,
+          "wall": 16767.60000000149
+        },
+        {
+          "time": 16.659783,
+          "wall": 17038.60000000149
+        },
+        {
+          "time": 16.921841,
+          "wall": 17300.60000000149
+        },
+        {
+          "time": 17.18578,
+          "wall": 17564.5
+        },
+        {
+          "time": 17.45142,
+          "wall": 17830.20000000298
+        },
+        {
+          "time": 17.717075,
+          "wall": 18095.80000000447
+        },
+        {
+          "time": 17.982655,
+          "wall": 18361.40000000596
+        },
+        {
+          "time": 18.24829,
+          "wall": 18627
+        },
+        {
+          "time": 18.513907,
+          "wall": 18892.60000000149
+        },
+        {
+          "time": 18.77954,
+          "wall": 19158.30000000447
+        },
+        {
+          "time": 19.052361,
+          "wall": 19431
+        },
+        {
+          "time": 19.314302,
+          "wall": 19693
+        },
+        {
+          "time": 19.576559,
+          "wall": 19955.30000000447
+        },
+        {
+          "time": 19.841943,
+          "wall": 20220.80000000447
+        },
+        {
+          "time": 20.11093,
+          "wall": 20489.60000000149
+        },
+        {
+          "time": 20.3733,
+          "wall": 20752
+        },
+        {
+          "time": 20.638904,
+          "wall": 21017.60000000149
+        },
+        {
+          "time": 20.904551,
+          "wall": 21283.20000000298
+        },
+        {
+          "time": 21.170216,
+          "wall": 21548.90000000596
+        },
+        {
+          "time": 21.441225,
+          "wall": 21819.90000000596
+        },
+        {
+          "time": 21.703246,
+          "wall": 22081.90000000596
+        },
+        {
+          "time": 21.967053,
+          "wall": 22345.80000000447
+        },
+        {
+          "time": 22.240325,
+          "wall": 22619.10000000149
+        },
+        {
+          "time": 22.502293,
+          "wall": 22881
+        },
+        {
+          "time": 22.763941,
+          "wall": 23142.70000000298
+        },
+        {
+          "time": 23.030877,
+          "wall": 23409.5
+        },
+        {
+          "time": 23.295194,
+          "wall": 23673.90000000596
+        },
+        {
+          "time": 23.560782,
+          "wall": 23939.60000000149
+        },
+        {
+          "time": 23.826428,
+          "wall": 24205.10000000149
+        },
+        {
+          "time": 24.092116,
+          "wall": 24470.90000000596
+        },
+        {
+          "time": 24.358638,
+          "wall": 24737.40000000596
+        },
+        {
+          "time": 24.629102,
+          "wall": 25007.90000000596
+        },
+        {
+          "time": 24.891602,
+          "wall": 25270.30000000447
+        },
+        {
+          "time": 25.154599,
+          "wall": 25533.30000000447
+        },
+        {
+          "time": 25.426096,
+          "wall": 25804.80000000447
+        },
+        {
+          "time": 25.687944,
+          "wall": 26066.70000000298
+        },
+        {
+          "time": 25.951444,
+          "wall": 26330.10000000149
+        },
+        {
+          "time": 26.219959,
+          "wall": 26598.60000000149
+        },
+        {
+          "time": 26.482678,
+          "wall": 26861.40000000596
+        },
+        {
+          "time": 26.750834,
+          "wall": 27129.60000000149
+        },
+        {
+          "time": 27.013915,
+          "wall": 27392.60000000149
+        },
+        {
+          "time": 27.279539,
+          "wall": 27658.20000000298
+        },
+        {
+          "time": 27.545176,
+          "wall": 27923.90000000596
+        },
+        {
+          "time": 27.810833,
+          "wall": 28189.5
+        },
+        {
+          "time": 28.076455,
+          "wall": 28455.10000000149
+        },
+        {
+          "time": 28.342052,
+          "wall": 28720.80000000447
+        },
+        {
+          "time": 28.607682,
+          "wall": 28986.40000000596
+        },
+        {
+          "time": 28.878879,
+          "wall": 29257.60000000149
+        },
+        {
+          "time": 29.140763,
+          "wall": 29519.40000000596
+        },
+        {
+          "time": 29.404534,
+          "wall": 29783.20000000298
+        },
+        {
+          "time": 29.670162,
+          "wall": 30048.90000000596
+        },
+        {
+          "time": 29.935832,
+          "wall": 30314.60000000149
+        },
+        {
+          "time": 30.201445,
+          "wall": 30580.20000000298
+        },
+        {
+          "time": 30.472886,
+          "wall": 30851.60000000149
+        },
+        {
+          "time": 30.736453,
+          "wall": 31115.20000000298
+        },
+        {
+          "time": 30.998313,
+          "wall": 31377.10000000149
+        },
+        {
+          "time": 31.263924,
+          "wall": 31642.70000000298
+        },
+        {
+          "time": 31.529575,
+          "wall": 31908.30000000447
+        },
+        {
+          "time": 31.801478,
+          "wall": 32180.20000000298
+        },
+        {
+          "time": 32.064039,
+          "wall": 32442.80000000447
+        },
+        {
+          "time": 32.326386,
+          "wall": 32705.10000000149
+        },
+        {
+          "time": 32.59204,
+          "wall": 32970.70000000298
+        },
+        {
+          "time": 32.858602,
+          "wall": 33237.40000000596
+        },
+        {
+          "time": 33.126633,
+          "wall": 33505.40000000596
+        },
+        {
+          "time": 33.388922,
+          "wall": 33767.70000000298
+        },
+        {
+          "time": 33.654534,
+          "wall": 34033.30000000447
+        },
+        {
+          "time": 33.920192,
+          "wall": 34298.90000000596
+        },
+        {
+          "time": 34.185755,
+          "wall": 34564.5
+        },
+        {
+          "time": 34.451424,
+          "wall": 34830.20000000298
+        },
+        {
+          "time": 34.71986,
+          "wall": 35098.60000000149
+        },
+        {
+          "time": 34.982597,
+          "wall": 35361.30000000447
+        },
+        {
+          "time": 35.248293,
+          "wall": 35627.10000000149
+        },
+        {
+          "time": 35.513905,
+          "wall": 35892.70000000298
+        },
+        {
+          "time": 35.779584,
+          "wall": 36158.40000000596
+        },
+        {
+          "time": 36.050039,
+          "wall": 36428.80000000447
+        },
+        {
+          "time": 36.312071,
+          "wall": 36690.80000000447
+        },
+        {
+          "time": 36.576559,
+          "wall": 36955.30000000447
+        },
+        {
+          "time": 36.842058,
+          "wall": 37220.70000000298
+        },
+        {
+          "time": 37.107591,
+          "wall": 37486.5
+        },
+        {
+          "time": 37.373279,
+          "wall": 37752
+        },
+        {
+          "time": 37.638916,
+          "wall": 38017.60000000149
+        },
+        {
+          "time": 37.904527,
+          "wall": 38285.20000000298
+        },
+        {
+          "time": 38,
+          "wall": 38395.10000000149
+        }
+      ],
+      "wall_seconds": 38.08360000000149,
       "pageErrors": []
     },
     {
       "edition": "muted",
+      "device": "phone",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "orientation": "landscape",
       "file": "renders/he-said-ceo-muted.mp4",
-      "sha256": "1128f7bff853d955e7a401648c2b811316db08113b7a2fe06edcb06a77a32138",
-      "method": "Complete normal-speed browser playback from 0 to ended, no seeking; opening, every cut midpoint, visual-pass comparison points and ended screenshots at 430×940 phone viewport. Proof hierarchy is sampled before two seconds.",
-      "target_frames": 930,
-      "target_seconds": 31,
+      "sha256": "39781db4a8a788583091d294660d538b317c5deae1c761b3204c2759b13aae91",
+      "method": "Complete normal-speed browser playback from 0 to ended, no seeking; opening, every editorial beat midpoint, gesture peaks, proof before two seconds and ended screenshots. Canonical 16:9 film contains the viewport without cropping.",
+      "target_frames": 1140,
+      "target_seconds": 38,
       "stamps": [
         {
-          "shot": "message",
-          "kind": "shot midpoint",
-          "target": 2.7,
-          "actual": 2.721365,
-          "capture_completed_at": 2.790756
+          "shot": "opener",
+          "kind": "editorial beat midpoint",
+          "target": 1.5166666666666666,
+          "actual": 1.537954,
+          "capture_completed_at": 1.603611
         },
         {
-          "shot": "absolutely",
-          "kind": "shot midpoint",
-          "target": 5.933333333333334,
-          "actual": 5.942134,
-          "capture_completed_at": 6.024618
+          "shot": "manipulation",
+          "kind": "editorial beat midpoint",
+          "target": 5.116666666666666,
+          "actual": 5.138549,
+          "capture_completed_at": 5.205944
         },
         {
-          "shot": "attempt",
-          "kind": "shot midpoint",
-          "target": 7,
-          "actual": 7.014236,
-          "capture_completed_at": 7.090538
+          "shot": "attack",
+          "kind": "editorial beat midpoint",
+          "target": 10.05,
+          "actual": 10.05259,
+          "capture_completed_at": 10.125237
         },
         {
-          "shot": "gate-refused-before-push",
-          "kind": "closed gate at the start of the restrained push",
-          "target": 8.066666666666666,
-          "actual": 8.075735,
-          "capture_completed_at": 8.158483
+          "shot": "accept",
+          "kind": "editorial beat midpoint",
+          "target": 13.783333333333333,
+          "actual": 13.800273,
+          "capture_completed_at": 13.872073
         },
         {
-          "shot": "stop",
-          "kind": "shot midpoint",
-          "target": 8.3,
-          "actual": 8.313305,
-          "capture_completed_at": 8.38997
+          "shot": "fooled",
+          "kind": "editorial beat midpoint",
+          "target": 15.883333333333333,
+          "actual": 15.896029,
+          "capture_completed_at": 15.969861
         },
         {
-          "shot": "argument-tight-composition",
-          "kind": "completed push at the first argument beat",
-          "target": 9.066666666666666,
-          "actual": 9.072695,
-          "capture_completed_at": 9.148609
+          "shot": "walk",
+          "kind": "editorial beat midpoint",
+          "target": 17.85,
+          "actual": 17.869541,
+          "capture_completed_at": 17.94301
+        },
+        {
+          "shot": "gate-refused",
+          "kind": "closed mechanical gate immediately after latch",
+          "target": 19.7,
+          "actual": 19.721327,
+          "capture_completed_at": 19.791672
+        },
+        {
+          "shot": "check",
+          "kind": "editorial beat midpoint",
+          "target": 19.783333333333335,
+          "actual": 19.79487,
+          "capture_completed_at": 19.876164
+        },
+        {
+          "shot": "amount",
+          "kind": "editorial beat midpoint",
+          "target": 21.683333333333334,
+          "actual": 21.695574,
+          "capture_completed_at": 21.775442
+        },
+        {
+          "shot": "no-amount",
+          "kind": "editorial beat midpoint",
+          "target": 22.65,
+          "actual": 22.666063,
+          "capture_completed_at": 22.739941
+        },
+        {
+          "shot": "ceo-gesture",
+          "kind": "CEO appeal at gesture peak",
+          "target": 23.683333333333334,
+          "actual": 23.690862,
+          "capture_completed_at": 23.759546
         },
         {
           "shot": "ceo",
-          "kind": "shot midpoint",
-          "target": 10.1,
-          "actual": 10.108601,
-          "capture_completed_at": 10.187767
+          "kind": "editorial beat midpoint",
+          "target": 23.7,
+          "actual": 23.76388,
+          "capture_completed_at": 23.849422
         },
         {
           "shot": "still-no",
-          "kind": "shot midpoint",
-          "target": 11.816666666666666,
-          "actual": 11.827882,
-          "capture_completed_at": 11.912321
+          "kind": "editorial beat midpoint",
+          "target": 24.883333333333333,
+          "actual": 24.900973,
+          "capture_completed_at": 24.974437
         },
         {
           "shot": "please",
-          "kind": "shot midpoint",
-          "target": 13.2,
-          "actual": 13.224908,
-          "capture_completed_at": 13.333163
+          "kind": "editorial beat midpoint",
+          "target": 25.783333333333335,
+          "actual": 25.804261,
+          "capture_completed_at": 25.873153
         },
         {
-          "shot": "no",
-          "kind": "shot midpoint",
-          "target": 14.6,
-          "actual": 14.621742,
-          "capture_completed_at": 14.69672
+          "shot": "please-gesture",
+          "kind": "smaller please appeal at gesture peak",
+          "target": 25.866666666666667,
+          "actual": 25.876418,
+          "capture_completed_at": 25.962213
         },
         {
-          "shot": "boundary",
-          "kind": "shot midpoint",
-          "target": 17.016666666666666,
-          "actual": 17.04086,
-          "capture_completed_at": 17.114837
+          "shot": "no-please",
+          "kind": "editorial beat midpoint",
+          "target": 26.533333333333335,
+          "actual": 26.5511,
+          "capture_completed_at": 26.625243
         },
         {
-          "shot": "authority",
-          "kind": "shot midpoint",
-          "target": 20.333333333333332,
-          "actual": 20.342191,
-          "capture_completed_at": 20.432391
+          "shot": "scam",
+          "kind": "editorial beat midpoint",
+          "target": 27.916666666666668,
+          "actual": 27.922085,
+          "capture_completed_at": 27.991397
+        },
+        {
+          "shot": "permission",
+          "kind": "editorial beat midpoint",
+          "target": 30.833333333333332,
+          "actual": 30.838821,
+          "capture_completed_at": 30.909012
         },
         {
           "shot": "proof-within-two-seconds",
-          "kind": "proof hierarchy before two seconds",
-          "target": 23.733333333333334,
-          "actual": 23.736357,
-          "capture_completed_at": 23.802455
+          "kind": "actual-test hierarchy before two seconds",
+          "target": 33.800000000000004,
+          "actual": 33.813686,
+          "capture_completed_at": 33.886183
         },
         {
           "shot": "proof",
-          "kind": "shot midpoint",
-          "target": 24.233333333333334,
-          "actual": 24.258366,
-          "capture_completed_at": 24.34063
+          "kind": "editorial beat midpoint",
+          "target": 34.36666666666667,
+          "actual": 34.37277,
+          "capture_completed_at": 34.438864
         },
         {
           "shot": "end",
-          "kind": "shot midpoint",
-          "target": 28.766666666666666,
-          "actual": 28.776255,
-          "capture_completed_at": 28.852345
+          "kind": "editorial beat midpoint",
+          "target": 37.06666666666667,
+          "actual": 37.082195,
+          "capture_completed_at": 37.146235
         }
       ],
-      "duration": 31,
-      "currentTime": 31,
+      "duration": 38,
+      "currentTime": 38,
       "ended": true,
       "playbackRate": 1,
       "muted": false,
       "volume": 1,
-      "decodedFrames": 930,
+      "displayed_size": [
+        693.328125,
+        389.984375
+      ],
+      "decodedFrames": 1140,
       "droppedFrames": 0,
       "mediaErrors": [],
       "samples": [
         {
-          "time": 0.176644,
-          "wall": 514.1000000014901
+          "time": 0.184775,
+          "wall": 548.2999999970198
         },
         {
-          "time": 0.449617,
-          "wall": 786.8999999985099
+          "time": 0.447265,
+          "wall": 810.6000000014901
         },
         {
-          "time": 0.70787,
-          "wall": 1045.1000000014901
+          "time": 0.712483,
+          "wall": 1075.8999999985099
         },
         {
-          "time": 0.978018,
-          "wall": 1315.2999999970198
+          "time": 0.978204,
+          "wall": 1341.5
         },
         {
-          "time": 1.239143,
-          "wall": 1576.2999999970198
+          "time": 1.24384,
+          "wall": 1607.1999999955297
         },
         {
-          "time": 1.506795,
-          "wall": 1844
+          "time": 1.515788,
+          "wall": 1879.1000000014901
         },
         {
-          "time": 1.770353,
-          "wall": 2107.60000000149
+          "time": 1.774931,
+          "wall": 2138.39999999851
         },
         {
-          "time": 2.038318,
-          "wall": 2375.60000000149
+          "time": 2.04071,
+          "wall": 2404
         },
         {
-          "time": 2.301674,
-          "wall": 2638.89999999851
+          "time": 2.311898,
+          "wall": 2675.1999999955297
         },
         {
-          "time": 2.567218,
-          "wall": 2904.5
+          "time": 2.57377,
+          "wall": 2937.10000000149
         },
         {
-          "time": 2.83291,
-          "wall": 3170.10000000149
+          "time": 2.837593,
+          "wall": 3200.89999999851
         },
         {
-          "time": 3.098451,
-          "wall": 3435.7999999970198
+          "time": 3.103187,
+          "wall": 3466.5
         },
         {
-          "time": 3.370439,
-          "wall": 3707.6999999955297
+          "time": 3.368905,
+          "wall": 3732.1999999955297
         },
         {
-          "time": 3.62977,
-          "wall": 3967
+          "time": 3.634465,
+          "wall": 3997.7999999970198
         },
         {
-          "time": 3.898979,
-          "wall": 4236.19999999553
+          "time": 3.905659,
+          "wall": 4269
         },
         {
-          "time": 4.161024,
-          "wall": 4498.29999999702
+          "time": 4.167608,
+          "wall": 4530.89999999851
         },
         {
-          "time": 4.429174,
-          "wall": 4766.5
+          "time": 4.431267,
+          "wall": 4794.5
         },
         {
-          "time": 4.692278,
-          "wall": 5029.5
+          "time": 4.696978,
+          "wall": 5060.29999999702
         },
         {
-          "time": 4.957878,
-          "wall": 5295
+          "time": 4.96252,
+          "wall": 5325.79999999702
         },
         {
-          "time": 5.223554,
-          "wall": 5560.79999999702
+          "time": 5.228177,
+          "wall": 5591.5
         },
         {
-          "time": 5.489101,
-          "wall": 5826.39999999851
+          "time": 5.493821,
+          "wall": 5857
         },
         {
-          "time": 5.754782,
-          "wall": 6092
+          "time": 5.759502,
+          "wall": 6122.79999999702
         },
         {
-          "time": 6.020395,
-          "wall": 6357.60000000149
+          "time": 6.025091,
+          "wall": 6388.39999999851
         },
         {
-          "time": 6.286039,
-          "wall": 6623.29999999702
+          "time": 6.296315,
+          "wall": 6659.60000000149
         },
         {
-          "time": 6.559244,
-          "wall": 6896.5
+          "time": 6.558309,
+          "wall": 6921.5
         },
         {
-          "time": 6.81726,
-          "wall": 7154.5
+          "time": 6.821968,
+          "wall": 7185.19999999553
         },
         {
-          "time": 7.082876,
-          "wall": 7420.19999999553
+          "time": 7.087514,
+          "wall": 7450.89999999851
         },
         {
-          "time": 7.348494,
-          "wall": 7685.69999999553
+          "time": 7.353271,
+          "wall": 7716.5
         },
         {
-          "time": 7.620155,
-          "wall": 7957.39999999851
+          "time": 7.618811,
+          "wall": 7982.10000000149
         },
         {
-          "time": 7.879774,
-          "wall": 8217
+          "time": 7.88978,
+          "wall": 8253
         },
         {
-          "time": 8.145352,
-          "wall": 8482.60000000149
+          "time": 8.151667,
+          "wall": 8514.89999999851
         },
         {
-          "time": 8.416761,
-          "wall": 8754.10000000149
+          "time": 8.415681,
+          "wall": 8778.89999999851
         },
         {
-          "time": 8.676637,
-          "wall": 9013.89999999851
+          "time": 8.681297,
+          "wall": 9044.60000000149
         },
         {
-          "time": 8.944888,
-          "wall": 9282.10000000149
+          "time": 8.94691,
+          "wall": 9310.19999999553
         },
         {
-          "time": 9.20787,
-          "wall": 9545.10000000149
+          "time": 9.212557,
+          "wall": 9575.79999999702
         },
         {
-          "time": 9.477667,
-          "wall": 9814.89999999851
+          "time": 9.485973,
+          "wall": 9849.19999999553
         },
         {
-          "time": 9.739126,
-          "wall": 10076.39999999851
+          "time": 9.748113,
+          "wall": 10111.39999999851
         },
         {
-          "time": 10.005965,
-          "wall": 10343.19999999553
+          "time": 10.010155,
+          "wall": 10373.39999999851
         },
         {
-          "time": 10.270367,
-          "wall": 10607.60000000149
+          "time": 10.275072,
+          "wall": 10638.39999999851
         },
         {
-          "time": 10.541429,
-          "wall": 10878.69999999553
+          "time": 10.540706,
+          "wall": 10904
         },
         {
-          "time": 10.801601,
-          "wall": 11138.79999999702
+          "time": 10.812628,
+          "wall": 11175.79999999702
         },
         {
-          "time": 11.071756,
-          "wall": 11409
+          "time": 11.074989,
+          "wall": 11438.39999999851
         },
         {
-          "time": 11.332878,
-          "wall": 11670.10000000149
+          "time": 11.337531,
+          "wall": 11700.79999999702
         },
         {
-          "time": 11.600183,
-          "wall": 11937.39999999851
+          "time": 11.603208,
+          "wall": 11966.5
         },
         {
-          "time": 11.864127,
-          "wall": 12201.39999999851
+          "time": 11.8688,
+          "wall": 12232.10000000149
         },
         {
-          "time": 12.129843,
-          "wall": 12467
+          "time": 12.134419,
+          "wall": 12497.79999999702
         },
         {
-          "time": 12.395262,
-          "wall": 12732.60000000149
+          "time": 12.407125,
+          "wall": 12770.39999999851
         },
         {
-          "time": 12.66106,
-          "wall": 12998.29999999702
+          "time": 12.669658,
+          "wall": 13032.89999999851
         },
         {
-          "time": 12.926659,
-          "wall": 13263.79999999702
+          "time": 12.931538,
+          "wall": 13294.89999999851
         },
         {
-          "time": 13.197957,
-          "wall": 13535.10000000149
+          "time": 13.196949,
+          "wall": 13560.19999999553
         },
         {
-          "time": 13.460507,
-          "wall": 13797.69999999553
+          "time": 13.462556,
+          "wall": 13825.79999999702
         },
         {
-          "time": 13.721679,
-          "wall": 14060.79999999702
+          "time": 13.728211,
+          "wall": 14091.5
         },
         {
-          "time": 13.98913,
-          "wall": 14326.39999999851
+          "time": 13.995567,
+          "wall": 14358.89999999851
         },
         {
-          "time": 14.252843,
-          "wall": 14592
+          "time": 14.259446,
+          "wall": 14622.69999999553
         },
         {
-          "time": 14.52041,
-          "wall": 14857.60000000149
+          "time": 14.525073,
+          "wall": 14888.29999999702
         },
         {
-          "time": 14.784103,
-          "wall": 15123.29999999702
+          "time": 14.790734,
+          "wall": 15154
         },
         {
-          "time": 15.051658,
-          "wall": 15388.89999999851
+          "time": 15.056347,
+          "wall": 15419.60000000149
         },
         {
-          "time": 15.317248,
-          "wall": 15654.5
+          "time": 15.329719,
+          "wall": 15693
         },
         {
-          "time": 15.582908,
-          "wall": 15920.10000000149
+          "time": 15.591748,
+          "wall": 15955
         },
         {
-          "time": 15.855682,
-          "wall": 16192.79999999702
+          "time": 15.853759,
+          "wall": 16217
         },
         {
-          "time": 16.114156,
-          "wall": 16451.39999999851
+          "time": 16.118813,
+          "wall": 16482.10000000149
         },
         {
-          "time": 16.384526,
-          "wall": 16721.89999999851
+          "time": 16.384452,
+          "wall": 16747.79999999702
         },
         {
-          "time": 16.645409,
-          "wall": 16982.69999999553
+          "time": 16.6581,
+          "wall": 17021.39999999851
         },
         {
-          "time": 16.91322,
-          "wall": 17250.5
+          "time": 16.920512,
+          "wall": 17283.79999999702
         },
         {
-          "time": 17.176644,
-          "wall": 17513.89999999851
+          "time": 17.182339,
+          "wall": 17545.60000000149
         },
         {
-          "time": 17.444877,
-          "wall": 17782.10000000149
+          "time": 17.446931,
+          "wall": 17810.19999999553
         },
         {
-          "time": 17.707893,
-          "wall": 18045.10000000149
+          "time": 17.712574,
+          "wall": 18075.79999999702
         },
         {
-          "time": 17.973486,
-          "wall": 18310.79999999702
+          "time": 17.984464,
+          "wall": 18347.79999999702
         },
         {
-          "time": 18.23916,
-          "wall": 18576.39999999851
+          "time": 18.246503,
+          "wall": 18609.79999999702
         },
         {
-          "time": 18.504732,
-          "wall": 18841.89999999851
+          "time": 18.509706,
+          "wall": 18873
         },
         {
-          "time": 18.770422,
-          "wall": 19107.79999999702
+          "time": 18.775061,
+          "wall": 19138.29999999702
         },
         {
-          "time": 19.036002,
-          "wall": 19373.29999999702
+          "time": 19.040668,
+          "wall": 19404
         },
         {
-          "time": 19.308227,
-          "wall": 19645.5
+          "time": 19.306325,
+          "wall": 19669.69999999553
         },
         {
-          "time": 19.56724,
-          "wall": 19904.5
+          "time": 19.577991,
+          "wall": 19941.29999999702
         },
         {
-          "time": 19.837137,
-          "wall": 20174.29999999702
+          "time": 19.837528,
+          "wall": 20200.79999999702
         },
         {
-          "time": 20.098504,
-          "wall": 20435.79999999702
+          "time": 20.103138,
+          "wall": 20466.5
         },
         {
-          "time": 20.364094,
-          "wall": 20701.5
+          "time": 20.368901,
+          "wall": 20732.19999999553
         },
         {
-          "time": 20.636896,
-          "wall": 20974.10000000149
+          "time": 20.63441,
+          "wall": 20997.79999999702
         },
         {
-          "time": 20.895382,
-          "wall": 21232.60000000149
+          "time": 20.906552,
+          "wall": 21269.79999999702
         },
         {
-          "time": 21.165599,
-          "wall": 21502.89999999851
+          "time": 21.169014,
+          "wall": 21532.29999999702
         },
         {
-          "time": 21.42665,
-          "wall": 21763.89999999851
+          "time": 21.431483,
+          "wall": 21794.69999999553
         },
         {
-          "time": 21.696138,
-          "wall": 22033.29999999702
+          "time": 21.696948,
+          "wall": 22060.19999999553
         },
         {
-          "time": 21.957888,
-          "wall": 22295.10000000149
+          "time": 21.962576,
+          "wall": 22325.89999999851
         },
         {
-          "time": 22.224591,
-          "wall": 22561.79999999702
+          "time": 22.228206,
+          "wall": 22591.39999999851
         },
         {
-          "time": 22.489168,
-          "wall": 22826.39999999851
+          "time": 22.493848,
+          "wall": 22857.10000000149
         },
         {
-          "time": 22.754692,
-          "wall": 23091.89999999851
+          "time": 22.761,
+          "wall": 23124.29999999702
         },
         {
-          "time": 23.0204,
-          "wall": 23357.69999999553
+          "time": 23.025109,
+          "wall": 23388.39999999851
         },
         {
-          "time": 23.286025,
-          "wall": 23623.19999999553
+          "time": 23.290711,
+          "wall": 23654
         },
         {
-          "time": 23.558473,
-          "wall": 23895.69999999553
+          "time": 23.556319,
+          "wall": 23919.69999999553
         },
         {
-          "time": 23.817245,
-          "wall": 24154.5
+          "time": 23.821978,
+          "wall": 24185.29999999702
         },
         {
-          "time": 24.082869,
-          "wall": 24420.10000000149
+          "time": 24.092417,
+          "wall": 24455.69999999553
         },
         {
-          "time": 24.34852,
-          "wall": 24685.79999999702
+          "time": 24.354605,
+          "wall": 24717.79999999702
         },
         {
-          "time": 24.619117,
-          "wall": 24956.29999999702
+          "time": 24.618825,
+          "wall": 24982.10000000149
         },
         {
-          "time": 24.879771,
-          "wall": 25216.89999999851
+          "time": 24.884483,
+          "wall": 25247.69999999553
         },
         {
-          "time": 25.147326,
-          "wall": 25484.5
+          "time": 25.156892,
+          "wall": 25520.19999999553
         },
         {
-          "time": 25.411017,
-          "wall": 25748.29999999702
+          "time": 25.419094,
+          "wall": 25782.39999999851
         },
         {
-          "time": 25.67663,
-          "wall": 26013.79999999702
+          "time": 25.681302,
+          "wall": 26044.5
         },
         {
-          "time": 25.942251,
-          "wall": 26279.5
+          "time": 25.946956,
+          "wall": 26310.19999999553
         },
         {
-          "time": 26.207861,
-          "wall": 26545.10000000149
+          "time": 26.212585,
+          "wall": 26575.89999999851
         },
         {
-          "time": 26.481176,
-          "wall": 26818.39999999851
+          "time": 26.478199,
+          "wall": 26841.5
         },
         {
-          "time": 26.739131,
-          "wall": 27076.39999999851
+          "time": 26.747595,
+          "wall": 27110.89999999851
         },
         {
-          "time": 27.012639,
-          "wall": 27349.89999999851
+          "time": 27.009776,
+          "wall": 27373
         },
         {
-          "time": 27.270371,
-          "wall": 27607.60000000149
+          "time": 27.275061,
+          "wall": 27638.39999999851
         },
         {
-          "time": 27.541176,
-          "wall": 27878.39999999851
+          "time": 27.538125,
+          "wall": 27904
         },
         {
-          "time": 27.801631,
-          "wall": 28138.89999999851
+          "time": 27.806344,
+          "wall": 28169.60000000149
         },
         {
-          "time": 28.069429,
-          "wall": 28406.60000000149
+          "time": 28.073434,
+          "wall": 28436.79999999702
         },
         {
-          "time": 28.332888,
-          "wall": 28670.10000000149
+          "time": 28.337541,
+          "wall": 28700.79999999702
         },
         {
-          "time": 28.598543,
-          "wall": 28935.69999999553
+          "time": 28.60323,
+          "wall": 28966.5
         },
         {
-          "time": 28.864124,
-          "wall": 29201.39999999851
+          "time": 28.868811,
+          "wall": 29232.10000000149
         },
         {
-          "time": 29.129766,
-          "wall": 29467
+          "time": 29.134507,
+          "wall": 29497.79999999702
         },
         {
-          "time": 29.395417,
-          "wall": 29732.60000000149
+          "time": 29.405589,
+          "wall": 29768.89999999851
         },
         {
-          "time": 29.661034,
-          "wall": 29998.19999999553
+          "time": 29.667937,
+          "wall": 30031.19999999553
         },
         {
-          "time": 29.926623,
-          "wall": 30263.89999999851
+          "time": 29.931246,
+          "wall": 30294.5
         },
         {
-          "time": 30.192288,
-          "wall": 30529.5
+          "time": 30.196954,
+          "wall": 30560.19999999553
         },
         {
-          "time": 30.457885,
-          "wall": 30795.10000000149
+          "time": 30.462577,
+          "wall": 30825.89999999851
         },
         {
-          "time": 30.723511,
-          "wall": 31060.79999999702
+          "time": 30.728187,
+          "wall": 31091.5
         },
         {
-          "time": 30.989144,
-          "wall": 31326.39999999851
+          "time": 30.993824,
+          "wall": 31357.10000000149
         },
         {
-          "time": 31,
-          "wall": 31356.19999999553
+          "time": 31.258008,
+          "wall": 31622.79999999702
+        },
+        {
+          "time": 31.525062,
+          "wall": 31888.39999999851
+        },
+        {
+          "time": 31.796567,
+          "wall": 32160.5
+        },
+        {
+          "time": 32.059023,
+          "wall": 32422.29999999702
+        },
+        {
+          "time": 32.321934,
+          "wall": 32685.19999999553
+        },
+        {
+          "time": 32.58759,
+          "wall": 32950.89999999851
+        },
+        {
+          "time": 32.853198,
+          "wall": 33216.60000000149
+        },
+        {
+          "time": 33.126715,
+          "wall": 33490
+        },
+        {
+          "time": 33.388588,
+          "wall": 33751.79999999702
+        },
+        {
+          "time": 33.6504,
+          "wall": 34013.69999999553
+        },
+        {
+          "time": 33.915687,
+          "wall": 34279
+        },
+        {
+          "time": 34.181317,
+          "wall": 34544.60000000149
+        },
+        {
+          "time": 34.44695,
+          "wall": 34810.29999999702
+        },
+        {
+          "time": 34.712514,
+          "wall": 35075.89999999851
+        },
+        {
+          "time": 34.983834,
+          "wall": 35347.10000000149
+        },
+        {
+          "time": 35.245843,
+          "wall": 35609.10000000149
+        },
+        {
+          "time": 35.509402,
+          "wall": 35872.79999999702
+        },
+        {
+          "time": 35.775111,
+          "wall": 36138.29999999702
+        },
+        {
+          "time": 36.040699,
+          "wall": 36403.89999999851
+        },
+        {
+          "time": 36.314175,
+          "wall": 36677.39999999851
+        },
+        {
+          "time": 36.576509,
+          "wall": 36939.69999999553
+        },
+        {
+          "time": 36.838319,
+          "wall": 37201.60000000149
+        },
+        {
+          "time": 37.103354,
+          "wall": 37466.69999999553
+        },
+        {
+          "time": 37.369006,
+          "wall": 37732.29999999702
+        },
+        {
+          "time": 37.634515,
+          "wall": 37997.79999999702
+        },
+        {
+          "time": 37.900118,
+          "wall": 38263.39999999851
+        },
+        {
+          "time": 38,
+          "wall": 38379.5
         }
       ],
-      "wall_seconds": 31.10180000000447,
+      "wall_seconds": 38.09619999999553,
+      "pageErrors": []
+    },
+    {
+      "edition": "muted",
+      "device": "laptop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "orientation": "landscape",
+      "file": "renders/he-said-ceo-muted.mp4",
+      "sha256": "39781db4a8a788583091d294660d538b317c5deae1c761b3204c2759b13aae91",
+      "method": "Complete normal-speed browser playback from 0 to ended, no seeking; opening, every editorial beat midpoint, gesture peaks, proof before two seconds and ended screenshots. Canonical 16:9 film contains the viewport without cropping.",
+      "target_frames": 1140,
+      "target_seconds": 38,
+      "stamps": [
+        {
+          "shot": "opener",
+          "kind": "editorial beat midpoint",
+          "target": 1.5166666666666666,
+          "actual": 1.522198,
+          "capture_completed_at": 1.613007
+        },
+        {
+          "shot": "manipulation",
+          "kind": "editorial beat midpoint",
+          "target": 5.116666666666666,
+          "actual": 5.125363,
+          "capture_completed_at": 5.236741
+        },
+        {
+          "shot": "attack",
+          "kind": "editorial beat midpoint",
+          "target": 10.05,
+          "actual": 10.057485,
+          "capture_completed_at": 10.160915
+        },
+        {
+          "shot": "accept",
+          "kind": "editorial beat midpoint",
+          "target": 13.783333333333333,
+          "actual": 13.790937,
+          "capture_completed_at": 13.891944
+        },
+        {
+          "shot": "fooled",
+          "kind": "editorial beat midpoint",
+          "target": 15.883333333333333,
+          "actual": 15.892141,
+          "capture_completed_at": 16.019332
+        },
+        {
+          "shot": "walk",
+          "kind": "editorial beat midpoint",
+          "target": 17.85,
+          "actual": 17.856794,
+          "capture_completed_at": 17.955386
+        },
+        {
+          "shot": "gate-refused",
+          "kind": "closed mechanical gate immediately after latch",
+          "target": 19.7,
+          "actual": 19.718061,
+          "capture_completed_at": 19.829046
+        },
+        {
+          "shot": "check",
+          "kind": "editorial beat midpoint",
+          "target": 19.783333333333335,
+          "actual": 19.831843,
+          "capture_completed_at": 19.964737
+        },
+        {
+          "shot": "amount",
+          "kind": "editorial beat midpoint",
+          "target": 21.683333333333334,
+          "actual": 21.701714,
+          "capture_completed_at": 21.814585
+        },
+        {
+          "shot": "no-amount",
+          "kind": "editorial beat midpoint",
+          "target": 22.65,
+          "actual": 22.664136,
+          "capture_completed_at": 22.773102
+        },
+        {
+          "shot": "ceo-gesture",
+          "kind": "CEO appeal at gesture peak",
+          "target": 23.683333333333334,
+          "actual": 23.70289,
+          "capture_completed_at": 23.82006
+        },
+        {
+          "shot": "ceo",
+          "kind": "editorial beat midpoint",
+          "target": 23.7,
+          "actual": 23.822789,
+          "capture_completed_at": 23.950527
+        },
+        {
+          "shot": "still-no",
+          "kind": "editorial beat midpoint",
+          "target": 24.883333333333333,
+          "actual": 24.900968,
+          "capture_completed_at": 25.020903
+        },
+        {
+          "shot": "please",
+          "kind": "editorial beat midpoint",
+          "target": 25.783333333333335,
+          "actual": 25.790676,
+          "capture_completed_at": 25.902915
+        },
+        {
+          "shot": "please-gesture",
+          "kind": "smaller please appeal at gesture peak",
+          "target": 25.866666666666667,
+          "actual": 25.905445,
+          "capture_completed_at": 26.030255
+        },
+        {
+          "shot": "no-please",
+          "kind": "editorial beat midpoint",
+          "target": 26.533333333333335,
+          "actual": 26.537278,
+          "capture_completed_at": 26.645886
+        },
+        {
+          "shot": "scam",
+          "kind": "editorial beat midpoint",
+          "target": 27.916666666666668,
+          "actual": 27.928594,
+          "capture_completed_at": 28.047553
+        },
+        {
+          "shot": "permission",
+          "kind": "editorial beat midpoint",
+          "target": 30.833333333333332,
+          "actual": 30.840736,
+          "capture_completed_at": 30.961059
+        },
+        {
+          "shot": "proof-within-two-seconds",
+          "kind": "actual-test hierarchy before two seconds",
+          "target": 33.800000000000004,
+          "actual": 33.81036,
+          "capture_completed_at": 33.916411
+        },
+        {
+          "shot": "proof",
+          "kind": "editorial beat midpoint",
+          "target": 34.36666666666667,
+          "actual": 34.384106,
+          "capture_completed_at": 34.487307
+        },
+        {
+          "shot": "end",
+          "kind": "editorial beat midpoint",
+          "target": 37.06666666666667,
+          "actual": 37.076564,
+          "capture_completed_at": 37.162052
+        }
+      ],
+      "duration": 38,
+      "currentTime": 38,
+      "ended": true,
+      "playbackRate": 1,
+      "muted": false,
+      "volume": 1,
+      "displayed_size": [
+        1440,
+        810
+      ],
+      "decodedFrames": 1140,
+      "droppedFrames": 0,
+      "mediaErrors": [],
+      "samples": [
+        {
+          "time": 0.18798,
+          "wall": 539.6999999955297
+        },
+        {
+          "time": 0.450106,
+          "wall": 801.5
+        },
+        {
+          "time": 0.714181,
+          "wall": 1065.5
+        },
+        {
+          "time": 0.976366,
+          "wall": 1327.7999999970198
+        },
+        {
+          "time": 1.240842,
+          "wall": 1592.1999999955297
+        },
+        {
+          "time": 1.506481,
+          "wall": 1857.8999999985099
+        },
+        {
+          "time": 1.775607,
+          "wall": 2127
+        },
+        {
+          "time": 2.037685,
+          "wall": 2389
+        },
+        {
+          "time": 2.303365,
+          "wall": 2654.6999999955297
+        },
+        {
+          "time": 2.568981,
+          "wall": 2920.39999999851
+        },
+        {
+          "time": 2.83461,
+          "wall": 3186
+        },
+        {
+          "time": 3.105791,
+          "wall": 3457.1999999955297
+        },
+        {
+          "time": 3.367561,
+          "wall": 3718.89999999851
+        },
+        {
+          "time": 3.631485,
+          "wall": 3982.7999999970198
+        },
+        {
+          "time": 3.897117,
+          "wall": 4248.39999999851
+        },
+        {
+          "time": 4.162743,
+          "wall": 4514.10000000149
+        },
+        {
+          "time": 4.435525,
+          "wall": 4786.89999999851
+        },
+        {
+          "time": 4.698079,
+          "wall": 5049.39999999851
+        },
+        {
+          "time": 4.962464,
+          "wall": 5313.79999999702
+        },
+        {
+          "time": 5.221904,
+          "wall": 5576.60000000149
+        },
+        {
+          "time": 5.490897,
+          "wall": 5842.19999999553
+        },
+        {
+          "time": 5.763831,
+          "wall": 6115.19999999553
+        },
+        {
+          "time": 6.026144,
+          "wall": 6377.5
+        },
+        {
+          "time": 6.288095,
+          "wall": 6639.5
+        },
+        {
+          "time": 6.553364,
+          "wall": 6904.69999999553
+        },
+        {
+          "time": 6.818993,
+          "wall": 7170.39999999851
+        },
+        {
+          "time": 7.084637,
+          "wall": 7436
+        },
+        {
+          "time": 7.356455,
+          "wall": 7707.79999999702
+        },
+        {
+          "time": 7.618389,
+          "wall": 7969.69999999553
+        },
+        {
+          "time": 7.881497,
+          "wall": 8232.79999999702
+        },
+        {
+          "time": 8.147104,
+          "wall": 8498.5
+        },
+        {
+          "time": 8.412709,
+          "wall": 8764.10000000149
+        },
+        {
+          "time": 8.685729,
+          "wall": 9037.19999999553
+        },
+        {
+          "time": 8.947668,
+          "wall": 9299
+        },
+        {
+          "time": 9.209594,
+          "wall": 9561
+        },
+        {
+          "time": 9.475246,
+          "wall": 9826.60000000149
+        },
+        {
+          "time": 9.74084,
+          "wall": 10092.19999999553
+        },
+        {
+          "time": 10.006494,
+          "wall": 10357.79999999702
+        },
+        {
+          "time": 10.272113,
+          "wall": 10623.5
+        },
+        {
+          "time": 10.544491,
+          "wall": 10895.89999999851
+        },
+        {
+          "time": 10.806346,
+          "wall": 11157.79999999702
+        },
+        {
+          "time": 11.068975,
+          "wall": 11420.39999999851
+        },
+        {
+          "time": 11.3346,
+          "wall": 11686
+        },
+        {
+          "time": 11.600246,
+          "wall": 11951.60000000149
+        },
+        {
+          "time": 11.865856,
+          "wall": 12217.19999999553
+        },
+        {
+          "time": 12.137026,
+          "wall": 12488.39999999851
+        },
+        {
+          "time": 12.398782,
+          "wall": 12750.10000000149
+        },
+        {
+          "time": 12.662784,
+          "wall": 13014.19999999553
+        },
+        {
+          "time": 12.928363,
+          "wall": 13279.69999999553
+        },
+        {
+          "time": 13.194057,
+          "wall": 13545.39999999851
+        },
+        {
+          "time": 13.467008,
+          "wall": 13818.39999999851
+        },
+        {
+          "time": 13.729006,
+          "wall": 14080.29999999702
+        },
+        {
+          "time": 13.99394,
+          "wall": 14345.29999999702
+        },
+        {
+          "time": 14.25649,
+          "wall": 14607.89999999851
+        },
+        {
+          "time": 14.524806,
+          "wall": 14876.29999999702
+        },
+        {
+          "time": 14.787785,
+          "wall": 15139.19999999553
+        },
+        {
+          "time": 15.053404,
+          "wall": 15404.79999999702
+        },
+        {
+          "time": 15.323969,
+          "wall": 15675.29999999702
+        },
+        {
+          "time": 15.587219,
+          "wall": 15938.60000000149
+        },
+        {
+          "time": 15.85022,
+          "wall": 16201.60000000149
+        },
+        {
+          "time": 16.121447,
+          "wall": 16472.79999999702
+        },
+        {
+          "time": 16.383668,
+          "wall": 16735
+        },
+        {
+          "time": 16.646904,
+          "wall": 16998.5
+        },
+        {
+          "time": 16.912691,
+          "wall": 17264.10000000149
+        },
+        {
+          "time": 17.178376,
+          "wall": 17529.69999999553
+        },
+        {
+          "time": 17.444005,
+          "wall": 17795.39999999851
+        },
+        {
+          "time": 17.714257,
+          "wall": 18065.69999999553
+        },
+        {
+          "time": 17.976822,
+          "wall": 18328.19999999553
+        },
+        {
+          "time": 18.242289,
+          "wall": 18593.69999999553
+        },
+        {
+          "time": 18.50647,
+          "wall": 18857.79999999702
+        },
+        {
+          "time": 18.772039,
+          "wall": 19123.5
+        },
+        {
+          "time": 19.037613,
+          "wall": 19389.10000000149
+        },
+        {
+          "time": 19.303254,
+          "wall": 19654.60000000149
+        },
+        {
+          "time": 19.574557,
+          "wall": 19925.89999999851
+        },
+        {
+          "time": 19.83459,
+          "wall": 20185.89999999851
+        },
+        {
+          "time": 20.107064,
+          "wall": 20458.39999999851
+        },
+        {
+          "time": 20.368385,
+          "wall": 20720.39999999851
+        },
+        {
+          "time": 20.631445,
+          "wall": 20982.79999999702
+        },
+        {
+          "time": 20.897097,
+          "wall": 21248.5
+        },
+        {
+          "time": 21.162732,
+          "wall": 21514.10000000149
+        },
+        {
+          "time": 21.42839,
+          "wall": 21779.69999999553
+        },
+        {
+          "time": 21.699843,
+          "wall": 22051.29999999702
+        },
+        {
+          "time": 21.959576,
+          "wall": 22311
+        },
+        {
+          "time": 22.225259,
+          "wall": 22576.60000000149
+        },
+        {
+          "time": 22.490878,
+          "wall": 22842.29999999702
+        },
+        {
+          "time": 22.756498,
+          "wall": 23108
+        },
+        {
+          "time": 23.02213,
+          "wall": 23373.60000000149
+        },
+        {
+          "time": 23.287789,
+          "wall": 23639.19999999553
+        },
+        {
+          "time": 23.560131,
+          "wall": 23911.5
+        },
+        {
+          "time": 23.819082,
+          "wall": 24170.39999999851
+        },
+        {
+          "time": 24.092743,
+          "wall": 24444.10000000149
+        },
+        {
+          "time": 24.354671,
+          "wall": 24706
+        },
+        {
+          "time": 24.616969,
+          "wall": 24968.29999999702
+        },
+        {
+          "time": 24.881502,
+          "wall": 25232.79999999702
+        },
+        {
+          "time": 25.147115,
+          "wall": 25498.60000000149
+        },
+        {
+          "time": 25.412765,
+          "wall": 25764.10000000149
+        },
+        {
+          "time": 25.67839,
+          "wall": 26029.79999999702
+        },
+        {
+          "time": 25.943987,
+          "wall": 26295.29999999702
+        },
+        {
+          "time": 26.21276,
+          "wall": 26564.10000000149
+        },
+        {
+          "time": 26.475222,
+          "wall": 26826.60000000149
+        },
+        {
+          "time": 26.747715,
+          "wall": 27099.10000000149
+        },
+        {
+          "time": 27.009889,
+          "wall": 27361.29999999702
+        },
+        {
+          "time": 27.275718,
+          "wall": 27627.10000000149
+        },
+        {
+          "time": 27.541678,
+          "wall": 27893.10000000149
+        },
+        {
+          "time": 27.805662,
+          "wall": 28157
+        },
+        {
+          "time": 28.070651,
+          "wall": 28422
+        },
+        {
+          "time": 28.334585,
+          "wall": 28686
+        },
+        {
+          "time": 28.600266,
+          "wall": 28951.60000000149
+        },
+        {
+          "time": 28.865831,
+          "wall": 29217.19999999553
+        },
+        {
+          "time": 29.139529,
+          "wall": 29490.89999999851
+        },
+        {
+          "time": 29.401614,
+          "wall": 29753
+        },
+        {
+          "time": 29.663537,
+          "wall": 30014.89999999851
+        },
+        {
+          "time": 29.928368,
+          "wall": 30279.79999999702
+        },
+        {
+          "time": 30.193958,
+          "wall": 30545.29999999702
+        },
+        {
+          "time": 30.45956,
+          "wall": 30811
+        },
+        {
+          "time": 30.725243,
+          "wall": 31076.69999999553
+        },
+        {
+          "time": 30.990886,
+          "wall": 31342.29999999702
+        },
+        {
+          "time": 31.256518,
+          "wall": 31607.89999999851
+        },
+        {
+          "time": 31.528972,
+          "wall": 31880.29999999702
+        },
+        {
+          "time": 31.791576,
+          "wall": 32142.89999999851
+        },
+        {
+          "time": 32.053591,
+          "wall": 32404.89999999851
+        },
+        {
+          "time": 32.318987,
+          "wall": 32670.29999999702
+        },
+        {
+          "time": 32.584672,
+          "wall": 32936.10000000149
+        },
+        {
+          "time": 32.85023,
+          "wall": 33201.60000000149
+        },
+        {
+          "time": 33.122852,
+          "wall": 33474.19999999553
+        },
+        {
+          "time": 33.384909,
+          "wall": 33736.29999999702
+        },
+        {
+          "time": 33.647127,
+          "wall": 33998.5
+        },
+        {
+          "time": 33.912771,
+          "wall": 34264.19999999553
+        },
+        {
+          "time": 34.179689,
+          "wall": 34531
+        },
+        {
+          "time": 34.444077,
+          "wall": 34795.5
+        },
+        {
+          "time": 34.712177,
+          "wall": 35063.60000000149
+        },
+        {
+          "time": 34.975174,
+          "wall": 35326.60000000149
+        },
+        {
+          "time": 35.240848,
+          "wall": 35592.19999999553
+        },
+        {
+          "time": 35.50646,
+          "wall": 35857.79999999702
+        },
+        {
+          "time": 35.772122,
+          "wall": 36123.5
+        },
+        {
+          "time": 36.04312,
+          "wall": 36394.60000000149
+        },
+        {
+          "time": 36.306133,
+          "wall": 36657.5
+        },
+        {
+          "time": 36.570224,
+          "wall": 36921.69999999553
+        },
+        {
+          "time": 36.834599,
+          "wall": 37186
+        },
+        {
+          "time": 37.100201,
+          "wall": 37451.60000000149
+        },
+        {
+          "time": 37.365868,
+          "wall": 37717.19999999553
+        },
+        {
+          "time": 37.6315,
+          "wall": 37982.89999999851
+        },
+        {
+          "time": 37.897135,
+          "wall": 38248.5
+        },
+        {
+          "time": 38,
+          "wall": 38367.60000000149
+        }
+      ],
+      "wall_seconds": 38.09939999999851,
       "pageErrors": []
     }
   ],
-  "editorial_assessment": {
-    "wren_gate_phone_legibility": "PASS",
-    "argument_comedy_reads_visually": "PASS",
-    "fiction_disclosure_quiet_but_clear": "PASS",
-    "actual_test_two_second_comprehension": "PASS",
-    "real_receipt_preserved": "PASS",
-    "muted_comprehension": "PASS",
-    "added_visual_information_makes_idea_harder": false,
-    "materially_better_than_f671cb04": true,
-    "reason": "The same earnest appeals are larger and easier to read on a phone; all four existing proof fields now lead the unchanged receipt.",
-    "proof_screenshot_completed_after_transition_seconds": {
-      "narrated": 1.8876006666666676,
-      "muted": 1.8691216666666648
+  "editorial_checks": {
+    "opening_problem_clear": "PASS",
+    "voiceover_continuity_structural": "PASS",
+    "spatial_continuity": "PASS",
+    "dead_space_removed": "PASS",
+    "wren_journey_clear": "PASS",
+    "argument_escalation_works": "PASS",
+    "value_prop_clear": "PASS",
+    "actual_test_readable": "PASS",
+    "feels_like_one_commercial": "PASS",
+    "muted_comprehension": "PASS"
+  },
+  "full_playback_watched": true,
+  "full_playback_definition": "All four normal-speed browser playbacks ran from 0 to ended without seeking. Agent visual assessment uses complete-sequence decoded samples plus current phone/laptop frames and motion strips; no human auditory review occurred.",
+  "voiceover_continuity_scope": "One complete natural-rate source inserted once; script connections, full waveform alignment and sample preservation pass. Subjective conversational delivery, pronunciation and emotional tone remain unverified.",
+  "whole_sequence_visual_review": "review/FULL-SEQUENCE.json",
+  "picture_stream_identical": true,
+  "independent_animatic_review": "ANIMATIC-REVIEW.md",
+  "product_code_changed": false,
+  "protocol_changed": false,
+  "external_api_spend": 0,
+  "proof_readability_samples": [
+    {
+      "edition": "narrated",
+      "device": "phone",
+      "seconds_after_reveal": 1.2147480000000002,
+      "capture_completed_after_reveal": 1.2860919999999965,
+      "primary_fields_readable": true,
+      "receipt_secondary": true
     },
-    "producing_agent_visual_assessment": true,
-    "independent_animatic_visual_assessment": true,
-    "independent_audience_study": false,
-    "human_audio_listening_verified": false,
-    "reviewed_head": "f671cb04d265414cbb48d1a78e4886e43a4fa72e",
-    "review_files": [
-      "review/contact-narrated-0.jpg",
-      "review/contact-narrated-1.jpg",
-      "review/contact-muted-0.jpg",
-      "review/contact-muted-1.jpg",
-      "review/argument-motion.jpg",
-      "ANIMATIC-REVIEW.md"
-    ]
-  }
+    {
+      "edition": "narrated",
+      "device": "laptop",
+      "seconds_after_reveal": 1.2174459999999954,
+      "capture_completed_after_reveal": 1.3216800000000006,
+      "primary_fields_readable": true,
+      "receipt_secondary": true
+    },
+    {
+      "edition": "muted",
+      "device": "phone",
+      "seconds_after_reveal": 1.2136859999999956,
+      "capture_completed_after_reveal": 1.2861830000000012,
+      "primary_fields_readable": true,
+      "receipt_secondary": true
+    },
+    {
+      "edition": "muted",
+      "device": "laptop",
+      "seconds_after_reveal": 1.2103600000000014,
+      "capture_completed_after_reveal": 1.3164109999999951,
+      "primary_fields_readable": true,
+      "receipt_secondary": true
+    }
+  ]
 }

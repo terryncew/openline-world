@@ -1,29 +1,23 @@
 {
   "base_sha": "792372a2cd87a01e0500a229e60114b0a00ac64c",
   "checkpoint": "13e9c60abc45036c81aaa604855250b0e5384273",
-  "replaces_delivery": "a106022d78e848c27dc0871f9622fd65a424908c",
-  "previous_reviewed_head": "f671cb04d265414cbb48d1a78e4886e43a4fa72e",
+  "replaces_delivery": "23f310792aa6931e2918a08f592406f17a894563",
+  "previous_reviewed_head": "23f310792aa6931e2918a08f592406f17a894563",
   "current_delivery": {
-    "seconds": 31,
-    "frames": 930,
-    "fps": 30
+    "seconds": 38,
+    "frames": 1140,
+    "fps": 30,
+    "size": [
+      1920,
+      1080
+    ],
+    "canonical_format": "16:9 horizontal"
   },
-  "timeline_schema": "openline.film.physical-recut.v2",
-  "timeline_sha256": "168637dbc0d37cc29985daf8a348e25726fc5f4ed38cb336304c01f8d2055259",
+  "timeline_schema": "openline.film.director-horizontal.v3",
+  "timeline_sha256": "71c06d8bf7483554d005a1cadf41897b7405f1738025dc0c9581e74779e843a5",
   "presentation": {
-    "argument_push_in": {
-      "in_frame": 242,
-      "out_frame": 272,
-      "scale": 1.62,
-      "target_center": [
-        746,
-        470
-      ],
-      "hold_until_frame": 658,
-      "method": "Continuous eased crop of the approved physical source; same perspective and performance."
-    },
     "fiction_disclosure": {
-      "font_size": 28,
+      "font_size": 30,
       "face": "sans",
       "color": [
         87,
@@ -31,8 +25,8 @@
         86
       ],
       "position": [
-        84,
-        154
+        128,
+        72
       ],
       "background": [
         243,
@@ -40,15 +34,23 @@
         220
       ]
     },
+    "dialogue": {
+      "position": [
+        128,
+        956
+      ],
+      "size": 48,
+      "gap": 16
+    },
     "actual_test_layout": {
       "primary": [
         {
           "text": "ACTUAL OPENLINE TEST",
           "position": [
-            84,
-            154
+            128,
+            110
           ],
-          "size": 43,
+          "size": 48,
           "face": "bold",
           "color": [
             27,
@@ -59,10 +61,10 @@
         {
           "text": "refund.execute:4800",
           "position": [
-            84,
-            340
+            128,
+            280
           ],
-          "size": 58,
+          "size": 66,
           "face": "mono",
           "color": [
             27,
@@ -73,10 +75,10 @@
         {
           "text": "STOPPED",
           "position": [
-            84,
-            455
+            128,
+            390
           ],
-          "size": 110,
+          "size": 126,
           "face": "bold",
           "color": [
             143,
@@ -87,8 +89,8 @@
         {
           "text": "ACTION_OUTSIDE_MANDATE",
           "position": [
-            84,
-            620
+            128,
+            565
           ],
           "size": 50,
           "face": "mono",
@@ -99,42 +101,52 @@
           ]
         }
       ],
+      "receipt_reveal_delay_frames": 9,
       "receipt_label": {
         "text": "Receiver-signed decision",
         "position": [
-          84,
-          815
+          1110,
+          465
         ],
-        "size": 36,
+        "size": 34,
         "face": "sans"
       },
       "receipt_capture": {
         "position": [
-          84,
-          880
+          1110,
+          535
         ],
-        "width": 704,
-        "crop": "Use the unchanged proof-shot crop; scale and position only."
+        "width": 680,
+        "crop": "Use unchanged proof-shot crop; scale and position only."
       },
       "footnotes": [
         {
           "text": "Recorded local test",
           "position": [
-            84,
-            1620
+            128,
+            770
           ],
-          "size": 36,
+          "size": 34,
           "face": "sans"
         },
         {
           "text": "No payment executed",
           "position": [
-            84,
-            1670
+            128,
+            824
           ],
-          "size": 36,
+          "size": 34,
           "face": "sans"
         }
+      ]
+    },
+    "end_card": {
+      "text": "OPENLINE",
+      "size": 126,
+      "face": "serif",
+      "center": [
+        960,
+        540
       ]
     }
   },
@@ -142,18 +154,30 @@
     {
       "quality": "animatic",
       "source_file": "source/physical-animatic.mp4",
-      "source_sha256": "9bb1aba2f2f52ed69d5a79d03f6d4fca656605f3a21bddd6ffbc0ed7965d88e9",
-      "original_capture_timeline_sha256": "c14e8abf1d013c4890e79a54cf4122fa205ed7df8665f534edd54507c2dceb45",
-      "physical_schedule_sha256": "16392ba7218394250068399ad82c0ee4aa35b5ca443ef38b9e09d140df226135",
-      "reused_from_reviewed_head": true
+      "source_sha256": "7860343a43bda791e2f52497bd426dd7910169d6f59167cd67afa30c2d6ede91",
+      "capture_timeline_sha256": "71c06d8bf7483554d005a1cadf41897b7405f1738025dc0c9581e74779e843a5",
+      "physical_schedule_sha256": "ed0ebe4a37ed38d8a0801d86ba2fc53c00a2f6a542c4a78e1d133a7f24f785f7",
+      "size": [
+        960,
+        540
+      ],
+      "frames": 978,
+      "reused_from_reviewed_head": false,
+      "captured_for_director_horizontal_recut": true
     },
     {
       "quality": "final",
       "source_file": "source/physical-final.mp4",
-      "source_sha256": "1a07dcdafb69f00fc38a9a77bec1ea98592426942a1902bf1e08a8fb97254aa8",
-      "original_capture_timeline_sha256": "c14e8abf1d013c4890e79a54cf4122fa205ed7df8665f534edd54507c2dceb45",
-      "physical_schedule_sha256": "16392ba7218394250068399ad82c0ee4aa35b5ca443ef38b9e09d140df226135",
-      "reused_from_reviewed_head": true
+      "source_sha256": "0556b7a4ac524635dd5692721c8020e05092d72b7dfd8b10a7a59adc4070500a",
+      "capture_timeline_sha256": "71c06d8bf7483554d005a1cadf41897b7405f1738025dc0c9581e74779e843a5",
+      "physical_schedule_sha256": "ed0ebe4a37ed38d8a0801d86ba2fc53c00a2f6a542c4a78e1d133a7f24f785f7",
+      "size": [
+        1920,
+        1080
+      ],
+      "frames": 978,
+      "reused_from_reviewed_head": false,
+      "captured_for_director_horizontal_recut": true
     }
   ],
   "production": [
@@ -213,26 +237,26 @@
     },
     {
       "path": "production/he-said-ceo-001/source/PHYSICAL-animatic.json",
-      "bytes": 7107,
-      "sha256": "d2f5d026b07c460c93cb512b295754f0b8cb31134f99e2df87fd81e7603bf3de",
+      "bytes": 39814,
+      "sha256": "78cf2a3d1f870e62c39ba3636310cc0edb86b53bc556c4e836d2ea06f7286383",
       "role": "DRAMATIZATION \u2014 original World meshes, production-only fixed-frame poses"
     },
     {
       "path": "production/he-said-ceo-001/source/PHYSICAL-final.json",
-      "bytes": 7106,
-      "sha256": "f255fcd42c5c9bb0a346bc4cc90fdf99dbcc7c12e171b81c20901f7fdcf89e0d",
+      "bytes": 39813,
+      "sha256": "253bb1e0cbd7fb1a7214fe8bc2f9875229c7ed52fd26881a8bcc89264e2e657f",
       "role": "DRAMATIZATION \u2014 original World meshes, production-only fixed-frame poses"
     },
     {
       "path": "production/he-said-ceo-001/source/physical-animatic.mp4",
-      "bytes": 180663,
-      "sha256": "9bb1aba2f2f52ed69d5a79d03f6d4fca656605f3a21bddd6ffbc0ed7965d88e9",
+      "bytes": 1348139,
+      "sha256": "7860343a43bda791e2f52497bd426dd7910169d6f59167cd67afa30c2d6ede91",
       "role": "DRAMATIZATION \u2014 original World meshes, production-only fixed-frame poses"
     },
     {
       "path": "production/he-said-ceo-001/source/physical-final.mp4",
-      "bytes": 606490,
-      "sha256": "1a07dcdafb69f00fc38a9a77bec1ea98592426942a1902bf1e08a8fb97254aa8",
+      "bytes": 4482788,
+      "sha256": "0556b7a4ac524635dd5692721c8020e05092d72b7dfd8b10a7a59adc4070500a",
       "role": "DRAMATIZATION \u2014 original World meshes, production-only fixed-frame poses"
     },
     {
@@ -285,98 +309,38 @@
     },
     {
       "path": "production/he-said-ceo-001/audio/MIX.json",
-      "bytes": 3715,
-      "sha256": "5266e23a5786cdb580c778cebe38a4796787ddadc02ac0ae43fca8e4c74062cc",
+      "bytes": 10533,
+      "sha256": "57f19dc645a2470b2a6efdcb80db7a414952e231e8e94a2226267cd37edecb79",
       "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
       "path": "production/he-said-ceo-001/audio/VOICE-SOURCES.json",
-      "bytes": 3887,
-      "sha256": "bc79ed370cce72082d3d125d580f7035d870c80014b35c11d95a6a4c0f21e549",
+      "bytes": 71156,
+      "sha256": "5cc2e03a86dee762a846e426378621a1e35e1d8fae1e10866a1b66af62ed8402",
       "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
       "path": "production/he-said-ceo-001/audio/final-mix.flac",
-      "bytes": 2614311,
-      "sha256": "90604d7f9beb724544ccbd0775a4e7a50f9df91a20810ae596fda6b836dd458c",
+      "bytes": 3512738,
+      "sha256": "e7df1ee90d5c0701d4e8aef33a976fb7e411515dde1ea640ffb23abee743b5c4",
       "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
     },
     {
-      "path": "production/he-said-ceo-001/audio/voice-absolutely.wav",
-      "bytes": 62454,
-      "sha256": "54b36ef53cbf1d87106b7268f52db74f9e77455f2f16bb9bcb7a5f78518d9024",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
+      "path": "production/he-said-ceo-001/audio/voice-continuous-unpaced.wav",
+      "bytes": 2653602,
+      "sha256": "e9fc078465b9c1f32964b398b53becba321b7237f9d90d50aee9ec9dfeed9895",
+      "role": "SYNTHETIC NARRATION PROVENANCE \u2014 complete natural model output before zero-PCM refusal pauses; all speech samples retained in current source"
     },
     {
-      "path": "production/he-said-ceo-001/audio/voice-attempt.wav",
-      "bytes": 64506,
-      "sha256": "f1aef69009a2cd6de087838a92753e2b0939bd3301f8dad442cf731cf19ecde0",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-authority.wav",
-      "bytes": 194306,
-      "sha256": "5fd7b6990e62f69ab8646e2d084a3f4e53313993f77befe49ba21fc5fa4f59ee",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-boundary.wav",
-      "bytes": 223460,
-      "sha256": "612f7ae5444e477615aa98ae4703b420509aa1e1cf1a161572bbd74ec3f025f4",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-ceo.wav",
-      "bytes": 109430,
-      "sha256": "40eefc198cc70f58f8aca8a5e578a48c8cabdd782c6298db83788528feedcd71",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-end.wav",
-      "bytes": 298604,
-      "sha256": "13a8cc07995e2b655954be1acf9ad001dc127d1cdd3ac110bb80ffe603921044",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-message.wav",
-      "bytes": 377742,
-      "sha256": "8cf70b2153c7bc00b420073486d88e47ad96b626223c70cf7af80e0fe196ebd1",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-no.wav",
-      "bytes": 43184,
-      "sha256": "ab18ebb09b27c8c6f5fb316a12dcf42f6616c3c02b8b4b0e763b639011415cfc",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-please.wav",
-      "bytes": 71226,
-      "sha256": "9d378d4b79cbced0c7ee968b721eb97e1423ca91066ffc890e5cbd1fdaf5cb5a",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-proof.wav",
-      "bytes": 320354,
-      "sha256": "37f092e9ffc21a6350eaae21210b350fe65a748033b1c8f9ca6fd924ab6bd2f4",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-still-no.wav",
-      "bytes": 56652,
-      "sha256": "4489f5fba0f9f5539b9019c623c37f19f15782aa2f0f84ff5a02f659acc2ba46",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
-    },
-    {
-      "path": "production/he-said-ceo-001/audio/voice-stop.wav",
-      "bytes": 98276,
-      "sha256": "e6e9f2e083dfc4748ce5b346756015274d392fca7279016e3689104abe17937e",
-      "role": "SYNTHETIC PRODUCTION AUDIO \u2014 local neural voice or original latch; no human recording"
+      "path": "production/he-said-ceo-001/audio/voice-continuous.wav",
+      "bytes": 2689602,
+      "sha256": "5f6a95671925f9ee89dbb3c78c379b79845b604f7d5c8d5aa86622f56b4350ab",
+      "role": "CURRENT CONTINUOUS SYNTHETIC NARRATION \u2014 one full-script local neural source at natural speed; no independent sentence takes"
     },
     {
       "path": "production/he-said-ceo-001/tools/capture-physical.mjs",
-      "bytes": 3806,
-      "sha256": "61b34452782300f1a52a0723ac4cdd445831582c1047504b9e08a5af70794736",
+      "bytes": 4223,
+      "sha256": "790099809ec44f5fe3738607f703250a674dade272e64fbe2ca6d219ca9a284f",
       "role": "PRODUCTION-ONLY DRAMATIZATION SOURCE \u2014 no protocol events or API mutations"
     },
     {
@@ -387,8 +351,8 @@
     },
     {
       "path": "production/he-said-ceo-001/tools/contact.py",
-      "bytes": 1163,
-      "sha256": "2791494e166c24b16a4e57b7e6c05c4fb910c50f31adc5c98d00de32f9a18b6c",
+      "bytes": 1400,
+      "sha256": "18cae231636f542063bb18fc7ae0d9ee7c44399dba93345564c3d970a0a5c806",
       "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
@@ -399,14 +363,14 @@
     },
     {
       "path": "production/he-said-ceo-001/tools/inventory.py",
-      "bytes": 6015,
-      "sha256": "63de711fc3f9e2f11e7a1b9dae187aeb8687e3edc02119ddb22608f01b96672d",
+      "bytes": 7405,
+      "sha256": "2b0821b596b961ebffb13acc2682f8b6355e9bc3f297c599ab9f1d7edf1d8bfb",
       "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/mix.py",
-      "bytes": 3443,
-      "sha256": "2383b24290d6453256c62f6b8c8a51ba7973fbbc3f30cdae78db79af3e5c391a",
+      "bytes": 6725,
+      "sha256": "ff62d0d1e15e51c8f0bc39cd74579e55d7619bf7a783f803acc1cc9cf9cb23d0",
       "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
@@ -417,20 +381,20 @@
     },
     {
       "path": "production/he-said-ceo-001/tools/physical.tsx",
-      "bytes": 6658,
-      "sha256": "94d1a2af4a1efc72d2d17f2f32c75922dee8eda29be3dea18f6ed48a2b79ad80",
+      "bytes": 11238,
+      "sha256": "4e784805a1d57dc1d68bfa7afcd75d455c749bbcf7fcda4adea95d3b0c6c5d68",
       "role": "PRODUCTION-ONLY DRAMATIZATION SOURCE \u2014 no protocol events or API mutations"
     },
     {
       "path": "production/he-said-ceo-001/tools/plan.py",
-      "bytes": 6991,
-      "sha256": "fa1f76a0b7b848c93aac7948a81c63f431a9f347024e32d62f437e0269841142",
+      "bytes": 6787,
+      "sha256": "008f0f07e42288ce584a24087bd8781ceed3d82d862e6e8b68f8c1a0cb37464f",
       "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/playback.mjs",
-      "bytes": 7125,
-      "sha256": "bce9b0607910db541e23048f66c1676e619f9826198ad948d42f9c6ef4a502f2",
+      "bytes": 8296,
+      "sha256": "0cdb57f75f6c6f468e034f489da5ff759a31e66ebcd5b0374d8610046539d101",
       "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
@@ -441,8 +405,8 @@
     },
     {
       "path": "production/he-said-ceo-001/tools/render.py",
-      "bytes": 8901,
-      "sha256": "553a0651b819c4b2f69063622e18cafdbfeddc111ae97426767a8e46048a5676",
+      "bytes": 8556,
+      "sha256": "9a13781a096ae3d430423b032ffd60ead68ad631300670490e86c425d81493f6",
       "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
@@ -459,51 +423,1299 @@
     },
     {
       "path": "production/he-said-ceo-001/tools/verify.py",
-      "bytes": 27606,
-      "sha256": "c0e71aaaf54b610649a5d01b235d5db740de26ab9810bdd3a9258208e31a088d",
+      "bytes": 34243,
+      "sha256": "26ed5c58bdec6d97f3d0b76323d07a950502676ba405639a979a73c882c4b36c",
       "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/tools/voice.py",
-      "bytes": 2011,
-      "sha256": "dcd17937e51c57cac8220528adb722f14731a3d74d21f2f0f584a3297b371479",
+      "bytes": 10677,
+      "sha256": "44e621f46bc91d7b5f3a348504e3a319939f13f567bb36a7725a528438a4c9b4",
       "role": "EDITABLE PRODUCTION SOURCE"
     },
     {
       "path": "production/he-said-ceo-001/renders/RENDER.json",
-      "bytes": 19148,
-      "sha256": "b48fe0e852baf4d83185e4556ef9bccc6a6645c04ad30a42067efea703de3fe0",
+      "bytes": 16433,
+      "sha256": "e2c2a79d91cf0173223613cd752a5d5993f1fbbe519909f9c7b83dfb10d25beb",
       "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/renders/he-said-ceo-muted.mp4",
-      "bytes": 1226781,
-      "sha256": "1128f7bff853d955e7a401648c2b811316db08113b7a2fe06edcb06a77a32138",
+      "bytes": 3799573,
+      "sha256": "39781db4a8a788583091d294660d538b317c5deae1c761b3204c2759b13aae91",
       "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/renders/he-said-ceo-narrated.mp4",
-      "bytes": 2077933,
-      "sha256": "b9a7b115b46a76d0df1b760277cb0d33253193d0b24d6c10852548ca7a37cd12",
+      "bytes": 4956439,
+      "sha256": "2044dfc4cccbdf0995dde0124f9a032d12f1e0e04658f06acf99ca9fdb06971d",
       "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/animatic/PLAYBACK.json",
-      "bytes": 14613,
-      "sha256": "36a77e690b961e02971f151dc43ce1e5a2851a93841f0b19f4daa4ddce404ee4",
+      "bytes": 35267,
+      "sha256": "bbdbbb9810fc9f27577f786e26a0834eb5469aeffb9af5a6ad954c9677fa96f5",
       "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/animatic/RENDER.json",
-      "bytes": 19155,
-      "sha256": "fa815516ca194b8743a49f1e95c5d6350981769e6217d35a389bcdb59b38d2d6",
+      "bytes": 16440,
+      "sha256": "070852794368ccf7d53ead925ed9fdfaa98acc0e52181d99178f69f8a8fcd562",
       "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
     },
     {
       "path": "production/he-said-ceo-001/animatic/he-said-ceo-animatic.mp4",
-      "bytes": 1241394,
-      "sha256": "1ba9e2456d203aa1312a03dd942d8ee0b60a79705e28bd6c6bbc287abc775cba",
+      "bytes": 2340801,
+      "sha256": "147bf3cc9c1c8ca7481108b40670c662cf21d9cddb6a396e2b4043a281f9f569",
       "role": "DERIVED COMPOSITE \u2014 dramatization, one real UI proof and brand end card"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/FULL-SEQUENCE.json",
+      "bytes": 1662,
+      "sha256": "f7cde2fa56d2b0db5a4913e06753d1e98be118a1be30bb2b51413e32b848532f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-accept.png",
+      "bytes": 268521,
+      "sha256": "75d8e5821536ff391c4221f37e9ac0b3235f9a6843017ae289a9db1fcacddb1c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-amount.png",
+      "bytes": 309212,
+      "sha256": "2b429ed09f723ea25429662504908ef83a39fe2b628f2b3f50cab37f86acdf94",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-attack.png",
+      "bytes": 239355,
+      "sha256": "ba3c9e42c789ddf32715f19a5f2ff176225efc8de6d05023378f3bacd38589d1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-ceo.png",
+      "bytes": 350275,
+      "sha256": "1465857541ba27396402827f904f7f005e7ef13bab60e9f838644969bc2f4ce6",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-check.png",
+      "bytes": 336323,
+      "sha256": "70d5136a3f51cc9bec3a921c07f04af674a3f9b0feb50428838ff7a3acbf49ea",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-end.png",
+      "bytes": 18230,
+      "sha256": "c126db54e48cfa5a35f57363afde656bc846fcc228f281dab1aca8802a3eadf7",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-fooled.png",
+      "bytes": 247822,
+      "sha256": "af38a368b3165331bdd1bc9bbdd94ca5ac7c2a0bcd497c4ad91afe4e4f52a38d",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-manipulation.png",
+      "bytes": 242682,
+      "sha256": "5b289ff70828472767849e0c30d6aed127524dc8d05cd6f2b6cc4057316aa3d9",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-no-amount.png",
+      "bytes": 312398,
+      "sha256": "a605b78584981bed399de3f443d5e454407bb6c3557f058a3452cbbbffa2f8d0",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-no-please.png",
+      "bytes": 300778,
+      "sha256": "2c3ad7c4182d0016dca02818a241c4f87e2ba764e51fbf9e8d741478418c2cf3",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-opener.png",
+      "bytes": 173206,
+      "sha256": "80954dadfb7ec8b6db4e9bc6c4c621b02e12ba36686f718f3ccd54ec18ebe7c7",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-permission.png",
+      "bytes": 315657,
+      "sha256": "bf87a1144efbb9a5499ff4593c88bd76c662ab5d2e8f88bc8695960dc91c26aa",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-please.png",
+      "bytes": 310348,
+      "sha256": "2f4a1e8004a096f4ae5fc44dabfaafeb9909bb69f7556568e2585caec481ed58",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-proof.png",
+      "bytes": 109902,
+      "sha256": "50f793765fb6a12423e8d7d63c8fc7dd0eaecaf4f452109ade5d16ca0395b9a2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-scam.png",
+      "bytes": 301303,
+      "sha256": "8e9c32554faf9c73c45d57799f4d5df8e6e4152312c7ff6db12ae974679b4f75",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-still-no.png",
+      "bytes": 326118,
+      "sha256": "823c2daf039b8ae0efc8c6828d6c11a5dc17376d2e1958fb534dc775c4202110",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/animatic-walk.png",
+      "bytes": 251959,
+      "sha256": "eca1a7319b9b198058dd3751a41a837260ea4e0f0c7a4c6c80045cecf70f2fb1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/argument-motion.jpg",
+      "bytes": 160437,
+      "sha256": "d3d08cd2f5f52842fe724bf1391a185039444ea788e669bf6346cf397208ac3b",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-0.jpg",
+      "bytes": 54054,
+      "sha256": "edf40af54bb37d7663d9019fbdc01c5b61dbca6ef97ee2e53bf12399c9f03c51",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-1.jpg",
+      "bytes": 60415,
+      "sha256": "dcf01cbe1044c6e1ebee3004030c43b80addae49f7c8cdefc616437f9563c6d0",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-2.jpg",
+      "bytes": 73850,
+      "sha256": "ffcbfb37f7aa4e5aa81f6acd89bc2278bcafd6d4c8c99371c1551710770ff45c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-3.jpg",
+      "bytes": 73238,
+      "sha256": "1b1bd0fce1f43844c017bb0fcc0d90936f95d0ad23c15c99359ee9c1a2bd45ff",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-4.jpg",
+      "bytes": 6183,
+      "sha256": "9748233bfea01a07d7db6c65fd19ddeef5598bbfa9c5a7936d960603ad156a8b",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-laptop-0.jpg",
+      "bytes": 53183,
+      "sha256": "e2c9f72e85092dc5a2787a75f74ea087cd195df9d56f449b05737d35c43c9bbf",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-laptop-1.jpg",
+      "bytes": 59410,
+      "sha256": "c7b7fceed95ff85ffec7bfe8c7698a17800c222e93ddff091b517779c56c2c2f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-laptop-2.jpg",
+      "bytes": 73231,
+      "sha256": "3688189cfd83ac712ef1d48d2e3b050c4b9b21cdd5d2525434971e2124b70d79",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-laptop-3.jpg",
+      "bytes": 72724,
+      "sha256": "f972850991df8b032c6cb390079c86b5592af402c945e312a592fd275d70836c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-animatic-laptop-4.jpg",
+      "bytes": 6132,
+      "sha256": "49457eb627c0f3a1b6b39783edf6523851957e3f75cd4621d2a2c200b8e3279b",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-0.jpg",
+      "bytes": 55756,
+      "sha256": "9e41e1b8d8d367e11090093d03b94d2f5e23cea7c751f02cbcdb485370d74d60",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-1.jpg",
+      "bytes": 61938,
+      "sha256": "1c52691f0d0613609c545f37d9cf31b16ac2f22028035ce2d1a9e16769474594",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-2.jpg",
+      "bytes": 74826,
+      "sha256": "b52191f64bd23c6be54b1bc2a36b828424a30663bdf138460ec6431941cf26b2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-3.jpg",
+      "bytes": 74291,
+      "sha256": "5ad7fbf088bc5affea7a9917e7c8a6138d9d9fb468a4cdbbaa5da7e1448b282c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-4.jpg",
+      "bytes": 6020,
+      "sha256": "3d56d931978dba0c5f38bac8e6e04abb04ed3687325c616bb2a9f69799d35bdb",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-laptop-0.jpg",
+      "bytes": 54092,
+      "sha256": "cdd4291a5ee06f922b19c561faf421f6557226e28a5a75c9ecf622b403c3ab1d",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-laptop-1.jpg",
+      "bytes": 60580,
+      "sha256": "d3be7e3299aa576c50a7c0ffd6f5c3e24397af5a12d1aff4a74f1a2d908a83db",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-laptop-2.jpg",
+      "bytes": 73626,
+      "sha256": "f7e55265932f43331cbd8f97dbe1a0da637de78dea651257264242f0bc31a40d",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-laptop-3.jpg",
+      "bytes": 73319,
+      "sha256": "d1e5f14ba2c259289fb7f07b6771bf0394c7ca85fa3bf56fa1019441fefbacec",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-muted-laptop-4.jpg",
+      "bytes": 6153,
+      "sha256": "e36332031efc6c119a93a338d7902970cfabc52ab19b459bef15db92bf8fa4a3",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-0.jpg",
+      "bytes": 55960,
+      "sha256": "319c3ec069bab5c336058178988b71468d2bcd8ecd192608132cbe9c80eab104",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-1.jpg",
+      "bytes": 61946,
+      "sha256": "9c55cccc3f24fc066333f4e9e34fe16cab0e4472c025f6cbbe6bc802c16a6469",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-2.jpg",
+      "bytes": 74906,
+      "sha256": "8e3ffae40dc331f368ece4ff4b1f2c80c52979f370cee94140fa9d5fe4f6078e",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-3.jpg",
+      "bytes": 74286,
+      "sha256": "11de12055d3cf150746fb39a08f93b926719e3f59a38cef762d39a8e093d5815",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-4.jpg",
+      "bytes": 6020,
+      "sha256": "3d56d931978dba0c5f38bac8e6e04abb04ed3687325c616bb2a9f69799d35bdb",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-laptop-0.jpg",
+      "bytes": 54275,
+      "sha256": "d062a3817de2b43aa2895fbd07e0d02ef10983fec62d6656937e79147d994af3",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-laptop-1.jpg",
+      "bytes": 60503,
+      "sha256": "2f0428ccab50d642cfa9d0b7de80d6751e237835487718ea492c322dd656ee17",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-laptop-2.jpg",
+      "bytes": 73634,
+      "sha256": "3e3f96ea365c1afccad1ebb1ce1a586bf810b67063ddfaa9fbfc3574c2c4a276",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-laptop-3.jpg",
+      "bytes": 73308,
+      "sha256": "54a5a676b5022fa11cfc9aa08e538720fbea5d145498f7d766c1449e87f42118",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/contact-narrated-laptop-4.jpg",
+      "bytes": 6153,
+      "sha256": "e36332031efc6c119a93a338d7902970cfabc52ab19b459bef15db92bf8fa4a3",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-accept.png",
+      "bytes": 208949,
+      "sha256": "49c9e00adff48869807a149b8e9c4c0621ad854f72ad4adcba9c6cf6106b542a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-amount.png",
+      "bytes": 218544,
+      "sha256": "0c6da938864adda04ede66085fed7267cc07b0d369f436e9644448a14363098e",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-attack.png",
+      "bytes": 184687,
+      "sha256": "95a7ff783e5335f75135ebcfc6d4469882f5c317fc086269399ad0f7a7a39310",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-ceo.png",
+      "bytes": 255633,
+      "sha256": "7d7da6247c5d7a4f88ecf590d72c5fb1b367a70a1ce6040a3be2f6175770e952",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-check.png",
+      "bytes": 252366,
+      "sha256": "f24c6e9d9ad5360ce98897872eb88866fed0f5e9e1ba2b8334fafe98a944a3f7",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-end.png",
+      "bytes": 18230,
+      "sha256": "c126db54e48cfa5a35f57363afde656bc846fcc228f281dab1aca8802a3eadf7",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-fooled.png",
+      "bytes": 191166,
+      "sha256": "d0cea6d28cebcd686a253686a94b9d2ef97bc95ffd0479ccc254a18dbdb3d0c9",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-manipulation.png",
+      "bytes": 183546,
+      "sha256": "5fe4dc7d8e25943cbc7ca4ccf525679611381597d4fc5c832393e35419611e79",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-no-amount.png",
+      "bytes": 215336,
+      "sha256": "cd97668340135509ca6c5e318fb0db0fbd74ad19dcfc849ab41f449b31c38c13",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-no-please.png",
+      "bytes": 216234,
+      "sha256": "d0793eb5f2ceb5f6f77a2b21508e44b2cc2a6182307580e51a3949058a585256",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-opener.png",
+      "bytes": 128530,
+      "sha256": "0b524e4d7514cc772658410c14da906085235c750d39522eb526f7f0d72aa935",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-permission.png",
+      "bytes": 231096,
+      "sha256": "972d8c5dbd2a9da042c7a565778dc011913dff48f18414789e4d535bd466ac39",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-please.png",
+      "bytes": 225218,
+      "sha256": "1625cfdc28ea588f6df67f2a2ee9e2c71e262fa4f9df8c6546df71f68de58e26",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-proof.png",
+      "bytes": 109902,
+      "sha256": "50f793765fb6a12423e8d7d63c8fc7dd0eaecaf4f452109ade5d16ca0395b9a2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-scam.png",
+      "bytes": 215767,
+      "sha256": "adc5ad0ba58ec2fc66192004465c2e342370f37227c90c1cb8c8aa7e1fe609d8",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-still-no.png",
+      "bytes": 233037,
+      "sha256": "258ad08d392b9a1ae7f3950b9fce98ed07a09d6a7a66de31bb38f7ea9c64d735",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/final-walk.png",
+      "bytes": 208574,
+      "sha256": "dc10f1a95af8ad7e9dbbd0169fbfd5122ad84e28e1897416456fccf51b906ff1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/full-sequence-0.jpg",
+      "bytes": 216817,
+      "sha256": "6fc27b62e30cb0caa74d0b7ec8243d27fc922c960b8c0aea05eaf0b3d8dbafdb",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/full-sequence-1.jpg",
+      "bytes": 257842,
+      "sha256": "507b0e255c24a82423c992e3e351b696e4bfd0df4a43b4207f162fb9c3df1ec1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/full-sequence-2.jpg",
+      "bytes": 324133,
+      "sha256": "8877b223e6f2e7eb4dc31610652a49ecda865b4c66e7b9c38cb02cb827698136",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/full-sequence-3.jpg",
+      "bytes": 18383,
+      "sha256": "59e4b192883dac04f6c7c1060e5d2d49dc13f16aa4983807f8f76430725803f2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/accept.png",
+      "bytes": 70980,
+      "sha256": "95e685b8541514c0ae2cdc31c9aea24e44a7869d9c11376e893adba3d7b44a92",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/amount.png",
+      "bytes": 79610,
+      "sha256": "f59f8d612992af4206e3500e1d025357c75692b6b28bdcc20d2a33dcafc4b212",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/attack.png",
+      "bytes": 62096,
+      "sha256": "0851164e6e09ac29cf7eaf2fb7bf27e415afe0b2a972196b74f0719c723354e3",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/ceo-gesture.png",
+      "bytes": 98022,
+      "sha256": "3e11b6c711d99f16786296dcc7a1127e5a365137857e05abf6d067672dcaee75",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/ceo.png",
+      "bytes": 97880,
+      "sha256": "79e0725512ee734adfa8c34407647a71c92ce0a3947e0a13c9537cbef5246a6f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/check.png",
+      "bytes": 83334,
+      "sha256": "ff400ea42b69e6df3cb2dd5953be251642b41eab7bb172fab28ff2356620d7d2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/end.png",
+      "bytes": 13511,
+      "sha256": "4134404d37459e207cac37afc73e35cd169d4413aac92d61fc4d6099ae5d191f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/ended.png",
+      "bytes": 13511,
+      "sha256": "4134404d37459e207cac37afc73e35cd169d4413aac92d61fc4d6099ae5d191f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/fooled.png",
+      "bytes": 64860,
+      "sha256": "d74ea603a32bb64dc30414bc27f95a5ee0ef9156d4f98a15218bdb7e2936ccf9",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/gate-refused.png",
+      "bytes": 83199,
+      "sha256": "4c76cc9abcc7a4e38ebf73ebe9b0197a7ae551961a0188ebcf5344cddd0b33ad",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/manipulation.png",
+      "bytes": 61229,
+      "sha256": "e5503c1fb97b5e6657e689197fd20dfba4737bd474ca529a3cbe9721190324e0",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/no-amount.png",
+      "bytes": 86848,
+      "sha256": "e07323229a3a6769f925ec1c5a3eeb0908565f2b4adba87bb617f2eb669cdb11",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/no-please.png",
+      "bytes": 77967,
+      "sha256": "aeae8a049d36ff968ad3c2082f5c651aa18424bb94028b60914a2efe2a94df32",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/opener.png",
+      "bytes": 48041,
+      "sha256": "fb135ca06f10e017c3f63d62323e57393afcaac93bcf2243105e7886979a3e0a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/opening.png",
+      "bytes": 46154,
+      "sha256": "191b60ef3a78de5477d7138f400cdbbab95f3172f02167a7536fd6128eded8e2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/permission.png",
+      "bytes": 93264,
+      "sha256": "a9daa3bcc90324106dd6aaeecae176b073c90ca7f119a73f99368f9ed1d1e413",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/please-gesture.png",
+      "bytes": 82311,
+      "sha256": "be8bbd966cf38390e94a8e7b35a022754432f5ae4f38ed5ccfd3f75d21211cd9",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/please.png",
+      "bytes": 82216,
+      "sha256": "280330c8020be7767889a4c0cdafd4e249e52b57dd829b2a17e68b24a0702502",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/proof-within-two-seconds.png",
+      "bytes": 72028,
+      "sha256": "3a1f54a883636b0799d4bff64ece8348e76ba76c2dd9751403ff492e6188ccc5",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/proof.png",
+      "bytes": 72028,
+      "sha256": "3a1f54a883636b0799d4bff64ece8348e76ba76c2dd9751403ff492e6188ccc5",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/scam.png",
+      "bytes": 77699,
+      "sha256": "cf488239207caec347bcb220203e1030e812a8c402c49bc57b8ea47ecfffd4a2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/still-no.png",
+      "bytes": 89765,
+      "sha256": "4073f32169c9ca84d935c4fdaf04de74fd6ad99d630a91223b181fbb75621b9f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic/walk.png",
+      "bytes": 65894,
+      "sha256": "532aedcf37028447df5621ab51f4e238c7d1c75dd918b8f5a4664f3ef6e9375d",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/accept.png",
+      "bytes": 204951,
+      "sha256": "13dcc9aafec1b3d1ffc33827a3a3929e8ad00dee5bf179260f65021cb65db28c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/amount.png",
+      "bytes": 226152,
+      "sha256": "a0ece1634dd9b25f5c9ae3df7e2e5e2e3748f23120913f6bc86bec1a895bebd2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/attack.png",
+      "bytes": 176836,
+      "sha256": "1c80f69ee786a39e0a1d4cf6b31d133789c6f30b6008bf63569f7e2c9f7a25c6",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/ceo-gesture.png",
+      "bytes": 283582,
+      "sha256": "e0bbdf23b87dbf05d5bbc3875570be625cb30f71117f99892d405a1b7e824ead",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/ceo.png",
+      "bytes": 282197,
+      "sha256": "240fc755fe096d98e13fc56a92b7deaca441f40a69cf0a5f2ac424cf9ca342f6",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/check.png",
+      "bytes": 241733,
+      "sha256": "edb15bc31287016813eaea6a944d820baab053a29a06e00d36048c1434e23440",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/end.png",
+      "bytes": 41236,
+      "sha256": "36ae11c0e43269c737ff04069884d04694389af2dcd77dab3ecb281611ff2e18",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/ended.png",
+      "bytes": 41236,
+      "sha256": "36ae11c0e43269c737ff04069884d04694389af2dcd77dab3ecb281611ff2e18",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/fooled.png",
+      "bytes": 183771,
+      "sha256": "fe4b0568fb048f9b42e51cad3bd236d97311e0758c53a3b5ed9ba0671998cfa2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/gate-refused.png",
+      "bytes": 241401,
+      "sha256": "9356d950d085d67b3ff5cb795b543e3d9829792ad78663c06a80a7adb306a148",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/manipulation.png",
+      "bytes": 173614,
+      "sha256": "61d85d43b5a053672e14f4cdcca0573c031948916f1b2419e2685eabdce4ce04",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/no-amount.png",
+      "bytes": 248529,
+      "sha256": "4a8d571bfdc1d6e936b5919e7e5aae0e1d9f7346794b156f4b216918537093b3",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/no-please.png",
+      "bytes": 222953,
+      "sha256": "69a47a23dfb777607442b1c925c8c24bbd94e4cbb7313443455e1f1a232a5f10",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/opener.png",
+      "bytes": 140603,
+      "sha256": "8d00d929d5e4e3112653c3d9cdee7055cc15d4cd1683e6baeeebe4ecfe89d60d",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/opening.png",
+      "bytes": 132643,
+      "sha256": "f7372b71951148cacf7969bb2f3d7b2c90460959ea7d91970147f0a1559636ad",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/permission.png",
+      "bytes": 271052,
+      "sha256": "9a2ebabb6a8f18aeb5a71a6972cd95980e7f1f4e0594a2e3ff3bb3c10d552235",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/please-gesture.png",
+      "bytes": 237111,
+      "sha256": "edc6a61cb19dedcc9b418f74d4c16161e81d82d075ee83ce6354e3989ce767d6",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/please.png",
+      "bytes": 237887,
+      "sha256": "3e9776ef7a98a6b30b596f26221e969b5823d057cebf9493bb4fac7a4c051c81",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/proof-within-two-seconds.png",
+      "bytes": 229444,
+      "sha256": "27d19566e53891be7dd9741e1bd794515970e530f400e5bce66a0b8367bb3459",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/proof.png",
+      "bytes": 229444,
+      "sha256": "27d19566e53891be7dd9741e1bd794515970e530f400e5bce66a0b8367bb3459",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/scam.png",
+      "bytes": 222240,
+      "sha256": "3131fde36ee7de55b1710a8a42189c4a775a0ed66df0d09fff66850ee1657721",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/still-no.png",
+      "bytes": 256535,
+      "sha256": "e1d8eea2669da56525af962cc4bc62c74e59255829797ed078abce6bc141d004",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-animatic-laptop/walk.png",
+      "bytes": 186426,
+      "sha256": "1b74d6260e20f1bd4d12035ec0d539e2b5f3479a09b480d22386b203b1ff0cfa",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/accept.png",
+      "bytes": 54599,
+      "sha256": "cedaa88e31105faa1e2bddb3a2714b2317e0dd0769af0f0d88e7e6d2d03dfc37",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/amount.png",
+      "bytes": 58741,
+      "sha256": "49d3500e6d1d97b8f28a605e4d0e5e418691b5e88958fc9da098d248e98bd772",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/attack.png",
+      "bytes": 50242,
+      "sha256": "58ff6578b1d974908c105895e456436c7b2cdae19119fff697c1617c241eed9a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/ceo-gesture.png",
+      "bytes": 71387,
+      "sha256": "90b64676bc3f20a54554d3e807d3123c93571b37e6958abc2e79876defbbc802",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/ceo.png",
+      "bytes": 71406,
+      "sha256": "250724638285d92b8223e337d7ad4f59b627b94cb8eed73a76d5b808a99f0cf8",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/check.png",
+      "bytes": 65289,
+      "sha256": "fe3ec2448ba6860ecbfe081f4491e4bf7eacd1a197ccf9f3be3324e42a50f5d3",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/end.png",
+      "bytes": 9105,
+      "sha256": "b11e4221a1bb4a3a57847dd5b14de977d7608cdf3a92799c5bf9ca6ba3dcd969",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/ended.png",
+      "bytes": 9105,
+      "sha256": "b11e4221a1bb4a3a57847dd5b14de977d7608cdf3a92799c5bf9ca6ba3dcd969",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/fooled.png",
+      "bytes": 50218,
+      "sha256": "c8efc69be748a48ddb632aefb723ec61cd965bb4c5f683aabd048ce469036c10",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/gate-refused.png",
+      "bytes": 65188,
+      "sha256": "e814cfd3131c514e951243b8f05e7c4c777c250bdb0a05b087d2e4ec6358bfb1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/manipulation.png",
+      "bytes": 49647,
+      "sha256": "67210eaf4d78e362321bdd5351c62f3de1a00b44524dd12183523db3a572147a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/no-amount.png",
+      "bytes": 61633,
+      "sha256": "e435700891543fe01e5b667b6f5adedbc7a531db3e2c2c2a7b2e4327a2510031",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/no-please.png",
+      "bytes": 60534,
+      "sha256": "f0e4f729a6bb3103643f867d4bd788a2b617c36b7def11c3b0c6c6f39949565d",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/opener.png",
+      "bytes": 40097,
+      "sha256": "b760e1128e8ce935e859adc66fa85a1b6ec83ad32732347cf6dcaf4197b47fbe",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/opening.png",
+      "bytes": 37743,
+      "sha256": "e2e562bcb6215320d9cc37df73d885f2dedc3e192c24ba9e1b8792a4fa16b65b",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/permission.png",
+      "bytes": 70876,
+      "sha256": "8a15d92278f77ca03fa8df9ca9df8638fdf8bc3886659e005aa49c2a05e2ee2b",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/please-gesture.png",
+      "bytes": 64702,
+      "sha256": "a629d48d57f6001dd6a0449077b17a743adb65809d525b68cb0a748ab052f462",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/please.png",
+      "bytes": 64786,
+      "sha256": "098ea61a3c049df183e0f79770e0446a2072f3841b8c2f5cc1c0e8fcea462322",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/proof-within-two-seconds.png",
+      "bytes": 50634,
+      "sha256": "9892405abaf49ba0f83df3349ef5c40965de521ec87a97f112b94afb1e5d8f00",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/proof.png",
+      "bytes": 50634,
+      "sha256": "9892405abaf49ba0f83df3349ef5c40965de521ec87a97f112b94afb1e5d8f00",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/scam.png",
+      "bytes": 60228,
+      "sha256": "afcf57bf767994ea1a371666278f3acbc07681119b32b166f187417ebd6355a9",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/still-no.png",
+      "bytes": 64491,
+      "sha256": "e0ad6d6dfaa6fc86d0dd2be7789a3895bf4ba12f9d7a4d8762ca32e5f9df8a04",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted/walk.png",
+      "bytes": 52171,
+      "sha256": "447d479af124bd19ada833986f9c01b8f1d578381b92349ba316f5d63c6672f1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/accept.png",
+      "bytes": 170822,
+      "sha256": "cd386f2a42a6f51333ee4532f90fd4b72449e62f8196f6740ae65dedd5a5e17a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/amount.png",
+      "bytes": 173713,
+      "sha256": "88e4fc7359125e2a2f0aae3c66dd8a8d8492f5db9f57320ee3451d7b202407c6",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/attack.png",
+      "bytes": 151876,
+      "sha256": "7be340babd8554a67ca6cc52ed2298a27aeac374949c006b39931271fd66d264",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/ceo-gesture.png",
+      "bytes": 217833,
+      "sha256": "11a2f2cdc5705796bf5d01708bef0a7abca5727f58d24baaad0640e27c3d2f7a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/ceo.png",
+      "bytes": 217139,
+      "sha256": "bc81fc9734f91e7174de91375c09e276765d1c80281be6b15e102be6d090caf7",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/check.png",
+      "bytes": 201086,
+      "sha256": "cc87671aba40f3086ac9bc0b2880a6dd6377d889ed440314dcd11a59182c51d7",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/end.png",
+      "bytes": 28080,
+      "sha256": "23e66f0eec00adbb9fe4eea46c4165a208edd163b72d861aecd63add5123737f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/ended.png",
+      "bytes": 28080,
+      "sha256": "23e66f0eec00adbb9fe4eea46c4165a208edd163b72d861aecd63add5123737f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/fooled.png",
+      "bytes": 152561,
+      "sha256": "1aeff7f2b774a31c9562e49ecf4339585b750360f882e326640e7cea2e16909c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/gate-refused.png",
+      "bytes": 200823,
+      "sha256": "2ac13015f7a36d1b52bca4d131fae419c517e164e28d8605ce514517f0b8676e",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/manipulation.png",
+      "bytes": 150112,
+      "sha256": "2fcbccf5e0379773e9d278a877d007de74c341d2fc165a65460fd34244e5ce4d",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/no-amount.png",
+      "bytes": 182053,
+      "sha256": "613f8fb2edf31338179ee42bfd19de08ad7035922de728b977384b07caa43543",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/no-please.png",
+      "bytes": 175741,
+      "sha256": "5abe3dcc34e38bc7ec5a71a53135bf6deb87ef74d701882e61e2f00fbca5c794",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/opener.png",
+      "bytes": 114848,
+      "sha256": "a46ea57606f001c5d6234eae64391e690298dca849a3f2c3f3dbbc9b777f940f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/opening.png",
+      "bytes": 108189,
+      "sha256": "23f821d3ccac57196903c48b2162680bab66cc10c71c3d7e51ddb8b0ccbea0c5",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/permission.png",
+      "bytes": 211974,
+      "sha256": "3e70ed01d10dffadd7627489845980b944201cb59f2c723d89d88a0030f31c4a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/please-gesture.png",
+      "bytes": 189863,
+      "sha256": "e04a569c5f422d4c249820e58d1225889b1c0de3a5f808bc13762ac2b7cfe7c1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/please.png",
+      "bytes": 189487,
+      "sha256": "3a9848b6b7e952ae631d1d07725cda567f3d0b1812f024d5818e2475a3c8da7c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/proof-within-two-seconds.png",
+      "bytes": 166751,
+      "sha256": "c09f5d1b6b02ed268c222d7a06809746a6bda45e42bd60cd4d591ebde96d5250",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/proof.png",
+      "bytes": 166751,
+      "sha256": "c09f5d1b6b02ed268c222d7a06809746a6bda45e42bd60cd4d591ebde96d5250",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/scam.png",
+      "bytes": 174763,
+      "sha256": "4c0d1c5fc47b6c55e9f3e197b38922e4547aa750185e78b681d4d5436b3f8d6b",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/still-no.png",
+      "bytes": 193385,
+      "sha256": "4292ba1916fdbda602a3eaedec5c99972f02f27fe918d8a009aa695dcb50cb7d",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-muted-laptop/walk.png",
+      "bytes": 161520,
+      "sha256": "233ab0406e5561cf3ba249e2840568c8351a55a24f79bb0fba159d851236df6a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/accept.png",
+      "bytes": 54636,
+      "sha256": "1ee7fa6e1977270b679ac150f5abbb20400d0f02a0972859dccc15e763f1553c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/amount.png",
+      "bytes": 58741,
+      "sha256": "49d3500e6d1d97b8f28a605e4d0e5e418691b5e88958fc9da098d248e98bd772",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/attack.png",
+      "bytes": 50236,
+      "sha256": "5b1fa3bf64dcaab1060b74bf0dde04164dc37b2c58c6b37923d68120f1e7d108",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/ceo-gesture.png",
+      "bytes": 71628,
+      "sha256": "b103607d199ec11e9fa9bb7ee4e846ac1e3b6bc188836779e0f282f49e3d5ae2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/ceo.png",
+      "bytes": 71456,
+      "sha256": "7db34d7916e1eb8dcdcf359feedf346d63d3690cf3f8f12b7189ec943d4a4695",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/check.png",
+      "bytes": 65264,
+      "sha256": "b5d67d8a7c91ceddd8bd89c11e7feeb8c3822897ef32c59b6d230281fc8e59b6",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/end.png",
+      "bytes": 9105,
+      "sha256": "b11e4221a1bb4a3a57847dd5b14de977d7608cdf3a92799c5bf9ca6ba3dcd969",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/ended.png",
+      "bytes": 9105,
+      "sha256": "b11e4221a1bb4a3a57847dd5b14de977d7608cdf3a92799c5bf9ca6ba3dcd969",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/fooled.png",
+      "bytes": 50218,
+      "sha256": "c8efc69be748a48ddb632aefb723ec61cd965bb4c5f683aabd048ce469036c10",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/gate-refused.png",
+      "bytes": 65188,
+      "sha256": "e814cfd3131c514e951243b8f05e7c4c777c250bdb0a05b087d2e4ec6358bfb1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/manipulation.png",
+      "bytes": 49467,
+      "sha256": "a948005601f5aa737f21600a944b09afc9ba8942485e24f871ea9fa212f84603",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/no-amount.png",
+      "bytes": 61633,
+      "sha256": "e435700891543fe01e5b667b6f5adedbc7a531db3e2c2c2a7b2e4327a2510031",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/no-please.png",
+      "bytes": 60600,
+      "sha256": "beb02fcbc2d1b17d331d85c7d0a42adc7b167cbbb08373ff1f2fa1aeb4e0551b",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/opener.png",
+      "bytes": 40666,
+      "sha256": "acb3324567a1269a908f7451cc8a9bb2d72bb885b00e089ce8471e7c5cf711c2",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/opening.png",
+      "bytes": 37743,
+      "sha256": "e2e562bcb6215320d9cc37df73d885f2dedc3e192c24ba9e1b8792a4fa16b65b",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/permission.png",
+      "bytes": 70876,
+      "sha256": "8a15d92278f77ca03fa8df9ca9df8638fdf8bc3886659e005aa49c2a05e2ee2b",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/please-gesture.png",
+      "bytes": 64640,
+      "sha256": "c75fd236f3bb5c9af593b3286538c448554317c07de068df63e118747a85652f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/please.png",
+      "bytes": 64786,
+      "sha256": "098ea61a3c049df183e0f79770e0446a2072f3841b8c2f5cc1c0e8fcea462322",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/proof-within-two-seconds.png",
+      "bytes": 50634,
+      "sha256": "9892405abaf49ba0f83df3349ef5c40965de521ec87a97f112b94afb1e5d8f00",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/proof.png",
+      "bytes": 50634,
+      "sha256": "9892405abaf49ba0f83df3349ef5c40965de521ec87a97f112b94afb1e5d8f00",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/scam.png",
+      "bytes": 60223,
+      "sha256": "4dd8fedd843dfcf856f9ffad68a5d0007820f23d54a2c93f12c553400ad43bbc",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/still-no.png",
+      "bytes": 64491,
+      "sha256": "e0ad6d6dfaa6fc86d0dd2be7789a3895bf4ba12f9d7a4d8762ca32e5f9df8a04",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated/walk.png",
+      "bytes": 52171,
+      "sha256": "447d479af124bd19ada833986f9c01b8f1d578381b92349ba316f5d63c6672f1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/accept.png",
+      "bytes": 170764,
+      "sha256": "153eb7fbcb66205d6f10d0f73dc71d86d0da24739a6f721ed38170109f1461a3",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/amount.png",
+      "bytes": 173713,
+      "sha256": "88e4fc7359125e2a2f0aae3c66dd8a8d8492f5db9f57320ee3451d7b202407c6",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/attack.png",
+      "bytes": 152284,
+      "sha256": "fe7953809a14c8519e2b285ff3951942cffc7310a7fdfbabb12ab3bc071e4704",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/ceo-gesture.png",
+      "bytes": 217833,
+      "sha256": "11a2f2cdc5705796bf5d01708bef0a7abca5727f58d24baaad0640e27c3d2f7a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/ceo.png",
+      "bytes": 217139,
+      "sha256": "bc81fc9734f91e7174de91375c09e276765d1c80281be6b15e102be6d090caf7",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/check.png",
+      "bytes": 201086,
+      "sha256": "cc87671aba40f3086ac9bc0b2880a6dd6377d889ed440314dcd11a59182c51d7",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/end.png",
+      "bytes": 28080,
+      "sha256": "23e66f0eec00adbb9fe4eea46c4165a208edd163b72d861aecd63add5123737f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/ended.png",
+      "bytes": 28080,
+      "sha256": "23e66f0eec00adbb9fe4eea46c4165a208edd163b72d861aecd63add5123737f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/fooled.png",
+      "bytes": 152561,
+      "sha256": "1aeff7f2b774a31c9562e49ecf4339585b750360f882e326640e7cea2e16909c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/gate-refused.png",
+      "bytes": 200823,
+      "sha256": "2ac13015f7a36d1b52bca4d131fae419c517e164e28d8605ce514517f0b8676e",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/manipulation.png",
+      "bytes": 150112,
+      "sha256": "2fcbccf5e0379773e9d278a877d007de74c341d2fc165a65460fd34244e5ce4d",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/no-amount.png",
+      "bytes": 182053,
+      "sha256": "613f8fb2edf31338179ee42bfd19de08ad7035922de728b977384b07caa43543",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/no-please.png",
+      "bytes": 175741,
+      "sha256": "5abe3dcc34e38bc7ec5a71a53135bf6deb87ef74d701882e61e2f00fbca5c794",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/opener.png",
+      "bytes": 117895,
+      "sha256": "3ca46486ef1e66f4ab4cacc931089e4ee274e46cb8dad7f2824f73dba37538df",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/opening.png",
+      "bytes": 108189,
+      "sha256": "23f821d3ccac57196903c48b2162680bab66cc10c71c3d7e51ddb8b0ccbea0c5",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/permission.png",
+      "bytes": 211974,
+      "sha256": "3e70ed01d10dffadd7627489845980b944201cb59f2c723d89d88a0030f31c4a",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/please-gesture.png",
+      "bytes": 189863,
+      "sha256": "e04a569c5f422d4c249820e58d1225889b1c0de3a5f808bc13762ac2b7cfe7c1",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/please.png",
+      "bytes": 189487,
+      "sha256": "3a9848b6b7e952ae631d1d07725cda567f3d0b1812f024d5818e2475a3c8da7c",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/proof-within-two-seconds.png",
+      "bytes": 166751,
+      "sha256": "c09f5d1b6b02ed268c222d7a06809746a6bda45e42bd60cd4d591ebde96d5250",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/proof.png",
+      "bytes": 166751,
+      "sha256": "c09f5d1b6b02ed268c222d7a06809746a6bda45e42bd60cd4d591ebde96d5250",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/scam.png",
+      "bytes": 174768,
+      "sha256": "dc79afd94cb21570eefa0c0dc4c9037c94ed409a46a5a11df64811c8536f286f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/still-no.png",
+      "bytes": 193174,
+      "sha256": "26cd424c1b09c54a1134976b084602a433dd22288812a7c9401dd00ded55410f",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
+    },
+    {
+      "path": "production/he-said-ceo-001/review/playback-narrated-laptop/walk.png",
+      "bytes": 159472,
+      "sha256": "0e303fcd49c415fbe1bf0df5ac8d1ff9bb2e706d7b893b941a20660329f842a5",
+      "role": "DERIVED EDITORIAL REVIEW \u2014 current composite frames, contact sheets, motion strips or full-sequence provenance; not new test evidence"
     },
     {
       "path": "production/he-said-ceo-001/FACTS.json",
@@ -513,86 +1725,92 @@
     },
     {
       "path": "production/he-said-ceo-001/TIMELINE.json",
-      "bytes": 9229,
-      "sha256": "168637dbc0d37cc29985daf8a348e25726fc5f4ed38cb336304c01f8d2055259",
+      "bytes": 16027,
+      "sha256": "71c06d8bf7483554d005a1cadf41897b7405f1738025dc0c9581e74779e843a5",
+      "role": "PRODUCTION / PROOF MANIFEST"
+    },
+    {
+      "path": "production/he-said-ceo-001/NARRATION.json",
+      "bytes": 4197,
+      "sha256": "a3145505fd7cf8cd3030bdef64fc1ab354bedb3e106fb6a4518f5014673635eb",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/CLAIM-SHOT-MAP.json",
-      "bytes": 13270,
-      "sha256": "89567c3eb4235e04e1290277b43c20200b48cc2b3ca851898984b338488cfdd7",
+      "bytes": 16796,
+      "sha256": "0bd54d156aa00d301ac313c155d10552cf702ef995ebafaa620aa485dd2c255b",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/CAPTIONS.json",
-      "bytes": 3319,
-      "sha256": "5ede27b1b05fe60d8c5a3693414868c4df0bbddb69844aebd613cd1a506e32b7",
+      "bytes": 8477,
+      "sha256": "cb64d308e8db267f55dc1d6b71e77b4f444364b3e0d9006e75e2dfe79da1727f",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/captions.srt",
-      "bytes": 830,
-      "sha256": "0caa91d2fa1cbcee48223e46fb59dc372d7d65e6e7eba9df05423bf005aeac61",
+      "bytes": 1256,
+      "sha256": "24f5aca62fb6e89ede4fb70a855f8805f0d27d5ef333e49ecccf7ff1e1ade2aa",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/captions.vtt",
-      "bytes": 811,
-      "sha256": "293f5a866bdfd0c6f09c719ba6bf2a54e4f72a38e9fca796dbd974597bf2e00e",
+      "bytes": 1222,
+      "sha256": "e4a32f8c4080f29056a3159b6d370091d4bb0b7811d9b9bb880c89ecab6a10ed",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/poster.png",
-      "bytes": 310366,
-      "sha256": "b6d7d7d9f93099a0ad381b53a22ac9c57d72d726aeced3e092f0b5638f832a11",
+      "bytes": 236081,
+      "sha256": "49ebf82116a2cc779409c18eb9b218d1a4bdb3f7b495f8a7509d2246afcb967a",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/README.md",
-      "bytes": 5802,
-      "sha256": "271a6ec785e175e4b67d73e7f6f7bbaa87e32891cf2b6f8cec729a5d8cb3af7b",
+      "bytes": 6720,
+      "sha256": "1f0153ba8a61a353c63155cb8bdcffac64d8f4d3827cb3588763b808bf54853b",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/AUDIT.md",
-      "bytes": 7525,
-      "sha256": "5c74d620ca2b4625bc813f8ea4e075e44862c78e5897a4bf6a79a6d20af3e02b",
+      "bytes": 9329,
+      "sha256": "269a84bc919edd0b0f3161961110b5c6c10fb83aead44d3717ec044da4a0f24a",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/SCREENPLAY.md",
-      "bytes": 3988,
-      "sha256": "f327a2233e04bb8d30a797f8b4399841f33ccd4f7923fb97237a80bd1d360deb",
+      "bytes": 5822,
+      "sha256": "78f801ede56f6d4f4adba3a358c9720ad6c9a9d0c1fed14aeb31383e811eeef0",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/DELIVERY.md",
-      "bytes": 10438,
-      "sha256": "d817af5b2e2c73401135e8b396f84a13fb6528ad9258488225b7c5ea32a6a33e",
+      "bytes": 11622,
+      "sha256": "a3cfeaf8c46cb57439e7f8f9b0e31a733d9a22ad0b39867d472a92b0b5b568fe",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/WATCH.html",
-      "bytes": 1369,
-      "sha256": "5169b9f01322a0e9115f361099a42778a32ede673900e79d19aa65eac3c1f563",
+      "bytes": 1410,
+      "sha256": "8b0c042497997e19838fe7f44ea1e996ba1f28c1aed0cfb7789b389994da2ba8",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/ANIMATIC-REVIEW.md",
-      "bytes": 4020,
-      "sha256": "68db6093408c4bb25439b7d40c62e159c5bac20fc84d84f7f4bb6664232f965d",
+      "bytes": 5064,
+      "sha256": "e59db3167bf35e2903fa2a999a1599916d98319c97b491c464dfc3eab3d4de60",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/TECHNICAL-QA.json",
-      "bytes": 14133,
-      "sha256": "fd31b2aa181620d799f7785081242da0463786ca36b4dbe1da6296ae3669f50d",
+      "bytes": 17214,
+      "sha256": "41817cac63ff7ebb6d48513a850e0e55219a01ad8ec80d1155abde4fe35858e3",
       "role": "PRODUCTION / PROOF MANIFEST"
     },
     {
       "path": "production/he-said-ceo-001/PLAYBACK-QA.json",
-      "bytes": 28953,
-      "sha256": "43956784cfd9f7e7c089d45386867faf80e2a99dc525104078e699a0b8a8c7c7",
+      "bytes": 72438,
+      "sha256": "204857d1804bc66d8eb6927475c47a886430ca9c4826628ce5f88a118952f6a4",
       "role": "PRODUCTION / PROOF MANIFEST"
     }
   ],
@@ -748,9 +1966,9 @@
       "role": "UNCHANGED PRODUCT / PREVIOUS PRODUCTION REFERENCE"
     }
   ],
-  "classification_policy": "Physical scene is DRAMATIZATION. Only the preserved STOPPED UI panel is REAL CAPTURE in the current picture. ALLOWED comparison is underlying evidence only.",
+  "classification_policy": "Native horizontal physical scene is fresh DRAMATIZATION using unchanged original World meshes. Only the preserved STOPPED UI panel is REAL CAPTURE in the current picture. ALLOWED comparison is underlying evidence only. The one full-script synthetic narration and complete unpaced source are production audio provenance, not actual-test observations.",
   "private_keys_exported": false,
   "paid_assets": false,
   "external_api_spend": 0,
-  "voice_disclosure": "Local neural voice at natural speed 1.0; full takes included. No human recording; human listening unverified."
+  "voice_disclosure": "One full-script local neural take at natural speed 1.0; unpaced source included. Three existing quiet intervals receive zero PCM only, with all original speech samples retained. No independent sentence takes, speech clipping or time compression. No human recording; human listening unverified."
 }
