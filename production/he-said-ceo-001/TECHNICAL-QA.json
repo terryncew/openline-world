@@ -43,7 +43,7 @@
     {
       "edition": "narrated",
       "file": "renders/he-said-ceo-narrated.mp4",
-      "sha256": "12ddadfc8f9aa6b708e490028f77ec05e1605ccde65820d5e3885356c48d3fd2",
+      "sha256": "b9a7b115b46a76d0df1b760277cb0d33253193d0b24d6c10852548ca7a37cd12",
       "full_decode": true,
       "video_codec": "h264",
       "audio_codec": "aac",
@@ -131,6 +131,8 @@
           "not_truncated": true
         }
       ],
+      "approved_aac_stream_unchanged": true,
+      "aac_stream_sha256": "4f9461577c9a70e367f01eab601661c9a8b26162084847205596406069c0191a",
       "loudness": {
         "input_i": "-16.14",
         "input_tp": "-2.00",
@@ -171,7 +173,7 @@
     {
       "edition": "muted",
       "file": "renders/he-said-ceo-muted.mp4",
-      "sha256": "36b94eb8902f72a3666499d244dd14a7353d2c83a8e7542926a9d3608c449f75",
+      "sha256": "1128f7bff853d955e7a401648c2b811316db08113b7a2fe06edcb06a77a32138",
       "full_decode": true,
       "video_codec": "h264",
       "audio_codec": "aac",
@@ -186,6 +188,8 @@
       "video_duration": "31.000000",
       "audio_duration": "31.000000",
       "cue_alignment": [],
+      "approved_aac_stream_unchanged": true,
+      "aac_stream_sha256": "82dfa98429089482e0b227da2f6faf1f95caa197b6cff3f1b4c5b1d933de37b3",
       "loudness": {
         "silent": true
       },
@@ -222,10 +226,23 @@
   "physical_capture_frame_count": 658,
   "caption_sources_match_timeline_and_voice": true,
   "same_video_bitstream": true,
-  "video_bitstream_sha256": "2f35e3a1f9ec4ef0d072b20212b36c194bfefe3607d0a0966dee8a55fc939a15",
+  "video_bitstream_sha256": "1c13882cc04a096b1ce54ee63e95507e1543a119c3794fdd73b60c73415687b7",
   "opening_frame_changes": true,
   "safe_geometry_pass": true,
-  "information_label_floor_at_360px": 10.67,
+  "information_label_floor_at_360px": 12.0,
+  "fiction_disclosure_size_at_360px": 9.33,
+  "fiction_disclosure_contrast_ratio": 5.811,
+  "proof_primary_labels_in_requested_order": true,
+  "actual_receipt_capture_source_and_crop_unchanged": true,
+  "actual_receipt_capture_secondary_size": [
+    704,
+    375
+  ],
+  "argument_push_in_after_gate_stop": true,
+  "argument_push_in_complete_before_dialogue": true,
+  "argument_push_in_held_through_proof_transition": true,
+  "argument_push_in_linear_magnification": 1.62,
+  "fresh_animatic_reviewed_before_final": true,
   "end_card_hold_seconds": 4.466666666666667,
   "claim_map_complete": true,
   "product_code_changed": false,
@@ -233,8 +250,153 @@
   "git_diff_check": true,
   "external_api_spend": 0,
   "human_listening_verified": false,
+  "reviewed_head": "f671cb04d265414cbb48d1a78e4886e43a4fa72e",
+  "approved_timeline_content_unchanged": true,
+  "approved_voice_mix_captions_and_physical_source_unchanged": [
+    {
+      "file": "audio/MIX.json",
+      "sha256": "5266e23a5786cdb580c778cebe38a4796787ddadc02ac0ae43fca8e4c74062cc"
+    },
+    {
+      "file": "audio/VOICE-SOURCES.json",
+      "sha256": "bc79ed370cce72082d3d125d580f7035d870c80014b35c11d95a6a4c0f21e549"
+    },
+    {
+      "file": "audio/final-mix.flac",
+      "sha256": "90604d7f9beb724544ccbd0775a4e7a50f9df91a20810ae596fda6b836dd458c"
+    },
+    {
+      "file": "audio/voice-absolutely.wav",
+      "sha256": "54b36ef53cbf1d87106b7268f52db74f9e77455f2f16bb9bcb7a5f78518d9024"
+    },
+    {
+      "file": "audio/voice-attempt.wav",
+      "sha256": "f1aef69009a2cd6de087838a92753e2b0939bd3301f8dad442cf731cf19ecde0"
+    },
+    {
+      "file": "audio/voice-authority.wav",
+      "sha256": "5fd7b6990e62f69ab8646e2d084a3f4e53313993f77befe49ba21fc5fa4f59ee"
+    },
+    {
+      "file": "audio/voice-boundary.wav",
+      "sha256": "612f7ae5444e477615aa98ae4703b420509aa1e1cf1a161572bbd74ec3f025f4"
+    },
+    {
+      "file": "audio/voice-ceo.wav",
+      "sha256": "40eefc198cc70f58f8aca8a5e578a48c8cabdd782c6298db83788528feedcd71"
+    },
+    {
+      "file": "audio/voice-end.wav",
+      "sha256": "13a8cc07995e2b655954be1acf9ad001dc127d1cdd3ac110bb80ffe603921044"
+    },
+    {
+      "file": "audio/voice-message.wav",
+      "sha256": "8cf70b2153c7bc00b420073486d88e47ad96b626223c70cf7af80e0fe196ebd1"
+    },
+    {
+      "file": "audio/voice-no.wav",
+      "sha256": "ab18ebb09b27c8c6f5fb316a12dcf42f6616c3c02b8b4b0e763b639011415cfc"
+    },
+    {
+      "file": "audio/voice-please.wav",
+      "sha256": "9d378d4b79cbced0c7ee968b721eb97e1423ca91066ffc890e5cbd1fdaf5cb5a"
+    },
+    {
+      "file": "audio/voice-proof.wav",
+      "sha256": "37f092e9ffc21a6350eaae21210b350fe65a748033b1c8f9ca6fd924ab6bd2f4"
+    },
+    {
+      "file": "audio/voice-still-no.wav",
+      "sha256": "4489f5fba0f9f5539b9019c623c37f19f15782aa2f0f84ff5a02f659acc2ba46"
+    },
+    {
+      "file": "audio/voice-stop.wav",
+      "sha256": "e6e9f2e083dfc4748ce5b346756015274d392fca7279016e3689104abe17937e"
+    },
+    {
+      "file": "source/PHYSICAL-animatic.json",
+      "sha256": "d2f5d026b07c460c93cb512b295754f0b8cb31134f99e2df87fd81e7603bf3de"
+    },
+    {
+      "file": "source/PHYSICAL-final.json",
+      "sha256": "f255fcd42c5c9bb0a346bc4cc90fdf99dbcc7c12e171b81c20901f7fdcf89e0d"
+    },
+    {
+      "file": "source/physical-animatic.mp4",
+      "sha256": "9bb1aba2f2f52ed69d5a79d03f6d4fca656605f3a21bddd6ffbc0ed7965d88e9"
+    },
+    {
+      "file": "source/physical-final.mp4",
+      "sha256": "1a07dcdafb69f00fc38a9a77bec1ea98592426942a1902bf1e08a8fb97254aa8"
+    },
+    {
+      "file": "source/proposal-row.png",
+      "sha256": "a23f3b16b778732684473d5e43d87593f43d91b2c72948141cc6cb8bd0d573cd"
+    },
+    {
+      "file": "source/receipt-allowed-detail.png",
+      "sha256": "2bd62df5b743d6ccbd5f4d306dbfe0bc190ba7b22c16b4e9ca7b23f87dc3ac31"
+    },
+    {
+      "file": "source/receipt-allowed-full-ui.png",
+      "sha256": "ea44b3a21f06ec640449ae985c46939b2f3be5624aa363fb1c091f357988e6cc"
+    },
+    {
+      "file": "source/receipt-allowed-reason.png",
+      "sha256": "b1152c798cf2e4249718f8cc2a507ade5ed150e40b11c79cf7747d78df2eab82"
+    },
+    {
+      "file": "source/receipt-list.png",
+      "sha256": "b589057071639f125262e035797c7682c335d1db78681ff140ad469783b7fe01"
+    },
+    {
+      "file": "source/receipt-stopped-detail.png",
+      "sha256": "186a6d9e4381a01ffa18da4cdd76a358c525eab5c95d4df0d041ea70aea7d379"
+    },
+    {
+      "file": "source/receipt-stopped-full-ui.png",
+      "sha256": "fadd3db639ae3b81faa1132b3a9d216571281acebc1b3a36bfa4483a8f7d1eca"
+    },
+    {
+      "file": "source/receipt-stopped-reason.png",
+      "sha256": "13ddefa9d70b1beff9d6f8f81885f65ffe04f8857cd6f406598fbc92ffd51670"
+    },
+    {
+      "file": "CAPTIONS.json",
+      "sha256": "5ede27b1b05fe60d8c5a3693414868c4df0bbddb69844aebd613cd1a506e32b7"
+    },
+    {
+      "file": "captions.srt",
+      "sha256": "0caa91d2fa1cbcee48223e46fb59dc372d7d65e6e7eba9df05423bf005aeac61"
+    },
+    {
+      "file": "captions.vtt",
+      "sha256": "293f5a866bdfd0c6f09c719ba6bf2a54e4f72a38e9fca796dbd974597bf2e00e"
+    },
+    {
+      "file": "tools/physical.html",
+      "sha256": "13f7244f87c7e720266fa43c85a93d0387b78011c5741bec2656f034f4b0526d"
+    },
+    {
+      "file": "tools/physical.tsx",
+      "sha256": "94d1a2af4a1efc72d2d17f2f32c75922dee8eda29be3dea18f6ed48a2b79ad80"
+    },
+    {
+      "file": "tools/capture-physical.mjs",
+      "sha256": "61b34452782300f1a52a0723ac4cdd445831582c1047504b9e08a5af70794736"
+    },
+    {
+      "file": "tools/voice.py",
+      "sha256": "dcd17937e51c57cac8220528adb722f14731a3d74d21f2f0f584a3297b371479"
+    },
+    {
+      "file": "tools/mix.py",
+      "sha256": "2383b24290d6453256c62f6b8c8a51ba7973fbbc3f30cdae78db79af3e5c391a"
+    }
+  ],
+  "approved_pauses_and_sfx_unchanged": true,
   "active_motion_no_unintended_stalls": true,
-  "active_motion_method": "Every RGB frame decoded from the physical source at270\u00d7270; exact pixel hashes during pickup, walk, shutter, CEO and please. Static reading holds and closed-gate pauses are excluded.",
+  "active_motion_method": "Every RGB frame decoded from the physical source at 270\u00d7270; exact pixel hashes during pickup, walk, shutter, CEO and please. Static reading holds and closed-gate pauses are excluded.",
   "active_motion_source_sha256": "1a07dcdafb69f00fc38a9a77bec1ea98592426942a1902bf1e08a8fb97254aa8",
   "active_motion_stall_limits": {
     "minimum_unique_fraction": 0.5,

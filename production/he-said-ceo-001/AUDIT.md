@@ -1,4 +1,4 @@
-# Recovery and physical recut audit
+# Recovery, physical recut and visual-pass audit
 
 The existing workspace survived. Before modifying or generating anything,
 the recovery inspection found branch `film/he-said-ceo-001`, HEAD
@@ -18,6 +18,15 @@ The subsequent 43-second editorial commercial was delivered at
 physical recut replaces that delivery on the same branch. Recovery history and
 frozen evidence remain intact. Publication remains on hold; no merge, master
 rebase, product modification or protocol change is part of the recut.
+
+The final visual-comedy pass starts from reviewed HEAD
+`f671cb04d265414cbb48d1a78e4886e43a4fa72e`. Story, voiceover, captions, physical
+performance, frozen evidence and the complete 31-second structure are approved
+and retained. Only three presentation properties change: a single eased 1.62×
+crop after the shutter has closed, a smaller and quieter persistent fiction
+disclosure, and a simpler four-field actual-test layout with the genuine
+receipt capture scaled as secondary provenance. No new scene, shot, prop,
+dialogue or fact is introduced.
 
 ## Evidence and capability boundary
 
@@ -85,6 +94,16 @@ scene as DRAMATIZATION. It avoids the full app, unrelated World runtime, worker
 entrance effects and wall-clock proposal lifetimes. `tools/render.py` combines
 the continuous physical scene, essential typography, the one actual UI proof
 and current end card. Animatic and final share that implementation and timeline.
+
+This presentation pass reuses both approved physical videos and their capture
+reports byte-for-byte. Their recorded timeline SHA identifies the earlier
+capture; it is not rewritten to imply a new capture. Their physical-schedule
+SHA still matches the unchanged fps, camera, gesture and shutter schedule in
+the current timeline. The current renderer separately records its updated
+presentation timeline SHA, source-video SHA and crop samples. The push-in is a
+continuous crop of those original pixels, with no new camera perspective or
+gate response. The genuine receipt PNG and its crop remain unchanged; only its
+display scale and position change.
 
 `frontend/public/prompt-injection/` supplies earlier scenario media and recorded
 public evidence as inspected references only. This commercial uses the

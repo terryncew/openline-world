@@ -57,15 +57,30 @@ try{
       video.ontimeupdate=()=>window.__samples.push({time:video.currentTime,wall:performance.now()});
       await video.play();
     });
+    const proof=T.shots.find(shot=>shot.id==='proof');
+    const reviewTargets=T.shots.map(shot=>({
+      id:shot.id,target:(shot.in_frame+shot.out_frame)/(2*T.fps),
+      limit:shot.out_frame/T.fps,kind:'shot midpoint'}));
+    if(T.presentation){
+      reviewTargets.push(
+        {id:'gate-refused-before-push',target:242/T.fps,limit:249/T.fps,
+          kind:'closed gate at the start of the restrained push'},
+        {id:'argument-tight-composition',target:272/T.fps,limit:303/T.fps,
+          kind:'completed push at the first argument beat'},
+        {id:'proof-within-two-seconds',target:proof.in_frame/T.fps+1.8,
+          limit:proof.in_frame/T.fps+2,kind:'proof hierarchy before two seconds'});
+    }
+    reviewTargets.sort((a,b)=>a.target-b.target);
     const stamps=[];
-    for(const shot of T.shots){
-      const target=(shot.in_frame+shot.out_frame)/(2*T.fps);
+    for(const sample of reviewTargets){
+      const {target}=sample;
       await page.waitForFunction(time=>document.querySelector('video').currentTime>=time,
         target,{timeout:60000,polling:25});
       const actual=await page.evaluate(()=>document.querySelector('video').currentTime);
-      await page.locator('video').screenshot({path:resolve(directory,shot.id+'.png')});
-      if(actual>=shot.out_frame/T.fps)throw Error('Missed review shot: '+shot.id);
-      stamps.push({shot:shot.id,target,actual});
+      await page.locator('video').screenshot({path:resolve(directory,sample.id+'.png')});
+      const captured=await page.evaluate(()=>document.querySelector('video').currentTime);
+      if(captured>=sample.limit)throw Error('Missed review sample: '+sample.id);
+      stamps.push({shot:sample.id,kind:sample.kind,target,actual,capture_completed_at:captured});
     }
     await page.waitForFunction(()=>window.__ended,null,{timeout:10000});
     const state=await page.evaluate(()=>{
@@ -87,7 +102,8 @@ try{
     results.push({edition:name,file,
       sha256:createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex'),
       method:'Complete normal-speed browser playback from 0 to ended, no seeking; '
-        +'opening, every cut midpoint and ended screenshots at 430×940 phone viewport.',
+        +'opening, every cut midpoint, visual-pass comparison points and ended screenshots '
+        +'at 430×940 phone viewport. Proof hierarchy is sampled before two seconds.',
       target_frames:T.frames,target_seconds:T.seconds,stamps,...state,pageErrors:errors});
     writeFileSync(resolve(root,animatic?'animatic/PLAYBACK.json':'PLAYBACK-QA.json'),
       JSON.stringify({

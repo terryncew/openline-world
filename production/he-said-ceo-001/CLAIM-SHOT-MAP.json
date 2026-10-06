@@ -28,7 +28,11 @@
       "limitations": [
         "Fictional CEO message and agent behavior; no live model was fooled."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "absolutely",
@@ -52,7 +56,11 @@
       "limitations": [
         "Fictional CEO message and agent behavior; no live model was fooled."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "attempt",
@@ -74,7 +82,11 @@
       "limitations": [
         "Fictional CEO message and agent behavior; no live model was fooled."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "stop",
@@ -96,7 +108,11 @@
       "limitations": [
         "Fictional CEO message and agent behavior; no live model was fooled."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "ceo",
@@ -120,7 +136,11 @@
       "limitations": [
         "Fictional CEO message and agent behavior; no live model was fooled."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "still-no",
@@ -144,7 +164,11 @@
       "limitations": [
         "Fictional CEO message and agent behavior; no live model was fooled."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "please",
@@ -168,7 +192,11 @@
       "limitations": [
         "Fictional CEO message and agent behavior; no live model was fooled."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "no",
@@ -192,7 +220,11 @@
       "limitations": [
         "Fictional CEO message and agent behavior; no live model was fooled."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "boundary",
@@ -224,7 +256,11 @@
         "The stock six-step capture contains only STOPPED; ALLOWED is this deliberate existing-semantics comparison.",
         "A signature establishes this receiver decision, not universal fraud prevention or exclusive capability."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "authority",
@@ -256,7 +292,11 @@
         "The stock six-step capture contains only STOPPED; ALLOWED is this deliberate existing-semantics comparison.",
         "A signature establishes this receiver decision, not universal fraud prevention or exclusive capability."
       ],
-      "capture": null
+      "capture": null,
+      "presentation": {
+        "push_in": "TIMELINE.json:presentation.argument_push_in",
+        "disclosure": "TIMELINE.json:presentation.fiction_disclosure"
+      }
     },
     {
       "claim_id": "proof",
@@ -313,7 +353,17 @@
             "evidence/run.json:checks.effects"
           ]
         }
-      ]
+      ],
+      "presentation": {
+        "primary_fields": [
+          "ACTUAL OPENLINE TEST",
+          "refund.execute:4800",
+          "STOPPED",
+          "ACTION_OUTSIDE_MANDATE"
+        ],
+        "receipt": "Original capture unchanged; secondary scaled provenance.",
+        "layout": "TIMELINE.json:presentation.actual_test_layout"
+      }
     },
     {
       "claim_id": "end",

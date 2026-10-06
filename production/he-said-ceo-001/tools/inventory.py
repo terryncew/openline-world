@@ -95,8 +95,23 @@ manifest = {
     'base_sha': timeline['base_sha'],
     'checkpoint': '13e9c60abc45036c81aaa604855250b0e5384273',
     'replaces_delivery': timeline['replaces_delivery'],
+    'previous_reviewed_head': 'f671cb04d265414cbb48d1a78e4886e43a4fa72e',
     'current_delivery': {'seconds': timeline['seconds'], 'frames': timeline['frames'], 'fps': timeline['fps']},
+    'timeline_schema': timeline['schema'],
     'timeline_sha256': hashlib.sha256((ROOT / 'TIMELINE.json').read_bytes()).hexdigest(),
+    'presentation': timeline['presentation'],
+    'physical_source_provenance': [
+        {
+            'quality': quality,
+            'source_file': capture['file'],
+            'source_sha256': capture['sha256'],
+            'original_capture_timeline_sha256': capture['timeline_sha256'],
+            'physical_schedule_sha256': capture['physical_schedule_sha256'],
+            'reused_from_reviewed_head': True,
+        }
+        for quality in ['animatic', 'final']
+        for capture in [json.loads((ROOT / f'source/PHYSICAL-{quality}.json').read_text())]
+    ],
     'production': paths,
     'inspected_existing_sources': refs,
     'classification_policy': 'Physical scene is DRAMATIZATION. Only the preserved STOPPED UI panel is REAL CAPTURE in the current picture. ALLOWED comparison is underlying evidence only.',

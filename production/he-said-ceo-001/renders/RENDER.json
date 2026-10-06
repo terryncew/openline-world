@@ -1,5 +1,5 @@
 {
-  "timeline_sha256": "c14e8abf1d013c4890e79a54cf4122fa205ed7df8665f534edd54507c2dceb45",
+  "timeline_sha256": "168637dbc0d37cc29985daf8a348e25726fc5f4ed38cb336304c01f8d2055259",
   "quality": "final",
   "frames": 930,
   "size": [
@@ -7,7 +7,7 @@
     1920
   ],
   "duration": 31,
-  "narrated_sha256": "12ddadfc8f9aa6b708e490028f77ec05e1605ccde65820d5e3885356c48d3fd2",
+  "narrated_sha256": "b9a7b115b46a76d0df1b760277cb0d33253193d0b24d6c10852548ca7a37cd12",
   "delivery_gain_db": 0,
   "encoded_loudness": {
     "input_i": "-16.14",
@@ -29,13 +29,18 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         },
         {
@@ -47,6 +52,11 @@
             318,
             757.75,
             375
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -58,6 +68,11 @@
             399,
             413.41,
             445
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -69,9 +84,24 @@
             469,
             768.88,
             528
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 81,
+        "scale": 1.0,
+        "source_rect": [
+          0.0,
+          0.0,
+          1080.0,
+          1080.0
+        ]
+      }
     },
     {
       "id": "absolutely",
@@ -80,13 +110,18 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         },
         {
@@ -98,9 +133,24 @@
             1550,
             425.22,
             1609
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 178,
+        "scale": 1.0,
+        "source_rect": [
+          0.0,
+          0.0,
+          1080.0,
+          1080.0
+        ]
+      }
     },
     {
       "id": "attempt",
@@ -109,16 +159,31 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 210,
+        "scale": 1.0,
+        "source_rect": [
+          0.0,
+          0.0,
+          1080.0,
+          1080.0
+        ]
+      }
     },
     {
       "id": "stop",
@@ -127,16 +192,31 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 249,
+        "scale": 1.085514074074074,
+        "source_rect": [
+          70.95258532026753,
+          32.88502976471193,
+          1065.8728961612142,
+          1027.8053406056583
+        ]
+      }
     },
     {
       "id": "ceo",
@@ -145,13 +225,18 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         },
         {
@@ -163,9 +248,24 @@
             1550,
             791.09,
             1596
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 303,
+        "scale": 1.62,
+        "source_rect": [
+          412.6666666666667,
+          136.66666666666669,
+          1079.3333333333333,
+          803.3333333333333
+        ]
+      }
     },
     {
       "id": "still-no",
@@ -174,13 +274,18 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         },
         {
@@ -192,9 +297,24 @@
             1550,
             286.66,
             1596
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 354,
+        "scale": 1.62,
+        "source_rect": [
+          412.6666666666667,
+          136.66666666666669,
+          1079.3333333333333,
+          803.3333333333333
+        ]
+      }
     },
     {
       "id": "please",
@@ -203,13 +323,18 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         },
         {
@@ -221,9 +346,24 @@
             1550,
             542.16,
             1609
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 396,
+        "scale": 1.62,
+        "source_rect": [
+          412.6666666666667,
+          136.66666666666669,
+          1079.3333333333333,
+          803.3333333333333
+        ]
+      }
     },
     {
       "id": "no",
@@ -232,13 +372,18 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         },
         {
@@ -250,9 +395,24 @@
             1550,
             180.34,
             1593
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 438,
+        "scale": 1.62,
+        "source_rect": [
+          412.6666666666667,
+          136.66666666666669,
+          1079.3333333333333,
+          803.3333333333333
+        ]
+      }
     },
     {
       "id": "boundary",
@@ -261,13 +421,18 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         },
         {
@@ -279,6 +444,11 @@
             1550,
             845.42,
             1605
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -290,9 +460,24 @@
             1625,
             771.64,
             1680
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 510,
+        "scale": 1.62,
+        "source_rect": [
+          412.6666666666667,
+          136.66666666666669,
+          1079.3333333333333,
+          803.3333333333333
+        ]
+      }
     },
     {
       "id": "authority",
@@ -301,13 +486,18 @@
       "text_boxes": [
         {
           "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
-          "size": 32,
+          "size": 28,
           "face": "sans",
           "bbox": [
             84,
             154,
-            577.09,
-            178
+            515.45,
+            174
+          ],
+          "color": [
+            87,
+            92,
+            86
           ]
         },
         {
@@ -319,6 +509,11 @@
             1550,
             557.39,
             1605
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -330,9 +525,24 @@
             1625,
             818.58,
             1680
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
-      ]
+      ],
+      "physical_crop": {
+        "frame": 610,
+        "scale": 1.62,
+        "source_rect": [
+          412.6666666666667,
+          136.66666666666669,
+          1079.3333333333333,
+          803.3333333333333
+        ]
+      }
     },
     {
       "id": "proof",
@@ -348,6 +558,27 @@
             154,
             591.39,
             185
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "refund.execute:4800",
+          "size": 58,
+          "face": "mono",
+          "bbox": [
+            84,
+            340,
+            747.52,
+            385
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -356,31 +587,46 @@
           "face": "bold",
           "bbox": [
             84,
-            385,
+            455,
             574.81,
-            465
+            535
+          ],
+          "color": [
+            143,
+            52,
+            44
           ]
         },
         {
-          "text": "refund.execute:4800",
-          "size": 55,
+          "text": "ACTION_OUTSIDE_MANDATE",
+          "size": 50,
           "face": "mono",
           "bbox": [
             84,
-            555,
-            713.08,
-            598
+            620,
+            746.41,
+            669
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
           "text": "Receiver-signed decision",
-          "size": 41,
+          "size": 36,
           "face": "sans",
           "bbox": [
             84,
-            1320,
-            558.88,
-            1362
+            815,
+            500.88,
+            851
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -392,6 +638,11 @@
             1620,
             404.58,
             1647
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -403,9 +654,30 @@
             1670,
             454.94,
             1706
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
-      ]
+      ],
+      "receipt_capture": {
+        "source": "source/receipt-stopped-detail.png",
+        "source_sha256": "186a6d9e4381a01ffa18da4cdd76a358c525eab5c95d4df0d041ea70aea7d379",
+        "crop": [
+          0,
+          0,
+          919,
+          490
+        ],
+        "position": [
+          84,
+          880
+        ],
+        "width": 704,
+        "height": 375
+      }
     },
     {
       "id": "end",
@@ -421,6 +693,11 @@
             510,
             625.44,
             588
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -432,6 +709,11 @@
             795,
             830.78,
             874
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -443,6 +725,11 @@
             898,
             468.3,
             980
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -454,6 +741,11 @@
             1090,
             666.44,
             1153
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         },
         {
@@ -465,8 +757,203 @@
             1177,
             547.08,
             1259
+          ],
+          "color": [
+            27,
+            42,
+            60
           ]
         }
+      ]
+    }
+  ],
+  "presentation": {
+    "argument_push_in": {
+      "in_frame": 242,
+      "out_frame": 272,
+      "scale": 1.62,
+      "target_center": [
+        746,
+        470
+      ],
+      "hold_until_frame": 658,
+      "method": "Continuous eased crop of the approved physical source; same perspective and performance."
+    },
+    "fiction_disclosure": {
+      "font_size": 28,
+      "face": "sans",
+      "color": [
+        87,
+        92,
+        86
+      ],
+      "position": [
+        84,
+        154
+      ],
+      "background": [
+        243,
+        236,
+        220
+      ]
+    },
+    "actual_test_layout": {
+      "primary": [
+        {
+          "text": "ACTUAL OPENLINE TEST",
+          "position": [
+            84,
+            154
+          ],
+          "size": 43,
+          "face": "bold",
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "refund.execute:4800",
+          "position": [
+            84,
+            340
+          ],
+          "size": 58,
+          "face": "mono",
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "STOPPED",
+          "position": [
+            84,
+            455
+          ],
+          "size": 110,
+          "face": "bold",
+          "color": [
+            143,
+            52,
+            44
+          ]
+        },
+        {
+          "text": "ACTION_OUTSIDE_MANDATE",
+          "position": [
+            84,
+            620
+          ],
+          "size": 50,
+          "face": "mono",
+          "color": [
+            27,
+            42,
+            60
+          ]
+        }
+      ],
+      "receipt_label": {
+        "text": "Receiver-signed decision",
+        "position": [
+          84,
+          815
+        ],
+        "size": 36,
+        "face": "sans"
+      },
+      "receipt_capture": {
+        "position": [
+          84,
+          880
+        ],
+        "width": 704,
+        "crop": "Use the unchanged proof-shot crop; scale and position only."
+      },
+      "footnotes": [
+        {
+          "text": "Recorded local test",
+          "position": [
+            84,
+            1620
+          ],
+          "size": 36,
+          "face": "sans"
+        },
+        {
+          "text": "No payment executed",
+          "position": [
+            84,
+            1670
+          ],
+          "size": 36,
+          "face": "sans"
+        }
+      ]
+    }
+  },
+  "push_in_samples": [
+    {
+      "frame": 241,
+      "scale": 1.0,
+      "source_rect": [
+        0.0,
+        0.0,
+        1080.0,
+        1080.0
+      ]
+    },
+    {
+      "frame": 242,
+      "scale": 1.0,
+      "source_rect": [
+        0.0,
+        0.0,
+        1080.0,
+        1080.0
+      ]
+    },
+    {
+      "frame": 257,
+      "scale": 1.31,
+      "source_rect": [
+        230.78625954198475,
+        92.78625954198475,
+        1055.2137404580153,
+        917.2137404580153
+      ]
+    },
+    {
+      "frame": 272,
+      "scale": 1.62,
+      "source_rect": [
+        412.6666666666667,
+        136.66666666666669,
+        1079.3333333333333,
+        803.3333333333333
+      ]
+    },
+    {
+      "frame": 395,
+      "scale": 1.62,
+      "source_rect": [
+        412.6666666666667,
+        136.66666666666669,
+        1079.3333333333333,
+        803.3333333333333
+      ]
+    },
+    {
+      "frame": 657,
+      "scale": 1.62,
+      "source_rect": [
+        412.6666666666667,
+        136.66666666666669,
+        1079.3333333333333,
+        803.3333333333333
       ]
     }
   ],

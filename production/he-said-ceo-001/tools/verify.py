@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parents[1]
 CHECKPOINT = '13e9c60abc45036c81aaa604855250b0e5384273'
 PREVIOUS_DELIVERY = 'a106022d78e848c27dc0871f9622fd65a424908c'
+REVIEWED_DELIVERY = 'f671cb04d265414cbb48d1a78e4886e43a4fa72e'
 T = json.loads((ROOT / 'TIMELINE.json').read_text())
 FPS, FRAMES, SECONDS = T['fps'], T['frames'], T['seconds']
 sys.path[:0] = [str(REPO / 'backend'), str(REPO / 'backend/vendor')]
@@ -25,6 +26,35 @@ def command(args):
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def reviewed_bytes(name):
+    return command(['git', '-C', str(REPO), 'show',
+                    REVIEWED_DELIVERY + ':production/he-said-ceo-001/' + name]).stdout
+
+
+def reviewed_content_lock():
+    """Keep the approved story, audio, evidence and physical performance intact."""
+    reviewed_timeline = json.loads(reviewed_bytes('TIMELINE.json'))
+    locked_timeline = {key: value for key, value in T.items() if key != 'presentation'}
+    assert locked_timeline == reviewed_timeline, 'Approved timeline content changed'
+    assert (FPS, FRAMES, SECONDS) == (30, 930, 31)
+    prefixes = ['production/he-said-ceo-001/audio/',
+                'production/he-said-ceo-001/source/']
+    locked_paths = command(['git', '-C', str(REPO), 'ls-tree', '-r', '--name-only',
+                            REVIEWED_DELIVERY, *prefixes]).stdout.decode().splitlines()
+    locked_names = [p.removeprefix('production/he-said-ceo-001/') for p in locked_paths]
+    locked_names.extend(['CAPTIONS.json', 'captions.srt', 'captions.vtt',
+                         'tools/physical.html', 'tools/physical.tsx',
+                         'tools/capture-physical.mjs', 'tools/voice.py', 'tools/mix.py'])
+    rows = []
+    for name in locked_names:
+        assert reviewed_bytes(name) == (ROOT / name).read_bytes(), ('Locked file changed', name)
+        rows.append({'file': name, 'sha256': sha(ROOT / name)})
+    return {'reviewed_head': REVIEWED_DELIVERY,
+            'approved_timeline_content_unchanged': True,
+            'approved_voice_mix_captions_and_physical_source_unchanged': rows,
+            'approved_pauses_and_sfx_unchanged': True}
 
 
 def active_motion_report():
@@ -54,7 +84,7 @@ def active_motion_report():
                      'max_consecutive_identical_frames': longest,
                      'frame_hashes_sha256': hashlib.sha256('\n'.join(hashes).encode()).hexdigest()})
     return {'active_motion_no_unintended_stalls': True,
-            'active_motion_method': 'Every RGB frame decoded from the physical source at270×270; '
+            'active_motion_method': 'Every RGB frame decoded from the physical source at 270×270; '
                                     'exact pixel hashes during pickup, walk, shutter, CEO and please. '
                                     'Static reading holds and closed-gate pauses are excluded.',
             'active_motion_source_sha256': sha(source),
@@ -74,6 +104,7 @@ if '--motion-only' in sys.argv:
     sys.exit(0)
 
 
+reviewed_lock = reviewed_content_lock()
 facts = json.loads((ROOT / 'FACTS.json').read_text())
 run = json.loads((ROOT / 'evidence/run.json').read_text())
 receipts = run['receipts']
@@ -155,17 +186,102 @@ render = json.loads((ROOT / 'renders/RENDER.json').read_text())
 assert render['timeline_sha256'] == sha(ROOT / 'TIMELINE.json')
 assert render['frames'] == FRAMES and render['duration'] == SECONDS
 assert [s['id'] for s in render['layout']] == [s['id'] for s in T['shots']]
+presentation = T['presentation']
+assert set(presentation) == {'argument_push_in', 'fiction_disclosure', 'actual_test_layout'}
+assert render['presentation'] == presentation
+push = presentation['argument_push_in']
+assert push['in_frame'] > T['physical_scene']['shutter_close_frames'][1]
+assert push['out_frame'] == next(s['in_frame'] for s in T['shots'] if s['id'] == 'ceo')
+assert (push['in_frame'], push['out_frame'], push['hold_until_frame']) == (242, 272, 658)
+assert push['scale'] == 1.62 and push['target_center'] == [746, 470]
+push_samples = render['push_in_samples']
+assert [p['frame'] for p in push_samples] == [241, 242, 257, 272, 395, 657]
+assert push_samples[0]['scale'] == push_samples[1]['scale'] == 1
+assert 1 < push_samples[2]['scale'] < push['scale']
+assert all(p['scale'] == push['scale'] for p in push_samples[3:])
+assert all(p['source_rect'] == push_samples[3]['source_rect'] for p in push_samples[3:])
+for sample in push_samples:
+    left, top, right, bottom = sample['source_rect']
+    assert 0 <= left < right <= 1080 and 0 <= top < bottom <= 1080
+    assert abs((right - left) * sample['scale'] - 1080) < 1e-6
+    assert abs((bottom - top) * sample['scale'] - 1080) < 1e-6
+assert np.allclose([(push_samples[-1]['source_rect'][0] +
+                     push_samples[-1]['source_rect'][2]) / 2,
+                    (push_samples[-1]['source_rect'][1] +
+                     push_samples[-1]['source_rect'][3]) / 2], push['target_center'])
+for layout in render['layout']:
+    shot = next(s for s in T['shots'] if s['id'] == layout['id'])
+    if shot['kind'] == 'physical':
+        crop = layout['physical_crop']
+        assert crop['frame'] == (shot['in_frame'] + shot['out_frame']) // 2
+        if crop['frame'] >= push['out_frame']:
+            assert crop['scale'] == push['scale'] and \
+                   crop['source_rect'] == push_samples[-1]['source_rect']
+
+
+def luminance(rgb):
+    values = [v / 255 for v in rgb]
+    linear = [v / 12.92 if v <= .04045 else ((v + .055) / 1.055) ** 2.4
+              for v in values]
+    return sum(weight * value for weight, value in zip([.2126, .7152, .0722], linear))
+
+
+disclosure = presentation['fiction_disclosure']
+contrast = (luminance(disclosure['background']) + .05) / \
+           (luminance(disclosure['color']) + .05)
+assert contrast >= 4.5, ('Fiction disclosure contrast below WCAG AA', contrast)
 safe = T.get('safe_rect', [84, 144, 996, 1740])
-font_sizes = []
+font_sizes, disclosure_sizes = [], []
 for shot in render['layout']:
     for box in shot['text_boxes']:
         left, top, right, bottom = box['bbox']
         assert safe[0] <= left < right <= safe[2], (shot['id'], box)
         assert safe[1] <= top < bottom <= safe[3], (shot['id'], box)
-        assert box['size'] >= 32, (shot['id'], box)
+        if box['text'] == T['fiction_badge']:
+            assert box['size'] == 28 and box['face'] == 'sans', (shot['id'], box)
+            assert (left, top) == (84, 154), (shot['id'], box)
+            assert box['color'] == disclosure['color'], (shot['id'], box)
+            disclosure_sizes.append(box['size'])
+        else:
+            assert box['size'] >= 32, (shot['id'], box)
+            font_sizes.append(box['size'])
         assert_no_comparison(box['text'], shot['id'])
-        font_sizes.append(box['size'])
-assert font_sizes
+assert font_sizes and len(disclosure_sizes) == len([s for s in T['shots']
+                                                 if s['kind'] == 'physical'])
+proof_layout = next(s for s in render['layout'] if s['id'] == 'proof')
+primary = proof_layout['text_boxes'][:4]
+assert [box['text'] for box in primary] == proof['text'], 'Proof hierarchy changed'
+assert all(box['size'] >= 40 for box in primary), 'Primary proof type is too small'
+assert all(a['bbox'][3] < b['bbox'][1] for a, b in zip(primary, primary[1:])), \
+    'Primary proof hierarchy overlaps or is out of order'
+proof_presentation = presentation['actual_test_layout']
+for item, box in zip(proof_presentation['primary'], primary):
+    assert (box['text'], box['size'], box['face'], box['color'], box['bbox'][:2]) == \
+           (item['text'], item['size'], item['face'], item['color'], item['position'])
+expected_proof_text = proof['text'] + ['Receiver-signed decision', 'Recorded local test',
+                                     'No payment executed']
+assert [box['text'] for box in proof_layout['text_boxes']] == expected_proof_text
+receipt_capture = proof_layout['receipt_capture']
+assert receipt_capture['source'] == proof['capture']
+assert receipt_capture['source_sha256'] == sha(ROOT / proof['capture'])
+assert receipt_capture['crop'] == proof['crop']
+assert receipt_capture['position'] == [84, 880] and receipt_capture['width'] == 704
+assert receipt_capture['height'] == 375
+assert receipt_capture['position'][1] > primary[-1]['bbox'][3]
+assert receipt_capture['position'][1] + receipt_capture['height'] < 1620
+reviewed_render = json.loads(reviewed_bytes('renders/RENDER.json'))
+for old, new in zip(reviewed_render['layout'], render['layout']):
+    assert (old['id'], old['in_frame'], old['hold_seconds']) == \
+           (new['id'], new['in_frame'], new['hold_seconds'])
+    if new['id'] != 'proof':
+        def locked_boxes(layout):
+            return [{key: box[key] for key in ['text', 'size', 'face', 'bbox']}
+                    for box in layout['text_boxes'] if box['text'] != T['fiction_badge']]
+        assert locked_boxes(old) == locked_boxes(new), ('Unapproved typography change', new['id'])
+animatic_review = (ROOT / 'ANIMATIC-REVIEW.md').read_text()
+assert '# Physical recut animatic — PASS' in animatic_review
+assert sha(ROOT / 'TIMELINE.json') in animatic_review
+assert sha(ROOT / 'animatic/he-said-ceo-animatic.mp4') in animatic_review
 
 physical = json.loads((ROOT / render['physical_capture_report']).read_text())
 scene = T['physical_scene']
@@ -249,6 +365,15 @@ for edition in ['narrated', 'muted']:
     assert abs(float(video_stream['duration']) - SECONDS) < .002
     assert abs(float(audio_stream['duration']) - SECONDS) < .022
     command(['ffmpeg', '-v', 'error', '-xerror', '-i', str(path), '-f', 'null', '-'])
+    reviewed_media = ROOT / 'work' / f'reviewed-{edition}.mp4'
+    reviewed_media.write_bytes(reviewed_bytes(f'renders/he-said-ceo-{edition}.mp4'))
+    def aac_stream_digest(media):
+        stream = command(['ffmpeg', '-v', 'error', '-i', str(media), '-map', '0:a',
+                          '-c:a', 'copy', '-f', 'adts', '-']).stdout
+        return hashlib.sha256(stream).hexdigest()
+    aac_sha256 = aac_stream_digest(path)
+    assert aac_sha256 == aac_stream_digest(reviewed_media), \
+        ('Approved encoded audio changed', edition)
     bitstream = command(['ffmpeg', '-v', 'error', '-i', str(path), '-map', '0:v',
                          '-c:v', 'copy', '-bsf:v', 'h264_mp4toannexb', '-f', 'h264', '-']).stdout
     video_hashes.append(hashlib.sha256(bitstream).hexdigest())
@@ -288,7 +413,7 @@ for edition in ['narrated', 'muted']:
     silence = []
     for low, high in T['silence_windows']:
         assert 0 <= low < high <= SECONDS and high - low > .2
-        # Exclude only AAC filter ringing within100 ms of the window boundaries.
+        # Exclude only AAC filter ringing within 100 ms of the window boundaries.
         window = audio[round((low + .1) * rate):round((high - .1) * rate)]
         assert len(window)
         peak = float(np.max(np.abs(window)))
@@ -308,6 +433,7 @@ for edition in ['narrated', 'muted']:
                     'audio_start_pts': audio_stream['start_time'],
                     'video_duration': video_stream['duration'],
                     'audio_duration': audio_stream['duration'], 'cue_alignment': cues,
+                    'approved_aac_stream_unchanged': True, 'aac_stream_sha256': aac_sha256,
                     'loudness': loudness, 'silence': silence, 'black_frames_detected': False})
 assert video_hashes[0] == video_hashes[1]
 
@@ -319,7 +445,7 @@ for frame_number in [0, 11]:
                    '-pix_fmt', 'rgb24', '-']).stdout
     assert raw
     opening.append(hashlib.sha256(raw).hexdigest())
-assert opening[0] != opening[1], 'Opening has no movement in its first12 frames'
+assert opening[0] != opening[1], 'Opening has no movement in its first 12 frames'
 command(['git', '-C', str(REPO), 'diff', '--check'])
 paths = command(['git', '-C', str(REPO), 'diff', '--name-only', facts['base_sha']]).stdout.decode().splitlines()
 assert all(p.startswith('production/he-said-ceo-001/') for p in paths)
@@ -339,9 +465,20 @@ report = {'status': 'PASS', 'base_sha': facts['base_sha'], 'recovery_checkpoint'
           'same_video_bitstream': True, 'video_bitstream_sha256': video_hashes[0],
           'opening_frame_changes': True, 'safe_geometry_pass': True,
           'information_label_floor_at_360px': round(min(font_sizes) / 3, 2),
+          'fiction_disclosure_size_at_360px': round(min(disclosure_sizes) / 3, 2),
+          'fiction_disclosure_contrast_ratio': round(contrast, 3),
+          'proof_primary_labels_in_requested_order': True,
+          'actual_receipt_capture_source_and_crop_unchanged': True,
+          'actual_receipt_capture_secondary_size': [704, 375],
+          'argument_push_in_after_gate_stop': True,
+          'argument_push_in_complete_before_dialogue': True,
+          'argument_push_in_held_through_proof_transition': True,
+          'argument_push_in_linear_magnification': push['scale'],
+          'fresh_animatic_reviewed_before_final': True,
           'end_card_hold_seconds': end_hold, 'claim_map_complete': True,
           'product_code_changed': False, 'protocol_changed': False,
           'git_diff_check': True, 'external_api_spend': 0, 'human_listening_verified': False}
+report.update(reviewed_lock)
 report.update(active_motion_report())
 (ROOT / 'TECHNICAL-QA.json').write_text(json.dumps(report, indent=2) + '\n')
 print(f'TECHNICAL QA PASS: frozen signatures; full decode; {FRAMES} frames/{SECONDS:g} s; '

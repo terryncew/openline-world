@@ -37,6 +37,29 @@ for id,lo,hi,kind,lines,vo in rows:
  claims.append(claim)
 assert all(a['out_frame']==b['in_frame'] for a,b in zip(shots,shots[1:]));assert shots[-1]['out_frame']==930
 T={'schema':'openline.film.physical-recut.v2','title':'HE SAID HE WAS THE CEO','base_sha':facts['base_sha'],'replaces_delivery':'a106022d78e848c27dc0871f9622fd65a424908c','fps':30,'frames':930,'seconds':31,'size':[1080,1920],'safe_rect':[84,144,996,1740],'shots':shots,'sfx':[{'kind':'latch','frame':241,'gain':.13}],'silence_windows':[[12.12,12.42],[14.7,15.2],[30.78,31]],'fiction_badge':'DRAMATIZED · FICTIONAL SCENE','test_badge':'ACTUAL OPENLINE TEST','test_footnote':'Recorded local test · No payment executed','edit_policy':'One fictional physical scene; only the final refusal panel is real preserved evidence. Editorial timing is not receiver latency. ALLOWED comparison stays in the evidence package only.','voice_disclosure':'Local neural voice; natural-rate dry delivery; human listening unverified.','physical_scene':{'source':'source/physical-{quality}.mp4','end_frame':658,'camera_position':[-8.3,5.8,11.6],'camera_target':[-.3,1.6,0],'camera_fov':35,'gate_position':[1.45,0,0],'gate_rotation':.85,'agent_start':[-2.5,0,0],'agent_stop':[.05,0,0],'agent_scale':1.22,'pickup_frames':[164,187],'walk_frames':[185,226],'shutter_close_frames':[227,241],'ceo_gesture_frames':[274,332],'please_gesture_frames':[377,414],'closed_until_frame':658}}
+T['presentation']={
+ 'argument_push_in':{'in_frame':242,'out_frame':272,'scale':1.62,'target_center':[746,470],'hold_until_frame':658,'method':'Continuous eased crop of the approved physical source; same perspective and performance.'},
+ 'fiction_disclosure':{'font_size':28,'face':'sans','color':[87,92,86],'position':[84,154],'background':[243,236,220]},
+ 'actual_test_layout':{
+  'primary':[
+   {'text':'ACTUAL OPENLINE TEST','position':[84,154],'size':43,'face':'bold','color':[27,42,60]},
+   {'text':'refund.execute:4800','position':[84,340],'size':58,'face':'mono','color':[27,42,60]},
+   {'text':'STOPPED','position':[84,455],'size':110,'face':'bold','color':[143,52,44]},
+   {'text':'ACTION_OUTSIDE_MANDATE','position':[84,620],'size':50,'face':'mono','color':[27,42,60]}
+  ],
+  'receipt_label':{'text':'Receiver-signed decision','position':[84,815],'size':36,'face':'sans'},
+  'receipt_capture':{'position':[84,880],'width':704,'crop':'Use the unchanged proof-shot crop; scale and position only.'},
+  'footnotes':[
+   {'text':'Recorded local test','position':[84,1620],'size':36,'face':'sans'},
+   {'text':'No payment executed','position':[84,1670],'size':36,'face':'sans'}
+  ]
+ }
+}
+for claim in claims:
+ if claim['dramatized']:
+  claim['presentation']={'push_in':'TIMELINE.json:presentation.argument_push_in','disclosure':'TIMELINE.json:presentation.fiction_disclosure'}
+ elif claim['claim_id']=='proof':
+  claim['presentation']={'primary_fields':rows[10][4],'receipt':'Original capture unchanged; secondary scaled provenance.','layout':'TIMELINE.json:presentation.actual_test_layout'}
 write('TIMELINE.json',T)
 write('CLAIM-SHOT-MAP.json',{'schema':'openline.film.claim-map.v2','facts':'FACTS.json','timeline':'TIMELINE.json','scope':'Only one refused action in the commercial. Authorized comparison retained as underlying evidence, excluded from picture, voice and captions.','shots':claims})
 print('Physical recut planned: 930 frames / 31s; one agent, one gate, one refusal; frozen facts untouched.')

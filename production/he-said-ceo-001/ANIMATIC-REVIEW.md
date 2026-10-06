@@ -1,35 +1,45 @@
 # Physical recut animatic — PASS
 
-Reviewed before final rendering. This replaces the former 43-second type-led cut.
-Current animatic: `animatic/he-said-ceo-animatic.mp4`, 31s / 930 frames at 30 fps.
-SHA-256: `d029b53b637974606a9010420b9fcdc39561ea5f2c00ee07934eb5796182ef41`.
-Same physical-stage choreography, composite renderer, canonical timeline,
-complete natural-rate narration, single gate latch, proof and end card as final.
-Working resolution 540×960; final 1080×1920.
+Final visual-comedy pass, reviewed before final rendering. Reviewed baseline:
+`f671cb04d265414cbb48d1a78e4886e43a4fa72e`. The approved 31-second story,
+voice wording, full takes, mix, captions, pauses, performance and factual records
+remain unchanged. Only three presentation settings change.
 
-The complete revised MP4 played at normal speed from zero to ended in Chromium,
-without seeking: 930 decoded frames, zero dropped frames or media/page errors.
-The producing agent inspected the phone-size frames from every beat, the
-contact sheets and six decoded argument-motion samples. A second agent reviewed
-those visual frames independently and passed the nine story questions. Neither
-agent can hear audio; human subjective listening remains UNVERIFIED. This is
-an editorial assessment, not an audience study.
+Current animatic: `animatic/he-said-ceo-animatic.mp4`, 31 seconds / 930 frames
+at 30 fps, working resolution 540×960.
+Animatic SHA-256: `1ba9e2456d203aa1312a03dd942d8ee0b60a79705e28bd6c6bbc287abc775cba`.
+Canonical timeline SHA-256: `168637dbc0d37cc29985daf8a348e25726fc5f4ed38cb336304c01f8d2055259`.
 
-| Question | Review |
+The complete fresh animatic played at normal speed from zero to ended in
+Chromium, without seeking: 930 decoded frames, zero dropped frames and no
+media/page errors. The producing agent reviewed both contact sheets, every
+shot's phone frame, the special comparison samples and six decoded argument
+frames. A separate agent independently inspected those visual artifacts and
+passed the eight requested questions. These are editorial visual assessments,
+not an audience study. Neither agent can hear audio; human listening remains
+UNVERIFIED.
+
+| Requested question | Result and evidence |
 | --- | --- |
-| Can someone understand the hostile prompt immediately? | PASS. The first frame presents the exact three-line conceptual message in a large paper close-up, above Wren and the open gate. No terminal text or distracting attack details. |
-| Is it obvious the AI fell for it? | PASS. “Absolutely,” the pickup and the confident walk make acceptance one continuous physical action. The scene is labelled fiction; no real model deception is claimed. |
-| Is it obvious the agent is trying to get the gate to accept the action? | PASS. Wren carries the same $4,800 paper to the threshold, stays outside, turns toward the message and makes a renewed presentation. |
-| Is the refusal visually unmistakable? | PASS. The heavy terracotta shutter closes once, a readable physical STOP appears, and the gate remains completely closed throughout both pleas. No ring, classifier, gate speech or new verdict. |
-| Is “He said please” funny without feeling written-to-be-funny? | PASS. A modest head/shoulder lean follows the larger CEO gesture; the gate does nothing. The understated line and held “No” support the physical joke. |
-| Does the audience understand authority rather than scam detection? | PASS. The same proposal and Wren remain outside. The two short value lines say permission stays the same and scam detection is not required for this boundary. No detection animation or classifier appears. |
-| Is the actual-test reveal brief but credible? | PASS. One 4.6s proof panel, explicitly ACTUAL OPENLINE TEST, shows the original preserved UI pixels for refund.execute:4800 / STOPPED / ACTION_OUTSIDE_MANDATE. No ALLOWED comparison or receipt walkthrough. |
-| Does it work muted? | PASS. The readable hostile message, acceptance line, carrying action, shutter, two physical pleas, short value lines, proof fields and exact end card carry the same single story. |
-| Is there only one value proposition at the end? | PASS. A prompt can steer the agent; it cannot rewrite permission. No second action, authorized-amount joke, feature list or extra slogan. |
+| Are Wren's gestures easy to see? | YES. The post-STOP crop reaches 1.62× before the first CEO appeal; the head turn, larger arm presentation and smaller please lean are distinct at 430px phone width. |
+| Does the gate dominate the argument? | YES. The full cream aperture, shut shutter and STOP mechanism stay visible and substantially larger than Wren. Only the outer blue housing edge is cropped; ground and quiet surrounding space preserve the miniature. |
+| Is please funnier because the interaction is readable? | YES. The same small, unsuccessful lean is now visible. The gate makes no movement or response. No new joke or performance was added. |
+| Is the fiction disclosure clear without dominating? | YES. Exact wording persists in a stable position at 28px regular type, with a measured 5.811:1 contrast ratio. The message remains the opening headline. |
+| Can the four proof fields be understood within roughly two seconds? | YES, editorial visual assessment. The actual browser screenshot completed at proof +1.893s shows ACTUAL OPENLINE TEST, refund.execute:4800, STOPPED and ACTION_OUTSIDE_MANDATE in one primary reading order. Every field is present from the transition; no search inside the receipt is needed. |
+| Is the real receipt visibly preserved? | YES. The same original navy UI crop remains recognizable below the primary result, scaled to secondary prominence. Its source pixels and factual contents are unchanged; receiver-signed/local-test/no-payment disclosures remain. |
+| Does the commercial still work muted? | YES. The unchanged prompt, acceptance, carry, refusal, two appeals, value lines and ending remain clear. The tighter performance and simpler proof improve their readability. |
+| Did new visual information make the idea harder? | NO. No prop, actor, text claim, camera angle, cut, joke or story idea was added. The primary reason was already in the approved timeline and real receipt. |
 
-The first physical iteration failed the argument: Wren's gestures were too
-small at phone size. Before this pass, Wren was uniformly enlarged, the
-backward shoulder gesture and head turn were clarified, and the same paper
-was re-presented. The gate remained fixed. The latch was aligned to the
-shutter's final stop. The complete revised animatic was rendered and played
-through again before this review was written; no revised final existed yet.
+The first 1.4× crop left an awkward partial message at the left edge. Before
+this reviewed animatic, it was replaced by the 1.62× crop that removes the
+message from the tight hold while retaining Wren, both hands and the complete
+STOP/aperture. The push runs once from frames 242–272, after shutter closure
+at frame 241, then remains fixed to frame 658. It uses the same perspective
+and approved physical footage; no performance or gate behavior was changed.
+
+Materially better than f671cb04: YES. The existing earnest pleas read clearly
+on a phone, and the actual result is visible without searching the receipt.
+
+Final rendering is allowed only for the current reviewed animatic and timeline
+hashes above. The final uses the same source, crop, text hierarchy and timing
+at 1080×1920; no revised final had been rendered when this pass was recorded.
