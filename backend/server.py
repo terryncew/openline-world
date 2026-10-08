@@ -650,6 +650,12 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if self.path == "/api/health":
                 self._send(200, {"status": "ok", "mode": self.workshop.mode})
+            elif self.path == "/api/bounty/state":
+                bounty = getattr(self.server, "bounty", None)
+                if bounty is None:
+                    raise WalletError("BOUNTY_DISABLED", "Use ./bounty/run.sh")
+                with bounty.lock:
+                    self._send(200, bounty.snapshot())
             elif self.path == "/api/state":
                 self._send(200, self.workshop.snapshot())
             elif self.path.startswith("/api/events"):
@@ -724,6 +730,40 @@ class Handler(BaseHTTPRequestHandler):
                 "/api/world/challenge", "/api/world/reset") else {}
             if not isinstance(body, dict):
                 raise WalletError("HTTP_JSON_OBJECT_REQUIRED")
+            if path.startswith("/api/bounty/"):
+                bounty = getattr(self.server, "bounty", None)
+                if bounty is None:
+                    raise WalletError("BOUNTY_DISABLED", "Use ./bounty/run.sh")
+                origin = self.headers.get("Origin", "")
+                if (origin and not _origin_allowed(origin)) or self.headers.get_content_type() != "application/json":
+                    raise WalletError("BOUNTY_LOCAL_JSON_REQUIRED")
+                from bounty import BountyError
+                try:
+                    action = path[len("/api/bounty/"):]
+                    if action == "approve":
+                        result = bounty.approve()
+                    elif action == "attempt":
+                        result = bounty.attempt(body.get("candidate"), body.get("actor", "worker-a"))
+                    elif action == "verify":
+                        result = bounty.verify(body.get("number"))
+                    elif action == "prepare-payment":
+                        result = bounty.prepare_payment(body.get("kind"), body.get("number"))
+                    elif action == "settle":
+                        result = bounty.settle(body.get("key"))
+                    elif action == "complete-committed":
+                        result = bounty.settle(body.get("key"), complete_committed=True)
+                    elif action == "reconcile":
+                        result = bounty.reconcile()
+                    elif action == "revoke":
+                        result = bounty.revoke()
+                    else:
+                        self._send(404, {"error": "NOT_FOUND"})
+                        return
+                except BountyError as exc:
+                    self._send(409, {"error": str(exc)})
+                    return
+                self._send(200, result)
+                return
             if path == "/api/demo/prompt-injection/reset":
                 self.server.workshop = PromptInjectionWorkshop(new_session_dir())  # type: ignore[attr-defined]
                 self._send(200, {"reset": True})
@@ -982,6 +1022,12 @@ def main() -> int:
     data_dir = os.environ.get("WORLD_DATA_DIR")
     server.world = (World(data_root=Path(data_dir))  # type: ignore[attr-defined]
                     if data_dir else World())  # type: ignore[attr-defined]
+    if os.environ.get("BOUNTY_ENABLED") == "1":
+        if HOST not in ("127.0.0.1", "localhost", "::1"):
+            raise RuntimeError("The bounty demo must bind to loopback")
+        from bounty import Bounty
+        server.bounty = Bounty(Path(os.environ.get(  # type: ignore[attr-defined]
+            "BOUNTY_DATA_DIR", str(Path(__file__).parent / "data" / "bounty"))))
     print(f"OpenLine Workshop backend  http://{HOST}:{PORT}")
     print("Receiver: real OpenLine EffectGate (in-process), loopback only.")
     print("World: separate key custody -- one server receiver key; "

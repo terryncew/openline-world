@@ -1,0 +1,34 @@
+.bounty-page { height:100dvh; overflow:auto; color:#242830; background:#f5f1e8; padding:0 5vw 50px; font:16px/1.6 system-ui,sans-serif; }
+.bounty-header { display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; padding:24px 0; border-bottom:1px solid #d4d0c6; font-size:12px; letter-spacing:.06em; }
+.bounty-page a { color:#244da3; }
+.bounty-intro { max-width:850px; padding:45px 0 25px; }
+.bounty-page h1 { font-size:clamp(36px,6vw,68px); line-height:1.06; letter-spacing:-.04em; margin:15px 0 25px; }
+.bounty-page h2 { font-size:23px; line-height:1.3; margin:8px 0 22px; }
+.bounty-page h3 { font-size:17px; }
+.bounty-eyebrow { color:#315baa; font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:.1em; }
+.bounty-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; margin:22px 0; }
+.bounty-grid article { background:#fffdf8; border:1px solid #d7d3c9; border-radius:14px; padding:28px; min-width:0; }
+.bounty-page button { font:inherit; font-size:14px; padding:10px 16px; color:#254b92; border:1px solid #b2bacc; border-radius:7px; background:white; cursor:pointer; }
+.bounty-page button:disabled { opacity:.5; cursor:wait; }
+.bounty-page button.bounty-primary { background:#254b92; color:white; }
+.bounty-page button:focus-visible, .bounty-page a:focus-visible, .bounty-page summary:focus-visible { outline:3px solid #d29a27; outline-offset:3px; }
+.bounty-page pre { max-height:360px; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; background:#eceeea; padding:16px; font-size:12px; }
+.bounty-page code { overflow-wrap:anywhere; }
+.bounty-notice { background:#eee7d8; border-left:3px solid #b48732; padding:14px 18px; font-size:14px; }
+.bounty-error { color:#923d2d; border:1px solid #923d2d; padding:16px; }
+.bounty-fine { font-size:12px; color:#646670; }
+.bounty-success { color:#24664a; font-weight:700; }
+.bounty-stats { display:flex; flex-wrap:wrap; gap:25px; margin:24px 0; }
+.bounty-stats b { display:block; font-size:27px; }
+.bounty-stats span { font-size:12px; }
+.bounty-attempt { border-top:1px solid #dedacf; padding:12px 0; }
+.bounty-timeline { list-style:none; padding:0; max-height:600px; overflow:auto; }
+.bounty-timeline li { border-left:2px solid #b7c1d4; padding:0 0 18px 20px; }
+.bounty-timeline span { font-size:11px; color:#315baa; font-weight:700; }
+.bounty-timeline p { margin:4px 0; }
+.bounty-receipts { display:flex; flex-wrap:wrap; gap:8px; }
+.bounty-receipts .selected { background:#254b92; color:white; }
+.bounty-ledger { overflow:auto; max-height:600px; }
+.bounty-page table { border-collapse:collapse; width:100%; font-size:12px; }
+.bounty-page td,.bounty-page th { border-bottom:1px solid #dedacf; padding:8px; text-align:left; }
+@media(max-width:760px) { .bounty-grid { grid-template-columns:1fr; } .bounty-grid article { padding:20px; } .bounty-page { padding:0 5vw 25px; } }
