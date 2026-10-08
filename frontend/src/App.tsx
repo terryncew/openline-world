@@ -14,6 +14,7 @@ import { AuthorityDemoView } from "./viz/AuthorityDemoView";
 import { SquareHost } from "./square/SquareHost";
 import { HeroView } from "./hero/HeroView";
 import { PromptInjectionView } from "./scenarios/PromptInjectionView";
+import { BountyView } from "./bounty/BountyView";
 import "./styles.css";
 
 const HELPER_FOCUS: Record<string, Focus> = {
@@ -54,6 +55,7 @@ export default function App() {
   });
 
   if (new URLSearchParams(window.location.search).get("scenario") === "prompt-injection") return <PromptInjectionView />;
+  if (new URLSearchParams(window.location.search).get("scenario") === "bounty") return <BountyView />;
 
   if (view === "hero") return <HeroView />;
 
@@ -266,6 +268,7 @@ function BackendApp({ view, setView }: { view: View; setView: (v: View) => void 
           <button onClick={() => setView("watch")}>Watch the tour</button>
           <button onClick={() => setView("viz")}>Visualize</button>
           <button onClick={() => setView("world")}>World</button>
+          <a href="/?scenario=bounty">Local bounty</a>
           <button onClick={() => setView("changed")}>What changed?</button>
           <button onClick={() => w.setMode(snap.mode === "demo" ? "connected" : "demo")}>
             Mode: {snap.mode === "demo" ? "Demo" : "Connected"}
