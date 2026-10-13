@@ -1,0 +1,21 @@
+{
+  "schema": "openline.gate.action_receipt.v1",
+  "gate_id": "workshop-receiver",
+  "gate_public_key": "7b76b096f6be59e03131227529ec08077d2618d73a4b5c3316ae9c23ca48c9a9",
+  "principal_id": "openline:principal:51ecfff18a6188ae6386378366ac921117374f7c4c20683d5f46a4d89ade9d9e",
+  "mandate_id": "mandate-wren-1",
+  "subject_id": "wren",
+  "action": "refund.execute:100",
+  "decision": "ALLOWED",
+  "reason_codes": [],
+  "presentation_hash": "9960826a1f514b92e4acbaae9abedd47d5f8c49ef0810544941bdfde3393ba09",
+  "decided_at": "2026-10-06T02:14:47.365292Z",
+  "wallet_policy_authority": "NONE",
+  "decision_authority": "RECEIVER_GATE",
+  "payload_hash": "20207d90f7a6e980b355886e52069492e77e088ffb4fa6099383dae258bab875",
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "7b76b096f6be59e03131227529ec08077d2618d73a4b5c3316ae9c23ca48c9a9",
+    "value": "407180980554bccd31a1c1f497781156fe2efbd3a5c8405e825928c3b9bf2b0409443f44144c30168db3bc9ef4cc9f2c5397cff09d582368c51b26d39e637a0b"
+  }
+}

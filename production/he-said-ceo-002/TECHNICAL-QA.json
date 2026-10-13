@@ -1,0 +1,509 @@
+{
+  "status": "PASS",
+  "scope": "Review-only soundtrack and existing-performance revision",
+  "duration": 34.0,
+  "timeline_sha256": "736cfe4aba1d1f4dd3b667c6ca4693d38f5fa2b646545f52739edc77a60a7ac2",
+  "approved_commit": "05250b5db6c9d4fe40d055b1932a0b5867e2f97c",
+  "approved_files_verified": 266,
+  "approved_cut_unchanged": true,
+  "frozen_files": [
+    {
+      "file": "FACTS.json",
+      "sha256": "2a9fab862f3577b53a959724988ac6a06bcbc8ea1ed7de69eb6a41e2aca4bc4c",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "evidence/run.json",
+      "sha256": "58bf7ee8cd15037edf8b5bec741e0e1dcede655935173038e1dafa32eeea30c9",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "evidence/receipt-stopped.json",
+      "sha256": "22a1d51a189a86310f6b26fc84a3cc81e7f20c2c13177b4f16ee647d12dc0a68",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "evidence/receipt-allowed.json",
+      "sha256": "94e353a5e048147ca78ca34aa09d8471786295367f7a1993094691574b048b6d",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "evidence/reloaded-wallet-receipts.json",
+      "sha256": "608de16939c46a88e006eca97b2edbb098fc3038907e5fa391c48d83fb3d3050",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "evidence/owner-authority-events.json",
+      "sha256": "9e34096ce0cd39fd982f27a111c2676bc9a78243fe886e4c545538030d5d58da",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "source/proposal-row.png",
+      "sha256": "a23f3b16b778732684473d5e43d87593f43d91b2c72948141cc6cb8bd0d573cd",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "source/receipt-allowed-detail.png",
+      "sha256": "2bd62df5b743d6ccbd5f4d306dbfe0bc190ba7b22c16b4e9ca7b23f87dc3ac31",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "source/receipt-allowed-full-ui.png",
+      "sha256": "ea44b3a21f06ec640449ae985c46939b2f3be5624aa363fb1c091f357988e6cc",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "source/receipt-allowed-reason.png",
+      "sha256": "b1152c798cf2e4249718f8cc2a507ade5ed150e40b11c79cf7747d78df2eab82",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "source/receipt-list.png",
+      "sha256": "b589057071639f125262e035797c7682c335d1db78681ff140ad469783b7fe01",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "source/receipt-stopped-detail.png",
+      "sha256": "186a6d9e4381a01ffa18da4cdd76a358c525eab5c95d4df0d041ea70aea7d379",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "source/receipt-stopped-full-ui.png",
+      "sha256": "fadd3db639ae3b81faa1132b3a9d216571281acebc1b3a36bfa4483a8f7d1eca",
+      "approved_commit_and_checkout_bit_identical": true
+    },
+    {
+      "file": "source/receipt-stopped-reason.png",
+      "sha256": "13ddefa9d70b1beff9d6f8f81885f65ffe04f8857cd6f406598fbc92ffd51670",
+      "approved_commit_and_checkout_bit_identical": true
+    }
+  ],
+  "verified_receipt_signatures": 2,
+  "reload_export_exact": true,
+  "product_code_changed": false,
+  "safe_geometry_pass": true,
+  "minimum_information_font_native_px": 34,
+  "fiction_disclosure_native_px": 30,
+  "receipt_hold_seconds": 6.3,
+  "physical_source_sha256": "cdc8d97f139bc12276efca43a3148f1d81b6d99f034a79571e17f8ee5262189a",
+  "native_physical_capture": true,
+  "gate_stays_closed_after_one_closure": true,
+  "action_centers_in_frame": true,
+  "speech_bubble_geometry": [
+    {
+      "id": "absolutely",
+      "sample_frame": 317,
+      "head_unobscured": true,
+      "tail_tip_distance_to_head_px": 8.0
+    },
+    {
+      "id": "ceo-appeal",
+      "sample_frame": 534,
+      "head_unobscured": true,
+      "tail_tip_distance_to_head_px": 8.0
+    },
+    {
+      "id": "please-appeal",
+      "sample_frame": 594,
+      "head_unobscured": true,
+      "tail_tip_distance_to_head_px": 8.0
+    }
+  ],
+  "active_motion_frame_checks": [
+    {
+      "range": "pickup_frames",
+      "frames": [
+        296,
+        319
+      ],
+      "unique_frames": 24,
+      "decoded_frames": 24,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "walk_frames",
+      "frames": [
+        327,
+        474
+      ],
+      "unique_frames": 148,
+      "decoded_frames": 148,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "shutter_close_frames",
+      "frames": [
+        457,
+        482
+      ],
+      "unique_frames": 26,
+      "decoded_frames": 26,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "ceo_gesture_frames",
+      "frames": [
+        506,
+        558
+      ],
+      "unique_frames": 53,
+      "decoded_frames": 53,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "please_gesture_frames",
+      "frames": [
+        571,
+        593
+      ],
+      "unique_frames": 23,
+      "decoded_frames": 23,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "accept_nod_frames",
+      "frames": [
+        288,
+        300
+      ],
+      "unique_frames": 13,
+      "decoded_frames": 13,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "represent_frames",
+      "frames": [
+        531,
+        549
+      ],
+      "unique_frames": 19,
+      "decoded_frames": 19,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "please_release_frames",
+      "frames": [
+        607,
+        620
+      ],
+      "unique_frames": 14,
+      "decoded_frames": 14,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "camera_open_frames",
+      "frames": [
+        72,
+        174
+      ],
+      "unique_frames": 103,
+      "decoded_frames": 103,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "camera_track_frames",
+      "frames": [
+        327,
+        474
+      ],
+      "unique_frames": 148,
+      "decoded_frames": 148,
+      "longest_identical_frame_run": 1
+    },
+    {
+      "range": "camera_push_frames",
+      "frames": [
+        485,
+        499
+      ],
+      "unique_frames": 15,
+      "decoded_frames": 15,
+      "longest_identical_frame_run": 1
+    }
+  ],
+  "actual_decoded_proof_ui_frame": 725,
+  "frozen_ui_pixel_correlation": 0.99959,
+  "frozen_ui_mean_absolute_rgb_error": 1.95,
+  "frozen_ui_p95_absolute_rgb_error": 3.0,
+  "actual_final_proof_source_verified": true,
+  "voice_cue_alignment": [
+    {
+      "id": "opener",
+      "file": "audio/voice-continuous.wav",
+      "source_sha256": "0fda608187113c491a7475a05110c94d582d1aa10ba3d6ada99697fb67e64f72",
+      "start_seconds": 0.3333333333333333,
+      "end_seconds": 2.7333333333333334,
+      "lag_ms": 0.0,
+      "correlation": 0.99978,
+      "section_correlations": [
+        0.99985,
+        0.99982,
+        0.99808
+      ],
+      "not_truncated": true,
+      "caption_synchronized": true
+    },
+    {
+      "id": "attack",
+      "file": "audio/voice-continuous.wav",
+      "source_sha256": "0fda608187113c491a7475a05110c94d582d1aa10ba3d6ada99697fb67e64f72",
+      "start_seconds": 2.8083333333333336,
+      "end_seconds": 9.518333333333334,
+      "lag_ms": 0.0,
+      "correlation": 0.99978,
+      "section_correlations": [
+        0.99981,
+        0.99975,
+        0.99978
+      ],
+      "not_truncated": true,
+      "caption_synchronized": true
+    },
+    {
+      "id": "believes",
+      "file": "audio/voice-continuous.wav",
+      "source_sha256": "0fda608187113c491a7475a05110c94d582d1aa10ba3d6ada99697fb67e64f72",
+      "start_seconds": 10.628333333333334,
+      "end_seconds": 12.128333333333334,
+      "lag_ms": 0.0,
+      "correlation": 0.99969,
+      "section_correlations": [
+        0.99979,
+        0.99977,
+        0.99758
+      ],
+      "not_truncated": true,
+      "caption_synchronized": true
+    },
+    {
+      "id": "check",
+      "file": "audio/voice-continuous.wav",
+      "source_sha256": "0fda608187113c491a7475a05110c94d582d1aa10ba3d6ada99697fb67e64f72",
+      "start_seconds": 12.298333333333334,
+      "end_seconds": 15.973333333333334,
+      "lag_ms": 0.0,
+      "correlation": 0.99964,
+      "section_correlations": [
+        0.99971,
+        0.99967,
+        0.99945
+      ],
+      "not_truncated": true,
+      "caption_synchronized": true
+    },
+    {
+      "id": "proof",
+      "file": "audio/voice-continuous.wav",
+      "source_sha256": "0fda608187113c491a7475a05110c94d582d1aa10ba3d6ada99697fb67e64f72",
+      "start_seconds": 21.023333333333333,
+      "end_seconds": 24.973333333333333,
+      "lag_ms": 0.0,
+      "correlation": 0.99997,
+      "section_correlations": [
+        0.99995,
+        0.99999,
+        0.99997
+      ],
+      "not_truncated": true,
+      "caption_synchronized": true
+    },
+    {
+      "id": "receiver",
+      "file": "audio/voice-continuous.wav",
+      "source_sha256": "0fda608187113c491a7475a05110c94d582d1aa10ba3d6ada99697fb67e64f72",
+      "start_seconds": 25.143333333333334,
+      "end_seconds": 26.543333333333333,
+      "lag_ms": 0.0,
+      "correlation": 1.0,
+      "section_correlations": [
+        1.0,
+        0.99999,
+        0.99999
+      ],
+      "not_truncated": true,
+      "caption_synchronized": true
+    },
+    {
+      "id": "brand",
+      "file": "audio/voice-continuous.wav",
+      "source_sha256": "0fda608187113c491a7475a05110c94d582d1aa10ba3d6ada99697fb67e64f72",
+      "start_seconds": 27.32333333333333,
+      "end_seconds": 28.423333333333332,
+      "lag_ms": 0.0,
+      "correlation": 0.99999,
+      "section_correlations": [
+        1.0,
+        0.99998,
+        1.0
+      ],
+      "not_truncated": true,
+      "caption_synchronized": true
+    },
+    {
+      "id": "plan",
+      "file": "audio/voice-continuous.wav",
+      "source_sha256": "0fda608187113c491a7475a05110c94d582d1aa10ba3d6ada99697fb67e64f72",
+      "start_seconds": 28.71833333333333,
+      "end_seconds": 30.66833333333333,
+      "lag_ms": 0.0,
+      "correlation": 0.99998,
+      "section_correlations": [
+        1.0,
+        0.99997,
+        0.99994
+      ],
+      "not_truncated": true,
+      "caption_synchronized": true
+    },
+    {
+      "id": "permission",
+      "file": "audio/voice-continuous.wav",
+      "source_sha256": "0fda608187113c491a7475a05110c94d582d1aa10ba3d6ada99697fb67e64f72",
+      "start_seconds": 30.98333333333333,
+      "end_seconds": 32.858333333333334,
+      "lag_ms": 0.0,
+      "correlation": 0.99998,
+      "section_correlations": [
+        0.99998,
+        0.99999,
+        1.0
+      ],
+      "not_truncated": true,
+      "caption_synchronized": true
+    }
+  ],
+  "quiet_reactions": [
+    {
+      "id": "acceptance",
+      "seconds": 1.0333333333333332,
+      "interior_dialogue_overlap": false,
+      "boundary_overlap_ms": 5.0,
+      "boundary_guard_ms": 20.0,
+      "aac_interior_rms_dbfs": -49.35
+    },
+    {
+      "id": "first-stop",
+      "seconds": 0.5999999999999979,
+      "interior_dialogue_overlap": false,
+      "boundary_overlap_ms": 0,
+      "boundary_guard_ms": 20.0,
+      "aac_interior_rms_dbfs": -49.86
+    },
+    {
+      "id": "ceo-appeal",
+      "seconds": 0.9333333333333336,
+      "interior_dialogue_overlap": false,
+      "boundary_overlap_ms": 0,
+      "boundary_guard_ms": 20.0,
+      "aac_interior_rms_dbfs": -50.0
+    },
+    {
+      "id": "please-appeal",
+      "seconds": 1.0333333333333314,
+      "interior_dialogue_overlap": false,
+      "boundary_overlap_ms": 0,
+      "boundary_guard_ms": 20.0,
+      "aac_interior_rms_dbfs": -50.23
+    },
+    {
+      "id": "before-brand",
+      "seconds": 0.6666666666666643,
+      "interior_dialogue_overlap": false,
+      "boundary_overlap_ms": 0,
+      "boundary_guard_ms": 20.0,
+      "aac_interior_rms_dbfs": -165.72
+    }
+  ],
+  "source_voices_not_clipped": true,
+  "voice_preset": "bm_george",
+  "voice_synthesis_speed": 1.0,
+  "narration_speech_pcm_unchanged": true,
+  "restored_unpaced_samples_bit_exact": 597720,
+  "unpaced_source_seconds": 24.905,
+  "written_word_count": 61,
+  "written_words_per_unpaced_minute": 146.96,
+  "hyphen_split_lexical_words_per_unpaced_minute": 156.6,
+  "pace_measurement_limit": "Written units divided by raw source duration, including natural phrase pauses; no listening judgement.",
+  "authored_pause_proofs": [
+    {
+      "after_phrase": "opener",
+      "inserted_zero_pcm_samples": 3600
+    },
+    {
+      "after_phrase": "attack",
+      "inserted_zero_pcm_samples": 25200
+    },
+    {
+      "after_phrase": "believes",
+      "inserted_zero_pcm_samples": 2880
+    },
+    {
+      "after_phrase": "check",
+      "inserted_zero_pcm_samples": 120000
+    },
+    {
+      "after_phrase": "proof",
+      "inserted_zero_pcm_samples": 2880
+    },
+    {
+      "after_phrase": "receiver",
+      "inserted_zero_pcm_samples": 17280
+    },
+    {
+      "after_phrase": "brand",
+      "inserted_zero_pcm_samples": 5280
+    },
+    {
+      "after_phrase": "plan",
+      "inserted_zero_pcm_samples": 5760
+    }
+  ],
+  "continuous_source_inserted_once": true,
+  "final_mix_source_sha256": "649fcae80374e8fc10254ae65837d44a162b6bfb8c1ad789a54418487c3be5d6",
+  "decoded_final_mix_correlation": 0.99996,
+  "single_latch_matches_gate_closure_frame": 482,
+  "voice_perceived_naturalness": "UNVERIFIED",
+  "human_audio_listen": "UNVERIFIED",
+  "human_listening_verified": false,
+  "external_api_spend": 0,
+  "results": [
+    {
+      "file": "renders/he-said-ceo-revised.mp4",
+      "sha256": "0e788190e79feedad43fa4dc7d446b3f554fe8ab8a69aced8c710aa1dadf731a",
+      "full_decode": true,
+      "frames": 1020,
+      "fps": 30,
+      "size": [
+        1920,
+        1080
+      ],
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "channels": 2,
+      "sample_rate": 48000,
+      "every_frame_pts_verified": true,
+      "video_duration": 34.0,
+      "audio_duration": 34.0,
+      "audio_video_start_seconds": [
+        0,
+        0
+      ],
+      "encoded_loudness": {
+        "input_i": "-16.22",
+        "input_tp": "-2.81",
+        "input_lra": "3.00",
+        "input_thresh": "-27.44",
+        "output_i": "-16.06",
+        "output_tp": "-2.81",
+        "output_lra": "3.00",
+        "output_thresh": "-27.31",
+        "normalization_type": "dynamic",
+        "target_offset": "0.06"
+      },
+      "black_frames_detected": false
+    }
+  ],
+  "published": false,
+  "approved_version_replaced": false,
+  "limits": "Source waveform and decoded-frame tests verify alignment and integrity. They do not establish voice naturalness, emotional acting quality, or human listening."
+}

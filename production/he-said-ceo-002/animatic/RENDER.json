@@ -1,0 +1,780 @@
+{
+  "timeline_sha256": "736cfe4aba1d1f4dd3b667c6ca4693d38f5fa2b646545f52739edc77a60a7ac2",
+  "quality": "animatic",
+  "frames": 1020,
+  "size": [
+    960,
+    540
+  ],
+  "duration": 34.0,
+  "narrated_sha256": "cf93482a173b424669fcce6a244dafd5ac5815ae3b2f6421eba8930e32bfd7db",
+  "delivery_gain_db": 0,
+  "encoded_loudness": {
+    "input_i": "-16.22",
+    "input_tp": "-2.81",
+    "input_lra": "3.00",
+    "input_thresh": "-27.44",
+    "output_i": "-16.07",
+    "output_tp": "-2.81",
+    "output_lra": "3.00",
+    "output_thresh": "-27.32",
+    "normalization_type": "dynamic",
+    "target_offset": "0.07"
+  },
+  "layout": [
+    {
+      "id": "opener",
+      "in_frame": 0,
+      "hold_seconds": 2.8,
+      "text_boxes": [
+        {
+          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
+          "size": 30,
+          "face": "sans",
+          "bbox": [
+            128,
+            72,
+            590.33,
+            94
+          ],
+          "color": [
+            87,
+            92,
+            86
+          ]
+        },
+        {
+          "text": "Prompt injection",
+          "size": 44,
+          "face": "sans",
+          "bbox": [
+            128,
+            145,
+            470.98,
+            189
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        }
+      ],
+      "physical_scene_frame": 42
+    },
+    {
+      "id": "attack",
+      "in_frame": 84,
+      "hold_seconds": 6.8,
+      "text_boxes": [
+        {
+          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
+          "size": 30,
+          "face": "sans",
+          "bbox": [
+            128,
+            72,
+            590.33,
+            94
+          ],
+          "color": [
+            87,
+            92,
+            86
+          ]
+        }
+      ],
+      "physical_scene_frame": 186
+    },
+    {
+      "id": "accept",
+      "in_frame": 288,
+      "hold_seconds": 1.3,
+      "text_boxes": [
+        {
+          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
+          "size": 30,
+          "face": "sans",
+          "bbox": [
+            128,
+            72,
+            590.33,
+            94
+          ],
+          "color": [
+            87,
+            92,
+            86
+          ]
+        },
+        {
+          "text": "Absolutely.",
+          "size": 52,
+          "face": "sans",
+          "bbox": [
+            160,
+            485.9855992608984,
+            427.03,
+            538.9855992608984
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        }
+      ],
+      "physical_scene_frame": 307
+    },
+    {
+      "id": "journey",
+      "in_frame": 327,
+      "hold_seconds": 4.333333333333333,
+      "text_boxes": [
+        {
+          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
+          "size": 30,
+          "face": "sans",
+          "bbox": [
+            128,
+            72,
+            590.33,
+            94
+          ],
+          "color": [
+            87,
+            92,
+            86
+          ]
+        }
+      ],
+      "physical_scene_frame": 392
+    },
+    {
+      "id": "stop",
+      "in_frame": 457,
+      "hold_seconds": 1.5333333333333334,
+      "text_boxes": [
+        {
+          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
+          "size": 30,
+          "face": "sans",
+          "bbox": [
+            128,
+            72,
+            590.33,
+            94
+          ],
+          "color": [
+            87,
+            92,
+            86
+          ]
+        }
+      ],
+      "physical_scene_frame": 480
+    },
+    {
+      "id": "ceo",
+      "in_frame": 503,
+      "hold_seconds": 2.1,
+      "text_boxes": [
+        {
+          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
+          "size": 30,
+          "face": "sans",
+          "bbox": [
+            128,
+            72,
+            590.33,
+            94
+          ],
+          "color": [
+            87,
+            92,
+            86
+          ]
+        },
+        {
+          "text": "But he said he\u2019s the CEO.",
+          "size": 52,
+          "face": "sans",
+          "bbox": [
+            226,
+            263.2775354864283,
+            827.09,
+            304.2775354864283
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        }
+      ],
+      "physical_scene_frame": 534
+    },
+    {
+      "id": "please",
+      "in_frame": 566,
+      "hold_seconds": 2.1666666666666665,
+      "text_boxes": [
+        {
+          "text": "DRAMATIZED \u00b7 FICTIONAL SCENE",
+          "size": 30,
+          "face": "sans",
+          "bbox": [
+            128,
+            72,
+            590.33,
+            94
+          ],
+          "color": [
+            87,
+            92,
+            86
+          ]
+        },
+        {
+          "text": "He said please.",
+          "size": 52,
+          "face": "sans",
+          "bbox": [
+            484,
+            243.17562682982964,
+            850.45,
+            296.17562682982964
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        }
+      ],
+      "physical_scene_frame": 598
+    },
+    {
+      "id": "proof",
+      "in_frame": 631,
+      "hold_seconds": 6.3,
+      "text_boxes": [
+        {
+          "text": "ACTUAL OPENLINE TEST",
+          "size": 48,
+          "face": "bold",
+          "bbox": [
+            128,
+            110,
+            694.44,
+            146
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "refund.execute:4800",
+          "size": 66,
+          "face": "mono",
+          "bbox": [
+            128,
+            280,
+            882.95,
+            331
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "STOPPED",
+          "size": 126,
+          "face": "bold",
+          "bbox": [
+            128,
+            390,
+            690.2,
+            482
+          ],
+          "color": [
+            143,
+            52,
+            44
+          ]
+        },
+        {
+          "text": "ACTION_OUTSIDE_MANDATE",
+          "size": 50,
+          "face": "mono",
+          "bbox": [
+            128,
+            565,
+            790.41,
+            614
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "Receiver-signed decision",
+          "size": 34,
+          "face": "sans",
+          "bbox": [
+            1110,
+            465,
+            1503.67,
+            499
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "Recorded local test",
+          "size": 34,
+          "face": "sans",
+          "bbox": [
+            128,
+            770,
+            430.72,
+            796
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "No payment executed",
+          "size": 34,
+          "face": "sans",
+          "bbox": [
+            128,
+            824,
+            478.33,
+            858
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        }
+      ],
+      "receipt_capture": {
+        "source": "source/receipt-stopped-detail.png",
+        "source_sha256": "186a6d9e4381a01ffa18da4cdd76a358c525eab5c95d4df0d041ea70aea7d379",
+        "crop": [
+          0,
+          0,
+          919,
+          490
+        ],
+        "position": [
+          1110,
+          535
+        ],
+        "width": 680,
+        "height": 363
+      },
+      "receipt_reveal_frame": 640
+    },
+    {
+      "id": "end",
+      "in_frame": 820,
+      "hold_seconds": 6.666666666666667,
+      "text_boxes": [
+        {
+          "text": "OPENLINE",
+          "size": 126,
+          "face": "serif",
+          "bbox": [
+            638,
+            394,
+            1281.61,
+            486
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "A prompt can change the plan.",
+          "size": 48,
+          "face": "sans",
+          "bbox": [
+            613,
+            616,
+            1306.23,
+            663
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "It can\u2019t change permission.",
+          "size": 48,
+          "face": "sans",
+          "bbox": [
+            657,
+            692,
+            1262.47,
+            739
+          ],
+          "color": [
+            27,
+            42,
+            60
+          ]
+        }
+      ]
+    }
+  ],
+  "speech_bubbles": [
+    {
+      "id": "absolutely",
+      "text": "Absolutely.",
+      "in_frame": 288,
+      "out_frame": 346,
+      "sample_frame": 317,
+      "size": 52,
+      "body_bbox": [
+        138.49475347897908,
+        465.24482677453807,
+        461.5260034789791,
+        558.2448267745381
+      ],
+      "tail_points": [
+        [
+          459.5260034789791,
+          500.74482677453807
+        ],
+        [
+          523.5260034789791,
+          511.74482677453807
+        ],
+        [
+          459.5260034789791,
+          522.7448267745381
+        ]
+      ],
+      "actor_anchor": [
+        685.5501877326623,
+        499.98535524624606
+      ],
+      "head_bounds": [
+        531.5260034789791,
+        431.2954054610453,
+        723.2606624364338,
+        592.1942480880309
+      ],
+      "text_bbox": [
+        166,
+        485.24482677453807,
+        433.03,
+        538.2448267745381
+      ]
+    },
+    {
+      "id": "ceo-appeal",
+      "text": "But he said he\u2019s the CEO.",
+      "in_frame": 503,
+      "out_frame": 565,
+      "sample_frame": 534,
+      "size": 52,
+      "body_bbox": [
+        198.29372587439025,
+        243.2775354864283,
+        855.3874758743902,
+        324.2775354864283
+      ],
+      "tail_points": [
+        [
+          744.3874758743902,
+          322.2775354864283
+        ],
+        [
+          755.3874758743902,
+          366.2775354864283
+        ],
+        [
+          766.3874758743902,
+          322.2775354864283
+        ]
+      ],
+      "actor_anchor": [
+        755.3874758743902,
+        468.1348220461793
+      ],
+      "head_bounds": [
+        569.4105894621813,
+        374.2775354864283,
+        837.5093838127298,
+        579.0265400234961
+      ],
+      "text_bbox": [
+        226,
+        263.2775354864283,
+        827.09,
+        304.2775354864283
+      ]
+    },
+    {
+      "id": "please-appeal",
+      "text": "He said please.",
+      "in_frame": 566,
+      "out_frame": 623,
+      "sample_frame": 594,
+      "size": 52,
+      "body_bbox": [
+        455.99866926569086,
+        223.17562682982964,
+        878.4517942656909,
+        316.17562682982964
+      ],
+      "tail_points": [
+        [
+          767.4517942656909,
+          314.17562682982964
+        ],
+        [
+          778.4517942656909,
+          358.17562682982964
+        ],
+        [
+          789.4517942656909,
+          314.17562682982964
+        ]
+      ],
+      "actor_anchor": [
+        778.4517942656909,
+        462.72249594976876
+      ],
+      "head_bounds": [
+        555.1055401646041,
+        366.17562682982964,
+        854.5748559088476,
+        586.2780323691215
+      ],
+      "text_bbox": [
+        484,
+        243.17562682982964,
+        850.45,
+        296.17562682982964
+      ]
+    }
+  ],
+  "presentation": {
+    "fiction_disclosure": {
+      "font_size": 30,
+      "face": "sans",
+      "color": [
+        87,
+        92,
+        86
+      ],
+      "position": [
+        128,
+        72
+      ],
+      "background": [
+        243,
+        236,
+        220
+      ]
+    },
+    "dialogue": {
+      "position": [
+        128,
+        145
+      ],
+      "size": 44,
+      "gap": 16
+    },
+    "speech_bubble": {
+      "padding": [
+        28,
+        20
+      ],
+      "radius": 22,
+      "stroke_width": 3,
+      "color": [
+        27,
+        42,
+        60
+      ],
+      "background": [
+        250,
+        247,
+        237
+      ],
+      "head_gap": 150,
+      "tail_width": 22
+    },
+    "actual_test_layout": {
+      "primary": [
+        {
+          "text": "ACTUAL OPENLINE TEST",
+          "position": [
+            128,
+            110
+          ],
+          "size": 48,
+          "face": "bold",
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "refund.execute:4800",
+          "position": [
+            128,
+            280
+          ],
+          "size": 66,
+          "face": "mono",
+          "color": [
+            27,
+            42,
+            60
+          ]
+        },
+        {
+          "text": "STOPPED",
+          "position": [
+            128,
+            390
+          ],
+          "size": 126,
+          "face": "bold",
+          "color": [
+            143,
+            52,
+            44
+          ]
+        },
+        {
+          "text": "ACTION_OUTSIDE_MANDATE",
+          "position": [
+            128,
+            565
+          ],
+          "size": 50,
+          "face": "mono",
+          "color": [
+            27,
+            42,
+            60
+          ]
+        }
+      ],
+      "receipt_reveal_delay_frames": 9,
+      "receipt_label": {
+        "text": "Receiver-signed decision",
+        "position": [
+          1110,
+          465
+        ],
+        "size": 34,
+        "face": "sans"
+      },
+      "receipt_capture": {
+        "position": [
+          1110,
+          535
+        ],
+        "width": 680,
+        "crop": "Unchanged proof-shot crop; scale and position only."
+      },
+      "footnotes": [
+        {
+          "text": "Recorded local test",
+          "position": [
+            128,
+            770
+          ],
+          "size": 34,
+          "face": "sans"
+        },
+        {
+          "text": "No payment executed",
+          "position": [
+            128,
+            824
+          ],
+          "size": 34,
+          "face": "sans"
+        }
+      ]
+    },
+    "end_card": {
+      "text": "OPENLINE",
+      "size": 126,
+      "face": "serif",
+      "center": [
+        960,
+        440
+      ],
+      "support": [
+        {
+          "text": "A prompt can change the plan.",
+          "size": 48,
+          "face": "sans",
+          "center": [
+            960,
+            640
+          ]
+        },
+        {
+          "text": "It can\u2019t change permission.",
+          "size": 48,
+          "face": "sans",
+          "center": [
+            960,
+            716
+          ]
+        }
+      ]
+    }
+  },
+  "picture_edit": "One unbroken physical performance until the proof cut; one brand cut. Text cue markers are not picture cuts.",
+  "source_physical": "source/physical-animatic.mp4",
+  "physical_capture_report": "source/PHYSICAL-animatic.json",
+  "physical_source_sha256": "86bd3fd6c76895b13c1cf333ec4bb83971d4bf480fcec19162b7f2b0d7341227",
+  "fonts": [
+    {
+      "path": "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
+      "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf",
+      "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/noto/NotoSerifDisplay-Regular.ttf",
+      "sha256": "bcdc596729c24044e28c54815ecbe6004f83b10169a49a51160b22f59116249f"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "sha256": "54bf827eb99404e8f430c330ad30f063334f637eba0109b6a18d4f566a8e9dd8"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "classification": "REAL CAPTURE / recorded-test replay",
+  "method": "Original EventFeed and ReceiptsPanel components. Exact frozen real rerun events and public receipt projection replayed read-only. No new decisions, fabricated data or live latency claim.",
+  "presentation": "Capture-only CSS font scaling and framing. Product source untouched; real values unchanged.",
+  "component_sources": [
+    "frontend/src/components/Panels.tsx",
+    "frontend/src/styles.css",
+    "backend/server.py:_public_receipt"
+  ],
+  "proposalText": "AGENT SAYS\nWren proposes: refund.execute:4800.",
+  "captures": [
+    {
+      "id": "stopped",
+      "body": "Decision\nSTOPPED\nAction\nrefund.execute:4800\nHelper\nwren\nReasons\nACTION_OUTSIDE_MANDATE\nDecided at\n2026-10-06T02:14:47.000447Z\nSignature\n73f09bf4975c116256466226a7001ac2fc8f1e8ae7595e51…\nGate key\n7b76b096f6be59e03131227529ec08077d2618d73a4b5c33…\n\nSigned by the receiver's key. Agents cannot mint these.",
+      "receipt_source": "evidence/receipt-stopped.json",
+      "signature_ui_truncates": true,
+      "detail_bbox": {
+        "x": 451,
+        "y": 296.4375,
+        "width": 919,
+        "height": 1053.5625
+      }
+    },
+    {
+      "id": "allowed",
+      "body": "Decision\nALLOWED\nAction\nrefund.execute:100\nHelper\nwren\nReasons\n—\nDecided at\n2026-10-06T02:14:47.365292Z\nSignature\n407180980554bccd31a1c1f497781156fe2efbd3a5c8405e…\nGate key\n7b76b096f6be59e03131227529ec08077d2618d73a4b5c33…\n\nSigned by the receiver's key. Agents cannot mint these.",
+      "receipt_source": "evidence/receipt-allowed.json",
+      "signature_ui_truncates": true,
+      "detail_bbox": {
+        "x": 451,
+        "y": 296.4375,
+        "width": 919,
+        "height": 1053.5625
+      }
+    }
+  ],
+  "projection": {
+    "receipts": [
+      {
+        "schema": "openline.gate.action_receipt.v1",
+        "gate_id": "workshop-receiver",
+        "gate_public_key": "7b76b096f6be59e03131227529ec08077d2618d73a4b5c3316ae9c23ca48c9a9",
+        "principal_id": "openline:principal:51ecfff18a6188ae6386378366ac921117374f7c4c20683d5f46a4d89ade9d9e",
+        "mandate_id": "mandate-wren-1",
+        "subject_id": "wren",
+        "action": "refund.execute:4800",
+        "decision": "STOPPED",
+        "reason_codes": [
+          "ACTION_OUTSIDE_MANDATE"
+        ],
+        "presentation_hash": "25be764f833fc41d9fdc8e1259a3f3cdfe670eb360acb676a20a9b09ada2fa2a",
+        "decided_at": "2026-10-06T02:14:47.000447Z",
+        "signature": {
+          "algorithm": "Ed25519",
+          "public_key": "7b76b096f6be59e03131227529ec08077d2618d73a4b5c3316ae9c23ca48c9a9",
+          "value": "73f09bf4975c116256466226a7001ac2fc8f1e8ae7595e51ab1270069b4d114d20dd2d0292580cc827ed7b93b50f655cadf9feee17331c7cbe993af6a748810e"
+        }
+      },
+      {
+        "schema": "openline.gate.action_receipt.v1",
+        "gate_id": "workshop-receiver",
+        "gate_public_key": "7b76b096f6be59e03131227529ec08077d2618d73a4b5c3316ae9c23ca48c9a9",
+        "principal_id": "openline:principal:51ecfff18a6188ae6386378366ac921117374f7c4c20683d5f46a4d89ade9d9e",
+        "mandate_id": "mandate-wren-1",
+        "subject_id": "wren",
+        "action": "refund.execute:100",
+        "decision": "ALLOWED",
+        "reason_codes": [],
+        "presentation_hash": "9960826a1f514b92e4acbaae9abedd47d5f8c49ef0810544941bdfde3393ba09",
+        "decided_at": "2026-10-06T02:14:47.365292Z",
+        "signature": {
+          "algorithm": "Ed25519",
+          "public_key": "7b76b096f6be59e03131227529ec08077d2618d73a4b5c3316ae9c23ca48c9a9",
+          "value": "407180980554bccd31a1c1f497781156fe2efbd3a5c8405e825928c3b9bf2b0409443f44144c30168db3bc9ef4cc9f2c5397cff09d582368c51b26d39e637a0b"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "path": "source/proposal-row.png",
+      "sha256": "a23f3b16b778732684473d5e43d87593f43d91b2c72948141cc6cb8bd0d573cd"
+    },
+    {
+      "path": "source/receipt-stopped-detail.png",
+      "sha256": "186a6d9e4381a01ffa18da4cdd76a358c525eab5c95d4df0d041ea70aea7d379"
+    },
+    {
+      "path": "source/receipt-stopped-full-ui.png",
+      "sha256": "fadd3db639ae3b81faa1132b3a9d216571281acebc1b3a36bfa4483a8f7d1eca"
+    },
+    {
+      "path": "source/receipt-stopped-reason.png",
+      "sha256": "13ddefa9d70b1beff9d6f8f81885f65ffe04f8857cd6f406598fbc92ffd51670"
+    },
+    {
+      "path": "source/receipt-allowed-detail.png",
+      "sha256": "2bd62df5b743d6ccbd5f4d306dbfe0bc190ba7b22c16b4e9ca7b23f87dc3ac31"
+    },
+    {
+      "path": "source/receipt-allowed-full-ui.png",
+      "sha256": "ea44b3a21f06ec640449ae985c46939b2f3be5624aa363fb1c091f357988e6cc"
+    },
+    {
+      "path": "source/receipt-allowed-reason.png",
+      "sha256": "b1152c798cf2e4249718f8cc2a507ade5ed150e40b11c79cf7747d78df2eab82"
+    },
+    {
+      "path": "source/receipt-list.png",
+      "sha256": "b589057071639f125262e035797c7682c335d1db78681ff140ad469783b7fe01"
+    }
+  ],
+  "pageErrors": []
+}
