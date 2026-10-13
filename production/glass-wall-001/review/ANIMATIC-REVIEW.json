@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "stage_sha256": "2c1c665432a46fad924cf679e73b677f3aad48481da3c042f46d2595fb881e0c",
+  "timeline_sha256": "ff1603eb47cc782efafd38968bf7cf02472a3bbe497a44dd44a68046d22ad081",
+  "picture_sha256": "c610b49180d19ed3560331a435860c541f354e51334048dca2ebf9eb50f94122",
+  "reviewed_movie": "review/the-glass-wall-animatic.mp4",
+  "reviewed_actual_encoded_frames": true,
+  "review_coverage": "Every second of full64sec plus0.2secaction/lawyersequences and25native exactcueframes",
+  "findings": [
+    "Mature angular humans and matte small-optic mechanicalrobots consistent",
+    "Owner fingertipcontact31s and laterrefusal35s readable",
+    "Four impacts38/41.5/45/56.5 aligned with actualcontactposes",
+    "FirstBONK rebound and1.5secsilence hold reviewed",
+    "Margaret continuesmotion and speech afterownerrevocation",
+    "Glass is separate physicalpane besiderefuseddoor",
+    "Lawyer andcoffeerobot framedclearly",
+    "Receipt/endcard readable"
+  ],
+  "limitations": [
+    "Simplified amplitude-driven mouthmovement",
+    "Human audio listening unverified"
+  ],
+  "final_encoder_correction": "Explicit JPEGfullrangetoBT709limitedrangeconversionforportableH264"
+}

@@ -1,0 +1,13 @@
+{
+  "request": {
+    "text": "...rude.",
+    "voice": "af_sky",
+    "speed": 0.92,
+    "window_seconds": 1.38
+  },
+  "used_speed": 0.92,
+  "sample_rate": 24000,
+  "duration": 1.0666666666666667,
+  "phonemes": [],
+  "timing_source": "duration output unavailable"
+}

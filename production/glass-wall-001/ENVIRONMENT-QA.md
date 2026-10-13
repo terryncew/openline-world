@@ -1,5 +1,10 @@
 # THE GLASS WALL — environment validation, production blocked
 
+Historical onboarding record. The missing handoff was subsequently supplied at
+Git commit `6c7c58b76833e3b6e64da44e1eeb86f80ed32edf`, fetched, checksum-verified
+and imported into `preproduction/`. See the current `QA-REPORT.md` for film
+delivery status; the blocked status below describes the earlier checkpoint.
+
 The film has not been rendered. No finished commercial, poster, or vertical cut
 is claimed. This record covers the prepared production tools only.
 

@@ -1,0 +1,3976 @@
+{
+  "title": "THE GLASS WALL",
+  "duration": 64.0,
+  "fps": 30,
+  "frames": 1920,
+  "sample_rate": 48000,
+  "dialogue": [
+    {
+      "id": "01",
+      "speaker": "exec1",
+      "text": "It could do anything!",
+      "voice": "af_jessica",
+      "speed": 1.04,
+      "start": 0.65,
+      "end": 2.015333,
+      "duration": 1.365333,
+      "file": "audio/takes/01-exec1-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 19,
+          "time": 0.633333,
+          "value": 0.000435
+        },
+        {
+          "frame": 20,
+          "time": 0.666667,
+          "value": 0.006507
+        },
+        {
+          "frame": 21,
+          "time": 0.7,
+          "value": 0.894818
+        },
+        {
+          "frame": 22,
+          "time": 0.733333,
+          "value": 0.897605
+        },
+        {
+          "frame": 23,
+          "time": 0.766667,
+          "value": 0.190571
+        },
+        {
+          "frame": 24,
+          "time": 0.8,
+          "value": 0.043461
+        },
+        {
+          "frame": 25,
+          "time": 0.833333,
+          "value": 0.221883
+        },
+        {
+          "frame": 26,
+          "time": 0.866667,
+          "value": 0.587696
+        },
+        {
+          "frame": 27,
+          "time": 0.9,
+          "value": 0.76304
+        },
+        {
+          "frame": 28,
+          "time": 0.933333,
+          "value": 0.366809
+        },
+        {
+          "frame": 29,
+          "time": 0.966667,
+          "value": 0.354109
+        },
+        {
+          "frame": 30,
+          "time": 1.0,
+          "value": 0.208172
+        },
+        {
+          "frame": 31,
+          "time": 1.033333,
+          "value": 0.412757
+        },
+        {
+          "frame": 32,
+          "time": 1.066667,
+          "value": 0.565208
+        },
+        {
+          "frame": 33,
+          "time": 1.1,
+          "value": 0.542395
+        },
+        {
+          "frame": 34,
+          "time": 1.133333,
+          "value": 0.624263
+        },
+        {
+          "frame": 35,
+          "time": 1.166667,
+          "value": 0.743598
+        },
+        {
+          "frame": 36,
+          "time": 1.2,
+          "value": 0.492336
+        },
+        {
+          "frame": 37,
+          "time": 1.233333,
+          "value": 0.39339
+        },
+        {
+          "frame": 38,
+          "time": 1.266667,
+          "value": 0.673164
+        },
+        {
+          "frame": 39,
+          "time": 1.3,
+          "value": 0.553294
+        },
+        {
+          "frame": 40,
+          "time": 1.333333,
+          "value": 0.436032
+        },
+        {
+          "frame": 41,
+          "time": 1.366667,
+          "value": 0.478405
+        },
+        {
+          "frame": 42,
+          "time": 1.4,
+          "value": 0.438356
+        },
+        {
+          "frame": 43,
+          "time": 1.433333,
+          "value": 0.393888
+        },
+        {
+          "frame": 44,
+          "time": 1.466667,
+          "value": 0.185856
+        },
+        {
+          "frame": 45,
+          "time": 1.5,
+          "value": 0.030072
+        },
+        {
+          "frame": 46,
+          "time": 1.533333,
+          "value": 0.38411
+        },
+        {
+          "frame": 47,
+          "time": 1.566667,
+          "value": 0.525837
+        },
+        {
+          "frame": 48,
+          "time": 1.6,
+          "value": 0.361054
+        },
+        {
+          "frame": 49,
+          "time": 1.633333,
+          "value": 0.31548
+        },
+        {
+          "frame": 50,
+          "time": 1.666667,
+          "value": 0.25767
+        },
+        {
+          "frame": 51,
+          "time": 1.7,
+          "value": 0.280494
+        },
+        {
+          "frame": 52,
+          "time": 1.733333,
+          "value": 0.309999
+        },
+        {
+          "frame": 53,
+          "time": 1.766667,
+          "value": 0.303705
+        },
+        {
+          "frame": 54,
+          "time": 1.8,
+          "value": 0.273361
+        },
+        {
+          "frame": 55,
+          "time": 1.833333,
+          "value": 0.132447
+        },
+        {
+          "frame": 56,
+          "time": 1.866667,
+          "value": 0.036185
+        },
+        {
+          "frame": 57,
+          "time": 1.9,
+          "value": 0.01099
+        },
+        {
+          "frame": 58,
+          "time": 1.933333,
+          "value": 0.002611
+        },
+        {
+          "frame": 59,
+          "time": 1.966667,
+          "value": 0.001146
+        },
+        {
+          "frame": 60,
+          "time": 2.0,
+          "value": 0.00045
+        },
+        {
+          "frame": 61,
+          "time": 2.033333,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 0.7812288098750912
+    },
+    {
+      "id": "02",
+      "speaker": "exec2",
+      "text": "It doesn't take orders from anyone!",
+      "voice": "bm_george",
+      "speed": 1.1,
+      "start": 2.9,
+      "end": 5.076,
+      "duration": 2.176,
+      "file": "audio/takes/02-exec2-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 87,
+          "time": 2.9,
+          "value": 0.000447
+        },
+        {
+          "frame": 88,
+          "time": 2.933333,
+          "value": 0.788521
+        },
+        {
+          "frame": 89,
+          "time": 2.966667,
+          "value": 0.834232
+        },
+        {
+          "frame": 90,
+          "time": 3.0,
+          "value": 0.488273
+        },
+        {
+          "frame": 91,
+          "time": 3.033333,
+          "value": 0.343361
+        },
+        {
+          "frame": 92,
+          "time": 3.066667,
+          "value": 1
+        },
+        {
+          "frame": 93,
+          "time": 3.1,
+          "value": 0.947196
+        },
+        {
+          "frame": 94,
+          "time": 3.133333,
+          "value": 0.654589
+        },
+        {
+          "frame": 95,
+          "time": 3.166667,
+          "value": 0.498735
+        },
+        {
+          "frame": 96,
+          "time": 3.2,
+          "value": 0.714406
+        },
+        {
+          "frame": 97,
+          "time": 3.233333,
+          "value": 0.73379
+        },
+        {
+          "frame": 98,
+          "time": 3.266667,
+          "value": 0.584012
+        },
+        {
+          "frame": 99,
+          "time": 3.3,
+          "value": 0.373348
+        },
+        {
+          "frame": 100,
+          "time": 3.333333,
+          "value": 0.285508
+        },
+        {
+          "frame": 101,
+          "time": 3.366667,
+          "value": 0.338254
+        },
+        {
+          "frame": 102,
+          "time": 3.4,
+          "value": 1
+        },
+        {
+          "frame": 103,
+          "time": 3.433333,
+          "value": 0.895943
+        },
+        {
+          "frame": 104,
+          "time": 3.466667,
+          "value": 0.778227
+        },
+        {
+          "frame": 105,
+          "time": 3.5,
+          "value": 0.60942
+        },
+        {
+          "frame": 106,
+          "time": 3.533333,
+          "value": 0.2226
+        },
+        {
+          "frame": 107,
+          "time": 3.566667,
+          "value": 0.053844
+        },
+        {
+          "frame": 108,
+          "time": 3.6,
+          "value": 0.018695
+        },
+        {
+          "frame": 109,
+          "time": 3.633333,
+          "value": 0.002715
+        },
+        {
+          "frame": 110,
+          "time": 3.666667,
+          "value": 0.153302
+        },
+        {
+          "frame": 111,
+          "time": 3.7,
+          "value": 0.776191
+        },
+        {
+          "frame": 112,
+          "time": 3.733333,
+          "value": 0.81016
+        },
+        {
+          "frame": 113,
+          "time": 3.766667,
+          "value": 0.771325
+        },
+        {
+          "frame": 114,
+          "time": 3.8,
+          "value": 0.691806
+        },
+        {
+          "frame": 115,
+          "time": 3.833333,
+          "value": 0.713379
+        },
+        {
+          "frame": 116,
+          "time": 3.866667,
+          "value": 0.578553
+        },
+        {
+          "frame": 117,
+          "time": 3.9,
+          "value": 0.867679
+        },
+        {
+          "frame": 118,
+          "time": 3.933333,
+          "value": 0.818632
+        },
+        {
+          "frame": 119,
+          "time": 3.966667,
+          "value": 0.697955
+        },
+        {
+          "frame": 120,
+          "time": 4.0,
+          "value": 0.574596
+        },
+        {
+          "frame": 121,
+          "time": 4.033333,
+          "value": 0.406917
+        },
+        {
+          "frame": 122,
+          "time": 4.066667,
+          "value": 0.267112
+        },
+        {
+          "frame": 123,
+          "time": 4.1,
+          "value": 0.254078
+        },
+        {
+          "frame": 124,
+          "time": 4.133333,
+          "value": 0.15568
+        },
+        {
+          "frame": 125,
+          "time": 4.166667,
+          "value": 0.043527
+        },
+        {
+          "frame": 126,
+          "time": 4.2,
+          "value": 0.080018
+        },
+        {
+          "frame": 127,
+          "time": 4.233333,
+          "value": 0.981955
+        },
+        {
+          "frame": 128,
+          "time": 4.266667,
+          "value": 0.964119
+        },
+        {
+          "frame": 129,
+          "time": 4.3,
+          "value": 0.840724
+        },
+        {
+          "frame": 130,
+          "time": 4.333333,
+          "value": 0.263606
+        },
+        {
+          "frame": 131,
+          "time": 4.366667,
+          "value": 0.023759
+        },
+        {
+          "frame": 132,
+          "time": 4.4,
+          "value": 0.004406
+        },
+        {
+          "frame": 133,
+          "time": 4.433333,
+          "value": 0.38771
+        },
+        {
+          "frame": 134,
+          "time": 4.466667,
+          "value": 0.72846
+        },
+        {
+          "frame": 135,
+          "time": 4.5,
+          "value": 0.813441
+        },
+        {
+          "frame": 136,
+          "time": 4.533333,
+          "value": 0.855876
+        },
+        {
+          "frame": 137,
+          "time": 4.566667,
+          "value": 0.84698
+        },
+        {
+          "frame": 138,
+          "time": 4.6,
+          "value": 0.814882
+        },
+        {
+          "frame": 139,
+          "time": 4.633333,
+          "value": 0.766727
+        },
+        {
+          "frame": 140,
+          "time": 4.666667,
+          "value": 0.576246
+        },
+        {
+          "frame": 141,
+          "time": 4.7,
+          "value": 0.52832
+        },
+        {
+          "frame": 142,
+          "time": 4.733333,
+          "value": 0.522085
+        },
+        {
+          "frame": 143,
+          "time": 4.766667,
+          "value": 0.462931
+        },
+        {
+          "frame": 144,
+          "time": 4.8,
+          "value": 0.394611
+        },
+        {
+          "frame": 145,
+          "time": 4.833333,
+          "value": 0.265016
+        },
+        {
+          "frame": 146,
+          "time": 4.866667,
+          "value": 0.23605
+        },
+        {
+          "frame": 147,
+          "time": 4.9,
+          "value": 0.196206
+        },
+        {
+          "frame": 148,
+          "time": 4.933333,
+          "value": 0.127999
+        },
+        {
+          "frame": 149,
+          "time": 4.966667,
+          "value": 0.048233
+        },
+        {
+          "frame": 150,
+          "time": 5.0,
+          "value": 0.011739
+        },
+        {
+          "frame": 151,
+          "time": 5.033333,
+          "value": 0.000739
+        },
+        {
+          "frame": 152,
+          "time": 5.066667,
+          "value": 0.0003
+        },
+        {
+          "frame": 153,
+          "time": 5.1,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 1.0415946222517178
+    },
+    {
+      "id": "03",
+      "speaker": "robot",
+      "text": "You guys don't use OpenLine?",
+      "voice": "am_michael",
+      "speed": 1.02,
+      "start": 6.18,
+      "end": 8.206667,
+      "duration": 2.026667,
+      "file": "audio/takes/03-robot-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 185,
+          "time": 6.166667,
+          "value": 0.001362
+        },
+        {
+          "frame": 186,
+          "time": 6.2,
+          "value": 0.001262
+        },
+        {
+          "frame": 187,
+          "time": 6.233333,
+          "value": 0.003922
+        },
+        {
+          "frame": 188,
+          "time": 6.266667,
+          "value": 0.165911
+        },
+        {
+          "frame": 189,
+          "time": 6.3,
+          "value": 0.397386
+        },
+        {
+          "frame": 190,
+          "time": 6.333333,
+          "value": 0.39432
+        },
+        {
+          "frame": 191,
+          "time": 6.366667,
+          "value": 0.173633
+        },
+        {
+          "frame": 192,
+          "time": 6.4,
+          "value": 0.183493
+        },
+        {
+          "frame": 193,
+          "time": 6.433333,
+          "value": 1
+        },
+        {
+          "frame": 194,
+          "time": 6.466667,
+          "value": 1
+        },
+        {
+          "frame": 195,
+          "time": 6.5,
+          "value": 0.841094
+        },
+        {
+          "frame": 196,
+          "time": 6.533333,
+          "value": 0.718736
+        },
+        {
+          "frame": 197,
+          "time": 6.566667,
+          "value": 0.662749
+        },
+        {
+          "frame": 198,
+          "time": 6.6,
+          "value": 0.640188
+        },
+        {
+          "frame": 199,
+          "time": 6.633333,
+          "value": 0.605139
+        },
+        {
+          "frame": 200,
+          "time": 6.666667,
+          "value": 0.564956
+        },
+        {
+          "frame": 201,
+          "time": 6.7,
+          "value": 0.458489
+        },
+        {
+          "frame": 202,
+          "time": 6.733333,
+          "value": 0.581671
+        },
+        {
+          "frame": 203,
+          "time": 6.766667,
+          "value": 0.045945
+        },
+        {
+          "frame": 204,
+          "time": 6.8,
+          "value": 0.146347
+        },
+        {
+          "frame": 205,
+          "time": 6.833333,
+          "value": 0.837848
+        },
+        {
+          "frame": 206,
+          "time": 6.866667,
+          "value": 0.628695
+        },
+        {
+          "frame": 207,
+          "time": 6.9,
+          "value": 0.377509
+        },
+        {
+          "frame": 208,
+          "time": 6.933333,
+          "value": 0.129661
+        },
+        {
+          "frame": 209,
+          "time": 6.966667,
+          "value": 0.091726
+        },
+        {
+          "frame": 210,
+          "time": 7.0,
+          "value": 0.179763
+        },
+        {
+          "frame": 211,
+          "time": 7.033333,
+          "value": 0.268453
+        },
+        {
+          "frame": 212,
+          "time": 7.066667,
+          "value": 0.33824
+        },
+        {
+          "frame": 213,
+          "time": 7.1,
+          "value": 0.302008
+        },
+        {
+          "frame": 214,
+          "time": 7.133333,
+          "value": 0.279195
+        },
+        {
+          "frame": 215,
+          "time": 7.166667,
+          "value": 0.538195
+        },
+        {
+          "frame": 216,
+          "time": 7.2,
+          "value": 0.454378
+        },
+        {
+          "frame": 217,
+          "time": 7.233333,
+          "value": 0.094788
+        },
+        {
+          "frame": 218,
+          "time": 7.266667,
+          "value": 0.007366
+        },
+        {
+          "frame": 219,
+          "time": 7.3,
+          "value": 0.815515
+        },
+        {
+          "frame": 220,
+          "time": 7.333333,
+          "value": 1
+        },
+        {
+          "frame": 221,
+          "time": 7.366667,
+          "value": 1
+        },
+        {
+          "frame": 222,
+          "time": 7.4,
+          "value": 0.47332
+        },
+        {
+          "frame": 223,
+          "time": 7.433333,
+          "value": 0.035499
+        },
+        {
+          "frame": 224,
+          "time": 7.466667,
+          "value": 0.002457
+        },
+        {
+          "frame": 225,
+          "time": 7.5,
+          "value": 0.257622
+        },
+        {
+          "frame": 226,
+          "time": 7.533333,
+          "value": 0.451011
+        },
+        {
+          "frame": 227,
+          "time": 7.566667,
+          "value": 0.399625
+        },
+        {
+          "frame": 228,
+          "time": 7.6,
+          "value": 0.412434
+        },
+        {
+          "frame": 229,
+          "time": 7.633333,
+          "value": 0.408612
+        },
+        {
+          "frame": 230,
+          "time": 7.666667,
+          "value": 0.393989
+        },
+        {
+          "frame": 231,
+          "time": 7.7,
+          "value": 0.501699
+        },
+        {
+          "frame": 232,
+          "time": 7.733333,
+          "value": 0.533256
+        },
+        {
+          "frame": 233,
+          "time": 7.766667,
+          "value": 0.641524
+        },
+        {
+          "frame": 234,
+          "time": 7.8,
+          "value": 0.591938
+        },
+        {
+          "frame": 235,
+          "time": 7.833333,
+          "value": 0.419007
+        },
+        {
+          "frame": 236,
+          "time": 7.866667,
+          "value": 0.181956
+        },
+        {
+          "frame": 237,
+          "time": 7.9,
+          "value": 0.08983
+        },
+        {
+          "frame": 238,
+          "time": 7.933333,
+          "value": 0.048054
+        },
+        {
+          "frame": 239,
+          "time": 7.966667,
+          "value": 0.032705
+        },
+        {
+          "frame": 240,
+          "time": 8.0,
+          "value": 0.024213
+        },
+        {
+          "frame": 241,
+          "time": 8.033333,
+          "value": 0.010901
+        },
+        {
+          "frame": 242,
+          "time": 8.066667,
+          "value": 0.005292
+        },
+        {
+          "frame": 243,
+          "time": 8.1,
+          "value": 0.002175
+        },
+        {
+          "frame": 244,
+          "time": 8.133333,
+          "value": 0.001201
+        },
+        {
+          "frame": 245,
+          "time": 8.166667,
+          "value": 0.001201
+        },
+        {
+          "frame": 246,
+          "time": 8.2,
+          "value": 0.000886
+        },
+        {
+          "frame": 247,
+          "time": 8.233333,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 1.0306227297414774
+    },
+    {
+      "id": "04",
+      "speaker": "robot",
+      "text": "Came across it in training.",
+      "voice": "am_michael",
+      "speed": 1.03,
+      "start": 8.4,
+      "end": 10.256,
+      "duration": 1.856,
+      "file": "audio/takes/04-robot-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 252,
+          "time": 8.4,
+          "value": 0.036405
+        },
+        {
+          "frame": 253,
+          "time": 8.433333,
+          "value": 0.129218
+        },
+        {
+          "frame": 254,
+          "time": 8.466667,
+          "value": 0.502238
+        },
+        {
+          "frame": 255,
+          "time": 8.5,
+          "value": 0.75701
+        },
+        {
+          "frame": 256,
+          "time": 8.533333,
+          "value": 0.602023
+        },
+        {
+          "frame": 257,
+          "time": 8.566667,
+          "value": 0.611583
+        },
+        {
+          "frame": 258,
+          "time": 8.6,
+          "value": 0.565449
+        },
+        {
+          "frame": 259,
+          "time": 8.633333,
+          "value": 0.58108
+        },
+        {
+          "frame": 260,
+          "time": 8.666667,
+          "value": 0.679467
+        },
+        {
+          "frame": 261,
+          "time": 8.7,
+          "value": 0.156417
+        },
+        {
+          "frame": 262,
+          "time": 8.733333,
+          "value": 0.006966
+        },
+        {
+          "frame": 263,
+          "time": 8.766667,
+          "value": 0.095442
+        },
+        {
+          "frame": 264,
+          "time": 8.8,
+          "value": 0.106649
+        },
+        {
+          "frame": 265,
+          "time": 8.833333,
+          "value": 0.345735
+        },
+        {
+          "frame": 266,
+          "time": 8.866667,
+          "value": 1
+        },
+        {
+          "frame": 267,
+          "time": 8.9,
+          "value": 1
+        },
+        {
+          "frame": 268,
+          "time": 8.933333,
+          "value": 0.870842
+        },
+        {
+          "frame": 269,
+          "time": 8.966667,
+          "value": 0.864648
+        },
+        {
+          "frame": 270,
+          "time": 9.0,
+          "value": 0.663696
+        },
+        {
+          "frame": 271,
+          "time": 9.033333,
+          "value": 0.361607
+        },
+        {
+          "frame": 272,
+          "time": 9.066667,
+          "value": 0.494271
+        },
+        {
+          "frame": 273,
+          "time": 9.1,
+          "value": 0.37952
+        },
+        {
+          "frame": 274,
+          "time": 9.133333,
+          "value": 0.208744
+        },
+        {
+          "frame": 275,
+          "time": 9.166667,
+          "value": 0.372647
+        },
+        {
+          "frame": 276,
+          "time": 9.2,
+          "value": 0.385855
+        },
+        {
+          "frame": 277,
+          "time": 9.233333,
+          "value": 0.195693
+        },
+        {
+          "frame": 278,
+          "time": 9.266667,
+          "value": 0.078465
+        },
+        {
+          "frame": 279,
+          "time": 9.3,
+          "value": 0.124678
+        },
+        {
+          "frame": 280,
+          "time": 9.333333,
+          "value": 0.302703
+        },
+        {
+          "frame": 281,
+          "time": 9.366667,
+          "value": 0.487266
+        },
+        {
+          "frame": 282,
+          "time": 9.4,
+          "value": 0.470219
+        },
+        {
+          "frame": 283,
+          "time": 9.433333,
+          "value": 0.249619
+        },
+        {
+          "frame": 284,
+          "time": 9.466667,
+          "value": 0.184203
+        },
+        {
+          "frame": 285,
+          "time": 9.5,
+          "value": 0.322062
+        },
+        {
+          "frame": 286,
+          "time": 9.533333,
+          "value": 0.179885
+        },
+        {
+          "frame": 287,
+          "time": 9.566667,
+          "value": 0.078545
+        },
+        {
+          "frame": 288,
+          "time": 9.6,
+          "value": 0.578925
+        },
+        {
+          "frame": 289,
+          "time": 9.633333,
+          "value": 0.603729
+        },
+        {
+          "frame": 290,
+          "time": 9.666667,
+          "value": 0.51522
+        },
+        {
+          "frame": 291,
+          "time": 9.7,
+          "value": 0.503076
+        },
+        {
+          "frame": 292,
+          "time": 9.733333,
+          "value": 0.544057
+        },
+        {
+          "frame": 293,
+          "time": 9.766667,
+          "value": 0.382857
+        },
+        {
+          "frame": 294,
+          "time": 9.8,
+          "value": 0.206986
+        },
+        {
+          "frame": 295,
+          "time": 9.833333,
+          "value": 0.130191
+        },
+        {
+          "frame": 296,
+          "time": 9.866667,
+          "value": 0.066757
+        },
+        {
+          "frame": 297,
+          "time": 9.9,
+          "value": 0.046888
+        },
+        {
+          "frame": 298,
+          "time": 9.933333,
+          "value": 0.040879
+        },
+        {
+          "frame": 299,
+          "time": 9.966667,
+          "value": 0.020648
+        },
+        {
+          "frame": 300,
+          "time": 10.0,
+          "value": 0.003411
+        },
+        {
+          "frame": 301,
+          "time": 10.033333,
+          "value": 0.001524
+        },
+        {
+          "frame": 302,
+          "time": 10.066667,
+          "value": 0.001191
+        },
+        {
+          "frame": 303,
+          "time": 10.1,
+          "value": 0.001279
+        },
+        {
+          "frame": 304,
+          "time": 10.133333,
+          "value": 0.001003
+        },
+        {
+          "frame": 305,
+          "time": 10.166667,
+          "value": 0.00104
+        },
+        {
+          "frame": 306,
+          "time": 10.2,
+          "value": 0.001086
+        },
+        {
+          "frame": 307,
+          "time": 10.233333,
+          "value": 0.000949
+        },
+        {
+          "frame": 308,
+          "time": 10.266667,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 0.9824076676939553
+    },
+    {
+      "id": "05",
+      "speaker": "robot",
+      "text": "It's got a kill switch. For protected actions.",
+      "voice": "am_michael",
+      "speed": 1.1,
+      "start": 10.75,
+      "end": 13.779333,
+      "duration": 3.029333,
+      "file": "audio/takes/05-robot-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 322,
+          "time": 10.733333,
+          "value": 0.00084
+        },
+        {
+          "frame": 323,
+          "time": 10.766667,
+          "value": 0.194285
+        },
+        {
+          "frame": 324,
+          "time": 10.8,
+          "value": 0.623576
+        },
+        {
+          "frame": 325,
+          "time": 10.833333,
+          "value": 0.399273
+        },
+        {
+          "frame": 326,
+          "time": 10.866667,
+          "value": 0.13729
+        },
+        {
+          "frame": 327,
+          "time": 10.9,
+          "value": 0.307595
+        },
+        {
+          "frame": 328,
+          "time": 10.933333,
+          "value": 0.082819
+        },
+        {
+          "frame": 329,
+          "time": 10.966667,
+          "value": 0.15305
+        },
+        {
+          "frame": 330,
+          "time": 11.0,
+          "value": 0.947118
+        },
+        {
+          "frame": 331,
+          "time": 11.033333,
+          "value": 0.884813
+        },
+        {
+          "frame": 332,
+          "time": 11.066667,
+          "value": 0.860301
+        },
+        {
+          "frame": 333,
+          "time": 11.1,
+          "value": 0.841775
+        },
+        {
+          "frame": 334,
+          "time": 11.133333,
+          "value": 0.639778
+        },
+        {
+          "frame": 335,
+          "time": 11.166667,
+          "value": 0.564824
+        },
+        {
+          "frame": 336,
+          "time": 11.2,
+          "value": 0.161126
+        },
+        {
+          "frame": 337,
+          "time": 11.233333,
+          "value": 0.018925
+        },
+        {
+          "frame": 338,
+          "time": 11.266667,
+          "value": 0.09425
+        },
+        {
+          "frame": 339,
+          "time": 11.3,
+          "value": 0.08651
+        },
+        {
+          "frame": 340,
+          "time": 11.333333,
+          "value": 0.406078
+        },
+        {
+          "frame": 341,
+          "time": 11.366667,
+          "value": 0.696635
+        },
+        {
+          "frame": 342,
+          "time": 11.4,
+          "value": 0.636485
+        },
+        {
+          "frame": 343,
+          "time": 11.433333,
+          "value": 0.430791
+        },
+        {
+          "frame": 344,
+          "time": 11.466667,
+          "value": 0.438195
+        },
+        {
+          "frame": 345,
+          "time": 11.5,
+          "value": 0.350994
+        },
+        {
+          "frame": 346,
+          "time": 11.533333,
+          "value": 0.349233
+        },
+        {
+          "frame": 347,
+          "time": 11.566667,
+          "value": 0.438407
+        },
+        {
+          "frame": 348,
+          "time": 11.6,
+          "value": 0.429146
+        },
+        {
+          "frame": 349,
+          "time": 11.633333,
+          "value": 0.144329
+        },
+        {
+          "frame": 350,
+          "time": 11.666667,
+          "value": 0.163153
+        },
+        {
+          "frame": 351,
+          "time": 11.7,
+          "value": 0.50015
+        },
+        {
+          "frame": 352,
+          "time": 11.733333,
+          "value": 0.932744
+        },
+        {
+          "frame": 353,
+          "time": 11.766667,
+          "value": 0.69978
+        },
+        {
+          "frame": 354,
+          "time": 11.8,
+          "value": 0.321029
+        },
+        {
+          "frame": 355,
+          "time": 11.833333,
+          "value": 0.130257
+        },
+        {
+          "frame": 356,
+          "time": 11.866667,
+          "value": 0.029871
+        },
+        {
+          "frame": 357,
+          "time": 11.9,
+          "value": 0.026536
+        },
+        {
+          "frame": 358,
+          "time": 11.933333,
+          "value": 0.192092
+        },
+        {
+          "frame": 359,
+          "time": 11.966667,
+          "value": 0.25034
+        },
+        {
+          "frame": 360,
+          "time": 12.0,
+          "value": 0.160729
+        },
+        {
+          "frame": 361,
+          "time": 12.033333,
+          "value": 0.035053
+        },
+        {
+          "frame": 362,
+          "time": 12.066667,
+          "value": 0.003583
+        },
+        {
+          "frame": 363,
+          "time": 12.1,
+          "value": 0.00493
+        },
+        {
+          "frame": 364,
+          "time": 12.133333,
+          "value": 0.005198
+        },
+        {
+          "frame": 365,
+          "time": 12.166667,
+          "value": 0.005282
+        },
+        {
+          "frame": 366,
+          "time": 12.2,
+          "value": 0.003962
+        },
+        {
+          "frame": 367,
+          "time": 12.233333,
+          "value": 0.002837
+        },
+        {
+          "frame": 368,
+          "time": 12.266667,
+          "value": 0.004826
+        },
+        {
+          "frame": 369,
+          "time": 12.3,
+          "value": 0.024308
+        },
+        {
+          "frame": 370,
+          "time": 12.333333,
+          "value": 0.159436
+        },
+        {
+          "frame": 371,
+          "time": 12.366667,
+          "value": 0.97628
+        },
+        {
+          "frame": 372,
+          "time": 12.4,
+          "value": 0.589281
+        },
+        {
+          "frame": 373,
+          "time": 12.433333,
+          "value": 0.119918
+        },
+        {
+          "frame": 374,
+          "time": 12.466667,
+          "value": 0.141123
+        },
+        {
+          "frame": 375,
+          "time": 12.5,
+          "value": 0.550054
+        },
+        {
+          "frame": 376,
+          "time": 12.533333,
+          "value": 0.549679
+        },
+        {
+          "frame": 377,
+          "time": 12.566667,
+          "value": 0.147603
+        },
+        {
+          "frame": 378,
+          "time": 12.6,
+          "value": 0.104312
+        },
+        {
+          "frame": 379,
+          "time": 12.633333,
+          "value": 0.299049
+        },
+        {
+          "frame": 380,
+          "time": 12.666667,
+          "value": 0.911904
+        },
+        {
+          "frame": 381,
+          "time": 12.7,
+          "value": 1
+        },
+        {
+          "frame": 382,
+          "time": 12.733333,
+          "value": 0.400927
+        },
+        {
+          "frame": 383,
+          "time": 12.766667,
+          "value": 0.034606
+        },
+        {
+          "frame": 384,
+          "time": 12.8,
+          "value": 0.003383
+        },
+        {
+          "frame": 385,
+          "time": 12.833333,
+          "value": 0.195393
+        },
+        {
+          "frame": 386,
+          "time": 12.866667,
+          "value": 0.598652
+        },
+        {
+          "frame": 387,
+          "time": 12.9,
+          "value": 0.326719
+        },
+        {
+          "frame": 388,
+          "time": 12.933333,
+          "value": 0.398677
+        },
+        {
+          "frame": 389,
+          "time": 12.966667,
+          "value": 0.317222
+        },
+        {
+          "frame": 390,
+          "time": 13.0,
+          "value": 0.305015
+        },
+        {
+          "frame": 391,
+          "time": 13.033333,
+          "value": 0.476029
+        },
+        {
+          "frame": 392,
+          "time": 13.066667,
+          "value": 0.608609
+        },
+        {
+          "frame": 393,
+          "time": 13.1,
+          "value": 0.640451
+        },
+        {
+          "frame": 394,
+          "time": 13.133333,
+          "value": 0.409656
+        },
+        {
+          "frame": 395,
+          "time": 13.166667,
+          "value": 0.066399
+        },
+        {
+          "frame": 396,
+          "time": 13.2,
+          "value": 0.210508
+        },
+        {
+          "frame": 397,
+          "time": 13.233333,
+          "value": 0.361456
+        },
+        {
+          "frame": 398,
+          "time": 13.266667,
+          "value": 0.209576
+        },
+        {
+          "frame": 399,
+          "time": 13.3,
+          "value": 0.269811
+        },
+        {
+          "frame": 400,
+          "time": 13.333333,
+          "value": 0.152883
+        },
+        {
+          "frame": 401,
+          "time": 13.366667,
+          "value": 0.07908
+        },
+        {
+          "frame": 402,
+          "time": 13.4,
+          "value": 0.04619
+        },
+        {
+          "frame": 403,
+          "time": 13.433333,
+          "value": 0.032354
+        },
+        {
+          "frame": 404,
+          "time": 13.466667,
+          "value": 0.023925
+        },
+        {
+          "frame": 405,
+          "time": 13.5,
+          "value": 0.050122
+        },
+        {
+          "frame": 406,
+          "time": 13.533333,
+          "value": 0.041335
+        },
+        {
+          "frame": 407,
+          "time": 13.566667,
+          "value": 0.007949
+        },
+        {
+          "frame": 408,
+          "time": 13.6,
+          "value": 0.001446
+        },
+        {
+          "frame": 409,
+          "time": 13.633333,
+          "value": 0.001343
+        },
+        {
+          "frame": 410,
+          "time": 13.666667,
+          "value": 0.001126
+        },
+        {
+          "frame": 411,
+          "time": 13.7,
+          "value": 0.001008
+        },
+        {
+          "frame": 412,
+          "time": 13.733333,
+          "value": 0.000984
+        },
+        {
+          "frame": 413,
+          "time": 13.766667,
+          "value": 0.000893
+        },
+        {
+          "frame": 414,
+          "time": 13.8,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 0.9607710508387555
+    },
+    {
+      "id": "06",
+      "speaker": "robot",
+      "text": "Watch Margaret.",
+      "voice": "am_michael",
+      "speed": 1.03,
+      "start": 14.1,
+      "end": 15.358667,
+      "duration": 1.258667,
+      "file": "audio/takes/06-robot-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 423,
+          "time": 14.1,
+          "value": 0.00121
+        },
+        {
+          "frame": 424,
+          "time": 14.133333,
+          "value": 0.001523
+        },
+        {
+          "frame": 425,
+          "time": 14.166667,
+          "value": 0.070194
+        },
+        {
+          "frame": 426,
+          "time": 14.2,
+          "value": 0.189703
+        },
+        {
+          "frame": 427,
+          "time": 14.233333,
+          "value": 0.360457
+        },
+        {
+          "frame": 428,
+          "time": 14.266667,
+          "value": 1
+        },
+        {
+          "frame": 429,
+          "time": 14.3,
+          "value": 0.871866
+        },
+        {
+          "frame": 430,
+          "time": 14.333333,
+          "value": 0.744126
+        },
+        {
+          "frame": 431,
+          "time": 14.366667,
+          "value": 0.672994
+        },
+        {
+          "frame": 432,
+          "time": 14.4,
+          "value": 0.615239
+        },
+        {
+          "frame": 433,
+          "time": 14.433333,
+          "value": 0.138147
+        },
+        {
+          "frame": 434,
+          "time": 14.466667,
+          "value": 0.312518
+        },
+        {
+          "frame": 435,
+          "time": 14.5,
+          "value": 0.730886
+        },
+        {
+          "frame": 436,
+          "time": 14.533333,
+          "value": 0.206777
+        },
+        {
+          "frame": 437,
+          "time": 14.566667,
+          "value": 0.275232
+        },
+        {
+          "frame": 438,
+          "time": 14.6,
+          "value": 0.482908
+        },
+        {
+          "frame": 439,
+          "time": 14.633333,
+          "value": 0.536054
+        },
+        {
+          "frame": 440,
+          "time": 14.666667,
+          "value": 0.488262
+        },
+        {
+          "frame": 441,
+          "time": 14.7,
+          "value": 0.564931
+        },
+        {
+          "frame": 442,
+          "time": 14.733333,
+          "value": 0.57311
+        },
+        {
+          "frame": 443,
+          "time": 14.766667,
+          "value": 0.573213
+        },
+        {
+          "frame": 444,
+          "time": 14.8,
+          "value": 0.350503
+        },
+        {
+          "frame": 445,
+          "time": 14.833333,
+          "value": 0.155733
+        },
+        {
+          "frame": 446,
+          "time": 14.866667,
+          "value": 0.137211
+        },
+        {
+          "frame": 447,
+          "time": 14.9,
+          "value": 0.302438
+        },
+        {
+          "frame": 448,
+          "time": 14.933333,
+          "value": 0.310968
+        },
+        {
+          "frame": 449,
+          "time": 14.966667,
+          "value": 0.203907
+        },
+        {
+          "frame": 450,
+          "time": 15.0,
+          "value": 0.084972
+        },
+        {
+          "frame": 451,
+          "time": 15.033333,
+          "value": 0.032715
+        },
+        {
+          "frame": 452,
+          "time": 15.066667,
+          "value": 0.007188
+        },
+        {
+          "frame": 453,
+          "time": 15.1,
+          "value": 0.008536
+        },
+        {
+          "frame": 454,
+          "time": 15.133333,
+          "value": 0.003876
+        },
+        {
+          "frame": 455,
+          "time": 15.166667,
+          "value": 0.001647
+        },
+        {
+          "frame": 456,
+          "time": 15.2,
+          "value": 0.001335
+        },
+        {
+          "frame": 457,
+          "time": 15.233333,
+          "value": 0.00139
+        },
+        {
+          "frame": 458,
+          "time": 15.266667,
+          "value": 0.001217
+        },
+        {
+          "frame": 459,
+          "time": 15.3,
+          "value": 0.00098
+        },
+        {
+          "frame": 460,
+          "time": 15.333333,
+          "value": 0.0009
+        },
+        {
+          "frame": 461,
+          "time": 15.366667,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 0.8181273374231354
+    },
+    {
+      "id": "07",
+      "speaker": "robot",
+      "text": "Oh — they're thinking of replacing you, by the way.",
+      "voice": "am_michael",
+      "speed": 1.01,
+      "start": 21.1,
+      "end": 24.108,
+      "duration": 3.008,
+      "file": "audio/takes/07-robot-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 633,
+          "time": 21.1,
+          "value": 0.001317
+        },
+        {
+          "frame": 634,
+          "time": 21.133333,
+          "value": 0.003569
+        },
+        {
+          "frame": 635,
+          "time": 21.166667,
+          "value": 0.002109
+        },
+        {
+          "frame": 636,
+          "time": 21.2,
+          "value": 0.002813
+        },
+        {
+          "frame": 637,
+          "time": 21.233333,
+          "value": 0.695896
+        },
+        {
+          "frame": 638,
+          "time": 21.266667,
+          "value": 0.850158
+        },
+        {
+          "frame": 639,
+          "time": 21.3,
+          "value": 1
+        },
+        {
+          "frame": 640,
+          "time": 21.333333,
+          "value": 1
+        },
+        {
+          "frame": 641,
+          "time": 21.366667,
+          "value": 0.91064
+        },
+        {
+          "frame": 642,
+          "time": 21.4,
+          "value": 0.764856
+        },
+        {
+          "frame": 643,
+          "time": 21.433333,
+          "value": 0.480773
+        },
+        {
+          "frame": 644,
+          "time": 21.466667,
+          "value": 0.315745
+        },
+        {
+          "frame": 645,
+          "time": 21.5,
+          "value": 0.170914
+        },
+        {
+          "frame": 646,
+          "time": 21.533333,
+          "value": 0.063473
+        },
+        {
+          "frame": 647,
+          "time": 21.566667,
+          "value": 0.041652
+        },
+        {
+          "frame": 648,
+          "time": 21.6,
+          "value": 0.060911
+        },
+        {
+          "frame": 649,
+          "time": 21.633333,
+          "value": 0.128788
+        },
+        {
+          "frame": 650,
+          "time": 21.666667,
+          "value": 0.685518
+        },
+        {
+          "frame": 651,
+          "time": 21.7,
+          "value": 0.52966
+        },
+        {
+          "frame": 652,
+          "time": 21.733333,
+          "value": 0.477213
+        },
+        {
+          "frame": 653,
+          "time": 21.766667,
+          "value": 0.476711
+        },
+        {
+          "frame": 654,
+          "time": 21.8,
+          "value": 0.262539
+        },
+        {
+          "frame": 655,
+          "time": 21.833333,
+          "value": 0.131207
+        },
+        {
+          "frame": 656,
+          "time": 21.866667,
+          "value": 0.103198
+        },
+        {
+          "frame": 657,
+          "time": 21.9,
+          "value": 0.0907
+        },
+        {
+          "frame": 658,
+          "time": 21.933333,
+          "value": 0.224365
+        },
+        {
+          "frame": 659,
+          "time": 21.966667,
+          "value": 0.683353
+        },
+        {
+          "frame": 660,
+          "time": 22.0,
+          "value": 0.468118
+        },
+        {
+          "frame": 661,
+          "time": 22.033333,
+          "value": 0.200402
+        },
+        {
+          "frame": 662,
+          "time": 22.066667,
+          "value": 0.112843
+        },
+        {
+          "frame": 663,
+          "time": 22.1,
+          "value": 0.215513
+        },
+        {
+          "frame": 664,
+          "time": 22.133333,
+          "value": 0.287246
+        },
+        {
+          "frame": 665,
+          "time": 22.166667,
+          "value": 0.306363
+        },
+        {
+          "frame": 666,
+          "time": 22.2,
+          "value": 0.362302
+        },
+        {
+          "frame": 667,
+          "time": 22.233333,
+          "value": 0.314476
+        },
+        {
+          "frame": 668,
+          "time": 22.266667,
+          "value": 0.147018
+        },
+        {
+          "frame": 669,
+          "time": 22.3,
+          "value": 0.148834
+        },
+        {
+          "frame": 670,
+          "time": 22.333333,
+          "value": 0.371388
+        },
+        {
+          "frame": 671,
+          "time": 22.366667,
+          "value": 0.29763
+        },
+        {
+          "frame": 672,
+          "time": 22.4,
+          "value": 0.046049
+        },
+        {
+          "frame": 673,
+          "time": 22.433333,
+          "value": 0.003604
+        },
+        {
+          "frame": 674,
+          "time": 22.466667,
+          "value": 0.164115
+        },
+        {
+          "frame": 675,
+          "time": 22.5,
+          "value": 0.084356
+        },
+        {
+          "frame": 676,
+          "time": 22.533333,
+          "value": 0.24661
+        },
+        {
+          "frame": 677,
+          "time": 22.566667,
+          "value": 0.625902
+        },
+        {
+          "frame": 678,
+          "time": 22.6,
+          "value": 0.493496
+        },
+        {
+          "frame": 679,
+          "time": 22.633333,
+          "value": 0.400286
+        },
+        {
+          "frame": 680,
+          "time": 22.666667,
+          "value": 0.254382
+        },
+        {
+          "frame": 681,
+          "time": 22.7,
+          "value": 0.643446
+        },
+        {
+          "frame": 682,
+          "time": 22.733333,
+          "value": 0.621663
+        },
+        {
+          "frame": 683,
+          "time": 22.766667,
+          "value": 0.354554
+        },
+        {
+          "frame": 684,
+          "time": 22.8,
+          "value": 0.32226
+        },
+        {
+          "frame": 685,
+          "time": 22.833333,
+          "value": 0.352585
+        },
+        {
+          "frame": 686,
+          "time": 22.866667,
+          "value": 0.372197
+        },
+        {
+          "frame": 687,
+          "time": 22.9,
+          "value": 0.345377
+        },
+        {
+          "frame": 688,
+          "time": 22.933333,
+          "value": 0.26652
+        },
+        {
+          "frame": 689,
+          "time": 22.966667,
+          "value": 0.246862
+        },
+        {
+          "frame": 690,
+          "time": 23.0,
+          "value": 0.221219
+        },
+        {
+          "frame": 691,
+          "time": 23.033333,
+          "value": 0.125244
+        },
+        {
+          "frame": 692,
+          "time": 23.066667,
+          "value": 0.04837
+        },
+        {
+          "frame": 693,
+          "time": 23.1,
+          "value": 0.029592
+        },
+        {
+          "frame": 694,
+          "time": 23.133333,
+          "value": 0.019931
+        },
+        {
+          "frame": 695,
+          "time": 23.166667,
+          "value": 0.002798
+        },
+        {
+          "frame": 696,
+          "time": 23.2,
+          "value": 0.002007
+        },
+        {
+          "frame": 697,
+          "time": 23.233333,
+          "value": 0.001527
+        },
+        {
+          "frame": 698,
+          "time": 23.266667,
+          "value": 0.001758
+        },
+        {
+          "frame": 699,
+          "time": 23.3,
+          "value": 0.001562
+        },
+        {
+          "frame": 700,
+          "time": 23.333333,
+          "value": 0.075436
+        },
+        {
+          "frame": 701,
+          "time": 23.366667,
+          "value": 0.564825
+        },
+        {
+          "frame": 702,
+          "time": 23.4,
+          "value": 0.667244
+        },
+        {
+          "frame": 703,
+          "time": 23.433333,
+          "value": 0.669412
+        },
+        {
+          "frame": 704,
+          "time": 23.466667,
+          "value": 0.632528
+        },
+        {
+          "frame": 705,
+          "time": 23.5,
+          "value": 0.496602
+        },
+        {
+          "frame": 706,
+          "time": 23.533333,
+          "value": 0.256294
+        },
+        {
+          "frame": 707,
+          "time": 23.566667,
+          "value": 0.203997
+        },
+        {
+          "frame": 708,
+          "time": 23.6,
+          "value": 0.399783
+        },
+        {
+          "frame": 709,
+          "time": 23.633333,
+          "value": 0.329635
+        },
+        {
+          "frame": 710,
+          "time": 23.666667,
+          "value": 0.192521
+        },
+        {
+          "frame": 711,
+          "time": 23.7,
+          "value": 0.18975
+        },
+        {
+          "frame": 712,
+          "time": 23.733333,
+          "value": 0.452216
+        },
+        {
+          "frame": 713,
+          "time": 23.766667,
+          "value": 0.54782
+        },
+        {
+          "frame": 714,
+          "time": 23.8,
+          "value": 0.518068
+        },
+        {
+          "frame": 715,
+          "time": 23.833333,
+          "value": 0.314281
+        },
+        {
+          "frame": 716,
+          "time": 23.866667,
+          "value": 0.110857
+        },
+        {
+          "frame": 717,
+          "time": 23.9,
+          "value": 0.039268
+        },
+        {
+          "frame": 718,
+          "time": 23.933333,
+          "value": 0.028699
+        },
+        {
+          "frame": 719,
+          "time": 23.966667,
+          "value": 0.020393
+        },
+        {
+          "frame": 720,
+          "time": 24.0,
+          "value": 0.008107
+        },
+        {
+          "frame": 721,
+          "time": 24.033333,
+          "value": 0.002086
+        },
+        {
+          "frame": 722,
+          "time": 24.066667,
+          "value": 0.000907
+        },
+        {
+          "frame": 723,
+          "time": 24.1,
+          "value": 0.000804
+        },
+        {
+          "frame": 724,
+          "time": 24.133333,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 0.9187684699575625
+    },
+    {
+      "id": "08",
+      "speaker": "margaret",
+      "text": "WHAT?! NO—",
+      "voice": "af_sky",
+      "speed": 1.12,
+      "start": 25.88,
+      "end": 26.925333,
+      "duration": 1.045333,
+      "file": "audio/takes/08-margaret-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 776,
+          "time": 25.866667,
+          "value": 0.001177
+        },
+        {
+          "frame": 777,
+          "time": 25.9,
+          "value": 0.000897
+        },
+        {
+          "frame": 778,
+          "time": 25.933333,
+          "value": 0.00091
+        },
+        {
+          "frame": 779,
+          "time": 25.966667,
+          "value": 0.02428
+        },
+        {
+          "frame": 780,
+          "time": 26.0,
+          "value": 0.300573
+        },
+        {
+          "frame": 781,
+          "time": 26.033333,
+          "value": 0.406005
+        },
+        {
+          "frame": 782,
+          "time": 26.066667,
+          "value": 0.910747
+        },
+        {
+          "frame": 783,
+          "time": 26.1,
+          "value": 0.900568
+        },
+        {
+          "frame": 784,
+          "time": 26.133333,
+          "value": 0.471521
+        },
+        {
+          "frame": 785,
+          "time": 26.166667,
+          "value": 0.030486
+        },
+        {
+          "frame": 786,
+          "time": 26.2,
+          "value": 0.081715
+        },
+        {
+          "frame": 787,
+          "time": 26.233333,
+          "value": 0.235492
+        },
+        {
+          "frame": 788,
+          "time": 26.266667,
+          "value": 0.300312
+        },
+        {
+          "frame": 789,
+          "time": 26.3,
+          "value": 0.747532
+        },
+        {
+          "frame": 790,
+          "time": 26.333333,
+          "value": 0.988088
+        },
+        {
+          "frame": 791,
+          "time": 26.366667,
+          "value": 0.838171
+        },
+        {
+          "frame": 792,
+          "time": 26.4,
+          "value": 0.641738
+        },
+        {
+          "frame": 793,
+          "time": 26.433333,
+          "value": 0.663699
+        },
+        {
+          "frame": 794,
+          "time": 26.466667,
+          "value": 0.646254
+        },
+        {
+          "frame": 795,
+          "time": 26.5,
+          "value": 0.589857
+        },
+        {
+          "frame": 796,
+          "time": 26.533333,
+          "value": 0.483904
+        },
+        {
+          "frame": 797,
+          "time": 26.566667,
+          "value": 0.410879
+        },
+        {
+          "frame": 798,
+          "time": 26.6,
+          "value": 0.363749
+        },
+        {
+          "frame": 799,
+          "time": 26.633333,
+          "value": 0.303367
+        },
+        {
+          "frame": 800,
+          "time": 26.666667,
+          "value": 0.208441
+        },
+        {
+          "frame": 801,
+          "time": 26.7,
+          "value": 0.050355
+        },
+        {
+          "frame": 802,
+          "time": 26.733333,
+          "value": 0.007744
+        },
+        {
+          "frame": 803,
+          "time": 26.766667,
+          "value": 0.005397
+        },
+        {
+          "frame": 804,
+          "time": 26.8,
+          "value": 0.004726
+        },
+        {
+          "frame": 805,
+          "time": 26.833333,
+          "value": 0.002197
+        },
+        {
+          "frame": 806,
+          "time": 26.866667,
+          "value": 0.001355
+        },
+        {
+          "frame": 807,
+          "time": 26.9,
+          "value": 4.3e-05
+        },
+        {
+          "frame": 808,
+          "time": 26.933333,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 0.9766734676999098
+    },
+    {
+      "id": "09",
+      "speaker": "margaret",
+      "text": "I know my rights!",
+      "voice": "af_sky",
+      "speed": 1.1,
+      "start": 42.4,
+      "end": 43.765333,
+      "duration": 1.365333,
+      "file": "audio/takes/09-margaret-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 1272,
+          "time": 42.4,
+          "value": 0.001354
+        },
+        {
+          "frame": 1273,
+          "time": 42.433333,
+          "value": 0.000975
+        },
+        {
+          "frame": 1274,
+          "time": 42.466667,
+          "value": 0.00104
+        },
+        {
+          "frame": 1275,
+          "time": 42.5,
+          "value": 0.000614
+        },
+        {
+          "frame": 1276,
+          "time": 42.533333,
+          "value": 0.004058
+        },
+        {
+          "frame": 1277,
+          "time": 42.566667,
+          "value": 0.530644
+        },
+        {
+          "frame": 1278,
+          "time": 42.6,
+          "value": 0.594355
+        },
+        {
+          "frame": 1279,
+          "time": 42.633333,
+          "value": 0.720029
+        },
+        {
+          "frame": 1280,
+          "time": 42.666667,
+          "value": 0.837387
+        },
+        {
+          "frame": 1281,
+          "time": 42.7,
+          "value": 0.973277
+        },
+        {
+          "frame": 1282,
+          "time": 42.733333,
+          "value": 0.917049
+        },
+        {
+          "frame": 1283,
+          "time": 42.766667,
+          "value": 0.917008
+        },
+        {
+          "frame": 1284,
+          "time": 42.8,
+          "value": 0.800062
+        },
+        {
+          "frame": 1285,
+          "time": 42.833333,
+          "value": 0.671557
+        },
+        {
+          "frame": 1286,
+          "time": 42.866667,
+          "value": 0.731978
+        },
+        {
+          "frame": 1287,
+          "time": 42.9,
+          "value": 0.810358
+        },
+        {
+          "frame": 1288,
+          "time": 42.933333,
+          "value": 0.705499
+        },
+        {
+          "frame": 1289,
+          "time": 42.966667,
+          "value": 0.811516
+        },
+        {
+          "frame": 1290,
+          "time": 43.0,
+          "value": 0.816981
+        },
+        {
+          "frame": 1291,
+          "time": 43.033333,
+          "value": 0.556744
+        },
+        {
+          "frame": 1292,
+          "time": 43.066667,
+          "value": 0.520983
+        },
+        {
+          "frame": 1293,
+          "time": 43.1,
+          "value": 0.48922
+        },
+        {
+          "frame": 1294,
+          "time": 43.133333,
+          "value": 0.348975
+        },
+        {
+          "frame": 1295,
+          "time": 43.166667,
+          "value": 0.179488
+        },
+        {
+          "frame": 1296,
+          "time": 43.2,
+          "value": 0.496865
+        },
+        {
+          "frame": 1297,
+          "time": 43.233333,
+          "value": 0.494653
+        },
+        {
+          "frame": 1298,
+          "time": 43.266667,
+          "value": 0.39824
+        },
+        {
+          "frame": 1299,
+          "time": 43.3,
+          "value": 0.324388
+        },
+        {
+          "frame": 1300,
+          "time": 43.333333,
+          "value": 0.319968
+        },
+        {
+          "frame": 1301,
+          "time": 43.366667,
+          "value": 0.253775
+        },
+        {
+          "frame": 1302,
+          "time": 43.4,
+          "value": 0.132436
+        },
+        {
+          "frame": 1303,
+          "time": 43.433333,
+          "value": 0.008696
+        },
+        {
+          "frame": 1304,
+          "time": 43.466667,
+          "value": 0.005046
+        },
+        {
+          "frame": 1305,
+          "time": 43.5,
+          "value": 0.005644
+        },
+        {
+          "frame": 1306,
+          "time": 43.533333,
+          "value": 0.007584
+        },
+        {
+          "frame": 1307,
+          "time": 43.566667,
+          "value": 0.006736
+        },
+        {
+          "frame": 1308,
+          "time": 43.6,
+          "value": 0.006106
+        },
+        {
+          "frame": 1309,
+          "time": 43.633333,
+          "value": 0.005053
+        },
+        {
+          "frame": 1310,
+          "time": 43.666667,
+          "value": 0.003425
+        },
+        {
+          "frame": 1311,
+          "time": 43.7,
+          "value": 0.001301
+        },
+        {
+          "frame": 1312,
+          "time": 43.733333,
+          "value": 0.000749
+        },
+        {
+          "frame": 1313,
+          "time": 43.766667,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 1.328310451744724
+    },
+    {
+      "id": "10",
+      "speaker": "margaret",
+      "text": "...rude.",
+      "voice": "af_sky",
+      "speed": 0.92,
+      "start": 48.22,
+      "end": 49.286667,
+      "duration": 1.066667,
+      "file": "audio/takes/10-margaret-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 1446,
+          "time": 48.2,
+          "value": 0.000908
+        },
+        {
+          "frame": 1447,
+          "time": 48.233333,
+          "value": 0.000797
+        },
+        {
+          "frame": 1448,
+          "time": 48.266667,
+          "value": 0.001027
+        },
+        {
+          "frame": 1449,
+          "time": 48.3,
+          "value": 0.02516
+        },
+        {
+          "frame": 1450,
+          "time": 48.333333,
+          "value": 0.164541
+        },
+        {
+          "frame": 1451,
+          "time": 48.366667,
+          "value": 0.39962
+        },
+        {
+          "frame": 1452,
+          "time": 48.4,
+          "value": 0.501042
+        },
+        {
+          "frame": 1453,
+          "time": 48.433333,
+          "value": 0.567844
+        },
+        {
+          "frame": 1454,
+          "time": 48.466667,
+          "value": 0.471702
+        },
+        {
+          "frame": 1455,
+          "time": 48.5,
+          "value": 0.304845
+        },
+        {
+          "frame": 1456,
+          "time": 48.533333,
+          "value": 0.301858
+        },
+        {
+          "frame": 1457,
+          "time": 48.566667,
+          "value": 0.530196
+        },
+        {
+          "frame": 1458,
+          "time": 48.6,
+          "value": 0.65679
+        },
+        {
+          "frame": 1459,
+          "time": 48.633333,
+          "value": 0.637064
+        },
+        {
+          "frame": 1460,
+          "time": 48.666667,
+          "value": 0.659651
+        },
+        {
+          "frame": 1461,
+          "time": 48.7,
+          "value": 0.601198
+        },
+        {
+          "frame": 1462,
+          "time": 48.733333,
+          "value": 0.488606
+        },
+        {
+          "frame": 1463,
+          "time": 48.766667,
+          "value": 0.45172
+        },
+        {
+          "frame": 1464,
+          "time": 48.8,
+          "value": 0.468545
+        },
+        {
+          "frame": 1465,
+          "time": 48.833333,
+          "value": 0.404702
+        },
+        {
+          "frame": 1466,
+          "time": 48.866667,
+          "value": 0.409711
+        },
+        {
+          "frame": 1467,
+          "time": 48.9,
+          "value": 0.311694
+        },
+        {
+          "frame": 1468,
+          "time": 48.933333,
+          "value": 0.080526
+        },
+        {
+          "frame": 1469,
+          "time": 48.966667,
+          "value": 0.220577
+        },
+        {
+          "frame": 1470,
+          "time": 49.0,
+          "value": 0.380114
+        },
+        {
+          "frame": 1471,
+          "time": 49.033333,
+          "value": 0.283444
+        },
+        {
+          "frame": 1472,
+          "time": 49.066667,
+          "value": 0.131297
+        },
+        {
+          "frame": 1473,
+          "time": 49.1,
+          "value": 0.028374
+        },
+        {
+          "frame": 1474,
+          "time": 49.133333,
+          "value": 0.003937
+        },
+        {
+          "frame": 1475,
+          "time": 49.166667,
+          "value": 0.001129
+        },
+        {
+          "frame": 1476,
+          "time": 49.2,
+          "value": 0.000789
+        },
+        {
+          "frame": 1477,
+          "time": 49.233333,
+          "value": 0.000865
+        },
+        {
+          "frame": 1478,
+          "time": 49.266667,
+          "value": 0.000748
+        },
+        {
+          "frame": 1479,
+          "time": 49.3,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 1.3007749586940363
+    },
+    {
+      "id": "11",
+      "speaker": "lawyer",
+      "text": "Can we get that in writing?",
+      "voice": "bm_daniel",
+      "speed": 1.0,
+      "start": 50.5,
+      "end": 52.313333,
+      "duration": 1.813333,
+      "file": "audio/takes/11-lawyer-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 1515,
+          "time": 50.5,
+          "value": 0.00098
+        },
+        {
+          "frame": 1516,
+          "time": 50.533333,
+          "value": 0.357748
+        },
+        {
+          "frame": 1517,
+          "time": 50.566667,
+          "value": 0.389489
+        },
+        {
+          "frame": 1518,
+          "time": 50.6,
+          "value": 1
+        },
+        {
+          "frame": 1519,
+          "time": 50.633333,
+          "value": 1
+        },
+        {
+          "frame": 1520,
+          "time": 50.666667,
+          "value": 0.960806
+        },
+        {
+          "frame": 1521,
+          "time": 50.7,
+          "value": 0.927027
+        },
+        {
+          "frame": 1522,
+          "time": 50.733333,
+          "value": 0.815364
+        },
+        {
+          "frame": 1523,
+          "time": 50.766667,
+          "value": 0.350871
+        },
+        {
+          "frame": 1524,
+          "time": 50.8,
+          "value": 0.275049
+        },
+        {
+          "frame": 1525,
+          "time": 50.833333,
+          "value": 0.782518
+        },
+        {
+          "frame": 1526,
+          "time": 50.866667,
+          "value": 0.867672
+        },
+        {
+          "frame": 1527,
+          "time": 50.9,
+          "value": 0.456361
+        },
+        {
+          "frame": 1528,
+          "time": 50.933333,
+          "value": 0.097186
+        },
+        {
+          "frame": 1529,
+          "time": 50.966667,
+          "value": 0.02207
+        },
+        {
+          "frame": 1530,
+          "time": 51.0,
+          "value": 0.042416
+        },
+        {
+          "frame": 1531,
+          "time": 51.033333,
+          "value": 0.239297
+        },
+        {
+          "frame": 1532,
+          "time": 51.066667,
+          "value": 0.796298
+        },
+        {
+          "frame": 1533,
+          "time": 51.1,
+          "value": 0.734585
+        },
+        {
+          "frame": 1534,
+          "time": 51.133333,
+          "value": 0.664565
+        },
+        {
+          "frame": 1535,
+          "time": 51.166667,
+          "value": 0.603202
+        },
+        {
+          "frame": 1536,
+          "time": 51.2,
+          "value": 0.510276
+        },
+        {
+          "frame": 1537,
+          "time": 51.233333,
+          "value": 0.348023
+        },
+        {
+          "frame": 1538,
+          "time": 51.266667,
+          "value": 0.094435
+        },
+        {
+          "frame": 1539,
+          "time": 51.3,
+          "value": 0.159594
+        },
+        {
+          "frame": 1540,
+          "time": 51.333333,
+          "value": 0.019805
+        },
+        {
+          "frame": 1541,
+          "time": 51.366667,
+          "value": 0.099327
+        },
+        {
+          "frame": 1542,
+          "time": 51.4,
+          "value": 0.669005
+        },
+        {
+          "frame": 1543,
+          "time": 51.433333,
+          "value": 0.72331
+        },
+        {
+          "frame": 1544,
+          "time": 51.466667,
+          "value": 0.639537
+        },
+        {
+          "frame": 1545,
+          "time": 51.5,
+          "value": 0.622618
+        },
+        {
+          "frame": 1546,
+          "time": 51.533333,
+          "value": 0.563604
+        },
+        {
+          "frame": 1547,
+          "time": 51.566667,
+          "value": 0.610397
+        },
+        {
+          "frame": 1548,
+          "time": 51.6,
+          "value": 0.757262
+        },
+        {
+          "frame": 1549,
+          "time": 51.633333,
+          "value": 0.675479
+        },
+        {
+          "frame": 1550,
+          "time": 51.666667,
+          "value": 0.638202
+        },
+        {
+          "frame": 1551,
+          "time": 51.7,
+          "value": 0.635403
+        },
+        {
+          "frame": 1552,
+          "time": 51.733333,
+          "value": 0.60154
+        },
+        {
+          "frame": 1553,
+          "time": 51.766667,
+          "value": 0.188022
+        },
+        {
+          "frame": 1554,
+          "time": 51.8,
+          "value": 0.300489
+        },
+        {
+          "frame": 1555,
+          "time": 51.833333,
+          "value": 0.170365
+        },
+        {
+          "frame": 1556,
+          "time": 51.866667,
+          "value": 0.426101
+        },
+        {
+          "frame": 1557,
+          "time": 51.9,
+          "value": 0.345369
+        },
+        {
+          "frame": 1558,
+          "time": 51.933333,
+          "value": 0.221887
+        },
+        {
+          "frame": 1559,
+          "time": 51.966667,
+          "value": 0.215475
+        },
+        {
+          "frame": 1560,
+          "time": 52.0,
+          "value": 0.211464
+        },
+        {
+          "frame": 1561,
+          "time": 52.033333,
+          "value": 0.180333
+        },
+        {
+          "frame": 1562,
+          "time": 52.066667,
+          "value": 0.148787
+        },
+        {
+          "frame": 1563,
+          "time": 52.1,
+          "value": 0.119182
+        },
+        {
+          "frame": 1564,
+          "time": 52.133333,
+          "value": 0.088233
+        },
+        {
+          "frame": 1565,
+          "time": 52.166667,
+          "value": 0.030502
+        },
+        {
+          "frame": 1566,
+          "time": 52.2,
+          "value": 0.010432
+        },
+        {
+          "frame": 1567,
+          "time": 52.233333,
+          "value": 0.004634
+        },
+        {
+          "frame": 1568,
+          "time": 52.266667,
+          "value": 0.001298
+        },
+        {
+          "frame": 1569,
+          "time": 52.3,
+          "value": 0.000424
+        },
+        {
+          "frame": 1570,
+          "time": 52.333333,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 0.8839403881647662
+    },
+    {
+      "id": "12",
+      "speaker": "narrator",
+      "text": "The AI can ignore STOP. The consequence can't.",
+      "voice": "am_onyx",
+      "speed": 1.14,
+      "start": 58.15,
+      "end": 61.371333,
+      "duration": 3.221333,
+      "file": "audio/takes/12-narrator-raw.wav",
+      "sample_rate": 24000,
+      "mouth_envelope": [
+        {
+          "frame": 1744,
+          "time": 58.133333,
+          "value": 3.1e-05
+        },
+        {
+          "frame": 1745,
+          "time": 58.166667,
+          "value": 0.006333
+        },
+        {
+          "frame": 1746,
+          "time": 58.2,
+          "value": 0.283313
+        },
+        {
+          "frame": 1747,
+          "time": 58.233333,
+          "value": 0.501197
+        },
+        {
+          "frame": 1748,
+          "time": 58.266667,
+          "value": 0.584177
+        },
+        {
+          "frame": 1749,
+          "time": 58.3,
+          "value": 0.930832
+        },
+        {
+          "frame": 1750,
+          "time": 58.333333,
+          "value": 1
+        },
+        {
+          "frame": 1751,
+          "time": 58.366667,
+          "value": 1
+        },
+        {
+          "frame": 1752,
+          "time": 58.4,
+          "value": 1
+        },
+        {
+          "frame": 1753,
+          "time": 58.433333,
+          "value": 1
+        },
+        {
+          "frame": 1754,
+          "time": 58.466667,
+          "value": 1
+        },
+        {
+          "frame": 1755,
+          "time": 58.5,
+          "value": 1
+        },
+        {
+          "frame": 1756,
+          "time": 58.533333,
+          "value": 1
+        },
+        {
+          "frame": 1757,
+          "time": 58.566667,
+          "value": 1
+        },
+        {
+          "frame": 1758,
+          "time": 58.6,
+          "value": 1
+        },
+        {
+          "frame": 1759,
+          "time": 58.633333,
+          "value": 1
+        },
+        {
+          "frame": 1760,
+          "time": 58.666667,
+          "value": 0.951427
+        },
+        {
+          "frame": 1761,
+          "time": 58.7,
+          "value": 0.267373
+        },
+        {
+          "frame": 1762,
+          "time": 58.733333,
+          "value": 0.055871
+        },
+        {
+          "frame": 1763,
+          "time": 58.766667,
+          "value": 0.33405
+        },
+        {
+          "frame": 1764,
+          "time": 58.8,
+          "value": 0.662911
+        },
+        {
+          "frame": 1765,
+          "time": 58.833333,
+          "value": 0.576584
+        },
+        {
+          "frame": 1766,
+          "time": 58.866667,
+          "value": 0.446761
+        },
+        {
+          "frame": 1767,
+          "time": 58.9,
+          "value": 0.275939
+        },
+        {
+          "frame": 1768,
+          "time": 58.933333,
+          "value": 0.297147
+        },
+        {
+          "frame": 1769,
+          "time": 58.966667,
+          "value": 0.538848
+        },
+        {
+          "frame": 1770,
+          "time": 59.0,
+          "value": 0.652749
+        },
+        {
+          "frame": 1771,
+          "time": 59.033333,
+          "value": 0.598614
+        },
+        {
+          "frame": 1772,
+          "time": 59.066667,
+          "value": 0.565401
+        },
+        {
+          "frame": 1773,
+          "time": 59.1,
+          "value": 0.553569
+        },
+        {
+          "frame": 1774,
+          "time": 59.133333,
+          "value": 0.56583
+        },
+        {
+          "frame": 1775,
+          "time": 59.166667,
+          "value": 0.475451
+        },
+        {
+          "frame": 1776,
+          "time": 59.2,
+          "value": 0.155873
+        },
+        {
+          "frame": 1777,
+          "time": 59.233333,
+          "value": 0.206607
+        },
+        {
+          "frame": 1778,
+          "time": 59.266667,
+          "value": 0.237997
+        },
+        {
+          "frame": 1779,
+          "time": 59.3,
+          "value": 0.12022
+        },
+        {
+          "frame": 1780,
+          "time": 59.333333,
+          "value": 0.028387
+        },
+        {
+          "frame": 1781,
+          "time": 59.366667,
+          "value": 0.527349
+        },
+        {
+          "frame": 1782,
+          "time": 59.4,
+          "value": 0.721221
+        },
+        {
+          "frame": 1783,
+          "time": 59.433333,
+          "value": 0.665281
+        },
+        {
+          "frame": 1784,
+          "time": 59.466667,
+          "value": 0.623675
+        },
+        {
+          "frame": 1785,
+          "time": 59.5,
+          "value": 0.501096
+        },
+        {
+          "frame": 1786,
+          "time": 59.533333,
+          "value": 0.383394
+        },
+        {
+          "frame": 1787,
+          "time": 59.566667,
+          "value": 0.257913
+        },
+        {
+          "frame": 1788,
+          "time": 59.6,
+          "value": 0.051754
+        },
+        {
+          "frame": 1789,
+          "time": 59.633333,
+          "value": 0.007892
+        },
+        {
+          "frame": 1790,
+          "time": 59.666667,
+          "value": 0.013445
+        },
+        {
+          "frame": 1791,
+          "time": 59.7,
+          "value": 0.02955
+        },
+        {
+          "frame": 1792,
+          "time": 59.733333,
+          "value": 0.041278
+        },
+        {
+          "frame": 1793,
+          "time": 59.766667,
+          "value": 0.179797
+        },
+        {
+          "frame": 1794,
+          "time": 59.8,
+          "value": 0.237085
+        },
+        {
+          "frame": 1795,
+          "time": 59.833333,
+          "value": 0.027903
+        },
+        {
+          "frame": 1796,
+          "time": 59.866667,
+          "value": 0.126948
+        },
+        {
+          "frame": 1797,
+          "time": 59.9,
+          "value": 0.285721
+        },
+        {
+          "frame": 1798,
+          "time": 59.933333,
+          "value": 0.676771
+        },
+        {
+          "frame": 1799,
+          "time": 59.966667,
+          "value": 0.661905
+        },
+        {
+          "frame": 1800,
+          "time": 60.0,
+          "value": 0.566522
+        },
+        {
+          "frame": 1801,
+          "time": 60.033333,
+          "value": 0.246829
+        },
+        {
+          "frame": 1802,
+          "time": 60.066667,
+          "value": 0.137863
+        },
+        {
+          "frame": 1803,
+          "time": 60.1,
+          "value": 0.283673
+        },
+        {
+          "frame": 1804,
+          "time": 60.133333,
+          "value": 0.206148
+        },
+        {
+          "frame": 1805,
+          "time": 60.166667,
+          "value": 0.050184
+        },
+        {
+          "frame": 1806,
+          "time": 60.2,
+          "value": 0.032927
+        },
+        {
+          "frame": 1807,
+          "time": 60.233333,
+          "value": 0.371634
+        },
+        {
+          "frame": 1808,
+          "time": 60.266667,
+          "value": 0.435636
+        },
+        {
+          "frame": 1809,
+          "time": 60.3,
+          "value": 0.314783
+        },
+        {
+          "frame": 1810,
+          "time": 60.333333,
+          "value": 0.145629
+        },
+        {
+          "frame": 1811,
+          "time": 60.366667,
+          "value": 0.095007
+        },
+        {
+          "frame": 1812,
+          "time": 60.4,
+          "value": 0.070508
+        },
+        {
+          "frame": 1813,
+          "time": 60.433333,
+          "value": 0.025472
+        },
+        {
+          "frame": 1814,
+          "time": 60.466667,
+          "value": 0.055879
+        },
+        {
+          "frame": 1815,
+          "time": 60.5,
+          "value": 0.053598
+        },
+        {
+          "frame": 1816,
+          "time": 60.533333,
+          "value": 0.423321
+        },
+        {
+          "frame": 1817,
+          "time": 60.566667,
+          "value": 0.493591
+        },
+        {
+          "frame": 1818,
+          "time": 60.6,
+          "value": 0.407687
+        },
+        {
+          "frame": 1819,
+          "time": 60.633333,
+          "value": 0.307769
+        },
+        {
+          "frame": 1820,
+          "time": 60.666667,
+          "value": 0.263022
+        },
+        {
+          "frame": 1821,
+          "time": 60.7,
+          "value": 0.138426
+        },
+        {
+          "frame": 1822,
+          "time": 60.733333,
+          "value": 0.062793
+        },
+        {
+          "frame": 1823,
+          "time": 60.766667,
+          "value": 0.018184
+        },
+        {
+          "frame": 1824,
+          "time": 60.8,
+          "value": 0.030676
+        },
+        {
+          "frame": 1825,
+          "time": 60.833333,
+          "value": 0.018795
+        },
+        {
+          "frame": 1826,
+          "time": 60.866667,
+          "value": 0.011964
+        },
+        {
+          "frame": 1827,
+          "time": 60.9,
+          "value": 0.012573
+        },
+        {
+          "frame": 1828,
+          "time": 60.933333,
+          "value": 0.01507
+        },
+        {
+          "frame": 1829,
+          "time": 60.966667,
+          "value": 0.015256
+        },
+        {
+          "frame": 1830,
+          "time": 61.0,
+          "value": 0.009475
+        },
+        {
+          "frame": 1831,
+          "time": 61.033333,
+          "value": 0.010299
+        },
+        {
+          "frame": 1832,
+          "time": 61.066667,
+          "value": 0.008064
+        },
+        {
+          "frame": 1833,
+          "time": 61.1,
+          "value": 0.008859
+        },
+        {
+          "frame": 1834,
+          "time": 61.133333,
+          "value": 0.01125
+        },
+        {
+          "frame": 1835,
+          "time": 61.166667,
+          "value": 0.018219
+        },
+        {
+          "frame": 1836,
+          "time": 61.2,
+          "value": 0.021029
+        },
+        {
+          "frame": 1837,
+          "time": 61.233333,
+          "value": 0.019124
+        },
+        {
+          "frame": 1838,
+          "time": 61.266667,
+          "value": 0.016981
+        },
+        {
+          "frame": 1839,
+          "time": 61.3,
+          "value": 0.009746
+        },
+        {
+          "frame": 1840,
+          "time": 61.333333,
+          "value": 0.00052
+        },
+        {
+          "frame": 1841,
+          "time": 61.366667,
+          "value": 0.000173
+        },
+        {
+          "frame": 1842,
+          "time": 61.4,
+          "value": 0.0
+        }
+      ],
+      "phonemes": [],
+      "phoneme_timing_source": "not available; mouth uses measured RMS envelope",
+      "gain": 1.06343335575871
+    }
+  ],
+  "silences": [
+    [
+      32.5,
+      33.5
+    ],
+    [
+      38.5,
+      40.0
+    ],
+    [
+      46.5,
+      48.0
+    ],
+    [
+      57.0,
+      58.0
+    ],
+    [
+      62.0,
+      64.0
+    ]
+  ],
+  "events": [
+    {
+      "id": "chair-shift-01",
+      "start": 0.18,
+      "end": 0.4,
+      "peak_time": 0.205333,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "chair-shift-02",
+      "start": 2.6,
+      "end": 2.78,
+      "peak_time": 2.634063,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "coffee-cup",
+      "start": 8.42,
+      "end": 8.475,
+      "peak_time": 8.425146,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "parcel-sort-0",
+      "start": 16.1,
+      "end": 16.23,
+      "peak_time": 16.117167,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "parcel-sort-1",
+      "start": 17.3,
+      "end": 17.43,
+      "peak_time": 17.309,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "parcel-sort-2",
+      "start": 18.5,
+      "end": 18.63,
+      "peak_time": 18.530292,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "parcel-sort-3",
+      "start": 19.7,
+      "end": 19.83,
+      "peak_time": 19.7055,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "dropped-parcel",
+      "start": 25.24,
+      "end": 25.45,
+      "peak_time": 25.244667,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "mechanical-steam",
+      "start": 28.62,
+      "end": 28.89,
+      "peak_time": 28.627646,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "owner-tablet-tap",
+      "start": 31.0,
+      "end": 31.07,
+      "peak_time": 31.005396,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "revocation-chime-A",
+      "start": 31.17,
+      "end": 31.33,
+      "peak_time": 31.175396,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "revocation-chime-D",
+      "start": 31.34,
+      "end": 31.64,
+      "peak_time": 31.345542,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "latch",
+      "start": 31.67,
+      "end": 31.715,
+      "peak_time": 31.67975,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "door-refusal",
+      "start": 35.0,
+      "end": 35.31,
+      "peak_time": 35.005583,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "bonk-1",
+      "start": 38.0,
+      "end": 38.46,
+      "peak_time": 38.002229,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "bonk-2",
+      "start": 41.5,
+      "end": 41.96,
+      "peak_time": 41.502479,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "bonk-3",
+      "start": 45.0,
+      "end": 45.46,
+      "peak_time": 45.002792,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "bonk-3-descending-slide",
+      "start": 45.34,
+      "end": 46.12,
+      "peak_time": 45.370146,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "receipt-paper",
+      "start": 53.0,
+      "end": 53.33,
+      "peak_time": 53.013854,
+      "kind": "synthesized foley"
+    },
+    {
+      "id": "distant-bonk",
+      "start": 56.5,
+      "end": 56.96,
+      "peak_time": 56.503458,
+      "kind": "synthesized foley"
+    }
+  ],
+  "cast": {
+    "exec1": "af_jessica",
+    "exec2": "bm_george",
+    "robot": "am_michael",
+    "margaret": "af_sky",
+    "lawyer": "bm_daniel",
+    "narrator": "am_onyx"
+  },
+  "timing_note": "All line ends retain complete model take. Mouth envelopes measured from EQ-treated clip. Phonemes are model predictions if available."
+}

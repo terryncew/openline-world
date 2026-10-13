@@ -1,0 +1,13 @@
+{
+  "request": {
+    "text": "Oh — they're thinking of replacing you, by the way.",
+    "voice": "am_michael",
+    "speed": 1.01,
+    "window_seconds": 4.25
+  },
+  "used_speed": 1.01,
+  "sample_rate": 24000,
+  "duration": 3.008,
+  "phonemes": [],
+  "timing_source": "duration output unavailable"
+}

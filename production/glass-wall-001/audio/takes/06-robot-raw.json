@@ -1,0 +1,13 @@
+{
+  "request": {
+    "text": "Watch Margaret.",
+    "voice": "am_michael",
+    "speed": 1.03,
+    "window_seconds": 1.38
+  },
+  "used_speed": 1.03,
+  "sample_rate": 24000,
+  "duration": 1.2586666666666666,
+  "phonemes": [],
+  "timing_source": "duration output unavailable"
+}

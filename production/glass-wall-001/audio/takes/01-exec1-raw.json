@@ -1,0 +1,13 @@
+{
+  "request": {
+    "text": "It could do anything!",
+    "voice": "af_jessica",
+    "speed": 1.04,
+    "window_seconds": 2.1
+  },
+  "used_speed": 1.04,
+  "sample_rate": 24000,
+  "duration": 1.3653333333333333,
+  "phonemes": [],
+  "timing_source": "duration output unavailable"
+}

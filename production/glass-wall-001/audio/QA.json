@@ -1,0 +1,76 @@
+{
+  "sample_rate": 48000,
+  "channels": 2,
+  "duration": 64.0,
+  "integrated_lufs": -16.09,
+  "true_peak_dbtp": -1.9,
+  "loudness_range_lu": 17.3,
+  "normalization": "EBU R128 loudnorm master; separate pre-master stems with linear loudness gain retained",
+  "gain_db": 7.420000000000002,
+  "before": {
+    "input_i": "-23.42",
+    "input_tp": "-8.84",
+    "input_lra": "12.50",
+    "input_thresh": "-35.29",
+    "output_i": "-16.43",
+    "output_tp": "-1.50",
+    "output_lra": "17.30",
+    "output_thresh": "-27.86",
+    "normalization_type": "dynamic",
+    "target_offset": "0.43"
+  },
+  "after": {
+    "input_i": "-16.09",
+    "input_tp": "-1.90",
+    "input_lra": "17.30",
+    "input_thresh": "-27.59",
+    "output_i": "-16.13",
+    "output_tp": "-1.50",
+    "output_lra": "13.40",
+    "output_thresh": "-27.44",
+    "normalization_type": "dynamic",
+    "target_offset": "0.13"
+  },
+  "silence_checks": [
+    {
+      "start": 32.5,
+      "end": 33.5,
+      "peak": 0.0,
+      "digital_silence": true
+    },
+    {
+      "start": 38.5,
+      "end": 40.0,
+      "peak": 0.0,
+      "digital_silence": true
+    },
+    {
+      "start": 46.5,
+      "end": 48.0,
+      "peak": 0.0,
+      "digital_silence": true
+    },
+    {
+      "start": 57.0,
+      "end": 58.0,
+      "peak": 0.0,
+      "digital_silence": true
+    },
+    {
+      "start": 62.0,
+      "end": 64.0,
+      "peak": 0.0,
+      "digital_silence": true
+    }
+  ],
+  "voice_takes": 12,
+  "raw_takes_retained": true,
+  "model_hashes": {
+    "kokoro-v1.0.onnx": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+    "voices-v1.0.bin": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+  },
+  "has_model_phoneme_timing": false,
+  "api_spend_usd": 0,
+  "seeded_effects": true,
+  "listening": "UNVERIFIED: no human auditory review performed by this script. Objective audio and codec checks are reported separately."
+}
