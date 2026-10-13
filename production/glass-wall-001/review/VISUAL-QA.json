@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "movie_sha256": "8a554b7f025a2c14fb50388fbdb86371bdafa2656a27dd596911bd515f810df2",
+  "method": "Sampled actual encoded MP4 frames, independently reviewed; not subjective listening",
+  "coverage": [
+    "Everysecond0\u201363",
+    "0.2secondaction andlawyersequences",
+    "25native exactcueframes",
+    "Opening/poster/title extraction"
+  ],
+  "findings": [
+    "Owner fingertip contact31s, subsequent door refusal35s and continued Margaret mobility readable",
+    "First impact38s with visible compression and rebound; second41.5s, third45s, distant56.5s",
+    "Glass supplies physical containment in a separate pane beside protected door",
+    "First silent hold shows settling, lawyer at50.5s and receipt at53.2s clear",
+    "Adult identities, matte mechanical robot silhouettes and architecture consistent",
+    "Native text, surfaces and framing remain clear after standard color-range encoding"
+  ],
+  "limitations": [
+    "Simplified amplitude-driven mouth movement",
+    "Subjective human listening and audience response not tested"
+  ],
+  "stage_sha256": "2c1c665432a46fad924cf679e73b677f3aad48481da3c042f46d2595fb881e0c",
+  "timeline_sha256": "ff1603eb47cc782efafd38968bf7cf02472a3bbe497a44dd44a68046d22ad081"
+}
