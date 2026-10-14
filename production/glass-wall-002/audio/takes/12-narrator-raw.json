@@ -1,0 +1,13 @@
+{
+  "request": {
+    "text": "The AI can ignore STOP. The consequence can't.",
+    "voice": "am_onyx",
+    "speed": 1.14,
+    "window_seconds": 3.78
+  },
+  "used_speed": 1.14,
+  "sample_rate": 24000,
+  "duration": 3.2213333333333334,
+  "phonemes": [],
+  "timing_source": "duration output unavailable"
+}

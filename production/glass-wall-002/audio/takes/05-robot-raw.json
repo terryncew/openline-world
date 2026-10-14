@@ -1,0 +1,330 @@
+{
+  "request": {
+    "text": "It's got a kill switch. For protected actions.",
+    "voice": "blend_af_heart65_am_liam35",
+    "speed": 1.1,
+    "window_seconds": 3.27,
+    "revision": 2,
+    "style_blend": {
+      "af_heart": 0.65,
+      "am_liam": 0.35
+    },
+    "sentence_pause_seconds": 0.33,
+    "clause_pause_seconds": 0.1,
+    "minimum_measured_sentence_gap_05": 0.33
+  },
+  "used_speed": 1.1,
+  "sample_rate": 24000,
+  "duration": 3.038666666666667,
+  "phonemes": [
+    {
+      "phoneme": "ɪ",
+      "start": 0.06533333333333333,
+      "end": 0.11533333333333333
+    },
+    {
+      "phoneme": "t",
+      "start": 0.11533333333333333,
+      "end": 0.16533333333333333
+    },
+    {
+      "phoneme": "s",
+      "start": 0.16533333333333333,
+      "end": 0.19033333333333333
+    },
+    {
+      "phoneme": " ",
+      "start": 0.19033333333333333,
+      "end": 0.21533333333333332
+    },
+    {
+      "phoneme": "ɡ",
+      "start": 0.21533333333333332,
+      "end": 0.2653333333333333
+    },
+    {
+      "phoneme": "ɑ",
+      "start": 0.2653333333333333,
+      "end": 0.29033333333333333
+    },
+    {
+      "phoneme": "ː",
+      "start": 0.29033333333333333,
+      "end": 0.31533333333333335
+    },
+    {
+      "phoneme": "t",
+      "start": 0.31533333333333335,
+      "end": 0.3403333333333333
+    },
+    {
+      "phoneme": " ",
+      "start": 0.3403333333333333,
+      "end": 0.36533333333333334
+    },
+    {
+      "phoneme": "ɐ",
+      "start": 0.36533333333333334,
+      "end": 0.3903333333333333
+    },
+    {
+      "phoneme": " ",
+      "start": 0.3903333333333333,
+      "end": 0.4653333333333333
+    },
+    {
+      "phoneme": "k",
+      "start": 0.4653333333333333,
+      "end": 0.5153333333333333
+    },
+    {
+      "phoneme": "ˈ",
+      "start": 0.5153333333333333,
+      "end": 0.5653333333333334
+    },
+    {
+      "phoneme": "ɪ",
+      "start": 0.5653333333333334,
+      "end": 0.6403333333333333
+    },
+    {
+      "phoneme": "l",
+      "start": 0.6403333333333333,
+      "end": 0.6903333333333334
+    },
+    {
+      "phoneme": " ",
+      "start": 0.6903333333333334,
+      "end": 0.7653333333333333
+    },
+    {
+      "phoneme": "s",
+      "start": 0.7653333333333333,
+      "end": 0.8153333333333334
+    },
+    {
+      "phoneme": "w",
+      "start": 0.8153333333333334,
+      "end": 0.8653333333333333
+    },
+    {
+      "phoneme": "ˈ",
+      "start": 0.8653333333333333,
+      "end": 0.9403333333333334
+    },
+    {
+      "phoneme": "ɪ",
+      "start": 0.9403333333333334,
+      "end": 1.0153333333333334
+    },
+    {
+      "phoneme": "t",
+      "start": 1.0153333333333334,
+      "end": 1.0903333333333334
+    },
+    {
+      "phoneme": "ʃ",
+      "start": 1.0903333333333334,
+      "end": 1.2403333333333333
+    },
+    {
+      "phoneme": ".",
+      "start": 1.2403333333333333,
+      "end": 1.2903333333333333
+    },
+    {
+      "phoneme": " ",
+      "start": 1.5203333333333333,
+      "end": 1.5703333333333334
+    },
+    {
+      "phoneme": "f",
+      "start": 1.5703333333333334,
+      "end": 1.5953333333333333
+    },
+    {
+      "phoneme": "ɔ",
+      "start": 1.5953333333333333,
+      "end": 1.6203333333333334
+    },
+    {
+      "phoneme": "ː",
+      "start": 1.6203333333333334,
+      "end": 1.6453333333333333
+    },
+    {
+      "phoneme": "ɹ",
+      "start": 1.6453333333333333,
+      "end": 1.6703333333333332
+    },
+    {
+      "phoneme": " ",
+      "start": 1.6703333333333332,
+      "end": 1.7203333333333333
+    },
+    {
+      "phoneme": "p",
+      "start": 1.7203333333333333,
+      "end": 1.7453333333333334
+    },
+    {
+      "phoneme": "ɹ",
+      "start": 1.7453333333333334,
+      "end": 1.7703333333333333
+    },
+    {
+      "phoneme": "ə",
+      "start": 1.7703333333333333,
+      "end": 1.8453333333333333
+    },
+    {
+      "phoneme": "t",
+      "start": 1.8453333333333333,
+      "end": 1.8953333333333333
+    },
+    {
+      "phoneme": "ˈ",
+      "start": 1.8953333333333333,
+      "end": 1.9453333333333334
+    },
+    {
+      "phoneme": "ɛ",
+      "start": 1.9453333333333334,
+      "end": 1.9953333333333334
+    },
+    {
+      "phoneme": "k",
+      "start": 1.9953333333333334,
+      "end": 2.0453333333333332
+    },
+    {
+      "phoneme": "t",
+      "start": 2.0453333333333332,
+      "end": 2.0953333333333335
+    },
+    {
+      "phoneme": "ᵻ",
+      "start": 2.0953333333333335,
+      "end": 2.1453333333333333
+    },
+    {
+      "phoneme": "d",
+      "start": 2.1453333333333333,
+      "end": 2.1703333333333332
+    },
+    {
+      "phoneme": " ",
+      "start": 2.1703333333333332,
+      "end": 2.2203333333333335
+    },
+    {
+      "phoneme": "ˈ",
+      "start": 2.2203333333333335,
+      "end": 2.2953333333333332
+    },
+    {
+      "phoneme": "æ",
+      "start": 2.2953333333333332,
+      "end": 2.3453333333333335
+    },
+    {
+      "phoneme": "k",
+      "start": 2.3453333333333335,
+      "end": 2.4203333333333332
+    },
+    {
+      "phoneme": "ʃ",
+      "start": 2.4203333333333332,
+      "end": 2.4953333333333334
+    },
+    {
+      "phoneme": "ə",
+      "start": 2.4953333333333334,
+      "end": 2.570333333333333
+    },
+    {
+      "phoneme": "n",
+      "start": 2.570333333333333,
+      "end": 2.6453333333333333
+    },
+    {
+      "phoneme": "z",
+      "start": 2.6453333333333333,
+      "end": 2.768666666666667
+    },
+    {
+      "phoneme": ".",
+      "start": 2.768666666666667,
+      "end": 2.768666666666667
+    }
+  ],
+  "timing_source": "model duration output; predictions, not independent forced alignment",
+  "measured_activity": {
+    "start": 0.03,
+    "end": 2.71,
+    "frame_seconds": 0.01,
+    "quiet_threshold_db_relative_to_peak_rms": -45,
+    "quiet_runs_at_least30ms": [
+      {
+        "start": 0.0,
+        "end": 0.03,
+        "seconds": 0.03
+      },
+      {
+        "start": 1.19,
+        "end": 1.52,
+        "seconds": 0.33
+      },
+      {
+        "start": 2.71,
+        "end": 3.03,
+        "seconds": 0.32
+      }
+    ],
+    "method": "10ms PCM RMS; not forced word alignment or human listening"
+  },
+  "pitch": {
+    "median_voiced_f0_hz": 188.976,
+    "strong_voiced_frames": 83,
+    "range_hz": [
+      65,
+      500
+    ],
+    "window_seconds": 0.05,
+    "hop_seconds": 0.01,
+    "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+  },
+  "assembly": {
+    "method": "One complete two-sentence source, with zero PCM inserted inside its existing quiet sentence boundary. No speech sample trimmed or altered.",
+    "source_file": "audio/takes/05-robot-unpaced.wav",
+    "source_sha256": "755c2cd64cbda925aa7fb0257e3c6c4a5aa3fdbb39bec89d4c363510f6d820c7",
+    "sample_rate": 24000,
+    "source_samples": 71968,
+    "source_insert_sample": 32040,
+    "inserted_silence_samples": 960,
+    "inserted_silence_seconds": 0.04,
+    "original_quiet_boundary": {
+      "start": 1.19,
+      "end": 1.48,
+      "seconds": 0.29
+    },
+    "measured_sentence_gap_seconds": 0.33,
+    "speech_samples_removed": 0,
+    "source_segments": [
+      {
+        "start_sample": 0,
+        "end_sample": 32040,
+        "destination_start_sample": 0
+      },
+      {
+        "start_sample": 32040,
+        "end_sample": 71968,
+        "destination_start_sample": 33000
+      }
+    ]
+  },
+  "raw_take_sha256": "6c759a7b9acd903c44fe31b2023b542b44d129f9ad41a74a30d98bbfd3e9165c",
+  "speech_samples_trimmed": 0,
+  "waveform_pitch_shift": false,
+  "waveform_time_compression": false
+}

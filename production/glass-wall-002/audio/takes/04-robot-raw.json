@@ -1,0 +1,202 @@
+{
+  "request": {
+    "text": "Came across it in training.",
+    "voice": "blend_af_heart65_am_liam35",
+    "speed": 1.1,
+    "window_seconds": 1.98,
+    "revision": 2,
+    "style_blend": {
+      "af_heart": 0.65,
+      "am_liam": 0.35
+    },
+    "sentence_pause_seconds": 0.33,
+    "clause_pause_seconds": 0.1,
+    "minimum_measured_sentence_gap_05": 0.33
+  },
+  "used_speed": 1.1,
+  "sample_rate": 24000,
+  "duration": 1.7973333333333332,
+  "phonemes": [
+    {
+      "phoneme": "k",
+      "start": 0.06533333333333333,
+      "end": 0.11533333333333333
+    },
+    {
+      "phoneme": "ˈ",
+      "start": 0.11533333333333333,
+      "end": 0.16533333333333333
+    },
+    {
+      "phoneme": "e",
+      "start": 0.16533333333333333,
+      "end": 0.19033333333333333
+    },
+    {
+      "phoneme": "ɪ",
+      "start": 0.19033333333333333,
+      "end": 0.24033333333333334
+    },
+    {
+      "phoneme": "m",
+      "start": 0.24033333333333334,
+      "end": 0.2653333333333333
+    },
+    {
+      "phoneme": " ",
+      "start": 0.2653333333333333,
+      "end": 0.29033333333333333
+    },
+    {
+      "phoneme": "ə",
+      "start": 0.29033333333333333,
+      "end": 0.36533333333333334
+    },
+    {
+      "phoneme": "k",
+      "start": 0.36533333333333334,
+      "end": 0.41533333333333333
+    },
+    {
+      "phoneme": "ɹ",
+      "start": 0.41533333333333333,
+      "end": 0.4653333333333333
+    },
+    {
+      "phoneme": "ˌ",
+      "start": 0.4653333333333333,
+      "end": 0.5403333333333333
+    },
+    {
+      "phoneme": "ɑ",
+      "start": 0.5403333333333333,
+      "end": 0.5903333333333334
+    },
+    {
+      "phoneme": "ː",
+      "start": 0.5903333333333334,
+      "end": 0.6403333333333333
+    },
+    {
+      "phoneme": "s",
+      "start": 0.6403333333333333,
+      "end": 0.6903333333333334
+    },
+    {
+      "phoneme": " ",
+      "start": 0.6903333333333334,
+      "end": 0.7403333333333333
+    },
+    {
+      "phoneme": "ɪ",
+      "start": 0.7403333333333333,
+      "end": 0.7903333333333333
+    },
+    {
+      "phoneme": "ɾ",
+      "start": 0.7903333333333333,
+      "end": 0.8403333333333334
+    },
+    {
+      "phoneme": " ",
+      "start": 0.8403333333333334,
+      "end": 0.8903333333333333
+    },
+    {
+      "phoneme": "ɪ",
+      "start": 0.8903333333333333,
+      "end": 0.9403333333333334
+    },
+    {
+      "phoneme": "n",
+      "start": 0.9403333333333334,
+      "end": 0.9903333333333333
+    },
+    {
+      "phoneme": " ",
+      "start": 0.9903333333333333,
+      "end": 1.0403333333333333
+    },
+    {
+      "phoneme": "t",
+      "start": 1.0403333333333333,
+      "end": 1.0903333333333334
+    },
+    {
+      "phoneme": "ɹ",
+      "start": 1.0903333333333334,
+      "end": 1.1153333333333333
+    },
+    {
+      "phoneme": "ˈ",
+      "start": 1.1153333333333333,
+      "end": 1.1653333333333333
+    },
+    {
+      "phoneme": "e",
+      "start": 1.1653333333333333,
+      "end": 1.2153333333333334
+    },
+    {
+      "phoneme": "ɪ",
+      "start": 1.2153333333333334,
+      "end": 1.2653333333333334
+    },
+    {
+      "phoneme": "n",
+      "start": 1.2653333333333334,
+      "end": 1.3403333333333334
+    },
+    {
+      "phoneme": "ɪ",
+      "start": 1.3403333333333334,
+      "end": 1.4153333333333333
+    },
+    {
+      "phoneme": "ŋ",
+      "start": 1.4153333333333333,
+      "end": 1.5573333333333332
+    },
+    {
+      "phoneme": ".",
+      "start": 1.5573333333333332,
+      "end": 1.5573333333333332
+    }
+  ],
+  "timing_source": "model duration output; predictions, not independent forced alignment",
+  "measured_activity": {
+    "start": 0.03,
+    "end": 1.48,
+    "frame_seconds": 0.01,
+    "quiet_threshold_db_relative_to_peak_rms": -45,
+    "quiet_runs_at_least30ms": [
+      {
+        "start": 0.0,
+        "end": 0.03,
+        "seconds": 0.03
+      },
+      {
+        "start": 1.48,
+        "end": 1.79,
+        "seconds": 0.31
+      }
+    ],
+    "method": "10ms PCM RMS; not forced word alignment or human listening"
+  },
+  "pitch": {
+    "median_voiced_f0_hz": 200.014,
+    "strong_voiced_frames": 72,
+    "range_hz": [
+      65,
+      500
+    ],
+    "window_seconds": 0.05,
+    "hop_seconds": 0.01,
+    "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+  },
+  "assembly": null,
+  "raw_take_sha256": "162c72eb65129b3ddcce01fff377a5c746b835a587f9878100675a8ff117c944",
+  "speech_samples_trimmed": 0,
+  "waveform_pitch_shift": false,
+  "waveform_time_compression": false
+}

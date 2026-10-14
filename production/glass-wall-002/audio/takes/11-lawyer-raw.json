@@ -1,0 +1,13 @@
+{
+  "request": {
+    "text": "Can we get that in writing?",
+    "voice": "bm_daniel",
+    "speed": 1.0,
+    "window_seconds": 2.25
+  },
+  "used_speed": 1.0,
+  "sample_rate": 24000,
+  "duration": 1.8133333333333332,
+  "phonemes": [],
+  "timing_source": "duration output unavailable"
+}

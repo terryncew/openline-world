@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "scope": "Internal sampled visual and source review permits native final capture; user creative/listening approval remains pending.",
+  "stage_sha256": "7a211a2588ac13d4c8fc9fb2e46d46438ea2985a28dcb67dbea2123b7ee6a4b1",
+  "timeline_sha256": "3d73c77f39f3a732ef3b2a3028b10c1e1dec5c4287cd81b5291ab022e36748a7",
+  "graphics_sha256": "be0c02437cbccdb80e7a8f685563bf2125803d71f6b117687cb5da2575863b58",
+  "movie_sha256": "0b4591868d42fee5cf9cc475067bf79dbc23d2bda628f8bf3e6e61638789b554",
+  "method": "Producing and independent reviewing agents inspected decoded whole-film one-second overview, speech0.2s, handoff0.1s, impacts/lawyer0.2s and cue-adjacent frames;340 sample slots in32sheets.",
+  "visual_result": "PASS: continuous controller grip/transfer; no old button; owner slider and door scope clear; readable safe graphics; original characters, refusal, physical containment, BONKs, silence poses, lawyer, receipt and title retained.",
+  "audio_source_result": "All5mixedrobotlinesmatchunpromptedlocalrecognition;330ms sentencegap, source-preserving PCM and higherpitch verified in separateaudio records.",
+  "full_browser_playback": "PASS: complete normal-speed phone/laptop viewport runs,1920frames each,zero dropped frames; no media/pageerrors.",
+  "human_audio_listening": "UNVERIFIED",
+  "publication_approval": false,
+  "playback_report_sha256": "a670c3c4cd4109e15f737369eea5cdbcfb31c0efa8386776ae175999c5c2921b"
+}

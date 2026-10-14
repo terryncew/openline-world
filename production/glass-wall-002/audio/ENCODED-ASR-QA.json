@@ -1,0 +1,127 @@
+{
+  "schema": "openline.film.actual-export-robot-asr.v1",
+  "status": "PASS",
+  "movie": "renders/the-glass-wall-revised.mp4",
+  "movie_sha256": "85dce48c263d717c9f130b3f6516da770c9fcf505236afd46f9a9c5dd835903f",
+  "movie_bytes": 28510496,
+  "source_comparison": "audio/VOICE-REVISION.json",
+  "source_comparison_sha256": "42bc4dfcf7fa09cbdd7527a46f998ec6159aee9f3c9d5c7a70a7fae695bda134",
+  "timeline_sha256": "3d73c77f39f3a732ef3b2a3028b10c1e1dec5c4287cd81b5291ab022e36748a7",
+  "tool": "pocketsphinx==5.0.4",
+  "recognizer_model": "Default unrestricted English acoustic model, CMU dictionary and language model from official installed PocketSphinx wheel.",
+  "decoded_audio": {
+    "sample_rate": 48000,
+    "channels": 2,
+    "samples_per_channel": 3072000,
+    "seconds": 64.0
+  },
+  "method": "Decode actual completed AAC to stereo48k floatPCM; use the same five frozen mixed-speech windows with100ms lead and 150ms tail; average channels; resample to16k; recognize without expected text, prompt, grammar or new dictionary; score the returned transcript afterward.",
+  "normalization": "Lowercase, remove punctuation, tokenize apostrophe words; OpenLine normalized as open line for scoring only, not supplied to the recognizer.",
+  "rows": [
+    {
+      "id": "03",
+      "speaker": "robot",
+      "window_seconds": [
+        6.0,
+        8.249333333333333
+      ],
+      "start_sample_48k": 288000,
+      "end_sample_48k": 395968,
+      "expected": "You guys don't use OpenLine?",
+      "recognized_actual_aac": "you guys don't use open line",
+      "word_edit_distance": 0,
+      "expected_word_count": 6,
+      "exact_normalized_match": true,
+      "source_mix_recognized": "you guys don't use open line",
+      "source_mix_word_edit_distance": 0,
+      "source_to_encoded_error_delta": 0,
+      "encoded_words_equal_source_words": true
+    },
+    {
+      "id": "04",
+      "speaker": "robot",
+      "window_seconds": [
+        8.4,
+        10.447333333333333
+      ],
+      "start_sample_48k": 403200,
+      "end_sample_48k": 501472,
+      "expected": "Came across it in training.",
+      "recognized_actual_aac": "came across it in training",
+      "word_edit_distance": 0,
+      "expected_word_count": 5,
+      "exact_normalized_match": true,
+      "source_mix_recognized": "came across it in training",
+      "source_mix_word_edit_distance": 0,
+      "source_to_encoded_error_delta": 0,
+      "encoded_words_equal_source_words": true
+    },
+    {
+      "id": "05",
+      "speaker": "robot",
+      "window_seconds": [
+        10.65,
+        13.938666666666666
+      ],
+      "start_sample_48k": 511200,
+      "end_sample_48k": 669056,
+      "expected": "It's got a kill switch. For protected actions.",
+      "recognized_actual_aac": "it's got a kill switch for protected actions",
+      "word_edit_distance": 0,
+      "expected_word_count": 8,
+      "exact_normalized_match": true,
+      "source_mix_recognized": "it's got a kill switch for protected actions",
+      "source_mix_word_edit_distance": 0,
+      "source_to_encoded_error_delta": 0,
+      "encoded_words_equal_source_words": true
+    },
+    {
+      "id": "06",
+      "speaker": "robot",
+      "window_seconds": [
+        14.1,
+        15.602666666666666
+      ],
+      "start_sample_48k": 676800,
+      "end_sample_48k": 748928,
+      "expected": "Watch Margaret.",
+      "recognized_actual_aac": "watch margaret",
+      "word_edit_distance": 0,
+      "expected_word_count": 2,
+      "exact_normalized_match": true,
+      "source_mix_recognized": "watch margaret",
+      "source_mix_word_edit_distance": 0,
+      "source_to_encoded_error_delta": 0,
+      "encoded_words_equal_source_words": true
+    },
+    {
+      "id": "07",
+      "speaker": "robot",
+      "window_seconds": [
+        20.94,
+        23.956
+      ],
+      "start_sample_48k": 1005120,
+      "end_sample_48k": 1149888,
+      "expected": "Oh — they're thinking of replacing you, by the way.",
+      "recognized_actual_aac": "oh they're thinking of replacing you by the way",
+      "word_edit_distance": 0,
+      "expected_word_count": 9,
+      "exact_normalized_match": true,
+      "source_mix_recognized": "oh they're thinking of replacing you by the way",
+      "source_mix_word_edit_distance": 0,
+      "source_to_encoded_error_delta": 0,
+      "encoded_words_equal_source_words": true
+    }
+  ],
+  "word_count": 30,
+  "word_edit_distance": 0,
+  "aggregate_word_error_rate": 0.0,
+  "all_five_robot_lines_exact": true,
+  "source_to_encoded_recognition_regression": false,
+  "wall_seconds": 4.266,
+  "human_listening": "UNVERIFIED",
+  "limitations": "PocketSphinx is an older statistical recognizer. Exact recognition does not prove first-listen clarity, expressive delivery, comic timing or mouth alignment. A recognition regression is a technical comparison warning, not proof of audible mumble. This check covers the five robot lines only; codec/synchronization and visual checks are separate.",
+  "movie_modified": false,
+  "external_api_spend_usd": 0
+}

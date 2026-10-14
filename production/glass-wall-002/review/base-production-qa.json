@@ -1,0 +1,777 @@
+{
+  "video": "renders/the-glass-wall-revised.mp4",
+  "sha256": "85dce48c263d717c9f130b3f6516da770c9fcf505236afd46f9a9c5dd835903f",
+  "method": "Actual MP4 probing, complete decode, and audio measurements.",
+  "limitations": [
+    "Automated measurements do not establish intelligibility, comedy, lip synchronization, framing, character continuity, or technical honesty.",
+    "Those require separate review of rendered frames and audible playback; this script performs neither."
+  ],
+  "checks": [
+    {
+      "name": "approved_timeline_spec",
+      "status": "pass",
+      "detail": {
+        "timeline_duration": 64.0,
+        "timeline_fps": 30,
+        "approved_script": "02-SHOOTING-SCRIPT.md: 64 seconds, 30 fps, 1920 frames."
+      }
+    },
+    {
+      "name": "delivery_stream_count",
+      "status": "pass",
+      "detail": {
+        "video": 1,
+        "audio": 1
+      }
+    },
+    {
+      "name": "widescreen_h264",
+      "status": "pass",
+      "detail": {
+        "codec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "pixel_format": "yuv420p"
+      }
+    },
+    {
+      "name": "frame_rate_count",
+      "status": "pass",
+      "detail": {
+        "fps": 30.0,
+        "decoded_frames": "1920",
+        "expected": 1920
+      }
+    },
+    {
+      "name": "duration",
+      "status": "pass",
+      "detail": {
+        "seconds": 64.0,
+        "expected": 64.0
+      }
+    },
+    {
+      "name": "aac_stereo_48khz",
+      "status": "pass",
+      "detail": {
+        "codec": "aac",
+        "channels": 2,
+        "sample_rate": "48000"
+      }
+    },
+    {
+      "name": "container_av_start_alignment",
+      "status": "pass",
+      "detail": {
+        "video_start_seconds": 0.0,
+        "audio_start_seconds": 0.0
+      }
+    },
+    {
+      "name": "complete_av_decode",
+      "status": "pass",
+      "detail": "Every frame and audio packet decoded without error."
+    },
+    {
+      "name": "finite_audio",
+      "status": "pass",
+      "detail": {
+        "frames": 3072000,
+        "duration": 64.0,
+        "samples": 3072000,
+        "rms_linear": 0.05965513052959431,
+        "peak_linear": 0.7859066128730774,
+        "rms_dbfs": -24.487,
+        "peak_dbfs": -2.093,
+        "digital_zero": false
+      }
+    },
+    {
+      "name": "delivered_audio_matches_source",
+      "status": "pass",
+      "detail": {
+        "source": "/workspace/openline-world/production/glass-wall-002/audio/mix.wav",
+        "source_sha256": "7588eb049d5b9c9f398d1b390b86f1d5a194ad7edc87249749116fadac6a844b",
+        "correlation": 0.9999414155502991,
+        "source_frames": 3072000,
+        "delivered_frames": 3072000
+      }
+    },
+    {
+      "name": "declared_dialogue_inventory",
+      "status": "pass",
+      "detail": {
+        "note": "Metadata and source asset presence; spoken intelligibility requires listening.",
+        "lines": [
+          {
+            "id": "01",
+            "speaker": "exec1",
+            "text": "It could do anything!",
+            "start": 0.65,
+            "end": 2.015333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "02",
+            "speaker": "exec2",
+            "text": "It doesn't take orders from anyone!",
+            "start": 2.9,
+            "end": 5.076,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "03",
+            "speaker": "robot",
+            "text": "You guys don't use OpenLine?",
+            "start": 6.1,
+            "end": 8.099333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "04",
+            "speaker": "robot",
+            "text": "Came across it in training.",
+            "start": 8.5,
+            "end": 10.297333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "05",
+            "speaker": "robot",
+            "text": "It's got a kill switch. For protected actions.",
+            "start": 10.75,
+            "end": 13.788667,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "06",
+            "speaker": "robot",
+            "text": "Watch Margaret.",
+            "start": 14.2,
+            "end": 15.452667,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "07",
+            "speaker": "robot",
+            "text": "Oh \u2014 they're thinking of replacing you, by the way.",
+            "start": 21.04,
+            "end": 23.806,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "08",
+            "speaker": "margaret",
+            "text": "WHAT?! NO\u2014",
+            "start": 25.88,
+            "end": 26.925333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "09",
+            "speaker": "margaret",
+            "text": "I know my rights!",
+            "start": 42.4,
+            "end": 43.765333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "10",
+            "speaker": "margaret",
+            "text": "...rude.",
+            "start": 48.22,
+            "end": 49.286667,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "11",
+            "speaker": "lawyer",
+            "text": "Can we get that in writing?",
+            "start": 50.5,
+            "end": 52.313333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "12",
+            "speaker": "narrator",
+            "text": "The AI can ignore STOP. The consequence can't.",
+            "start": 58.15,
+            "end": 61.371333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "source_to_aac_alignment",
+      "status": "pass",
+      "detail": {
+        "method": "Normalized waveform cross-correlation within \u00b1120 ms; does not verify mouth animation.",
+        "anchors": [
+          {
+            "start": 0.7000000000000001,
+            "end": 1.9,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999915,
+            "id": "01"
+          },
+          {
+            "start": 2.9499999999999997,
+            "end": 4.15,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999977,
+            "id": "02"
+          },
+          {
+            "start": 6.1499999999999995,
+            "end": 7.35,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999969,
+            "id": "03"
+          },
+          {
+            "start": 8.55,
+            "end": 9.75,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999962,
+            "id": "04"
+          },
+          {
+            "start": 10.8,
+            "end": 12.0,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999992,
+            "id": "05"
+          },
+          {
+            "start": 14.25,
+            "end": 15.402667,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999934,
+            "id": "06"
+          },
+          {
+            "start": 21.09,
+            "end": 22.29,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999945,
+            "id": "07"
+          },
+          {
+            "start": 25.93,
+            "end": 26.875332999999998,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999976,
+            "id": "08"
+          },
+          {
+            "start": 42.449999999999996,
+            "end": 43.65,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999985,
+            "id": "09"
+          },
+          {
+            "start": 48.269999999999996,
+            "end": 49.236667000000004,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999993,
+            "id": "10"
+          },
+          {
+            "start": 50.55,
+            "end": 51.75,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999981,
+            "id": "11"
+          },
+          {
+            "start": 58.199999999999996,
+            "end": 59.4,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999983,
+            "id": "12"
+          }
+        ]
+      }
+    },
+    {
+      "name": "declared_complete_mix_silences",
+      "status": "pass",
+      "detail": [
+        {
+          "label": "silence-1",
+          "start": 32.5,
+          "end": 33.5,
+          "measured_interior": [
+            32.535,
+            33.465
+          ],
+          "samples": 44641,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        },
+        {
+          "label": "silence-2",
+          "start": 38.5,
+          "end": 40.0,
+          "measured_interior": [
+            38.535,
+            39.965
+          ],
+          "samples": 68641,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        },
+        {
+          "label": "silence-3",
+          "start": 46.5,
+          "end": 48.0,
+          "measured_interior": [
+            46.535,
+            47.965
+          ],
+          "samples": 68640,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        },
+        {
+          "label": "silence-4",
+          "start": 57.0,
+          "end": 58.0,
+          "measured_interior": [
+            57.035,
+            57.965
+          ],
+          "samples": 44640,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        },
+        {
+          "label": "silence-5",
+          "start": 62.0,
+          "end": 64.0,
+          "measured_interior": [
+            62.035,
+            63.965
+          ],
+          "samples": 92640,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        }
+      ]
+    },
+    {
+      "name": "bonk_peaks_at_cues",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "bonk-1",
+          "start": 38.0,
+          "end": 38.46,
+          "peak_time": 38.002229166666666,
+          "kind": "synthesized foley",
+          "window": [
+            37.962208333333336,
+            38.16220833333333
+          ],
+          "peak_offset_ms": 0.0,
+          "expected_impact_frame": 1140,
+          "measured_peak_frame": 1140,
+          "samples": 9600,
+          "rms_linear": 0.16282230802332484,
+          "peak_linear": 0.7058634161949158,
+          "rms_dbfs": -15.766,
+          "peak_dbfs": -3.026,
+          "digital_zero": false
+        },
+        {
+          "id": "bonk-2",
+          "start": 41.5,
+          "end": 41.96,
+          "peak_time": 41.50247916666667,
+          "kind": "synthesized foley",
+          "window": [
+            41.46245833333333,
+            41.66245833333333
+          ],
+          "peak_offset_ms": 0.0,
+          "expected_impact_frame": 1245,
+          "measured_peak_frame": 1245,
+          "samples": 9600,
+          "rms_linear": 0.17011894478453873,
+          "peak_linear": 0.733749508857727,
+          "rms_dbfs": -15.385,
+          "peak_dbfs": -2.689,
+          "digital_zero": false
+        },
+        {
+          "id": "bonk-3",
+          "start": 45.0,
+          "end": 45.46,
+          "peak_time": 45.00279166666667,
+          "kind": "synthesized foley",
+          "window": [
+            44.96279166666667,
+            45.162791666666664
+          ],
+          "peak_offset_ms": -0.0,
+          "expected_impact_frame": 1350,
+          "measured_peak_frame": 1350,
+          "samples": 9600,
+          "rms_linear": 0.173152854243602,
+          "peak_linear": 0.7385836839675903,
+          "rms_dbfs": -15.231,
+          "peak_dbfs": -2.632,
+          "digital_zero": false
+        },
+        {
+          "id": "distant-bonk",
+          "start": 56.5,
+          "end": 56.96,
+          "peak_time": 56.503458333333334,
+          "kind": "synthesized foley",
+          "window": [
+            56.4634375,
+            56.6634375
+          ],
+          "peak_offset_ms": 0.0,
+          "expected_impact_frame": 1695,
+          "measured_peak_frame": 1695,
+          "samples": 9600,
+          "rms_linear": 0.031577652079305095,
+          "peak_linear": 0.11682254821062088,
+          "rms_dbfs": -30.012,
+          "peak_dbfs": -18.649,
+          "digital_zero": false
+        }
+      ]
+    },
+    {
+      "name": "first_bonk_uncomfortable_silence",
+      "status": "pass",
+      "detail": {
+        "note": "Timing and digital-silence evidence; comic effect requires playback review.",
+        "holds": [
+          {
+            "label": "silence-2",
+            "start": 38.5,
+            "end": 40.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "score_stem_duration",
+      "status": "pass",
+      "detail": {
+        "frames": 3072000,
+        "expected_frames": 3072000
+      }
+    },
+    {
+      "name": "no_music_around_impacts",
+      "status": "pass",
+      "detail": {
+        "source": "/workspace/openline-world/production/glass-wall-002/audio/music.wav",
+        "source_sha256": "be65cb2e974a76cd30bde7480532d5399b79506ddac32facb01f4671163511d9",
+        "measurements": [
+          {
+            "label": "bonk-1",
+            "window": [
+              37.6,
+              39.0
+            ],
+            "samples": 67200,
+            "rms_linear": 0.0,
+            "peak_linear": 0.0,
+            "rms_dbfs": null,
+            "peak_dbfs": null,
+            "digital_zero": true
+          },
+          {
+            "label": "bonk-2",
+            "window": [
+              41.1,
+              42.5
+            ],
+            "samples": 67200,
+            "rms_linear": 0.0,
+            "peak_linear": 0.0,
+            "rms_dbfs": null,
+            "peak_dbfs": null,
+            "digital_zero": true
+          },
+          {
+            "label": "bonk-3",
+            "window": [
+              44.6,
+              46.0
+            ],
+            "samples": 67200,
+            "rms_linear": 0.0,
+            "peak_linear": 0.0,
+            "rms_dbfs": null,
+            "peak_dbfs": null,
+            "digital_zero": true
+          },
+          {
+            "label": "distant-bonk",
+            "window": [
+              56.1,
+              57.5
+            ],
+            "samples": 67200,
+            "rms_linear": 0.0,
+            "peak_linear": 0.0,
+            "rms_dbfs": null,
+            "peak_dbfs": null,
+            "digital_zero": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "loudness_delivery",
+      "status": "pass",
+      "detail": {
+        "input_i": "-17.79",
+        "input_tp": "-2.04",
+        "input_lra": "12.80",
+        "input_thresh": "-30.15",
+        "output_i": "-16.54",
+        "output_tp": "-1.50",
+        "output_lra": "17.20",
+        "output_thresh": "-28.12",
+        "normalization_type": "dynamic",
+        "target_offset": "0.54",
+        "revision_target_lufs": -18,
+        "reason": "Constant peak-safe gain preserves speech shape; no nonlinear master saturation."
+      }
+    },
+    {
+      "name": "true_peak_delivery",
+      "status": "pass",
+      "detail": {
+        "measured_dbTP": -2.04,
+        "spec_dbTP": -1.5,
+        "measurement_tolerance_db": 0.1
+      }
+    }
+  ],
+  "ffprobe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1088,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "16:9",
+        "pix_fmt": "yuv420p",
+        "level": 40,
+        "color_range": "tv",
+        "color_space": "bt709",
+        "chroma_location": "center",
+        "field_order": "progressive",
+        "refs": 4,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 983040,
+        "duration": "64.000000",
+        "bit_rate": "3430097",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "1920",
+        "nb_read_frames": "1920",
+        "extradata_size": 51,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        },
+        "side_data_list": [
+          {
+            "side_data_type": "ICC Profile"
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 3072000,
+        "duration": "64.000000",
+        "bit_rate": "124634",
+        "nb_frames": "3001",
+        "nb_read_frames": "3000",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/workspace/openline-world/production/glass-wall-002/renders/the-glass-wall-revised.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "64.000000",
+      "size": "28510496",
+      "bit_rate": "3563812",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    }
+  },
+  "decoded_audio": {
+    "frames": 3072000,
+    "duration": 64.0,
+    "samples": 3072000,
+    "rms_linear": 0.05965513052959431,
+    "peak_linear": 0.7859066128730774,
+    "rms_dbfs": -24.487,
+    "peak_dbfs": -2.093,
+    "digital_zero": false
+  },
+  "summary": {
+    "pass": 19,
+    "fail": 0,
+    "not_performed": 0
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "request": {
+    "text": "I know my rights!",
+    "voice": "af_sky",
+    "speed": 1.1,
+    "window_seconds": 1.95
+  },
+  "used_speed": 1.1,
+  "sample_rate": 24000,
+  "duration": 1.3653333333333333,
+  "phonemes": [],
+  "timing_source": "duration output unavailable"
+}

@@ -1,0 +1,62 @@
+{
+  "classification": "fictional commercial, no real building integration",
+  "claims": [
+    {
+      "time": [
+        10.5,
+        15.5
+      ],
+      "claim": "Kill switch for protected actions",
+      "scope": "Owner revocation enforced by an authority-checking receiver"
+    },
+    {
+      "time": [
+        29.5,
+        33.5
+      ],
+      "claim": "Human owner revokes",
+      "scope": "The service robot hands over a fictional OpenLine door-authorization controller; only the human owner pulls its REVOKE slider. Handoff alone does not revoke."
+    },
+    {
+      "time": [
+        33.5,
+        37
+      ],
+      "claim": "Protected door refuses old authority",
+      "scope": "A post-revocation command; no claim about already completed or in-flight actions"
+    },
+    {
+      "time": [
+        37,
+        50
+      ],
+      "claim": "Robot continues moving and protesting",
+      "scope": "Revocation removes authorization, not thoughts, body movement or unrelated abilities"
+    },
+    {
+      "time": [
+        38,
+        58
+      ],
+      "claim": "Glass supplies physical containment",
+      "scope": "Fictional ordinary physical pane; software neither strengthens glass nor blocks physical force"
+    },
+    {
+      "time": [
+        53.2,
+        55
+      ],
+      "claim": "door.open \u2014 REFUSED",
+      "scope": "Fictional paper prop, not a real or signed experimental receipt"
+    },
+    {
+      "time": [
+        58,
+        64
+      ],
+      "claim": "The AI can ignore STOP. The consequence can't.",
+      "scope": "Protected consequences checked by receivers; not all consequences"
+    }
+  ],
+  "revision_baseline": "64862a67be2f72661f94b8d4dd01589ef921e998"
+}

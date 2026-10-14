@@ -1,0 +1,86 @@
+{
+  "native_size": [
+    1920,
+    1080
+  ],
+  "items": [
+    {
+      "id": "openline",
+      "start": 6.13,
+      "end": 8.299332999999999,
+      "lines": [
+        "OPENLINE"
+      ],
+      "font_sizes": [
+        54
+      ],
+      "rect": [
+        88,
+        76,
+        470,
+        104
+      ],
+      "fade_seconds": 0.12
+    },
+    {
+      "id": "protected-actions",
+      "start": 12.27,
+      "end": 13.71,
+      "lines": [
+        "FOR PROTECTED ACTIONS"
+      ],
+      "font_sizes": [
+        46
+      ],
+      "rect": [
+        88,
+        76,
+        720,
+        112
+      ],
+      "fade_seconds": 0.12
+    },
+    {
+      "id": "controller-handoff",
+      "start": 29.5,
+      "end": 30.85,
+      "lines": [
+        "OPENLINE",
+        "OWNER CONTROL"
+      ],
+      "font_sizes": [
+        48,
+        30
+      ],
+      "rect": [
+        88,
+        874,
+        470,
+        138
+      ],
+      "fade_seconds": 0.12
+    },
+    {
+      "id": "owner-revocation",
+      "start": 31.05,
+      "end": 32.3,
+      "lines": [
+        "DOOR ACCESS",
+        "REVOKED BY OWNER"
+      ],
+      "font_sizes": [
+        44,
+        30
+      ],
+      "rect": [
+        88,
+        874,
+        570,
+        138
+      ],
+      "fade_seconds": 0.12
+    }
+  ],
+  "purpose": "Phrase reinforcement and fictional authorization state; original graphic design, not recorded product UI.",
+  "timing": "Question and protected-actions sentence use actual revised speech timing; owner state follows the owner slider cue at31.0s."
+}

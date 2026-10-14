@@ -1,0 +1,1380 @@
+{
+  "schema": "openline.film.robot-auditions.v1",
+  "original_commit": "64862a67be2f72661f94b8d4dd01589ef921e998",
+  "model_hashes": {
+    "kokoro-v1.0.onnx": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+    "voices-v1.0.bin": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+    "kokoro-v1.0-duration.onnx": "1eb3dd7b15a3ce59eee74c8057492f1e95bbd6f236a61c0b1ae8b617a95e67d6"
+  },
+  "originals": [
+    {
+      "id": "03",
+      "voice": "am_michael",
+      "speed": 1.02,
+      "file": "audio/takes/03-robot-raw.wav",
+      "sha256": "89740223f2fcdfc08c92561b7d0a33f640745f19679c7e90dbfa4314608dcca1",
+      "activity": {
+        "start": 0.08,
+        "end": 1.88,
+        "frame_seconds": 0.01,
+        "quiet_threshold_db_relative_to_peak_rms": -45,
+        "quiet_runs_at_least30ms": [
+          {
+            "start": 0.0,
+            "end": 0.08,
+            "seconds": 0.08
+          },
+          {
+            "start": 1.27,
+            "end": 1.32,
+            "seconds": 0.05
+          },
+          {
+            "start": 1.88,
+            "end": 2.02,
+            "seconds": 0.14
+          }
+        ],
+        "method": "10ms PCM RMS; not forced word alignment or human listening"
+      },
+      "pitch": {
+        "median_voiced_f0_hz": 128.342,
+        "strong_voiced_frames": 64,
+        "range_hz": [
+          65,
+          500
+        ],
+        "window_seconds": 0.05,
+        "hop_seconds": 0.01,
+        "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+      },
+      "asr": {
+        "expected": "You guys don't use OpenLine?",
+        "recognized": "you guys don't use open long",
+        "word_edit_distance": 1,
+        "word_count": 6,
+        "exact_normalized_match": false,
+        "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+        "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+      }
+    },
+    {
+      "id": "04",
+      "voice": "am_michael",
+      "speed": 1.03,
+      "file": "audio/takes/04-robot-raw.wav",
+      "sha256": "78ce2e846612fc2fdf6e0e0585e759044e301a945a70c8e1875c56b166224d5e",
+      "activity": {
+        "start": 0.03,
+        "end": 1.6,
+        "frame_seconds": 0.01,
+        "quiet_threshold_db_relative_to_peak_rms": -45,
+        "quiet_runs_at_least30ms": [
+          {
+            "start": 0.0,
+            "end": 0.03,
+            "seconds": 0.03
+          },
+          {
+            "start": 0.34,
+            "end": 0.37,
+            "seconds": 0.03
+          },
+          {
+            "start": 1.6,
+            "end": 1.85,
+            "seconds": 0.25
+          }
+        ],
+        "method": "10ms PCM RMS; not forced word alignment or human listening"
+      },
+      "pitch": {
+        "median_voiced_f0_hz": 132.597,
+        "strong_voiced_frames": 60,
+        "range_hz": [
+          65,
+          500
+        ],
+        "window_seconds": 0.05,
+        "hop_seconds": 0.01,
+        "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+      },
+      "asr": {
+        "expected": "Came across it in training.",
+        "recognized": "came across it in training",
+        "word_edit_distance": 0,
+        "word_count": 5,
+        "exact_normalized_match": true,
+        "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+        "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+      }
+    },
+    {
+      "id": "05",
+      "voice": "am_michael",
+      "speed": 1.1,
+      "file": "audio/takes/05-robot-raw.wav",
+      "sha256": "88d1e6335178f0629100ac4c0d208931e9cae0f13b7d1c66095b47806b34a8b4",
+      "activity": {
+        "start": 0.04,
+        "end": 2.83,
+        "frame_seconds": 0.01,
+        "quiet_threshold_db_relative_to_peak_rms": -45,
+        "quiet_runs_at_least30ms": [
+          {
+            "start": 0.0,
+            "end": 0.04,
+            "seconds": 0.04
+          },
+          {
+            "start": 1.14,
+            "end": 1.17,
+            "seconds": 0.03
+          },
+          {
+            "start": 1.31,
+            "end": 1.55,
+            "seconds": 0.24
+          },
+          {
+            "start": 2.05,
+            "end": 2.09,
+            "seconds": 0.04
+          },
+          {
+            "start": 2.83,
+            "end": 3.02,
+            "seconds": 0.19
+          }
+        ],
+        "method": "10ms PCM RMS; not forced word alignment or human listening"
+      },
+      "pitch": {
+        "median_voiced_f0_hz": 140.351,
+        "strong_voiced_frames": 59,
+        "range_hz": [
+          65,
+          500
+        ],
+        "window_seconds": 0.05,
+        "hop_seconds": 0.01,
+        "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+      },
+      "asr": {
+        "expected": "It's got a kill switch. For protected actions.",
+        "recognized": "it's got a kill switch for protective actions",
+        "word_edit_distance": 1,
+        "word_count": 8,
+        "exact_normalized_match": false,
+        "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+        "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+      }
+    },
+    {
+      "id": "06",
+      "voice": "am_michael",
+      "speed": 1.03,
+      "file": "audio/takes/06-robot-raw.wav",
+      "sha256": "1da4009462d31251647a48d33ada7577198b3b8ebde69f13183dd78f66447216",
+      "activity": {
+        "start": 0.08,
+        "end": 1.02,
+        "frame_seconds": 0.01,
+        "quiet_threshold_db_relative_to_peak_rms": -45,
+        "quiet_runs_at_least30ms": [
+          {
+            "start": 0.0,
+            "end": 0.08,
+            "seconds": 0.08
+          },
+          {
+            "start": 1.02,
+            "end": 1.25,
+            "seconds": 0.23
+          }
+        ],
+        "method": "10ms PCM RMS; not forced word alignment or human listening"
+      },
+      "pitch": {
+        "median_voiced_f0_hz": 136.364,
+        "strong_voiced_frames": 33,
+        "range_hz": [
+          65,
+          500
+        ],
+        "window_seconds": 0.05,
+        "hop_seconds": 0.01,
+        "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+      },
+      "asr": {
+        "expected": "Watch Margaret.",
+        "recognized": "watch margaret",
+        "word_edit_distance": 0,
+        "word_count": 2,
+        "exact_normalized_match": true,
+        "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+        "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+      }
+    },
+    {
+      "id": "07",
+      "voice": "am_michael",
+      "speed": 1.01,
+      "file": "audio/takes/07-robot-raw.wav",
+      "sha256": "51de2633c9cf5118d5a32787c14c9e34892c4990acd1d0e96469ed382484d9f8",
+      "activity": {
+        "start": 0.13,
+        "end": 2.92,
+        "frame_seconds": 0.01,
+        "quiet_threshold_db_relative_to_peak_rms": -45,
+        "quiet_runs_at_least30ms": [
+          {
+            "start": 0.0,
+            "end": 0.13,
+            "seconds": 0.13
+          },
+          {
+            "start": 1.33,
+            "end": 1.37,
+            "seconds": 0.04
+          },
+          {
+            "start": 2.06,
+            "end": 2.24,
+            "seconds": 0.18
+          },
+          {
+            "start": 2.92,
+            "end": 3.0,
+            "seconds": 0.08
+          }
+        ],
+        "method": "10ms PCM RMS; not forced word alignment or human listening"
+      },
+      "pitch": {
+        "median_voiced_f0_hz": 125.654,
+        "strong_voiced_frames": 67,
+        "range_hz": [
+          65,
+          500
+        ],
+        "window_seconds": 0.05,
+        "hop_seconds": 0.01,
+        "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+      },
+      "asr": {
+        "expected": "Oh — they're thinking of replacing you, by the way.",
+        "recognized": "oh they're thinking of replacing you by the way",
+        "word_edit_distance": 0,
+        "word_count": 9,
+        "exact_normalized_match": true,
+        "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+        "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+      }
+    }
+  ],
+  "auditions": [
+    {
+      "voice": "am_puck",
+      "takes": [
+        {
+          "id": "03",
+          "voice": "am_puck",
+          "speed": 1.1,
+          "text": "You guys don't use OpenLine?",
+          "file": "audio/auditions/03-am_puck.wav",
+          "sha256": "77954ccde715f0e67a4e52a7293423a61e0956e98ffe42791ee94525b250481e",
+          "duration": 1.8313333333333333,
+          "activity": {
+            "start": 0.03,
+            "end": 1.56,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.51,
+                "end": 1.54,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.56,
+                "end": 1.83,
+                "seconds": 0.27
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 123.711,
+            "strong_voiced_frames": 59,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "You guys don't use OpenLine?",
+            "recognized": "guys still he's open mind",
+            "word_edit_distance": 4,
+            "word_count": 6,
+            "exact_normalized_match": false,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "04",
+          "voice": "am_puck",
+          "speed": 1.1,
+          "text": "Came across it in training.",
+          "file": "audio/auditions/04-am_puck.wav",
+          "sha256": "e6d721d6884511b2812fafc853a6899e939ccdc8f76b45497de40cfb21a9baa8",
+          "duration": 1.568,
+          "activity": {
+            "start": 0.03,
+            "end": 1.31,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.31,
+                "end": 1.56,
+                "seconds": 0.25
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 135.978,
+            "strong_voiced_frames": 50,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "Came across it in training.",
+            "recognized": "im across in training",
+            "word_edit_distance": 2,
+            "word_count": 5,
+            "exact_normalized_match": false,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "05",
+          "voice": "am_puck",
+          "speed": 1.1,
+          "text": "It's got a kill switch. For protected actions.",
+          "file": "audio/auditions/05-am_puck.wav",
+          "sha256": "82da190f2754b9cc93723dc30755647baf01e2dabbf71e54f2ec90d14c17d1e7",
+          "duration": 2.5493333333333332,
+          "activity": {
+            "start": 0.03,
+            "end": 2.49,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 2.27,
+                "end": 2.48,
+                "seconds": 0.21
+              },
+              {
+                "start": 2.49,
+                "end": 2.54,
+                "seconds": 0.05
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 133.333,
+            "strong_voiced_frames": 59,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "It's got a kill switch. For protected actions.",
+            "recognized": "it's got a kill switch for protected actions",
+            "word_edit_distance": 0,
+            "word_count": 8,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "06",
+          "voice": "am_puck",
+          "speed": 1.1,
+          "text": "Watch Margaret.",
+          "file": "audio/auditions/06-am_puck.wav",
+          "sha256": "aa598a75cd9e383d21c488c5dd503c726c9eb9885425bdf4e35832303a3e621c",
+          "duration": 1.1573333333333333,
+          "activity": {
+            "start": 0.02,
+            "end": 1.11,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.82,
+                "end": 0.85,
+                "seconds": 0.03
+              },
+              {
+                "start": 0.86,
+                "end": 1.1,
+                "seconds": 0.24
+              },
+              {
+                "start": 1.11,
+                "end": 1.15,
+                "seconds": 0.04
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 137.143,
+            "strong_voiced_frames": 33,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "Watch Margaret.",
+            "recognized": "watch margaret",
+            "word_edit_distance": 0,
+            "word_count": 2,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "07",
+          "voice": "am_puck",
+          "speed": 1.02,
+          "text": "Oh — they're thinking of replacing you, by the way.",
+          "file": "audio/auditions/07-am_puck.wav",
+          "sha256": "b892da86f15556ba3b8729f1cd66f2a9110b4c4a98d26c6d3741f7170b19ea05",
+          "duration": 2.472,
+          "activity": {
+            "start": 0.03,
+            "end": 2.4,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 2.15,
+                "end": 2.2,
+                "seconds": 0.05
+              },
+              {
+                "start": 2.26,
+                "end": 2.34,
+                "seconds": 0.08
+              },
+              {
+                "start": 2.4,
+                "end": 2.47,
+                "seconds": 0.07
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 133.333,
+            "strong_voiced_frames": 78,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "Oh — they're thinking of replacing you, by the way.",
+            "recognized": "oh they're thinking of replacing you by the way",
+            "word_edit_distance": 0,
+            "word_count": 9,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        }
+      ],
+      "median_take_f0_hz": 133.333,
+      "total_word_edit_distance": 6
+    },
+    {
+      "voice": "af_heart",
+      "takes": [
+        {
+          "id": "03",
+          "voice": "af_heart",
+          "speed": 1.08,
+          "text": "You guys don't use OpenLine?",
+          "file": "audio/auditions/03-af_heart.wav",
+          "sha256": "d886e8362a492aee41a9aacf88dcbc37377fd18f3f5382c5c48adb42d443effc",
+          "duration": 1.9806666666666666,
+          "activity": {
+            "start": 0.03,
+            "end": 1.67,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 0.55,
+                "end": 0.58,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.12,
+                "end": 1.15,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.67,
+                "end": 1.98,
+                "seconds": 0.31
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 195.122,
+            "strong_voiced_frames": 84,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "You guys don't use OpenLine?",
+            "recognized": "you can still use open mind",
+            "word_edit_distance": 3,
+            "word_count": 6,
+            "exact_normalized_match": false,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "04",
+          "voice": "af_heart",
+          "speed": 1.08,
+          "text": "Came across it in training.",
+          "file": "audio/auditions/04-af_heart.wav",
+          "sha256": "fe09a50dbe4f4fc40beef0056a6e35f648dfbf81f253baf48a47bb4e5f2627b2",
+          "duration": 1.6166666666666667,
+          "activity": {
+            "start": 0.03,
+            "end": 1.3,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.3,
+                "end": 1.61,
+                "seconds": 0.31
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 230.092,
+            "strong_voiced_frames": 60,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "Came across it in training.",
+            "recognized": "came across it in training",
+            "word_edit_distance": 0,
+            "word_count": 5,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "05",
+          "voice": "af_heart",
+          "speed": 1.08,
+          "text": "It's got a kill switch. For protected actions.",
+          "file": "audio/auditions/05-af_heart.wav",
+          "sha256": "318e05b1803d7c522dd24d6cfe7e812e34552ae3220edd59c99655fb50a6f756",
+          "duration": 2.9513333333333334,
+          "activity": {
+            "start": 0.03,
+            "end": 2.63,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.13,
+                "end": 1.44,
+                "seconds": 0.31
+              },
+              {
+                "start": 2.63,
+                "end": 2.95,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 208.696,
+            "strong_voiced_frames": 93,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "It's got a kill switch. For protected actions.",
+            "recognized": "it's got a kill switch for protected actions",
+            "word_edit_distance": 0,
+            "word_count": 8,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "06",
+          "voice": "af_heart",
+          "speed": 1.08,
+          "text": "Watch Margaret.",
+          "file": "audio/auditions/06-af_heart.wav",
+          "sha256": "7068cab9b162e35a22a0d80ef2615b675848e91259ceefffda69b1ade3c35e6e",
+          "duration": 1.2666666666666666,
+          "activity": {
+            "start": 0.04,
+            "end": 0.94,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.04,
+                "seconds": 0.04
+              },
+              {
+                "start": 0.94,
+                "end": 1.26,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 218.182,
+            "strong_voiced_frames": 45,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "Watch Margaret.",
+            "recognized": "watch margaret",
+            "word_edit_distance": 0,
+            "word_count": 2,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "07",
+          "voice": "af_heart",
+          "speed": 1.02,
+          "text": "Oh — they're thinking of replacing you, by the way.",
+          "file": "audio/auditions/07-af_heart.wav",
+          "sha256": "4d19894a79b1a7194f2ea3f810b63897093342c5a8d0d21ba25af57cbba4e19f",
+          "duration": 2.8626666666666667,
+          "activity": {
+            "start": 0.05,
+            "end": 2.54,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.05,
+                "seconds": 0.05
+              },
+              {
+                "start": 1.86,
+                "end": 2.03,
+                "seconds": 0.17
+              },
+              {
+                "start": 2.54,
+                "end": 2.86,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 198.347,
+            "strong_voiced_frames": 116,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "Oh — they're thinking of replacing you, by the way.",
+            "recognized": "oh they're thinking of replacing you by the way",
+            "word_edit_distance": 0,
+            "word_count": 9,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        }
+      ],
+      "median_take_f0_hz": 208.696,
+      "total_word_edit_distance": 3
+    },
+    {
+      "voice": "am_liam",
+      "takes": [
+        {
+          "id": "03",
+          "voice": "am_liam",
+          "speed": 1.12,
+          "text": "You guys don't use OpenLine?",
+          "file": "audio/auditions/03-am_liam.wav",
+          "sha256": "39fc6d3d5f0c70b1c1c3d4dde09c4ccb9a73e90fc1c9bbd46f844258c25f1a47",
+          "duration": 2.076,
+          "activity": {
+            "start": 0.03,
+            "end": 1.75,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.75,
+                "end": 2.07,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 131.868,
+            "strong_voiced_frames": 85,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "You guys don't use OpenLine?",
+            "recognized": "you guys don't use open line",
+            "word_edit_distance": 0,
+            "word_count": 6,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "04",
+          "voice": "am_liam",
+          "speed": 1.12,
+          "text": "Came across it in training.",
+          "file": "audio/auditions/04-am_liam.wav",
+          "sha256": "b4cbd5f59fb3677d0b4888a3a2cd6847726c5b85f8694fa00d7e2c2ca3fc8f8e",
+          "duration": 1.9253333333333333,
+          "activity": {
+            "start": 0.02,
+            "end": 1.59,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 1.59,
+                "end": 1.92,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 143.713,
+            "strong_voiced_frames": 65,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "Came across it in training.",
+            "recognized": "came across it in training",
+            "word_edit_distance": 0,
+            "word_count": 5,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "05",
+          "voice": "am_liam",
+          "speed": 1.12,
+          "text": "It's got a kill switch. For protected actions.",
+          "file": "audio/auditions/05-am_liam.wav",
+          "sha256": "f3f5c35ac96d37228b3d6339cc4c641130fc09f3b93441f2c7214a5897c130fd",
+          "duration": 2.78,
+          "activity": {
+            "start": 0.02,
+            "end": 2.45,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 2.45,
+                "end": 2.78,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 143.285,
+            "strong_voiced_frames": 70,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "It's got a kill switch. For protected actions.",
+            "recognized": "it's gonna kill switch for protected actions",
+            "word_edit_distance": 2,
+            "word_count": 8,
+            "exact_normalized_match": false,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "06",
+          "voice": "am_liam",
+          "speed": 1.12,
+          "text": "Watch Margaret.",
+          "file": "audio/auditions/06-am_liam.wav",
+          "sha256": "92b873cb9791994681b1483f2b9365b21308d8a68b55561371666e7137bf1b98",
+          "duration": 1.392,
+          "activity": {
+            "start": 0.03,
+            "end": 1.09,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.09,
+                "end": 1.39,
+                "seconds": 0.3
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 138.33,
+            "strong_voiced_frames": 44,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "Watch Margaret.",
+            "recognized": "watch more grades",
+            "word_edit_distance": 2,
+            "word_count": 2,
+            "exact_normalized_match": false,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "07",
+          "voice": "am_liam",
+          "speed": 1.02,
+          "text": "Oh — they're thinking of replacing you, by the way.",
+          "file": "audio/auditions/07-am_liam.wav",
+          "sha256": "c5c1ae75438fe926d27274dc4492d45a2337f6bdde468f503e565a73fe4c66e8",
+          "duration": 2.7373333333333334,
+          "activity": {
+            "start": 0.02,
+            "end": 2.42,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 2.42,
+                "end": 2.73,
+                "seconds": 0.31
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 126.316,
+            "strong_voiced_frames": 110,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "Oh — they're thinking of replacing you, by the way.",
+            "recognized": "oh they're thinking of replacing you by the way",
+            "word_edit_distance": 0,
+            "word_count": 9,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        }
+      ],
+      "median_take_f0_hz": 138.33,
+      "total_word_edit_distance": 4
+    },
+    {
+      "voice": "af_heart35-am_liam65",
+      "style_blend": {
+        "af_heart": 0.35,
+        "am_liam": 0.65
+      },
+      "takes": [
+        {
+          "id": "03",
+          "voice": "af_heart35-am_liam65",
+          "speed": 1.1,
+          "text": "You guys don't use OpenLine?",
+          "file": "audio/auditions/03-af_heart35-am_liam65.wav",
+          "sha256": "ca738d5e0aa5093232898d60b0154e0701abfbc59d0fd8bad3a1c5c6f0bfd73b",
+          "duration": 2.032,
+          "activity": {
+            "start": 0.03,
+            "end": 1.7,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.7,
+                "end": 2.03,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 149.068,
+            "strong_voiced_frames": 83,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "You guys don't use OpenLine?",
+            "recognized": "you guys don't use open line",
+            "word_edit_distance": 0,
+            "word_count": 6,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "05",
+          "voice": "af_heart35-am_liam65",
+          "speed": 1.1,
+          "text": "It's got a kill switch. For protected actions.",
+          "file": "audio/auditions/05-af_heart35-am_liam65.wav",
+          "sha256": "03b9e68ef8b46952dc483106271fca75ab5ea5a82c25aac7ebb1564e42e0eeb3",
+          "duration": 3.0286666666666666,
+          "activity": {
+            "start": 0.02,
+            "end": 2.69,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 1.2,
+                "end": 1.48,
+                "seconds": 0.28
+              },
+              {
+                "start": 2.69,
+                "end": 3.02,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 164.384,
+            "strong_voiced_frames": 79,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "It's got a kill switch. For protected actions.",
+            "recognized": "it's gonna kill switch for protected actions",
+            "word_edit_distance": 2,
+            "word_count": 8,
+            "exact_normalized_match": false,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        }
+      ],
+      "median_take_f0_hz": 156.726,
+      "total_word_edit_distance": 2,
+      "full_five_line_comparison": false
+    },
+    {
+      "voice": "af_heart50-am_liam50",
+      "style_blend": {
+        "af_heart": 0.5,
+        "am_liam": 0.5
+      },
+      "takes": [
+        {
+          "id": "03",
+          "voice": "af_heart50-am_liam50",
+          "speed": 1.1,
+          "text": "You guys don't use OpenLine?",
+          "file": "audio/auditions/03-af_heart50-am_liam50.wav",
+          "sha256": "dfa1738d4242fc044480decb351dbf525ff6a98313f0f2a9fb7484377673de9e",
+          "duration": 2.0433333333333334,
+          "activity": {
+            "start": 0.04,
+            "end": 1.72,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.04,
+                "seconds": 0.04
+              },
+              {
+                "start": 1.72,
+                "end": 2.04,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 156.863,
+            "strong_voiced_frames": 87,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "You guys don't use OpenLine?",
+            "recognized": "you guys don't use open line",
+            "word_edit_distance": 0,
+            "word_count": 6,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "05",
+          "voice": "af_heart50-am_liam50",
+          "speed": 1.1,
+          "text": "It's got a kill switch. For protected actions.",
+          "file": "audio/auditions/05-af_heart50-am_liam50.wav",
+          "sha256": "3ff749e70765a75da04159dc1b0aa95c24b01da5c89877abee079969c1adbd23",
+          "duration": 3.0086666666666666,
+          "activity": {
+            "start": 0.02,
+            "end": 2.68,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 1.18,
+                "end": 1.49,
+                "seconds": 0.31
+              },
+              {
+                "start": 2.68,
+                "end": 3.0,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 180.451,
+            "strong_voiced_frames": 75,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "It's got a kill switch. For protected actions.",
+            "recognized": "it's gonna kill switch for protected actions",
+            "word_edit_distance": 2,
+            "word_count": 8,
+            "exact_normalized_match": false,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        }
+      ],
+      "median_take_f0_hz": 168.65699999999998,
+      "total_word_edit_distance": 2,
+      "full_five_line_comparison": false
+    },
+    {
+      "voice": "af_heart65-am_liam35",
+      "style_blend": {
+        "af_heart": 0.65,
+        "am_liam": 0.35
+      },
+      "takes": [
+        {
+          "id": "03",
+          "voice": "af_heart65-am_liam35",
+          "speed": 1.1,
+          "text": "You guys don't use OpenLine?",
+          "file": "audio/auditions/03-af_heart65-am_liam35.wav",
+          "sha256": "0135bbd561c7fdd0cc6ccbd24d2a5fc512b10e4c1da0b309eb88602f1eb8aa71",
+          "duration": 1.9993333333333334,
+          "activity": {
+            "start": 0.03,
+            "end": 1.67,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.67,
+                "end": 1.99,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 172.662,
+            "strong_voiced_frames": 85,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "You guys don't use OpenLine?",
+            "recognized": "you guys don't use open line",
+            "word_edit_distance": 0,
+            "word_count": 6,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        },
+        {
+          "id": "05",
+          "voice": "af_heart65-am_liam35",
+          "speed": 1.1,
+          "text": "It's got a kill switch. For protected actions.",
+          "file": "audio/auditions/05-af_heart65-am_liam35.wav",
+          "sha256": "755c2cd64cbda925aa7fb0257e3c6c4a5aa3fdbb39bec89d4c363510f6d820c7",
+          "duration": 2.998666666666667,
+          "activity": {
+            "start": 0.03,
+            "end": 2.67,
+            "frame_seconds": 0.01,
+            "quiet_threshold_db_relative_to_peak_rms": -45,
+            "quiet_runs_at_least30ms": [
+              {
+                "start": 0.0,
+                "end": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start": 1.19,
+                "end": 1.48,
+                "seconds": 0.29
+              },
+              {
+                "start": 2.67,
+                "end": 2.99,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms PCM RMS; not forced word alignment or human listening"
+          },
+          "pitch": {
+            "median_voiced_f0_hz": 188.976,
+            "strong_voiced_frames": 83,
+            "range_hz": [
+              65,
+              500
+            ],
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "method": "strong-frame autocorrelation confidence>0.65; estimated native F0, possible octave errors; not perceived pitch/listening"
+          },
+          "asr": {
+            "expected": "It's got a kill switch. For protected actions.",
+            "recognized": "it's got a kill switch for protected actions",
+            "word_edit_distance": 0,
+            "word_count": 8,
+            "exact_normalized_match": true,
+            "normalization": "lowercase punctuation removed, OpenLine split to open line; no recognizer prompt or custom grammar",
+            "method": "PocketSphinx5.0.4 default unrestricted English model; not listening or independent word alignment"
+          }
+        }
+      ],
+      "median_take_f0_hz": 180.81900000000002,
+      "total_word_edit_distance": 0,
+      "full_five_line_comparison": false
+    }
+  ],
+  "human_listening": "UNVERIFIED",
+  "limitations": "Pitch is an autocorrelation estimate; ASR comparisons are objective warning signals, not a listener intelligibility or performance rating."
+}

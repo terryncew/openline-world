@@ -1,0 +1,81 @@
+{
+  "sample_rate": 48000,
+  "channels": 2,
+  "duration": 64.0,
+  "integrated_lufs": -17.76,
+  "true_peak_dbtp": -2.0,
+  "loudness_range_lu": 12.7,
+  "normalization": "One uniform linear gain within revision target−18 LUFS±1, constrained to−2 dBTP; no saturation, compression, limiter, dynamic loudnorm or robot EQ.",
+  "revision_target_lufs": -18,
+  "revision_target_tolerance_lu": 1,
+  "maximum_true_peak_dbtp": -1.5,
+  "rendering_true_peak_target_dbtp": -2.0,
+  "gain_db": 4.55,
+  "before": {
+    "input_i": "-22.30",
+    "input_tp": "-6.55",
+    "input_lra": "12.80",
+    "input_thresh": "-34.63",
+    "output_i": "-16.54",
+    "output_tp": "-1.50",
+    "output_lra": "17.20",
+    "output_thresh": "-28.13",
+    "normalization_type": "dynamic",
+    "target_offset": "0.54"
+  },
+  "after": {
+    "input_i": "-17.76",
+    "input_tp": "-2.00",
+    "input_lra": "12.70",
+    "input_thresh": "-30.14",
+    "output_i": "-16.54",
+    "output_tp": "-1.50",
+    "output_lra": "17.10",
+    "output_thresh": "-28.13",
+    "normalization_type": "dynamic",
+    "target_offset": "0.54"
+  },
+  "silence_checks": [
+    {
+      "start": 32.5,
+      "end": 33.5,
+      "peak": 0.0,
+      "digital_silence": true
+    },
+    {
+      "start": 38.5,
+      "end": 40.0,
+      "peak": 0.0,
+      "digital_silence": true
+    },
+    {
+      "start": 46.5,
+      "end": 48.0,
+      "peak": 0.0,
+      "digital_silence": true
+    },
+    {
+      "start": 57.0,
+      "end": 58.0,
+      "peak": 0.0,
+      "digital_silence": true
+    },
+    {
+      "start": 62.0,
+      "end": 64.0,
+      "peak": 0.0,
+      "digital_silence": true
+    }
+  ],
+  "voice_takes": 12,
+  "raw_takes_retained": true,
+  "model_hashes": {
+    "kokoro-v1.0.onnx": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+    "voices-v1.0.bin": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+    "kokoro-v1.0-duration.onnx": "1eb3dd7b15a3ce59eee74c8057492f1e95bbd6f236a61c0b1ae8b617a95e67d6"
+  },
+  "has_model_phoneme_timing": true,
+  "api_spend_usd": 0,
+  "seeded_effects": true,
+  "listening": "UNVERIFIED: no human auditory review performed by this script. Objective audio and codec checks are reported separately."
+}

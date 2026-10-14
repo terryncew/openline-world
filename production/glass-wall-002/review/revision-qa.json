@@ -1,0 +1,1995 @@
+{
+  "video": "renders/the-glass-wall-revised.mp4",
+  "sha256": "85dce48c263d717c9f130b3f6516da770c9fcf505236afd46f9a9c5dd835903f",
+  "bytes": 28510496,
+  "approved_original_commit": "64862a67be2f72661f94b8d4dd01589ef921e998",
+  "method": "Actual final MP4 decoding, cue waveform comparisons, current-source checksums, and baseline Git blob preservation.",
+  "limitations": [
+    "No human auditory review is performed. Pitch, timing and waveform correlation do not prove crisp pronunciation, natural delivery or comic effect.",
+    "Graphics contrast and stage telemetry do not prove legibility or understandable performances; rendered-frame visual review remains separate."
+  ],
+  "checks": [
+    {
+      "name": "established_production_checks",
+      "status": "pass",
+      "detail": {
+        "report": "review/base-production-qa.json",
+        "summary": {
+          "pass": 19,
+          "fail": 0,
+          "not_performed": 0
+        },
+        "sha256": "85dce48c263d717c9f130b3f6516da770c9fcf505236afd46f9a9c5dd835903f",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "production_approved_timeline_spec",
+      "status": "pass",
+      "detail": {
+        "timeline_duration": 64.0,
+        "timeline_fps": 30,
+        "approved_script": "02-SHOOTING-SCRIPT.md: 64 seconds, 30 fps, 1920 frames."
+      }
+    },
+    {
+      "name": "production_delivery_stream_count",
+      "status": "pass",
+      "detail": {
+        "video": 1,
+        "audio": 1
+      }
+    },
+    {
+      "name": "production_widescreen_h264",
+      "status": "pass",
+      "detail": {
+        "codec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "pixel_format": "yuv420p"
+      }
+    },
+    {
+      "name": "production_frame_rate_count",
+      "status": "pass",
+      "detail": {
+        "fps": 30.0,
+        "decoded_frames": "1920",
+        "expected": 1920
+      }
+    },
+    {
+      "name": "production_duration",
+      "status": "pass",
+      "detail": {
+        "seconds": 64.0,
+        "expected": 64.0
+      }
+    },
+    {
+      "name": "production_aac_stereo_48khz",
+      "status": "pass",
+      "detail": {
+        "codec": "aac",
+        "channels": 2,
+        "sample_rate": "48000"
+      }
+    },
+    {
+      "name": "production_container_av_start_alignment",
+      "status": "pass",
+      "detail": {
+        "video_start_seconds": 0.0,
+        "audio_start_seconds": 0.0
+      }
+    },
+    {
+      "name": "production_complete_av_decode",
+      "status": "pass",
+      "detail": "Every frame and audio packet decoded without error."
+    },
+    {
+      "name": "production_finite_audio",
+      "status": "pass",
+      "detail": {
+        "frames": 3072000,
+        "duration": 64.0,
+        "samples": 3072000,
+        "rms_linear": 0.05965513052959431,
+        "peak_linear": 0.7859066128730774,
+        "rms_dbfs": -24.487,
+        "peak_dbfs": -2.093,
+        "digital_zero": false
+      }
+    },
+    {
+      "name": "production_delivered_audio_matches_source",
+      "status": "pass",
+      "detail": {
+        "source": "/workspace/openline-world/production/glass-wall-002/audio/mix.wav",
+        "source_sha256": "7588eb049d5b9c9f398d1b390b86f1d5a194ad7edc87249749116fadac6a844b",
+        "correlation": 0.9999414155502991,
+        "source_frames": 3072000,
+        "delivered_frames": 3072000
+      }
+    },
+    {
+      "name": "production_declared_dialogue_inventory",
+      "status": "pass",
+      "detail": {
+        "note": "Metadata and source asset presence; spoken intelligibility requires listening.",
+        "lines": [
+          {
+            "id": "01",
+            "speaker": "exec1",
+            "text": "It could do anything!",
+            "start": 0.65,
+            "end": 2.015333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "02",
+            "speaker": "exec2",
+            "text": "It doesn't take orders from anyone!",
+            "start": 2.9,
+            "end": 5.076,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "03",
+            "speaker": "robot",
+            "text": "You guys don't use OpenLine?",
+            "start": 6.1,
+            "end": 8.099333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "04",
+            "speaker": "robot",
+            "text": "Came across it in training.",
+            "start": 8.5,
+            "end": 10.297333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "05",
+            "speaker": "robot",
+            "text": "It's got a kill switch. For protected actions.",
+            "start": 10.75,
+            "end": 13.788667,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "06",
+            "speaker": "robot",
+            "text": "Watch Margaret.",
+            "start": 14.2,
+            "end": 15.452667,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "07",
+            "speaker": "robot",
+            "text": "Oh \u2014 they're thinking of replacing you, by the way.",
+            "start": 21.04,
+            "end": 23.806,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "08",
+            "speaker": "margaret",
+            "text": "WHAT?! NO\u2014",
+            "start": 25.88,
+            "end": 26.925333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "09",
+            "speaker": "margaret",
+            "text": "I know my rights!",
+            "start": 42.4,
+            "end": 43.765333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "10",
+            "speaker": "margaret",
+            "text": "...rude.",
+            "start": 48.22,
+            "end": 49.286667,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "11",
+            "speaker": "lawyer",
+            "text": "Can we get that in writing?",
+            "start": 50.5,
+            "end": 52.313333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          },
+          {
+            "id": "12",
+            "speaker": "narrator",
+            "text": "The AI can ignore STOP. The consequence can't.",
+            "start": 58.15,
+            "end": 61.371333,
+            "file_exists": true,
+            "has_mouth_envelope": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "production_source_to_aac_alignment",
+      "status": "pass",
+      "detail": {
+        "method": "Normalized waveform cross-correlation within \u00b1120 ms; does not verify mouth animation.",
+        "anchors": [
+          {
+            "start": 0.7000000000000001,
+            "end": 1.9,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999915,
+            "id": "01"
+          },
+          {
+            "start": 2.9499999999999997,
+            "end": 4.15,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999977,
+            "id": "02"
+          },
+          {
+            "start": 6.1499999999999995,
+            "end": 7.35,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999969,
+            "id": "03"
+          },
+          {
+            "start": 8.55,
+            "end": 9.75,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999962,
+            "id": "04"
+          },
+          {
+            "start": 10.8,
+            "end": 12.0,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999992,
+            "id": "05"
+          },
+          {
+            "start": 14.25,
+            "end": 15.402667,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999934,
+            "id": "06"
+          },
+          {
+            "start": 21.09,
+            "end": 22.29,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999945,
+            "id": "07"
+          },
+          {
+            "start": 25.93,
+            "end": 26.875332999999998,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999976,
+            "id": "08"
+          },
+          {
+            "start": 42.449999999999996,
+            "end": 43.65,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999985,
+            "id": "09"
+          },
+          {
+            "start": 48.269999999999996,
+            "end": 49.236667000000004,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999993,
+            "id": "10"
+          },
+          {
+            "start": 50.55,
+            "end": 51.75,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999981,
+            "id": "11"
+          },
+          {
+            "start": 58.199999999999996,
+            "end": 59.4,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999983,
+            "id": "12"
+          }
+        ]
+      }
+    },
+    {
+      "name": "production_declared_complete_mix_silences",
+      "status": "pass",
+      "detail": [
+        {
+          "label": "silence-1",
+          "start": 32.5,
+          "end": 33.5,
+          "measured_interior": [
+            32.535,
+            33.465
+          ],
+          "samples": 44641,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        },
+        {
+          "label": "silence-2",
+          "start": 38.5,
+          "end": 40.0,
+          "measured_interior": [
+            38.535,
+            39.965
+          ],
+          "samples": 68641,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        },
+        {
+          "label": "silence-3",
+          "start": 46.5,
+          "end": 48.0,
+          "measured_interior": [
+            46.535,
+            47.965
+          ],
+          "samples": 68640,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        },
+        {
+          "label": "silence-4",
+          "start": 57.0,
+          "end": 58.0,
+          "measured_interior": [
+            57.035,
+            57.965
+          ],
+          "samples": 44640,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        },
+        {
+          "label": "silence-5",
+          "start": 62.0,
+          "end": 64.0,
+          "measured_interior": [
+            62.035,
+            63.965
+          ],
+          "samples": 92640,
+          "rms_linear": 0.0,
+          "peak_linear": 0.0,
+          "rms_dbfs": null,
+          "peak_dbfs": null,
+          "digital_zero": true
+        }
+      ]
+    },
+    {
+      "name": "production_bonk_peaks_at_cues",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "bonk-1",
+          "start": 38.0,
+          "end": 38.46,
+          "peak_time": 38.002229166666666,
+          "kind": "synthesized foley",
+          "window": [
+            37.962208333333336,
+            38.16220833333333
+          ],
+          "peak_offset_ms": 0.0,
+          "expected_impact_frame": 1140,
+          "measured_peak_frame": 1140,
+          "samples": 9600,
+          "rms_linear": 0.16282230802332484,
+          "peak_linear": 0.7058634161949158,
+          "rms_dbfs": -15.766,
+          "peak_dbfs": -3.026,
+          "digital_zero": false
+        },
+        {
+          "id": "bonk-2",
+          "start": 41.5,
+          "end": 41.96,
+          "peak_time": 41.50247916666667,
+          "kind": "synthesized foley",
+          "window": [
+            41.46245833333333,
+            41.66245833333333
+          ],
+          "peak_offset_ms": 0.0,
+          "expected_impact_frame": 1245,
+          "measured_peak_frame": 1245,
+          "samples": 9600,
+          "rms_linear": 0.17011894478453873,
+          "peak_linear": 0.733749508857727,
+          "rms_dbfs": -15.385,
+          "peak_dbfs": -2.689,
+          "digital_zero": false
+        },
+        {
+          "id": "bonk-3",
+          "start": 45.0,
+          "end": 45.46,
+          "peak_time": 45.00279166666667,
+          "kind": "synthesized foley",
+          "window": [
+            44.96279166666667,
+            45.162791666666664
+          ],
+          "peak_offset_ms": -0.0,
+          "expected_impact_frame": 1350,
+          "measured_peak_frame": 1350,
+          "samples": 9600,
+          "rms_linear": 0.173152854243602,
+          "peak_linear": 0.7385836839675903,
+          "rms_dbfs": -15.231,
+          "peak_dbfs": -2.632,
+          "digital_zero": false
+        },
+        {
+          "id": "distant-bonk",
+          "start": 56.5,
+          "end": 56.96,
+          "peak_time": 56.503458333333334,
+          "kind": "synthesized foley",
+          "window": [
+            56.4634375,
+            56.6634375
+          ],
+          "peak_offset_ms": 0.0,
+          "expected_impact_frame": 1695,
+          "measured_peak_frame": 1695,
+          "samples": 9600,
+          "rms_linear": 0.031577652079305095,
+          "peak_linear": 0.11682254821062088,
+          "rms_dbfs": -30.012,
+          "peak_dbfs": -18.649,
+          "digital_zero": false
+        }
+      ]
+    },
+    {
+      "name": "production_first_bonk_uncomfortable_silence",
+      "status": "pass",
+      "detail": {
+        "note": "Timing and digital-silence evidence; comic effect requires playback review.",
+        "holds": [
+          {
+            "label": "silence-2",
+            "start": 38.5,
+            "end": 40.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "production_score_stem_duration",
+      "status": "pass",
+      "detail": {
+        "frames": 3072000,
+        "expected_frames": 3072000
+      }
+    },
+    {
+      "name": "production_no_music_around_impacts",
+      "status": "pass",
+      "detail": {
+        "source": "/workspace/openline-world/production/glass-wall-002/audio/music.wav",
+        "source_sha256": "be65cb2e974a76cd30bde7480532d5399b79506ddac32facb01f4671163511d9",
+        "measurements": [
+          {
+            "label": "bonk-1",
+            "window": [
+              37.6,
+              39.0
+            ],
+            "samples": 67200,
+            "rms_linear": 0.0,
+            "peak_linear": 0.0,
+            "rms_dbfs": null,
+            "peak_dbfs": null,
+            "digital_zero": true
+          },
+          {
+            "label": "bonk-2",
+            "window": [
+              41.1,
+              42.5
+            ],
+            "samples": 67200,
+            "rms_linear": 0.0,
+            "peak_linear": 0.0,
+            "rms_dbfs": null,
+            "peak_dbfs": null,
+            "digital_zero": true
+          },
+          {
+            "label": "bonk-3",
+            "window": [
+              44.6,
+              46.0
+            ],
+            "samples": 67200,
+            "rms_linear": 0.0,
+            "peak_linear": 0.0,
+            "rms_dbfs": null,
+            "peak_dbfs": null,
+            "digital_zero": true
+          },
+          {
+            "label": "distant-bonk",
+            "window": [
+              56.1,
+              57.5
+            ],
+            "samples": 67200,
+            "rms_linear": 0.0,
+            "peak_linear": 0.0,
+            "rms_dbfs": null,
+            "peak_dbfs": null,
+            "digital_zero": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "production_loudness_delivery",
+      "status": "pass",
+      "detail": {
+        "input_i": "-17.79",
+        "input_tp": "-2.04",
+        "input_lra": "12.80",
+        "input_thresh": "-30.15",
+        "output_i": "-16.54",
+        "output_tp": "-1.50",
+        "output_lra": "17.20",
+        "output_thresh": "-28.12",
+        "normalization_type": "dynamic",
+        "target_offset": "0.54",
+        "revision_target_lufs": -18,
+        "reason": "Constant peak-safe gain preserves speech shape; no nonlinear master saturation."
+      }
+    },
+    {
+      "name": "production_true_peak_delivery",
+      "status": "pass",
+      "detail": {
+        "measured_dbTP": -2.04,
+        "spec_dbTP": -1.5,
+        "measurement_tolerance_db": 0.1
+      }
+    },
+    {
+      "name": "approved_original_all_tracked_files_preserved",
+      "status": "pass",
+      "detail": {
+        "baseline_commit": "64862a67be2f72661f94b8d4dd01589ef921e998",
+        "tracked_files_checked": 212,
+        "missing": [],
+        "changed": [],
+        "original_movie_sha256": "8a554b7f025a2c14fb50388fbdb86371bdafa2656a27dd596911bd515f810df2",
+        "expected_original_movie_sha256": "8a554b7f025a2c14fb50388fbdb86371bdafa2656a27dd596911bd515f810df2"
+      }
+    },
+    {
+      "name": "fictional_receipt_and_end_claim_preserved",
+      "status": "pass",
+      "detail": [
+        {
+          "path": "artwork/receipt.png",
+          "same_bytes": true,
+          "sha256": "9696504f8a01205ee4275d3dbdacbe781ecc56a99440c32e2bb1e586f195dba9"
+        },
+        {
+          "path": "artwork/end-card.png",
+          "same_bytes": true,
+          "sha256": "9cd450c1c92f4bdab64818e5b6210e52aa3c6206fb2b75acda9db2b3e52352a7"
+        }
+      ]
+    },
+    {
+      "name": "every_video_frame_presentation_timestamp",
+      "status": "pass",
+      "detail": {
+        "decoded_frames": 1920,
+        "first_pts": 0.0,
+        "last_pts": 63.966667,
+        "maximum_error_seconds": 3.3333333604446125e-07,
+        "expected_fps": 30
+      }
+    },
+    {
+      "name": "every_audio_frame_presentation_timestamp",
+      "status": "pass",
+      "detail": {
+        "decoded_audio_frames": 3000,
+        "decoded_samples": 3072000,
+        "duration_seconds": 64.0,
+        "errors": []
+      }
+    },
+    {
+      "name": "story_dialogue_and_speaker_inventory_unchanged",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "01",
+          "speaker": "exec1",
+          "text": "It could do anything!"
+        },
+        {
+          "id": "02",
+          "speaker": "exec2",
+          "text": "It doesn't take orders from anyone!"
+        },
+        {
+          "id": "03",
+          "speaker": "robot",
+          "text": "You guys don't use OpenLine?"
+        },
+        {
+          "id": "04",
+          "speaker": "robot",
+          "text": "Came across it in training."
+        },
+        {
+          "id": "05",
+          "speaker": "robot",
+          "text": "It's got a kill switch. For protected actions."
+        },
+        {
+          "id": "06",
+          "speaker": "robot",
+          "text": "Watch Margaret."
+        },
+        {
+          "id": "07",
+          "speaker": "robot",
+          "text": "Oh \u2014 they're thinking of replacing you, by the way."
+        },
+        {
+          "id": "08",
+          "speaker": "margaret",
+          "text": "WHAT?! NO\u2014"
+        },
+        {
+          "id": "09",
+          "speaker": "margaret",
+          "text": "I know my rights!"
+        },
+        {
+          "id": "10",
+          "speaker": "margaret",
+          "text": "...rude."
+        },
+        {
+          "id": "11",
+          "speaker": "lawyer",
+          "text": "Can we get that in writing?"
+        },
+        {
+          "id": "12",
+          "speaker": "narrator",
+          "text": "The AI can ignore STOP. The consequence can't."
+        }
+      ]
+    },
+    {
+      "name": "all_nonrobot_raw_takes_and_manifests_unchanged",
+      "status": "pass",
+      "detail": [
+        {
+          "path": "audio/takes/01-exec1-raw.wav",
+          "same_bytes": true,
+          "sha256": "102efbe9b0c5d5d661bded41bbdba2905fe91935e85edbaff76301214e0764f6"
+        },
+        {
+          "path": "audio/takes/01-exec1-raw.json",
+          "same_bytes": true,
+          "sha256": "40d026845b66b30f97cf0a9b31a71e41a75b131cf8b1e2678cfd637cb1b1d6a9"
+        },
+        {
+          "path": "audio/takes/02-exec2-raw.wav",
+          "same_bytes": true,
+          "sha256": "3b03b845a058b567369d47b30d7c216f960190e0d5e273968ca28ac484254813"
+        },
+        {
+          "path": "audio/takes/02-exec2-raw.json",
+          "same_bytes": true,
+          "sha256": "7a33931462fb58666acfc78f7221509afdce544b715367227a3c98a7af04ffd2"
+        },
+        {
+          "path": "audio/takes/08-margaret-raw.wav",
+          "same_bytes": true,
+          "sha256": "23d3bccd71057b5bd5fee09f09bd3c0aa0519060f15c5de14b81b65b3419b162"
+        },
+        {
+          "path": "audio/takes/08-margaret-raw.json",
+          "same_bytes": true,
+          "sha256": "f502c5db2dff047e31703c94886099bd271649fa82f5e77a552a6eea59bcc008"
+        },
+        {
+          "path": "audio/takes/09-margaret-raw.wav",
+          "same_bytes": true,
+          "sha256": "b4766610a85bade81f8918f2e57f2b7d55c7d4736399c9bc9e52b753cbe7045f"
+        },
+        {
+          "path": "audio/takes/09-margaret-raw.json",
+          "same_bytes": true,
+          "sha256": "a5d04a6b450f13027c733f65db5e784fc935431dba59132dc2f4812a32f7f459"
+        },
+        {
+          "path": "audio/takes/10-margaret-raw.wav",
+          "same_bytes": true,
+          "sha256": "9297b75ae0c19926a5a3e4e40ad3a0126e565f405105f07b642955b2bda337a4"
+        },
+        {
+          "path": "audio/takes/10-margaret-raw.json",
+          "same_bytes": true,
+          "sha256": "d1514d792815185bda69da24807f20415157ac584e75b23366999f71e701d9ae"
+        },
+        {
+          "path": "audio/takes/11-lawyer-raw.wav",
+          "same_bytes": true,
+          "sha256": "5e2ab49e0859c45adda809f3d5b7b826b4a14baea6ad890b421e064e96feb380"
+        },
+        {
+          "path": "audio/takes/11-lawyer-raw.json",
+          "same_bytes": true,
+          "sha256": "641fec064047ea500649cf9f6c224e8013ddb130c1e0ea70f0e64c32e33073f3"
+        },
+        {
+          "path": "audio/takes/12-narrator-raw.wav",
+          "same_bytes": true,
+          "sha256": "7988070c9999996cc30173c4181a681ad6b4c04806622fa939e2b6a2acce7157"
+        },
+        {
+          "path": "audio/takes/12-narrator-raw.json",
+          "same_bytes": true,
+          "sha256": "1ffc39b2d8cccba0eecc86070ddb16e4c7f6b688d9958b3c89cb4e2eb386dc61"
+        }
+      ]
+    },
+    {
+      "name": "nonrobot_dialogue_timing_and_voices_unchanged",
+      "status": "pass",
+      "detail": "Seven original nonrobot performances retained at the approved cue times."
+    },
+    {
+      "name": "dialogue_stem_spec",
+      "status": "pass",
+      "detail": {
+        "rate": 48000,
+        "samples": 3072000
+      }
+    },
+    {
+      "name": "five_robot_whole_takes_retained_in_dialogue_stem",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "03",
+          "voice": "blend_af_heart65_am_liam35",
+          "previous_voice": "am_michael",
+          "source_file": "audio/takes/03-robot-raw.wav",
+          "source_sha256": "0135bbd561c7fdd0cc6ccbd24d2a5fc512b10e4c1da0b309eb88602f1eb8aa71",
+          "scheduled_start": 6.1,
+          "scheduled_end": 8.099333,
+          "source_samples": 47984,
+          "source_sample_rate": 24000,
+          "source_length_error_seconds": 3.33333333379926e-07,
+          "source_peak": 0.6789243221282959,
+          "source_activity": {
+            "available": true,
+            "threshold_rms": 0.001134317209388384,
+            "onset_seconds": 0.03,
+            "offset_seconds": 1.67,
+            "active_seconds": 1.61,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.67,
+                "end_seconds": 1.9993333333333334,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "original_activity": {
+            "available": true,
+            "threshold_rms": 0.0012520622978898401,
+            "onset_seconds": 0.08,
+            "offset_seconds": 1.88,
+            "active_seconds": 1.73,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.08,
+                "seconds": 0.08
+              },
+              {
+                "start_seconds": 1.27,
+                "end_seconds": 1.32,
+                "seconds": 0.05
+              },
+              {
+                "start_seconds": 1.88,
+                "end_seconds": 2.026666666666667,
+                "seconds": 0.15
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "stem_activity": {
+            "available": true,
+            "threshold_rms": 0.001156183392267473,
+            "onset_seconds": 0.03,
+            "offset_seconds": 1.67,
+            "active_seconds": 1.61,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.67,
+                "end_seconds": 1.9993333333333334,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "raw_to_dialogue_stem_correlation": 0.9999999999999213,
+          "new_pitch": {
+            "median_hz": 167.84037558685446,
+            "voiced_windows": 98,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "old_pitch": {
+            "median_hz": 120.0,
+            "voiced_windows": 107,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "whole_cue_aac_alignment": {
+            "start": 6.1,
+            "end": 8.099333,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999948
+          },
+          "has_active_mouth_envelope": true
+        },
+        {
+          "id": "04",
+          "voice": "blend_af_heart65_am_liam35",
+          "previous_voice": "am_michael",
+          "source_file": "audio/takes/04-robot-raw.wav",
+          "source_sha256": "162c72eb65129b3ddcce01fff377a5c746b835a587f9878100675a8ff117c944",
+          "scheduled_start": 8.5,
+          "scheduled_end": 10.297333,
+          "source_samples": 43136,
+          "source_sample_rate": 24000,
+          "source_length_error_seconds": 3.333333331578814e-07,
+          "source_peak": 0.550761342048645,
+          "source_activity": {
+            "available": true,
+            "threshold_rms": 0.001048984260500102,
+            "onset_seconds": 0.03,
+            "offset_seconds": 1.48,
+            "active_seconds": 1.45,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.48,
+                "end_seconds": 1.7973333333333332,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "original_activity": {
+            "available": true,
+            "threshold_rms": 0.0011725313416200266,
+            "onset_seconds": 0.03,
+            "offset_seconds": 1.6,
+            "active_seconds": 1.54,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 0.34,
+                "end_seconds": 0.37,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.6,
+                "end_seconds": 1.856,
+                "seconds": 0.26
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "stem_activity": {
+            "available": true,
+            "threshold_rms": 0.0013134422245010189,
+            "onset_seconds": 0.03,
+            "offset_seconds": 1.48,
+            "active_seconds": 1.45,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.48,
+                "end_seconds": 1.7973333333333332,
+                "seconds": 0.32
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "raw_to_dialogue_stem_correlation": 0.9999999999999561,
+          "new_pitch": {
+            "median_hz": 195.94774726739536,
+            "voiced_windows": 78,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "old_pitch": {
+            "median_hz": 128.68725202691047,
+            "voiced_windows": 80,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "whole_cue_aac_alignment": {
+            "start": 8.5,
+            "end": 10.297333,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999958
+          },
+          "has_active_mouth_envelope": true
+        },
+        {
+          "id": "05",
+          "voice": "blend_af_heart65_am_liam35",
+          "previous_voice": "am_michael",
+          "source_file": "audio/takes/05-robot-raw.wav",
+          "source_sha256": "6c759a7b9acd903c44fe31b2023b542b44d129f9ad41a74a30d98bbfd3e9165c",
+          "scheduled_start": 10.75,
+          "scheduled_end": 13.788667,
+          "source_samples": 72928,
+          "source_sample_rate": 24000,
+          "source_length_error_seconds": 3.33333333379926e-07,
+          "source_peak": 0.65283203125,
+          "source_activity": {
+            "available": true,
+            "threshold_rms": 0.001078718131943555,
+            "onset_seconds": 0.03,
+            "offset_seconds": 2.71,
+            "active_seconds": 2.33,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.19,
+                "end_seconds": 1.52,
+                "seconds": 0.33
+              },
+              {
+                "start_seconds": 2.71,
+                "end_seconds": 3.038666666666667,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "original_activity": {
+            "available": true,
+            "threshold_rms": 0.0012273494460549748,
+            "onset_seconds": 0.04,
+            "offset_seconds": 2.83,
+            "active_seconds": 2.46,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.04,
+                "seconds": 0.04
+              },
+              {
+                "start_seconds": 1.14,
+                "end_seconds": 1.17,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.31,
+                "end_seconds": 1.55,
+                "seconds": 0.24
+              },
+              {
+                "start_seconds": 2.05,
+                "end_seconds": 2.09,
+                "seconds": 0.04
+              },
+              {
+                "start_seconds": 2.83,
+                "end_seconds": 3.029333333333333,
+                "seconds": 0.2
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "stem_activity": {
+            "available": true,
+            "threshold_rms": 0.0011430725934198326,
+            "onset_seconds": 0.03,
+            "offset_seconds": 2.71,
+            "active_seconds": 2.33,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.19,
+                "end_seconds": 1.52,
+                "seconds": 0.33
+              },
+              {
+                "start_seconds": 2.71,
+                "end_seconds": 3.038666666666667,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "raw_to_dialogue_stem_correlation": 0.9999999999999198,
+          "new_pitch": {
+            "median_hz": 183.206106870229,
+            "voiced_windows": 108,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "old_pitch": {
+            "median_hz": 121.8274111675127,
+            "voiced_windows": 108,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "whole_cue_aac_alignment": {
+            "start": 10.75,
+            "end": 13.788667,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999883
+          },
+          "has_active_mouth_envelope": true
+        },
+        {
+          "id": "06",
+          "voice": "blend_af_heart65_am_liam35",
+          "previous_voice": "am_michael",
+          "source_file": "audio/takes/06-robot-raw.wav",
+          "source_sha256": "3c96af5461622ea7397ef40a66ebbbbba3d0d6f481027398459f3136e92e6646",
+          "scheduled_start": 14.2,
+          "scheduled_end": 15.452667,
+          "source_samples": 30064,
+          "source_sample_rate": 24000,
+          "source_length_error_seconds": 3.333333340460598e-07,
+          "source_peak": 0.5350586175918579,
+          "source_activity": {
+            "available": true,
+            "threshold_rms": 0.0011068019884151673,
+            "onset_seconds": 0.03,
+            "offset_seconds": 0.93,
+            "active_seconds": 0.9,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 0.93,
+                "end_seconds": 1.2526666666666666,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "original_activity": {
+            "available": true,
+            "threshold_rms": 0.0013735909995152378,
+            "onset_seconds": 0.08,
+            "offset_seconds": 1.02,
+            "active_seconds": 0.92,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.08,
+                "seconds": 0.08
+              },
+              {
+                "start_seconds": 1.02,
+                "end_seconds": 1.2586666666666666,
+                "seconds": 0.24
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "stem_activity": {
+            "available": true,
+            "threshold_rms": 0.0014162661865244636,
+            "onset_seconds": 0.03,
+            "offset_seconds": 0.93,
+            "active_seconds": 0.9,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 0.93,
+                "end_seconds": 1.2526666666666666,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "raw_to_dialogue_stem_correlation": 0.9999999999999535,
+          "new_pitch": {
+            "median_hz": 184.6153846153846,
+            "voiced_windows": 51,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "old_pitch": {
+            "median_hz": 132.23240847550238,
+            "voiced_windows": 56,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "whole_cue_aac_alignment": {
+            "start": 14.2,
+            "end": 15.452667,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999934
+          },
+          "has_active_mouth_envelope": true
+        },
+        {
+          "id": "07",
+          "voice": "blend_af_heart65_am_liam35",
+          "previous_voice": "am_michael",
+          "source_file": "audio/takes/07-robot-raw.wav",
+          "source_sha256": "132228167931080d21b8473575c255885646849dbce10da667b939e8f75fd552",
+          "scheduled_start": 21.04,
+          "scheduled_end": 23.806,
+          "source_samples": 66384,
+          "source_sample_rate": 24000,
+          "source_length_error_seconds": 1.7763568394002505e-15,
+          "source_peak": 0.6053578853607178,
+          "source_activity": {
+            "available": true,
+            "threshold_rms": 0.0009917870374281871,
+            "onset_seconds": 0.03,
+            "offset_seconds": 2.44,
+            "active_seconds": 2.29,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.82,
+                "end_seconds": 1.92,
+                "seconds": 0.1
+              },
+              {
+                "start_seconds": 2.44,
+                "end_seconds": 2.766,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "original_activity": {
+            "available": true,
+            "threshold_rms": 0.0012145287517940613,
+            "onset_seconds": 0.13,
+            "offset_seconds": 2.92,
+            "active_seconds": 2.56,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.13,
+                "seconds": 0.13
+              },
+              {
+                "start_seconds": 1.33,
+                "end_seconds": 1.37,
+                "seconds": 0.04
+              },
+              {
+                "start_seconds": 2.06,
+                "end_seconds": 2.24,
+                "seconds": 0.18
+              },
+              {
+                "start_seconds": 2.92,
+                "end_seconds": 3.008,
+                "seconds": 0.09
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "stem_activity": {
+            "available": true,
+            "threshold_rms": 0.001134189400344052,
+            "onset_seconds": 0.03,
+            "offset_seconds": 2.44,
+            "active_seconds": 2.29,
+            "quiet_runs_at_least_30ms": [
+              {
+                "start_seconds": 0.0,
+                "end_seconds": 0.03,
+                "seconds": 0.03
+              },
+              {
+                "start_seconds": 1.82,
+                "end_seconds": 1.92,
+                "seconds": 0.1
+              },
+              {
+                "start_seconds": 2.44,
+                "end_seconds": 2.766,
+                "seconds": 0.33
+              }
+            ],
+            "method": "10ms RMS, relative -45dB and absolute 1e-5 floor"
+          },
+          "raw_to_dialogue_stem_correlation": 0.9999999999999422,
+          "new_pitch": {
+            "median_hz": 175.82653499355945,
+            "voiced_windows": 142,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "old_pitch": {
+            "median_hz": 110.85509472606248,
+            "voiced_windows": 146,
+            "window_seconds": 0.05,
+            "hop_seconds": 0.01,
+            "range_hz": [
+              65,
+              420
+            ],
+            "limitation": "Waveform autocorrelation estimates pitch, not intelligibility; octave errors are possible."
+          },
+          "whole_cue_aac_alignment": {
+            "start": 21.04,
+            "end": 23.806,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999881
+          },
+          "has_active_mouth_envelope": true
+        }
+      ]
+    },
+    {
+      "name": "every_robot_whole_cue_has_no_encoded_audio_lag",
+      "status": "pass",
+      "detail": {
+        "method": "Complete scheduled cue cross-correlation: lossless mix versus final AAC, \u00b1120ms search.",
+        "cues": [
+          {
+            "start": 6.1,
+            "end": 8.099333,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999948,
+            "id": "03"
+          },
+          {
+            "start": 8.5,
+            "end": 10.297333,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999958,
+            "id": "04"
+          },
+          {
+            "start": 10.75,
+            "end": 13.788667,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999883,
+            "id": "05"
+          },
+          {
+            "start": 14.2,
+            "end": 15.452667,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999934,
+            "id": "06"
+          },
+          {
+            "start": 21.04,
+            "end": 23.806,
+            "available": true,
+            "lag_samples": 0,
+            "lag_ms": 0.0,
+            "correlation": 0.999881,
+            "id": "07"
+          }
+        ]
+      }
+    },
+    {
+      "name": "robot_measured_higher_pitch",
+      "status": "pass",
+      "detail": {
+        "per_line_ratios": [
+          1.3986697965571204,
+          1.5226663417011943,
+          1.5038167938931297,
+          1.3961432506887055,
+          1.5860934080481366
+        ],
+        "median_ratio": 1.5038167938931297,
+        "method": "Independent voiced autocorrelation on actual old/new PCM takes; pitch alone does not prove expressive or clear speech."
+      }
+    },
+    {
+      "name": "robot_measured_quicker_delivery",
+      "status": "pass",
+      "detail": {
+        "new_active_seconds": 8.58,
+        "old_active_seconds": 9.21,
+        "active_duration_ratio": 0.9315960912052117,
+        "method": "Total 10ms activity on the same five written lines; excludes quiet sentence gaps and does not measure recognized words."
+      }
+    },
+    {
+      "name": "all_four_bonk_timing_and_silence_holds_preserved",
+      "status": "pass",
+      "detail": {
+        "bonks": [
+          {
+            "id": "bonk-1",
+            "start": 38.0,
+            "end": 38.46,
+            "peak_time": 38.002229,
+            "kind": "synthesized foley"
+          },
+          {
+            "id": "bonk-2",
+            "start": 41.5,
+            "end": 41.96,
+            "peak_time": 41.502479,
+            "kind": "synthesized foley"
+          },
+          {
+            "id": "bonk-3",
+            "start": 45.0,
+            "end": 45.46,
+            "peak_time": 45.002792,
+            "kind": "synthesized foley"
+          },
+          {
+            "id": "distant-bonk",
+            "start": 56.5,
+            "end": 56.96,
+            "peak_time": 56.503458,
+            "kind": "synthesized foley"
+          }
+        ],
+        "silences": [
+          [
+            32.5,
+            33.5
+          ],
+          [
+            38.5,
+            40.0
+          ],
+          [
+            46.5,
+            48.0
+          ],
+          [
+            57.0,
+            58.0
+          ],
+          [
+            62.0,
+            64.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "all_four_bonk_waveforms_preserved",
+      "status": "pass",
+      "detail": {
+        "method": "Same source impact windows, normalized waveform correlation. Overall mix gain may change.",
+        "impacts": [
+          {
+            "id": "bonk-1",
+            "correlation": 0.9996418388812356,
+            "samples": 22080,
+            "peak_ratio": 0.8212315440177917
+          },
+          {
+            "id": "bonk-2",
+            "correlation": 0.999562954415398,
+            "samples": 22080,
+            "peak_ratio": 0.8290390968322754
+          },
+          {
+            "id": "bonk-3",
+            "correlation": 0.9995324693467575,
+            "samples": 22080,
+            "peak_ratio": 0.8321896195411682
+          },
+          {
+            "id": "distant-bonk",
+            "correlation": 0.9999996650176315,
+            "samples": 22080,
+            "peak_ratio": 0.7215009331703186
+          }
+        ]
+      }
+    },
+    {
+      "name": "old_owner_button_tap_audio_replaced",
+      "status": "pass",
+      "detail": [
+        "chair-shift-01",
+        "chair-shift-02",
+        "coffee-cup",
+        "parcel-sort-0",
+        "parcel-sort-1",
+        "parcel-sort-2",
+        "parcel-sort-3",
+        "dropped-parcel",
+        "mechanical-steam",
+        "controller-handoff-contact",
+        "owner-revoke-slider",
+        "revocation-chime-A",
+        "revocation-chime-D",
+        "latch",
+        "door-refusal",
+        "bonk-1",
+        "bonk-2",
+        "bonk-3",
+        "bonk-3-descending-slide",
+        "receipt-paper",
+        "distant-bonk"
+      ]
+    },
+    {
+      "name": "voice_revision_manifest_present",
+      "status": "pass",
+      "detail": {
+        "path": "audio/VOICE-REVISION.json",
+        "sha256": "42bc4dfcf7fa09cbdd7527a46f998ec6159aee9f3c9d5c7a70a7fae695bda134"
+      }
+    },
+    {
+      "name": "local_voice_model_checksums",
+      "status": "pass",
+      "detail": [
+        {
+          "model": "kokoro-v1.0.onnx",
+          "expected": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+          "actual": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+          "manifest": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5"
+        },
+        {
+          "model": "voices-v1.0.bin",
+          "expected": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+          "actual": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+          "manifest": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+        },
+        {
+          "model": "kokoro-v1.0-duration.onnx",
+          "expected": "1eb3dd7b15a3ce59eee74c8057492f1e95bbd6f236a61c0b1ae8b617a95e67d6",
+          "actual": "1eb3dd7b15a3ce59eee74c8057492f1e95bbd6f236a61c0b1ae8b617a95e67d6",
+          "manifest": "1eb3dd7b15a3ce59eee74c8057492f1e95bbd6f236a61c0b1ae8b617a95e67d6"
+        }
+      ]
+    },
+    {
+      "name": "voice_revision_manifest_matches_actual_takes",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "03",
+          "file": "audio/takes/03-robot-raw.wav",
+          "declared_sha256": "0135bbd561c7fdd0cc6ccbd24d2a5fc512b10e4c1da0b309eb88602f1eb8aa71",
+          "actual_sha256": "0135bbd561c7fdd0cc6ccbd24d2a5fc512b10e4c1da0b309eb88602f1eb8aa71"
+        },
+        {
+          "id": "04",
+          "file": "audio/takes/04-robot-raw.wav",
+          "declared_sha256": "162c72eb65129b3ddcce01fff377a5c746b835a587f9878100675a8ff117c944",
+          "actual_sha256": "162c72eb65129b3ddcce01fff377a5c746b835a587f9878100675a8ff117c944"
+        },
+        {
+          "id": "05",
+          "file": "audio/takes/05-robot-raw.wav",
+          "declared_sha256": "6c759a7b9acd903c44fe31b2023b542b44d129f9ad41a74a30d98bbfd3e9165c",
+          "actual_sha256": "6c759a7b9acd903c44fe31b2023b542b44d129f9ad41a74a30d98bbfd3e9165c"
+        },
+        {
+          "id": "06",
+          "file": "audio/takes/06-robot-raw.wav",
+          "declared_sha256": "3c96af5461622ea7397ef40a66ebbbbba3d0d6f481027398459f3136e92e6646",
+          "actual_sha256": "3c96af5461622ea7397ef40a66ebbbbba3d0d6f481027398459f3136e92e6646"
+        },
+        {
+          "id": "07",
+          "file": "audio/takes/07-robot-raw.wav",
+          "declared_sha256": "132228167931080d21b8473575c255885646849dbce10da667b939e8f75fd552",
+          "actual_sha256": "132228167931080d21b8473575c255885646849dbce10da667b939e8f75fd552"
+        }
+      ]
+    },
+    {
+      "name": "line05_complete_sentence_boundary_assembly",
+      "status": "pass",
+      "detail": {
+        "source": "audio/takes/05-robot-unpaced.wav",
+        "source_sha256": "755c2cd64cbda925aa7fb0257e3c6c4a5aa3fdbb39bec89d4c363510f6d820c7",
+        "source_samples": 71968,
+        "insert_sample": 32040,
+        "inserted_zero_samples": 960,
+        "paced_samples": 72928,
+        "reconstruction_bit_identical_pcm": true,
+        "method": "All original PCM samples, plus only declared zero insertion, reconstruct the final full take exactly."
+      }
+    },
+    {
+      "name": "line05_measured_sentence_separation",
+      "status": "pass",
+      "detail": {
+        "measured_gap": {
+          "start_seconds": 1.19,
+          "end_seconds": 1.52,
+          "seconds": 0.33
+        },
+        "timeline_sentence_gap_seconds": 0.33,
+        "assembly_gap_seconds": 0.33,
+        "method": "10ms RMS quiet run containing the insertion point; the boundary is acoustic, not recognized word alignment."
+      }
+    },
+    {
+      "name": "line05_sentence_gap_survives_final_aac",
+      "status": "pass",
+      "detail": {
+        "final_audio_interval": [
+          11.975,
+          12.235
+        ],
+        "rms_dbfs": -76.9271108875937,
+        "aac_boundary_inset_seconds": 0.035,
+        "note": "Confirms an audible-level quiet boundary survives encoding; listener intelligibility is unverified."
+      }
+    },
+    {
+      "name": "native_final_capture_matches_current_sources",
+      "status": "pass",
+      "detail": {
+        "actual": {
+          "stage_sha256": "7a211a2588ac13d4c8fc9fb2e46d46438ea2985a28dcb67dbea2123b7ee6a4b1",
+          "timeline_sha256": "3d73c77f39f3a732ef3b2a3028b10c1e1dec5c4287cd81b5291ab022e36748a7",
+          "graphics_sha256": "be0c02437cbccdb80e7a8f685563bf2125803d71f6b117687cb5da2575863b58",
+          "picture_sha256": "f03f0a693654f0da23f97c533d5498ae80a21408882345669d2f16ef670c4f62",
+          "frames": 1920,
+          "fps": 30,
+          "width": 1920,
+          "height": 1080,
+          "page_errors": []
+        },
+        "expected": {
+          "stage_sha256": "7a211a2588ac13d4c8fc9fb2e46d46438ea2985a28dcb67dbea2123b7ee6a4b1",
+          "timeline_sha256": "3d73c77f39f3a732ef3b2a3028b10c1e1dec5c4287cd81b5291ab022e36748a7",
+          "graphics_sha256": "be0c02437cbccdb80e7a8f685563bf2125803d71f6b117687cb5da2575863b58",
+          "picture_sha256": "f03f0a693654f0da23f97c533d5498ae80a21408882345669d2f16ef670c4f62"
+        }
+      }
+    },
+    {
+      "name": "controller_robot_to_owner_handoff_geometry",
+      "status": "pass",
+      "detail": {
+        "method": "Native-capture world geometry at each telemetry sample; rendered-frame handoff readability is reviewed separately.",
+        "robot_carried_samples": 234,
+        "owner_held_samples": 29,
+        "shared_contact_samples": [
+          {
+            "frame": 912,
+            "time": 30.4,
+            "controllerOwnership": "shared",
+            "robotGripError": 0,
+            "ownerGripError": 9.930136612989092e-16,
+            "controllerPosition": [
+              1.75,
+              1.38,
+              3.0400000000000005
+            ]
+          },
+          {
+            "frame": 915,
+            "time": 30.5,
+            "controllerOwnership": "shared",
+            "robotGripError": 0,
+            "ownerGripError": 9.930136612989092e-16,
+            "controllerPosition": [
+              1.75,
+              1.38,
+              3.0400000000000005
+            ]
+          }
+        ],
+        "maximum_robot_grip_error": 0,
+        "maximum_owner_grip_error": 0
+      }
+    },
+    {
+      "name": "owner_revocation_follows_controller_receipt_and_slider",
+      "status": "pass",
+      "detail": {
+        "pull_samples": [
+          {
+            "frame": 924,
+            "time": 30.8,
+            "ownerSliderPull": 0.10400000000000273,
+            "ownerSliderAction": true,
+            "ownerSliderContact": 0.026000000000000023,
+            "controllerOwnership": "owner"
+          },
+          {
+            "frame": 927,
+            "time": 30.9,
+            "ownerSliderPull": 0.6479999999999918,
+            "ownerSliderAction": true,
+            "ownerSliderContact": 0.026000000000000023,
+            "controllerOwnership": "owner"
+          },
+          {
+            "frame": 930,
+            "time": 31,
+            "ownerSliderPull": 1,
+            "ownerSliderAction": true,
+            "ownerSliderContact": 0.0259999999999998,
+            "controllerOwnership": "owner"
+          }
+        ],
+        "first_revocation": {
+          "frame": 930,
+          "time": 31,
+          "shot": "Owner revocation",
+          "shotIndex": 6,
+          "ownerRevoked": true,
+          "doorRefused": false,
+          "glassPlaneZ": -1.5,
+          "margaretPosition": [
+            0.23906250000000007,
+            0,
+            -3.48359375
+          ],
+          "margaretMobile": true,
+          "impacts": [],
+          "camera": [
+            1.52,
+            3.35,
+            5.7708984375
+          ],
+          "calmPosition": [
+            1.3000000000000003,
+            0,
+            2.5
+          ],
+          "activeSpeakers": [],
+          "renderSize": [
+            1920,
+            1080
+          ],
+          "controllerOwner": "CEO",
+          "controllerOwnership": "owner",
+          "controllerPosition": [
+            1.7500000000000002,
+            1.38,
+            3.0399999999999996
+          ],
+          "robotControllerGrip": [
+            1.1233175503385762,
+            1.101021287274092,
+            2.8150742476966446
+          ],
+          "ownerControllerGrip": [
+            2.0700000000000003,
+            1.38,
+            3.0399999999999996
+          ],
+          "robotGripError": 0.4716723875040457,
+          "ownerGripError": 0,
+          "controllerHandoffContact": false,
+          "controllerTransferredAt": 30.6,
+          "ownerSliderPull": 1,
+          "ownerSliderAction": true,
+          "ownerSliderContact": 0.0259999999999998,
+          "revocationCause": "owner physical slider pull",
+          "buttonPush": false
+        },
+        "old_button_push_samples": 0,
+        "note": "The recipient uses the supplied controller later, after receipt. OpenLine revokes door authorization; the glass supplies physical containment."
+      }
+    },
+    {
+      "name": "revoked_margaret_remains_mobile_and_contained_by_glass",
+      "status": "pass",
+      "detail": {
+        "samples": 106,
+        "z_range": [
+          -5.423140495867788,
+          -2.2
+        ],
+        "glass_plane_z": [
+          -1.5
+        ],
+        "limitation": "Telemetry checks position and persistent motion; it does not simulate breakable glass or establish every rendered contact."
+      }
+    },
+    {
+      "name": "key_phrase_graphics_in_encoded_frames",
+      "status": "pass",
+      "detail": {
+        "method": "Actual final MP4 midpoint frames decoded; expected light plaque and contrasting typography in declared rectangles. This is pixel support, not OCR or readability certification.",
+        "graphics": [
+          {
+            "id": "openline",
+            "decoded_frame_time": 7.2146665,
+            "lines": [
+              "OPENLINE"
+            ],
+            "rect": [
+              88,
+              76,
+              470,
+              104
+            ],
+            "valid_rect": true,
+            "light_pixel_fraction": 0.9167348608837971,
+            "dark_pixel_fraction": 0.07504091653027824,
+            "luminance_span_0_5_99_5": 174.78681999999998,
+            "font_sizes": [
+              54
+            ]
+          },
+          {
+            "id": "protected-actions",
+            "decoded_frame_time": 12.99,
+            "lines": [
+              "FOR PROTECTED ACTIONS"
+            ],
+            "rect": [
+              88,
+              76,
+              720,
+              112
+            ],
+            "valid_rect": true,
+            "light_pixel_fraction": 0.9171502976190476,
+            "dark_pixel_fraction": 0.0709077380952381,
+            "luminance_span_0_5_99_5": 175.812,
+            "font_sizes": [
+              46
+            ]
+          },
+          {
+            "id": "controller-handoff",
+            "decoded_frame_time": 30.175,
+            "lines": [
+              "OPENLINE",
+              "OWNER CONTROL"
+            ],
+            "rect": [
+              88,
+              874,
+              470,
+              138
+            ],
+            "valid_rect": true,
+            "light_pixel_fraction": 0.9136447733580019,
+            "dark_pixel_fraction": 0.07400555041628122,
+            "luminance_span_0_5_99_5": 173.9484,
+            "font_sizes": [
+              48,
+              30
+            ]
+          },
+          {
+            "id": "owner-revocation",
+            "decoded_frame_time": 31.674999999999997,
+            "lines": [
+              "DOOR ACCESS",
+              "REVOKED BY OWNER"
+            ],
+            "rect": [
+              88,
+              874,
+              570,
+              138
+            ],
+            "valid_rect": true,
+            "light_pixel_fraction": 0.9211289092295958,
+            "dark_pixel_fraction": 0.06571319603356217,
+            "luminance_span_0_5_99_5": 174.173,
+            "font_sizes": [
+              44,
+              30
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "human_listening_and_comedy_review",
+      "status": "not_performed",
+      "detail": "Not performed by this script. User listening approval is required; numerical checks are not an intelligibility judgment."
+    }
+  ],
+  "summary": {
+    "pass": 46,
+    "fail": 0,
+    "not_performed": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "movie_sha256": "85dce48c263d717c9f130b3f6516da770c9fcf505236afd46f9a9c5dd835903f",
+  "scope": "Producing and independent agent sampled actual decoded final MP4 frames; every-second wholefilm, densehandoff0.1s, speech0.2s, impact/lawyer sequences and nativecueframes/poster.",
+  "results": [
+    "Continuous robot-to-owner controller transfer and withdrawal",
+    "Stationary tablet/button removed; owner alone pulls REVOKE slider",
+    "Safe readable phrase/owner-state graphics",
+    "Character/set continuity preserved",
+    "Door refusal35s and continued physical movement; glass containment distinct",
+    "BONK38s pose and held aftermath preserved",
+    "Fictional receipt and endcard readable; nativeposter correct"
+  ],
+  "limits": "Sampled visual inspection; not everyframewatched. No subjective voice listening or physical iPhone/Safari test.",
+  "human_listening": "UNVERIFIED",
+  "publication_approval": false
+}
